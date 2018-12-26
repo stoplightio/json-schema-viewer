@@ -1,0 +1,80 @@
+{
+  "name": "@stoplight/json-schema-viewer",
+  "version": "0.0.0",
+  "description": "A JSON Schema viewer React component",
+  "keywords": [],
+  "sideEffects": false,
+  "homepage": "https://github.com/stoplightio/json-schema-viewer",
+  "bugs": "https://github.com/stoplightio/json-schema-viewer/issues",
+  "author": "Stoplight <support@stoplight.io>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stoplightio/json-schema-viewer"
+  },
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "files": [
+    "**/*"
+  ],
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "scripts": {
+    "build": "sl-scripts build",
+    "build.docs": "build-storybook -c .storybook -o docs-auto",
+    "commit": "git-cz",
+    "lint": "sl-scripts lint",
+    "lint.fix": "yarn lint --fix",
+    "release": "sl-scripts release",
+    "release.docs": "sl-scripts release:docs",
+    "release.dryRun": "sl-scripts release --dry-run --debug",
+    "storybook": "start-storybook -p 9001",
+    "test": "sl-scripts test",
+    "test.prod": "yarn lint && yarn test --coverage --maxWorkers=2",
+    "test.update": "yarn test --updateSnapshot",
+    "test.watch": "yarn test --watch"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "@emotion/core": "10.0.x",
+    "@emotion/provider": "0.11.x",
+    "@stoplight/ui-kit": "1.x.x",
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2"
+  },
+  "devDependencies": {
+    "@stoplight/scripts": "4.x.x",
+    "@stoplight/storybook-config": "1.x.x",
+    "@types/react": "16.x.x",
+    "@types/react-dom": "16.x.x",
+    "enzyme": "3.x.x",
+    "enzyme-adapter-react-16": "1.x.x",
+    "enzyme-to-json": "3.x.x",
+    "typescript": "3.2.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}$": [
+      "yarn lint.fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release": {
+    "extends": "@stoplight/scripts/release"
+  }
+}
