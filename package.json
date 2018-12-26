@@ -36,9 +36,8 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "@emotion/core": "10.0.x",
-    "@emotion/provider": "0.11.x",
     "@stoplight/ui-kit": "1.x.x",
+    "lodash": "^4.17.11",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2"
   },

@@ -3,3 +3,4 @@
 import './Welcome';
 
 import './Button';
+import './JsonSchemaViewer';
