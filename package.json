@@ -40,7 +40,8 @@
     "react-dom": ">=16.7.0-alpha.1"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "@stoplight/json": "1.3.x",
+    "lodash": "4.17.x"
   },
   "devDependencies": {
     "@stoplight/scripts": "4.1.0",
