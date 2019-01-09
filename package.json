@@ -34,21 +34,25 @@
     "test.update": "yarn test --updateSnapshot",
     "test.watch": "yarn test --watch"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@stoplight/ui-kit": ">=1.27",
+    "react": ">=16.7.0-alpha.1",
+    "react-dom": ">=16.7.0-alpha.1"
+  },
   "dependencies": {
-    "@stoplight/ui-kit": "1.x.x",
-    "lodash": "^4.17.11",
-    "react": "16.7.0-alpha.2",
-    "react-dom": "16.7.0-alpha.2"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "@stoplight/scripts": "4.x.x",
+    "@stoplight/scripts": "4.1.0",
     "@stoplight/storybook-config": "1.x.x",
+    "@stoplight/ui-kit": "1.27.x",
     "@types/react": "16.x.x",
     "@types/react-dom": "16.x.x",
     "enzyme": "3.x.x",
     "enzyme-adapter-react-16": "1.x.x",
     "enzyme-to-json": "3.x.x",
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2",
     "typescript": "3.2.2"
   },
   "lint-staged": {
