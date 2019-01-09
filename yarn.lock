@@ -1398,7 +1398,7 @@
     ts-loader "5.3.x"
     webpack "4.x.x"
 
-"@stoplight/types@3.x.x":
+"@stoplight/types@3.1.x", "@stoplight/types@3.x.x":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@stoplight/types/-/types-3.1.0.tgz#bca0a2943adbfee02f6a560cff3e60493af013cf"
   integrity sha512-HlqKh6iLqZp/rXwEryJTybY7ZEcuePPiSm0Y18dSZMrlywzeWEDQ5jDX3DdP1y7N5BIzN2dUt727uvbsC4UmFQ==
