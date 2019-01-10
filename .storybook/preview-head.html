@@ -1,1 +1,342 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+
+<style>
+    .JSV-row {
+        user-select: none;
+    }
+    .JSV-row:nth-child(even) {
+        background-color: #f8fafc;
+    }
+    .JSV-row:hover {
+        background-color: #f3f3f3;
+    }
+    .JSV-row i {
+        font-size: 11px;
+    }
+    .JSV-row--0 {
+        padding-left: 20px;
+    }
+    .JSV-divider--0 {
+        padding-left: 5px;
+    }
+    .JSV-row--1 {
+        padding-left: 35px;
+    }
+    .JSV-divider--1 {
+        padding-left: 20px;
+    }
+    .JSV-row--2 {
+        padding-left: 50px;
+    }
+    .JSV-divider--2 {
+        padding-left: 35px;
+    }
+    .JSV-row--3 {
+        padding-left: 65px;
+    }
+    .JSV-divider--3 {
+        padding-left: 50px;
+    }
+    .JSV-row--4 {
+        padding-left: 80px;
+    }
+    .JSV-divider--4 {
+        padding-left: 65px;
+    }
+    .JSV-row--5 {
+        padding-left: 95px;
+    }
+    .JSV-divider--5 {
+        padding-left: 80px;
+    }
+    .JSV-row--6 {
+        padding-left: 110px;
+    }
+    .JSV-divider--6 {
+        padding-left: 95px;
+    }
+    .JSV-row--7 {
+        padding-left: 125px;
+    }
+    .JSV-divider--7 {
+        padding-left: 110px;
+    }
+    .JSV-row--8 {
+        padding-left: 140px;
+    }
+    .JSV-divider--8 {
+        padding-left: 125px;
+    }
+    .JSV-row--9 {
+        padding-left: 155px;
+    }
+    .JSV-divider--9 {
+        padding-left: 140px;
+    }
+    .JSV-row--10 {
+        padding-left: 170px;
+    }
+    .JSV-divider--10 {
+        padding-left: 155px;
+    }
+    .JSV-row--11 {
+        padding-left: 185px;
+    }
+    .JSV-divider--11 {
+        padding-left: 170px;
+    }
+    .JSV-row--12 {
+        padding-left: 200px;
+    }
+    .JSV-divider--12 {
+        padding-left: 185px;
+    }
+    .JSV-row--13 {
+        padding-left: 215px;
+    }
+    .JSV-divider--13 {
+        padding-left: 200px;
+    }
+    .JSV-row--14 {
+        padding-left: 230px;
+    }
+    .JSV-divider--14 {
+        padding-left: 215px;
+    }
+    .JSV-row--15 {
+        padding-left: 245px;
+    }
+    .JSV-divider--15 {
+        padding-left: 230px;
+    }
+    .JSV-row--16 {
+        padding-left: 260px;
+    }
+    .JSV-divider--16 {
+        padding-left: 245px;
+    }
+    .JSV-row--17 {
+        padding-left: 275px;
+    }
+    .JSV-divider--17 {
+        padding-left: 260px;
+    }
+    .JSV-row--18 {
+        padding-left: 290px;
+    }
+    .JSV-divider--18 {
+        padding-left: 275px;
+    }
+    .JSV-row--19 {
+        padding-left: 305px;
+    }
+    .JSV-divider--19 {
+        padding-left: 290px;
+    }
+    .JSV-row--20 {
+        padding-left: 320px;
+    }
+    .JSV-divider--20 {
+        padding-left: 305px;
+    }
+    .JSV-row--21 {
+        padding-left: 335px;
+    }
+    .JSV-divider--21 {
+        padding-left: 320px;
+    }
+    .JSV-row--22 {
+        padding-left: 350px;
+    }
+    .JSV-divider--22 {
+        padding-left: 335px;
+    }
+    .JSV-row--23 {
+        padding-left: 365px;
+    }
+    .JSV-divider--23 {
+        padding-left: 350px;
+    }
+    .JSV-row--24 {
+        padding-left: 380px;
+    }
+    .JSV-divider--24 {
+        padding-left: 365px;
+    }
+    .JSV-row--25 {
+        padding-left: 395px;
+    }
+    .JSV-divider--25 {
+        padding-left: 380px;
+    }
+    .JSV-row--26 {
+        padding-left: 410px;
+    }
+    .JSV-divider--26 {
+        padding-left: 395px;
+    }
+    .JSV-row--27 {
+        padding-left: 425px;
+    }
+    .JSV-divider--27 {
+        padding-left: 410px;
+    }
+    .JSV-row--28 {
+        padding-left: 440px;
+    }
+    .JSV-divider--28 {
+        padding-left: 425px;
+    }
+    .JSV-row--29 {
+        padding-left: 455px;
+    }
+    .JSV-divider--29 {
+        padding-left: 440px;
+    }
+    .JSV-row--30 {
+        padding-left: 470px;
+    }
+    .JSV-divider--30 {
+        padding-left: 455px;
+    }
+    .JSV-row--31 {
+        padding-left: 485px;
+    }
+    .JSV-divider--31 {
+        padding-left: 470px;
+    }
+    .JSV-row--32 {
+        padding-left: 500px;
+    }
+    .JSV-divider--32 {
+        padding-left: 485px;
+    }
+    .JSV-row--33 {
+        padding-left: 515px;
+    }
+    .JSV-divider--33 {
+        padding-left: 500px;
+    }
+    .JSV-row--34 {
+        padding-left: 530px;
+    }
+    .JSV-divider--34 {
+        padding-left: 515px;
+    }
+    .JSV-row--35 {
+        padding-left: 545px;
+    }
+    .JSV-divider--35 {
+        padding-left: 530px;
+    }
+    .JSV-row--36 {
+        padding-left: 560px;
+    }
+    .JSV-divider--36 {
+        padding-left: 545px;
+    }
+    .JSV-row--37 {
+        padding-left: 575px;
+    }
+    .JSV-divider--37 {
+        padding-left: 560px;
+    }
+    .JSV-row--38 {
+        padding-left: 590px;
+    }
+    .JSV-divider--38 {
+        padding-left: 575px;
+    }
+    .JSV-row--39 {
+        padding-left: 605px;
+    }
+    .JSV-divider--39 {
+        padding-left: 590px;
+    }
+    .JSV-row--40 {
+        padding-left: 620px;
+    }
+    .JSV-divider--40 {
+        padding-left: 605px;
+    }
+    .JSV-row--41 {
+        padding-left: 635px;
+    }
+    .JSV-divider--41 {
+        padding-left: 620px;
+    }
+    .JSV-row--42 {
+        padding-left: 650px;
+    }
+    .JSV-divider--42 {
+        padding-left: 635px;
+    }
+    .JSV-row--43 {
+        padding-left: 665px;
+    }
+    .JSV-divider--43 {
+        padding-left: 650px;
+    }
+    .JSV-row--44 {
+        padding-left: 680px;
+    }
+    .JSV-divider--44 {
+        padding-left: 665px;
+    }
+    .JSV-row--45 {
+        padding-left: 695px;
+    }
+    .JSV-divider--45 {
+        padding-left: 680px;
+    }
+    .JSV-row--46 {
+        padding-left: 710px;
+    }
+    .JSV-divider--46 {
+        padding-left: 695px;
+    }
+    .JSV-row--47 {
+        padding-left: 725px;
+    }
+    .JSV-divider--47 {
+        padding-left: 710px;
+    }
+    .JSV-row--48 {
+        padding-left: 740px;
+    }
+    .JSV-divider--48 {
+        padding-left: 725px;
+    }
+    .JSV-row--49 {
+        padding-left: 755px;
+    }
+    .JSV-divider--49 {
+        padding-left: 740px;
+    }
+    .JSV-row--50 {
+        padding-left: 770px;
+    }
+    .JSV-divider--50 {
+        padding-left: 755px;
+    }
+    .JSV-rowExpander {
+        padding-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    .JSV-validations {
+        margin-right: 0.5rem;
+    }
+    .JSV-dividerInner {
+        height: 1px;
+        background-color: #ddd;
+        position: relative;
+    }
+    .JSV-dividerText {
+        position: absolute;
+        left: -5px;
+        top: -10px;
+        padding: 0 15px;
+        background-color: #fff;
+    }
+
+</style>
