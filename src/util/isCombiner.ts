@@ -1,3 +1,3 @@
-export const isCombiner = (prop: any) => {
-  return prop.allOf || prop.anyOf || prop.oneOf ? true : false;
-};
+import { IProp, IResolvedProp } from '../types';
+
+export const isCombiner = (prop: IProp | IResolvedProp) => !!(prop.allOf || prop.anyOf || prop.oneOf);

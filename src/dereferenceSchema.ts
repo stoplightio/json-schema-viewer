@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
+import { IResolvedProp } from './types';
 
-const _dereferenceSchema = (options = {}) => {
+const _dereferenceSchema = (options: any = {}) => {
   const {
     target = {},
     schemas = {},
@@ -97,7 +98,7 @@ const _dereferenceSchema = (options = {}) => {
   return schema;
 };
 
-const _dereferenceSchemaRef = (options = {}) => {
+const _dereferenceSchemaRef = (options: any = {}) => {
   const {
     target,
     schemas,
@@ -115,7 +116,7 @@ const _dereferenceSchemaRef = (options = {}) => {
   }
 
   if (previousRefs.indexOf(ref) !== -1) {
-    const resolved = {
+    const resolved: IResolvedProp = {
       type: '@circular',
     };
 
@@ -162,17 +163,15 @@ const _dereferenceSchemaRef = (options = {}) => {
     if (propsInherited) {
       const iterFunc = _.isArray(schema[propsInherited]) ? _.map : _.mapValues;
 
+      // @ts-ignore
       schema[propsInherited] = iterFunc(schema[propsInherited], item => {
         if (item.properties) {
           item.properties = _.mapValues(item.properties, val => {
-            const obj = { ...val };
-
-            // Don't show hideInheritedFrom for combiners anymore.
-            if (!isAllOf && !hideInheritedFrom) {
-              obj.__inheritedFrom = { name: ref, ref };
-            }
-
-            return obj;
+            return {
+              ...val,
+              // Don't show hideInheritedFrom for combiners anymore.
+              ...(!isAllOf && !hideInheritedFrom && { ____inheritedFrom: { name: ref, ref } }),
+            };
           });
 
           return item;

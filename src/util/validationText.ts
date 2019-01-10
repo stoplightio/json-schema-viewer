@@ -1,7 +1,8 @@
+import { IProp, IResolvedProp } from '../types';
 import { isCombiner } from './isCombiner';
 import { pickValidations } from './pickValidations';
 
-export const validationText = (prop: never) => {
+export const validationText = (prop: IProp | IResolvedProp) => {
   if (!isCombiner(prop)) {
     const validationCount = Object.keys(pickValidations(prop)).length;
 
