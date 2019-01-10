@@ -31,6 +31,5 @@ storiesOf('JsonSchemaViewer', module).add('with text', () => (
     hideRoot={boolean('hideRoot', false)}
     expanded={boolean('expanded', true)}
     emptyText={text('emptyText', 'empty')}
-    emptyClass={text('emptyClass', 'empty')}
   />
 ));

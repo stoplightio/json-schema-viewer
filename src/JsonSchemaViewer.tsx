@@ -15,14 +15,12 @@ export interface IJsonSchemaViewer {
   name?: string;
   dereferencedSchema?: string | ISchema;
   defaultExpandedDepth?: number;
-  forApiDocs?: boolean;
   schemas: object;
   schema: string | ISchema;
   limitPropertyCount: number;
   hideRoot?: boolean;
   expanded?: boolean;
   emptyText?: string;
-  emptyClass?: string;
   hideInheritedFrom?: boolean;
 }
 
@@ -50,7 +48,6 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
       expanded = false,
       defaultExpandedDepth = 1,
       emptyText,
-      emptyClass = '',
       hideInheritedFrom = false,
     } = this.props;
 
@@ -58,7 +55,7 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
 
     // an empty array or object is still a valid response, schema is ONLY really empty when a combiner type has no information
     if (isSchemaViewerEmpty(schema)) {
-      return <div className={`${emptyClass}`}>{emptyElem}</div>;
+      return <div>{emptyElem}</div>;
     }
 
     let parsed: IProp;
