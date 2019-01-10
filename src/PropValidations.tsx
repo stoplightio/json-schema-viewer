@@ -1,52 +1,46 @@
+import { safeStringify } from '@stoplight/json';
 import * as React from 'react';
 
-import includes = require('lodash/includes');
-
-import { safeStringify } from '@stoplight/json';
-
+import { IProp, IResolvedProp } from './types';
 import { isCombiner } from './util/isCombiner';
 import { pickValidations } from './util/pickValidations';
 
-export const PropValidations = ({ prop }: { prop: any }) => {
+export const PropValidations: React.FunctionComponent<{ prop: IProp | IResolvedProp }> = ({ prop }) => {
   if (!isCombiner(prop)) {
     const validations = pickValidations(prop);
 
-    const elems = [];
-    for (const k in validations) {
-      if (!Object.prototype.hasOwnProperty.call(validations, k)) {
-        continue;
-      }
+    return (
+      <>
+        {Object.entries(validations).reduce(
+          (elems, [k, v]) => {
+            let type = typeof v;
 
-      let v = validations[k];
+            if (k === 'default' && ['object', 'boolean'].includes(type)) {
+              v = safeStringify(v);
 
-      let type = typeof v;
+              type = typeof v;
+            }
 
-      if (k === 'default' && includes(['object', 'boolean'], type)) {
-        v = safeStringify(v);
+            if (type === 'boolean') {
+              elems.push(
+                <div key={k}>
+                  <b>{k}:</b> {v.toString()}
+                </div>
+              );
+            } else if (type !== 'object') {
+              elems.push(
+                <div key={k}>
+                  <b>{k}:</b> {v}
+                </div>
+              );
+            }
 
-        type = typeof v;
-      }
-
-      if (type === 'object') {
-        continue;
-      } else if (type === 'boolean') {
-        elems.push(
-          <div key={k}>
-            <b>{k}:</b> {v.toString()}
-          </div>
-        );
-      } else {
-        elems.push(
-          <div key={k}>
-            <b>{k}:</b> {v}
-          </div>
-        );
-      }
-    }
-
-    if (elems.length) {
-      return elems;
-    }
+            return elems;
+          },
+          [] as Array<React.ReactElement<any>>
+        )}
+      </>
+    );
   }
 
   return null;
