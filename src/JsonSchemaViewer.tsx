@@ -2,9 +2,11 @@ import * as React from 'react';
 
 import { safeParse } from '@stoplight/json';
 import { Dictionary, ISchema } from '@stoplight/types';
-import cn from 'classnames';
+import { Box } from '@stoplight/ui-kit';
 import * as _ from 'lodash';
 
+import { MutedText } from './common/MutedText';
+import { Row } from './common/Row';
 import { dereferenceSchema } from './dereferenceSchema';
 import { renderSchema } from './renderers/renderSchema';
 import { IProp } from './types';
@@ -51,7 +53,7 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
       hideInheritedFrom = false,
     } = this.props;
 
-    const emptyElem = <div className="u-none c-muted">{emptyText || 'No schema defined.'}</div>;
+    const emptyElem = <MutedText className="u-none">{emptyText || 'No schema defined.'}</MutedText>;
 
     // an empty array or object is still a valid response, schema is ONLY really empty when a combiner type has no information
     if (isSchemaViewerEmpty(schema)) {
@@ -71,7 +73,11 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
       }
     } catch (e) {
       console.error('JsonSchemaViewer dereference error', e);
-      return <p className="u-error p-3">There is an error in your {name} schema definition.</p>;
+      return (
+        <Box as="p" p={3} className="u-error">
+          There is an error in your {name} schema definition.
+        </Box>
+      );
     }
 
     if (!parsed || !Object.keys(parsed).length || (parsed.properties && !Object.keys(parsed.properties).length)) {
@@ -108,7 +114,7 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
       });
     } catch (e) {
       console.error('JSV:error', e);
-      rowElems = [<div className="JSV-row u-error">{`Error rendering schema. ${e}`}</div>];
+      rowElems = [<Row className="u-error">{`Error rendering schema. ${e}`}</Row>];
     }
 
     const { showExtra } = this.state;
@@ -129,7 +135,8 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
         {rowElems}
 
         {showExtra || propOverflowCount > 0 ? (
-          <div className={cn('JSV-toggleExtra', { 'is-on': showExtra })} onClick={this.toggleShowExtra}>
+          <div onClick={this.toggleShowExtra}>
+            {/* className={cn('JSV-toggleExtra', { 'is-on': showExtra })} */}
             {showExtra ? 'collapse' : `...show ${propOverflowCount} more properties`}
           </div>
         ) : null}

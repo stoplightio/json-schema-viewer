@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "@stoplight/json": "1.3.x",
-    "classnames": "^2.2.6",
     "lodash": "4.17.x"
   },
   "devDependencies": {
@@ -49,7 +48,6 @@
     "@stoplight/storybook-config": "1.x.x",
     "@stoplight/types": "3.1.x",
     "@stoplight/ui-kit": "1.27.x",
-    "@types/classnames": "^2.2.7",
     "@types/react": "16.x.x",
     "@types/react-dom": "16.x.x",
     "enzyme": "3.x.x",

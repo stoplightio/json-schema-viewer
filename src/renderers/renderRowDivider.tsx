@@ -1,4 +1,7 @@
-import * as React from 'react';
+/* @jsx jsx */
+import { jsx } from '@emotion/core';
+import { Box, Flex } from '@stoplight/ui-kit';
+import { MutedText } from '../common/MutedText';
 
 interface IRowDivider {
   key: string;
@@ -8,9 +11,11 @@ interface IRowDivider {
 
 export const renderRowDivider = ({ key, level, text }: IRowDivider) => {
   return (
-    <div key={`${key}-d`} className={`JSV-divider--${level} h-10 flex items-center`}>
-      <div className="c-muted pr-3 uppercase text-sm">{text}</div>
-      <div className="h-px bg-grey-light flex-1 mr-4" />
-    </div>
+    <Flex alignItems="center" key={`${key}-d`} height="2.5rem" pl={5 * (level + 1)}>
+      <MutedText fontSize=".875rem" textTransform="uppercase" pr={3}>
+        {text}
+      </MutedText>
+      <Box backgroundColor="#dae1e7" height="1px" mr={4} flex="1 1 0%" />
+    </Flex>
   );
 };

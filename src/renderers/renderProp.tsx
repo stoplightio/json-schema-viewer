@@ -1,8 +1,12 @@
-import { Textarea } from '@stoplight/ui-kit';
-import cn from 'classnames';
+/* @jsx jsx */
+import { jsx } from '@emotion/core';
+import { Box, Flex, Textarea } from '@stoplight/ui-kit';
+
 import * as _ from 'lodash';
 import { ReactNode, ReactNodeArray } from 'react';
-import * as React from 'react';
+import { MutedText } from '../common/MutedText';
+import { Row } from '../common/Row';
+import { RowType } from '../common/RowType';
 import { PropValidations } from '../PropValidations';
 import { ICommonProps } from '../types';
 import { getProps } from '../util/getProps';
@@ -36,9 +40,9 @@ export const renderProp = ({
 
   if (!prop) {
     rowElems.push(
-      <div key={position} className={`text-negative py-2 JSV-row--${level}`}>
+      <Row key={position} py={2} level={level} className="text-negative">
         Could not render prop. Is it valid? If it is a $ref, does the $ref exist?
-      </div>
+      </Row>
     );
 
     return rowElems;
@@ -53,7 +57,6 @@ export const renderProp = ({
     : expandedRows.all || level <= defaultExpandedDepth;
 
   if (prop.items) {
-    propType = prop.type;
     if (prop.items.allOf) {
       childPropType = 'object';
     } else if (prop.items.anyOf) {
@@ -114,9 +117,9 @@ export const renderProp = ({
 
       if (types[i + 1]) {
         acc.push(
-          <span key={`${i}-sep`} className="c-muted">
+          <MutedText as="span" key={`${i}-sep`}>
             {' or '}
-          </span>
+          </MutedText>
         );
       }
 
@@ -130,9 +133,9 @@ export const renderProp = ({
     );
   } else if (prop.__error || isBasic) {
     typeElems.push(
-      <span key="no-types" className="c-negative">
+      <Box as="span" key="no-types" color="#e3342f">
         {prop.__error || 'ERROR_NO_TYPE'}
-      </span>
+      </Box>
     );
   }
 
@@ -144,9 +147,13 @@ export const renderProp = ({
   if (required || vt) {
     requiredElem = (
       <div>
-        {showVt ? <span className="text-muted">{vt}</span> : null}
-        {showVt && required ? <span className="text-muted"> + </span> : null}
-        {required ? <span className="font-bold">required</span> : null}
+        {showVt ? <MutedText as="span">{vt}</MutedText> : null}
+        {showVt && required ? <MutedText as="span"> + </MutedText> : null}
+        {required ? (
+          <Box as="span" fontWeight={700}>
+            required
+          </Box>
+        ) : null}
       </div>
     );
   }
@@ -155,48 +162,45 @@ export const renderProp = ({
 
   if (!(hideRoot && jsonPath === 'root')) {
     rowElems.push(
-      <div
+      <Row
+        as={Flex}
+        position="relative"
+        py={2}
         key={position}
-        className={cn(`JSV-row JSV-row--${level} flex relative py-2`, {
-          'cursor-pointer': vt || expandable,
-          'is-expanded': expanded,
-        })}
+        level={level}
+        cursor={vt || expandable ? 'pointer' : 'default'}
         onClick={() => {
           if (vt || expandable) {
             toggleExpandRow(rowKey, !expanded);
           }
         }}
       >
-        {expandable ? <div className="JSV-rowExpander w-4 -ml-6 flex justify-center mt-1">{expanded} /></div> : null}
+        {expandable ? (
+          <Flex justifyContent="center" mt={1} className="JSV-rowExpander w-4 -ml-6">
+            {expanded} />
+          </Flex>
+        ) : null}
 
-        <div className="flex-1">
-          <div className="flex items-baseline">
-            {name && name !== 'root' ? <div className="mr-3">{name}</div> : null}
+        <Box flex="1 1 0%">
+          <Flex alignItems="baseline">
+            {name && name !== 'root' ? <Box mr={3}>{name}</Box> : null}
 
-            {!_.isEmpty(typeElems) && (
-              <div
-                className={cn('JSV-rowType', {
-                  'JSV-namelessType': !name,
-                })}
-              >
-                {typeElems}
-              </div>
-            )}
-          </div>
+            {!_.isEmpty(typeElems) && <RowType name={name}>{typeElems}</RowType>}
+          </Flex>
 
           {!_.isEmpty(prop.description) ? <Textarea className="text-muted text-sm" value={prop.description} /> : null}
-        </div>
+        </Box>
 
         {requiredElem || showInheritedFrom || expanded ? (
-          <div className="text-right text-sm pr-3 max-w-sm">
+          <Box maxWidth="30rem" textAlign="right" fontSize=".875rem" pr={3} className="max-w-sm">
             {requiredElem}
 
-            {showInheritedFrom ? <div className="text-muted">{`$ref:${prop.__inheritedFrom.name}`}</div> : null}
+            {showInheritedFrom ? <MutedText>{`$ref:${prop.__inheritedFrom.name}`}</MutedText> : null}
 
             {expanded && <PropValidations prop={prop} />}
-          </div>
+          </Box>
         ) : null}
-      </div>
+      </Row>
     );
   }
 
