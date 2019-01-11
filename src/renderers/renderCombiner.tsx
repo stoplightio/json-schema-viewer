@@ -1,14 +1,14 @@
-import { Dictionary } from '@stoplight/types';
+import { Dictionary, ISchema } from '@stoplight/types';
 import has = require('lodash/has');
 import set = require('lodash/set');
-import { ICommonProps, IProp, IResolvedProp } from '../types';
+import { ICommonProps } from '../types';
 import { renderProp } from './renderProp';
 import { renderRowDivider } from './renderRowDivider';
 import { renderSchema } from './renderSchema';
 
 export interface IRenderCombinerProp extends ICommonProps {
-  defaultType?: IProp['type'] | IResolvedProp['type'];
-  props: Dictionary<IProp>;
+  defaultType?: string;
+  props: Dictionary<ISchema>;
   level: number;
 }
 

@@ -1,10 +1,10 @@
-import { Dictionary } from '@stoplight/types';
-import { ICommonProps, IProp } from '../types';
+import { Dictionary, ISchema } from '@stoplight/types';
+import { ICommonProps } from '../types';
 import { renderProp } from './renderProp';
 
 export interface IRenderProps extends ICommonProps {
   level: number;
-  props: Dictionary<IProp>;
+  props: Dictionary<ISchema>;
   required: string[];
 }
 

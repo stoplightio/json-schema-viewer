@@ -1,11 +1,11 @@
-import { Dictionary } from '@stoplight/types';
-import { ICommonProps, IProp } from '../types';
+import { Dictionary, ISchema } from '@stoplight/types';
+import { ICommonProps } from '../types';
 import { buildAllOfSchema } from '../util/buildAllOfSchema';
 import { renderProps } from './renderProps';
 
 export interface IRenderAllProps extends ICommonProps {
   level: number;
-  props: Dictionary<IProp>;
+  props: Dictionary<ISchema>;
 }
 
 export const renderAllOf = ({
@@ -20,7 +20,7 @@ export const renderAllOf = ({
   hideInheritedFrom,
   jsonPath,
 }: IRenderAllProps) => {
-  const schema = buildAllOfSchema({ elems: props });
+  const schema = buildAllOfSchema(props);
 
   return renderProps({
     schemas,

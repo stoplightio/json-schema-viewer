@@ -1,15 +1,32 @@
+import { Dictionary, ISchema } from '@stoplight/types';
 import cloneDeep = require('lodash/cloneDeep');
 import get = require('lodash/get');
 import isArray = require('lodash/isArray');
 import isEmpty = require('lodash/isEmpty');
 import map = require('lodash/map');
 import mapValues = require('lodash/mapValues');
-import { IResolvedProp } from './types';
 
-const _dereferenceSchema = (options: any = {}) => {
+interface IRefCache {
+  depth?: number;
+  resolved?: ISchema;
+  target?: ISchema;
+}
+
+interface IDereferenceSchemaOptions {
+  allOfParent?: boolean;
+  combinerParent?: boolean;
+  target: ISchema;
+  schemas: Dictionary<ISchema>;
+  hideInheritedFrom: boolean;
+  isRoot?: boolean;
+  previousRefs?: string[];
+  refCache?: IRefCache;
+}
+
+const _dereferenceSchema = (options: IDereferenceSchemaOptions) => {
   const {
-    target = {},
-    schemas = {},
+    target,
+    schemas,
     previousRefs = [],
     refCache = {},
     allOfParent,
@@ -94,7 +111,7 @@ const _dereferenceSchema = (options: any = {}) => {
           allOfParent: isAllOf,
           combinerParent: isCombiner,
           hideInheritedFrom,
-          isRoot: isRoot && isAllOf,
+          isRoot: !!(isRoot && isAllOf),
         });
       }
     }
@@ -103,7 +120,19 @@ const _dereferenceSchema = (options: any = {}) => {
   return schema;
 };
 
-const _dereferenceSchemaRef = (options: any = {}) => {
+interface IDereferenceSchemaRefOptions {
+  allOfParent?: boolean;
+  combinerParent?: boolean;
+  target: ISchema;
+  schemas: Dictionary<ISchema>;
+  hideInheritedFrom: boolean;
+  isRoot?: boolean;
+  previousRefs?: string[];
+  ref: string;
+  refCache?: IRefCache;
+}
+
+const _dereferenceSchemaRef = (options: IDereferenceSchemaRefOptions): ISchema => {
   const {
     target,
     schemas,
@@ -117,11 +146,11 @@ const _dereferenceSchemaRef = (options: any = {}) => {
   } = options;
 
   if (refCache[ref]) {
-    return refCache[ref].resolved;
+    return refCache[ref].resolved!;
   }
 
-  if (previousRefs.indexOf(ref) !== -1) {
-    const resolved: IResolvedProp = {
+  if (previousRefs.includes(ref)) {
+    const resolved: ISchema = {
       type: '@circular',
     };
 
@@ -228,7 +257,7 @@ const _dereferenceSchemaRef = (options: any = {}) => {
  * @param  {Boolean} hideInheritedFrom - Don't add the __inheritedFrom property to the dereferenced schema
  * @return {Object}                    - An object with no $refs
  */
-export const dereferenceSchema = (target: object, schemas: object, hideInheritedFrom: boolean) => {
+export const dereferenceSchema = (target: ISchema, schemas: Dictionary<ISchema>, hideInheritedFrom: boolean) => {
   if (!target) {
     return {};
   }

@@ -1,11 +1,10 @@
 import { safeStringify } from '@stoplight/json';
+import { ISchema } from '@stoplight/types';
 import * as React from 'react';
-
-import { IProp, IResolvedProp } from './types';
 import { isCombiner } from './util/isCombiner';
 import { pickValidations } from './util/pickValidations';
 
-export const PropValidations: React.FunctionComponent<{ prop: IProp | IResolvedProp }> = ({ prop }) => {
+export const PropValidations: React.FunctionComponent<{ prop: ISchema }> = ({ prop }) => {
   if (!isCombiner(prop)) {
     const validations = pickValidations(prop);
 

@@ -1,7 +1,6 @@
 /* @jsx jsx */
 
 import { jsx } from '@emotion/core';
-import { safeParse } from '@stoplight/json';
 import dropRight = require('lodash/dropRight');
 import isEmpty = require('lodash/isEmpty');
 import { Fragment, FunctionComponent, MouseEventHandler, ReactNodeArray, useCallback, useState } from 'react';
@@ -10,15 +9,14 @@ import { Dictionary, ISchema } from '@stoplight/types';
 import { Button } from '@stoplight/ui-kit';
 import { dereferenceSchema } from './dereferenceSchema';
 import { renderSchema } from './renderers/renderSchema';
-import { IProp } from './types';
 import { buildAllOfSchema } from './util/buildAllOfSchema';
 
 export interface ISchemaView {
   name?: string;
-  dereferencedSchema?: string | ISchema;
+  dereferencedSchema?: ISchema;
   defaultExpandedDepth?: number;
   schemas: object;
-  schema: string | ISchema;
+  schema: ISchema;
   limitPropertyCount?: number;
   hideRoot?: boolean;
   expanded?: boolean;
@@ -48,31 +46,25 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
     setShowExtra(!showExtra);
   }, []);
 
-  let parsedSchema: IProp;
-  if (typeof (dereferencedSchema || schema) === 'string') {
-    parsedSchema = safeParse((dereferencedSchema || schema) as string) as IProp;
-  } else {
-    parsedSchema = (dereferencedSchema || schema) as IProp;
-  }
-
-  if (!dereferencedSchema || isEmpty(dereferencedSchema)) {
-    parsedSchema = dereferenceSchema(parsedSchema, { definitions: schemas }, hideInheritedFrom);
-  }
+  let actualSchema: ISchema =
+    !dereferencedSchema || isEmpty(dereferencedSchema)
+      ? dereferenceSchema(schema, { definitions: schemas }, hideInheritedFrom)
+      : dereferencedSchema;
 
   if (
-    !parsedSchema ||
-    !Object.keys(parsedSchema).length ||
-    (parsedSchema.properties && !Object.keys(parsedSchema.properties).length)
+    !actualSchema ||
+    !Object.keys(actualSchema).length ||
+    (actualSchema.properties && !Object.keys(actualSchema.properties).length)
   ) {
     return null;
   }
 
-  if (parsedSchema.allOf) {
-    const elems = parsedSchema.allOf;
+  if (actualSchema.allOf) {
+    const props = actualSchema.allOf;
 
-    if (parsedSchema.type) elems.push({ type: parsedSchema.type });
+    if (actualSchema.type) props.push({ type: actualSchema.type });
 
-    parsedSchema = buildAllOfSchema({ elems });
+    actualSchema = buildAllOfSchema(props);
   }
 
   let rowElems: ReactNodeArray = [];
@@ -81,8 +73,8 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
     schemas,
     expandedRows,
     defaultExpandedDepth,
-    schema: parsedSchema,
-    level: hideRoot && (parsedSchema.type === 'object' || parsedSchema.hasOwnProperty('allOf')) ? -1 : 0,
+    schema: actualSchema,
+    level: hideRoot && (actualSchema.type === 'object' || actualSchema.hasOwnProperty('allOf')) ? -1 : 0,
     name: 'root',
     rowElems,
     toggleExpandRow,

@@ -1,30 +1,12 @@
-import { Dictionary, ISchema, Omit } from '@stoplight/types';
+import { Dictionary, ISchema } from '@stoplight/types';
 import { ICustomTheme } from '@stoplight/ui-kit';
 import { ReactNodeArray } from 'react';
 
-export interface IProp extends ISchema {
-  allOf?: IProp[];
-  anyOf?: IProp[];
-  oneOf?: IProp[];
-  properties?: IProp[];
-  required?: IProp[];
-  items?: IProp;
-  type: 'string' | 'object' | 'array' | 'number' | string;
-}
-
-export interface IResolvedProp extends Omit<IProp, 'type'> {
-  type: '@circular' | string;
-  __inheritedFrom?: {
-    name: string;
-    ref: string;
-  };
-}
-
 export interface ICommonProps {
   schemas: any;
-  schema?: IProp | IResolvedProp;
+  schema?: ISchema;
   defaultExpandedDepth: number;
-  prop?: IProp | IResolvedProp;
+  prop?: ISchema;
   parentName?: string;
   rowElems: ReactNodeArray;
   expandedRows: Dictionary<boolean>;
