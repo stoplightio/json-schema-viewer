@@ -1,6 +1,6 @@
 import { Dictionary, ISchema, Omit } from '@stoplight/types';
 import { ICustomTheme } from '@stoplight/ui-kit';
-import { ReactElement } from 'react';
+import { ReactNodeArray } from 'react';
 
 export interface IProp extends ISchema {
   allOf?: IProp[];
@@ -26,7 +26,7 @@ export interface ICommonProps {
   defaultExpandedDepth: number;
   prop?: IProp | IResolvedProp;
   parentName?: string;
-  rowElems: Array<ReactElement<any>>;
+  rowElems: ReactNodeArray;
   expandedRows: Dictionary<boolean>;
   jsonPath: string;
   propName?: string;

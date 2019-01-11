@@ -25,11 +25,10 @@ const schema = {
 storiesOf('JsonSchemaViewer', module).add('with text', () => (
   <JsonSchemaViewer
     name={text('name', 'name')}
-    schemas={{}}
+    schemas={object('schemas', {})}
     schema={object('schema', schema)}
     limitPropertyCount={number('limitPropertyCount', 20)}
     hideRoot={boolean('hideRoot', false)}
     expanded={boolean('expanded', true)}
-    emptyText={text('emptyText', 'empty')}
   />
 ));
