@@ -1,5 +1,6 @@
-import * as _ from 'lodash';
-
+import includes = require('lodash/includes');
+import isEmpty = require('lodash/isEmpty');
+import pick = require('lodash/pick');
 import { ICommonProps } from '../types';
 import { renderAllOf } from './renderAllOf';
 import { renderCombiner } from './renderCombiner';
@@ -23,7 +24,7 @@ export const renderSchema = ({
   jsonPath,
   hideRoot,
 }: IRenderSchemaProps) => {
-  if (!schema || _.isEmpty(schema)) {
+  if (!schema || isEmpty(schema)) {
     return rowElems;
   }
 
@@ -36,7 +37,7 @@ export const renderSchema = ({
     defaultExpandedDepth,
     parentName: name,
     propName: name,
-    required: _.includes(schema.required || [], name),
+    required: includes(schema.required || [], name),
     hideInheritedFrom,
     jsonPath,
     hideRoot,
@@ -50,7 +51,7 @@ export const renderSchema = ({
     };
 
     if (!hideInheritedFrom && schema.__inheritedFrom) {
-      Object.assign(prop, _.pick(schema, '__inheritedFrom'));
+      Object.assign(prop, pick(schema, '__inheritedFrom'));
     }
 
     rowElems = renderProp({

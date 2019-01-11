@@ -1,5 +1,6 @@
 import { Dictionary } from '@stoplight/types';
-import * as _ from 'lodash';
+import has = require('lodash/has');
+import set = require('lodash/set');
 import { ICommonProps, IProp, IResolvedProp } from '../types';
 import { renderProp } from './renderProp';
 import { renderRowDivider } from './renderRowDivider';
@@ -25,8 +26,8 @@ export const renderCombiner = ({
   jsonPath,
 }: IRenderCombinerProp) => {
   for (const [e, elem] of Object.entries(props)) {
-    if (!_.has(elem, 'type') && defaultType) {
-      _.set(elem, 'type', defaultType);
+    if (!has(elem, 'type') && defaultType) {
+      set(elem, 'type', defaultType);
     }
 
     const key = `${parentName}-c-${level}-${e}`;

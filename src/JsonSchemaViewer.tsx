@@ -3,7 +3,8 @@ import * as React from 'react';
 import { safeParse } from '@stoplight/json';
 import { Dictionary, ISchema } from '@stoplight/types';
 import { Box } from '@stoplight/ui-kit';
-import * as _ from 'lodash';
+import dropRight = require('lodash/dropRight');
+import isEmpty = require('lodash/isEmpty');
 
 import { MutedText } from './common/MutedText';
 import { Row } from './common/Row';
@@ -68,7 +69,7 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
     }
 
     try {
-      if (!dereferencedSchema || _.isEmpty(dereferencedSchema)) {
+      if (!dereferencedSchema || isEmpty(dereferencedSchema)) {
         parsed = dereferenceSchema(parsed, { definitions: schemas }, hideInheritedFrom);
       }
     } catch (e) {
@@ -122,11 +123,11 @@ export class JsonSchemaViewer extends React.Component<IJsonSchemaViewer, IJsonSc
 
     if (limitPropertyCount) {
       if (!showExtra && propOverflowCount > 0) {
-        rowElems = _.dropRight(rowElems, propOverflowCount);
+        rowElems = dropRight(rowElems, propOverflowCount);
       }
     }
 
-    if (_.isEmpty(rowElems)) {
+    if (isEmpty(rowElems)) {
       return emptyElem;
     }
 

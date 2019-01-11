@@ -1,9 +1,11 @@
 /* @jsx jsx */
 import { jsx } from '@emotion/core';
 import { Box, Flex, Textarea } from '@stoplight/ui-kit';
-
-import * as _ from 'lodash';
+import has = require('lodash/has');
+import isEmpty = require('lodash/isEmpty');
+import isString = require('lodash/isString');
 import { ReactNode, ReactNodeArray } from 'react';
+
 import { MutedText } from '../common/MutedText';
 import { Row } from '../common/Row';
 import { RowType } from '../common/RowType';
@@ -52,9 +54,7 @@ export const renderProp = ({
   let childPropType: 'object' | 'anyOf' | 'oneOf' | 'array';
   let isBasic = false;
   let expandable = false;
-  const expanded = _.has(expandedRows, rowKey)
-    ? expandedRows[rowKey]
-    : expandedRows.all || level <= defaultExpandedDepth;
+  const expanded = has(expandedRows, rowKey) ? expandedRows[rowKey] : expandedRows.all || level <= defaultExpandedDepth;
 
   if (prop.items) {
     if (prop.items.allOf) {
@@ -81,13 +81,13 @@ export const renderProp = ({
     }
   } else if (prop.oneOf) {
     propType = 'oneOf';
-    expandable = !_.isEmpty(prop.oneOf);
+    expandable = !isEmpty(prop.oneOf);
   } else if (prop.anyOf) {
     propType = 'anyOf';
-    expandable = !_.isEmpty(prop.anyOf);
+    expandable = !isEmpty(prop.anyOf);
   } else if (prop.allOf) {
     propType = 'object';
-    expandable = !_.isEmpty(prop.allOf);
+    expandable = !isEmpty(prop.allOf);
   } else {
     propType = prop.type;
     isBasic = !!(prop.properties || prop.patternProperties || propType === 'object');
@@ -100,14 +100,14 @@ export const renderProp = ({
   if (jsonPath === 'root') expandable = false;
 
   let types: string[] = [];
-  if (_.isString(propType)) {
+  if (isString(propType)) {
     types = [propType];
   } else {
     types = propType;
   }
 
   let typeElems: ReactNodeArray = [];
-  if (!_.isEmpty(types)) {
+  if (!isEmpty(types)) {
     typeElems = types.reduce((acc: ReactNode[], type: string, i) => {
       acc.push(
         <span key={i} className={`sl--${type}`}>
@@ -158,7 +158,7 @@ export const renderProp = ({
     );
   }
 
-  const showInheritedFrom = !hideInheritedFrom && !_.isEmpty(prop.__inheritedFrom);
+  const showInheritedFrom = !hideInheritedFrom && !isEmpty(prop.__inheritedFrom);
 
   if (!(hideRoot && jsonPath === 'root')) {
     rowElems.push(
@@ -185,10 +185,10 @@ export const renderProp = ({
           <Flex alignItems="baseline">
             {name && name !== 'root' ? <Box mr={3}>{name}</Box> : null}
 
-            {!_.isEmpty(typeElems) && <RowType name={name}>{typeElems}</RowType>}
+            {!isEmpty(typeElems) && <RowType name={name}>{typeElems}</RowType>}
           </Flex>
 
-          {!_.isEmpty(prop.description) ? <Textarea className="text-muted text-sm" value={prop.description} /> : null}
+          {!isEmpty(prop.description) ? <Textarea className="text-muted text-sm" value={prop.description} /> : null}
         </Box>
 
         {requiredElem || showInheritedFrom || expanded ? (

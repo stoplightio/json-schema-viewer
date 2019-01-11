@@ -1,4 +1,9 @@
-import * as _ from 'lodash';
+import cloneDeep = require('lodash/cloneDeep');
+import get = require('lodash/get');
+import isArray = require('lodash/isArray');
+import isEmpty = require('lodash/isEmpty');
+import map = require('lodash/map');
+import mapValues = require('lodash/mapValues');
 import { IResolvedProp } from './types';
 
 const _dereferenceSchema = (options: any = {}) => {
@@ -18,11 +23,11 @@ const _dereferenceSchema = (options: any = {}) => {
   let isCombiner;
   let isAllOf;
 
-  if (_.isEmpty(schemas)) {
+  if (isEmpty(schemas)) {
     return schema;
   }
 
-  if (_.get(schema, '$ref')) {
+  if (get(schema, '$ref')) {
     schema = _dereferenceSchemaRef({
       target: schema,
       schemas,
@@ -34,9 +39,9 @@ const _dereferenceSchema = (options: any = {}) => {
       hideInheritedFrom,
       isRoot,
     });
-  } else if (_.get(schema, 'properties')) {
+  } else if (get(schema, 'properties')) {
     properties = schema.properties;
-  } else if (_.get(schema, 'items')) {
+  } else if (get(schema, 'items')) {
     if (schema.items.$ref) {
       schema.items = _dereferenceSchemaRef({
         target: schema.items,
@@ -60,21 +65,21 @@ const _dereferenceSchema = (options: any = {}) => {
       properties = schema.items.anyOf;
       isCombiner = true;
     }
-  } else if (_.get(schema, 'allOf')) {
+  } else if (get(schema, 'allOf')) {
     properties = schema.allOf;
     isCombiner = true;
     isAllOf = true;
-  } else if (_.get(schema, 'oneOf')) {
+  } else if (get(schema, 'oneOf')) {
     properties = schema.oneOf;
     isCombiner = true;
-  } else if (_.get(schema, 'anyOf')) {
+  } else if (get(schema, 'anyOf')) {
     properties = schema.anyOf;
     isCombiner = true;
-  } else if (_.get(schema, 'additionalProperties')) {
+  } else if (get(schema, 'additionalProperties')) {
     properties = schema.additionalProperties;
-  } else if (_.get(schema, 'patternProperties')) {
+  } else if (get(schema, 'patternProperties')) {
     properties = schema.patternProperties;
-  } else if (_.get(schema, 'dependencies')) {
+  } else if (get(schema, 'dependencies')) {
     properties = schema.dependencies;
   }
 
@@ -131,7 +136,7 @@ const _dereferenceSchemaRef = (options: any = {}) => {
 
   // defensive clone to protect against mutations :(
   const refPath = ref.replace('#/', '').split('/');
-  const schema = _.cloneDeep(_.get(schemas, refPath.concat('schema')) || _.get(schemas, refPath));
+  const schema = cloneDeep(get(schemas, refPath.concat('schema')) || get(schemas, refPath));
 
   if (schema) {
     let propsInherited: boolean | string = false;
@@ -161,12 +166,12 @@ const _dereferenceSchemaRef = (options: any = {}) => {
     }
 
     if (propsInherited) {
-      const iterFunc = _.isArray(schema[propsInherited]) ? _.map : _.mapValues;
+      const iterFunc = isArray(schema[propsInherited]) ? map : mapValues;
 
       // @ts-ignore
       schema[propsInherited] = iterFunc(schema[propsInherited], item => {
         if (item.properties) {
-          item.properties = _.mapValues(item.properties, val => {
+          item.properties = mapValues(item.properties, val => {
             return {
               ...val,
               // Don't show hideInheritedFrom for combiners anymore.
@@ -219,7 +224,7 @@ const _dereferenceSchemaRef = (options: any = {}) => {
 /**
  * Replace all $ref's with their respective JSON Schema objects
  * @param  {Object} target             - Schema to dereference
- * @param  {Object} schemas            - Schemas that the target may reference. For example a Swagger or {definitions: {}}. This function will use _.get and .split('/') to find the reference path. #/responses/foo will be in {responses: {foo: {}}}
+ * @param  {Object} schemas            - Schemas that the target may reference. For example a Swagger or {definitions: {}}. This function will use get and .split('/') to find the reference path. #/responses/foo will be in {responses: {foo: {}}}
  * @param  {Boolean} hideInheritedFrom - Don't add the __inheritedFrom property to the dereferenced schema
  * @return {Object}                    - An object with no $refs
  */
@@ -228,7 +233,7 @@ export const dereferenceSchema = (target: object, schemas: object, hideInherited
     return {};
   }
 
-  const schema = _.cloneDeep(target);
+  const schema = cloneDeep(target);
 
   return _dereferenceSchema({ target: schema, schemas, hideInheritedFrom, isRoot: true });
 };

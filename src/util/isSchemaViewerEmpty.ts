@@ -1,12 +1,14 @@
-import * as _ from 'lodash';
+import get = require('lodash/get');
+import isEmpty = require('lodash/isEmpty');
+import keys = require('lodash/keys');
 
 const combinerTypes = ['allOf', 'oneOf', 'anyOf'];
 
 export const isSchemaViewerEmpty = (schema: object | string) => {
-  const keys = _.keys(schema);
+  const objectKeys = keys(schema);
 
-  if (keys.length === 1 && combinerTypes.includes(keys[0])) {
-    return _.isEmpty(_.get(schema, keys[0], []));
+  if (objectKeys.length === 1 && combinerTypes.includes(objectKeys[0])) {
+    return isEmpty(get(schema, objectKeys[0], []));
   }
 
   return false;
