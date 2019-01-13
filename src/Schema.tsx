@@ -49,9 +49,12 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
     setExpandedRows({ ...expandedRows, [rowKey]: expandRow });
   }, []);
 
-  const toggleShowExtra = useCallback<MouseEventHandler<HTMLElement>>(() => {
-    setShowExtra(!showExtra);
-  }, []);
+  const toggleShowExtra = useCallback<MouseEventHandler<HTMLElement>>(
+    () => {
+      setShowExtra(!showExtra);
+    },
+    [showExtra]
+  );
 
   let actualSchema: ISchema =
     !dereferencedSchema || isEmpty(dereferencedSchema)
