@@ -1,21 +1,26 @@
 /* @jsx jsx */
 import { jsx } from '@emotion/core';
-import { Box, Flex, Textarea } from '@stoplight/ui-kit';
+import { Box, Flex, Icon, IconLibrary, Textarea } from '@stoplight/ui-kit';
 import has = require('lodash/has');
 import isEmpty = require('lodash/isEmpty');
 import isString = require('lodash/isString');
 import { ReactNode, ReactNodeArray } from 'react';
 
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
+import { ErrorMessage } from '../common/ErrorMessage';
 import { MutedText } from '../common/MutedText';
 import { Row } from '../common/Row';
-import { RowType } from '../common/RowType';
 import { PropValidations } from '../PropValidations';
+import { useTheme } from '../theme';
 import { ICommonProps } from '../types';
 import { getProps } from '../util/getProps';
 import { validationText } from '../util/validationText';
 import { renderAllOf } from './renderAllOf';
 import { renderCombiner } from './renderCombiner';
 import { renderProps } from './renderProps';
+
+IconLibrary.add(faCaretRight, faCaretDown);
 
 export interface IRenderProp extends ICommonProps {
   level: number;
@@ -36,13 +41,14 @@ export const renderProp = ({
   jsonPath,
   hideRoot,
 }: IRenderProp) => {
+  const theme = useTheme();
   const position = rowElems.length;
   const name = propName;
   const rowKey = jsonPath;
 
   if (!prop) {
     rowElems.push(
-      <Row key={position} py={2} level={level} className="text-negative">
+      <Row as={ErrorMessage} key={position} py={2} level={level}>
         Could not render prop. Is it valid? If it is a $ref, does the $ref exist?
       </Row>
     );
@@ -110,7 +116,7 @@ export const renderProp = ({
   if (!isEmpty(types)) {
     typeElems = types.reduce((acc: ReactNode[], type: string, i) => {
       acc.push(
-        <span key={i} className={`sl--${type}`}>
+        <span key={i}>
           {type === 'array' && childPropType && childPropType !== 'array' ? `array[${childPropType}]` : type}
         </span>
       );
@@ -126,14 +132,10 @@ export const renderProp = ({
       return acc;
     }, []);
   } else if (prop.$ref) {
-    typeElems.push(
-      <span key="prop-ref" className="sl--ref">
-        {`{${prop.$ref}}`}
-      </span>
-    );
+    typeElems.push(<span key="prop-ref">{`{${prop.$ref}}`}</span>);
   } else if (prop.__error || isBasic) {
     typeElems.push(
-      <Box as="span" key="no-types" color="#e3342f">
+      <Box as="span" key="no-types" color={theme.canvas.error}>
         {prop.__error || 'ERROR_NO_TYPE'}
       </Box>
     );
@@ -176,8 +178,8 @@ export const renderProp = ({
         }}
       >
         {expandable ? (
-          <Flex justifyContent="center" mt={1} className="JSV-rowExpander w-4 -ml-6">
-            {expanded} />
+          <Flex justifyContent="center" mt={1} pl="0.5rem" mr="0.5rem" ml="-1.5rem" width="1rem">
+            <Icon icon={expanded ? faCaretDown : faCaretRight} />
           </Flex>
         ) : null}
 
@@ -185,14 +187,14 @@ export const renderProp = ({
           <Flex alignItems="baseline">
             {name && name !== 'root' ? <Box mr={3}>{name}</Box> : null}
 
-            {!isEmpty(typeElems) && <RowType name={name}>{typeElems}</RowType>}
+            {!isEmpty(typeElems) && <div>{typeElems}</div>}
           </Flex>
 
-          {!isEmpty(prop.description) ? <Textarea className="text-muted text-sm" value={prop.description} /> : null}
+          {!isEmpty(prop.description) ? <MutedText as={Textarea} fontSize=".875rem" value={prop.description} /> : null}
         </Box>
 
         {requiredElem || showInheritedFrom || expanded ? (
-          <Box maxWidth="30rem" textAlign="right" fontSize=".875rem" pr={3} className="max-w-sm">
+          <Box maxWidth="30rem" textAlign="right" fontSize=".875rem" pr={3}>
             {requiredElem}
 
             {showInheritedFrom ? <MutedText>{`$ref:${prop.__inheritedFrom.name}`}</MutedText> : null}

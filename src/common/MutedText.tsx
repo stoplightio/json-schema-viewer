@@ -3,6 +3,7 @@
 import { jsx } from '@emotion/core';
 import { Box, IBox } from '@stoplight/ui-kit';
 import { FunctionComponent } from 'react';
+import { useTheme } from '../theme';
 
 export const MutedText: FunctionComponent<IMutedText> = props => {
   const { children, ...rest } = props;
@@ -20,9 +21,8 @@ export interface IMutedTextProps {}
 export interface IMutedText extends IMutedTextProps, IBox {}
 
 export const mutedTextStyles = () => {
-  // const theme = useTheme();
+  const theme = useTheme();
   return {
-    // canvas.muted
-    color: 'rgba(19, 15, 33, 0.6)',
+    color: theme.canvas.muted,
   };
 };

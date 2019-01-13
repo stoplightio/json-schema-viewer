@@ -3,6 +3,8 @@
 import { css, jsx } from '@emotion/core';
 import { Box, IBox } from '@stoplight/ui-kit';
 import { FunctionComponent } from 'react';
+import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
+import { useTheme } from '../theme';
 
 export const Row: FunctionComponent<IRow> = props => {
   const { children, level, ...rest } = props;
@@ -21,22 +23,24 @@ export interface IRowProps {
 
 export interface IRow extends IRowProps, IBox {}
 
-const $gutterWidth = 15;
-
 export const rowStyles = ({ level }: IRowProps) => {
+  const theme = useTheme();
+
   return [
     {
-      ...(level !== undefined && { paddingLeft: 20 + $gutterWidth * level }),
+      ...(level !== undefined && { paddingLeft: DEFAULT_PADDING + GUTTER_WIDTH * level }),
     },
     css`
       user-select none;
 
-      &:nth-child(even) {
-        background-color grey;
+     &:nth-of-type(even) {
+        background-color ${theme.row.evenBg};
+        color ${theme.row.evenFg || theme.canvas.fg};
       }
 
       &:hover {
-       background-color #f3f3f3;
+        background-color ${theme.row.hoverBg};
+        color ${theme.row.hoverFg || theme.canvas.fg};
       }
 
       i {

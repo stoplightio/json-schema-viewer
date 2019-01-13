@@ -3,6 +3,7 @@
 import { jsx } from '@emotion/core';
 import { Box, IBox } from '@stoplight/ui-kit';
 import { FunctionComponent } from 'react';
+import { useTheme } from '../theme';
 
 export const ErrorMessage: FunctionComponent<IErrorMessage> = props => {
   const { children, ...rest } = props;
@@ -20,9 +21,8 @@ export interface IErrorMessageProps {}
 export interface IErrorMessage extends IErrorMessageProps, IBox {}
 
 export const errorMessageStyles = () => {
-  // const theme = useTheme();
+  const theme = useTheme();
   return {
-    // canvas.error
-    color: 'red',
+    color: theme.canvas.error,
   };
 };

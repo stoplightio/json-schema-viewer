@@ -20,22 +20,21 @@ export interface ICommonProps {
 }
 
 export interface IJSONSchemaViewerTheme extends ICustomTheme {
-  canvas?: {
+  canvas: {
     bg: string;
     fg: string;
-    invalid: string;
+    error: string;
+    muted: string;
   };
 
-  row?: {
-    fg?: string;
-    bg?: string;
-    dragBg: string;
-    dragFg: string;
-    hoverFg: string;
+  row: {
+    hoverFg?: string;
     hoverBg: string;
-    activeFg: string;
-    activeBg: string;
-    highlightedFg: string;
-    highlightedBg: string;
+    evenFg?: string;
+    evenBg: string;
+  };
+
+  divider: {
+    bg: string;
   };
 }

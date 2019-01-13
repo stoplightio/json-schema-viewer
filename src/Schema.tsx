@@ -1,17 +1,18 @@
 /* @jsx jsx */
 
 import { jsx } from '@emotion/core';
+import { Dictionary, ISchema } from '@stoplight/types';
+import { Box, Button, IBox } from '@stoplight/ui-kit';
 import dropRight = require('lodash/dropRight');
 import isEmpty = require('lodash/isEmpty');
-import { Fragment, FunctionComponent, MouseEventHandler, ReactNodeArray, useCallback, useState } from 'react';
-
-import { Dictionary, ISchema } from '@stoplight/types';
-import { Button } from '@stoplight/ui-kit';
+import { FunctionComponent, MouseEventHandler, ReactNodeArray, useCallback, useState } from 'react';
+import { MutedText } from './common/MutedText';
 import { dereferenceSchema } from './dereferenceSchema';
 import { renderSchema } from './renderers/renderSchema';
+import { useTheme } from './theme';
 import { buildAllOfSchema } from './util/buildAllOfSchema';
 
-export interface ISchemaView {
+export interface ISchemaViewProps {
   name?: string;
   dereferencedSchema?: ISchema;
   defaultExpandedDepth?: number;
@@ -21,20 +22,26 @@ export interface ISchemaView {
   hideRoot?: boolean;
   expanded?: boolean;
   hideInheritedFrom?: boolean;
+  emptyText: string;
 }
+
+export interface ISchemaView extends ISchemaViewProps, IBox {}
 
 export const SchemaView: FunctionComponent<ISchemaView> = props => {
   const {
     defaultExpandedDepth = 1,
     dereferencedSchema,
+    emptyText,
     expanded = false,
     hideInheritedFrom = false,
     hideRoot,
     limitPropertyCount = 0,
     schema,
     schemas = {},
+    ...rest
   } = props;
 
+  const theme = useTheme();
   const [showExtra, setShowExtra] = useState<boolean>(false);
   const [expandedRows, setExpandedRows] = useState<Dictionary<boolean>>({ all: expanded });
 
@@ -56,15 +63,15 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
     !Object.keys(actualSchema).length ||
     (actualSchema.properties && !Object.keys(actualSchema.properties).length)
   ) {
-    return null;
+    return <MutedText>{emptyText}</MutedText>;
   }
 
   if (actualSchema.allOf) {
-    const props = actualSchema.allOf;
+    const schemaProps = actualSchema.allOf;
 
-    if (actualSchema.type) props.push({ type: actualSchema.type });
+    if (actualSchema.type) schemaProps.push({ type: actualSchema.type });
 
-    actualSchema = buildAllOfSchema(props);
+    actualSchema = buildAllOfSchema(schemaProps);
   }
 
   let rowElems: ReactNodeArray = [];
@@ -90,17 +97,17 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
   }
 
   if (rowElems.length === 0) {
-    return null;
+    return <MutedText>{emptyText}</MutedText>;
   }
 
   return (
-    <Fragment>
+    <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
       {rowElems}
       {showExtra || propOverflowCount > 0 ? (
         <Button onClick={toggleShowExtra}>
           {showExtra ? 'collapse' : `...show ${propOverflowCount} more properties`}
         </Button>
       ) : null}
-    </Fragment>
+    </Box>
   );
 };
