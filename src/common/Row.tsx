@@ -33,7 +33,7 @@ export const rowStyles = ({ level }: IRowProps) => {
     css`
       user-select none;
 
-     &:nth-of-type(even) {
+      &:nth-of-type(even) {
         background-color ${theme.row.evenBg};
         color ${theme.row.evenFg || theme.canvas.fg};
       }
@@ -41,10 +41,6 @@ export const rowStyles = ({ level }: IRowProps) => {
       &:hover {
         background-color ${theme.row.hoverBg};
         color ${theme.row.hoverFg || theme.canvas.fg};
-      }
-
-      i {
-        font-size 11px
       }
     `,
   ];

@@ -179,7 +179,7 @@ export const renderProp = ({
       >
         {expandable ? (
           <Flex justifyContent="center" mt={1} pl="0.5rem" mr="0.5rem" ml="-1.5rem" width="1rem">
-            <Icon icon={expanded ? faCaretDown : faCaretRight} />
+            <Icon size="1x" icon={expanded ? faCaretDown : faCaretRight} />
           </Flex>
         ) : null}
 
