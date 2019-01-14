@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "id": {
+      "description": "Group ID",
+      "type": "string"
+    },
+    "name": {
+      "description": "Group name",
+      "type": "string"
+    },
+    "total_members": {
+      "description": "Group member count",
+      "type": "integer"
+    }
+  }
+}

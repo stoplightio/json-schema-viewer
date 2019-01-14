@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "members": {
+      "description": "List of Group members",
+      "items": {
+        "properties": {
+          "email": {
+            "description": "User email. If ID given, email is ignored.",
+            "type": "string"
+          },
+          "id": {
+            "description": "User ID.",
+            "type": "string"
+          }
+        }
+      },
+      "maximum": 30,
+      "type": "array"
+    }
+  }
+}
