@@ -5,7 +5,7 @@ import { Omit } from '@stoplight/types';
 import { Component } from 'react';
 import { ErrorMessage } from './common/ErrorMessage';
 import { MutedText } from './common/MutedText';
-import { ISchemaView, SchemaView } from './Schema';
+import { ISchemaView, SchemaView } from './SchemaView';
 import { ThemeZone } from './theme';
 import { isSchemaViewerEmpty } from './util/isSchemaViewerEmpty';
 

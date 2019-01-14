@@ -45,9 +45,12 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
   const [showExtra, setShowExtra] = useState<boolean>(false);
   const [expandedRows, setExpandedRows] = useState<Dictionary<boolean>>({ all: expanded });
 
-  const toggleExpandRow = useCallback<(rowKey: string, expanded: boolean) => void>((rowKey, expandRow) => {
-    setExpandedRows({ ...expandedRows, [rowKey]: expandRow });
-  }, []);
+  const toggleExpandRow = useCallback<(rowKey: string, expanded: boolean) => void>(
+    (rowKey, expandRow) => {
+      setExpandedRows({ ...expandedRows, [rowKey]: expandRow });
+    },
+    [expandedRows]
+  );
 
   const toggleShowExtra = useCallback<MouseEventHandler<HTMLElement>>(
     () => {
