@@ -1,16 +1,60 @@
 {
+  "title": "User",
+  "type": "object",
   "properties": {
-    "data": {
+    "name": {
+      "type": "string",
+      "description": "The user's full name."
+    },
+    "age": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "completed_at": {},
+    "items": {
+      "type": [
+        "string",
+        "array"
+      ],
       "items": {
-        "$ref": "#/definitions/Gif"
-      },
-      "type": "array"
+        "type": "string"
+      }
     },
-    "meta": {
-      "$ref": "#/definitions/Meta"
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 2
     },
-    "pagination": {
-      "$ref": "#/definitions/Pagination"
+    "plan": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "foo": {
+              "type": "string"
+            },
+            "bar": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "foo",
+            "bar"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      ]
     }
-  }
+  },
+  "required": [
+    "name",
+    "age",
+    "completed_at"
+  ]
 }

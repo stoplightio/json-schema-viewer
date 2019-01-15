@@ -23,7 +23,22 @@ export const zones = {
       row: {
         hoverBg: '#999',
         hoverFg: '#222',
-        evenBg: '#333',
+        evenBg: '#232222',
+      },
+
+      types: {
+        object: '#00f',
+        array: '#008000',
+        allOff: '#B8860B',
+        oneOf: '#B8860B',
+        anyOf: '#B8860B',
+        null: '#ff7f50',
+        integer: '#a52a2a',
+        number: '#a52a2a',
+        boolean: '#ff69b4',
+        binary: '#66cdaa',
+        string: '#008080',
+        $ref: '#8a2be2',
       }
     } : {
       canvas: {
@@ -41,6 +56,22 @@ export const zones = {
         hoverBg: '#888',
         hoverFg: '#111',
         evenBg: '#e4e4e4',
+      },
+
+
+      types: {
+        object: '#00f',
+        array: '#008000',
+        allOff: '#B8860B',
+        oneOf: '#B8860B',
+        anyOf: '#B8860B',
+        null: '#ff7f50',
+        integer: '#a52a2a',
+        number: '#a52a2a',
+        boolean: '#ff69b4',
+        binary: '#66cdaa',
+        string: '#008080',
+        $ref: '#8a2be2',
       },
     },
 };

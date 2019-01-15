@@ -34,6 +34,20 @@ export interface IJSONSchemaViewerTheme extends ICustomTheme {
     evenBg: string;
   };
 
+  types: {
+    array: string;
+    object: string;
+    allOf: string;
+    oneOf: string;
+    anyOf: string;
+    null: string;
+    integer: string;
+    number: string;
+    boolean: string;
+    binary: boolean;
+    $ref: string;
+  };
+
   divider: {
     bg: string;
   };

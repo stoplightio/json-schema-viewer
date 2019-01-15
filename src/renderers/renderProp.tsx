@@ -1,6 +1,6 @@
 /* @jsx jsx */
 import { jsx } from '@emotion/core';
-import { Box, Flex, Icon, IconLibrary, Textarea } from '@stoplight/ui-kit';
+import { Box, Flex, Icon, IconLibrary } from '@stoplight/ui-kit';
 import has = require('lodash/has');
 import isEmpty = require('lodash/isEmpty');
 import isString = require('lodash/isString');
@@ -11,6 +11,7 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
 import { ErrorMessage } from '../common/ErrorMessage';
 import { MutedText } from '../common/MutedText';
 import { Row } from '../common/Row';
+import { RowType } from '../common/RowType';
 import { PropValidations } from '../PropValidations';
 import { useTheme } from '../theme';
 import { ICommonProps } from '../types';
@@ -116,9 +117,9 @@ export const renderProp = ({
   if (!isEmpty(types)) {
     typeElems = types.reduce((acc: ReactNode[], type: string, i) => {
       acc.push(
-        <span key={i}>
+        <RowType as="span" type={type} key={i}>
           {type === 'array' && childPropType && childPropType !== 'array' ? `array[${childPropType}]` : type}
-        </span>
+        </RowType>
       );
 
       if (types[i + 1]) {
@@ -132,7 +133,7 @@ export const renderProp = ({
       return acc;
     }, []);
   } else if (prop.$ref) {
-    typeElems.push(<span key="prop-ref">{`{${prop.$ref}}`}</span>);
+    typeElems.push(<RowType as="span" type="$ref" key="prop-ref">{`{${prop.$ref}}`}</RowType>);
   } else if (prop.__error || isBasic) {
     typeElems.push(
       <Box as="span" key="no-types" color={theme.canvas.error}>
@@ -166,6 +167,7 @@ export const renderProp = ({
     rowElems.push(
       <Row
         as={Flex}
+        alignItems="center"
         position="relative"
         py={2}
         key={position}
@@ -178,7 +180,7 @@ export const renderProp = ({
         }}
       >
         {expandable ? (
-          <Flex justifyContent="center" mt={1} pl="0.5rem" mr="0.5rem" ml="-1.5rem" width="1rem">
+          <Flex justifyContent="center" pl="0.5rem" mr="0.5rem" ml="-1.5rem" width="1rem">
             <Icon size="1x" icon={expanded ? faCaretDown : faCaretRight} />
           </Flex>
         ) : null}
@@ -190,7 +192,7 @@ export const renderProp = ({
             {!isEmpty(typeElems) && <div>{typeElems}</div>}
           </Flex>
 
-          {!isEmpty(prop.description) ? <MutedText as={Textarea} fontSize=".875rem" value={prop.description} /> : null}
+          {!isEmpty(prop.description) ? <MutedText fontSize=".875rem">{prop.description}</MutedText> : null}
         </Box>
 
         {requiredElem || showInheritedFrom || expanded ? (
