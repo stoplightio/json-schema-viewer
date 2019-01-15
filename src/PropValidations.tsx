@@ -1,9 +1,9 @@
 import { safeStringify } from '@stoplight/json';
 import { ISchema } from '@stoplight/types';
 import * as React from 'react';
+import { MutedText } from './common/MutedText';
 import { isCombiner } from './util/isCombiner';
 import { pickValidations } from './util/pickValidations';
-import { MutedText } from './common/MutedText';
 
 export const PropValidations: React.FunctionComponent<{ prop: ISchema }> = ({ prop }) => {
   if (!isCombiner(prop)) {
