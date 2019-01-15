@@ -33,7 +33,6 @@ export class JsonSchemaViewer extends Component<IJsonSchemaViewer, IJsonSchemaVi
         emptyText = 'No schema defined',
         name,
         schema,
-        dereferencedSchema,
         schemas,
         limitPropertyCount,
         hideRoot,
@@ -67,7 +66,6 @@ export class JsonSchemaViewer extends Component<IJsonSchemaViewer, IJsonSchemaVi
         <SchemaView
           emptyText={emptyText}
           defaultExpandedDepth={defaultExpandedDepth}
-          dereferencedSchema={dereferencedSchema}
           expanded={expanded}
           hideInheritedFrom={hideInheritedFrom}
           hideRoot={hideRoot}

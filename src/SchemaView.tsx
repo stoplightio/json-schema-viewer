@@ -4,17 +4,14 @@ import { jsx } from '@emotion/core';
 import { Dictionary, ISchema } from '@stoplight/types';
 import { Box, Button, IBox } from '@stoplight/ui-kit';
 import dropRight = require('lodash/dropRight');
-import isEmpty = require('lodash/isEmpty');
 import { FunctionComponent, MouseEventHandler, ReactNodeArray, useCallback, useState } from 'react';
 import { MutedText } from './common/MutedText';
-import { dereferenceSchema } from './dereferenceSchema';
 import { renderSchema } from './renderers/renderSchema';
 import { useTheme } from './theme';
 import { buildAllOfSchema } from './util/buildAllOfSchema';
 
 export interface ISchemaViewProps {
   name?: string;
-  dereferencedSchema?: ISchema;
   defaultExpandedDepth?: number;
   schemas: object;
   schema: ISchema;
@@ -30,7 +27,6 @@ export interface ISchemaView extends ISchemaViewProps, IBox {}
 export const SchemaView: FunctionComponent<ISchemaView> = props => {
   const {
     defaultExpandedDepth = 1,
-    dereferencedSchema,
     emptyText,
     expanded = false,
     hideInheritedFrom = false,
@@ -59,10 +55,7 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
     [showExtra]
   );
 
-  let actualSchema: ISchema =
-    !dereferencedSchema || isEmpty(dereferencedSchema)
-      ? dereferenceSchema(schema, { definitions: schemas }, hideInheritedFrom)
-      : dereferencedSchema;
+  let actualSchema = schema;
 
   if (
     !actualSchema ||
