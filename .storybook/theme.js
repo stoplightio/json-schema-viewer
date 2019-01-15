@@ -27,18 +27,18 @@ export const zones = {
       },
 
       types: {
-        object: '#00f',
-        array: '#008000',
-        allOff: '#B8860B',
-        oneOf: '#B8860B',
-        anyOf: '#B8860B',
+        object: '#83c1ff',
+        array: '#7dff75',
+        allOff: '#b89826',
+        oneOf: '#b89826',
+        anyOf: '#b89826',
         null: '#ff7f50',
-        integer: '#a52a2a',
-        number: '#a52a2a',
+        integer: '#e03b36',
+        number: '#e03b36',
         boolean: '#ff69b4',
-        binary: '#66cdaa',
-        string: '#008080',
-        $ref: '#8a2be2',
+        binary: '#8ccda3',
+        string: '#19c5a0',
+        $ref: '#a359e2',
       }
     } : {
       canvas: {
@@ -57,7 +57,6 @@ export const zones = {
         hoverFg: '#111',
         evenBg: '#e4e4e4',
       },
-
 
       types: {
         object: '#00f',

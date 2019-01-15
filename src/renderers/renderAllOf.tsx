@@ -11,7 +11,6 @@ export interface IRenderAllProps extends ICommonProps {
 export const renderAllOf = ({
   schemas,
   level,
-  parentName,
   rowElems,
   props,
   toggleExpandRow,

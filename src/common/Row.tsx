@@ -32,6 +32,7 @@ export const rowStyles = ({ level }: IRowProps) => {
     },
     css`
       user-select none;
+      line-height: 1rem;
 
       &:nth-of-type(even) {
         background-color ${theme.row.evenBg};

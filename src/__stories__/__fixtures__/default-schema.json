@@ -11,14 +11,20 @@
       "minimum": 0,
       "maximum": 150
     },
-    "completed_at": {},
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "items": {
       "type": [
-        "string",
+        "null",
         "array"
       ],
       "items": {
-        "type": "string"
+        "type": [
+          "string",
+          "number"
+        ]
       }
     },
     "email": {
@@ -50,6 +56,23 @@
           }
         }
       ]
+    },
+    "permissions": {
+      "type": [
+        "string",
+        "object"
+      ],
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "ref": {
+      "$ref": "#/definitions/error-response"
     }
   },
   "required": [

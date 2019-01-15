@@ -149,7 +149,7 @@ export const renderProp = ({
 
   if (required || vt) {
     requiredElem = (
-      <div>
+      <Box fontSize="0.75rem">
         {showVt ? <MutedText as="span">{vt}</MutedText> : null}
         {showVt && required ? <MutedText as="span"> + </MutedText> : null}
         {required ? (
@@ -157,7 +157,7 @@ export const renderProp = ({
             required
           </Box>
         ) : null}
-      </div>
+      </Box>
     );
   }
 
@@ -192,11 +192,15 @@ export const renderProp = ({
             {!isEmpty(typeElems) && <div>{typeElems}</div>}
           </Flex>
 
-          {!isEmpty(prop.description) ? <MutedText fontSize=".875rem">{prop.description}</MutedText> : null}
+          {!isEmpty(prop.description) ? (
+            <MutedText pt={1} fontSize=".875rem">
+              {prop.description}
+            </MutedText>
+          ) : null}
         </Box>
 
         {requiredElem || showInheritedFrom || expanded ? (
-          <Box maxWidth="30rem" textAlign="right" fontSize=".875rem" pr={3}>
+          <Box maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={3}>
             {requiredElem}
 
             {showInheritedFrom ? <MutedText>{`$ref:${prop.__inheritedFrom.name}`}</MutedText> : null}

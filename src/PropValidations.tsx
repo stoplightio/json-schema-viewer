@@ -3,6 +3,7 @@ import { ISchema } from '@stoplight/types';
 import * as React from 'react';
 import { isCombiner } from './util/isCombiner';
 import { pickValidations } from './util/pickValidations';
+import { MutedText } from './common/MutedText';
 
 export const PropValidations: React.FunctionComponent<{ prop: ISchema }> = ({ prop }) => {
   if (!isCombiner(prop)) {
@@ -22,7 +23,7 @@ export const PropValidations: React.FunctionComponent<{ prop: ISchema }> = ({ pr
           if (type === 'boolean') {
             return (
               <div key={k}>
-                <b>{k}:</b> {v.toString()}
+                <MutedText as="b">{k}:</MutedText> {v.toString()}
               </div>
             );
           }
@@ -30,7 +31,7 @@ export const PropValidations: React.FunctionComponent<{ prop: ISchema }> = ({ pr
           if (type !== 'object') {
             return (
               <div key={k}>
-                <b>{k}:</b> {v}
+                <MutedText as="b">{k}:</MutedText> {v}
               </div>
             );
           }
