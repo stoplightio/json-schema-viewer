@@ -49,11 +49,13 @@
     "@stoplight/storybook-config": "1.x.x",
     "@stoplight/types": "3.1.x",
     "@stoplight/ui-kit": "1.27.x",
+    "@types/enzyme": "3.1.x",
     "@types/react": "16.x.x",
     "@types/react-dom": "16.x.x",
     "enzyme": "3.x.x",
     "enzyme-adapter-react-16": "1.x.x",
     "enzyme-to-json": "3.x.x",
+    "jest-enzyme": "7.0.x",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
     "typescript": "3.2.2"

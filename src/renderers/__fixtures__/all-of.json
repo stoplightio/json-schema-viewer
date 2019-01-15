@@ -1,0 +1,15 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "id": {
+          "description": "Group ID",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "$ref": "#/definitions/Group"
+    }
+  ]
+}
