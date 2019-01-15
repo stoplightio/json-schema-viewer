@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/definitions/Gif"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/definitions/Meta"
+    },
+    "pagination": {
+      "$ref": "#/definitions/Pagination"
+    }
+  }
+}
