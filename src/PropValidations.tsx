@@ -1,11 +1,11 @@
 import { safeStringify } from '@stoplight/json';
+import { ISchema } from '@stoplight/types';
 import * as React from 'react';
-
-import { IProp, IResolvedProp } from './types';
+import { MutedText } from './common/MutedText';
 import { isCombiner } from './util/isCombiner';
 import { pickValidations } from './util/pickValidations';
 
-export const PropValidations: React.FunctionComponent<{ prop: IProp | IResolvedProp }> = ({ prop }) => {
+export const PropValidations: React.FunctionComponent<{ prop: ISchema }> = ({ prop }) => {
   if (!isCombiner(prop)) {
     const validations = pickValidations(prop);
 
@@ -23,7 +23,7 @@ export const PropValidations: React.FunctionComponent<{ prop: IProp | IResolvedP
           if (type === 'boolean') {
             return (
               <div key={k}>
-                <b>{k}:</b> {v.toString()}
+                <MutedText as="b">{k}:</MutedText> {v.toString()}
               </div>
             );
           }
@@ -31,7 +31,7 @@ export const PropValidations: React.FunctionComponent<{ prop: IProp | IResolvedP
           if (type !== 'object') {
             return (
               <div key={k}>
-                <b>{k}:</b> {v}
+                <MutedText as="b">{k}:</MutedText> {v}
               </div>
             );
           }

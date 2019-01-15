@@ -1,8 +1,8 @@
-import { IProp, IResolvedProp } from '../types';
+import { ISchema } from '@stoplight/types';
 import { isCombiner } from './isCombiner';
 import { pickValidations } from './pickValidations';
 
-export const validationText = (prop: IProp | IResolvedProp) => {
+export const validationText = (prop: ISchema) => {
   if (!isCombiner(prop)) {
     const validationCount = Object.keys(pickValidations(prop)).length;
 

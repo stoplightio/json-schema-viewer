@@ -1,13 +1,14 @@
-import { Dictionary } from '@stoplight/types';
-import * as _ from 'lodash';
-import { ICommonProps, IProp, IResolvedProp } from '../types';
+import { Dictionary, ISchema } from '@stoplight/types';
+import has = require('lodash/has');
+import set = require('lodash/set');
+import { ICommonProps } from '../types';
 import { renderProp } from './renderProp';
 import { renderRowDivider } from './renderRowDivider';
 import { renderSchema } from './renderSchema';
 
 export interface IRenderCombinerProp extends ICommonProps {
-  defaultType?: IProp['type'] | IResolvedProp['type'];
-  props: Dictionary<IProp>;
+  defaultType?: string;
+  props: Dictionary<ISchema>;
   level: number;
 }
 
@@ -25,8 +26,8 @@ export const renderCombiner = ({
   jsonPath,
 }: IRenderCombinerProp) => {
   for (const [e, elem] of Object.entries(props)) {
-    if (!_.has(elem, 'type') && defaultType) {
-      _.set(elem, 'type', defaultType);
+    if (!has(elem, 'type') && defaultType) {
+      set(elem, 'type', defaultType);
     }
 
     const key = `${parentName}-c-${level}-${e}`;

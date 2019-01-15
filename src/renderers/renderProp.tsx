@@ -1,15 +1,27 @@
-import { Textarea } from '@stoplight/ui-kit';
-import cn from 'classnames';
-import * as _ from 'lodash';
+/* @jsx jsx */
+import { jsx } from '@emotion/core';
+import { Box, Flex, Icon, IconLibrary } from '@stoplight/ui-kit';
+import has = require('lodash/has');
+import isEmpty = require('lodash/isEmpty');
+import isString = require('lodash/isString');
 import { ReactNode, ReactNodeArray } from 'react';
-import * as React from 'react';
+
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
+import { ErrorMessage } from '../common/ErrorMessage';
+import { MutedText } from '../common/MutedText';
+import { Row } from '../common/Row';
+import { RowType } from '../common/RowType';
 import { PropValidations } from '../PropValidations';
+import { useTheme } from '../theme';
 import { ICommonProps } from '../types';
 import { getProps } from '../util/getProps';
 import { validationText } from '../util/validationText';
 import { renderAllOf } from './renderAllOf';
 import { renderCombiner } from './renderCombiner';
 import { renderProps } from './renderProps';
+
+IconLibrary.add(faCaretRight, faCaretDown);
 
 export interface IRenderProp extends ICommonProps {
   level: number;
@@ -30,15 +42,16 @@ export const renderProp = ({
   jsonPath,
   hideRoot,
 }: IRenderProp) => {
+  const theme = useTheme();
   const position = rowElems.length;
   const name = propName;
   const rowKey = jsonPath;
 
   if (!prop) {
     rowElems.push(
-      <div key={position} className={`text-negative py-2 JSV-row--${level}`}>
+      <Row as={ErrorMessage} key={position} py={2} level={level}>
         Could not render prop. Is it valid? If it is a $ref, does the $ref exist?
-      </div>
+      </Row>
     );
 
     return rowElems;
@@ -48,12 +61,9 @@ export const renderProp = ({
   let childPropType: 'object' | 'anyOf' | 'oneOf' | 'array';
   let isBasic = false;
   let expandable = false;
-  const expanded = _.has(expandedRows, rowKey)
-    ? expandedRows[rowKey]
-    : expandedRows.all || level <= defaultExpandedDepth;
+  const expanded = has(expandedRows, rowKey) ? expandedRows[rowKey] : expandedRows.all || level <= defaultExpandedDepth;
 
   if (prop.items) {
-    propType = prop.type;
     if (prop.items.allOf) {
       childPropType = 'object';
     } else if (prop.items.anyOf) {
@@ -78,13 +88,13 @@ export const renderProp = ({
     }
   } else if (prop.oneOf) {
     propType = 'oneOf';
-    expandable = !_.isEmpty(prop.oneOf);
+    expandable = !isEmpty(prop.oneOf);
   } else if (prop.anyOf) {
     propType = 'anyOf';
-    expandable = !_.isEmpty(prop.anyOf);
+    expandable = !isEmpty(prop.anyOf);
   } else if (prop.allOf) {
     propType = 'object';
-    expandable = !_.isEmpty(prop.allOf);
+    expandable = !isEmpty(prop.allOf);
   } else {
     propType = prop.type;
     isBasic = !!(prop.properties || prop.patternProperties || propType === 'object');
@@ -97,42 +107,38 @@ export const renderProp = ({
   if (jsonPath === 'root') expandable = false;
 
   let types: string[] = [];
-  if (_.isString(propType)) {
+  if (isString(propType)) {
     types = [propType];
   } else {
     types = propType;
   }
 
   let typeElems: ReactNodeArray = [];
-  if (!_.isEmpty(types)) {
+  if (!isEmpty(types)) {
     typeElems = types.reduce((acc: ReactNode[], type: string, i) => {
       acc.push(
-        <span key={i} className={`sl--${type}`}>
+        <RowType as="span" type={type} key={i}>
           {type === 'array' && childPropType && childPropType !== 'array' ? `array[${childPropType}]` : type}
-        </span>
+        </RowType>
       );
 
       if (types[i + 1]) {
         acc.push(
-          <span key={`${i}-sep`} className="c-muted">
+          <MutedText as="span" key={`${i}-sep`}>
             {' or '}
-          </span>
+          </MutedText>
         );
       }
 
       return acc;
     }, []);
   } else if (prop.$ref) {
-    typeElems.push(
-      <span key="prop-ref" className="sl--ref">
-        {`{${prop.$ref}}`}
-      </span>
-    );
+    typeElems.push(<RowType as="span" type="$ref" key="prop-ref">{`{${prop.$ref}}`}</RowType>);
   } else if (prop.__error || isBasic) {
     typeElems.push(
-      <span key="no-types" className="c-negative">
+      <Box as="span" key="no-types" color={theme.canvas.error}>
         {prop.__error || 'ERROR_NO_TYPE'}
-      </span>
+      </Box>
     );
   }
 
@@ -143,60 +149,66 @@ export const renderProp = ({
 
   if (required || vt) {
     requiredElem = (
-      <div>
-        {showVt ? <span className="text-muted">{vt}</span> : null}
-        {showVt && required ? <span className="text-muted"> + </span> : null}
-        {required ? <span className="font-bold">required</span> : null}
-      </div>
+      <Box fontSize="0.75rem">
+        {showVt ? <MutedText as="span">{vt}</MutedText> : null}
+        {showVt && required ? <MutedText as="span"> + </MutedText> : null}
+        {required ? (
+          <Box as="span" fontWeight={700}>
+            required
+          </Box>
+        ) : null}
+      </Box>
     );
   }
 
-  const showInheritedFrom = !hideInheritedFrom && !_.isEmpty(prop.__inheritedFrom);
+  const showInheritedFrom = !hideInheritedFrom && !isEmpty(prop.__inheritedFrom);
 
   if (!(hideRoot && jsonPath === 'root')) {
     rowElems.push(
-      <div
+      <Row
+        as={Flex}
+        alignItems="center"
+        position="relative"
+        py={2}
         key={position}
-        className={cn(`JSV-row JSV-row--${level} flex relative py-2`, {
-          'cursor-pointer': vt || expandable,
-          'is-expanded': expanded,
-        })}
+        level={level}
+        cursor={vt || expandable ? 'pointer' : 'default'}
         onClick={() => {
           if (vt || expandable) {
             toggleExpandRow(rowKey, !expanded);
           }
         }}
       >
-        {expandable ? <div className="JSV-rowExpander w-4 -ml-6 flex justify-center mt-1">{expanded} /></div> : null}
+        {expandable ? (
+          <Flex justifyContent="center" pl="0.5rem" mr="0.5rem" ml="-1.5rem" width="1rem">
+            <Icon size="1x" icon={expanded ? faCaretDown : faCaretRight} />
+          </Flex>
+        ) : null}
 
-        <div className="flex-1">
-          <div className="flex items-baseline">
-            {name && name !== 'root' ? <div className="mr-3">{name}</div> : null}
+        <Box flex="1 1 0%">
+          <Flex alignItems="baseline">
+            {name && name !== 'root' ? <Box mr={3}>{name}</Box> : null}
 
-            {!_.isEmpty(typeElems) && (
-              <div
-                className={cn('JSV-rowType', {
-                  'JSV-namelessType': !name,
-                })}
-              >
-                {typeElems}
-              </div>
-            )}
-          </div>
+            {!isEmpty(typeElems) && <div>{typeElems}</div>}
+          </Flex>
 
-          {!_.isEmpty(prop.description) ? <Textarea className="text-muted text-sm" value={prop.description} /> : null}
-        </div>
+          {!isEmpty(prop.description) ? (
+            <MutedText pt={1} fontSize=".875rem">
+              {prop.description}
+            </MutedText>
+          ) : null}
+        </Box>
 
         {requiredElem || showInheritedFrom || expanded ? (
-          <div className="text-right text-sm pr-3 max-w-sm">
+          <Box maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={3}>
             {requiredElem}
 
-            {showInheritedFrom ? <div className="text-muted">{`$ref:${prop.__inheritedFrom.name}`}</div> : null}
+            {showInheritedFrom ? <MutedText>{`$ref:${prop.__inheritedFrom.name}`}</MutedText> : null}
 
             {expanded && <PropValidations prop={prop} />}
-          </div>
+          </Box>
         ) : null}
-      </div>
+      </Row>
     );
   }
 

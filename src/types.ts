@@ -1,31 +1,14 @@
-import { Dictionary, ISchema, Omit } from '@stoplight/types';
-import { ReactElement } from 'react';
-
-export interface IProp extends ISchema {
-  allOf?: IProp[];
-  anyOf?: IProp[];
-  oneOf?: IProp[];
-  properties?: IProp[];
-  required?: IProp[];
-  items?: IProp;
-  type: 'string' | 'object' | 'array' | 'number' | string;
-}
-
-export interface IResolvedProp extends Omit<IProp, 'type'> {
-  type: '@circular' | string;
-  __inheritedFrom?: {
-    name: string;
-    ref: string;
-  };
-}
+import { Dictionary, ISchema } from '@stoplight/types';
+import { ICustomTheme } from '@stoplight/ui-kit';
+import { ReactNodeArray } from 'react';
 
 export interface ICommonProps {
   schemas: any;
-  schema?: IProp | IResolvedProp;
+  schema?: ISchema;
   defaultExpandedDepth: number;
-  prop?: IProp | IResolvedProp;
+  prop?: ISchema;
   parentName?: string;
-  rowElems: Array<ReactElement<any>>;
+  rowElems: ReactNodeArray;
   expandedRows: Dictionary<boolean>;
   jsonPath: string;
   propName?: string;
@@ -34,4 +17,38 @@ export interface ICommonProps {
   hideRoot?: boolean;
 
   toggleExpandRow(rowKey: string, expanded: boolean): void;
+}
+
+export interface IJSONSchemaViewerTheme extends ICustomTheme {
+  canvas: {
+    bg: string;
+    fg: string;
+    error: string;
+    muted: string;
+  };
+
+  row: {
+    hoverFg?: string;
+    hoverBg: string;
+    evenFg?: string;
+    evenBg: string;
+  };
+
+  types: {
+    array: string;
+    object: string;
+    allOf: string;
+    oneOf: string;
+    anyOf: string;
+    null: string;
+    integer: string;
+    number: string;
+    boolean: string;
+    binary: boolean;
+    $ref: string;
+  };
+
+  divider: {
+    bg: string;
+  };
 }
