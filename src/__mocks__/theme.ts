@@ -3,7 +3,7 @@ export const useTheme = () => ({
     bg: '#111',
     fg: '#fff',
     error: 'red',
-    muted: 'rgba(255, 255, 255, 0.4)'
+    muted: 'rgba(255, 255, 255, 0.4)',
   },
 
   divider: {
