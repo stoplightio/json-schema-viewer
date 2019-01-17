@@ -6,7 +6,7 @@ describe('isCombiner function', () => {
     expect(isCombiner({ properties: [] })).toBe(false);
   });
 
-  test.each(['allOf', 'anyOf', 'oneOf'])('should return true if object with %s is given', (prop) => {
+  test.each(['allOf', 'anyOf', 'oneOf'])('should return true if object with %s is given', prop => {
     expect(isCombiner({ [prop]: {} })).toBe(true);
   });
 });
