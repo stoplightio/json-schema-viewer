@@ -9,9 +9,11 @@ A JSON Schema viewer React component
 
 ### Features
 
-- full OAS2 support
-- themeable
-- customizable
+- Full JSON Schema Draft 4 support, including `oneOf` and `anyOf` combiner properties
+- Renders complicated nested objects to any depth
+- Renders validation properties and markdown descriptions
+- Theme-able
+- Collapsible
 
 ### Installation
 
@@ -71,7 +73,7 @@ import { theme } from './theme';
 </ThemeProvider>
 ```
 
-More examples can be find in our [Storybook](https://github.com/stoplightio/json-schema-viewer/blob/master/src/__stories__/JsonSchemaViewer.tsx).
+More examples can be find in the [Storybook stories](./src/__stories__/JsonSchemaViewer.tsx).
 
 ### Contributing
 

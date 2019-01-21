@@ -54,6 +54,12 @@ describe('SchemaView', () => {
     expect(wrapper.children()).toHaveLength(3);
   });
 
+  test('should hide expand button when limitPropertyCount <= 0', () => {
+    const wrapper = shallow(<SchemaView emptyText="" schema={schema} schemas={{}} limitPropertyCount={0} />);
+
+    expect(wrapper.find(Button)).not.toExist();
+  });
+
   test('should toggle showExtra on btn click', () => {
     const wrapper = shallow(<SchemaView emptyText="" schema={schema} schemas={{}} limitPropertyCount={2} />);
 
