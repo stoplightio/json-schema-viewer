@@ -9,8 +9,9 @@ A JSON Schema viewer React component
 
 ### Features
 
-- **Awesome**: It is.
-- .. more features
+- full OAS2 support
+- themeable
+- customizable
 
 ### Installation
 
@@ -23,11 +24,54 @@ yarn add @stoplight/json-schema-viewer
 
 ### Usage
 
-```ts
-import { Library } from "@stoplight/json-schema-viewer";
+```js
+export const theme = {
+  base: 'dark',
 
-// ...example
+  canvas: {
+    bg: '#111',
+    fg: '#fff',
+    error: 'red',
+    muted: 'rgba(255, 255, 255, 0.6)',
+  },
+
+  divider: {
+    bg: '#bababa',
+  },
+
+  row: {
+    hoverBg: '#333',
+    hoverFg: '#fff',
+    evenBg: '#232222',
+  },
+
+  types: {
+    object: '#83c1ff',
+    array: '#7dff75',
+    allOf: '#b89826',
+    oneOf: '#b89826',
+    anyOf: '#b89826',
+    null: '#ff7f50',
+    integer: '#e03b36',
+    number: '#e03b36',
+    boolean: '#ff69b4',
+    binary: '#8ccda3',
+    string: '#19c5a0',
+    $ref: '#a359e2',
+  },
+};
 ```
+
+```jsx
+import { JsonSchemaViewer, ThemeProvider } from "@stoplight/json-schema-viewer";
+import { theme } from './theme';
+
+<ThemeProvider theme={theme}>
+  <JsonSchemaViewer schemas={schemas} schema={schema} expanded />
+</ThemeProvider>
+```
+
+More examples can be find in our [Storybook](https://github.com/stoplightio/json-schema-viewer/blob/master/src/__stories__/JsonSchemaViewer.tsx).
 
 ### Contributing
 

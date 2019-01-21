@@ -102,7 +102,7 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
   return (
     <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
       {rowElems}
-      {showExtra || propOverflowCount > 0 ? (
+      {showExtra || (limitPropertyCount > 0 && propOverflowCount > 0) ? (
         <Button onClick={toggleShowExtra}>
           {showExtra ? 'collapse' : `...show ${propOverflowCount} more properties`}
         </Button>

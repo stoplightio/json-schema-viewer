@@ -30,7 +30,7 @@ export const zones = {
           types: {
             object: '#83c1ff',
             array: '#7dff75',
-            allOff: '#b89826',
+            allOf: '#b89826',
             oneOf: '#b89826',
             anyOf: '#b89826',
             null: '#ff7f50',
@@ -63,7 +63,7 @@ export const zones = {
           types: {
             object: '#00f',
             array: '#008000',
-            allOff: '#B8860B',
+            allOf: '#B8860B',
             oneOf: '#B8860B',
             anyOf: '#B8860B',
             null: '#ff7f50',

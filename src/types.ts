@@ -44,7 +44,8 @@ export interface IJSONSchemaViewerTheme extends ICustomTheme {
     integer: string;
     number: string;
     boolean: string;
-    binary: boolean;
+    binary: string;
+    string: string;
     $ref: string;
   };
 
