@@ -3,4 +3,4 @@ import { IJSONSchemaViewerTheme } from './types';
 
 export type themeZones = 'json-schema-viewer';
 
-export const { useTheme, ThemeZone } = createThemedModule<themeZones, IJSONSchemaViewerTheme>();
+export const { useTheme, ThemeZone, ThemeProvider } = createThemedModule<themeZones, IJSONSchemaViewerTheme>();
