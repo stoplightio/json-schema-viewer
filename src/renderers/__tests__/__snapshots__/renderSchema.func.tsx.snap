@@ -89,7 +89,7 @@ Array [
             "prefix": "fas",
           }
         }
-        size="1x"
+        fontSize="1em"
       />
     </Unknown>
     <ForwardRef
@@ -173,7 +173,7 @@ Array [
             "prefix": "fas",
           }
         }
-        size="1x"
+        fontSize="1em"
       />
     </Unknown>
     <ForwardRef
@@ -374,7 +374,7 @@ Array [
             "prefix": "fas",
           }
         }
-        size="1x"
+        fontSize="1em"
       />
     </Unknown>
     <ForwardRef
