@@ -76,6 +76,7 @@ Array [
       width="1rem"
     >
       <Unknown
+        fontSize="1em"
         icon={
           Object {
             "icon": Array [
@@ -89,7 +90,6 @@ Array [
             "prefix": "fas",
           }
         }
-        size="1x"
       />
     </Unknown>
     <ForwardRef
@@ -160,6 +160,7 @@ Array [
       width="1rem"
     >
       <Unknown
+        fontSize="1em"
         icon={
           Object {
             "icon": Array [
@@ -173,7 +174,6 @@ Array [
             "prefix": "fas",
           }
         }
-        size="1x"
       />
     </Unknown>
     <ForwardRef
@@ -361,6 +361,7 @@ Array [
       width="1rem"
     >
       <Unknown
+        fontSize="1em"
         icon={
           Object {
             "icon": Array [
@@ -374,7 +375,6 @@ Array [
             "prefix": "fas",
           }
         }
-        size="1x"
       />
     </Unknown>
     <ForwardRef
