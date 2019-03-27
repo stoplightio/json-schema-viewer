@@ -17,10 +17,10 @@ export const renderRowDivider: FunctionComponent<IRowDivider> = ({ key, level, t
 
   return (
     <Flex alignItems="center" key={`${key}-d`} height="2.5rem" pl={DEFAULT_PADDING + GUTTER_WIDTH * (level - 1)}>
-      <MutedText fontSize=".875rem" textTransform="uppercase" pr={3}>
+      <MutedText fontSize=".875rem" textTransform="uppercase" pr={11}>
         {text}
       </MutedText>
-      <Box backgroundColor={theme.divider.bg} height="1px" mr={4} flex="1 1 0%" />
+      <Box backgroundColor={theme.divider.bg} height="1px" mr={15} flex="1 1 0%" />
     </Flex>
   );
 };

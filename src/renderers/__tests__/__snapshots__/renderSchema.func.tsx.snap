@@ -9,7 +9,7 @@ Array [
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <ForwardRef
       flex="1 1 0%"
@@ -18,7 +18,7 @@ Array [
         alignItems="baseline"
       >
         <ForwardRef
-          mr={3}
+          mr={11}
         >
           id
         </ForwardRef>
@@ -33,7 +33,7 @@ Array [
       </Unknown>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group ID
       </Unknown>
@@ -41,7 +41,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -66,7 +66,7 @@ Array [
     level={0}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <Unknown
       justifyContent="center"
@@ -111,7 +111,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -150,7 +150,7 @@ Array [
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <Unknown
       justifyContent="center"
@@ -183,7 +183,7 @@ Array [
         alignItems="baseline"
       >
         <ForwardRef
-          mr={3}
+          mr={11}
         >
           members
         </ForwardRef>
@@ -198,7 +198,7 @@ Array [
       </Unknown>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         List of Group members
       </Unknown>
@@ -206,7 +206,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <ForwardRef
@@ -242,7 +242,7 @@ Array [
     level={2}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <ForwardRef
       flex="1 1 0%"
@@ -251,7 +251,7 @@ Array [
         alignItems="baseline"
       >
         <ForwardRef
-          mr={3}
+          mr={11}
         >
           email
         </ForwardRef>
@@ -266,7 +266,7 @@ Array [
       </Unknown>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         User email. If ID given, email is ignored.
       </Unknown>
@@ -274,7 +274,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -294,7 +294,7 @@ Array [
     level={2}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <ForwardRef
       flex="1 1 0%"
@@ -303,7 +303,7 @@ Array [
         alignItems="baseline"
       >
         <ForwardRef
-          mr={3}
+          mr={11}
         >
           id
         </ForwardRef>
@@ -318,7 +318,7 @@ Array [
       </Unknown>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         User ID.
       </Unknown>
@@ -326,7 +326,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -351,7 +351,7 @@ Array [
     level={0}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <Unknown
       justifyContent="center"
@@ -396,7 +396,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -430,7 +430,7 @@ Array [
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <ForwardRef
       flex="1 1 0%"
@@ -439,7 +439,7 @@ Array [
         alignItems="baseline"
       >
         <ForwardRef
-          mr={3}
+          mr={11}
         >
           id
         </ForwardRef>
@@ -454,7 +454,7 @@ Array [
       </Unknown>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group ID
       </Unknown>
@@ -462,7 +462,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -482,7 +482,7 @@ Array [
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <ForwardRef
       flex="1 1 0%"
@@ -491,7 +491,7 @@ Array [
         alignItems="baseline"
       >
         <ForwardRef
-          mr={3}
+          mr={11}
         >
           name
         </ForwardRef>
@@ -506,7 +506,7 @@ Array [
       </Unknown>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group name
       </Unknown>
@@ -514,7 +514,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -534,7 +534,7 @@ Array [
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
     <ForwardRef
       flex="1 1 0%"
@@ -543,7 +543,7 @@ Array [
         alignItems="baseline"
       >
         <ForwardRef
-          mr={3}
+          mr={11}
         >
           total_members
         </ForwardRef>
@@ -558,7 +558,7 @@ Array [
       </Unknown>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group member count
       </Unknown>
@@ -566,7 +566,7 @@ Array [
     <ForwardRef
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
