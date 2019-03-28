@@ -1429,10 +1429,10 @@
   resolved "https://registry.yarnpkg.com/@stoplight/types/-/types-3.1.0.tgz#bca0a2943adbfee02f6a560cff3e60493af013cf"
   integrity sha512-HlqKh6iLqZp/rXwEryJTybY7ZEcuePPiSm0Y18dSZMrlywzeWEDQ5jDX3DdP1y7N5BIzN2dUt727uvbsC4UmFQ==
 
-"@stoplight/ui-kit@1.48.x":
-  version "1.48.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/ui-kit/-/ui-kit-1.48.0.tgz#e934ad958ae4d43d8e52f9bc9969b9c782d0a078"
-  integrity sha512-x79Z/DU6HskfBAADHAbYRfoR6Ryv9tYlSgwN83PsLm2QQ5+5Y8sM8pQIJSVsSKw7IeJ5ACo48hp3Q73SJvIlVg==
+"@stoplight/ui-kit@1.49.x":
+  version "1.49.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/ui-kit/-/ui-kit-1.49.0.tgz#1cd1ca43bf46271811688795a41f843f1d417f23"
+  integrity sha512-OhLDVfvY6CNb8Yi0JqiKI45WqfBqWMoH9InWSGLAmw8l92XaFTFKXB9jszlyTpZxtbIQSDZMx2UaHqGIn/wfmw==
   dependencies:
     "@emotion/core" "10.0.7"
     "@emotion/is-prop-valid" "0.7.3"
@@ -1440,6 +1440,7 @@
     "@fortawesome/react-fontawesome" "0.1.4"
     "@stoplight/types" "3.1.x"
     "@types/styled-system" "3.2.x"
+    clean-deep "^3.0.2"
     prop-types "15.7.x"
     react-contextmenu "2.10.x"
     react-custom-scrollbars "4.2.x"
@@ -3639,6 +3640,15 @@ clean-css@4.2.x:
   integrity sha512-4ZxI6dy4lrY6FHzfiy1aEOXgu4LIsW2MhwG0VBKdcoGoH/XLFgaHSdLTGr4O8Be6A8r3MOphEiI8Gc1n0ecf3g==
   dependencies:
     source-map "~0.6.0"
+
+clean-deep@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/clean-deep/-/clean-deep-3.0.2.tgz#1b7096822f289cc491ca6d85af5c028cbb22fc23"
+  integrity sha512-sLUtFxYtHc3jM9pmwyYXOLln0nnQ1OhFrefQ7nqUlva1crHDbi4gVO+nnMSm5jztFXIRDMt+kMNh0mOscbARow==
+  dependencies:
+    lodash.isempty "^4.4.0"
+    lodash.isplainobject "^4.0.6"
+    lodash.transform "^4.6.0"
 
 clean-stack@^1.0.0, clean-stack@^1.3.0:
   version "1.3.0"
@@ -7978,6 +7988,11 @@ lodash.isarray@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
   integrity sha1-eeTriMNqgSKvhvhEqpvNhRtfu1U=
 
+lodash.isempty@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.isempty/-/lodash.isempty-4.4.0.tgz#6f86cbedd8be4ec987be9aaf33c9684db1b31e7e"
+  integrity sha1-b4bL7di+TsmHvpqvM8loTbGzHn4=
+
 lodash.isequal@^3.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-3.0.4.tgz#1c35eb3b6ef0cd1ff51743e3ea3cf7fdffdacb64"
@@ -8094,6 +8109,11 @@ lodash.topairs@4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.topairs/-/lodash.topairs-4.3.0.tgz#3b6deaa37d60fb116713c46c5f17ea190ec48d64"
   integrity sha1-O23qo31g+xFnE8RsXxfqGQ7EjWQ=
+
+lodash.transform@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.transform/-/lodash.transform-4.6.0.tgz#12306422f63324aed8483d3f38332b5f670547a0"
+  integrity sha1-EjBkIvYzJK7YSD0/ODMrX2cFR6A=
 
 lodash.union@~4.6.0:
   version "4.6.0"
