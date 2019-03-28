@@ -49,7 +49,7 @@ export const renderProp = ({
 
   if (!prop) {
     rowElems.push(
-      <Row as={ErrorMessage} key={position} py={2} level={level}>
+      <Row as={ErrorMessage} key={position} py={7} level={level}>
         Could not render prop. Is it valid? If it is a $ref, does the $ref exist?
       </Row>
     );
@@ -169,7 +169,7 @@ export const renderProp = ({
         as={Flex}
         alignItems="center"
         position="relative"
-        py={2}
+        py={7}
         key={position}
         level={level}
         cursor={vt || expandable ? 'pointer' : 'default'}
@@ -187,20 +187,20 @@ export const renderProp = ({
 
         <Box flex="1 1 0%">
           <Flex alignItems="baseline">
-            {name && name !== 'root' ? <Box mr={3}>{name}</Box> : null}
+            {name && name !== 'root' ? <Box mr={11}>{name}</Box> : null}
 
             {!isEmpty(typeElems) && <div>{typeElems}</div>}
           </Flex>
 
           {!isEmpty(prop.description) ? (
-            <MutedText pt={1} fontSize=".875rem">
+            <MutedText pt={4} fontSize=".875rem">
               {prop.description}
             </MutedText>
           ) : null}
         </Box>
 
         {requiredElem || showInheritedFrom || expanded ? (
-          <Box maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={3}>
+          <Box maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={11}>
             {requiredElem}
 
             {showInheritedFrom ? <MutedText>{`$ref:${prop.__inheritedFrom.name}`}</MutedText> : null}

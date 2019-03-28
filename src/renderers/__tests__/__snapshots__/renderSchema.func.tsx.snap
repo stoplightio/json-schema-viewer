@@ -4,24 +4,30 @@ exports[`renderSchema function should render proper tree given schema all-of.jso
 Array [
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="default"
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <ForwardRef
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
-        <ForwardRef
-          mr={3}
+        <ForwardRef(Box)
+          mr={11}
         >
           id
-        </ForwardRef>
+        </ForwardRef(Box)>
         <div>
           <Unknown
             as="span"
@@ -30,18 +36,18 @@ Array [
             string
           </Unknown>
         </div>
-      </Unknown>
+      </ForwardRef(Flex)>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group ID
       </Unknown>
-    </ForwardRef>
-    <ForwardRef
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -52,7 +58,7 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
 ]
 `;
@@ -61,21 +67,27 @@ exports[`renderSchema function should render proper tree given schema nested-pro
 Array [
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="pointer"
     level={0}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <Unknown
+    <ForwardRef(Flex)
       justifyContent="center"
       ml="-1.5rem"
       mr="0.5rem"
       pl="0.5rem"
       width="1rem"
     >
-      <Unknown
+      <ForwardRef(Icon)
         fontSize="1em"
         icon={
           Object {
@@ -91,11 +103,11 @@ Array [
           }
         }
       />
-    </Unknown>
-    <ForwardRef
+    </ForwardRef(Flex)>
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
         <div>
@@ -106,12 +118,12 @@ Array [
             object
           </Unknown>
         </div>
-      </Unknown>
-    </ForwardRef>
-    <ForwardRef
+      </ForwardRef(Flex)>
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -141,25 +153,31 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="pointer"
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <Unknown
+    <ForwardRef(Flex)
       justifyContent="center"
       ml="-1.5rem"
       mr="0.5rem"
       pl="0.5rem"
       width="1rem"
     >
-      <Unknown
+      <ForwardRef(Icon)
         fontSize="1em"
         icon={
           Object {
@@ -175,18 +193,18 @@ Array [
           }
         }
       />
-    </Unknown>
-    <ForwardRef
+    </ForwardRef(Flex)>
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
-        <ForwardRef
-          mr={3}
+        <ForwardRef(Box)
+          mr={11}
         >
           members
-        </ForwardRef>
+        </ForwardRef(Box)>
         <div>
           <Unknown
             as="span"
@@ -195,21 +213,21 @@ Array [
             array
           </Unknown>
         </div>
-      </Unknown>
+      </ForwardRef(Flex)>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         List of Group members
       </Unknown>
-    </ForwardRef>
-    <ForwardRef
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
-      <ForwardRef
+      <ForwardRef(Box)
         fontSize="0.75rem"
       />
       <Unknown
@@ -233,28 +251,34 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="default"
     level={2}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <ForwardRef
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
-        <ForwardRef
-          mr={3}
+        <ForwardRef(Box)
+          mr={11}
         >
           email
-        </ForwardRef>
+        </ForwardRef(Box)>
         <div>
           <Unknown
             as="span"
@@ -263,18 +287,18 @@ Array [
             string
           </Unknown>
         </div>
-      </Unknown>
+      </ForwardRef(Flex)>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         User email. If ID given, email is ignored.
       </Unknown>
-    </ForwardRef>
-    <ForwardRef
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -285,28 +309,34 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="default"
     level={2}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <ForwardRef
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
-        <ForwardRef
-          mr={3}
+        <ForwardRef(Box)
+          mr={11}
         >
           id
-        </ForwardRef>
+        </ForwardRef(Box)>
         <div>
           <Unknown
             as="span"
@@ -315,18 +345,18 @@ Array [
             string
           </Unknown>
         </div>
-      </Unknown>
+      </ForwardRef(Flex)>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         User ID.
       </Unknown>
-    </ForwardRef>
-    <ForwardRef
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -337,7 +367,7 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
 ]
 `;
@@ -346,21 +376,27 @@ exports[`renderSchema function should render proper tree given schema properties
 Array [
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="pointer"
     level={0}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <Unknown
+    <ForwardRef(Flex)
       justifyContent="center"
       ml="-1.5rem"
       mr="0.5rem"
       pl="0.5rem"
       width="1rem"
     >
-      <Unknown
+      <ForwardRef(Icon)
         fontSize="1em"
         icon={
           Object {
@@ -376,11 +412,11 @@ Array [
           }
         }
       />
-    </Unknown>
-    <ForwardRef
+    </ForwardRef(Flex)>
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
         <div>
@@ -391,12 +427,12 @@ Array [
             object
           </Unknown>
         </div>
-      </Unknown>
-    </ForwardRef>
-    <ForwardRef
+      </ForwardRef(Flex)>
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -421,28 +457,34 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="default"
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <ForwardRef
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
-        <ForwardRef
-          mr={3}
+        <ForwardRef(Box)
+          mr={11}
         >
           id
-        </ForwardRef>
+        </ForwardRef(Box)>
         <div>
           <Unknown
             as="span"
@@ -451,18 +493,18 @@ Array [
             string
           </Unknown>
         </div>
-      </Unknown>
+      </ForwardRef(Flex)>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group ID
       </Unknown>
-    </ForwardRef>
-    <ForwardRef
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -473,28 +515,34 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="default"
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <ForwardRef
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
-        <ForwardRef
-          mr={3}
+        <ForwardRef(Box)
+          mr={11}
         >
           name
-        </ForwardRef>
+        </ForwardRef(Box)>
         <div>
           <Unknown
             as="span"
@@ -503,18 +551,18 @@ Array [
             string
           </Unknown>
         </div>
-      </Unknown>
+      </ForwardRef(Flex)>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group name
       </Unknown>
-    </ForwardRef>
-    <ForwardRef
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -525,28 +573,34 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
   <Unknown
     alignItems="center"
-    as={[Function]}
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Flex",
+        "render": [Function],
+      }
+    }
     cursor="default"
     level={1}
     onClick={[Function]}
     position="relative"
-    py={2}
+    py={7}
   >
-    <ForwardRef
+    <ForwardRef(Box)
       flex="1 1 0%"
     >
-      <Unknown
+      <ForwardRef(Flex)
         alignItems="baseline"
       >
-        <ForwardRef
-          mr={3}
+        <ForwardRef(Box)
+          mr={11}
         >
           total_members
-        </ForwardRef>
+        </ForwardRef(Box)>
         <div>
           <Unknown
             as="span"
@@ -555,18 +609,18 @@ Array [
             integer
           </Unknown>
         </div>
-      </Unknown>
+      </ForwardRef(Flex)>
       <Unknown
         fontSize=".875rem"
-        pt={1}
+        pt={4}
       >
         Group member count
       </Unknown>
-    </ForwardRef>
-    <ForwardRef
+    </ForwardRef(Box)>
+    <ForwardRef(Box)
       fontSize=".75rem"
       maxWidth="30rem"
-      pr={3}
+      pr={11}
       textAlign="right"
     >
       <Unknown
@@ -577,7 +631,7 @@ Array [
           }
         }
       />
-    </ForwardRef>
+    </ForwardRef(Box)>
   </Unknown>,
 ]
 `;

@@ -10,7 +10,7 @@ export const ErrorMessage: FunctionComponent<IErrorMessage> = props => {
   const css = errorMessageStyles();
 
   return (
-    <Box as="p" p={3} css={css} {...rest}>
+    <Box as="p" p={11} css={css} {...rest}>
       {children}
     </Box>
   );
