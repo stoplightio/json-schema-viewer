@@ -1,11 +1,8 @@
-/* @jsx jsx */
-
-import { jsx } from '@emotion/core';
 import { Box, IBox } from '@stoplight/ui-kit';
-import { FunctionComponent } from 'react';
+import * as React from 'react';
 import { useTheme } from '../theme';
 
-export const MutedText: FunctionComponent<IMutedText> = props => {
+export const MutedText: React.FunctionComponent<IMutedText> = props => {
   const { children, ...rest } = props;
   const css = mutedTextStyles();
 

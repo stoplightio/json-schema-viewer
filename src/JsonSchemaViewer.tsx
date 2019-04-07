@@ -1,8 +1,5 @@
-/* @jsx jsx */
-
-import { jsx } from '@emotion/core';
 import { Omit } from '@stoplight/types';
-import { Component } from 'react';
+import * as React from 'react';
 import { ErrorMessage } from './common/ErrorMessage';
 import { MutedText } from './common/MutedText';
 import { ISchemaView, SchemaView } from './SchemaView';
@@ -17,7 +14,7 @@ export interface IJsonSchemaViewerState {
   error: null | string;
 }
 
-export class JsonSchemaViewer extends Component<IJsonSchemaViewer, IJsonSchemaViewerState> {
+export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJsonSchemaViewerState> {
   public state = {
     error: null,
   };

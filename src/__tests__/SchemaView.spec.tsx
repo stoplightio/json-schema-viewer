@@ -1,5 +1,3 @@
-/* @jsx jsx */
-import { jsx } from '@emotion/core';
 import { Button } from '@stoplight/ui-kit';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';

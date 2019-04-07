@@ -1,12 +1,10 @@
-/* @jsx jsx */
-
-import { css, jsx } from '@emotion/core';
-import { Box, IBox } from '@stoplight/ui-kit';
-import { FunctionComponent } from 'react';
+import { css } from '@emotion/core';
+import { Box, IBox, IBoxCSS } from '@stoplight/ui-kit';
+import * as React from 'react';
 import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
 import { useTheme } from '../theme';
 
-export const Row: FunctionComponent<IRow> = props => {
+export const Row: React.FunctionComponent<IRow> = props => {
   const { children, level, ...rest } = props;
   const styles = rowStyles({ level });
 
@@ -23,13 +21,11 @@ export interface IRowProps {
 
 export interface IRow extends IRowProps, IBox {}
 
-export const rowStyles = ({ level }: IRowProps) => {
+export const rowStyles = ({ level }: IRowProps): IBoxCSS => {
   const theme = useTheme();
 
   return [
-    {
-      ...(level !== undefined && { paddingLeft: DEFAULT_PADDING + GUTTER_WIDTH * level }),
-    },
+    level !== undefined && { paddingLeft: DEFAULT_PADDING + GUTTER_WIDTH * level },
     css`
       user-select none;
       line-height: 1rem;

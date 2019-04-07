@@ -1,10 +1,7 @@
-/* @jsx jsx */
-
-import { jsx } from '@emotion/core';
 import { Dictionary, ISchema } from '@stoplight/types';
 import { Box, Button, IBox } from '@stoplight/ui-kit';
 import dropRight = require('lodash/dropRight');
-import { FunctionComponent, MouseEventHandler, ReactNodeArray, useCallback, useState } from 'react';
+import * as React from 'react';
 import { MutedText } from './common/MutedText';
 import { renderSchema } from './renderers/renderSchema';
 import { useTheme } from './theme';
@@ -24,7 +21,7 @@ export interface ISchemaViewProps {
 
 export interface ISchemaView extends ISchemaViewProps, IBox {}
 
-export const SchemaView: FunctionComponent<ISchemaView> = props => {
+export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   const {
     defaultExpandedDepth = 1,
     emptyText,
@@ -38,17 +35,17 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
   } = props;
 
   const theme = useTheme();
-  const [showExtra, setShowExtra] = useState<boolean>(false);
-  const [expandedRows, setExpandedRows] = useState<Dictionary<boolean>>({ all: expanded });
+  const [showExtra, setShowExtra] = React.useState<boolean>(false);
+  const [expandedRows, setExpandedRows] = React.useState<Dictionary<boolean>>({ all: expanded });
 
-  const toggleExpandRow = useCallback<(rowKey: string, expanded: boolean) => void>(
+  const toggleExpandRow = React.useCallback<(rowKey: string, expanded: boolean) => void>(
     (rowKey, expandRow) => {
       setExpandedRows({ ...expandedRows, [rowKey]: expandRow });
     },
     [expandedRows]
   );
 
-  const toggleShowExtra = useCallback<MouseEventHandler<HTMLElement>>(
+  const toggleShowExtra = React.useCallback<React.MouseEventHandler<HTMLElement>>(
     () => {
       setShowExtra(!showExtra);
     },
@@ -73,7 +70,7 @@ export const SchemaView: FunctionComponent<ISchemaView> = props => {
     actualSchema = buildAllOfSchema(schemaProps);
   }
 
-  let rowElems: ReactNodeArray = [];
+  let rowElems: React.ReactNodeArray = [];
 
   renderSchema({
     schemas,
