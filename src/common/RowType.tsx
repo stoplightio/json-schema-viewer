@@ -1,11 +1,8 @@
-/* @jsx jsx */
-
-import { jsx } from '@emotion/core';
-import { Box, IBox } from '@stoplight/ui-kit';
-import { FunctionComponent } from 'react';
+import { Box, IBox, IBoxCSS } from '@stoplight/ui-kit';
+import * as React from 'react';
 import { useTheme } from '../theme';
 
-export const RowType: FunctionComponent<IRowType> = props => {
+export const RowType: React.FunctionComponent<IRowType> = props => {
   const { children, type, ...rest } = props;
   const css = rowStyles({ type });
 
@@ -22,10 +19,8 @@ export interface IRowTypeProps {
 
 export interface IRowType extends IRowTypeProps, IBox {}
 
-export const rowStyles = ({ type }: IRowTypeProps) => {
+export const rowStyles = ({ type }: IRowTypeProps): IBoxCSS => {
   const theme = useTheme();
 
-  return {
-    ...(type !== undefined && type in theme.types && { color: theme.types[type] }),
-  };
+  return type !== undefined && type in theme.types && { color: theme.types[type] };
 };

@@ -1,10 +1,8 @@
-/* @jsx jsx */
-import { jsx } from '@emotion/core';
 import { Box, Flex, Icon, IconLibrary } from '@stoplight/ui-kit';
 import has = require('lodash/has');
 import isEmpty = require('lodash/isEmpty');
 import isString = require('lodash/isString');
-import { ReactNode, ReactNodeArray } from 'react';
+import * as React from 'react';
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
@@ -113,9 +111,9 @@ export const renderProp = ({
     types = propType;
   }
 
-  let typeElems: ReactNodeArray = [];
+  let typeElems: React.ReactNodeArray = [];
   if (!isEmpty(types)) {
-    typeElems = types.reduce((acc: ReactNode[], type: string, i) => {
+    typeElems = types.reduce((acc: React.ReactNode[], type: string, i) => {
       acc.push(
         <RowType as="span" type={type} key={i}>
           {type === 'array' && childPropType && childPropType !== 'array' ? `array[${childPropType}]` : type}
