@@ -4,7 +4,7 @@ import * as React from 'react';
 import { MutedText } from '../common/MutedText';
 import { JsonSchemaViewer } from '../JsonSchemaViewer';
 import { SchemaView } from '../SchemaView';
-import { isSchemaViewerEmpty } from '../util/isSchemaViewerEmpty';
+import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 
 jest.mock('../theme');
 jest.mock('../util/isSchemaViewerEmpty');

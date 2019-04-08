@@ -1,17 +1,20 @@
+import css from '@emotion/css';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
 import { Omit } from '@stoplight/types';
-import { Box, Flex, Icon } from '@stoplight/ui-kit';
+import { Box, Flex, IBox, Icon } from '@stoplight/ui-kit';
 import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
-import { Validations } from './Validations';
-import { SchemaTreeNode } from '../renderers/types';
-import { isCombiner } from '../util/isCombiner';
 import { MutedText } from '../common/MutedText';
-import { IRow, Row } from '../common/Row';
+import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
+import { SchemaTreeNode } from '../renderers/types';
+import { useTheme } from '../theme';
+import { isCombiner } from '../utils/isCombiner';
+import { Divider } from './Divider';
 import { Types } from './Types';
+import { Validations } from './Validations';
 
-export interface IProperty extends Omit<IRow, 'onClick'> {
+export interface IProperty extends Omit<IBox, 'onClick'> {
   node: SchemaTreeNode;
   showInheritedFrom?: boolean;
   onClick(node: SchemaTreeNode): void;
@@ -22,23 +25,24 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, showInherit
     (node.path.length > 0 && ('properties' in node && !_isEmpty(node.properties))) ||
     ('items' in node && !_isEmpty(node.items) && node.subtype === undefined);
 
-  const isConditionalCombiner = isCombiner(node) && (node.combiner === 'anyOf' || node.combiner === 'oneOf');
+  const styles = propertyStyles(node);
 
   return (
-    <Row
-      as={Flex}
+    <Flex
       alignItems="center"
       position="relative"
       py={2}
-      level={node.level}
       cursor={expandable ? 'pointer' : 'default'}
       {...props}
+      css={[props.css, styles]}
       onClick={() => {
         if (expandable) {
           onClick(node);
         }
       }}
     >
+      {node.showDivider && <Divider>or</Divider>}
+
       {expandable ? (
         <Flex justifyContent="center" ml="-1.3rem" width="1.3rem">
           <Icon size="1x" icon={node.expanded ? faCaretDown : faCaretRight} />
@@ -70,6 +74,31 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, showInherit
 
         {!isCombiner(node) && node.validations !== undefined && <Validations validations={node.validations} />}
       </Flex>
-    </Row>
+    </Flex>
   );
+};
+
+export const propertyStyles = ({ level }: SchemaTreeNode) => {
+  const theme = useTheme();
+
+  return [
+    {
+      ...(level !== undefined && { paddingLeft: DEFAULT_PADDING + GUTTER_WIDTH * level }),
+      height: '40px',
+      fontSize: '0.8rem',
+    },
+    css`
+        user-select none;
+      line-height: 1rem;
+
+      &:nth-of-type(even) {
+        background-color ${theme.row.evenBg};
+        color ${theme.row.evenFg || theme.canvas.fg};
+      }
+
+      &:hover {
+        background-color ${theme.row.hoverBg};
+        color ${theme.row.hoverFg || theme.canvas.fg};
+      }`,
+  ];
 };

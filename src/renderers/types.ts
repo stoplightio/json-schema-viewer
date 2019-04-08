@@ -41,6 +41,7 @@ export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | 
 export type SchemaTreeNode = SchemaNode & {
   level: number;
   path: JsonPath;
+  showDivider?: boolean;
   subtype?: IBaseNode['type'];
   expanded?: boolean;
   required?: boolean;

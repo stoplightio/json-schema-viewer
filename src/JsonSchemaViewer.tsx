@@ -4,7 +4,7 @@ import { ErrorMessage } from './common/ErrorMessage';
 import { MutedText } from './common/MutedText';
 import { ISchemaView, SchemaView } from './SchemaView';
 import { ThemeZone } from './theme';
-import { isSchemaViewerEmpty } from './util/isSchemaViewerEmpty';
+import { isSchemaViewerEmpty } from './utils/isSchemaViewerEmpty';
 
 export interface IJsonSchemaViewer extends Omit<ISchemaView, 'emptyText'> {
   emptyText?: string;

@@ -6,7 +6,7 @@ import { Property } from './components/Property';
 import { useProperties } from './hooks/useProperties';
 import { SchemaTreeNode } from './renderers/types';
 import { useTheme } from './theme';
-import { isExpanded } from './util/isExpanded';
+import { isExpanded } from './utils/isExpanded';
 
 export interface ISchemaViewProps {
   name?: string;
@@ -69,8 +69,8 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
 
   return (
     <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
-      {properties.map(node => (
-        <Property key={node.name} node={node} onClick={toggleExpandRow} />
+      {properties.map((node, i) => (
+        <Property key={i} node={node} onClick={toggleExpandRow} />
       ))}
       {showExtra || isOverflow ? (
         <Button onClick={toggleShowExtra}>{showExtra ? 'collapse' : `...show more properties`}</Button>

@@ -1,10 +1,10 @@
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { useMemo } from 'react';
-import { isCombiner } from '../util/isCombiner';
-import { isExpanded } from '../util/isExpanded';
-import { walk } from '../renderers/renderSchema';
 import { SchemaKind, SchemaTreeNode } from '../renderers/types';
+import { isCombiner } from '../utils/isCombiner';
+import { isExpanded } from '../utils/isExpanded';
+import { walk } from '../utils/walk';
 
 export interface IRenderOptions {
   limitPropertyCount?: number;
@@ -39,8 +39,11 @@ function* getProperties(
       };
 
       if (expanded && node.properties !== undefined) {
+        const isConditionalCombiner = node.combiner === 'anyOf' || node.combiner === 'oneOf';
         for (const [i, property] of node.properties.entries()) {
-          yield* getProperties(property, options, level + 1, [...path, i]);
+          yield* getProperties(property, options, level + 1, [...path, i], {
+            showDivider: isConditionalCombiner && i !== 0,
+          });
         }
       }
     } else {
