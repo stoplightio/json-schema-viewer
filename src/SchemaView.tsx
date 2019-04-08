@@ -1,16 +1,17 @@
 import { Dictionary, ISchema } from '@stoplight/types';
 import { Box, Button, IBox } from '@stoplight/ui-kit';
-import dropRight = require('lodash/dropRight');
 import * as React from 'react';
 import { MutedText } from './common/MutedText';
-import { renderSchema } from './renderers/renderSchema';
+import { Property } from './components/Property';
+import { useProperties } from './hooks/useProperties';
+import { SchemaTreeNode } from './renderers/types';
 import { useTheme } from './theme';
-import { buildAllOfSchema } from './util/buildAllOfSchema';
+import { isExpanded } from './util/isExpanded';
 
 export interface ISchemaViewProps {
   name?: string;
   defaultExpandedDepth?: number;
-  schemas: object;
+  originalSchema?: ISchema;
   schema: ISchema;
   limitPropertyCount?: number;
   hideRoot?: boolean;
@@ -28,21 +29,31 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     expanded = false,
     hideInheritedFrom = false,
     hideRoot,
-    limitPropertyCount = 0,
+    limitPropertyCount,
     schema,
-    schemas = {},
+    originalSchema,
     ...rest
   } = props;
 
   const theme = useTheme();
   const [showExtra, setShowExtra] = React.useState<boolean>(false);
   const [expandedRows, setExpandedRows] = React.useState<Dictionary<boolean>>({ all: expanded });
+  const { properties, isOverflow } = useProperties(schema, {
+    expandedRows,
+    defaultExpandedDepth,
+    limitPropertyCount,
+  });
 
-  const toggleExpandRow = React.useCallback<(rowKey: string, expanded: boolean) => void>(
-    (rowKey, expandRow) => {
-      setExpandedRows({ ...expandedRows, [rowKey]: expandRow });
+  const toggleExpandRow = React.useCallback<(node: SchemaTreeNode) => void>(
+    node => {
+      if (node.path.length > 0) {
+        setExpandedRows({
+          ...expandedRows,
+          [node.path.join('')]: !isExpanded(node, defaultExpandedDepth, expandedRows),
+        });
+      }
     },
-    [expandedRows]
+    [expandedRows, defaultExpandedDepth]
   );
 
   const toggleShowExtra = React.useCallback<React.MouseEventHandler<HTMLElement>>(
@@ -52,57 +63,17 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     [showExtra]
   );
 
-  let actualSchema = schema;
-
-  if (
-    !actualSchema ||
-    !Object.keys(actualSchema).length ||
-    (actualSchema.properties && !Object.keys(actualSchema.properties).length)
-  ) {
-    return <MutedText>{emptyText}</MutedText>;
-  }
-
-  if (actualSchema.allOf) {
-    const schemaProps = actualSchema.allOf;
-
-    if (actualSchema.type) schemaProps.push({ type: actualSchema.type });
-
-    actualSchema = buildAllOfSchema(schemaProps);
-  }
-
-  let rowElems: React.ReactNodeArray = [];
-
-  renderSchema({
-    schemas,
-    expandedRows,
-    defaultExpandedDepth,
-    schema: actualSchema,
-    level: hideRoot && (actualSchema.type === 'object' || actualSchema.hasOwnProperty('allOf')) ? -1 : 0,
-    name: 'root',
-    rowElems,
-    toggleExpandRow,
-    hideInheritedFrom,
-    jsonPath: 'root',
-    hideRoot,
-  });
-
-  const propOverflowCount = rowElems.length - Math.max(0, limitPropertyCount);
-
-  if (limitPropertyCount && !showExtra && propOverflowCount > 0) {
-    rowElems = dropRight(rowElems, propOverflowCount);
-  }
-
-  if (rowElems.length === 0) {
+  if (properties.length === 0) {
     return <MutedText>{emptyText}</MutedText>;
   }
 
   return (
     <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
-      {rowElems}
-      {showExtra || (limitPropertyCount > 0 && propOverflowCount > 0) ? (
-        <Button onClick={toggleShowExtra}>
-          {showExtra ? 'collapse' : `...show ${propOverflowCount} more properties`}
-        </Button>
+      {properties.map(node => (
+        <Property key={node.name} node={node} onClick={toggleExpandRow} />
+      ))}
+      {showExtra || isOverflow ? (
+        <Button onClick={toggleShowExtra}>{showExtra ? 'collapse' : `...show more properties`}</Button>
       ) : null}
     </Box>
   );

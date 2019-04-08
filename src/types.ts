@@ -1,16 +1,16 @@
-import { Dictionary, ISchema } from '@stoplight/types';
+import { Dictionary, ISchema, JsonPath } from '@stoplight/types';
 import { ICustomTheme } from '@stoplight/ui-kit';
 import { ReactNodeArray } from 'react';
 
 export interface ICommonProps {
-  schemas: any;
+  originalSchema?: ISchema;
   schema?: ISchema;
   defaultExpandedDepth: number;
   prop?: ISchema;
   parentName?: string;
   rowElems: ReactNodeArray;
   expandedRows: Dictionary<boolean>;
-  jsonPath: string;
+  path: JsonPath;
   propName?: string;
   required?: boolean | string[];
   hideInheritedFrom?: boolean;

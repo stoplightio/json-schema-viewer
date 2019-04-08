@@ -69,7 +69,6 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
           limitPropertyCount={limitPropertyCount}
           name={name}
           schema={schema}
-          schemas={schemas}
           {...props}
         />
       </ThemeZone>

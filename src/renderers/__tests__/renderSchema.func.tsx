@@ -15,7 +15,7 @@ describe('renderSchema function', () => {
           all: true,
         },
         toggleExpandRow: jest.fn(),
-        jsonPath: '',
+        path: [],
       })
     ).toMatchSnapshot();
   });

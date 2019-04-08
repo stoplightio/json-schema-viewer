@@ -1,3 +1,3 @@
-import { ISchema } from '@stoplight/types';
+import { ICombinerNode, SchemaNode } from '../renderers/types';
 
-export const isCombiner = (prop: ISchema) => !!(prop.allOf || prop.anyOf || prop.oneOf);
+export const isCombiner = (node: SchemaNode): node is ICombinerNode => 'combiner' in node;

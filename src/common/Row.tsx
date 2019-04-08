@@ -25,7 +25,11 @@ export const rowStyles = ({ level }: IRowProps): IBoxCSS => {
   const theme = useTheme();
 
   return [
-    level !== undefined && { paddingLeft: DEFAULT_PADDING + GUTTER_WIDTH * level },
+    {
+      ...(level !== undefined && { paddingLeft: DEFAULT_PADDING + GUTTER_WIDTH * level }),
+      height: '40px',
+      fontSize: '0.8rem',
+    },
     css`
       user-select none;
       line-height: 1rem;
