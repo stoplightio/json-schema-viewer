@@ -8,7 +8,7 @@ import { SchemaTreeNode } from './renderers/types';
 import { useTheme } from './theme';
 import { isExpanded } from './utils/isExpanded';
 
-export interface ISchemaViewProps {
+export interface ISchemaView extends IBox {
   name?: string;
   defaultExpandedDepth?: number;
   originalSchema?: ISchema;
@@ -19,8 +19,6 @@ export interface ISchemaViewProps {
   hideInheritedFrom?: boolean;
   emptyText: string;
 }
-
-export interface ISchemaView extends ISchemaViewProps, IBox {}
 
 export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   const {

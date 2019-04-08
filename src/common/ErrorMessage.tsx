@@ -2,7 +2,7 @@ import { Box, IBox } from '@stoplight/ui-kit';
 import * as React from 'react';
 import { useTheme } from '../theme';
 
-export const ErrorMessage: React.FunctionComponent<IErrorMessage> = props => {
+export const ErrorMessage: React.FunctionComponent<IBox> = props => {
   const { children, ...rest } = props;
   const css = errorMessageStyles();
 
@@ -12,10 +12,6 @@ export const ErrorMessage: React.FunctionComponent<IErrorMessage> = props => {
     </Box>
   );
 };
-
-export interface IErrorMessageProps {}
-
-export interface IErrorMessage extends IErrorMessageProps, IBox {}
 
 export const errorMessageStyles = () => {
   const theme = useTheme();
