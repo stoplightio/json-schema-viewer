@@ -23,6 +23,7 @@ export function* walk(
         type: node.type,
         validations: getValidations(node),
         annotations: getAnnotations(node),
+        enum: node.enum,
       };
 
       switch (node.type) {
@@ -36,6 +37,12 @@ export function* walk(
       }
 
       yield base;
+    } else if ('enum' in node) {
+      yield {
+        validations: getValidations(node),
+        annotations: getAnnotations(node),
+        enum: node.enum,
+      };
     } else {
       const combiner = getCombiner(node);
       if (combiner !== undefined) {
@@ -47,12 +54,8 @@ export function* walk(
       }
     }
 
-    if ('enum' in node) {
-      // todo: handle. noType? enum
-    }
-
-    if ('not' in node) {
-      // todo:
-    }
+    // if ('not' in node) {
+    //   // todo: shall we support it?
+    // }
   }
 }

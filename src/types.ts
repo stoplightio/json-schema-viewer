@@ -22,8 +22,8 @@ export interface ICombinerNode {
   annotations: Pick<JSONSchema4, JSONSchema4Annotations>;
 }
 
-export interface IBaseNode {
-  readonly type: JSONSchema4TypeName | JSONSchema4TypeName[];
+export interface IBaseNode extends Pick<JSONSchema4, 'enum'> {
+  readonly type?: JSONSchema4TypeName | JSONSchema4TypeName[];
   annotations: Pick<JSONSchema4, JSONSchema4Annotations>;
   validations: Dictionary<unknown>;
 }

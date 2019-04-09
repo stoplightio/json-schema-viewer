@@ -35,7 +35,7 @@ export const Validations: React.FunctionComponent<Pick<IBaseNode, 'validations'>
       posX="left"
       posY="center"
       padding={2}
-      renderTrigger={() => <Box fontSize="0.75rem" ml={10}>{content.length} validations</Box>}
+      renderTrigger={() => <Box fontSize="0.75rem" ml={6}>{content.length} validations</Box>}
       renderContent={() => (
         <Tooltip posX="left" posY="center">
           <Flex flexFlow="column nowrap">{content}</Flex>

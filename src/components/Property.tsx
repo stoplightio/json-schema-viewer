@@ -7,10 +7,11 @@ import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
 import { MutedText } from '../common/MutedText';
 import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
-import { SchemaTreeNode } from '../types';
 import { useTheme } from '../theme';
+import { SchemaTreeNode } from '../types';
 import { isCombiner } from '../utils/isCombiner';
 import { Divider } from './Divider';
+import { Enum } from './Enum';
 import { Types } from './Types';
 import { Validations } from './Validations';
 
@@ -57,15 +58,17 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, showInherit
         </Flex>
 
         {node.annotations.description ? (
-          <MutedText pt={1} fontSize=".875rem">
+          <MutedText pt={1} fontSize=".8rem">
             {node.annotations.description}
           </MutedText>
         ) : null}
       </Box>
 
       <Flex alignItems="center" maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={10}>
+        {'enum' in node && <Enum value={node.enum} />}
+
         {node.required && (
-          <Box as="span" fontWeight={700}>
+          <Box as="span" fontWeight={700} ml={6}>
             required
           </Box>
         )}
@@ -88,7 +91,7 @@ export const propertyStyles = ({ level }: SchemaTreeNode) => {
       fontSize: '0.8rem',
     },
     css`
-        user-select none;
+      user-select none;
       line-height: 1rem;
 
       &:nth-of-type(even) {
