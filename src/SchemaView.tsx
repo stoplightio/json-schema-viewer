@@ -47,7 +47,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
       if (node.path.length > 0) {
         setExpandedRows({
           ...expandedRows,
-          [node.path.join('')]: !isExpanded(node, defaultExpandedDepth, expandedRows),
+          [node.path.join('.')]: !isExpanded(node, defaultExpandedDepth, expandedRows),
         });
       }
     },

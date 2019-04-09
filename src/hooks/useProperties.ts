@@ -3,7 +3,11 @@ import { useMemo } from 'react';
 import { SchemaTreeNode } from '../types';
 import { getProperties, IFilterOptions } from '../utils/getProperties';
 
-export const useProperties = (schema: JSONSchema4, dereferencedSchema: JSONSchema4 | undefined, options: IFilterOptions) => {
+export const useProperties = (
+  schema: JSONSchema4,
+  dereferencedSchema: JSONSchema4 | undefined,
+  options: IFilterOptions
+) => {
   return useMemo(
     () => {
       let { limitPropertyCount } = options;
@@ -21,6 +25,6 @@ export const useProperties = (schema: JSONSchema4, dereferencedSchema: JSONSchem
 
       return { isOverflow, properties: nodes };
     },
-    [schema, options.limitPropertyCount, options.defaultExpandedDepth, options.expandedRows]
+    [schema, dereferencedSchema, options.limitPropertyCount, options.defaultExpandedDepth, options.expandedRows]
   );
 };

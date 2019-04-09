@@ -8,9 +8,9 @@ export const isExpanded = (
 ): boolean => {
   const path = node.path.join('.');
 
-  return (
-    expandedRows.all === true ||
-    (!(path in expandedRows) && node.level <= defaultExpandedDepth) ||
-    expandedRows[path] === true
-  );
+  if (expandedRows.all === true) {
+    return expandedRows[path] !== false;
+  }
+
+  return (!(path in expandedRows) && node.level <= defaultExpandedDepth) || expandedRows[path] === true;
 };
