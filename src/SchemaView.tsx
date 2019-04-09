@@ -4,8 +4,8 @@ import * as React from 'react';
 import { MutedText } from './common/MutedText';
 import { Property } from './components/Property';
 import { useProperties } from './hooks/useProperties';
-import { SchemaTreeNode } from './renderers/types';
 import { useTheme } from './theme';
+import { SchemaTreeNode } from './types';
 import { isExpanded } from './utils/isExpanded';
 
 export interface ISchemaView extends IBox {

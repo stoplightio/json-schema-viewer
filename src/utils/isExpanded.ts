@@ -1,5 +1,5 @@
 import { Dictionary } from '@stoplight/types';
-import { SchemaTreeNode } from '../renderers/types';
+import { SchemaTreeNode } from '../types';
 
 export const isExpanded = (
   node: SchemaTreeNode,

@@ -7,7 +7,7 @@ import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
 import { MutedText } from '../common/MutedText';
 import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
-import { SchemaTreeNode } from '../renderers/types';
+import { SchemaTreeNode } from '../types';
 import { useTheme } from '../theme';
 import { isCombiner } from '../utils/isCombiner';
 import { Divider } from './Divider';

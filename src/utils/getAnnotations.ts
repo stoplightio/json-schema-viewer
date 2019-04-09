@@ -1,6 +1,6 @@
 import { JSONSchema4 } from 'json-schema';
 import _pick = require('lodash/pick');
-import { JSONSchema4Annotations } from '../renderers/types';
+import { JSONSchema4Annotations } from '../types';
 
 const ANNOTATIONS: JSONSchema4Annotations[] = ['title', 'description', 'default', 'examples'];
 

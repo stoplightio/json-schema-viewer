@@ -1,7 +1,7 @@
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { useMemo } from 'react';
-import { SchemaKind, SchemaTreeNode } from '../renderers/types';
+import { SchemaKind, SchemaTreeNode } from '../types';
 import { isCombiner } from '../utils/isCombiner';
 import { isExpanded } from '../utils/isExpanded';
 import { walk } from '../utils/walk';

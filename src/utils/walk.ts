@@ -1,7 +1,7 @@
 import { JSONSchema4 } from 'json-schema';
+import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, JSONSchema4CombinerName, SchemaKind } from '../types';
 import { getAnnotations } from './getAnnotations';
 import { getValidations } from './getValidations';
-import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, JSONSchema4CombinerName, SchemaKind } from '../renderers/types';
 
 const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
   if ('allOf' in node) return 'allOf';
@@ -24,7 +24,6 @@ export function* walk(
         validations: getValidations(node),
         annotations: getAnnotations(node),
       };
-
 
       switch (node.type) {
         case SchemaKind.Array:

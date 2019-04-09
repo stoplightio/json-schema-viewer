@@ -1,8 +1,8 @@
 import { Box, IBoxCSS } from '@stoplight/ui-kit';
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
-import { JSONSchema4CombinerName } from '../renderers/types';
 import { useTheme } from '../theme';
+import { JSONSchema4CombinerName } from '../types';
 
 export const Type: React.FunctionComponent<IType> = ({ type, subtype }) => {
   const css = rowStyles({ type });

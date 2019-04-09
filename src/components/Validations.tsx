@@ -2,7 +2,7 @@ import { safeStringify } from '@stoplight/json';
 import { Box, Flex, Popup, Tooltip } from '@stoplight/ui-kit';
 import * as React from 'react';
 import { MutedText } from '../common/MutedText';
-import { IBaseNode } from '../renderers/types';
+import { IBaseNode } from '../types';
 
 export const Validations: React.FunctionComponent<Pick<IBaseNode, 'validations'>> = ({ validations }) => {
   const content = React.useMemo(
