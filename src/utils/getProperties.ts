@@ -1,8 +1,10 @@
-import { Dictionary, JsonPath } from '@stoplight/types';
+import { Dictionary } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { IArrayNode, IObjectNode, SchemaKind, SchemaTreeNode } from '../types';
+import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeNode } from '../types';
 import { isCombiner } from './isCombiner';
 import { isExpanded } from './isExpanded';
+import { isRef } from './isRef';
+import { lookupRef } from './lookupRef';
 import { walk } from './walk';
 
 export interface IFilterOptions {
@@ -13,12 +15,12 @@ export interface IFilterOptions {
 
 export function* getProperties(
   schema: JSONSchema4,
+  dereferencedSchema: JSONSchema4 | undefined,
   options: IFilterOptions,
-  level = 0,
-  path: JsonPath = [],
-  meta: object | null = null
+  meta: object = { level: 0, path: [] }
 ): IterableIterator<SchemaTreeNode> {
   const { defaultExpandedDepth, expandedRows } = options;
+  const { level, path } = meta as ITreeNodeMeta;
 
   for (const node of walk(schema)) {
     const baseNode: SchemaTreeNode = {
@@ -31,7 +33,20 @@ export function* getProperties(
 
     const expanded = isExpanded(baseNode, defaultExpandedDepth, expandedRows);
 
-    if (isCombiner(node)) {
+    if (isRef(node)) {
+      const resolved = lookupRef(path, dereferencedSchema);
+      if (resolved) {
+        yield* getProperties(resolved, dereferencedSchema, options, {
+          ...meta,
+          inheritedFrom: node.$ref,
+        });
+      } else {
+        yield {
+          ...baseNode,
+          $ref: node.$ref,
+        };
+      }
+    } else if (isCombiner(node)) {
       yield {
         ...baseNode,
         expanded,
@@ -40,8 +55,10 @@ export function* getProperties(
       if (expanded && node.properties !== undefined) {
         const isConditionalCombiner = node.combiner === 'anyOf' || node.combiner === 'oneOf';
         for (const [i, property] of node.properties.entries()) {
-          yield* getProperties(property, options, level + 1, [...path, i], {
+          yield* getProperties(property, dereferencedSchema, options, {
             showDivider: isConditionalCombiner && i !== 0,
+            level: level + 1,
+            path: [...path, 'properties', i],
           });
         }
       }
@@ -58,9 +75,11 @@ export function* getProperties(
 
           if (expanded && schema.properties !== undefined) {
             for (const [prop, property] of Object.entries(schema.properties)) {
-              yield* getProperties(property, options, level + 1, [...path, prop], {
+              yield* getProperties(property, dereferencedSchema, options, {
                 name: prop,
                 required: Array.isArray(schema.required) && schema.required.includes(prop),
+                level: level + 1,
+                path: [...path, 'properties', prop],
               });
             }
           }
@@ -77,17 +96,25 @@ export function* getProperties(
           if (expanded) {
             if (Array.isArray(schema.items)) {
               for (const [i, property] of schema.items.entries()) {
-                yield* getProperties(property, options, level + 1, [...path, i]);
+                yield* getProperties(property, dereferencedSchema, options, {
+                  level: level + 1,
+                  path: [...path, 'items', i],
+                });
               }
             } else if (baseNode.subtype === 'object' && schema.items!.properties) {
               for (const [prop, property] of Object.entries(schema.items!.properties)) {
-                yield* getProperties(property, options, level + 1, [...path, prop], {
+                yield* getProperties(property, dereferencedSchema, options, {
                   name: prop,
                   required: !Array.isArray(schema.required) || schema.required.includes(prop),
+                  level: level + 1,
+                  path: [...path, 'items', prop],
                 });
               }
-            } else if (baseNode.subtype === 'array') {
-              yield* getProperties(schema.items!, options, level + 1, path);
+            } else if (baseNode.subtype === 'array' && schema.items) {
+              yield* getProperties(schema.items, dereferencedSchema, options, {
+                level: level + 1,
+                path,
+              });
             }
           }
 

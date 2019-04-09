@@ -35,7 +35,6 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
         hideRoot,
         expanded,
         defaultExpandedDepth,
-        hideInheritedFrom,
         ...props
       },
       state: { error },
@@ -64,7 +63,6 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
           emptyText={emptyText}
           defaultExpandedDepth={defaultExpandedDepth}
           expanded={expanded}
-          hideInheritedFrom={hideInheritedFrom}
           hideRoot={hideRoot}
           limitPropertyCount={limitPropertyCount}
           name={name}

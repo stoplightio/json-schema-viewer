@@ -1,5 +1,6 @@
-import { Dictionary, ISchema } from '@stoplight/types';
+import { Dictionary } from '@stoplight/types';
 import { Box, Button, IBox } from '@stoplight/ui-kit';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { MutedText } from './common/MutedText';
 import { Property } from './components/Property';
@@ -11,12 +12,11 @@ import { isExpanded } from './utils/isExpanded';
 export interface ISchemaView extends IBox {
   name?: string;
   defaultExpandedDepth?: number;
-  originalSchema?: ISchema;
-  schema: ISchema;
+  dereferencedSchema?: JSONSchema4;
+  schema: JSONSchema4;
   limitPropertyCount?: number;
   hideRoot?: boolean;
   expanded?: boolean;
-  hideInheritedFrom?: boolean;
   emptyText: string;
 }
 
@@ -25,10 +25,10 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     defaultExpandedDepth = 1,
     emptyText,
     expanded = false,
-    hideInheritedFrom = false,
     hideRoot,
     limitPropertyCount,
     schema,
+    dereferencedSchema,
     originalSchema,
     ...rest
   } = props;
@@ -36,7 +36,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   const theme = useTheme();
   const [showExtra, setShowExtra] = React.useState<boolean>(false);
   const [expandedRows, setExpandedRows] = React.useState<Dictionary<boolean>>({ all: expanded });
-  const { properties, isOverflow } = useProperties(schema, {
+  const { properties, isOverflow } = useProperties(schema, dereferencedSchema, {
     expandedRows,
     defaultExpandedDepth,
     limitPropertyCount,

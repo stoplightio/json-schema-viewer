@@ -7,14 +7,9 @@ import { Type } from './Type';
 interface ITypes {
   type?: JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName;
   subtype?: JSONSchema4TypeName | JSONSchema4TypeName[];
-  $ref: boolean;
 }
 
-export const Types: React.FunctionComponent<ITypes> = ({ $ref, type, subtype }) => {
-  if ($ref) {
-    return <Type type="$ref">{`{${$ref}}`}</Type>;
-  }
-
+export const Types: React.FunctionComponent<ITypes> = ({ type, subtype }) => {
   if (!type) return null;
 
   if (!Array.isArray(type)) {

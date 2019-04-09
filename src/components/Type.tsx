@@ -4,12 +4,13 @@ import * as React from 'react';
 import { useTheme } from '../theme';
 import { JSONSchema4CombinerName } from '../types';
 
-export const Type: React.FunctionComponent<IType> = ({ type, subtype }) => {
+export const Type: React.FunctionComponent<IType> = ({ type, subtype, children }) => {
   const css = rowStyles({ type });
 
   return (
     <Box as="span" css={css}>
       {type === 'array' && subtype && subtype !== 'array' ? `array[${subtype}]` : type}
+      {children}
     </Box>
   );
 };

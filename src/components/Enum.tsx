@@ -9,9 +9,5 @@ export interface IEnum extends IBox {
 export const Enum: React.FunctionComponent<IEnum> = ({ value, ...props }) => {
   if (!value) return null;
 
-  return (
-    <Box as="span" {...props}>
-      enum[{value.join(',')}]
-    </Box>
-  );
+  return <Box as="span" {...props}>{`enum[${value.join(',')}]`}</Box>;
 };

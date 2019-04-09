@@ -6,7 +6,7 @@ export const isExpanded = (
   defaultExpandedDepth: number,
   expandedRows: Dictionary<boolean>
 ): boolean => {
-  const path = node.path.join('');
+  const path = node.path.join('.');
 
   return (
     expandedRows.all === true ||

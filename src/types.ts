@@ -28,6 +28,10 @@ export interface IBaseNode extends Pick<JSONSchema4, 'enum'> {
   validations: Dictionary<unknown>;
 }
 
+export interface IRefNode {
+  $ref: string;
+}
+
 export interface IArrayNode extends IBaseNode, Pick<JSONSchema4, 'items' | 'additionalItems'> {}
 
 export interface IObjectNode
@@ -38,9 +42,9 @@ export interface IObjectPropertyNode extends IBaseNode {
   name: string;
 }
 
-export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | IObjectPropertyNode;
+export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | IObjectPropertyNode | IRefNode;
 
-export type SchemaTreeNode = SchemaNode & {
+export interface ITreeNodeMeta {
   additional?: IArrayNode['additionalItems'] | IObjectNode['additionalProperties'];
   level: number;
   path: JsonPath;
@@ -49,4 +53,6 @@ export type SchemaTreeNode = SchemaNode & {
   expanded?: boolean;
   required?: boolean;
   inheritedFrom?: string;
-};
+}
+
+export type SchemaTreeNode = SchemaNode & ITreeNodeMeta;

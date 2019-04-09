@@ -10,19 +10,20 @@ import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
 import { useTheme } from '../theme';
 import { SchemaTreeNode } from '../types';
 import { isCombiner } from '../utils/isCombiner';
+import { isRef } from '../utils/isRef';
 import { Additional } from './Additional';
 import { Divider } from './Divider';
 import { Enum } from './Enum';
+import { Type } from './Type';
 import { Types } from './Types';
 import { Validations } from './Validations';
 
 export interface IProperty extends Omit<IBox, 'onClick'> {
   node: SchemaTreeNode;
-  showInheritedFrom?: boolean;
   onClick(node: SchemaTreeNode): void;
 }
 
-export const Property: React.FunctionComponent<IProperty> = ({ node, showInheritedFrom, onClick, ...props }) => {
+export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ...props }) => {
   const expandable =
     (node.path.length > 0 && ('properties' in node && !_isEmpty(node.properties))) ||
     ('items' in node && !_isEmpty(node.items) && node.subtype === undefined);
@@ -55,10 +56,14 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, showInherit
         <Flex alignItems="baseline">
           {'name' in node && node.name !== undefined ? <Box mr={5}>{node.name}</Box> : null}
 
-          <Types type={isCombiner(node) ? node.combiner : node.type} subtype={node.subtype} $ref={false} />
+          {isRef(node) ? (
+            <Type type="$ref">{`[${node.$ref}]`}</Type>
+          ) : (
+            <Types type={isCombiner(node) ? node.combiner : node.type} subtype={node.subtype} />
+          )}
         </Flex>
 
-        {node.annotations.description ? (
+        {'annotations' in node && node.annotations.description ? (
           <MutedText pt={1} fontSize=".8rem">
             {node.annotations.description}
           </MutedText>
@@ -76,9 +81,9 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, showInherit
 
         {'additional' in node && <Additional additional={node.additional} />}
 
-        {/*{showInheritedFrom ? <MutedText>{`$ref:${prop.__inheritedFrom.name}`}</MutedText> : null}*/}
+        {'inheritedFrom' in node ? <MutedText>{`$ref:${node.inheritedFrom}`}</MutedText> : null}
 
-        {!isCombiner(node) && node.validations !== undefined && <Validations validations={node.validations} />}
+        {'validations' in node && node.validations !== undefined && <Validations validations={node.validations} />}
       </Flex>
     </Flex>
   );

@@ -11,9 +11,7 @@ storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
   .add('default', () => (
     <JsonSchemaViewer
-      css={{ fontFamily: 'monospace' }}
       name={text('name', 'name')}
-      schemas={object('schemas', {})}
       schema={schema}
       limitPropertyCount={number('limitPropertyCount', 20)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
@@ -23,9 +21,7 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('custom schema', () => (
     <JsonSchemaViewer
-      css={{ fontFamily: 'monospace' }}
       name={text('name', 'name')}
-      schemas={object('schemas', {})}
       schema={object('schema', nestedSchema)}
       limitPropertyCount={number('limitPropertyCount', 20)}
       hideRoot={boolean('hideRoot', false)}
