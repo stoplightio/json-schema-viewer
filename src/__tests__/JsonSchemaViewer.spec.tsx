@@ -7,7 +7,7 @@ import { SchemaView } from '../SchemaView';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 
 jest.mock('../theme');
-jest.mock('../util/isSchemaViewerEmpty');
+jest.mock('../utils/isSchemaViewerEmpty');
 
 const schema = {
   properties: {
@@ -28,18 +28,16 @@ const schema = {
 
 describe('JSON Schema Viewer component', () => {
   test('should render empty message if schema is empty', () => {
-    // @ts-ignore storybook has some issues with (isSchemaViewer as jest.Mock)
-    isSchemaViewerEmpty.mockReturnValue(true);
-    const wrapper = shallow(<JsonSchemaViewer schemas={{}} schema={{}} />);
+    (isSchemaViewerEmpty as jest.Mock).mockReturnValue(true);
+    const wrapper = shallow(<JsonSchemaViewer schema={{}} />);
     expect(isSchemaViewerEmpty).toHaveBeenCalledWith({});
     expect(wrapper.find(MutedText)).toExist();
     expect(wrapper.find(SchemaView)).not.toExist();
   });
 
   test('should render SchemaView if schema is provided', () => {
-    // @ts-ignore storybook has some issues with (isSchemaViewer as jest.Mock)
-    isSchemaViewerEmpty.mockReturnValue(false);
-    const wrapper = shallow(<JsonSchemaViewer schemas={{}} schema={schema} />);
+    (isSchemaViewerEmpty as jest.Mock).mockReturnValue(false);
+    const wrapper = shallow(<JsonSchemaViewer schema={schema} />);
     expect(isSchemaViewerEmpty).toHaveBeenCalledWith(schema);
     expect(wrapper.find(MutedText)).not.toExist();
     expect(wrapper.find(SchemaView)).toExist();
