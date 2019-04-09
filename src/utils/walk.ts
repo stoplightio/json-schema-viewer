@@ -29,10 +29,12 @@ export function* walk(
       switch (node.type) {
         case SchemaKind.Array:
           (base as IArrayNode).items = node.array;
+          (base as IArrayNode).additionalItems = node.additionalItems;
           break;
         case SchemaKind.Object:
           (base as IObjectNode).properties = node.properties;
           (base as IObjectNode).patternProperties = node.patternProperties;
+          (base as IObjectNode).additionalProperties = node.additionalProperties;
           break;
       }
 

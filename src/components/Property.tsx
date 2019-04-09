@@ -10,6 +10,7 @@ import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
 import { useTheme } from '../theme';
 import { SchemaTreeNode } from '../types';
 import { isCombiner } from '../utils/isCombiner';
+import { Additional } from './Additional';
 import { Divider } from './Divider';
 import { Enum } from './Enum';
 import { Types } from './Types';
@@ -72,6 +73,8 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, showInherit
             required
           </Box>
         )}
+
+        {'additional' in node && <Additional additional={node.additional} />}
 
         {/*{showInheritedFrom ? <MutedText>{`$ref:${prop.__inheritedFrom.name}`}</MutedText> : null}*/}
 

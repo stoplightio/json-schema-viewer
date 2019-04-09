@@ -1,7 +1,7 @@
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { useMemo } from 'react';
-import { SchemaKind, SchemaTreeNode } from '../types';
+import { IArrayNode, IObjectNode, SchemaKind, SchemaTreeNode } from '../types';
 import { isCombiner } from '../utils/isCombiner';
 import { isExpanded } from '../utils/isExpanded';
 import { walk } from '../utils/walk';
@@ -52,6 +52,9 @@ function* getProperties(
           yield {
             ...baseNode,
             expanded,
+            ...((node as IObjectNode).additionalProperties && {
+              additional: (node as IObjectNode).additionalProperties,
+            }),
           };
 
           if (expanded && schema.properties !== undefined) {
@@ -65,7 +68,12 @@ function* getProperties(
 
           break;
         case SchemaKind.Array:
-          yield baseNode;
+          yield {
+            ...baseNode,
+            // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
+            ...(!('subtype' in baseNode) &&
+              (node as IArrayNode).additionalItems && { additional: (node as IArrayNode).additionalItems }),
+          };
 
           if (expanded) {
             if (Array.isArray(schema.items)) {
