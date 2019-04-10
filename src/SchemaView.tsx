@@ -1,15 +1,15 @@
-import { Dictionary } from '@stoplight/types';
+import { Dictionary, Omit } from '@stoplight/types';
 import { Box, Button, IBox } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { MutedText } from './common/MutedText';
-import { Property } from './components/Property';
+import { IProperty, Property } from './components/Property';
 import { useProperties } from './hooks/useProperties';
 import { useTheme } from './theme';
-import { SchemaTreeNode } from './types';
 import { isExpanded } from './utils/isExpanded';
+import { pathToString } from './utils/pathToString';
 
-export interface ISchemaView extends IBox {
+export interface ISchemaView extends Omit<IBox, 'onSelect'> {
   name?: string;
   defaultExpandedDepth?: number;
   dereferencedSchema?: JSONSchema4;
@@ -29,7 +29,6 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     limitPropertyCount,
     schema,
     dereferencedSchema,
-    originalSchema,
     ...rest
   } = props;
 
@@ -42,12 +41,12 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     limitPropertyCount,
   });
 
-  const toggleExpandRow = React.useCallback<(node: SchemaTreeNode) => void>(
+  const toggleExpandRow = React.useCallback<IProperty['onClick']>(
     node => {
       if (node.path.length > 0) {
         setExpandedRows({
           ...expandedRows,
-          [node.path.join('.')]: !isExpanded(node, defaultExpandedDepth, expandedRows),
+          [pathToString(node)]: !isExpanded(node, defaultExpandedDepth, expandedRows),
         });
       }
     },

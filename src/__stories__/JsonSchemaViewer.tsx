@@ -7,6 +7,9 @@ import { JsonSchemaViewer } from '../JsonSchemaViewer';
 import * as schema from './__fixtures__/default-schema.json';
 import * as nestedSchema from './__fixtures__/nested-schema.json';
 
+import * as schemaWithRefs from './__fixtures__/ref/original.json';
+import * as dereferencedSchema from './__fixtures__/ref/resolved.json';
+
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
   .add('default', () => (
@@ -16,6 +19,16 @@ storiesOf('JsonSchemaViewer', module)
       limitPropertyCount={number('limitPropertyCount', 20)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       hideRoot={boolean('hideRoot', false)}
+      expanded={boolean('expanded', true)}
+    />
+  ))
+  .add('with dereferenced schema', () => (
+    <JsonSchemaViewer
+      name={text('name', 'name')}
+      schema={schemaWithRefs}
+      dereferencedSchema={dereferencedSchema}
+      limitPropertyCount={number('limitPropertyCount', 20)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', true)}
     />
   ))
