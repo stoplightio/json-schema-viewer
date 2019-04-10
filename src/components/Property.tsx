@@ -99,7 +99,6 @@ export const propertyStyles = ({ level }: SchemaTreeNode) => {
       fontSize: '0.8rem',
     },
     css`
-      user-select none;
       line-height: 1rem;
 
       &:nth-of-type(even) {
