@@ -36,7 +36,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   const { properties, isOverflow } = useProperties(schema, dereferencedSchema, {
     expandedRows,
     defaultExpandedDepth,
-    limitPropertyCount,
+    ...(!showExtra && { limitPropertyCount }),
   });
 
   const toggleExpandRow = React.useCallback<IProperty['onClick']>(
