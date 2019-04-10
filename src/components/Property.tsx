@@ -73,17 +73,17 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
       <Flex alignItems="center" maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={10}>
         {'enum' in node && <Enum value={node.enum} />}
 
-        {node.required && (
-          <Box as="span" fontWeight={700} ml={6}>
-            required
-          </Box>
-        )}
-
         {'additional' in node && <Additional additional={node.additional} />}
 
         {'inheritedFrom' in node ? <MutedText>{`$ref:${node.inheritedFrom}`}</MutedText> : null}
 
         {'validations' in node && node.validations !== undefined && <Validations validations={node.validations} />}
+
+        {node.required && (
+          <Box as="span" fontWeight={700} ml={6}>
+            required
+          </Box>
+        )}
       </Flex>
     </Flex>
   );
