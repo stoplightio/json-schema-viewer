@@ -53,11 +53,9 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
         </Divider>
       )}
 
-      {expandable ? (
-        <Flex justifyContent="center" ml="-1.3rem" width="1.3rem">
-          <Icon size="1x" icon={node.expanded ? faCaretDown : faCaretRight} />
-        </Flex>
-      ) : null}
+      <Flex justifyContent="center" ml="-20px" width="20px">
+        {expandable ? <Icon size="1x" icon={node.expanded ? faCaretDown : faCaretRight} /> : null}
+      </Flex>
 
       <Box flex="1 1 0%">
         <Flex alignItems="baseline">
