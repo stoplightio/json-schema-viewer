@@ -18,16 +18,21 @@ const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
   if ('oneOf' in node) return 'oneOf';
 };
 
-export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<SchemaNode> {
-  if (Array.isArray(schema)) {
-    for (const segment of schema) {
-      yield* walk(segment);
-    }
-
-    return;
+function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
+  switch (node.type) {
+    case SchemaKind.Array:
+      (base as IArrayNode).items = node.array;
+      (base as IArrayNode).additionalItems = node.additionalItems;
+      break;
+    case SchemaKind.Object:
+      (base as IObjectNode).properties = node.properties;
+      (base as IObjectNode).patternProperties = node.patternProperties;
+      (base as IObjectNode).additionalProperties = node.additionalProperties;
+      break;
   }
+}
 
-  const node = schema as JSONSchema4;
+function processNode(node: JSONSchema4): SchemaNode | void {
   if (node.type !== undefined) {
     const base: IBaseNode = {
       type: node.type,
@@ -36,41 +41,58 @@ export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<Sch
       enum: node.enum,
     };
 
-    switch (node.type) {
-      case SchemaKind.Array:
-        (base as IArrayNode).items = node.array;
-        (base as IArrayNode).additionalItems = node.additionalItems;
-        break;
-      case SchemaKind.Object:
-        (base as IObjectNode).properties = node.properties;
-        (base as IObjectNode).patternProperties = node.patternProperties;
-        (base as IObjectNode).additionalProperties = node.additionalProperties;
-        break;
+    if (Array.isArray(node.type)) {
+      if (node.type.includes('object')) {
+        // special case :P
+        assignNodeSpecificFields(base, {
+          ...node,
+          type: 'object',
+        });
+      }
+    } else {
+      assignNodeSpecificFields(base, node);
     }
 
-    yield base;
-  } else if ('enum' in node) {
-    yield {
+    return base;
+  }
+
+  if ('enum' in node) {
+    return {
       validations: getValidations(node),
       annotations: getAnnotations(node),
       enum: node.enum,
     };
-  } else if ('$ref' in node) {
-    yield {
+  }
+
+  if ('$ref' in node) {
+    return {
       $ref: node.$ref,
     } as IRefNode;
-  } else {
-    const combiner = getCombiner(node);
-    if (combiner !== undefined) {
-      yield {
-        combiner,
-        properties: node[combiner],
-        annotations: getAnnotations(node),
-      } as ICombinerNode;
-    }
+  }
+
+  const combiner = getCombiner(node);
+  if (combiner !== undefined) {
+    return {
+      combiner,
+      properties: node[combiner],
+      annotations: getAnnotations(node),
+    } as ICombinerNode;
   }
 
   // if ('not' in node) {
   //   // todo: shall we support it?
   // }
+}
+
+export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<SchemaNode> {
+  if (Array.isArray(schema)) {
+    for (const segment of schema) {
+      yield* walk(segment);
+    }
+  } else {
+    const node = processNode(schema);
+    if (node !== undefined) {
+      yield node;
+    }
+  }
 }

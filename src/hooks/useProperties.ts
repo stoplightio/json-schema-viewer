@@ -1,7 +1,7 @@
 import { JSONSchema4 } from 'json-schema';
 import { useMemo } from 'react';
 import { SchemaTreeNode } from '../types';
-import { getProperties, IFilterOptions } from '../utils/getProperties';
+import { IFilterOptions, renderSchema } from '../utils/renderSchema';
 
 export const useProperties = (
   schema: JSONSchema4,
@@ -14,7 +14,7 @@ export const useProperties = (
       const nodes: SchemaTreeNode[] = [];
       let isOverflow = false;
 
-      for (const node of getProperties(schema, dereferencedSchema, options)) {
+      for (const node of renderSchema(schema, dereferencedSchema, options)) {
         if (limitPropertyCount !== undefined && limitPropertyCount-- < 0) {
           isOverflow = true;
           break;

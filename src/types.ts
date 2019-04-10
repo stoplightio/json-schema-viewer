@@ -53,6 +53,7 @@ export interface ITreeNodeMeta {
   expanded?: boolean;
   required?: boolean;
   inheritedFrom?: string;
+  pattern?: boolean;
 }
 
 export type SchemaTreeNode = SchemaNode & ITreeNodeMeta;
