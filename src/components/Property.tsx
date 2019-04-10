@@ -5,13 +5,13 @@ import { Omit } from '@stoplight/types';
 import { Box, Flex, IBox, Icon } from '@stoplight/ui-kit';
 import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
-import { MutedText } from './common/MutedText';
 import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
 import { useTheme } from '../theme';
 import { SchemaTreeNode } from '../types';
 import { isCombiner } from '../utils/isCombiner';
 import { isRef } from '../utils/isRef';
 import { Additional } from './Additional';
+import { MutedText } from './common/MutedText';
 import { Divider } from './Divider';
 import { Enum } from './Enum';
 import { Type } from './Type';
@@ -28,6 +28,8 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
     (node.path.length > 0 && ('properties' in node && !_isEmpty(node.properties))) ||
     ('items' in node && !_isEmpty(node.items) && node.subtype === undefined);
 
+  const indentation = `${DEFAULT_PADDING + GUTTER_WIDTH * node.level}px`;
+
   const styles = propertyStyles(node);
 
   return (
@@ -35,6 +37,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
       alignItems="center"
       position="relative"
       py={2}
+      pl={indentation}
       cursor={expandable ? 'pointer' : 'default'}
       {...props}
       css={[props.css, styles]}
@@ -44,7 +47,11 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
         }
       }}
     >
-      {node.showDivider && <Divider>or</Divider>}
+      {node.showDivider && (
+        <Divider ml="-1rem" width={`calc(100% - ${indentation} + 1rem)`}>
+          or
+        </Divider>
+      )}
 
       {expandable ? (
         <Flex justifyContent="center" ml="-1.3rem" width="1.3rem">
@@ -54,7 +61,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
 
       <Box flex="1 1 0%">
         <Flex alignItems="baseline">
-          {'name' in node && node.name !== undefined ? <Box mr={5}>{node.name}</Box> : null}
+          {'name' in node && node.name !== undefined ? <Box mr={11}>{node.name}</Box> : null}
 
           {isRef(node) ? (
             <Type type="$ref">{`[${node.$ref}]`}</Type>
@@ -89,12 +96,11 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
   );
 };
 
-export const propertyStyles = ({ level }: SchemaTreeNode) => {
+export const propertyStyles = (node: SchemaTreeNode) => {
   const theme = useTheme();
 
   return [
     {
-      ...(level !== undefined && { paddingLeft: DEFAULT_PADDING + GUTTER_WIDTH * level }),
       height: '40px',
       fontSize: '0.8rem',
     },

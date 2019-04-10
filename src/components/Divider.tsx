@@ -1,18 +1,17 @@
-import { Box, Flex } from '@stoplight/ui-kit';
+import { Box, Flex, IFlex } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { MutedText } from './common/MutedText';
 import { useTheme } from '../theme';
+import { MutedText } from './common/MutedText';
 
-export const Divider: React.FunctionComponent<{}> = ({ children }) => {
+export const Divider: React.FunctionComponent<IFlex> = ({ children, ...props }) => {
   const theme = useTheme();
 
   return (
-    <Flex alignItems="center" position="absolute" top="-5px" height="10px" width="calc(100% - 15px)">
-      <Box backgroundColor={theme.divider.bg} height="1px" minWidth="50px" width="20%" />
-      <MutedText fontSize=".75rem" textTransform="uppercase" px={3}>
+    <Flex alignItems="center" position="absolute" top="-5px" height="10px" {...props}>
+      <MutedText fontSize=".8rem" textTransform="uppercase" fontWeight={700} pr={7}>
         {children}
       </MutedText>
-      <Box backgroundColor={theme.divider.bg} height="1px" flex="1 1 0%" />
+      <Box backgroundColor={theme.divider.bg} height="2px" flex="1 1 0%" />
     </Flex>
   );
 };
