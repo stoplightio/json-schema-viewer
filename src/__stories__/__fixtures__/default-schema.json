@@ -75,6 +75,11 @@
       "$ref": "#/definitions/error-response"
     }
   },
+  "patternProperties": {
+    "^id_": { "type": "number" },
+    "foo": { "type": "integer" },
+    "_name$": { "type": "string" }
+  },
   "required": [
     "name",
     "age",

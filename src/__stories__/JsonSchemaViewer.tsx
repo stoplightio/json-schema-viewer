@@ -5,7 +5,6 @@ import { storiesOf } from '@storybook/react';
 
 import { JsonSchemaViewer } from '../JsonSchemaViewer';
 import * as schema from './__fixtures__/default-schema.json';
-import * as nestedSchema from './__fixtures__/nested-schema.json';
 
 import * as schemaWithRefs from './__fixtures__/ref/original.json';
 import * as dereferencedSchema from './__fixtures__/ref/resolved.json';
@@ -34,7 +33,7 @@ storiesOf('JsonSchemaViewer', module)
   .add('custom schema', () => (
     <JsonSchemaViewer
       name={text('name', 'name')}
-      schema={object('schema', nestedSchema)}
+      schema={object('schema', {})}
       limitPropertyCount={number('limitPropertyCount', 20)}
       expanded={boolean('expanded', true)}
     />

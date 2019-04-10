@@ -59,13 +59,23 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
 
       <Box flex="1 1 0%">
         <Flex alignItems="baseline">
-          {'name' in node && node.name !== undefined ? <Box mr={11}>{node.name}</Box> : null}
+          {'name' in node && node.name !== undefined ? (
+            <Box as="span" mr={11}>
+              {node.name}
+            </Box>
+          ) : null}
 
           {isRef(node) ? (
             <Type type="$ref">{`[${node.$ref}]`}</Type>
           ) : (
             <Types type={isCombiner(node) ? node.combiner : node.type} subtype={node.subtype} />
           )}
+
+          {'pattern' in node && node.pattern ? (
+            <MutedText as="span" fontSize="0.6rem" position="relative" top="-10px" pl={3}>
+              pattern
+            </MutedText>
+          ) : null}
         </Flex>
 
         {'annotations' in node && node.annotations.description ? (
