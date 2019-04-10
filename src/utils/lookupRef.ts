@@ -1,4 +1,4 @@
-import { JsonPath} from '@stoplight/types';
+import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import _get = require('lodash/get');
 

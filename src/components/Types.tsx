@@ -1,7 +1,7 @@
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
-import { MutedText } from './common/MutedText';
 import { JSONSchema4CombinerName } from '../types';
+import { MutedText } from './common/MutedText';
 import { Type } from './Type';
 
 interface ITypes {

@@ -1,8 +1,8 @@
 import { safeStringify } from '@stoplight/json';
 import { Box, Flex, Popup, Tooltip } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { MutedText } from './common/MutedText';
 import { IBaseNode } from '../types';
+import { MutedText } from './common/MutedText';
 
 export const Validations: React.FunctionComponent<Pick<IBaseNode, 'validations'>> = ({ validations }) => {
   const content = React.useMemo(
@@ -35,7 +35,11 @@ export const Validations: React.FunctionComponent<Pick<IBaseNode, 'validations'>
       posX="left"
       posY="center"
       padding={2}
-      renderTrigger={() => <Box fontSize="0.75rem" ml={6}>{content.length} validations</Box>}
+      renderTrigger={() => (
+        <Box fontSize="0.75rem" ml={6}>
+          {content.length} validations
+        </Box>
+      )}
       renderContent={() => (
         <Tooltip posX="left" posY="center" fontSize="0.75rem">
           <Flex flexFlow="column nowrap">{content}</Flex>
