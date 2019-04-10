@@ -5,7 +5,7 @@ import { Omit } from '@stoplight/types';
 import { Box, Flex, IBox, Icon } from '@stoplight/ui-kit';
 import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
-import { MutedText } from '../common/MutedText';
+import { MutedText } from './common/MutedText';
 import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
 import { useTheme } from '../theme';
 import { SchemaTreeNode } from '../types';

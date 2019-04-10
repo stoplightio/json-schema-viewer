@@ -2,7 +2,7 @@ import { Dictionary, Omit } from '@stoplight/types';
 import { Box, Button, IBox } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
-import { MutedText } from './common/MutedText';
+import { MutedText } from './components/common/MutedText';
 import { IProperty, Property } from './components/Property';
 import { useProperties } from './hooks/useProperties';
 import { useTheme } from './theme';
@@ -15,7 +15,6 @@ export interface ISchemaView extends Omit<IBox, 'onSelect'> {
   dereferencedSchema?: JSONSchema4;
   schema: JSONSchema4;
   limitPropertyCount?: number;
-  hideRoot?: boolean;
   expanded?: boolean;
   emptyText: string;
 }
@@ -25,7 +24,6 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     defaultExpandedDepth = 1,
     emptyText,
     expanded = false,
-    hideRoot,
     limitPropertyCount,
     schema,
     dereferencedSchema,

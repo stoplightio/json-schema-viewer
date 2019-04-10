@@ -18,7 +18,6 @@ storiesOf('JsonSchemaViewer', module)
       schema={schema}
       limitPropertyCount={number('limitPropertyCount', 20)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      hideRoot={boolean('hideRoot', false)}
       expanded={boolean('expanded', true)}
     />
   ))
@@ -37,7 +36,6 @@ storiesOf('JsonSchemaViewer', module)
       name={text('name', 'name')}
       schema={object('schema', nestedSchema)}
       limitPropertyCount={number('limitPropertyCount', 20)}
-      hideRoot={boolean('hideRoot', false)}
       expanded={boolean('expanded', true)}
     />
   ));

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
-import { MutedText } from '../common/MutedText';
+import { MutedText } from '../components/common/MutedText';
 import { JsonSchemaViewer } from '../JsonSchemaViewer';
 import { SchemaView } from '../SchemaView';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';

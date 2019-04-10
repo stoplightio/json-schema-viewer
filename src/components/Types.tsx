@@ -1,6 +1,6 @@
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
-import { MutedText } from '../common/MutedText';
+import { MutedText } from './common/MutedText';
 import { JSONSchema4CombinerName } from '../types';
 import { Type } from './Type';
 

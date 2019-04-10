@@ -1,7 +1,7 @@
 import { Omit } from '@stoplight/types';
 import * as React from 'react';
-import { ErrorMessage } from './common/ErrorMessage';
-import { MutedText } from './common/MutedText';
+import { ErrorMessage } from './components/common/ErrorMessage';
+import { MutedText } from './components/common/MutedText';
 import { ISchemaView, SchemaView } from './SchemaView';
 import { ThemeZone } from './theme';
 import { isSchemaViewerEmpty } from './utils/isSchemaViewerEmpty';
@@ -32,7 +32,6 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
         schema,
         schemas,
         limitPropertyCount,
-        hideRoot,
         expanded,
         defaultExpandedDepth,
         ...props
@@ -63,7 +62,6 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
           emptyText={emptyText}
           defaultExpandedDepth={defaultExpandedDepth}
           expanded={expanded}
-          hideRoot={hideRoot}
           limitPropertyCount={limitPropertyCount}
           name={name}
           schema={schema}

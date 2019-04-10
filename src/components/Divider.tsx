@@ -1,6 +1,6 @@
 import { Box, Flex } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { MutedText } from '../common/MutedText';
+import { MutedText } from './common/MutedText';
 import { useTheme } from '../theme';
 
 export const Divider: React.FunctionComponent<{}> = ({ children }) => {
