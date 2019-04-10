@@ -15,9 +15,13 @@ export const useProperties = (
       let isOverflow = false;
 
       for (const node of renderSchema(schema, dereferencedSchema, options)) {
-        if (limitPropertyCount !== undefined && limitPropertyCount-- < 0) {
-          isOverflow = true;
-          break;
+        if (limitPropertyCount !== undefined) {
+          if (limitPropertyCount < 0) {
+            isOverflow = true;
+            break;
+          }
+
+          limitPropertyCount--;
         }
 
         nodes.push(node);
