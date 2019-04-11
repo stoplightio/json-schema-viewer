@@ -4,6 +4,8 @@ import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { MutedText } from './components/common/MutedText';
 import { IProperty, Property } from './components/Property';
+import { TopBar } from './components/TopBar';
+import { useMetadata } from './hooks/useMetadata';
 import { useProperties } from './hooks/useProperties';
 import { useTheme } from './theme';
 import { isExpanded } from './utils/isExpanded';
@@ -27,6 +29,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     limitPropertyCount,
     schema,
     dereferencedSchema,
+    name,
     ...rest
   } = props;
 
@@ -38,6 +41,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     defaultExpandedDepth,
     ...(!showExtra && { limitPropertyCount }),
   });
+  const metadata = useMetadata(schema);
 
   const toggleExpandRow = React.useCallback<IProperty['onClick']>(
     node => {
@@ -64,6 +68,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
 
   return (
     <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
+      <TopBar name={name} metadata={metadata} />
       {properties.map((node, i) => (
         <Property key={i} node={node} onClick={toggleExpandRow} />
       ))}

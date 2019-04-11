@@ -13,7 +13,7 @@ storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
   .add('default', () => (
     <JsonSchemaViewer
-      name={text('name', 'name')}
+      name={text('name', 'my schema')}
       schema={schema}
       limitPropertyCount={number('limitPropertyCount', 20)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
@@ -22,7 +22,7 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('with dereferenced schema', () => (
     <JsonSchemaViewer
-      name={text('name', 'name')}
+      name={text('name', 'my schema')}
       schema={schemaWithRefs}
       dereferencedSchema={dereferencedSchema}
       limitPropertyCount={number('limitPropertyCount', 20)}
@@ -32,7 +32,7 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('custom schema', () => (
     <JsonSchemaViewer
-      name={text('name', 'name')}
+      name={text('name', 'my schema')}
       schema={object('schema', {})}
       limitPropertyCount={number('limitPropertyCount', 20)}
       expanded={boolean('expanded', true)}

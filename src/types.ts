@@ -14,7 +14,9 @@ export const enum SchemaKind {
 
 export type JSONSchema4CombinerName = 'allOf' | 'anyOf' | 'oneOf';
 
-export type JSONSchema4Annotations = 'title' | 'description' | 'default' | 'examples';
+export type JSONSchema4Annotations = 'title' | 'description' | 'default' | 'examples'
+
+export type JSONSchema4Metadata = 'id' | '$schema';
 
 export interface ICombinerNode {
   readonly combiner: JSONSchema4CombinerName;
