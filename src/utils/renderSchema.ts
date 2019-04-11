@@ -34,7 +34,7 @@ const getProperties: Walker = function*(schema, dereferencedSchema, options, met
   }
 };
 
-export const getPatternProperties: Walker = function*(schema, dereferencedSchema, options, meta) {
+const getPatternProperties: Walker = function*(schema, dereferencedSchema, options, meta) {
   if (schema.patternProperties !== undefined) {
     const { level, path } = meta!;
     for (const [prop, property] of Object.entries(schema.patternProperties)) {

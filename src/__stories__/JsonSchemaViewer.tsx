@@ -4,10 +4,10 @@ import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs
 import { storiesOf } from '@storybook/react';
 
 import { JsonSchemaViewer } from '../JsonSchemaViewer';
-import * as schema from './__fixtures__/default-schema.json';
+import * as schema from '../__fixtures__/default-schema.json';
 
-import * as schemaWithRefs from './__fixtures__/ref/original.json';
-import * as dereferencedSchema from './__fixtures__/ref/resolved.json';
+import * as schemaWithRefs from '../__fixtures__/ref/original.json';
+import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
