@@ -7,9 +7,11 @@ import { MutedText } from '../components/common/MutedText';
 import { Property } from '../components/Property';
 import { useProperties } from '../hooks/useProperties';
 import { SchemaView } from '../SchemaView';
+import { useMetadata } from '../hooks/useMetadata';
 
 jest.mock('../theme');
 jest.mock('../hooks/useProperties');
+jest.mock('../hooks/useMetadata');
 
 const schema: JSONSchema4 = {
   type: 'object',
@@ -38,9 +40,11 @@ describe('SchemaView component', () => {
     useStateSpy = jest
       .spyOn(React, 'useState')
       .mockImplementation((initialValue: any) => [initialValue, setStateActionSpy]);
+    (useMetadata as jest.Mock).mockReturnValue({});
   });
 
   afterEach(() => {
+    (useMetadata as jest.Mock).mockReset();
     useStateSpy.mockRestore();
   });
 
