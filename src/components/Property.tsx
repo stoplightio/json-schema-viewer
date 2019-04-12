@@ -108,7 +108,23 @@ export const Property: React.FunctionComponent<IProperty> = ({
           {node.inheritedFrom ? (
             <>
               <MutedText as="span" ml={6}>{`{${formatRef(node.inheritedFrom)}}`}</MutedText>
-              <Button onClick={handleEditMask}>edit mask</Button>
+              {onMaskEdit !== undefined && (
+                <Button
+                  border="0 none"
+                  css={{
+                    '&, &:hover': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}
+                  outline="none"
+                  px={6}
+                  py={0}
+                  fontSize="0.8rem"
+                  onClick={handleEditMask}
+                >
+                  (edit mask)
+                </Button>
+              )}
             </>
           ) : null}
         </Flex>

@@ -107,10 +107,3 @@ describe('SchemaView component', () => {
     expect(setStateActionSpy).toHaveBeenLastCalledWith(true);
   });
 });
-
-// <JsonSchemaViewer schema={schema} canSelect selected={[]} onSelect={(path) => {}} />
-
-// Step 1: on jsv, for rows that are a $ref under the hood, show "edit mask" link on right side
-// Step 2: on click edit mask, open modal with jsv in "mask mode", passing it the object the user clicked on
-// Step 3: implement mask mode - shows checkbox on right side of every property, keep track of selected paths, relative to parent
-// Step 4: onApply handler prop
