@@ -8,6 +8,7 @@ import * as React from 'react';
 import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
 import { useTheme } from '../theme';
 import { SchemaTreeNode } from '../types';
+import { formatRef } from '../utils/formatRef';
 import { isCombiner } from '../utils/isCombiner';
 import { isRef } from '../utils/isRef';
 import { Additional } from './Additional';
@@ -76,6 +77,8 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
               pattern
             </MutedText>
           ) : null}
+
+          {node.inheritedFrom ? <MutedText as="span" ml={6}>{`{${formatRef(node.inheritedFrom)}}`}</MutedText> : null}
         </Flex>
 
         {'annotations' in node && node.annotations.description ? (
@@ -89,8 +92,6 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
         {'enum' in node && <Enum value={node.enum} />}
 
         {'additional' in node && <Additional additional={node.additional} />}
-
-        {'inheritedFrom' in node ? <MutedText>{`$ref:${node.inheritedFrom}`}</MutedText> : null}
 
         {'validations' in node && node.validations !== undefined && <Validations validations={node.validations} />}
 
