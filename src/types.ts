@@ -1,55 +1,61 @@
-import { Dictionary, ISchema } from '@stoplight/types';
-import { ICustomTheme } from '@stoplight/ui-kit';
-import { ReactNodeArray } from 'react';
+import { Dictionary, JsonPath } from '@stoplight/types';
+import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 
-export interface ICommonProps {
-  schemas: any;
-  schema?: ISchema;
-  defaultExpandedDepth: number;
-  prop?: ISchema;
-  parentName?: string;
-  rowElems: ReactNodeArray;
-  expandedRows: Dictionary<boolean>;
-  jsonPath: string;
-  propName?: string;
-  required?: boolean | string[];
-  hideInheritedFrom?: boolean;
-  hideRoot?: boolean;
-
-  toggleExpandRow(rowKey: string, expanded: boolean): void;
+export const enum SchemaKind {
+  Any = 'any',
+  String = 'string',
+  Number = 'number',
+  Integer = 'integer',
+  Boolean = 'boolean',
+  Null = 'null',
+  Array = 'array',
+  Object = 'object',
 }
 
-export interface IJSONSchemaViewerTheme extends ICustomTheme {
-  canvas: {
-    bg: string;
-    fg: string;
-    error: string;
-    muted: string;
-  };
+export type JSONSchema4CombinerName = 'allOf' | 'anyOf' | 'oneOf';
 
-  row: {
-    hoverFg?: string;
-    hoverBg: string;
-    evenFg?: string;
-    evenBg: string;
-  };
+export type JSONSchema4Annotations = 'title' | 'description' | 'default' | 'examples';
 
-  types: {
-    array: string;
-    object: string;
-    allOf: string;
-    oneOf: string;
-    anyOf: string;
-    null: string;
-    integer: string;
-    number: string;
-    boolean: string;
-    binary: string;
-    string: string;
-    $ref: string;
-  };
+export type JSONSchema4Metadata = 'id' | '$schema';
 
-  divider: {
-    bg: string;
-  };
+export interface ICombinerNode {
+  readonly combiner: JSONSchema4CombinerName;
+  properties?: JSONSchema4[];
+  annotations: Pick<JSONSchema4, JSONSchema4Annotations>;
 }
+
+export interface IBaseNode extends Pick<JSONSchema4, 'enum'> {
+  readonly type?: JSONSchema4TypeName | JSONSchema4TypeName[];
+  annotations: Pick<JSONSchema4, JSONSchema4Annotations>;
+  validations: Dictionary<unknown>;
+}
+
+export interface IRefNode {
+  $ref: string;
+}
+
+export interface IArrayNode extends IBaseNode, Pick<JSONSchema4, 'items' | 'additionalItems'> {}
+
+export interface IObjectNode
+  extends IBaseNode,
+    Pick<JSONSchema4, 'properties' | 'patternProperties' | 'additionalProperties'> {}
+
+export interface IObjectPropertyNode extends IBaseNode {
+  name: string;
+}
+
+export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | IObjectPropertyNode | IRefNode;
+
+export interface ITreeNodeMeta {
+  additional?: IArrayNode['additionalItems'] | IObjectNode['additionalProperties'];
+  level: number;
+  path: JsonPath;
+  showDivider?: boolean;
+  subtype?: IBaseNode['type'];
+  expanded?: boolean;
+  required?: boolean;
+  inheritedFrom?: string;
+  pattern?: boolean;
+}
+
+export type SchemaTreeNode = SchemaNode & ITreeNodeMeta;

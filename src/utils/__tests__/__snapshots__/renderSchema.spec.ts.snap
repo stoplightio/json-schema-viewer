@@ -1,0 +1,560 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderSchema util should match default-schema.json 1`] = `
+Array [
+  Object {
+    "additionalProperties": undefined,
+    "annotations": Object {
+      "title": "User",
+    },
+    "enum": undefined,
+    "expanded": true,
+    "level": 0,
+    "path": Array [],
+    "patternProperties": Object {
+      "^id_": Object {
+        "type": "number",
+      },
+      "_name$": Object {
+        "type": "string",
+      },
+      "foo": Object {
+        "type": "integer",
+      },
+    },
+    "properties": Object {
+      "age": Object {
+        "maximum": 150,
+        "minimum": 0,
+        "type": "number",
+      },
+      "completed_at": Object {
+        "format": "date-time",
+        "type": "string",
+      },
+      "email": Object {
+        "format": "email",
+        "minLength": 2,
+        "type": "string",
+      },
+      "items": Object {
+        "items": Object {
+          "type": Array [
+            "string",
+            "number",
+          ],
+        },
+        "type": Array [
+          "null",
+          "array",
+        ],
+      },
+      "name": Object {
+        "description": "The user's full name.",
+        "type": "string",
+      },
+      "permissions": Object {
+        "properties": Object {
+          "ids": Object {
+            "items": Object {
+              "type": "integer",
+            },
+            "type": "array",
+          },
+        },
+        "type": Array [
+          "string",
+          "object",
+        ],
+      },
+      "plan": Object {
+        "anyOf": Array [
+          Object {
+            "properties": Object {
+              "bar": Object {
+                "type": "string",
+              },
+              "foo": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "foo",
+              "bar",
+            ],
+            "type": "object",
+          },
+          Object {
+            "items": Object {
+              "type": "integer",
+            },
+            "type": "array",
+          },
+        ],
+      },
+      "ref": Object {
+        "$ref": "#/definitions/error-response",
+      },
+    },
+    "type": "object",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {
+      "description": "The user's full name.",
+    },
+    "enum": undefined,
+    "level": 1,
+    "name": "name",
+    "path": Array [
+      "properties",
+      "name",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 1,
+    "name": "age",
+    "path": Array [
+      "properties",
+      "age",
+    ],
+    "required": true,
+    "type": "number",
+    "validations": Object {
+      "maximum": 150,
+      "minimum": 0,
+    },
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 1,
+    "name": "completed_at",
+    "path": Array [
+      "properties",
+      "completed_at",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {
+      "format": "date-time",
+    },
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 1,
+    "name": "items",
+    "path": Array [
+      "properties",
+      "items",
+    ],
+    "required": false,
+    "subtype": Array [
+      "string",
+      "number",
+    ],
+    "type": Array [
+      "null",
+      "array",
+    ],
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 1,
+    "name": "email",
+    "path": Array [
+      "properties",
+      "email",
+    ],
+    "required": false,
+    "type": "string",
+    "validations": Object {
+      "format": "email",
+      "minLength": 2,
+    },
+  },
+  Object {
+    "annotations": Object {},
+    "combiner": "anyOf",
+    "expanded": true,
+    "level": 1,
+    "name": "plan",
+    "path": Array [
+      "properties",
+      "plan",
+    ],
+    "properties": Array [
+      Object {
+        "properties": Object {
+          "bar": Object {
+            "type": "string",
+          },
+          "foo": Object {
+            "type": "string",
+          },
+        },
+        "required": Array [
+          "foo",
+          "bar",
+        ],
+        "type": "object",
+      },
+      Object {
+        "items": Object {
+          "type": "integer",
+        },
+        "type": "array",
+      },
+    ],
+    "required": false,
+  },
+  Object {
+    "additionalProperties": undefined,
+    "annotations": Object {},
+    "enum": undefined,
+    "expanded": true,
+    "level": 2,
+    "path": Array [
+      "properties",
+      "plan",
+      "properties",
+      0,
+    ],
+    "patternProperties": undefined,
+    "properties": Object {
+      "bar": Object {
+        "type": "string",
+      },
+      "foo": Object {
+        "type": "string",
+      },
+    },
+    "showDivider": false,
+    "type": "object",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 3,
+    "name": "foo",
+    "path": Array [
+      "properties",
+      "plan",
+      "properties",
+      0,
+      "properties",
+      "foo",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 3,
+    "name": "bar",
+    "path": Array [
+      "properties",
+      "plan",
+      "properties",
+      0,
+      "properties",
+      "bar",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "additionalItems": undefined,
+    "annotations": Object {},
+    "enum": undefined,
+    "items": undefined,
+    "level": 2,
+    "path": Array [
+      "properties",
+      "plan",
+      "properties",
+      1,
+    ],
+    "showDivider": true,
+    "subtype": "integer",
+    "type": "array",
+    "validations": Object {},
+  },
+  Object {
+    "additionalProperties": undefined,
+    "annotations": Object {},
+    "enum": undefined,
+    "expanded": true,
+    "level": 1,
+    "name": "permissions",
+    "path": Array [
+      "properties",
+      "permissions",
+    ],
+    "patternProperties": undefined,
+    "properties": Object {
+      "ids": Object {
+        "items": Object {
+          "type": "integer",
+        },
+        "type": "array",
+      },
+    },
+    "required": false,
+    "type": Array [
+      "string",
+      "object",
+    ],
+    "validations": Object {},
+  },
+  Object {
+    "additionalItems": undefined,
+    "annotations": Object {},
+    "enum": undefined,
+    "items": undefined,
+    "level": 2,
+    "name": "ids",
+    "path": Array [
+      "properties",
+      "permissions",
+      "properties",
+      "ids",
+    ],
+    "required": false,
+    "subtype": "integer",
+    "type": "array",
+    "validations": Object {},
+  },
+  Object {
+    "$ref": "#/definitions/error-response",
+    "level": 1,
+    "name": "ref",
+    "path": Array [
+      "properties",
+      "ref",
+    ],
+    "required": false,
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 1,
+    "name": "^id_",
+    "path": Array [
+      "patternProperties",
+      "^id_",
+    ],
+    "pattern": true,
+    "type": "number",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 1,
+    "name": "foo",
+    "path": Array [
+      "patternProperties",
+      "foo",
+    ],
+    "pattern": true,
+    "type": "integer",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 1,
+    "name": "_name$",
+    "path": Array [
+      "patternProperties",
+      "_name$",
+    ],
+    "pattern": true,
+    "type": "string",
+    "validations": Object {},
+  },
+]
+`;
+
+exports[`renderSchema util should match ref/original.json 1`] = `
+Array [
+  Object {
+    "additionalProperties": undefined,
+    "annotations": Object {},
+    "enum": undefined,
+    "expanded": true,
+    "level": 0,
+    "path": Array [],
+    "patternProperties": undefined,
+    "properties": Object {
+      "billing_address": Object {
+        "$ref": "#/definitions/address",
+      },
+      "shipping_address": Object {
+        "$ref": "#/definitions/address",
+      },
+    },
+    "type": "object",
+    "validations": Object {},
+  },
+  Object {
+    "additionalProperties": undefined,
+    "annotations": Object {},
+    "enum": undefined,
+    "expanded": true,
+    "inheritedFrom": "#/definitions/address",
+    "level": 1,
+    "name": "billing_address",
+    "path": Array [
+      "properties",
+      "billing_address",
+    ],
+    "patternProperties": undefined,
+    "properties": Object {
+      "city": Object {
+        "type": "string",
+      },
+      "state": Object {
+        "type": "string",
+      },
+      "street_address": Object {
+        "type": "string",
+      },
+    },
+    "required": false,
+    "type": "object",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 2,
+    "name": "street_address",
+    "path": Array [
+      "properties",
+      "billing_address",
+      "properties",
+      "street_address",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 2,
+    "name": "city",
+    "path": Array [
+      "properties",
+      "billing_address",
+      "properties",
+      "city",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 2,
+    "name": "state",
+    "path": Array [
+      "properties",
+      "billing_address",
+      "properties",
+      "state",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "additionalProperties": undefined,
+    "annotations": Object {},
+    "enum": undefined,
+    "expanded": true,
+    "inheritedFrom": "#/definitions/address",
+    "level": 1,
+    "name": "shipping_address",
+    "path": Array [
+      "properties",
+      "shipping_address",
+    ],
+    "patternProperties": undefined,
+    "properties": Object {
+      "city": Object {
+        "type": "string",
+      },
+      "state": Object {
+        "type": "string",
+      },
+      "street_address": Object {
+        "type": "string",
+      },
+    },
+    "required": false,
+    "type": "object",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 2,
+    "name": "street_address",
+    "path": Array [
+      "properties",
+      "shipping_address",
+      "properties",
+      "street_address",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 2,
+    "name": "city",
+    "path": Array [
+      "properties",
+      "shipping_address",
+      "properties",
+      "city",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+  Object {
+    "annotations": Object {},
+    "enum": undefined,
+    "level": 2,
+    "name": "state",
+    "path": Array [
+      "properties",
+      "shipping_address",
+      "properties",
+      "state",
+    ],
+    "required": true,
+    "type": "string",
+    "validations": Object {},
+  },
+]
+`;

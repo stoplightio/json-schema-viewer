@@ -1,4 +1,4 @@
-import { IJSONSchemaViewerTheme } from '../types';
+import { IJSONSchemaViewerTheme } from '../theme';
 
 export const dark: IJSONSchemaViewerTheme = {
   base: 'dark',
