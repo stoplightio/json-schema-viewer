@@ -8,22 +8,15 @@ export const Validations: React.FunctionComponent<Pick<IBaseNode, 'validations'>
   const content = React.useMemo(
     () =>
       Object.entries(validations).map(([name, value]) => {
-        let type = typeof value;
-
-        if (type === 'object') {
-          value = safeStringify(value);
-          type = typeof value;
+        if (typeof value === 'object') {
+          value = safeStringify(value, undefined, 2);
         }
 
-        if (type !== 'object') {
-          return (
-            <Box as="span" py={2} key={name}>
-              <MutedText as="b">{name}:</MutedText> {String(value)}
-            </Box>
-          );
-        }
-
-        return null;
+        return (
+          <Box as="span" py={2} key={name}>
+            <MutedText as="b">{name}:</MutedText> {String(value)}
+          </Box>
+        );
       }),
     [validations]
   );

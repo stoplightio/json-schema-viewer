@@ -16,8 +16,6 @@ export const Additional: React.FunctionComponent<Pick<SchemaTreeNode, 'additiona
 
   const content = React.useMemo(() => safeStringify(additional, undefined, 2), [additional]);
 
-  if (typeof content !== 'string') return trigger;
-
   return (
     <Popup
       posX="left"
