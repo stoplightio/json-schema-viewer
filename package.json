@@ -47,6 +47,7 @@
     "lodash": "4.17.x"
   },
   "devDependencies": {
+    "@sambego/storybook-state": "^1.3.4",
     "@stoplight/scripts": "4.1.0",
     "@stoplight/storybook-config": "1.4.0",
     "@stoplight/types": "4.1.0",

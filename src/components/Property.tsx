@@ -2,15 +2,16 @@ import css from '@emotion/css';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
 import { Omit } from '@stoplight/types';
-import { Box, Flex, IBox, Icon } from '@stoplight/ui-kit';
+import { Box, Button, Checkbox, Flex, IBox, Icon } from '@stoplight/ui-kit';
 import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
 import { DEFAULT_PADDING, GUTTER_WIDTH } from '../consts';
 import { useTheme } from '../theme';
-import { SchemaTreeNode } from '../types';
+import { IMasking, SchemaTreeNode } from '../types';
 import { formatRef } from '../utils/formatRef';
 import { isCombiner } from '../utils/isCombiner';
 import { isRef } from '../utils/isRef';
+import { pathToString } from '../utils/pathToString';
 import { Additional } from './Additional';
 import { MutedText } from './common/MutedText';
 import { Divider } from './Divider';
@@ -19,17 +20,43 @@ import { Type } from './Type';
 import { Types } from './Types';
 import { Validations } from './Validations';
 
-export interface IProperty extends Omit<IBox, 'onClick'> {
+export interface IProperty extends Omit<IBox, 'onClick'>, IMasking {
   node: SchemaTreeNode;
   onClick(node: SchemaTreeNode): void;
+  onMaskEdit(node: SchemaTreeNode): void;
 }
 
-export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ...props }) => {
+export const Property: React.FunctionComponent<IProperty> = ({
+  node,
+  canSelect,
+  onClick,
+  onSelect,
+  onMaskEdit,
+  selected,
+  ...props
+}) => {
+  const handleEditMask = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(
+    e => {
+      e.stopPropagation();
+      onMaskEdit(node);
+    },
+    [onMaskEdit]
+  );
+
+  const handleChange = React.useCallback(
+    () => {
+      if (onSelect !== undefined) {
+        onSelect(pathToString(node));
+      }
+    },
+    [onSelect]
+  );
+
+  const indentation = `${DEFAULT_PADDING + GUTTER_WIDTH * node.level}px`;
+
   const expandable =
     (node.path.length > 0 && ('properties' in node && !_isEmpty(node.properties))) ||
     ('items' in node && !_isEmpty(node.items) && node.subtype === undefined);
-
-  const indentation = `${DEFAULT_PADDING + GUTTER_WIDTH * node.level}px`;
 
   const styles = propertyStyles(node);
 
@@ -78,7 +105,28 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
             </MutedText>
           ) : null}
 
-          {node.inheritedFrom ? <MutedText as="span" ml={6}>{`{${formatRef(node.inheritedFrom)}}`}</MutedText> : null}
+          {node.inheritedFrom ? (
+            <>
+              <MutedText as="span" ml={6}>{`{${formatRef(node.inheritedFrom)}}`}</MutedText>
+              {onMaskEdit !== undefined && (
+                <Button
+                  border="0 none"
+                  css={{
+                    '&, &:hover': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}
+                  outline="none"
+                  px={6}
+                  py={0}
+                  fontSize="0.8rem"
+                  onClick={handleEditMask}
+                >
+                  (edit mask)
+                </Button>
+              )}
+            </>
+          ) : null}
         </Flex>
 
         {'annotations' in node && node.annotations.description ? (
@@ -89,16 +137,22 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onClick, ..
       </Box>
 
       <Flex alignItems="center" maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={10}>
-        {'enum' in node && <Enum value={node.enum} />}
+        {canSelect ? (
+          <Checkbox onChange={handleChange} checked={selected && selected.includes(pathToString(node))} ml={12} />
+        ) : (
+          <>
+            {'enum' in node && <Enum value={node.enum} />}
 
-        {'additional' in node && <Additional additional={node.additional} />}
+            {'additional' in node && <Additional additional={node.additional} />}
 
-        {'validations' in node && node.validations !== undefined && <Validations validations={node.validations} />}
+            {'validations' in node && node.validations !== undefined && <Validations validations={node.validations} />}
 
-        {node.required && (
-          <Box as="span" fontWeight={700} ml={6}>
-            required
-          </Box>
+            {node.required && (
+              <Box as="span" fontWeight={700} ml={6}>
+                required
+              </Box>
+            )}
+          </>
         )}
       </Flex>
     </Flex>
