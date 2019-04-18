@@ -46,44 +46,13 @@ describe('SchemaView component', () => {
     useStateSpy.mockRestore();
   });
 
-  test('should render empty text if schema has no properties', () => {
-
-    const emptyText = 'abc';
-    const wrapper = shallow(<SchemaView emptyText={emptyText} schema={{}} />);
-
-    expect(wrapper).toContainReact(<MutedText>{emptyText}</MutedText>);
-  });
-
-  it('should call useProperties hook and render properties', () => {
-
-    const dereferencedSchema: JSONSchema4 = { type: 'object' };
-    const wrapper = shallow(
-      <SchemaView
-        emptyText=""
-        schema={schema}
-        dereferencedSchema={dereferencedSchema}
-        defaultExpandedDepth={1}
-        limitPropertyCount={2}
-      />
-    );
-
-    expect(useProperties).toHaveBeenCalledWith(schema, dereferencedSchema, {
-      limitPropertyCount: 2,
-      defaultExpandedDepth: 1,
-      expandedRows: {
-        all: false,
-      },
-    });
-
-    expect(wrapper.find(Property)).toHaveLength(3);
-  });
 
   test('should hide expand button when limitPropertyCount is undefined', () => {
     (useProperties as jest.Mock).mockReturnValue({
       isOverflow: false,
       properties: [...new Array(5)],
     });
-    const wrapper = shallow(<SchemaView emptyText="" schema={schema} />);
+    const wrapper = shallow(<SchemaView schema={schema} />);
 
     expect(wrapper.find(Button)).not.toExist();
   });

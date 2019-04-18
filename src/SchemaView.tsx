@@ -10,6 +10,9 @@ import { TopBar } from './components/TopBar';
 import { useMetadata } from './hooks/useMetadata';
 import { useTheme } from './theme';
 import { IMasking } from './types';
+import { IJsonSchemaViewer } from './JsonSchemaViewer';
+
+const canDrag = () => false;
 
 export interface ISchemaView extends Omit<IBox, 'onSelect'>, IMasking {
   name?: string;
@@ -34,7 +37,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     ...rest
   } = props;
 
-  const theme = useTheme();
+  const theme = useTheme() as IJsonSchemaViewer;
   const [maskedSchema, setMaskedSchema] = React.useState<JSONSchema4 | null>(null);
 
   const metadata = useMetadata(schema);
@@ -69,7 +72,8 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
       <ThemeZone name="tree-list">
         <TreeList
           rowHeight={40}
-          canDrag={() => false}
+          canDrag={canDrag}
+
           store={treeStore}
           rowRenderer={node => <Property node={node.metadata! as any} {...itemData} />}
         />

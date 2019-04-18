@@ -1,8 +1,6 @@
-import css from '@emotion/css';
 import { Omit } from '@stoplight/types';
 import { Box, Button, Checkbox, Flex, IBox } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { useTheme } from '../theme';
 import { IMasking, ITreeNodeMeta, SchemaNode, SchemaTreeNode } from '../types';
 import { formatRef } from '../utils/formatRef';
 import { isCombiner } from '../utils/isCombiner';
@@ -46,10 +44,8 @@ export const Property: React.FunctionComponent<IProperty> = ({
     [onSelect]
   );
 
-  const styles = propertyStyles();
-
   return (
-    <Flex alignItems="center" position="relative" py={2} width="100%" ml="-25px" {...props} css={[props.css, styles]}>
+    <Flex alignItems="center" fontSize="0.8rem"  lineHeight="1rem"position="relative" width="100%" ml="-20px" {...props}>
       {node.showDivider && (
         <Divider ml="-1rem" width={`calc(100% + 1rem)`}>
           or
@@ -128,22 +124,4 @@ export const Property: React.FunctionComponent<IProperty> = ({
       </Flex>
     </Flex>
   );
-};
-
-export const propertyStyles = () => {
-  const theme = useTheme();
-
-  return [
-    {
-      fontSize: '0.8rem',
-    },
-    css`
-      line-height: 1rem;
-
-      &:nth-of-type(even) {
-        background-color ${theme.row.evenBg};
-        color ${theme.row.evenFg || theme.canvas.fg};
-      }
-    `,
-  ];
 };

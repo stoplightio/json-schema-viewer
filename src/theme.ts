@@ -1,22 +1,17 @@
+import { ITreeListTheme } from '@stoplight/tree-list';
 import { createThemedModule, ICustomTheme } from '@stoplight/ui-kit';
 
-export type themeZones = 'json-schema-viewer';
+export type themeZones = 'json-schema-viewer' | 'tree-list';
+export type themeTypes = IJsonSchemaViewerTheme | ITreeListTheme;
 
-export const { useTheme, ThemeZone, ThemeProvider } = createThemedModule<themeZones, IJSONSchemaViewerTheme>();
+export const { useTheme, ThemeZone, ThemeProvider } = createThemedModule<themeZones, themeTypes>();
 
-export interface IJSONSchemaViewerTheme extends ICustomTheme {
+export interface IJsonSchemaViewerTheme extends ICustomTheme {
   canvas: {
     bg: string;
     fg: string;
     error: string;
     muted: string;
-  };
-
-  row: {
-    hoverFg?: string;
-    hoverBg: string;
-    evenFg?: string;
-    evenBg: string;
   };
 
   types: {

@@ -1,4 +1,6 @@
 import { createThemedModule } from '@stoplight/ui-kit';
+import { dark } from '../src/themes/dark';
+import { light } from '../src/themes/light';
 
 const { useTheme, ThemeProvider } = createThemedModule();
 
@@ -7,88 +9,6 @@ export { useTheme, ThemeProvider };
 export const themes = ['dark', 'light'];
 
 export const zones = {
-  'tree-list': ({ base }) =>
-    base === 'dark'
-      ? {
-        canvas: {
-          bg: '#111',
-          fg: '#fff',
-          invalid: 'red',
-        },
-
-        node: {
-          hoverBg: '#333',
-          hoverFg: '#fff',
-          evenBg: '#232222',
-        },
-      }
-      : {
-        canvas: {
-          bg: '#fff',
-          fg: '#111',
-          invalid: 'red',
-        },
-
-        row: {
-          hoverBg: '#e9e9e9',
-          hoverFg: '#111',
-          evenBg: '#f3f3f3',
-        },
-      },
-  'json-schema-viewer': ({ base }) =>
-    base === 'dark'
-      ? {
-          canvas: {
-            bg: '#111',
-            fg: '#fff',
-            error: 'red',
-            muted: 'rgba(255, 255, 255, 0.6)',
-          },
-
-          divider: {
-            bg: '#bababa',
-          },
-
-          types: {
-            object: '#83c1ff',
-            array: '#7dff75',
-            allOf: '#b89826',
-            oneOf: '#b89826',
-            anyOf: '#b89826',
-            null: '#ff7f50',
-            integer: '#e03b36',
-            number: '#e03b36',
-            boolean: '#ff69b4',
-            binary: '#8ccda3',
-            string: '#19c5a0',
-            $ref: '#a359e2',
-          },
-        }
-      : {
-          canvas: {
-            bg: '#fff',
-            fg: '#111',
-            error: 'red',
-            muted: 'rgba(0, 0, 0, 0.5)',
-          },
-
-          divider: {
-            bg: '#dae1e7',
-          },
-
-          types: {
-            object: '#00f',
-            array: '#008000',
-            allOf: '#B8860B',
-            oneOf: '#B8860B',
-            anyOf: '#B8860B',
-            null: '#ff7f50',
-            integer: '#a52a2a',
-            number: '#a52a2a',
-            boolean: '#ff69b4',
-            binary: '#66cdaa',
-            string: '#008080',
-            $ref: '#8a2be2',
-          },
-        },
+  'tree-list': ({ base }) => base === 'dark'  ? dark['tree-list'] : light['tree-list'],
+  'json-schema-viewer': ({ base }) => base === 'dark'  ? dark['json-schema-viewer'] : light['json-schema-viewer'],
 };
