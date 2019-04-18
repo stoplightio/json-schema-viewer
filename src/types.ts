@@ -1,5 +1,6 @@
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
+import { TreeListNode } from '@stoplight/tree-list';
 
 export const enum SchemaKind {
   Any = 'any',
@@ -47,8 +48,8 @@ export interface IObjectPropertyNode extends IBaseNode {
 export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | IObjectPropertyNode | IRefNode;
 
 export interface ITreeNodeMeta {
+  name?: string;
   additional?: IArrayNode['additionalItems'] | IObjectNode['additionalProperties'];
-  level: number;
   path: JsonPath;
   showDivider?: boolean;
   subtype?: IBaseNode['type'];
@@ -56,9 +57,10 @@ export interface ITreeNodeMeta {
   required?: boolean;
   inheritedFrom?: string;
   pattern?: boolean;
+  $ref?: string;
 }
 
-export type SchemaTreeNode = SchemaNode & ITreeNodeMeta;
+export type SchemaTreeNode = TreeListNode<SchemaNode & ITreeNodeMeta>;
 
 export interface IMasking {
   selected?: string[];
