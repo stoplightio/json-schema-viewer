@@ -26,7 +26,6 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   const {
     emptyText,
     expanded = false,
-    limitPropertyCount,
     schema,
     dereferencedSchema,
     selected,

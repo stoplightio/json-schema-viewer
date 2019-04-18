@@ -17,7 +17,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       name={text('name', 'my schema')}
       schema={schema}
-      limitPropertyCount={number('limitPropertyCount', 20)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', true)}
     />
@@ -33,7 +32,6 @@ storiesOf('JsonSchemaViewer', module)
           name={text('name', 'name')}
           schema={schemaWithRefs}
           dereferencedSchema={dereferencedSchema}
-          limitPropertyCount={number('limitPropertyCount', 20)}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
           onSelect={(path: string) => {
             const selected = [...store.get('selected')];
@@ -57,7 +55,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       name={text('name', 'my schema')}
       schema={object('schema', {})}
-      limitPropertyCount={number('limitPropertyCount', 20)}
       expanded={boolean('expanded', true)}
     />
   ));
