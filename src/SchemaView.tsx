@@ -2,6 +2,7 @@ import { TreeList, TreeListMouseEventHandler, TreeStore } from '@stoplight/tree-
 import { Omit } from '@stoplight/types';
 import { Box, IBox, ThemeZone } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
+import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
 import { MaskedSchema } from './components/MaskedSchema';
 import { IProperty, Property } from './components/Property';
@@ -19,6 +20,7 @@ export interface ISchemaView extends Omit<IBox, 'onSelect'>, IMasking {
   dereferencedSchema?: JSONSchema4;
   schema: JSONSchema4;
   expanded?: boolean;
+  hideTopBar?: boolean;
   treeStore: TreeStore;
 }
 
@@ -28,6 +30,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     expanded = false,
     schema,
     dereferencedSchema,
+    hideTopBar,
     selected,
     canSelect,
     onSelect,
@@ -59,6 +62,8 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     setMaskedSchema(null);
   }, []);
 
+  const shouldRenderTopBar = !hideTopBar && (name || !_isEmpty(metadata));
+
   const itemData = {
     onSelect,
     onMaskEdit: handleMaskEdit,
@@ -71,9 +76,10 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
       {maskedSchema && (
         <MaskedSchema onClose={handleMaskedSchemaClose} onSelect={onSelect} selected={selected} schema={maskedSchema} />
       )}
-      <TopBar name={name} metadata={metadata} />
+      {shouldRenderTopBar && <TopBar name={name} metadata={metadata} />}
       <ThemeZone name="tree-list">
         <TreeList
+          top={shouldRenderTopBar ? '40px' : 0}
           rowHeight={40}
           canDrag={canDrag}
           store={treeStore}

@@ -1,4 +1,3 @@
-import { TreeStore } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
 import _isEmpty = require('lodash/isEmpty');
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
@@ -10,16 +9,15 @@ import { walk } from './walk';
 type Walker = (
   schema: JSONSchema4,
   dereferencedSchema: JSONSchema4 | undefined,
-  store: TreeStore,
   level?: number,
   meta?: ITreeNodeMeta
 ) => IterableIterator<SchemaTreeListNode>;
 
-const getProperties: Walker = function*(schema, dereferencedSchema, options, level = 0, meta) {
+const getProperties: Walker = function*(schema, dereferencedSchema, level = 0, meta) {
   if (schema.properties !== undefined) {
     const { path } = meta!;
     for (const [prop, property] of Object.entries(schema.properties)) {
-      yield* renderSchema(property, dereferencedSchema, options, level + 1, {
+      yield* renderSchema(property, dereferencedSchema, level + 1, {
         name: prop,
         required: Array.isArray(schema.required) && schema.required.includes(prop),
         path: [...path, prop],
@@ -28,11 +26,11 @@ const getProperties: Walker = function*(schema, dereferencedSchema, options, lev
   }
 };
 
-const getPatternProperties: Walker = function*(schema, dereferencedSchema, options, level = 0, meta) {
+const getPatternProperties: Walker = function*(schema, dereferencedSchema, level = 0, meta) {
   if (schema.patternProperties !== undefined) {
     const { path } = meta!;
     for (const [prop, property] of Object.entries(schema.patternProperties)) {
-      yield* renderSchema(property, dereferencedSchema, options, level + 1, {
+      yield* renderSchema(property, dereferencedSchema, level + 1, {
         name: prop,
         path: [...path, prop],
         pattern: true,
@@ -41,7 +39,7 @@ const getPatternProperties: Walker = function*(schema, dereferencedSchema, optio
   }
 };
 
-export const renderSchema: Walker = function*(schema, dereferencedSchema, store, level = 0, meta = { path: [] }) {
+export const renderSchema: Walker = function*(schema, dereferencedSchema, level = 0, meta = { path: [] }) {
   const { path } = meta;
 
   for (const node of walk(schema)) {
@@ -57,12 +55,10 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
       },
     };
 
-    const expanded = store.isNodeExpanded(baseNode);
-
     if (isRef(node)) {
       const resolved = lookupRef(path, dereferencedSchema);
       if (resolved) {
-        yield* renderSchema(resolved, dereferencedSchema, store, level, {
+        yield* renderSchema(resolved, dereferencedSchema, level, {
           ...meta,
           inheritedFrom: node.$ref,
         });
@@ -81,10 +77,10 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
         canHaveChildren: true,
       };
 
-      if (expanded && node.properties !== undefined) {
+      if (node.properties !== undefined) {
         const isConditionalCombiner = node.combiner === 'anyOf' || node.combiner === 'oneOf';
         for (const [i, property] of node.properties.entries()) {
-          yield* renderSchema(property, dereferencedSchema, store, level + 1, {
+          yield* renderSchema(property, dereferencedSchema, level + 1, {
             showDivider: isConditionalCombiner && i !== 0,
             path: [...path, 'properties', i],
           });
@@ -104,23 +100,21 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
         },
       } as SchemaTreeListNode;
 
-      if (expanded) {
-        if (Array.isArray(schema.items)) {
-          for (const [i, property] of schema.items.entries()) {
-            yield* renderSchema(property, dereferencedSchema, store, level + 1, {
-              path: [...path, 'items', i],
-            });
-          }
-        } else if (meta.subtype === 'object' && schema.items) {
-          yield* getProperties(schema.items, dereferencedSchema, store, level + 1, {
-            ...meta,
-            path: [...path, 'items'],
-          });
-        } else if (meta.subtype === 'array' && schema.items) {
-          yield* renderSchema(schema.items, dereferencedSchema, store, level + 1, {
-            path,
+      if (Array.isArray(schema.items)) {
+        for (const [i, property] of schema.items.entries()) {
+          yield* renderSchema(property, dereferencedSchema, level + 1, {
+            path: [...path, 'items', i],
           });
         }
+      } else if (meta.subtype === 'object' && schema.items) {
+        yield* getProperties(schema.items, dereferencedSchema, level + 1, {
+          ...meta,
+          path: [...path, 'items'],
+        });
+      } else if (meta.subtype === 'array' && schema.items) {
+        yield* renderSchema(schema.items, dereferencedSchema, level + 1, {
+          path,
+        });
       }
     } else if ('properties' in node) {
       // special case :P, it's
@@ -135,15 +129,13 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
         },
       } as SchemaTreeListNode;
 
-      if (expanded) {
-        yield* getProperties(schema, dereferencedSchema, store, level, {
-          path: [...path, 'properties'],
-        });
+      yield* getProperties(schema, dereferencedSchema, level, {
+        path: [...path, 'properties'],
+      });
 
-        yield* getPatternProperties(schema, dereferencedSchema, store, level, {
-          path: [...path, 'patternProperties'],
-        });
-      }
+      yield* getPatternProperties(schema, dereferencedSchema, level, {
+        path: [...path, 'patternProperties'],
+      });
     } else {
       yield baseNode;
     }

@@ -28,16 +28,10 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
   constructor(props: IJsonSchemaViewer) {
     super(props);
 
-    const store: TreeStore = new TreeStore({
+    this.treeStore = new TreeStore({
       defaultExpandedDepth: this.expandedDepth,
-      nodes: {
-        *[Symbol.iterator]() {
-          yield* renderSchema(props.schema, props.dereferencedSchema, store);
-        },
-      },
+      nodes: Array.from(renderSchema(props.schema, props.dereferencedSchema)),
     });
-
-    this.treeStore = store;
   }
 
   // there is no error hook yet, see https://reactjs.org/docs/hooks-faq.html#how-do-lifecycle-methods-correspond-to-hooks
@@ -60,6 +54,10 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
       this.setExpandedDepth();
+    }
+
+    if (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema) {
+      this.treeStore.nodes = Array.from(renderSchema(this.props.schema, this.props.dereferencedSchema));
     }
   }
 

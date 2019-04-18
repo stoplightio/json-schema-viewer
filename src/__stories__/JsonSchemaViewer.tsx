@@ -19,6 +19,7 @@ storiesOf('JsonSchemaViewer', module)
       schema={schema}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
     />
   ))
   .add('with dereferenced schema', () => {
@@ -47,6 +48,7 @@ storiesOf('JsonSchemaViewer', module)
           }}
           selected={store.get('selected')}
           expanded={boolean('expanded', true)}
+          hideTopBar={boolean('hideTopBar', false)}
         />
       </State>
     );
@@ -56,6 +58,7 @@ storiesOf('JsonSchemaViewer', module)
       name={text('name', 'my schema')}
       schema={object('schema', {})}
       expanded={boolean('expanded', true)}
+      hideTopBar={boolean('hideTopBar', false)}
     />
   ))
   .add('stress-test schema', () => (
@@ -64,5 +67,6 @@ storiesOf('JsonSchemaViewer', module)
       schema={stressSchema}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
     />
   ));
