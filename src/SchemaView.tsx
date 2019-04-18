@@ -42,9 +42,12 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
 
   const metadata = useMetadata(schema);
 
-  const handleMaskEdit = React.useCallback<IProperty['onMaskEdit']>(node => {
-    setMaskedSchema(lookupRef(node.path, dereferencedSchema));
-  }, []);
+  const handleMaskEdit = React.useCallback<IProperty['onMaskEdit']>(
+    node => {
+      setMaskedSchema(lookupRef(node.path, dereferencedSchema));
+    },
+    [dereferencedSchema]
+  );
 
   const handleMaskedSchemaClose = React.useCallback(() => {
     setMaskedSchema(null);
@@ -60,13 +63,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   return (
     <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
       {maskedSchema && (
-        <MaskedSchema
-          onClose={handleMaskedSchemaClose}
-          onSelect={onSelect}
-          selected={selected}
-          schema={maskedSchema}
-          treeStore={treeStore}
-        />
+        <MaskedSchema onClose={handleMaskedSchemaClose} onSelect={onSelect} selected={selected} schema={maskedSchema} />
       )}
       <TopBar name={name} metadata={metadata} />
       <ThemeZone name="tree-list">

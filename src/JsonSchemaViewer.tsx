@@ -9,7 +9,7 @@ import { ThemeZone } from './theme';
 import { isSchemaViewerEmpty } from './utils/isSchemaViewerEmpty';
 import { renderSchema } from './utils/renderSchema';
 
-export interface IJsonSchemaViewer extends Omit<ISchemaView, 'emptyText'> {
+export interface IJsonSchemaViewer extends Omit<ISchemaView, 'emptyText' | 'treeStore'> {
   emptyText?: string;
   defaultExpandedDepth?: number;
 }
@@ -84,13 +84,7 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
 
     return (
       <ThemeZone name="json-schema-viewer">
-        <SchemaView
-          expanded={expanded}
-          name={name}
-          schema={schema}
-          treeStore={this.treeStore}
-          {...props}
-        />
+        <SchemaView expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
       </ThemeZone>
     );
   }

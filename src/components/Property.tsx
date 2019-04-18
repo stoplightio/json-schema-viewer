@@ -83,7 +83,6 @@ export const Property: React.FunctionComponent<IProperty> = ({
                       backgroundColor: 'transparent',
                     },
                   }}
-                  outline="none"
                   px={6}
                   py={0}
                   fontSize="0.8rem"

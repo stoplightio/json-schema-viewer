@@ -9,6 +9,7 @@ import { JsonSchemaViewer } from '../JsonSchemaViewer';
 
 import * as schemaWithRefs from './__fixtures__/ref/original.json';
 import * as dereferencedSchema from './__fixtures__/ref/resolved.json';
+import { action } from '@storybook/addon-actions';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -44,6 +45,7 @@ storiesOf('JsonSchemaViewer', module)
             }
 
             store.set({ selected });
+            action('onSelect')(path);
           }}
           selected={store.get('selected')}
           expanded={boolean('expanded', true)}

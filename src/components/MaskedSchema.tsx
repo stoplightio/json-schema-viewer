@@ -8,7 +8,7 @@ export interface IMaskedSchema extends IJsonSchemaViewer {
 
 export const MaskedSchema: React.FunctionComponent<IMaskedSchema> = ({ onClose, ...props }) => {
   return (
-    <Dialog show onClickOutside={onClose}>
+    <Dialog show onClickOutside={onClose} width="50vh" height="50vh" position="relative">
       <JsonSchemaViewer {...props} canSelect />
     </Dialog>
   );
