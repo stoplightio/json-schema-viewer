@@ -29,7 +29,7 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
     super(props);
 
     const store: TreeStore = new TreeStore({
-      defaultExpandedDepth: this.props.defaultExpandedDepth === undefined ? 1 : this.props.defaultExpandedDepth,
+      defaultExpandedDepth: this.expandedDepth,
       nodes: {
         *[Symbol.iterator]() {
           yield* renderSchema(props.schema, props.dereferencedSchema, store);
@@ -45,15 +45,27 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
     return { error: `Error rendering schema. ${error.message}` };
   }
 
+  protected get expandedDepth(): number {
+    if (this.props.expanded) {
+      return 2 ** 31 - 3; // tree-list kind of equivalent of expanded: all
+    }
+
+    if (this.props.defaultExpandedDepth !== undefined) {
+      return this.props.defaultExpandedDepth;
+    }
+
+    return 1;
+  }
+
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
-    if (prevProps.defaultExpandedDepth !== this.props.defaultExpandedDepth) {
-      this.setExpandedDepth(this.props.defaultExpandedDepth);
+    if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
+      this.setExpandedDepth();
     }
   }
 
   @action
-  protected setExpandedDepth(depth?: number) {
-    this.treeStore.defaultExpandedDepth = depth === undefined ? 1 : depth;
+  protected setExpandedDepth(depth: number = this.expandedDepth) {
+    this.treeStore.defaultExpandedDepth = depth;
   }
 
   public render() {
