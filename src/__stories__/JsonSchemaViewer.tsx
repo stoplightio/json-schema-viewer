@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import { State, Store } from '@sambego/storybook-state';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-
-import * as schema from '../__fixtures__/default-schema.json';
 import { JsonSchemaViewer } from '../JsonSchemaViewer';
 
+import * as schema from '../__fixtures__/default-schema.json';
+import * as stressSchema from '../__fixtures__/stress-schema.json';
 import * as schemaWithRefs from './__fixtures__/ref/original.json';
 import * as dereferencedSchema from './__fixtures__/ref/resolved.json';
-import { action } from '@storybook/addon-actions';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -18,7 +18,7 @@ storiesOf('JsonSchemaViewer', module)
       name={text('name', 'my schema')}
       schema={schema}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      expanded={boolean('expanded', true)}
+      expanded={boolean('expanded', false)}
     />
   ))
   .add('with dereferenced schema', () => {
@@ -56,5 +56,13 @@ storiesOf('JsonSchemaViewer', module)
       name={text('name', 'my schema')}
       schema={object('schema', {})}
       expanded={boolean('expanded', true)}
+    />
+  ))
+  .add('stress-test schema', () => (
+    <JsonSchemaViewer
+      name={text('name', 'my stress schema')}
+      schema={stressSchema}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      expanded={boolean('expanded', false)}
     />
   ));
