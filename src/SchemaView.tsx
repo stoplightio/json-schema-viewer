@@ -1,4 +1,4 @@
-import { TreeList, TreeStore } from '@stoplight/tree-list';
+import { TreeList, TreeListMouseEventHandler, TreeStore } from '@stoplight/tree-list';
 import { Omit } from '@stoplight/types';
 import { Box, IBox, ThemeZone } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
@@ -48,6 +48,13 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
     [dereferencedSchema]
   );
 
+  const handleNodeClick = React.useCallback<TreeListMouseEventHandler>(
+    (e, node) => {
+      treeStore.toggleExpand(node);
+    },
+    [treeStore]
+  );
+
   const handleMaskedSchemaClose = React.useCallback(() => {
     setMaskedSchema(null);
   }, []);
@@ -70,6 +77,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
           rowHeight={40}
           canDrag={canDrag}
           store={treeStore}
+          onNodeClick={handleNodeClick}
           rowRenderer={node => <Property node={node.metadata as SchemaNodeWithMeta} {...itemData} />}
         />
       </ThemeZone>
