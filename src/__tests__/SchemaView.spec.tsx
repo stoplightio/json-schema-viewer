@@ -5,12 +5,10 @@ import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { MutedText } from '../components/common/MutedText';
 import { Property } from '../components/Property';
-import { useProperties } from '../hooks/useProperties';
 import { SchemaView } from '../SchemaView';
 import { useMetadata } from '../hooks/useMetadata';
 
 jest.mock('../theme');
-jest.mock('../hooks/useProperties');
 jest.mock('../hooks/useMetadata');
 
 const schema: JSONSchema4 = {
@@ -49,10 +47,7 @@ describe('SchemaView component', () => {
   });
 
   test('should render empty text if schema has no properties', () => {
-    (useProperties as jest.Mock).mockReturnValue({
-      isOverflow: false,
-      properties: [],
-    });
+
     const emptyText = 'abc';
     const wrapper = shallow(<SchemaView emptyText={emptyText} schema={{}} />);
 
@@ -60,10 +55,7 @@ describe('SchemaView component', () => {
   });
 
   it('should call useProperties hook and render properties', () => {
-    (useProperties as jest.Mock).mockReturnValue({
-      isOverflow: true,
-      properties: [...new Array(3)],
-    });
+
     const dereferencedSchema: JSONSchema4 = { type: 'object' };
     const wrapper = shallow(
       <SchemaView

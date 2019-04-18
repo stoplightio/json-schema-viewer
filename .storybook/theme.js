@@ -17,13 +17,9 @@ export const zones = {
         },
 
         node: {
-          dragBg: 'rgba(255, 255, 255, .9)',
-          dragFg: '#111',
-          activeFg: '#111',
-          activeBg: 'rgba(255, 255, 255, .8)',
-          hoverBg: 'rgba(255, 255, 255, .4)',
-          highlightedBg: 'rgba(255, 255, 255, .2)',
-          highlightedFg: '#ff',
+          hoverBg: '#333',
+          hoverFg: '#fff',
+          evenBg: '#232222',
         },
       }
       : {
@@ -33,14 +29,10 @@ export const zones = {
           invalid: 'red',
         },
 
-        node: {
-          dragBg: 'rgba(0, 0, 0, .9)',
-          dragFg: '#fff',
-          activeFg: '#fff',
-          activeBg: 'rgba(0, 0, 0, .8)',
-          hoverBg: 'rgba(0, 0, 0, .4)',
-          highlightedBg: 'rgba(0, 0, 0, .2)',
-          highlightedFg: '#111',
+        row: {
+          hoverBg: '#e9e9e9',
+          hoverFg: '#111',
+          evenBg: '#f3f3f3',
         },
       },
   'json-schema-viewer': ({ base }) =>
@@ -55,12 +47,6 @@ export const zones = {
 
           divider: {
             bg: '#bababa',
-          },
-
-          row: {
-            hoverBg: '#333',
-            hoverFg: '#fff',
-            evenBg: '#232222',
           },
 
           types: {
@@ -88,12 +74,6 @@ export const zones = {
 
           divider: {
             bg: '#dae1e7',
-          },
-
-          row: {
-            hoverBg: '#e9e9e9',
-            hoverFg: '#111',
-            evenBg: '#f3f3f3',
           },
 
           types: {

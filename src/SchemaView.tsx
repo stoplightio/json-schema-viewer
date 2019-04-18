@@ -15,7 +15,6 @@ export interface ISchemaView extends Omit<IBox, 'onSelect'>, IMasking {
   name?: string;
   dereferencedSchema?: JSONSchema4;
   schema: JSONSchema4;
-  limitPropertyCount?: number;
   expanded?: boolean;
   treeStore: TreeStore;
 }
@@ -70,6 +69,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
       <ThemeZone name="tree-list">
         <TreeList
           rowHeight={40}
+          canDrag={() => false}
           store={treeStore}
           rowRenderer={node => <Property node={node.metadata! as any} {...itemData} />}
         />

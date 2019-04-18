@@ -1,7 +1,6 @@
 import css from '@emotion/css';
 import { Omit } from '@stoplight/types';
 import { Box, Button, Checkbox, Flex, IBox } from '@stoplight/ui-kit';
-import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
 import { useTheme } from '../theme';
 import { IMasking, ITreeNodeMeta, SchemaNode, SchemaTreeNode } from '../types';
@@ -47,22 +46,10 @@ export const Property: React.FunctionComponent<IProperty> = ({
     [onSelect]
   );
 
-  const expandable =
-    (node.path.length > 0 && ('properties' in node && !_isEmpty(node.properties))) ||
-    ('items' in node && !_isEmpty(node.items) && node.subtype === undefined);
-
   const styles = propertyStyles();
 
   return (
-    <Flex
-      alignItems="center"
-      position="relative"
-      py={2}
-      cursor={expandable ? 'pointer' : 'default'}
-      width="100%"
-      {...props}
-      css={[props.css, styles]}
-    >
+    <Flex alignItems="center" position="relative" py={2} width="100%" ml="-25px" {...props} css={[props.css, styles]}>
       {node.showDivider && (
         <Divider ml="-1rem" width={`calc(100% + 1rem)`}>
           or
@@ -148,7 +135,6 @@ export const propertyStyles = () => {
 
   return [
     {
-      height: '40px',
       fontSize: '0.8rem',
     },
     css`
@@ -158,10 +144,6 @@ export const propertyStyles = () => {
         background-color ${theme.row.evenBg};
         color ${theme.row.evenFg || theme.canvas.fg};
       }
-
-      &:hover {
-        background-color ${theme.row.hoverBg};
-        color ${theme.row.hoverFg || theme.canvas.fg};
-      }`,
+    `,
   ];
 };

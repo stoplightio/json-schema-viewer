@@ -1,5 +1,6 @@
 import { TreeStore } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
+import _isEmpty = require('lodash/isEmpty');
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaNode, SchemaTreeNode } from '../types';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
@@ -103,6 +104,9 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
     } else if (node.type === SchemaKind.Array) {
       yield {
         ...baseNode,
+        ...('items' in node &&
+          !_isEmpty(node.items) &&
+          !('subtype' in baseNode.metadata!) && { canHaveChildren: true }),
         metadata: {
           ...baseNode.metadata,
           // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
@@ -133,7 +137,7 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
       // special case :P, it's
       yield {
         ...baseNode,
-        canHaveChildren: true,
+        ...('properties' in node && !_isEmpty(node.properties) && { canHaveChildren: true }),
         metadata: {
           ...baseNode.metadata,
           ...((node as IObjectNode).additionalProperties && {
