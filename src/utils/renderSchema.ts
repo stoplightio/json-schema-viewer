@@ -1,7 +1,7 @@
 import { TreeStore } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
 import _isEmpty = require('lodash/isEmpty');
-import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
+import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
 import { lookupRef } from './lookupRef';
@@ -41,23 +41,12 @@ const getPatternProperties: Walker = function*(schema, dereferencedSchema, optio
   }
 };
 
-const map = new WeakMap<SchemaNode, string>();
-
-const getId = (node: SchemaNode) => {
-  let id = map.get(node);
-  if (id === undefined) {
-    id = Math.random().toString(36);
-    map.set(node, id);
-  }
-  return id;
-};
-
 export const renderSchema: Walker = function*(schema, dereferencedSchema, store, level = 0, meta = { path: [] }) {
   const { path } = meta;
 
   for (const node of walk(schema)) {
     const baseNode: SchemaTreeListNode = {
-      id: getId(node),
+      id: node.id,
       level,
       name: '',
       metadata: {
