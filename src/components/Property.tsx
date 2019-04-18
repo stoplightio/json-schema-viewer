@@ -45,14 +45,23 @@ export const Property: React.FunctionComponent<IProperty> = ({
   );
 
   return (
-    <Flex alignItems="center" fontSize="0.8rem"  lineHeight="1rem"position="relative" width="100%" ml="-15px" {...props}>
+    <Flex
+      alignItems="center"
+      fontSize="0.8rem"
+      lineHeight="1rem"
+      position="relative"
+      width="calc(100% - 30px)"
+      ml="-15px"
+      css={{ userSelect: 'text' }}
+      {...props}
+    >
       {node.showDivider && (
         <Divider ml="-24px" width={`calc(100% + 24px)`}>
           or
         </Divider>
       )}
 
-      <Box flex="1 1 0%">
+      <Box overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">
         <Flex alignItems="baseline">
           {'name' in node && node.name !== undefined ? (
             <Box as="span" mr={11}>
@@ -96,13 +105,13 @@ export const Property: React.FunctionComponent<IProperty> = ({
         </Flex>
 
         {'annotations' in node && node.annotations.description ? (
-          <MutedText pt={1} fontSize=".8rem">
+          <MutedText as="span" pt={1} fontSize=".8rem" title={node.annotations.description}>
             {node.annotations.description}
           </MutedText>
         ) : null}
       </Box>
 
-      <Flex alignItems="center" maxWidth="30rem" textAlign="right" fontSize=".75rem">
+      <Flex alignItems="center" textAlign="right" fontSize=".75rem" ml="auto" pl={14}>
         {canSelect ? (
           <Checkbox onChange={handleChange} checked={selected && selected.includes(pathToString(node.path))} ml={12} />
         ) : (
