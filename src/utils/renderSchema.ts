@@ -1,7 +1,7 @@
 import { TreeStore } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
 import _isEmpty = require('lodash/isEmpty');
-import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaNode, SchemaTreeNode } from '../types';
+import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
 import { lookupRef } from './lookupRef';
@@ -13,7 +13,7 @@ type Walker = (
   store: TreeStore,
   level?: number,
   meta?: ITreeNodeMeta
-) => IterableIterator<SchemaTreeNode>;
+) => IterableIterator<SchemaTreeListNode>;
 
 const getProperties: Walker = function*(schema, dereferencedSchema, options, level = 0, meta) {
   if (schema.properties !== undefined) {
@@ -56,7 +56,7 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
   const { path } = meta;
 
   for (const node of walk(schema)) {
-    const baseNode: SchemaTreeNode = {
+    const baseNode: SchemaTreeListNode = {
       id: getId(node),
       level,
       name: '',
@@ -84,7 +84,7 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
             ...baseNode.metadata,
             $ref: node.$ref,
           },
-        } as SchemaTreeNode;
+        } as SchemaTreeListNode;
       }
     } else if (isCombiner(node)) {
       yield {
@@ -113,7 +113,7 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
           ...(!('subtype' in baseNode) &&
             (node as IArrayNode).additionalItems && { additional: (node as IArrayNode).additionalItems }),
         },
-      } as SchemaTreeNode;
+      } as SchemaTreeListNode;
 
       if (expanded) {
         if (Array.isArray(schema.items)) {
@@ -144,7 +144,7 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, store,
             additional: (node as IObjectNode).additionalProperties,
           }),
         },
-      } as SchemaTreeNode;
+      } as SchemaTreeListNode;
 
       if (expanded) {
         yield* getProperties(schema, dereferencedSchema, store, level, {

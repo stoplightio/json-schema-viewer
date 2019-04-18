@@ -60,7 +60,9 @@ export interface ITreeNodeMeta {
   $ref?: string;
 }
 
-export type SchemaTreeNode = TreeListNode<SchemaNode & ITreeNodeMeta>;
+export type SchemaNodeWithMeta = SchemaNode & ITreeNodeMeta;
+
+export type SchemaTreeListNode = TreeListNode<SchemaNodeWithMeta>;
 
 export interface IMasking {
   selected?: string[];

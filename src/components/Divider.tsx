@@ -7,7 +7,7 @@ export const Divider: React.FunctionComponent<IFlex> = ({ children, ...props }) 
   const theme = useTheme() as IJsonSchemaViewerTheme;
 
   return (
-    <Flex alignItems="center" position="absolute" top="-16px" height="10px" {...props}>
+    <Flex alignItems="center" position="absolute" top="-16px" left="0" height="10px" {...props}>
       <MutedText fontSize=".8rem" textTransform="uppercase" fontWeight={700} pr={7}>
         {children}
       </MutedText>

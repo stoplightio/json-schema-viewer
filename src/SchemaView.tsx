@@ -2,15 +2,15 @@ import { TreeList, TreeStore } from '@stoplight/tree-list';
 import { Omit } from '@stoplight/types';
 import { Box, IBox, ThemeZone } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
-import _get = require('lodash/get');
 import * as React from 'react';
 import { MaskedSchema } from './components/MaskedSchema';
 import { IProperty, Property } from './components/Property';
 import { TopBar } from './components/TopBar';
 import { useMetadata } from './hooks/useMetadata';
-import { useTheme } from './theme';
-import { IMasking } from './types';
 import { IJsonSchemaViewer } from './JsonSchemaViewer';
+import { useTheme } from './theme';
+import { IMasking, SchemaNodeWithMeta } from './types';
+import { lookupRef } from './utils/lookupRef';
 
 const canDrag = () => false;
 
@@ -43,7 +43,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   const metadata = useMetadata(schema);
 
   const handleMaskEdit = React.useCallback<IProperty['onMaskEdit']>(node => {
-    setMaskedSchema(_get(dereferencedSchema, node.metadata!.path));
+    setMaskedSchema(lookupRef(node.path, dereferencedSchema));
   }, []);
 
   const handleMaskedSchemaClose = React.useCallback(() => {
@@ -73,9 +73,8 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
         <TreeList
           rowHeight={40}
           canDrag={canDrag}
-
           store={treeStore}
-          rowRenderer={node => <Property node={node.metadata! as any} {...itemData} />}
+          rowRenderer={node => <Property node={node.metadata as SchemaNodeWithMeta} {...itemData} />}
         />
       </ThemeZone>
     </Box>

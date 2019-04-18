@@ -1,7 +1,7 @@
 import { Omit } from '@stoplight/types';
 import { Box, Button, Checkbox, Flex, IBox } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { IMasking, ITreeNodeMeta, SchemaNode, SchemaTreeNode } from '../types';
+import { IMasking, SchemaNodeWithMeta } from '../types';
 import { formatRef } from '../utils/formatRef';
 import { isCombiner } from '../utils/isCombiner';
 import { isRef } from '../utils/isRef';
@@ -15,8 +15,8 @@ import { Types } from './Types';
 import { Validations } from './Validations';
 
 export interface IProperty extends Omit<IBox, 'onClick'>, IMasking {
-  node: SchemaNode & ITreeNodeMeta;
-  onMaskEdit(node: SchemaTreeNode): void;
+  node: SchemaNodeWithMeta;
+  onMaskEdit(node: SchemaNodeWithMeta): void;
 }
 
 export const Property: React.FunctionComponent<IProperty> = ({
@@ -30,7 +30,7 @@ export const Property: React.FunctionComponent<IProperty> = ({
   const handleEditMask = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(
     e => {
       e.stopPropagation();
-      onMaskEdit(node as any); // todo: fixme
+      onMaskEdit(node);
     },
     [onMaskEdit]
   );
@@ -45,9 +45,9 @@ export const Property: React.FunctionComponent<IProperty> = ({
   );
 
   return (
-    <Flex alignItems="center" fontSize="0.8rem"  lineHeight="1rem"position="relative" width="100%" ml="-20px" {...props}>
+    <Flex alignItems="center" fontSize="0.8rem"  lineHeight="1rem"position="relative" width="100%" ml="-15px" {...props}>
       {node.showDivider && (
-        <Divider ml="-1rem" width={`calc(100% + 1rem)`}>
+        <Divider ml="-24px" width={`calc(100% + 24px)`}>
           or
         </Divider>
       )}
@@ -103,7 +103,7 @@ export const Property: React.FunctionComponent<IProperty> = ({
         ) : null}
       </Box>
 
-      <Flex alignItems="center" maxWidth="30rem" textAlign="right" fontSize=".75rem" pr={10}>
+      <Flex alignItems="center" maxWidth="30rem" textAlign="right" fontSize=".75rem">
         {canSelect ? (
           <Checkbox onChange={handleChange} checked={selected && selected.includes(pathToString(node.path))} ml={12} />
         ) : (
