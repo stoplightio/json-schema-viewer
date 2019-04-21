@@ -1,6 +1,6 @@
 import { TreeStore } from '@stoplight/tree-list';
 import { Omit } from '@stoplight/types';
-import { action } from 'mobx';
+import { runInAction } from 'mobx';
 import * as React from 'react';
 import { ErrorMessage } from './components/common/ErrorMessage';
 import { MutedText } from './components/common/MutedText';
@@ -53,17 +53,16 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
 
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
-      this.setExpandedDepth();
+      runInAction(() => {
+        this.treeStore.defaultExpandedDepth = this.expandedDepth;
+      })
     }
 
     if (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema) {
-      this.treeStore.nodes = Array.from(renderSchema(this.props.schema, this.props.dereferencedSchema));
+      runInAction(() => {
+        this.treeStore.nodes = Array.from(renderSchema(this.props.schema, this.props.dereferencedSchema));
+      });
     }
-  }
-
-  @action
-  protected setExpandedDepth(depth: number = this.expandedDepth) {
-    this.treeStore.defaultExpandedDepth = depth;
   }
 
   public render() {
