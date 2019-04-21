@@ -14,8 +14,8 @@ describe('assignId util', () => {
   test('should generate random id', () => {
     mathRandomSpy.mockReturnValueOnce(0.54444).mockReturnValueOnce(0.321);
 
-    expect(assignId({})).toEqual('jlle4v0fcep');
-    expect(assignId({})).toEqual('bk0kqhutdje');
+    expect(assignId({})).toEqual('0.jlle4v0fcep');
+    expect(assignId({})).toEqual('0.bk0kqhutdje');
   });
 
   test('should return previously stored id for same node', () => {
