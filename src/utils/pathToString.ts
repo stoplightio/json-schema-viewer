@@ -1,3 +1,3 @@
-import { SchemaTreeNode } from '../types';
+import { JsonPath } from '@stoplight/types';
 
-export const pathToString = (node: SchemaTreeNode) => node.path.join('.');
+export const pathToString = (path: JsonPath) => path.join('.');

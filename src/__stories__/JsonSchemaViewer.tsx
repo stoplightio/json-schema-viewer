@@ -1,14 +1,15 @@
 import * as React from 'react';
 
 import { State, Store } from '@sambego/storybook-state';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-
-import * as schema from '../__fixtures__/default-schema.json';
 import { JsonSchemaViewer } from '../JsonSchemaViewer';
 
-import * as schemaWithRefs from './__fixtures__/ref/original.json';
-import * as dereferencedSchema from './__fixtures__/ref/resolved.json';
+import * as schema from '../__fixtures__/default-schema.json';
+import * as schemaWithRefs from '../__fixtures__/ref/original.json';
+import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
+import * as stressSchema from '../__fixtures__/stress-schema.json';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -16,9 +17,9 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       name={text('name', 'my schema')}
       schema={schema}
-      limitPropertyCount={number('limitPropertyCount', 20)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      expanded={boolean('expanded', true)}
+      expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
     />
   ))
   .add('with dereferenced schema', () => {
@@ -32,7 +33,6 @@ storiesOf('JsonSchemaViewer', module)
           name={text('name', 'name')}
           schema={schemaWithRefs}
           dereferencedSchema={dereferencedSchema}
-          limitPropertyCount={number('limitPropertyCount', 20)}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
           onSelect={(path: string) => {
             const selected = [...store.get('selected')];
@@ -44,9 +44,11 @@ storiesOf('JsonSchemaViewer', module)
             }
 
             store.set({ selected });
+            action('onSelect')(path);
           }}
           selected={store.get('selected')}
           expanded={boolean('expanded', true)}
+          hideTopBar={boolean('hideTopBar', false)}
         />
       </State>
     );
@@ -55,7 +57,16 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       name={text('name', 'my schema')}
       schema={object('schema', {})}
-      limitPropertyCount={number('limitPropertyCount', 20)}
       expanded={boolean('expanded', true)}
+      hideTopBar={boolean('hideTopBar', false)}
+    />
+  ))
+  .add('stress-test schema', () => (
+    <JsonSchemaViewer
+      name={text('name', 'my stress schema')}
+      schema={stressSchema}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
     />
   ));

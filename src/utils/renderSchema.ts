@@ -1,46 +1,37 @@
-import { Dictionary } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeNode } from '../types';
+import _isEmpty = require('lodash/isEmpty');
+import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { isCombiner } from './isCombiner';
-import { isExpanded } from './isExpanded';
 import { isRef } from './isRef';
 import { lookupRef } from './lookupRef';
 import { walk } from './walk';
 
-export interface IFilterOptions {
-  limitPropertyCount?: number;
-  defaultExpandedDepth: number;
-  expandedRows: Dictionary<boolean>;
-}
-
-type Walker<T extends object = ITreeNodeMeta> = (
+type Walker = (
   schema: JSONSchema4,
   dereferencedSchema: JSONSchema4 | undefined,
-  options: IFilterOptions,
-  meta?: T
-) => IterableIterator<SchemaTreeNode>;
+  level?: number,
+  meta?: ITreeNodeMeta
+) => IterableIterator<SchemaTreeListNode>;
 
-const getProperties: Walker = function*(schema, dereferencedSchema, options, meta) {
+const getProperties: Walker = function*(schema, dereferencedSchema, level = 0, meta) {
   if (schema.properties !== undefined) {
-    const { level, path } = meta!;
+    const { path } = meta!;
     for (const [prop, property] of Object.entries(schema.properties)) {
-      yield* renderSchema(property, dereferencedSchema, options, {
+      yield* renderSchema(property, dereferencedSchema, level + 1, {
         name: prop,
         required: Array.isArray(schema.required) && schema.required.includes(prop),
-        level: level + 1,
         path: [...path, prop],
       });
     }
   }
 };
 
-const getPatternProperties: Walker = function*(schema, dereferencedSchema, options, meta) {
+const getPatternProperties: Walker = function*(schema, dereferencedSchema, level = 0, meta) {
   if (schema.patternProperties !== undefined) {
-    const { level, path } = meta!;
+    const { path } = meta!;
     for (const [prop, property] of Object.entries(schema.patternProperties)) {
-      yield* renderSchema(property, dereferencedSchema, options, {
+      yield* renderSchema(property, dereferencedSchema, level + 1, {
         name: prop,
-        level: level + 1,
         path: [...path, prop],
         pattern: true,
       });
@@ -48,51 +39,49 @@ const getPatternProperties: Walker = function*(schema, dereferencedSchema, optio
   }
 };
 
-export const renderSchema: Walker<ITreeNodeMeta & { name?: string }> = function*(
-  schema,
-  dereferencedSchema,
-  options,
-  meta = { level: 0, path: [] }
-) {
-  const { defaultExpandedDepth, expandedRows } = options;
-  const { level, path } = meta;
+export const renderSchema: Walker = function*(schema, dereferencedSchema, level = 0, meta = { path: [] }) {
+  const { path } = meta;
 
   for (const node of walk(schema)) {
-    const baseNode: SchemaTreeNode = {
-      ...node,
+    const baseNode: SchemaTreeListNode = {
+      id: node.id,
       level,
-      path,
-      ...(schema.items !== undefined && !Array.isArray(schema.items) && { subtype: schema.items.type }),
-      ...meta,
+      name: '',
+      metadata: {
+        ...node,
+        ...meta,
+        ...(schema.items !== undefined && !Array.isArray(schema.items) && { subtype: schema.items.type }),
+        path,
+      },
     };
-
-    const expanded = isExpanded(baseNode, defaultExpandedDepth, expandedRows);
 
     if (isRef(node)) {
       const resolved = lookupRef(path, dereferencedSchema);
       if (resolved) {
-        yield* renderSchema(resolved, dereferencedSchema, options, {
+        yield* renderSchema(resolved, dereferencedSchema, level, {
           ...meta,
           inheritedFrom: node.$ref,
         });
       } else {
         yield {
           ...baseNode,
-          $ref: node.$ref,
-        };
+          metadata: {
+            ...baseNode.metadata,
+            $ref: node.$ref,
+          },
+        } as SchemaTreeListNode;
       }
     } else if (isCombiner(node)) {
       yield {
         ...baseNode,
-        expanded,
+        canHaveChildren: true,
       };
 
-      if (expanded && node.properties !== undefined) {
+      if (node.properties !== undefined) {
         const isConditionalCombiner = node.combiner === 'anyOf' || node.combiner === 'oneOf';
         for (const [i, property] of node.properties.entries()) {
-          yield* renderSchema(property, dereferencedSchema, options, {
+          yield* renderSchema(property, dereferencedSchema, level + 1, {
             showDivider: isConditionalCombiner && i !== 0,
-            level: level + 1,
             path: [...path, 'properties', i],
           });
         }
@@ -100,52 +89,53 @@ export const renderSchema: Walker<ITreeNodeMeta & { name?: string }> = function*
     } else if (node.type === SchemaKind.Array) {
       yield {
         ...baseNode,
-        // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
-        ...(!('subtype' in baseNode) &&
-          (node as IArrayNode).additionalItems && { additional: (node as IArrayNode).additionalItems }),
-      };
+        ...('items' in node &&
+          !_isEmpty(node.items) &&
+          !('subtype' in baseNode.metadata!) && { canHaveChildren: true }),
+        metadata: {
+          ...baseNode.metadata,
+          // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
+          ...(!('subtype' in baseNode) &&
+            (node as IArrayNode).additionalItems && { additional: (node as IArrayNode).additionalItems }),
+        },
+      } as SchemaTreeListNode;
 
-      if (expanded) {
-        if (Array.isArray(schema.items)) {
-          for (const [i, property] of schema.items.entries()) {
-            yield* renderSchema(property, dereferencedSchema, options, {
-              level: level + 1,
-              path: [...path, 'items', i],
-            });
-          }
-        } else if (baseNode.subtype === 'object' && schema.items) {
-          yield* getProperties(schema.items, dereferencedSchema, options, {
-            ...meta,
-            path: [...path, 'items'],
-          });
-        } else if (baseNode.subtype === 'array' && schema.items) {
-          yield* renderSchema(schema.items, dereferencedSchema, options, {
-            level: level + 1,
-            path,
+      if (Array.isArray(schema.items)) {
+        for (const [i, property] of schema.items.entries()) {
+          yield* renderSchema(property, dereferencedSchema, level + 1, {
+            path: [...path, 'items', i],
           });
         }
+      } else if (meta.subtype === 'object' && schema.items) {
+        yield* getProperties(schema.items, dereferencedSchema, level + 1, {
+          ...meta,
+          path: [...path, 'items'],
+        });
+      } else if (meta.subtype === 'array' && schema.items) {
+        yield* renderSchema(schema.items, dereferencedSchema, level + 1, {
+          path,
+        });
       }
-    } else if ('properties' in baseNode) {
+    } else if ('properties' in node) {
       // special case :P, it's
       yield {
         ...baseNode,
-        expanded,
-        ...((node as IObjectNode).additionalProperties && {
-          additional: (node as IObjectNode).additionalProperties,
-        }),
-      };
+        ...('properties' in node && !_isEmpty(node.properties) && { canHaveChildren: true }),
+        metadata: {
+          ...baseNode.metadata,
+          ...((node as IObjectNode).additionalProperties && {
+            additional: (node as IObjectNode).additionalProperties,
+          }),
+        },
+      } as SchemaTreeListNode;
 
-      if (expanded) {
-        yield* getProperties(schema, dereferencedSchema, options, {
-          ...meta,
-          path: [...path, 'properties'],
-        });
+      yield* getProperties(schema, dereferencedSchema, level, {
+        path: [...path, 'properties'],
+      });
 
-        yield* getPatternProperties(schema, dereferencedSchema, options, {
-          ...meta,
-          path: [...path, 'patternProperties'],
-        });
-      }
+      yield* getPatternProperties(schema, dereferencedSchema, level, {
+        path: [...path, 'patternProperties'],
+      });
     } else {
       yield baseNode;
     }

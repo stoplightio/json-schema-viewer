@@ -1,107 +1,92 @@
-import { Dictionary, Omit } from '@stoplight/types';
-import { Box, Button, IBox } from '@stoplight/ui-kit';
+import { TreeList, TreeListMouseEventHandler, TreeStore } from '@stoplight/tree-list';
+import { Omit } from '@stoplight/types';
+import { Box, IBox, ThemeZone } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
-import _get = require('lodash/get');
+import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
-import { MutedText } from './components/common/MutedText';
 import { MaskedSchema } from './components/MaskedSchema';
 import { IProperty, Property } from './components/Property';
 import { TopBar } from './components/TopBar';
 import { useMetadata } from './hooks/useMetadata';
-import { useProperties } from './hooks/useProperties';
+import { IJsonSchemaViewer } from './JsonSchemaViewer';
 import { useTheme } from './theme';
-import { IMasking } from './types';
-import { isExpanded } from './utils/isExpanded';
-import { pathToString } from './utils/pathToString';
+import { IMasking, SchemaNodeWithMeta } from './types';
+import { lookupRef } from './utils/lookupRef';
+
+const canDrag = () => false;
 
 export interface ISchemaView extends Omit<IBox, 'onSelect'>, IMasking {
   name?: string;
-  defaultExpandedDepth?: number;
   dereferencedSchema?: JSONSchema4;
   schema: JSONSchema4;
-  limitPropertyCount?: number;
   expanded?: boolean;
-  emptyText: string;
+  hideTopBar?: boolean;
+  treeStore: TreeStore;
 }
 
 export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
   const {
-    defaultExpandedDepth = 1,
     emptyText,
     expanded = false,
-    limitPropertyCount,
     schema,
     dereferencedSchema,
+    hideTopBar,
     selected,
     canSelect,
     onSelect,
     name,
+    treeStore,
     ...rest
   } = props;
 
-  const theme = useTheme();
-  const [showExtra, setShowExtra] = React.useState<boolean>(false);
+  const theme = useTheme() as IJsonSchemaViewer;
   const [maskedSchema, setMaskedSchema] = React.useState<JSONSchema4 | null>(null);
-  const [expandedRows, setExpandedRows] = React.useState<Dictionary<boolean>>({ all: expanded });
-  const { properties, isOverflow } = useProperties(schema, dereferencedSchema, {
-    expandedRows,
-    defaultExpandedDepth,
-    ...(!showExtra && { limitPropertyCount }),
-    ...(canSelect && selected && { selected }),
-  });
+
   const metadata = useMetadata(schema);
 
-  const toggleExpandRow = React.useCallback<IProperty['onClick']>(
+  const handleMaskEdit = React.useCallback<IProperty['onMaskEdit']>(
     node => {
-      if (node.path.length > 0) {
-        setExpandedRows({
-          ...expandedRows,
-          [pathToString(node)]: !isExpanded(node, defaultExpandedDepth, expandedRows),
-        });
-      }
+      setMaskedSchema(lookupRef(node.path, dereferencedSchema));
     },
-    [expandedRows, defaultExpandedDepth]
+    [dereferencedSchema]
   );
 
-  const toggleShowExtra = React.useCallback<React.MouseEventHandler<HTMLElement>>(
-    () => {
-      setShowExtra(!showExtra);
+  const handleNodeClick = React.useCallback<TreeListMouseEventHandler>(
+    (e, node) => {
+      treeStore.toggleExpand(node);
     },
-    [showExtra]
+    [treeStore]
   );
-
-  const handleMaskEdit = React.useCallback<IProperty['onMaskEdit']>(node => {
-    setMaskedSchema(_get(dereferencedSchema, node.path));
-  }, []);
 
   const handleMaskedSchemaClose = React.useCallback(() => {
     setMaskedSchema(null);
   }, []);
 
-  if (properties.length === 0) {
-    return <MutedText>{emptyText}</MutedText>;
-  }
+  const shouldRenderTopBar = !hideTopBar && (name || !_isEmpty(metadata));
+
+  const itemData = {
+    onSelect,
+    onMaskEdit: handleMaskEdit,
+    selected,
+    canSelect,
+  };
 
   return (
     <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
       {maskedSchema && (
         <MaskedSchema onClose={handleMaskedSchemaClose} onSelect={onSelect} selected={selected} schema={maskedSchema} />
       )}
-      <TopBar name={name} metadata={metadata} />
-      {properties.map((node, i) => (
-        <Property
-          key={i}
-          node={node}
-          onClick={toggleExpandRow}
-          onSelect={onSelect}
-          onMaskEdit={handleMaskEdit}
-          selected={selected}
-          canSelect={canSelect}
+      {shouldRenderTopBar && <TopBar name={name} metadata={metadata} />}
+      <ThemeZone name="tree-list">
+        <TreeList
+          top={shouldRenderTopBar ? '40px' : 0}
+          rowHeight={40}
+          canDrag={canDrag}
+          store={treeStore}
+          onNodeClick={handleNodeClick}
+          rowRenderer={node => <Property node={node.metadata as SchemaNodeWithMeta} {...itemData} />}
         />
-      ))}
-      {showExtra || isOverflow ? (
-        <Button onClick={toggleShowExtra}>{showExtra ? 'collapse' : `...show more properties`}</Button>
-      ) : null}
+      </ThemeZone>
     </Box>
   );
 };

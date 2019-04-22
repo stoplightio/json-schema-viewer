@@ -1,16 +1,16 @@
-import { Button } from '@stoplight/ui-kit';
+import { TreeList, TreeListNode, TreeStore } from '@stoplight/tree-list';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
-import { MutedText } from '../components/common/MutedText';
+import { ReactElement } from 'react';
 import { Property } from '../components/Property';
-import { useProperties } from '../hooks/useProperties';
-import { SchemaView } from '../SchemaView';
+import { TopBar } from '../components/TopBar';
 import { useMetadata } from '../hooks/useMetadata';
+import { SchemaView } from '../SchemaView';
+import { ITreeNodeMeta } from '../types';
 
 jest.mock('../theme');
-jest.mock('../hooks/useProperties');
 jest.mock('../hooks/useMetadata');
 
 const schema: JSONSchema4 = {
@@ -34,6 +34,7 @@ const schema: JSONSchema4 = {
 describe('SchemaView component', () => {
   let useStateSpy: jest.SpyInstance;
   let setStateActionSpy: jest.Mock;
+  let store: TreeStore;
 
   beforeEach(() => {
     setStateActionSpy = jest.fn();
@@ -41,6 +42,7 @@ describe('SchemaView component', () => {
       .spyOn(React, 'useState')
       .mockImplementation((initialValue: any) => [initialValue, setStateActionSpy]);
     (useMetadata as jest.Mock).mockReturnValue({});
+    store = new TreeStore();
   });
 
   afterEach(() => {
@@ -48,62 +50,84 @@ describe('SchemaView component', () => {
     useStateSpy.mockRestore();
   });
 
-  test('should render empty text if schema has no properties', () => {
-    (useProperties as jest.Mock).mockReturnValue({
-      isOverflow: false,
-      properties: [],
+  describe('top bar', () => {
+    test('should not be rendered if hideTopBar is truthy', () => {
+      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} hideTopBar />);
+      expect(wrapper.find(TopBar)).not.toExist();
     });
-    const emptyText = 'abc';
-    const wrapper = shallow(<SchemaView emptyText={emptyText} schema={{}} />);
 
-    expect(wrapper).toContainReact(<MutedText>{emptyText}</MutedText>);
+    test('should be rendered if name is given', () => {
+      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} name="test" />);
+      expect(wrapper.find(TopBar)).toExist();
+      expect(wrapper.find(TopBar)).toHaveProp('name', 'test');
+    });
+
+    test('should be rendered if there is any metadata associated', () => {
+      (useMetadata as jest.Mock).mockReturnValue({
+        id: 'my-id',
+        $schema: 'schema',
+      });
+
+      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} name="test" />);
+      expect(wrapper.find(TopBar)).toExist();
+      expect(wrapper.find(TopBar)).toHaveProp('name', 'test');
+    });
+
+    test('should always prioritize hideTopBar flag', () => {
+      (useMetadata as jest.Mock).mockReturnValue({
+        id: 'my-id',
+        $schema: 'schema',
+      });
+
+      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} name="test" hideTopBar />);
+      expect(wrapper.find(TopBar)).not.toExist();
+    });
   });
 
-  it('should call useProperties hook and render properties', () => {
-    (useProperties as jest.Mock).mockReturnValue({
-      isOverflow: true,
-      properties: [...new Array(3)],
-    });
-    const dereferencedSchema: JSONSchema4 = { type: 'object' };
-    const wrapper = shallow(
-      <SchemaView
-        emptyText=""
-        schema={schema}
-        dereferencedSchema={dereferencedSchema}
-        defaultExpandedDepth={1}
-        limitPropertyCount={2}
-      />
-    );
+  describe('tree-list', () => {
+    test('should be rendered', () => {
+      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} />);
 
-    expect(useProperties).toHaveBeenCalledWith(schema, dereferencedSchema, {
-      limitPropertyCount: 2,
-      defaultExpandedDepth: 1,
-      expandedRows: {
-        all: false,
-      },
+      expect(wrapper.find(TreeList)).toExist();
+      expect(wrapper.find(TreeList)).toHaveProp({
+        store,
+        top: 0,
+        rowHeight: 40,
+      });
     });
 
-    expect(wrapper.find(Property)).toHaveLength(3);
-  });
+    test('should be not draggable', () => {
+      const treeList = shallow(<SchemaView schema={schema} treeStore={store} />).find(TreeList);
 
-  test('should hide expand button when limitPropertyCount is undefined', () => {
-    (useProperties as jest.Mock).mockReturnValue({
-      isOverflow: false,
-      properties: [...new Array(5)],
+      expect(treeList.prop('canDrag')).toHaveLength(0);
+      expect(treeList.prop('canDrag')!({} as any)).toBe(false);
     });
-    const wrapper = shallow(<SchemaView emptyText="" schema={schema} />);
 
-    expect(wrapper.find(Button)).not.toExist();
-  });
+    test('should have extra padding if top bar is rendered', () => {
+      const treeList = shallow(<SchemaView schema={schema} treeStore={store} name="my-schema" />).find(TreeList);
 
-  test('should toggle showExtra on btn click', () => {
-    (useProperties as jest.Mock).mockReturnValue({
-      isOverflow: true,
-      properties: [...new Array(5)],
+      expect(treeList).toHaveProp('top', '40px');
     });
-    const wrapper = shallow(<SchemaView emptyText="" schema={schema} limitPropertyCount={2} />);
 
-    wrapper.find(Button).simulate('click');
-    expect(setStateActionSpy).toHaveBeenLastCalledWith(true);
+    test('should render property for each row', () => {
+      const treeList = shallow(<SchemaView schema={schema} treeStore={store} />).find(TreeList);
+      const node: TreeListNode<ITreeNodeMeta> = {
+        id: 'random-id',
+        level: 0,
+        name: '',
+        metadata: {
+          path: [],
+        },
+      };
+
+      const rendered = treeList.prop('rowRenderer')!(node) as ReactElement<any>;
+
+      expect(rendered).toMatchObject({
+        type: Property,
+        props: expect.objectContaining({
+          node: node.metadata,
+        }),
+      });
+    });
   });
 });

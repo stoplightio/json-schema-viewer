@@ -1,10 +1,11 @@
 import { Box, IBox } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { useTheme } from '../../theme';
+import { IJsonSchemaViewerTheme, useTheme } from '../../theme';
 
 export const ErrorMessage: React.FunctionComponent<IBox> = props => {
   const { children, ...rest } = props;
-  const css = errorMessageStyles();
+  const theme = useTheme() as IJsonSchemaViewerTheme;
+  const css = errorMessageStyles(theme);
 
   return (
     <Box as="p" p={11} css={css} {...rest}>
@@ -13,8 +14,7 @@ export const ErrorMessage: React.FunctionComponent<IBox> = props => {
   );
 };
 
-export const errorMessageStyles = () => {
-  const theme = useTheme();
+export const errorMessageStyles = (theme: IJsonSchemaViewerTheme) => {
   return {
     color: theme.canvas.error,
   };

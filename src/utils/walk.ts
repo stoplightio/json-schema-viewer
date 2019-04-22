@@ -9,6 +9,7 @@ import {
   SchemaKind,
   SchemaNode,
 } from '../types';
+import { assignId } from './assignId';
 import { getAnnotations } from './getAnnotations';
 import { getValidations } from './getValidations';
 
@@ -35,6 +36,7 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
 function processNode(node: JSONSchema4): SchemaNode | void {
   if (node.type !== undefined) {
     const base: IBaseNode = {
+      id: assignId(node),
       type: node.type,
       validations: getValidations(node),
       annotations: getAnnotations(node),
@@ -58,6 +60,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
 
   if ('enum' in node) {
     return {
+      id: assignId(node),
       validations: getValidations(node),
       annotations: getAnnotations(node),
       enum: node.enum,
@@ -66,6 +69,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
 
   if ('$ref' in node) {
     return {
+      id: assignId(node),
       $ref: node.$ref,
     } as IRefNode;
   }
@@ -73,6 +77,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
   const combiner = getCombiner(node);
   if (combiner !== undefined) {
     return {
+      id: assignId(node),
       combiner,
       properties: node[combiner],
       annotations: getAnnotations(node),
