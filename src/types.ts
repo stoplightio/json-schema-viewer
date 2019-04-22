@@ -1,6 +1,6 @@
+import { TreeListNode } from '@stoplight/tree-list';
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
-import { TreeListNode } from '@stoplight/tree-list';
 
 export const enum SchemaKind {
   Any = 'any',

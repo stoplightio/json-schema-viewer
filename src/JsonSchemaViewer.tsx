@@ -55,7 +55,7 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
     if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
       runInAction(() => {
         this.treeStore.defaultExpandedDepth = this.expandedDepth;
-      })
+      });
     }
 
     if (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema) {

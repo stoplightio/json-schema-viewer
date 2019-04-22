@@ -16,7 +16,7 @@ describe('renderSchema util', () => {
         Array.from(
           renderSchema(
             JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf-8')),
-            dereferenced ? JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, dereferenced), 'utf-8')) : undefined,
+            dereferenced ? JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, dereferenced), 'utf-8')) : undefined
           )
         )
       ).toMatchSnapshot();

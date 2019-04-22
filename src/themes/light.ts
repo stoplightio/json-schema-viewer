@@ -30,7 +30,6 @@ export const light: ThemeZones<themeZones, themeTypes> = {
       bg: '#dae1e7',
     },
 
-
     types: {
       object: '#00f',
       array: '#008000',

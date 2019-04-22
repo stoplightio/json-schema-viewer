@@ -1,4 +1,4 @@
-import { Box, Flex} from '@stoplight/ui-kit';
+import { Box, Flex } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { JSONSchema4Metadata } from '../types';
