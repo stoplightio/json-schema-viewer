@@ -35,7 +35,8 @@
     "test.watch": "yarn test --watch"
   },
   "peerDependencies": {
-    "@stoplight/ui-kit": ">=1.49",
+    "@stoplight/tree-list": ">=2.0.0",
+    "@stoplight/ui-kit": ">=2.0.0",
     "react": ">=16.7.0-alpha.1",
     "react-dom": ">=16.7.0-alpha.1"
   },
@@ -43,10 +44,12 @@
     "@emotion/core": "^10.0.10",
     "@fortawesome/free-solid-svg-icons": "5.6.x",
     "@stoplight/json": "1.9.x",
-    "@stoplight/tree-list": "^3.6.0",
+    "@stoplight/tree-list": "^4.0.0",
     "@types/json-schema": "^7.0.3",
+    "classnames": "^2.2.6",
     "lodash": "4.17.x",
     "mobx": "^5.9.4",
+    "pluralize": "^7.0.0",
     "json-schema-merge-allof": "^0.6.0"
   },
   "devDependencies": {
@@ -54,16 +57,23 @@
     "@stoplight/scripts": "4.1.0",
     "@stoplight/storybook-config": "1.4.0",
     "@stoplight/types": "4.1.0",
-    "@stoplight/ui-kit": "1.49.3",
+    "@stoplight/ui-kit": "2.0.0",
     "@types/enzyme": "3.9.1",
+    "@types/pluralize": "^0.0.29",
     "@types/react": "16.8.12",
     "@types/react-dom": "16.8.3",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.12.1",
     "enzyme-to-json": "3.x.x",
     "jest-enzyme": "7.0.2",
+    "node-sass": "^4.11.0",
+    "node-sass-package-importer": "^5.3.1",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "sass-loader": "^7.1.0",
+    "ts-loader": "^5.3.3",
     "typescript": "3.4.2"
   },
   "lint-staged": {
