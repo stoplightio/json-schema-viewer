@@ -2,10 +2,8 @@ import { TreeStore } from '@stoplight/tree-list';
 import { Omit } from '@stoplight/types';
 import { runInAction } from 'mobx';
 import * as React from 'react';
-import { ThemeZone } from '../theme';
+
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
-import { ErrorMessage } from './common/ErrorMessage';
-import { MutedText } from './common/MutedText';
 import { ISchemaTree, SchemaTree } from './SchemaTree';
 
 export interface IJsonSchemaViewer extends Omit<ISchemaTree, 'emptyText' | 'treeStore'> {
@@ -73,26 +71,14 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
     } = this;
 
     if (error) {
-      return (
-        <ThemeZone name="json-schema-viewer">
-          <ErrorMessage>{error}</ErrorMessage>
-        </ThemeZone>
-      );
+      return <div>{error}</div>;
     }
 
     // an empty array or object is still a valid response, schema is ONLY really empty when a combiner type has no information
     if (isSchemaViewerEmpty(schema)) {
-      return (
-        <ThemeZone name="json-schema-viewer">
-          <MutedText>{emptyText}</MutedText>
-        </ThemeZone>
-      );
+      return <div>{emptyText}</div>;
     }
 
-    return (
-      <ThemeZone name="json-schema-viewer">
-        <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
-      </ThemeZone>
-    );
+    return <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />;
   }
 }

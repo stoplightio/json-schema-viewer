@@ -3,7 +3,7 @@ import * as React from 'react';
 import { State, Store } from '@sambego/storybook-state';
 import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { JsonSchemaViewer } from '../components/JsonSchemaViewer';
+import { JsonSchemaViewer } from '../components';
 
 import { JSONSchema4 } from 'json-schema';
 import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';

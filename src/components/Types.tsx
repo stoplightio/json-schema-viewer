@@ -5,7 +5,7 @@ import { MutedText } from './common/MutedText';
 import { Type } from './Type';
 
 interface ITypes {
-  type?: JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName;
+  type?: JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref';
   subtype?: ITreeNodeMeta['subtype'];
 }
 
@@ -22,9 +22,9 @@ export const Types: React.FunctionComponent<ITypes> = ({ type, subtype }) => {
         <>
           <Type type={name} subtype={subtype} />
           {i < length - 1 && (
-            <MutedText as="span" key={`${i}-sep`}>
+            <span key={`${i}-sep`} className="text-darken-7">
               {' or '}
-            </MutedText>
+            </span>
           )}
         </>
       ))}

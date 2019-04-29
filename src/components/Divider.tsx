@@ -1,17 +1,10 @@
-import { Box, Flex, IFlex } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { IJsonSchemaViewerTheme, useTheme } from '../theme';
-import { MutedText } from './common/MutedText';
 
-export const Divider: React.FunctionComponent<IFlex> = ({ children, ...props }) => {
-  const theme = useTheme() as IJsonSchemaViewerTheme;
-
+export const Divider: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   return (
-    <Flex alignItems="center" position="absolute" top="-16px" left="0" height="10px" {...props}>
-      <MutedText fontSize=".8rem" textTransform="uppercase" fontWeight={700} pr={7}>
-        {children}
-      </MutedText>
-      <Box backgroundColor={theme.divider.bg} height="2px" flex="1 1 0%" />
-    </Flex>
+    <div className="flex items-center w-full h-2 absolute" style={{ top: -16, left: -16 }} {...props}>
+      <div className="uppercase font-bold text-darken-7 pr-2">{children}</div>
+      <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
+    </div>
   );
 };

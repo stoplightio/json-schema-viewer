@@ -1,6 +1,6 @@
 import { Dialog } from '@stoplight/ui-kit';
 import * as React from 'react';
-import { IJsonSchemaViewer, JsonSchemaViewer } from './JsonSchemaViewer';
+import { IJsonSchemaViewer, JsonSchemaViewer } from './';
 
 export interface IMaskedSchema extends IJsonSchemaViewer {
   onClose(): void;
@@ -8,8 +8,8 @@ export interface IMaskedSchema extends IJsonSchemaViewer {
 
 export const MaskedSchema: React.FunctionComponent<IMaskedSchema> = ({ onClose, ...props }) => {
   return (
-    <Dialog show onClickOutside={onClose} width="50vh" height="50vh" position="relative">
-      <JsonSchemaViewer {...props} canSelect />
+    <Dialog isOpen={true} onClose={onClose}>
+      <JsonSchemaViewer {...props} style={{ height: 500 }} canSelect />
     </Dialog>
   );
 };
