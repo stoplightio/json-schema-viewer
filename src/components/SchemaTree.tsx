@@ -4,18 +4,18 @@ import { Box, IBox, ThemeZone } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
 import _isEmpty = require('lodash/isEmpty');
 import * as React from 'react';
-import { MaskedSchema } from './components/MaskedSchema';
-import { IProperty, Property } from './components/Property';
-import { TopBar } from './components/TopBar';
-import { useMetadata } from './hooks/useMetadata';
+import { useMetadata } from '../hooks';
+import { useTheme } from '../theme';
+import { IMasking, SchemaNodeWithMeta } from '../types';
+import { lookupRef } from '../utils';
 import { IJsonSchemaViewer } from './JsonSchemaViewer';
-import { useTheme } from './theme';
-import { IMasking, SchemaNodeWithMeta } from './types';
-import { lookupRef } from './utils/lookupRef';
+import { MaskedSchema } from './MaskedSchema';
+import { ISchemaRow, SchemaRow } from './SchemaRow';
+import { TopBar } from './TopBar';
 
 const canDrag = () => false;
 
-export interface ISchemaView extends Omit<IBox, 'onSelect'>, IMasking {
+export interface ISchemaTree extends Omit<IBox, 'onSelect'>, IMasking {
   name?: string;
   dereferencedSchema?: JSONSchema4;
   schema: JSONSchema4;
@@ -24,7 +24,7 @@ export interface ISchemaView extends Omit<IBox, 'onSelect'>, IMasking {
   treeStore: TreeStore;
 }
 
-export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
+export const SchemaTree: React.FunctionComponent<ISchemaTree> = props => {
   const {
     emptyText,
     expanded = false,
@@ -44,7 +44,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
 
   const metadata = useMetadata(schema);
 
-  const handleMaskEdit = React.useCallback<IProperty['onMaskEdit']>(
+  const handleMaskEdit = React.useCallback<ISchemaRow['onMaskEdit']>(
     node => {
       setMaskedSchema(lookupRef(node.path, dereferencedSchema));
     },
@@ -84,7 +84,7 @@ export const SchemaView: React.FunctionComponent<ISchemaView> = props => {
           canDrag={canDrag}
           store={treeStore}
           onNodeClick={handleNodeClick}
-          rowRenderer={node => <Property node={node.metadata as SchemaNodeWithMeta} {...itemData} />}
+          rowRenderer={node => <SchemaRow node={node.metadata as SchemaNodeWithMeta} {...itemData} />}
         />
       </ThemeZone>
     </Box>

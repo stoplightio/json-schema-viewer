@@ -2,14 +2,13 @@ import { TreeStore } from '@stoplight/tree-list';
 import { Omit } from '@stoplight/types';
 import { runInAction } from 'mobx';
 import * as React from 'react';
-import { ErrorMessage } from './components/common/ErrorMessage';
-import { MutedText } from './components/common/MutedText';
-import { ISchemaView, SchemaView } from './SchemaView';
-import { ThemeZone } from './theme';
-import { isSchemaViewerEmpty } from './utils/isSchemaViewerEmpty';
-import { renderSchema } from './utils/renderSchema';
+import { ThemeZone } from '../theme';
+import { isSchemaViewerEmpty, renderSchema } from '../utils';
+import { ErrorMessage } from './common/ErrorMessage';
+import { MutedText } from './common/MutedText';
+import { ISchemaTree, SchemaTree } from './SchemaTree';
 
-export interface IJsonSchemaViewer extends Omit<ISchemaView, 'emptyText' | 'treeStore'> {
+export interface IJsonSchemaViewer extends Omit<ISchemaTree, 'emptyText' | 'treeStore'> {
   emptyText?: string;
   defaultExpandedDepth?: number;
 }
@@ -90,7 +89,7 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
 
     return (
       <ThemeZone name="json-schema-viewer">
-        <SchemaView expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+        <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
       </ThemeZone>
     );
   }

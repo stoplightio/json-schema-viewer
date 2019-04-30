@@ -4,14 +4,12 @@ import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { ReactElement } from 'react';
-import { Property } from '../components/Property';
-import { TopBar } from '../components/TopBar';
-import { useMetadata } from '../hooks/useMetadata';
-import { SchemaView } from '../SchemaView';
-import { ITreeNodeMeta } from '../types';
+import { SchemaRow, SchemaTree, TopBar } from '../../components';
+import { useMetadata } from '../../hooks';
+import { ITreeNodeMeta } from '../../types';
 
-jest.mock('../theme');
-jest.mock('../hooks/useMetadata');
+jest.mock('../../theme');
+jest.mock('../../hooks');
 
 const schema: JSONSchema4 = {
   type: 'object',
@@ -31,7 +29,7 @@ const schema: JSONSchema4 = {
   },
 };
 
-describe('SchemaView component', () => {
+describe('SchemaTree component', () => {
   let useStateSpy: jest.SpyInstance;
   let setStateActionSpy: jest.Mock;
   let store: TreeStore;
@@ -52,12 +50,12 @@ describe('SchemaView component', () => {
 
   describe('top bar', () => {
     test('should not be rendered if hideTopBar is truthy', () => {
-      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} hideTopBar />);
+      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} hideTopBar />);
       expect(wrapper.find(TopBar)).not.toExist();
     });
 
     test('should be rendered if name is given', () => {
-      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} name="test" />);
+      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} name="test" />);
       expect(wrapper.find(TopBar)).toExist();
       expect(wrapper.find(TopBar)).toHaveProp('name', 'test');
     });
@@ -68,7 +66,7 @@ describe('SchemaView component', () => {
         $schema: 'schema',
       });
 
-      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} name="test" />);
+      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} name="test" />);
       expect(wrapper.find(TopBar)).toExist();
       expect(wrapper.find(TopBar)).toHaveProp('name', 'test');
     });
@@ -79,14 +77,14 @@ describe('SchemaView component', () => {
         $schema: 'schema',
       });
 
-      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} name="test" hideTopBar />);
+      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} name="test" hideTopBar />);
       expect(wrapper.find(TopBar)).not.toExist();
     });
   });
 
   describe('tree-list', () => {
     test('should be rendered', () => {
-      const wrapper = shallow(<SchemaView schema={schema} treeStore={store} />);
+      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} />);
 
       expect(wrapper.find(TreeList)).toExist();
       expect(wrapper.find(TreeList)).toHaveProp({
@@ -97,20 +95,20 @@ describe('SchemaView component', () => {
     });
 
     test('should be not draggable', () => {
-      const treeList = shallow(<SchemaView schema={schema} treeStore={store} />).find(TreeList);
+      const treeList = shallow(<SchemaTree schema={schema} treeStore={store} />).find(TreeList);
 
       expect(treeList.prop('canDrag')).toHaveLength(0);
       expect(treeList.prop('canDrag')!({} as any)).toBe(false);
     });
 
     test('should have extra padding if top bar is rendered', () => {
-      const treeList = shallow(<SchemaView schema={schema} treeStore={store} name="my-schema" />).find(TreeList);
+      const treeList = shallow(<SchemaTree schema={schema} treeStore={store} name="my-schema" />).find(TreeList);
 
       expect(treeList).toHaveProp('top', '40px');
     });
 
     test('should render property for each row', () => {
-      const treeList = shallow(<SchemaView schema={schema} treeStore={store} />).find(TreeList);
+      const treeList = shallow(<SchemaTree schema={schema} treeStore={store} />).find(TreeList);
       const node: TreeListNode<ITreeNodeMeta> = {
         id: 'random-id',
         level: 0,
@@ -123,7 +121,7 @@ describe('SchemaView component', () => {
       const rendered = treeList.prop('rowRenderer')!(node) as ReactElement<any>;
 
       expect(rendered).toMatchObject({
-        type: Property,
+        type: SchemaRow,
         props: expect.objectContaining({
           node: node.metadata,
         }),

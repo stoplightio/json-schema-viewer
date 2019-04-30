@@ -4,7 +4,7 @@ import { State, Store } from '@sambego/storybook-state';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { JsonSchemaViewer } from '../JsonSchemaViewer';
+import { JsonSchemaViewer } from '../components/JsonSchemaViewer';
 
 import * as schema from '../__fixtures__/default-schema.json';
 import * as schemaWithRefs from '../__fixtures__/ref/original.json';

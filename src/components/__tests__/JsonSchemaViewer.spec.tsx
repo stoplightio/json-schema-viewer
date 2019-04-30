@@ -1,13 +1,13 @@
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
-import { MutedText } from '../components/common/MutedText';
+import { isSchemaViewerEmpty } from '../../utils';
+import { MutedText } from '../common/MutedText';
 import { JsonSchemaViewer } from '../JsonSchemaViewer';
-import { SchemaView } from '../SchemaView';
-import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
+import { SchemaTree } from '../SchemaTree';
 
-jest.mock('../theme');
-jest.mock('../utils/isSchemaViewerEmpty');
+jest.mock('../../theme');
+jest.mock('../../utils/isSchemaViewerEmpty');
 
 const schema = {
   properties: {
@@ -32,7 +32,7 @@ describe('JSON Schema Viewer component', () => {
     const wrapper = shallow(<JsonSchemaViewer schema={{}} />);
     expect(isSchemaViewerEmpty).toHaveBeenCalledWith({});
     expect(wrapper.find(MutedText)).toExist();
-    expect(wrapper.find(SchemaView)).not.toExist();
+    expect(wrapper.find(SchemaTree)).not.toExist();
   });
 
   test('should render SchemaView if schema is provided', () => {
@@ -40,6 +40,6 @@ describe('JSON Schema Viewer component', () => {
     const wrapper = shallow(<JsonSchemaViewer schema={schema} />);
     expect(isSchemaViewerEmpty).toHaveBeenCalledWith(schema);
     expect(wrapper.find(MutedText)).not.toExist();
-    expect(wrapper.find(SchemaView)).toExist();
+    expect(wrapper.find(SchemaTree)).toExist();
   });
 });
