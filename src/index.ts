@@ -1,2 +1,2 @@
-export * from './JsonSchemaViewer';
+export * from './components/JsonSchemaViewer';
 export { ThemeProvider } from './theme';

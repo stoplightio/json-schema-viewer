@@ -2,10 +2,7 @@ import { Omit } from '@stoplight/types';
 import { Box, Button, Checkbox, Flex, IBox } from '@stoplight/ui-kit';
 import * as React from 'react';
 import { IMasking, SchemaNodeWithMeta } from '../types';
-import { formatRef } from '../utils/formatRef';
-import { isCombiner } from '../utils/isCombiner';
-import { isRef } from '../utils/isRef';
-import { pathToString } from '../utils/pathToString';
+import { formatRef, isCombiner, isRef, pathToString } from '../utils';
 import { Additional } from './Additional';
 import { MutedText } from './common/MutedText';
 import { Divider } from './Divider';
@@ -14,12 +11,12 @@ import { Type } from './Type';
 import { Types } from './Types';
 import { Validations } from './Validations';
 
-export interface IProperty extends Omit<IBox, 'onClick'>, IMasking {
+export interface ISchemaRow extends Omit<IBox, 'onClick'>, IMasking {
   node: SchemaNodeWithMeta;
   onMaskEdit(node: SchemaNodeWithMeta): void;
 }
 
-export const Property: React.FunctionComponent<IProperty> = ({
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
   node,
   canSelect,
   onSelect,
