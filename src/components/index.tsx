@@ -6,3 +6,4 @@ export * from './SchemaTree';
 export * from './TopBar';
 export * from './Type';
 export * from './Types';
+export * from './DetailDialog';
