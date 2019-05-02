@@ -12,7 +12,7 @@ A JSON Schema viewer React component
 - Full JSON Schema Draft 4 support, including `oneOf` and `anyOf` combiner properties
 - Renders complicated nested objects to any depth
 - Renders validation properties and markdown descriptions
-- Capable of linking resolved $refs
+- Capable of linking resolved \$refs
 - Theme-able
 - Collapsible
 
@@ -28,12 +28,17 @@ yarn add @stoplight/json-schema-viewer
 ### Usage
 
 ```jsx
-import { JsonSchemaViewer, ThemeProvider } from "@stoplight/json-schema-viewer";
-import { dark } from "@stoplight/json-schema-viewer/themes";
+import { JsonSchemaViewer } from "@stoplight/json-schema-viewer";
 
-<ThemeProvider theme={dark}>
-  <JsonSchemaViewer dereferencedSchema={dereferencedSchema} schema={schema} />
-</ThemeProvider>
+<JsonSchemaViewer
+  name="Todos Model"
+  dereferencedSchema={schemaWithoutRefs}
+  schema={schemaWithRefs}
+  expanded={true}
+  hideTopBar={false}
+  emptyText="No schema defined"
+  defaultExpandedDepth={0}
+/>;
 ```
 
 More examples can be find in the [Storybook stories](./src/__stories__/JsonSchemaViewer.tsx).

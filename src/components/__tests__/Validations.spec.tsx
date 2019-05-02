@@ -1,9 +1,7 @@
 import * as UIKit from '@stoplight/ui-kit';
-import { Box } from '@stoplight/ui-kit';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
-import { Validations } from '../Validations';
 
 jest.mock('../common/MutedText', () => ({
   MutedText: (({ children }) => children) as React.FunctionComponent,

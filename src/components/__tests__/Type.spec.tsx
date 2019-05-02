@@ -1,13 +1,11 @@
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
-import { Type } from '../Type';
-
-jest.mock('../../theme');
+import { IType, PropertyTypeColors, Type } from '../Type';
 
 describe('Type component', () => {
-  it.each(['integer', 'number', 'string'])('should handle $s type', type => {
-    const wrapper = shallow(<Type type={type} />);
+  it.each(Object.keys(PropertyTypeColors))('should handle $s type', type => {
+    const wrapper = shallow(<Type type={type as IType['type']} />);
 
     expect(wrapper).toHaveText(type);
   });
