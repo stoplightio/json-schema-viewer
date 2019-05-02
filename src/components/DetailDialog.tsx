@@ -38,7 +38,7 @@ export const DetailDialog: React.FunctionComponent<IDetailDialog> = ({ node, tre
   return (
     <Dialog
       isOpen
-      onClose={() => treeStore.setActiveNode()}
+      onClose={() => treeStore.setActiveNode('')}
       title={
         <div className="py-3">
           <div className="flex items-center text-base">
