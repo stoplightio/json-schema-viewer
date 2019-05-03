@@ -6,8 +6,6 @@ import * as React from 'react';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
 import { ISchemaTree, SchemaTree } from './SchemaTree';
 
-import '../styles/main.scss';
-
 export interface IJsonSchemaViewer extends Omit<ISchemaTree, 'treeStore'> {
   emptyText?: string;
   defaultExpandedDepth?: number;

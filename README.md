@@ -28,6 +28,7 @@ yarn add @stoplight/json-schema-viewer
 ### Usage
 
 ```jsx
+// index.jsx
 import { JsonSchemaViewer } from "@stoplight/json-schema-viewer";
 
 <JsonSchemaViewer
@@ -39,6 +40,13 @@ import { JsonSchemaViewer } from "@stoplight/json-schema-viewer";
   emptyText="No schema defined"
   defaultExpandedDepth={0}
 />;
+```
+
+Also make sure you import the styles
+
+```js
+// styles.scss
+import "~@stoplight/json-schema-viewer/styles/_json-schema-viewer.scss";
 ```
 
 More examples can be find in the [Storybook stories](./src/__stories__/JsonSchemaViewer.tsx).
