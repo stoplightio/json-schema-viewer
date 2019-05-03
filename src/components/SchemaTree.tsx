@@ -15,7 +15,7 @@ import { DetailDialog, ISchemaRow, MaskedSchema, SchemaRow, TopBar } from './';
 
 const canDrag = () => false;
 
-export interface ISchemaTree extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'>, IMasking {
+export interface ISchemaTree extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect' | 'onError'>, IMasking {
   name?: string;
   dereferencedSchema?: JSONSchema4;
   schema: JSONSchema4;
