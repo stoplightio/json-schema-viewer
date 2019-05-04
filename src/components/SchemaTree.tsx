@@ -6,13 +6,11 @@ import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
-import _isEmpty = require('lodash/isEmpty');
-
-import { useMetadata } from '../hooks';
 import { IMasking } from '../types';
 import { lookupRef } from '../utils';
 import { DetailDialog, ISchemaRow, MaskedSchema, SchemaRow, TopBar } from './';
 
+const ROW_HEIGHT = 40;
 const canDrag = () => false;
 
 export interface ISchemaTree extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect' | 'onError'>, IMasking {
@@ -41,8 +39,6 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   const [maskedSchema, setMaskedSchema] = React.useState<JSONSchema4 | null>(null);
 
-  const metadata = useMetadata(schema);
-
   const handleMaskEdit = React.useCallback<ISchemaRow['onMaskEdit']>(
     node => {
       setMaskedSchema(lookupRef(node.path, dereferencedSchema));
@@ -70,19 +66,24 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   const rowRenderer = React.useCallback<RendererFunc>(node => <SchemaRow node={node} {...itemData} />, [itemData]);
 
-  const shouldRenderTopBar = !hideTopBar && (name || !_isEmpty(metadata));
-
   return (
-    <div className={cn(className, 'h-full w-full')} {...rest}>
+    <div className={cn(className, 'flex flex-col h-full w-full')} {...rest}>
       {maskedSchema && (
         <MaskedSchema onClose={handleMaskedSchemaClose} onSelect={onSelect} selected={selected} schema={maskedSchema} />
       )}
 
-      {shouldRenderTopBar && <TopBar name={name} metadata={metadata} />}
+      {!hideTopBar && <TopBar name={name} height={ROW_HEIGHT} />}
 
       <DetailDialog treeStore={treeStore} />
 
-      <TreeList striped rowHeight={40} canDrag={canDrag} store={treeStore} rowRenderer={rowRenderer} />
+      <TreeList
+        className="flex-1"
+        striped
+        rowHeight={ROW_HEIGHT}
+        canDrag={canDrag}
+        store={treeStore}
+        rowRenderer={rowRenderer}
+      />
     </div>
   );
 });
