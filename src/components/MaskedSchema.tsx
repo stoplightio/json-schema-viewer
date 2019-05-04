@@ -13,3 +13,4 @@ export const MaskedSchema: React.FunctionComponent<IMaskedSchema> = ({ onClose, 
     </Dialog>
   );
 };
+MaskedSchema.displayName = 'JsonSchemaViewer.MaskedSchema';

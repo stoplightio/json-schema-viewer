@@ -17,6 +17,7 @@ export const Type: React.FunctionComponent<IType> = ({ children, type, subtype }
     </span>
   );
 };
+Type.displayName = 'JsonSchemaViewer.Type';
 
 export const PropertyTypeColors: Dictionary<string, IType['type']> = {
   object: 'text-blue-6',

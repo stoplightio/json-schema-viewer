@@ -1,4 +1,4 @@
-import { ITreeListNode, TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { RendererFunc, TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
 import { Omit } from '@stoplight/types';
 
 import * as cn from 'classnames';
@@ -9,7 +9,7 @@ import * as React from 'react';
 import _isEmpty = require('lodash/isEmpty');
 
 import { useMetadata } from '../hooks';
-import { IMasking, SchemaNodeWithMeta } from '../types';
+import { IMasking } from '../types';
 import { lookupRef } from '../utils';
 import { DetailDialog, ISchemaRow, MaskedSchema, SchemaRow, TopBar } from './';
 
@@ -24,8 +24,7 @@ export interface ISchemaTree extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   treeStore: TreeStore;
 }
 
-// @ts-ignore
-export const SchemaTree: React.NamedExoticComponent<ISchemaTree> = observer((props: ISchemaTree) => {
+export const SchemaTree = observer<ISchemaTree>(props => {
   const {
     expanded = false,
     schema,
@@ -43,7 +42,6 @@ export const SchemaTree: React.NamedExoticComponent<ISchemaTree> = observer((pro
   const [maskedSchema, setMaskedSchema] = React.useState<JSONSchema4 | null>(null);
 
   const metadata = useMetadata(schema);
-  const activeNode = treeStore.nodes.find(node => node.id === treeStore.activeNodeId);
 
   const handleMaskEdit = React.useCallback<ISchemaRow['onMaskEdit']>(
     node => {
@@ -60,11 +58,7 @@ export const SchemaTree: React.NamedExoticComponent<ISchemaTree> = observer((pro
     }
   });
 
-  const handleMaskedSchemaClose = React.useCallback(() => {
-    setMaskedSchema(null);
-  }, []);
-
-  const shouldRenderTopBar = !hideTopBar && (name || !_isEmpty(metadata));
+  const handleMaskedSchemaClose = React.useCallback(() => setMaskedSchema(null), []);
 
   const itemData = {
     onSelect,
@@ -74,20 +68,22 @@ export const SchemaTree: React.NamedExoticComponent<ISchemaTree> = observer((pro
     treeStore,
   };
 
+  const rowRenderer = React.useCallback<RendererFunc>(node => <SchemaRow node={node} {...itemData} />, [itemData]);
+
+  const shouldRenderTopBar = !hideTopBar && (name || !_isEmpty(metadata));
+
   return (
     <div className={cn(className, 'h-full w-full')} {...rest}>
       {maskedSchema && (
         <MaskedSchema onClose={handleMaskedSchemaClose} onSelect={onSelect} selected={selected} schema={maskedSchema} />
       )}
+
       {shouldRenderTopBar && <TopBar name={name} metadata={metadata} />}
-      <DetailDialog node={activeNode as ITreeListNode<SchemaNodeWithMeta>} treeStore={treeStore} />
-      <TreeList
-        rowHeight={40}
-        canDrag={canDrag}
-        striped
-        store={treeStore}
-        rowRenderer={node => <SchemaRow node={node} {...itemData} />}
-      />
+
+      <DetailDialog treeStore={treeStore} />
+
+      <TreeList striped rowHeight={40} canDrag={canDrag} store={treeStore} rowRenderer={rowRenderer} />
     </div>
   );
 });
+SchemaTree.displayName = 'JsonSchemaViewer.SchemaTree';

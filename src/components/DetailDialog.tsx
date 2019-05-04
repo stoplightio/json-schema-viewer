@@ -1,21 +1,27 @@
-import { MarkdownViewer } from '@stoplight/markdown-viewer';
-import { ITreeListNode, TreeStore } from '@stoplight/tree-list';
-import { Dialog } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import _get = require('lodash/get');
 import _isEmpty = require('lodash/isEmpty');
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+
+import { MarkdownViewer } from '@stoplight/markdown-viewer';
+import { TreeStore } from '@stoplight/tree-list';
+import { Dialog } from '@stoplight/ui-kit';
 
 import { SchemaNodeWithMeta } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
 export interface IDetailDialog extends React.HTMLAttributes<HTMLDivElement> {
-  node: ITreeListNode<SchemaNodeWithMeta>;
   treeStore: TreeStore;
 }
 
-export const DetailDialog: React.FunctionComponent<IDetailDialog> = ({ node, treeStore }) => {
+export const DetailDialog = observer<IDetailDialog>(({ treeStore }) => {
+  const onClose = React.useCallback(() => treeStore.setActiveNode(''), []);
+
+  if (!treeStore.activeNodeId) return null;
+
+  const node = treeStore.nodes.find(n => n.id === treeStore.activeNodeId);
   if (!node) return null;
 
   const meta = node.metadata as SchemaNodeWithMeta;
@@ -27,8 +33,10 @@ export const DetailDialog: React.FunctionComponent<IDetailDialog> = ({ node, tre
   const validations = 'validations' in meta && meta.validations ? meta.validations : [];
   const validationElems = [];
   for (const key in validations) {
+    if (!validations[key]) continue;
+
     validationElems.push(
-      <div className="flex py-1">
+      <div key={key} className="flex py-1">
         <div className="flex-1">{key}:</div>
         <div className="pl-10">{validations[key] as any}</div>
       </div>
@@ -38,7 +46,7 @@ export const DetailDialog: React.FunctionComponent<IDetailDialog> = ({ node, tre
   return (
     <Dialog
       isOpen
-      onClose={() => treeStore.setActiveNode('')}
+      onClose={onClose}
       title={
         <div className="py-3">
           <div className="flex items-center text-base">
@@ -66,4 +74,5 @@ export const DetailDialog: React.FunctionComponent<IDetailDialog> = ({ node, tre
       </div>
     </Dialog>
   );
-};
+});
+DetailDialog.displayName = 'JsonSchemaViewer.DetailDialog';

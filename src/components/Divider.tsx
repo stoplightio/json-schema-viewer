@@ -8,3 +8,4 @@ export const Divider: React.FunctionComponent<React.HTMLAttributes<HTMLDivElemen
     </div>
   );
 };
+Divider.displayName = 'JsonSchemaViewer.Divider';

@@ -43,6 +43,11 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
     [onMaskEdit]
   );
 
+  const handleButtonClick = React.useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    treeStore.setActiveNode(node.id);
+  }, []);
+
   const type = isRef(schemaNode) ? '$ref' : isCombiner(schemaNode) ? schemaNode.combiner : schemaNode.type;
   const description = 'annotations' in schemaNode && schemaNode.annotations.description;
 
@@ -96,12 +101,10 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
             className={cn(required && 'ml-2')}
             id={`${node.id}-showMore`}
             icon={<Icon icon="info-sign" className="opacity-75" iconSize={12} />}
-            onClick={(e: React.MouseEvent) => {
-              e.stopPropagation();
-              treeStore.setActiveNode(node.id);
-            }}
+            onClick={handleButtonClick}
           />
         )}
     </div>
   );
 };
+SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';

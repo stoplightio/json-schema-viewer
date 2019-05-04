@@ -18,16 +18,19 @@ export const Types: React.FunctionComponent<ITypes> = ({ type, subtype }) => {
 
   return (
     <div className="truncate">
-      {type.map((name, i, { length }) => (
-        <>
-          <Type type={name} subtype={subtype} />
-          {i < length - 1 && (
-            <span key={`${i}-sep`} className="text-darken-7">
-              {' or '}
-            </span>
-          )}
-        </>
-      ))}
+      <>
+        {type.map((name, i, { length }) => (
+          <React.Fragment key={i}>
+            <Type key={i} type={name} subtype={subtype} />
+            {i < length - 1 && (
+              <span key={`${i}-sep`} className="text-darken-7">
+                {' or '}
+              </span>
+            )}
+          </React.Fragment>
+        ))}
+      </>
     </div>
   );
 };
+Types.displayName = 'JsonSchemaViewer.Types';
