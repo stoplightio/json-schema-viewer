@@ -80,6 +80,10 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, level 
       if (node.properties !== undefined) {
         const isConditionalCombiner = node.combiner === 'anyOf' || node.combiner === 'oneOf';
         for (const [i, property] of node.properties.entries()) {
+          if ('type' in node) {
+            property.type = node.type;
+          }
+
           yield* renderSchema(property, dereferencedSchema, level + 1, {
             showDivider: isConditionalCombiner && i !== 0,
             path: [...path, 'properties', i],
