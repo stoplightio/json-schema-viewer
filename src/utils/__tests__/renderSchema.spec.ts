@@ -9,7 +9,7 @@ jest.mock('../assignId', () => ({
 }));
 
 describe('renderSchema util', () => {
-  it.each([['default-schema.json', ''], ['ref/original.json', 'ref/resolved.json']])(
+  it.each([['default-schema.json', ''], ['ref/original.json', 'ref/resolved.json'], ['combiner-schema.json', '']])(
     'should match %s',
     (schema, dereferenced) => {
       expect(

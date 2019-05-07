@@ -24,6 +24,7 @@ export interface ICombinerNode {
   readonly combiner: JSONSchema4CombinerName;
   properties?: JSONSchema4[];
   annotations: Pick<JSONSchema4, JSONSchema4Annotations>;
+  readonly type?: JSONSchema4TypeName | JSONSchema4TypeName[];
 }
 
 export interface IBaseNode extends Pick<JSONSchema4, 'enum'> {

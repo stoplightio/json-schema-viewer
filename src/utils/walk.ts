@@ -34,7 +34,9 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
 }
 
 function processNode(node: JSONSchema4): SchemaNode | void {
-  if (node.type !== undefined) {
+  const combiner = getCombiner(node);
+
+  if (node.type !== undefined && combiner === undefined) {
     const base: IBaseNode = {
       id: assignId(node),
       type: node.type,
@@ -74,13 +76,13 @@ function processNode(node: JSONSchema4): SchemaNode | void {
     } as IRefNode;
   }
 
-  const combiner = getCombiner(node);
   if (combiner !== undefined) {
     return {
       id: assignId(node),
       combiner,
       properties: node[combiner],
       annotations: getAnnotations(node),
+      ...(node.type !== undefined && { type: node.type }),
     } as ICombinerNode;
   }
 
