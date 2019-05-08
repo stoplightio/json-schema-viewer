@@ -52,9 +52,9 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
       css={{ userSelect: 'text' }}
       {...props}
     >
-      {node.showDivider && (
+      {node.divider && (
         <Divider ml="-24px" width={`calc(100% + 24px)`}>
-          or
+          {node.divider}
         </Divider>
       )}
 
