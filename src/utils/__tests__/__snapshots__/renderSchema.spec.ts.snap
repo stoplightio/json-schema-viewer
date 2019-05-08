@@ -74,7 +74,6 @@ Array [
           "type": "string",
         },
       },
-      "showDivider": false,
       "type": "object",
       "validations": Object {},
     },
@@ -107,6 +106,7 @@ Array [
     "metadata": Object {
       "additionalProperties": undefined,
       "annotations": Object {},
+      "divider": "and",
       "enum": undefined,
       "id": "random-id",
       "path": Array [
@@ -136,7 +136,6 @@ Array [
           "type": "string",
         },
       },
-      "showDivider": false,
       "type": "object",
       "validations": Object {},
     },
@@ -509,7 +508,6 @@ Array [
           "type": "string",
         },
       },
-      "showDivider": false,
       "type": "object",
       "validations": Object {},
     },
@@ -565,6 +563,7 @@ Array [
     "metadata": Object {
       "additionalItems": undefined,
       "annotations": Object {},
+      "divider": "and/or",
       "enum": undefined,
       "id": "random-id",
       "items": undefined,
@@ -574,7 +573,6 @@ Array [
         "properties",
         1,
       ],
-      "showDivider": true,
       "subtype": "integer",
       "type": "array",
       "validations": Object {},

@@ -55,7 +55,7 @@ export interface ITreeNodeMeta {
   name?: string;
   additional?: IArrayNode['additionalItems'] | IObjectNode['additionalProperties'];
   path: JsonPath;
-  showDivider?: boolean;
+  divider?: string;
   subtype?: IBaseNode['type'];
   expanded?: boolean;
   required?: boolean;

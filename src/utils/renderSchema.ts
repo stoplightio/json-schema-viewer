@@ -1,6 +1,7 @@
 import { JSONSchema4 } from 'json-schema';
 import _isEmpty = require('lodash/isEmpty');
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
+import { DIVIDERS } from './dividers';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
 import { lookupRef } from './lookupRef';
@@ -78,14 +79,13 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, level 
       };
 
       if (node.properties !== undefined) {
-        const isConditionalCombiner = node.combiner === 'anyOf' || node.combiner === 'oneOf';
         for (const [i, property] of node.properties.entries()) {
           if ('type' in node) {
             property.type = node.type;
           }
 
           yield* renderSchema(property, dereferencedSchema, level + 1, {
-            showDivider: isConditionalCombiner && i !== 0,
+            ...(i !== 0 && { divider: DIVIDERS[node.combiner] }),
             path: [...path, 'properties', i],
           });
         }
