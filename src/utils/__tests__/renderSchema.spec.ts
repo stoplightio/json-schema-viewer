@@ -9,17 +9,19 @@ jest.mock('../assignId', () => ({
 }));
 
 describe('renderSchema util', () => {
-  it.each([['default-schema.json', ''], ['ref/original.json', 'ref/resolved.json'], ['combiner-schema.json', '']])(
-    'should match %s',
-    (schema, dereferenced) => {
-      expect(
-        Array.from(
-          renderSchema(
-            JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf-8')),
-            dereferenced ? JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, dereferenced), 'utf-8')) : undefined
-          )
+  it.each([
+    ['default-schema.json', ''],
+    ['ref/original.json', 'ref/resolved.json'],
+    ['combiner-schema.json', ''],
+    ['array-of-objects.json', ''],
+  ])('should match %s', (schema, dereferenced) => {
+    expect(
+      Array.from(
+        renderSchema(
+          JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf-8')),
+          dereferenced ? JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, dereferenced), 'utf-8')) : undefined
         )
-      ).toMatchSnapshot();
-    }
-  );
+      )
+    ).toMatchSnapshot();
+  });
 });

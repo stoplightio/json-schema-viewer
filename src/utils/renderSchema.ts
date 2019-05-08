@@ -103,22 +103,26 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, level 
             (node as IArrayNode).additionalItems && { additional: (node as IArrayNode).additionalItems }),
         },
       } as SchemaTreeListNode;
-
       if (Array.isArray(schema.items)) {
         for (const [i, property] of schema.items.entries()) {
           yield* renderSchema(property, dereferencedSchema, level + 1, {
             path: [...path, 'items', i],
           });
         }
-      } else if (meta.subtype === 'object' && schema.items) {
-        yield* getProperties(schema.items, dereferencedSchema, level + 1, {
-          ...meta,
-          path: [...path, 'items'],
-        });
-      } else if (meta.subtype === 'array' && schema.items) {
-        yield* renderSchema(schema.items, dereferencedSchema, level + 1, {
-          path,
-        });
+      } else if (schema.items) {
+        switch (baseNode.metadata && baseNode.metadata.subtype) {
+          case SchemaKind.Object:
+            yield* getProperties(schema.items, dereferencedSchema, level + 1, {
+              ...meta,
+              path: [...path, 'items'],
+            });
+            break;
+          case SchemaKind.Array:
+            yield* renderSchema(schema.items, dereferencedSchema, level + 1, {
+              path,
+            });
+            break;
+        }
       }
     } else if ('properties' in node) {
       // special case :P, it's
