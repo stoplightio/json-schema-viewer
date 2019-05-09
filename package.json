@@ -20,7 +20,7 @@
     "node": ">=8.3.0"
   },
   "scripts": {
-    "build": "sl-scripts build && copyfiles -u 1 \"./src/styles/**/*.scss\" ./dist",
+    "build": "sl-scripts build",
     "build.docs": "build-storybook -c .storybook -o docs-auto",
     "commit": "git-cz",
     "lint": "tslint -c tslint.json 'src/**/*.ts?'",
@@ -35,31 +35,36 @@
     "test.watch": "yarn test --watch"
   },
   "peerDependencies": {
+    "@stoplight/markdown-viewer": "3.x.x",
+    "@stoplight/tree-list": "4.x.x",
+    "@stoplight/ui-kit": "2.x.x",
+    "lodash": "4.x.x",
     "mobx": "5.x.x",
     "react": ">=16.8",
     "react-dom": ">=16.8"
   },
   "dependencies": {
     "@stoplight/json": "1.9.x",
-    "@stoplight/markdown-viewer": "3.0.0-beta.4",
-    "@stoplight/tree-list": "^4.0.0",
-    "@types/json-schema": "^7.0.3",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.11",
     "mobx-react-lite": "^1.3.1",
     "pluralize": "^7.0.0",
     "json-schema-merge-allof": "^0.6.0",
     "react-error-boundary": "^1.2.5"
   },
   "devDependencies": {
+    "lodash": "^4.17.11",
+    "@stoplight/markdown-viewer": "^3.0.0-beta.4",
+    "@stoplight/tree-list": "^4.0.0",
+    "@stoplight/ui-kit": "^2.0.0",
     "@sambego/storybook-state": "^1.3.4",
     "@stoplight/scripts": "5.1.0",
-    "@stoplight/storybook-config": "^2.0.1",
+    "@stoplight/storybook-config": "^2.0.2",
     "@stoplight/types": "4.1.0",
-    "@stoplight/ui-kit": "2.0.0",
     "@types/classnames": "^2.2.7",
     "@types/enzyme": "3.9.1",
+    "@types/jest": "^24.0.12",
     "@types/json-schema": "^7.0.3",
+    "@types/node": "^11.13.8",
     "@types/pluralize": "^0.0.29",
     "@types/react": "16.8.12",
     "@types/react-dom": "16.8.3",

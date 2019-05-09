@@ -1,4 +1,4 @@
-import { RendererFunc, TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
 import { Omit } from '@stoplight/types';
 
 import * as cn from 'classnames';
@@ -64,7 +64,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     treeStore,
   };
 
-  const rowRenderer = React.useCallback<RendererFunc>(node => <SchemaRow node={node} {...itemData} />, [itemData]);
+  const rowRenderer = React.useCallback(node => <SchemaRow node={node} {...itemData} />, [itemData]);
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')} {...rest}>
@@ -76,14 +76,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
       <DetailDialog treeStore={treeStore} />
 
-      <TreeList
-        className="flex-1"
-        striped
-        rowHeight={ROW_HEIGHT}
-        canDrag={canDrag}
-        store={treeStore}
-        rowRenderer={rowRenderer}
-      />
+      <TreeList rowHeight={ROW_HEIGHT} canDrag={canDrag} store={treeStore} rowRenderer={rowRenderer} />
     </div>
   );
 });
