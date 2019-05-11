@@ -47,6 +47,8 @@ export const SchemaTree = observer<ISchemaTree>(props => {
   );
 
   treeStore.on(TreeListEvents.NodeClick, (e, node) => {
+    if (node.level === 0) return; // Don't allow collapsing the root
+
     if (node.canHaveChildren) {
       treeStore.toggleExpand(node);
     } else {
@@ -62,9 +64,13 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     selected,
     canSelect,
     treeStore,
+    count: treeStore.nodes.length,
   };
 
-  const rowRenderer = React.useCallback(node => <SchemaRow node={node} {...itemData} />, [itemData]);
+  const rowRenderer = React.useCallback(
+    (node, rowOptions) => <SchemaRow node={node} rowOptions={rowOptions} {...itemData} />,
+    [itemData]
+  );
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')} {...rest}>
@@ -76,7 +82,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
       <DetailDialog treeStore={treeStore} />
 
-      <TreeList rowHeight={ROW_HEIGHT} canDrag={canDrag} store={treeStore} rowRenderer={rowRenderer} />
+      <TreeList striped rowHeight={ROW_HEIGHT} canDrag={canDrag} store={treeStore} rowRenderer={rowRenderer} />
     </div>
   );
 });
