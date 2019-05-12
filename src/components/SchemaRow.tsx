@@ -3,11 +3,11 @@ import { Button, Colors, Icon } from '@stoplight/ui-kit';
 import * as pluralize from 'pluralize';
 import * as React from 'react';
 
-import { IMasking, SchemaNodeWithMeta } from '../types';
+import { SchemaNodeWithMeta } from '../types';
 import { formatRef, isCombiner, isRef } from '../utils';
 import { Types } from './';
 
-export interface ISchemaRow extends IMasking {
+export interface ISchemaRow {
   node: ITreeListNode<object>;
   rowOptions: IRowRendererOptions;
   treeStore: TreeStore;

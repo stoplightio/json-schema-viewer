@@ -1,19 +1,15 @@
 import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
-
 import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
-import { Dialog } from '@blueprintjs/core';
-import { IMasking } from '../types';
 import { DetailDialog, SchemaRow } from './';
-import { JsonSchemaViewer } from './JsonSchemaViewer';
 
 const ROW_HEIGHT = 40;
 const canDrag = () => false;
 
-export interface ISchemaTree extends IMasking {
+export interface ISchemaTree {
   treeStore: TreeStore;
   schema: JSONSchema4;
   className?: string;
@@ -24,9 +20,7 @@ export interface ISchemaTree extends IMasking {
 }
 
 export const SchemaTree = observer<ISchemaTree>(props => {
-  const { hideTopBar, selected, name, treeStore, className } = props;
-
-  const [maskedSchema, setMaskedSchema] = React.useState<JSONSchema4 | null>(null);
+  const { hideTopBar, name, treeStore, className } = props;
 
   treeStore.on(TreeListEvents.NodeClick, (e, node) => {
     if (node.level === 0) return; // Don't allow collapsing the root
@@ -38,10 +32,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     }
   });
 
-  const handleMaskedSchemaClose = React.useCallback(() => setMaskedSchema(null), []);
-
   const itemData = {
-    selected,
     treeStore,
     count: treeStore.nodes.length,
   };
@@ -53,12 +44,6 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')}>
-      {maskedSchema && (
-        <Dialog isOpen onClose={handleMaskedSchemaClose}>
-          <JsonSchemaViewer selected={selected} schema={maskedSchema} style={{ height: 500 }} />
-        </Dialog>
-      )}
-
       {name &&
         !hideTopBar && (
           <div className="flex items-center text-sm px-6 font-semibold" style={{ height: ROW_HEIGHT }}>

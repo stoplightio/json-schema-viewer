@@ -1,20 +1,25 @@
 import { TreeStore } from '@stoplight/tree-list';
-import { Omit } from '@stoplight/types';
 import { runInAction } from 'mobx';
 import * as React from 'react';
 import ErrorBoundary, { ErrorBoundaryProps, FallbackProps } from 'react-error-boundary';
 
+import { JSONSchema4 } from 'json-schema';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
-import { ISchemaTree, SchemaTree } from './SchemaTree';
+import { SchemaTree } from './SchemaTree';
 
-export interface IJsonSchemaViewer extends ErrorBoundaryProps, Omit<ISchemaTree, 'treeStore'> {
+export interface IJsonSchemaViewer extends ErrorBoundaryProps {
+  schema: JSONSchema4;
+  dereferencedSchema?: JSONSchema4;
   style?: object;
   emptyText?: string;
   defaultExpandedDepth?: number;
   expanded?: boolean;
+  className?: string;
+  name?: string;
+  hideTopBar?: boolean;
 }
 
-class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
+export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
   protected treeStore: TreeStore;
 
   constructor(props: IJsonSchemaViewer) {
