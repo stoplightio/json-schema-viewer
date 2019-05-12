@@ -12,7 +12,7 @@ import { SchemaNodeWithMeta } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
-export interface IDetailDialog extends React.HTMLAttributes<HTMLDivElement> {
+export interface IDetailDialog {
   treeStore: TreeStore;
 }
 

@@ -8,8 +8,10 @@ import { isSchemaViewerEmpty, renderSchema } from '../utils';
 import { ISchemaTree, SchemaTree } from './SchemaTree';
 
 export interface IJsonSchemaViewer extends ErrorBoundaryProps, Omit<ISchemaTree, 'treeStore'> {
+  style?: object;
   emptyText?: string;
   defaultExpandedDepth?: number;
+  expanded?: boolean;
 }
 
 class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {

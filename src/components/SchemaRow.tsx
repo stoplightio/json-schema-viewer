@@ -1,50 +1,23 @@
 import { IRowRendererOptions, ITreeListNode, TreeStore } from '@stoplight/tree-list';
-import { Omit } from '@stoplight/types';
-import { Button, Checkbox, Colors, Icon } from '@stoplight/ui-kit';
-import * as cn from 'classnames';
+import { Button, Colors, Icon } from '@stoplight/ui-kit';
 import * as pluralize from 'pluralize';
 import * as React from 'react';
 
 import { IMasking, SchemaNodeWithMeta } from '../types';
-import { formatRef, isCombiner, isRef, pathToString } from '../utils';
-import { Divider, Types } from './';
+import { formatRef, isCombiner, isRef } from '../utils';
+import { Types } from './';
 
-export interface ISchemaRow extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'onSelect'>, IMasking {
+export interface ISchemaRow extends IMasking {
   node: ITreeListNode<object>;
   rowOptions: IRowRendererOptions;
-  onMaskEdit(node: SchemaNodeWithMeta): void;
   treeStore: TreeStore;
 }
 
 const ICON_SIZE = 12;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
-  node,
-  treeStore,
-  canSelect,
-  onSelect,
-  onMaskEdit,
-  selected,
-}) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
-  const { showDivider, name, $ref, subtype, required, path, inheritedFrom } = schemaNode;
-
-  const handleChange = React.useCallback(
-    () => {
-      if (onSelect !== undefined) {
-        onSelect(pathToString(path));
-      }
-    },
-    [onSelect]
-  );
-
-  const handleEditMask = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(
-    e => {
-      e.stopPropagation();
-      onMaskEdit(schemaNode);
-    },
-    [onMaskEdit]
-  );
+  const { showDivider, name, $ref, subtype, required, inheritedFrom } = schemaNode;
 
   const handleButtonClick = React.useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -82,50 +55,40 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
           />
         )}
 
-        {showDivider && <Divider>or</Divider>}
+        {showDivider && (
+          <div className="flex items-center w-full h-2 absolute" style={{ top: -16, left: -16 }}>
+            <div className="font-bold text-darken-7 pr-2">OR</div>
+            <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
+          </div>
+        )}
 
         <div className="flex-1 truncate">
           <div className="flex items-baseline">
-            {name && <span className="mr-3">{name}</span>}
+            {name && <span>{name}</span>}
 
-            <Types type={type} subtype={subtype}>
+            <Types className="ml-2" type={type} subtype={subtype}>
               {type === '$ref' ? `[${$ref}]` : null}
             </Types>
 
-            {inheritedFrom ? (
-              <>
-                <span className="text-darken-7 mx-2">{`{${formatRef(inheritedFrom)}}`}</span>
-                {onMaskEdit !== undefined && <span onClick={handleEditMask}>(edit mask)</span>}
-              </>
-            ) : null}
+            {inheritedFrom && <span className="text-darken-7 ml-2">{`{${formatRef(inheritedFrom)}}`}</span>}
           </div>
 
           {description && <span className="text-darken-7 text-xs">{description}</span>}
         </div>
 
-        {(canSelect || validationCount || required) && (
-          <div className="items-center text-right ml-auto text-xs">
-            {canSelect ? (
-              <Checkbox onChange={handleChange} checked={selected && selected.includes(pathToString(path))} />
-            ) : (
-              <>
-                {validationCount ? (
-                  <span className="mr-2 text-darken-7">
-                    {validationCount} {pluralize('validation', validationCount)}
-                  </span>
-                ) : null}
-
-                {required && <span className="font-semibold">required</span>}
-              </>
-            )}
+        {validationCount > 0 && (
+          <div className="ml-2 text-darken-7 text-xs">
+            {validationCount} {pluralize('validation', validationCount)}
           </div>
         )}
 
-        {(validationCount || description) &&
-          node.canHaveChildren && (
+        {required && <div className="ml-2 font-semibold text-xs">required</div>}
+
+        {node.canHaveChildren &&
+          (validationCount || description) && (
             <Button
               small
-              className={cn(required && 'ml-2')}
+              className="ml-2"
               id={`${node.id}-showMore`}
               icon={<Icon icon="info-sign" className="opacity-75" iconSize={ICON_SIZE} />}
               onClick={handleButtonClick}
