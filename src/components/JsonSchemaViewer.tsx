@@ -17,6 +17,7 @@ export interface IJsonSchemaViewer extends ErrorBoundaryProps {
   className?: string;
   name?: string;
   hideTopBar?: boolean;
+  maxRows?: number;
 }
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
