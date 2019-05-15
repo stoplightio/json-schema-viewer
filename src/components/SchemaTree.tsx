@@ -17,10 +17,11 @@ export interface ISchemaTree {
   dereferencedSchema?: JSONSchema4;
   hideTopBar?: boolean;
   expanded?: boolean;
+  maxRows?: number;
 }
 
 export const SchemaTree = observer<ISchemaTree>(props => {
-  const { hideTopBar, name, treeStore, className } = props;
+  const { hideTopBar, name, treeStore, maxRows, className } = props;
 
   treeStore.on(TreeListEvents.NodeClick, (e, node) => {
     if (node.level === 0) return; // Don't allow collapsing the root
@@ -53,7 +54,14 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
       <DetailDialog treeStore={treeStore} />
 
-      <TreeList striped rowHeight={ROW_HEIGHT} canDrag={canDrag} store={treeStore} rowRenderer={rowRenderer} />
+      <TreeList
+        striped
+        maxRows={maxRows}
+        rowHeight={ROW_HEIGHT}
+        canDrag={canDrag}
+        store={treeStore}
+        rowRenderer={rowRenderer}
+      />
     </div>
   );
 });
