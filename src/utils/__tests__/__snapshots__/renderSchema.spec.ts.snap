@@ -1,5 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renderSchema util should match array-of-objects.json 1`] = `
+Array [
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 0,
+    "metadata": Object {
+      "additionalProperties": undefined,
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "path": Array [],
+      "patternProperties": undefined,
+      "properties": Object {
+        "propertyIsArrayOfObjects": Object {
+          "items": Object {
+            "properties": Object {
+              "ArrayObjectProperty": Object {
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "type": Array [
+            "array",
+          ],
+        },
+      },
+      "type": "object",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 1,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "items": undefined,
+      "name": "propertyIsArrayOfObjects",
+      "path": Array [
+        "properties",
+        "propertyIsArrayOfObjects",
+      ],
+      "required": false,
+      "subtype": "object",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 3,
+    "metadata": Object {
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "name": "ArrayObjectProperty",
+      "path": Array [
+        "properties",
+        "propertyIsArrayOfObjects",
+        "items",
+        "ArrayObjectProperty",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+]
+`;
+
 exports[`renderSchema util should match combiner-schema.json 1`] = `
 Array [
   Object {
