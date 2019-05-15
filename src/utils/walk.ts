@@ -1,4 +1,4 @@
-import { JSONSchema4 } from 'json-schema';
+import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 import {
   IArrayNode,
   IBaseNode,
@@ -20,7 +20,7 @@ const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
 };
 
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
-  switch (getType(node)) {
+  switch (getPrimaryType(node)) {
     case SchemaKind.Array:
       (base as IArrayNode).items = node.array;
       (base as IArrayNode).additionalItems = node.additionalItems;
@@ -33,40 +33,38 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   }
 }
 
-function getType(node: JSONSchema4) {
-  if (Array.isArray(node.type)) {
-    return node.type.length === 1 ? node.type[0] : node.type;
+function inferType(node: JSONSchema4): JSONSchema4TypeName | undefined {
+  if ('properties' in node) {
+    return SchemaKind.Object;
   }
 
-  return node.type;
+  if ('items' in node) {
+    return SchemaKind.Array;
+  }
+
+  return;
+}
+
+export function getPrimaryType(node: JSONSchema4) {
+  if (node.type !== undefined) {
+    if (Array.isArray(node.type)) {
+      if (node.type.includes(SchemaKind.Object)) {
+        return SchemaKind.Object;
+      }
+
+      if (node.type.includes(SchemaKind.Array)) {
+        return SchemaKind.Array;
+      }
+    }
+
+    return node.type;
+  }
+
+  return inferType(node);
 }
 
 function processNode(node: JSONSchema4): SchemaNode | void {
   const combiner = getCombiner(node);
-
-  if (node.type !== undefined && combiner === undefined) {
-    const base: IBaseNode = {
-      id: assignId(node),
-      type: getType(node),
-      validations: getValidations(node),
-      annotations: getAnnotations(node),
-      enum: node.enum,
-    };
-
-    if (Array.isArray(base.type)) {
-      if (base.type.includes('object')) {
-        // special case :P
-        assignNodeSpecificFields(base, {
-          ...node,
-          type: 'object',
-        });
-      }
-    } else {
-      assignNodeSpecificFields(base, node);
-    }
-
-    return base;
-  }
 
   if ('enum' in node) {
     return {
@@ -84,7 +82,19 @@ function processNode(node: JSONSchema4): SchemaNode | void {
     } as IRefNode;
   }
 
-  if (combiner !== undefined) {
+  if (combiner === undefined) {
+    const base: IBaseNode = {
+      id: assignId(node),
+      type: node.type || inferType(node),
+      validations: getValidations(node),
+      annotations: getAnnotations(node),
+      enum: node.enum,
+    };
+
+    assignNodeSpecificFields(base, node);
+
+    return base;
+  } else {
     return {
       id: assignId(node),
       combiner,

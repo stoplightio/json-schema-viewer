@@ -49,7 +49,9 @@ Array [
       ],
       "required": false,
       "subtype": "object",
-      "type": "array",
+      "type": Array [
+        "array",
+      ],
       "validations": Object {},
     },
     "name": "",
@@ -479,9 +481,11 @@ Array [
     "id": "random-id",
     "level": 1,
     "metadata": Object {
+      "additionalItems": undefined,
       "annotations": Object {},
       "enum": undefined,
       "id": "random-id",
+      "items": undefined,
       "name": "items",
       "path": Array [
         "properties",

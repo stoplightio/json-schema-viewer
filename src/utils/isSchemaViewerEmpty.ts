@@ -1,6 +1,5 @@
 import { ISchema } from '@stoplight/types';
-import get = require('lodash/get');
-import isEmpty = require('lodash/isEmpty');
+import { get, isEmpty } from 'lodash';
 
 const combinerTypes = ['allOf', 'oneOf', 'anyOf'];
 
