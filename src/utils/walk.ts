@@ -1,4 +1,4 @@
-import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
+import { JSONSchema4 } from 'json-schema';
 import {
   IArrayNode,
   IBaseNode,
@@ -11,7 +11,9 @@ import {
 } from '../types';
 import { assignId } from './assignId';
 import { getAnnotations } from './getAnnotations';
+import { getPrimaryType } from './getPrimaryType';
 import { getValidations } from './getValidations';
+import { inferType } from './inferType';
 
 const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
   if ('allOf' in node) return 'allOf';
@@ -31,36 +33,6 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
       (base as IObjectNode).additionalProperties = node.additionalProperties;
       break;
   }
-}
-
-function inferType(node: JSONSchema4): JSONSchema4TypeName | undefined {
-  if ('properties' in node) {
-    return SchemaKind.Object;
-  }
-
-  if ('items' in node) {
-    return SchemaKind.Array;
-  }
-
-  return;
-}
-
-export function getPrimaryType(node: JSONSchema4) {
-  if (node.type !== undefined) {
-    if (Array.isArray(node.type)) {
-      if (node.type.includes(SchemaKind.Object)) {
-        return SchemaKind.Object;
-      }
-
-      if (node.type.includes(SchemaKind.Array)) {
-        return SchemaKind.Array;
-      }
-    }
-
-    return node.type;
-  }
-
-  return inferType(node);
 }
 
 function processNode(node: JSONSchema4): SchemaNode | void {

@@ -2,10 +2,11 @@ import { JSONSchema4 } from 'json-schema';
 import { isEmpty as _isEmpty } from 'lodash';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
+import { getPrimaryType } from './getPrimaryType';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
 import { lookupRef } from './lookupRef';
-import { getPrimaryType, walk } from './walk';
+import { walk } from './walk';
 
 type Walker = (
   schema: JSONSchema4,
@@ -51,7 +52,10 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, level 
       metadata: {
         ...node,
         ...meta,
-        ...(schema.items !== undefined && !Array.isArray(schema.items) && { subtype: schema.items.type }),
+        ...(schema.items !== undefined &&
+          !Array.isArray(schema.items) && {
+            subtype: '$ref' in schema.items ? `$ref( ${schema.items.$ref} )` : schema.items.type,
+          }),
         path,
       },
     };

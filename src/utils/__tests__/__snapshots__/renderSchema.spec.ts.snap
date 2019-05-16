@@ -79,6 +79,27 @@ Array [
 ]
 `;
 
+exports[`renderSchema util should match array-of-refs.json 1`] = `
+Array [
+  Object {
+    "id": "random-id",
+    "level": 0,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "items": undefined,
+      "path": Array [],
+      "subtype": "$ref( ./models/todo-full.json )",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+]
+`;
+
 exports[`renderSchema util should match combiner-schema.json 1`] = `
 Array [
   Object {
