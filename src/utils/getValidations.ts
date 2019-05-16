@@ -27,5 +27,7 @@ export const getValidations = (node: JSONSchema4): Dictionary<unknown> => {
   return {
     ..._pick(node, COMMON_VALIDATION_TYPES),
     ...(extraValidations && _pick(node, extraValidations)),
+
+    ...('items' in node && node.items !== undefined && 'type' in node.items ? getValidations(node.items) : null),
   };
 };
