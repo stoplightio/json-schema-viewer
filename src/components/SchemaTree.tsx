@@ -18,12 +18,7 @@ export interface ISchemaTree {
 }
 
 export const SchemaTree = observer<ISchemaTree>(props => {
-  const {
-    //  hideTopBar, name,
-    treeStore,
-    maxRows,
-    className,
-  } = props;
+  const { hideTopBar, name, treeStore, maxRows, className } = props;
 
   treeStore.on(TreeListEvents.NodeClick, (e, node) => treeStore.toggleExpand(node));
 
@@ -39,12 +34,12 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')}>
-      {/* {name &&
+      {name &&
         !hideTopBar && (
-          <div className="flex items-center text-sm px-6 font-semibold" style={{ height: ROW_HEIGHT }}>
+          <div className="flex items-center text-sm px-6 font-semibold" style={{ height: 30 }}>
             {name}
           </div>
-        )} */}
+        )}
 
       <TreeList striped maxRows={maxRows} store={treeStore} rowRenderer={rowRenderer} />
     </div>
