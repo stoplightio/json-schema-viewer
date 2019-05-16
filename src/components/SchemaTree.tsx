@@ -4,10 +4,7 @@ import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
-import { DetailDialog, SchemaRow } from './';
-
-const ROW_HEIGHT = 40;
-const canDrag = () => false;
+import { SchemaRow } from './';
 
 export interface ISchemaTree {
   treeStore: TreeStore;
@@ -21,17 +18,14 @@ export interface ISchemaTree {
 }
 
 export const SchemaTree = observer<ISchemaTree>(props => {
-  const { hideTopBar, name, treeStore, maxRows, className } = props;
+  const {
+    //  hideTopBar, name,
+    treeStore,
+    maxRows,
+    className,
+  } = props;
 
-  treeStore.on(TreeListEvents.NodeClick, (e, node) => {
-    if (node.level === 0) return; // Don't allow collapsing the root
-
-    if (node.canHaveChildren) {
-      treeStore.toggleExpand(node);
-    } else {
-      treeStore.setActiveNode(node.id);
-    }
-  });
+  treeStore.on(TreeListEvents.NodeClick, (e, node) => treeStore.toggleExpand(node));
 
   const itemData = {
     treeStore,
@@ -45,23 +39,14 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')}>
-      {name &&
+      {/* {name &&
         !hideTopBar && (
           <div className="flex items-center text-sm px-6 font-semibold" style={{ height: ROW_HEIGHT }}>
             {name}
           </div>
-        )}
+        )} */}
 
-      <DetailDialog treeStore={treeStore} />
-
-      <TreeList
-        striped
-        maxRows={maxRows}
-        rowHeight={ROW_HEIGHT}
-        canDrag={canDrag}
-        store={treeStore}
-        rowRenderer={rowRenderer}
-      />
+      <TreeList striped maxRows={maxRows} store={treeStore} rowRenderer={rowRenderer} />
     </div>
   );
 });

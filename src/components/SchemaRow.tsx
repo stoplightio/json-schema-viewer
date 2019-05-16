@@ -1,10 +1,15 @@
+import { MarkdownViewer } from '@stoplight/markdown-viewer';
 import { IRowRendererOptions, ITreeListNode, TreeStore } from '@stoplight/tree-list';
-import { Button, Colors, Icon } from '@stoplight/ui-kit';
-import * as pluralize from 'pluralize';
+import { Colors, Icon, Popover } from '@stoplight/ui-kit';
+import * as cn from 'classnames';
 import * as React from 'react';
 
+import get = require('lodash/get');
+import map = require('lodash/map');
+import size = require('lodash/size');
+
 import { SchemaNodeWithMeta } from '../types';
-import { formatRef, isCombiner, isRef } from '../utils';
+import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
 export interface ISchemaRow {
@@ -14,49 +19,68 @@ export interface ISchemaRow {
 }
 
 const ICON_SIZE = 12;
+const ICON_DIMENSION = 20;
+const ROW_OFFSET = 7;
+
+export const validationKeys = {
+  common: ['deprecated', 'enum', 'format', 'example'],
+  number: ['minimum', 'maximum', 'multipleOf', 'exclusiveMinimum', 'exclusiveMaximum'],
+  integer: ['minimum', 'maximum', 'multipleOf', 'exclusiveMinimum', 'exclusiveMaximum'],
+  string: ['minLength', 'maxLength', 'pattern'],
+  array: ['uniqueItems', 'maxItems', 'minItems'],
+  object: ['additionalProperties', 'minProperties', 'maxProperties'],
+};
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
-  const { showDivider, name, $ref, subtype, required, inheritedFrom } = schemaNode;
-
-  const handleButtonClick = React.useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    treeStore.setActiveNode(node.id);
-  }, []);
+  const { showDivider, name, $ref, subtype, required } = schemaNode;
 
   const type = isRef(schemaNode) ? '$ref' : isCombiner(schemaNode) ? schemaNode.combiner : schemaNode.type;
-  const description = 'annotations' in schemaNode && schemaNode.annotations.description;
+  const description = get(schemaNode, 'annotations.description');
+  const childrenCount = size(get(schemaNode, 'properties'));
 
-  const validationCount = 'validations' in schemaNode ? Object.keys(schemaNode.validations).length : 0;
+  const nodeValidations = {
+    ...('annotations' in schemaNode && schemaNode.annotations.default
+      ? { default: schemaNode.annotations.default }
+      : {}),
+    ...get(schemaNode, 'validations', {}),
+  };
+  const validationCount = Object.keys(nodeValidations).length;
 
-  const showCaretIcon = node.level > 0 && node.canHaveChildren ? true : false;
-
-  const marginLeft = ICON_SIZE * node.level;
+  const requiredElem = (
+    <span className={cn(required ? 'font-semibold' : 'text-darken-7')}>
+      {required ? 'required' : 'optional'}
+      {validationCount ? `+${validationCount}` : ''}
+    </span>
+  );
 
   return (
-    <div className="flex-1 flex items-center" style={{ marginLeft: ICON_SIZE, marginRight: ICON_SIZE }}>
+    <div className="flex-1 flex items-center" style={{ marginLeft: ROW_OFFSET, marginRight: ROW_OFFSET }}>
       <div
         className="flex flex-1 items-center text-sm leading-tight w-full h-full relative"
-        style={{ marginLeft, marginRight: ICON_SIZE }}
+        style={{
+          marginLeft: ICON_DIMENSION * (node.level + 1) + ROW_OFFSET, // offset for spacing
+        }}
       >
-        {showCaretIcon && (
-          <Button
-            minimal
-            small
-            className="absolute"
-            style={{ left: ICON_SIZE * -2 }}
-            icon={
-              <Icon
-                iconSize={ICON_SIZE}
-                icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
-                color={Colors.GRAY1}
-              />
-            }
-          />
+        {node.canHaveChildren && (
+          <div
+            className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
+            style={{
+              left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+              width: ICON_DIMENSION,
+              height: ICON_DIMENSION,
+            }}
+          >
+            <Icon
+              iconSize={ICON_SIZE}
+              icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
+              color={Colors.GRAY1}
+            />
+          </div>
         )}
 
         {showDivider && (
-          <div className="flex items-center w-full h-2 absolute" style={{ top: -16, left: -16 }}>
+          <div className="flex items-center w-full h-2 absolute" style={{ top: -11, left: -16 }}>
             <div className="font-bold text-darken-7 pr-2">OR</div>
             <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
           </div>
@@ -64,36 +88,67 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
 
         <div className="flex-1 truncate">
           <div className="flex items-baseline">
-            {name && <span>{name}</span>}
+            {name && <span className="mr-2">{name}</span>}
 
-            <Types className="ml-2" type={type} subtype={subtype}>
+            <Types type={type} subtype={subtype}>
               {type === '$ref' ? `[${$ref}]` : null}
             </Types>
 
-            {inheritedFrom && <span className="text-darken-7 ml-2">{`{${formatRef(inheritedFrom)}}`}</span>}
-          </div>
+            {node.canHaveChildren && <span className="ml-2 text-darken-7">{`{${childrenCount}}`}</span>}
 
-          {description && <span className="text-darken-7 text-xs">{description}</span>}
+            {description && (
+              <Popover
+                boundary="window"
+                interactionKind="hover"
+                target={<span className="ml-2 text-darken-7">{description}</span>}
+                content={
+                  <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
+                    <MarkdownViewer markdown={description} />
+                  </div>
+                }
+              />
+            )}
+          </div>
         </div>
 
-        {validationCount > 0 && (
-          <div className="ml-2 text-darken-7 text-xs">
-            {validationCount} {pluralize('validation', validationCount)}
-          </div>
+        {validationCount ? (
+          <Popover
+            boundary="window"
+            interactionKind="hover"
+            content={
+              <div className="p-3">
+                {map(Object.keys(nodeValidations), (key, index) => {
+                  const validation = nodeValidations[key];
+
+                  let elem = [];
+                  if (Array.isArray(validation)) {
+                    elem = validation.map(v => (
+                      <span key={v} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                        {v}
+                      </span>
+                    ));
+                  } else if (typeof validation === 'object') {
+                    elem = [<span className="px-1 bg-red-2 text-red-7 text-sm rounded">{'{...}'}</span>];
+                  } else {
+                    elem = [
+                      <span className="px-1 bg-red-2 text-red-7 text-sm rounded">{JSON.stringify(validation)}</span>,
+                    ];
+                  }
+
+                  return (
+                    <div key={index} className="py-1">
+                      <span className="font-medium pr-2">{key}:</span>
+                      <span className="px-1 bg-red-2 text-red-7 text-sm rounded">{elem}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            }
+            target={requiredElem}
+          />
+        ) : (
+          requiredElem
         )}
-
-        {required && <div className="ml-2 font-semibold text-xs">required</div>}
-
-        {node.canHaveChildren &&
-          (validationCount || description) && (
-            <Button
-              small
-              className="ml-2"
-              id={`${node.id}-showMore`}
-              icon={<Icon icon="info-sign" className="opacity-75" iconSize={ICON_SIZE} />}
-              onClick={handleButtonClick}
-            />
-          )}
       </div>
     </div>
   );
