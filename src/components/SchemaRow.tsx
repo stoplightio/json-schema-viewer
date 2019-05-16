@@ -128,10 +128,10 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
                       </span>
                     ));
                   } else if (typeof validation === 'object') {
-                    elem = [<span className="px-1 bg-red-2 text-red-7 text-sm rounded">{'{...}'}</span>];
+                    elem = [<span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">{'{...}'}</span>];
                   } else {
                     elem = [
-                      <span className="px-1 bg-red-2 text-red-7 text-sm rounded">{JSON.stringify(validation)}</span>,
+                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">{JSON.stringify(validation)}</span>,
                     ];
                   }
 
