@@ -16,7 +16,7 @@ type Walker = (
   schema: JSONSchema4,
   level?: number,
   meta?: ITreeNodeMeta,
-  options?: { mergeAllOf?: boolean }
+  options?: { mergeAllOf?: boolean },
 ) => IterableIterator<SchemaTreeListNode>;
 
 const getProperties: Walker = function*(schema, level = 0, meta) {
@@ -48,7 +48,7 @@ const getPatternProperties: Walker = function*(schema, level = 0, meta) {
 export const renderSchema: Walker = function*(schema, level = 0, meta = { path: [] }, options = { mergeAllOf: false }) {
   if (typeof schema !== 'object' || schema === null) {
     throw new TypeError(
-      `Expected schema to be an "object" but received ${schema === null ? '"null"' : `a "${typeof schema}"`}`
+      `Expected schema to be an "object" but received ${schema === null ? '"null"' : `a "${typeof schema}"`}`,
     );
   }
 

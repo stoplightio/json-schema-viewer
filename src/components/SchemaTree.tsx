@@ -29,7 +29,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   const rowRenderer = React.useCallback(
     (node, rowOptions) => <SchemaRow node={node} rowOptions={rowOptions} {...itemData} />,
-    [itemData]
+    [itemData],
   );
 
   return (
