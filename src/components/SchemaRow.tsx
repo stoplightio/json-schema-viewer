@@ -39,16 +39,19 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
   const validationCount = Object.keys(nodeValidations).length;
 
   const requiredElem = (
-    <span className={cn(required ? 'font-semibold' : 'text-darken-7')}>
+    <span className={cn(required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
       {required ? 'required' : 'optional'}
       {validationCount ? `+${validationCount}` : ''}
     </span>
   );
 
   return (
-    <div className="flex-1 flex items-center" style={{ marginLeft: ROW_OFFSET, marginRight: ROW_OFFSET }}>
+    <div
+      className="flex-1 flex items-center overflow-hidden"
+      style={{ marginLeft: ROW_OFFSET, marginRight: ROW_OFFSET }}
+    >
       <div
-        className="flex flex-1 items-center text-sm leading-tight w-full h-full relative"
+        className="flex flex-1 items-center text-sm leading-tight w-full h-full relative overflow-hidden"
         style={{
           marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
@@ -73,10 +76,13 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
 
         {schemaNode.divider && (
           <div className="flex items-center w-full absolute" style={{ top: -9, height: 1 }}>
-            <div className="font-medium text-darken-7 pr-2 uppercase text-xs" style={{ marginLeft: -10 }}>
+            <div
+              className="font-medium text-darken-7 dark:text-lighten-7 pr-2 uppercase text-xs"
+              style={{ marginLeft: -10 }}
+            >
               {schemaNode.divider}
             </div>
-            <div className="flex-1 bg-darken-5" style={{ height: 1 }} />
+            <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
         )}
 
@@ -88,17 +94,21 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
               {type === '$ref' ? `[${$ref}]` : null}
             </Types>
 
-            {node.canHaveChildren && <span className="ml-2 text-darken-7">{`{${childrenCount}}`}</span>}
+            {node.canHaveChildren && (
+              <span className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</span>
+            )}
 
             {'pattern' in schemaNode && schemaNode.pattern ? (
-              <span className="text-darken-7 ml-2">(pattern property)</span>
+              <span className="text-darken-7 dark:text-lighten-6 ml-2">(pattern property)</span>
             ) : null}
 
             {description && (
               <Popover
                 boundary="window"
                 interactionKind="hover"
-                target={<span className="ml-2 text-darken-7">{description}</span>}
+                className="overflow-hidden JSV--Popover"
+                targetClassName="overflow-hidden block"
+                target={<div className="ml-2 text-darken-7 dark:text-lighten-6 truncate">{description}</div>}
                 content={
                   <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
                     <MarkdownViewer markdown={description} />

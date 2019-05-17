@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
-import { IType, PropertyTypeColors, Type } from '../Type';
+import { IType, PropertyTypeColors, Type } from '../Types';
 
 describe('Type component', () => {
   it.each(Object.keys(PropertyTypeColors))('should handle $s type', type => {

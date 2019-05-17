@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const Wrapper: React.FunctionComponent<React.HTMLAttributes<HTMLElement>> = ({ children, ...props }) => {
   return (
-    <div style={{ margin: '200px auto', width: '80vw' }}>
+    <div style={{ padding: '200px auto' }}>
       <div
         // @ts-ignore
         style={{
