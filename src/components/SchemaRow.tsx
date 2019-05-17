@@ -50,30 +50,33 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
       <div
         className="flex flex-1 items-center text-sm leading-tight w-full h-full relative"
         style={{
-          marginLeft: ICON_DIMENSION * (node.level + 1) + ROW_OFFSET, // offset for spacing
+          marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
       >
-        {node.canHaveChildren && (
-          <div
-            className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
-            style={{
-              left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
-              width: ICON_DIMENSION,
-              height: ICON_DIMENSION,
-            }}
-          >
-            <Icon
-              iconSize={ICON_SIZE}
-              icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
-              color={Colors.GRAY1}
-            />
-          </div>
-        )}
+        {node.canHaveChildren &&
+          node.level > 0 && (
+            <div
+              className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
+              style={{
+                left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+                width: ICON_DIMENSION,
+                height: ICON_DIMENSION,
+              }}
+            >
+              <Icon
+                iconSize={ICON_SIZE}
+                icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
+                color={Colors.GRAY1}
+              />
+            </div>
+          )}
 
         {schemaNode.divider && (
-          <div className="flex items-center w-full h-2 absolute" style={{ top: -11, left: -16 }}>
-            <div className="font-bold text-darken-7 pr-2 uppercase">{schemaNode.divider}</div>
-            <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
+          <div className="flex items-center w-full absolute" style={{ top: -9, height: 1 }}>
+            <div className="font-medium text-darken-7 pr-2 uppercase text-xs" style={{ marginLeft: -10 }}>
+              {schemaNode.divider}
+            </div>
+            <div className="flex-1 bg-darken-5" style={{ height: 1 }} />
           </div>
         )}
 
