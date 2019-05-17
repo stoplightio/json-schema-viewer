@@ -16,10 +16,7 @@
           "maximum": 1000000
         },
         "completed_at": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "created_at": {
@@ -31,9 +28,7 @@
           "format": "date-time"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     }
   ],
   "type": "object"

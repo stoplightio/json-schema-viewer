@@ -16,15 +16,9 @@
       "format": "date-time"
     },
     "items": {
-      "type": [
-        "null",
-        "array"
-      ],
+      "type": ["null", "array"],
       "items": {
-        "type": [
-          "string",
-          "number"
-        ]
+        "type": ["string", "number"]
       }
     },
     "email": {
@@ -44,10 +38,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "foo",
-            "bar"
-          ]
+          "required": ["foo", "bar"]
         },
         {
           "type": "array",
@@ -58,10 +49,7 @@
       ]
     },
     "permissions": {
-      "type": [
-        "string",
-        "object"
-      ],
+      "type": ["string", "object"],
       "properties": {
         "ids": {
           "type": "array",
@@ -80,9 +68,5 @@
     "foo": { "type": "integer" },
     "_name$": { "type": "string" }
   },
-  "required": [
-    "name",
-    "age",
-    "completed_at"
-  ]
+  "required": ["name", "age", "completed_at"]
 }
