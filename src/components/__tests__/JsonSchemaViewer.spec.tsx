@@ -3,10 +3,10 @@ import 'jest-enzyme';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { JsonSchemaViewerComponent, SchemaTree } from '../components';
-import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
+import { JsonSchemaViewerComponent, SchemaTree } from '../../components';
+import { isSchemaViewerEmpty } from '../../utils/isSchemaViewerEmpty';
 
-jest.mock('../utils/isSchemaViewerEmpty');
+jest.mock('../../utils/isSchemaViewerEmpty');
 
 const schema: JSONSchema4 = {
   properties: {
