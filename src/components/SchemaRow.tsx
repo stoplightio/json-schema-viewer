@@ -22,18 +22,9 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-export const validationKeys = {
-  common: ['deprecated', 'enum', 'format', 'example'],
-  number: ['minimum', 'maximum', 'multipleOf', 'exclusiveMinimum', 'exclusiveMaximum'],
-  integer: ['minimum', 'maximum', 'multipleOf', 'exclusiveMinimum', 'exclusiveMaximum'],
-  string: ['minLength', 'maxLength', 'pattern'],
-  array: ['uniqueItems', 'maxItems', 'minItems'],
-  object: ['additionalProperties', 'minProperties', 'maxProperties'],
-};
-
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
-  const { showDivider, name, $ref, subtype, required } = schemaNode;
+  const { name, $ref, subtype, required } = schemaNode;
 
   const type = isRef(schemaNode) ? '$ref' : isCombiner(schemaNode) ? schemaNode.combiner : schemaNode.type;
   const description = get(schemaNode, 'annotations.description');
@@ -79,9 +70,9 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
           </div>
         )}
 
-        {showDivider && (
+        {schemaNode.divider && (
           <div className="flex items-center w-full h-2 absolute" style={{ top: -11, left: -16 }}>
-            <div className="font-bold text-darken-7 pr-2">OR</div>
+            <div className="font-bold text-darken-7 pr-2">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
           </div>
         )}
@@ -95,6 +86,10 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
             </Types>
 
             {node.canHaveChildren && <span className="ml-2 text-darken-7">{`{${childrenCount}}`}</span>}
+
+            {'pattern' in schemaNode && schemaNode.pattern ? (
+              <span className="text-darken-7 ml-2">(pattern property)</span>
+            ) : null}
 
             {description && (
               <Popover
@@ -128,10 +123,16 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
                       </span>
                     ));
                   } else if (typeof validation === 'object') {
-                    elem = [<span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">{'{...}'}</span>];
+                    elem = [
+                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                        {'{...}'}
+                      </span>,
+                    ];
                   } else {
                     elem = [
-                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">{JSON.stringify(validation)}</span>,
+                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                        {JSON.stringify(validation)}
+                      </span>,
                     ];
                   }
 
