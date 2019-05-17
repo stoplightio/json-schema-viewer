@@ -8,13 +8,13 @@ import { ITreeNodeMeta, JSONSchema4CombinerName } from '../types';
 /**
  * TYPE
  */
-interface IType {
+export interface IType {
   type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
   subtype?: ITreeNodeMeta['subtype'];
   className?: string;
 }
 
-const Type: React.FunctionComponent<IType> = ({ className, children, type, subtype }) => {
+export const Type: React.FunctionComponent<IType> = ({ className, children, type, subtype }) => {
   return (
     <span className={cn(className, PropertyTypeColors[type])}>
       {type === 'array' && subtype && subtype !== 'array' ? `array[${subtype}]` : type}
