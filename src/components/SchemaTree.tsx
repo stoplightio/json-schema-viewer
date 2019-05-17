@@ -17,6 +17,8 @@ export interface ISchemaTree {
   maxRows?: number;
 }
 
+const canDrag = () => false;
+
 export const SchemaTree = observer<ISchemaTree>(props => {
   const { hideTopBar, name, treeStore, maxRows, className } = props;
 
@@ -41,7 +43,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
           </div>
         )}
 
-      <TreeList striped maxRows={maxRows} store={treeStore} rowRenderer={rowRenderer} />
+      <TreeList striped maxRows={maxRows} store={treeStore} rowRenderer={rowRenderer} canDrag={canDrag} />
     </div>
   );
 });

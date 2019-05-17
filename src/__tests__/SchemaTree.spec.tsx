@@ -56,7 +56,6 @@ describe('SchemaTree component', () => {
       expect(wrapper.find(TreeList)).toExist();
       expect(wrapper.find(TreeList)).toHaveProp({
         store,
-        rowHeight: 40,
       });
     });
 
