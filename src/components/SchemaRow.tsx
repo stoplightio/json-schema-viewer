@@ -53,7 +53,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
       <div
         className="flex flex-1 items-center text-sm leading-tight w-full h-full relative overflow-hidden"
         style={{
-          marginLeft: ICON_DIMENSION * node.level + ROW_OFFSET, // offset for spacing
+          marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
       >
         {node.canHaveChildren &&
@@ -75,9 +75,14 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
           )}
 
         {schemaNode.divider && (
-          <div className="flex items-center w-full h-2 absolute" style={{ top: -11, left: -16 }}>
-            <div className="font-bold text-darken-7 dark:text-lighten-7 pr-2 uppercase">{schemaNode.divider}</div>
-            <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 2 }} />
+          <div className="flex items-center w-full absolute" style={{ top: -9, height: 1 }}>
+            <div
+              className="font-medium text-darken-7 dark:text-lighten-7 pr-2 uppercase text-xs"
+              style={{ marginLeft: -10 }}
+            >
+              {schemaNode.divider}
+            </div>
+            <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
         )}
 
