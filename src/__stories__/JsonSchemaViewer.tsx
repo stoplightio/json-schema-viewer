@@ -61,8 +61,8 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('allOf-schema', () => (
     <JsonSchemaViewer
-      schema={allOfSchema}
-      dereferencedSchema={allOfSchemaResolved}
+      schema={allOfSchema as JSONSchema4}
+      dereferencedSchema={allOfSchemaResolved as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}

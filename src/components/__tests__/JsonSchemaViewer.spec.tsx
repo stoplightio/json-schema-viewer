@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { isSchemaViewerEmpty } from '../../utils';
 import { MutedText } from '../common/MutedText';
@@ -37,7 +38,7 @@ describe('JSON Schema Viewer component', () => {
 
   test('should render SchemaView if schema is provided', () => {
     (isSchemaViewerEmpty as jest.Mock).mockReturnValue(false);
-    const wrapper = shallow(<JsonSchemaViewer schema={schema} />);
+    const wrapper = shallow(<JsonSchemaViewer schema={schema as JSONSchema4} />);
     expect(isSchemaViewerEmpty).toHaveBeenCalledWith(schema);
     expect(wrapper.find(MutedText)).not.toExist();
     expect(wrapper.find(SchemaTree)).toExist();
