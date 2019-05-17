@@ -1,7 +1,7 @@
 {
   "name": "@stoplight/json-schema-viewer",
   "version": "0.0.0",
-  "description": "A JSON Schema viewer React component",
+  "description": "A beautiful React component for viewing JSON Schema",
   "keywords": [],
   "sideEffects": false,
   "homepage": "https://github.com/stoplightio/json-schema-viewer",
