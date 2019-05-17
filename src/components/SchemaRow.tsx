@@ -39,41 +39,45 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
   const validationCount = Object.keys(nodeValidations).length;
 
   const requiredElem = (
-    <span className={cn(required ? 'font-semibold' : 'text-darken-7')}>
+    <span className={cn(required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
       {required ? 'required' : 'optional'}
       {validationCount ? `+${validationCount}` : ''}
     </span>
   );
 
   return (
-    <div className="flex-1 flex items-center" style={{ marginLeft: ROW_OFFSET, marginRight: ROW_OFFSET }}>
+    <div
+      className="flex-1 flex items-center overflow-hidden"
+      style={{ marginLeft: ROW_OFFSET, marginRight: ROW_OFFSET }}
+    >
       <div
-        className="flex flex-1 items-center text-sm leading-tight w-full h-full relative"
+        className="flex flex-1 items-center text-sm leading-tight w-full h-full relative overflow-hidden"
         style={{
-          marginLeft: ICON_DIMENSION * (node.level + 1) + ROW_OFFSET, // offset for spacing
+          marginLeft: ICON_DIMENSION * node.level + ROW_OFFSET, // offset for spacing
         }}
       >
-        {node.canHaveChildren && (
-          <div
-            className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
-            style={{
-              left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
-              width: ICON_DIMENSION,
-              height: ICON_DIMENSION,
-            }}
-          >
-            <Icon
-              iconSize={ICON_SIZE}
-              icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
-              color={Colors.GRAY1}
-            />
-          </div>
-        )}
+        {node.canHaveChildren &&
+          node.level > 0 && (
+            <div
+              className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
+              style={{
+                left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+                width: ICON_DIMENSION,
+                height: ICON_DIMENSION,
+              }}
+            >
+              <Icon
+                iconSize={ICON_SIZE}
+                icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
+                color={Colors.GRAY1}
+              />
+            </div>
+          )}
 
         {schemaNode.divider && (
           <div className="flex items-center w-full h-2 absolute" style={{ top: -11, left: -16 }}>
-            <div className="font-bold text-darken-7 pr-2 uppercase">{schemaNode.divider}</div>
-            <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
+            <div className="font-bold text-darken-7 dark:text-lighten-7 pr-2 uppercase">{schemaNode.divider}</div>
+            <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 2 }} />
           </div>
         )}
 
@@ -85,17 +89,21 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
               {type === '$ref' ? `[${$ref}]` : null}
             </Types>
 
-            {node.canHaveChildren && <span className="ml-2 text-darken-7">{`{${childrenCount}}`}</span>}
+            {node.canHaveChildren && (
+              <span className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</span>
+            )}
 
             {'pattern' in schemaNode && schemaNode.pattern ? (
-              <span className="text-darken-7 ml-2">(pattern property)</span>
+              <span className="text-darken-7 dark:text-lighten-6 ml-2">(pattern property)</span>
             ) : null}
 
             {description && (
               <Popover
                 boundary="window"
                 interactionKind="hover"
-                target={<span className="ml-2 text-darken-7">{description}</span>}
+                className="overflow-hidden JSV--Popover"
+                targetClassName="overflow-hidden block"
+                target={<div className="ml-2 text-darken-7 dark:text-lighten-6 truncate">{description}</div>}
                 content={
                   <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
                     <MarkdownViewer markdown={description} />

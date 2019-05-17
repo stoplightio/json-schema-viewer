@@ -70,7 +70,16 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       return <div>{emptyText}</div>;
     }
 
-    return <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />;
+    return (
+      <SchemaTree
+        className="JsonSchemaViewer"
+        expanded={expanded}
+        name={name}
+        schema={schema}
+        treeStore={this.treeStore}
+        {...props}
+      />
+    );
   }
 }
 

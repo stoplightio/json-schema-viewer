@@ -91,4 +91,17 @@ storiesOf('JsonSchemaViewer', module)
         hideTopBar={boolean('hideTopBar', false)}
       />
     </Wrapper>
+  ))
+  .add('dark', () => (
+    <div style={{ height: '100vh' }} className="bp3-dark bg-gray-8">
+      <Wrapper>
+        <JsonSchemaViewer
+          name={text('name', 'my stress schema')}
+          schema={stressSchema as JSONSchema4}
+          defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+          expanded={boolean('expanded', false)}
+          hideTopBar={boolean('hideTopBar', false)}
+        />
+      </Wrapper>
+    </div>
   ));

@@ -1,0 +1,11 @@
+@import '~@stoplight/ui-kit/styles/common/theme';
+
+.JsonSchemaViewer {
+  .JSV--Popover {
+    overflow: hidden;
+
+    .#{$ns}-popover-target {
+      display: block !important;
+    }
+  }
+}

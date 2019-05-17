@@ -38,7 +38,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     <div className={cn(className, 'flex flex-col h-full w-full')}>
       {name &&
         !hideTopBar && (
-          <div className="flex items-center text-sm px-6 font-semibold" style={{ height: 30 }}>
+          <div className="flex items-center text-sm px-6 font-semibold" style={{ minHeight: 30 }}>
             {name}
           </div>
         )}
