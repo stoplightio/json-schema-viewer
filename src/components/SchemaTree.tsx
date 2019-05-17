@@ -2,7 +2,7 @@ import { TreeList, TreeListMouseEventHandler, TreeStore } from '@stoplight/tree-
 import { Omit } from '@stoplight/types';
 import { Box, IBox, ThemeZone } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
-import _isEmpty = require('lodash/isEmpty');
+import { isEmpty as _isEmpty } from 'lodash';
 import * as React from 'react';
 import { useMetadata } from '../hooks';
 import { useTheme } from '../theme';

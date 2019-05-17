@@ -11,7 +11,9 @@ import {
 } from '../types';
 import { assignId } from './assignId';
 import { getAnnotations } from './getAnnotations';
+import { getPrimaryType } from './getPrimaryType';
 import { getValidations } from './getValidations';
+import { inferType } from './inferType';
 
 const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
   if ('allOf' in node) return 'allOf';
@@ -20,7 +22,7 @@ const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
 };
 
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
-  switch (getType(node)) {
+  switch (getPrimaryType(node)) {
     case SchemaKind.Array:
       (base as IArrayNode).items = node.array;
       (base as IArrayNode).additionalItems = node.additionalItems;
@@ -33,51 +35,32 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   }
 }
 
-function getType(node: JSONSchema4) {
-  if (Array.isArray(node.type)) {
-    return node.type.length === 1 ? node.type[0] : node.type;
-  }
-
-  return node.type;
-}
-
 function processNode(node: JSONSchema4): SchemaNode | void {
   const combiner = getCombiner(node);
+  const type = node.type || inferType(node);
 
-  if (node.type !== undefined && combiner === undefined) {
+  if (combiner) {
+    return {
+      id: assignId(node),
+      combiner,
+      properties: node[combiner],
+      annotations: getAnnotations(node),
+      ...(type !== undefined && { type }),
+    } as ICombinerNode;
+  }
+
+  if (type) {
     const base: IBaseNode = {
       id: assignId(node),
-      type: getType(node),
+      type: node.type || inferType(node),
       validations: getValidations(node),
       annotations: getAnnotations(node),
       enum: node.enum,
     };
 
-    if (Array.isArray(base.type)) {
-      if (base.type.includes('object')) {
-        // special case :P
-        assignNodeSpecificFields(base, {
-          ...node,
-          type: 'object',
-        });
-      }
-    } else {
-      assignNodeSpecificFields(base, node);
-    }
+    assignNodeSpecificFields(base, node);
 
     return base;
-  }
-
-  // combiners can have type that propagate to children
-  if (combiner !== undefined) {
-    return {
-      id: assignId(node),
-      combiner,
-      type: getType(node),
-      properties: node[combiner],
-      annotations: getAnnotations(node),
-      ...(node.type !== undefined && { type: node.type }),
-    } as ICombinerNode;
   }
 
   if ('enum' in node) {

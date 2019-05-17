@@ -14,6 +14,7 @@ describe('renderSchema util', () => {
     ['ref/original.json', 'ref/resolved.json'],
     ['combiner-schema.json', ''],
     ['array-of-objects.json', ''],
+    ['array-of-refs.json', ''],
   ])('should match %s', (schema, dereferenced) => {
     expect(
       Array.from(
