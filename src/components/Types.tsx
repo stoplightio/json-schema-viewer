@@ -1,12 +1,12 @@
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
-import { JSONSchema4CombinerName } from '../types';
+import { ITreeNodeMeta, JSONSchema4CombinerName } from '../types';
 import { MutedText } from './common/MutedText';
 import { Type } from './Type';
 
 interface ITypes {
   type?: JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName;
-  subtype?: JSONSchema4TypeName | JSONSchema4TypeName[];
+  subtype?: ITreeNodeMeta['subtype'];
 }
 
 export const Types: React.FunctionComponent<ITypes> = ({ type, subtype }) => {

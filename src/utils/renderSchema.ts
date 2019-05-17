@@ -1,7 +1,8 @@
 import { JSONSchema4 } from 'json-schema';
-import _isEmpty = require('lodash/isEmpty');
+import { isEmpty as _isEmpty } from 'lodash';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
+import { getPrimaryType } from './getPrimaryType';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
 import { lookupRef } from './lookupRef';
@@ -51,7 +52,10 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, level 
       metadata: {
         ...node,
         ...meta,
-        ...(schema.items !== undefined && !Array.isArray(schema.items) && { subtype: schema.items.type }),
+        ...(schema.items !== undefined &&
+          !Array.isArray(schema.items) && {
+            subtype: '$ref' in schema.items ? `$ref( ${schema.items.$ref} )` : schema.items.type,
+          }),
         path,
       },
     };
@@ -90,62 +94,69 @@ export const renderSchema: Walker = function*(schema, dereferencedSchema, level 
           });
         }
       }
-    } else if (node.type === SchemaKind.Array) {
-      yield {
-        ...baseNode,
-        ...('items' in node &&
-          !_isEmpty(node.items) &&
-          !('subtype' in baseNode.metadata!) && { canHaveChildren: true }),
-        metadata: {
-          ...baseNode.metadata,
-          // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
-          ...(!('subtype' in baseNode) &&
-            (node as IArrayNode).additionalItems && { additional: (node as IArrayNode).additionalItems }),
-        },
-      } as SchemaTreeListNode;
-      if (Array.isArray(schema.items)) {
-        for (const [i, property] of schema.items.entries()) {
-          yield* renderSchema(property, dereferencedSchema, level + 1, {
-            path: [...path, 'items', i],
-          });
-        }
-      } else if (schema.items) {
-        switch (baseNode.metadata && baseNode.metadata.subtype) {
-          case SchemaKind.Object:
-            yield* getProperties(schema.items, dereferencedSchema, level + 1, {
-              ...meta,
-              path: [...path, 'items'],
-            });
-            break;
-          case SchemaKind.Array:
-            yield* renderSchema(schema.items, dereferencedSchema, level + 1, {
-              path,
-            });
-            break;
-        }
-      }
-    } else if ('properties' in node) {
-      // special case :P, it's
-      yield {
-        ...baseNode,
-        ...('properties' in node && !_isEmpty(node.properties) && { canHaveChildren: true }),
-        metadata: {
-          ...baseNode.metadata,
-          ...((node as IObjectNode).additionalProperties && {
-            additional: (node as IObjectNode).additionalProperties,
-          }),
-        },
-      } as SchemaTreeListNode;
-
-      yield* getProperties(schema, dereferencedSchema, level, {
-        path: [...path, 'properties'],
-      });
-
-      yield* getPatternProperties(schema, dereferencedSchema, level, {
-        path: [...path, 'patternProperties'],
-      });
     } else {
-      yield baseNode;
+      switch (getPrimaryType(node)) {
+        case SchemaKind.Array:
+          yield {
+            ...baseNode,
+            ...('items' in node &&
+              !_isEmpty(node.items) &&
+              !('subtype' in baseNode.metadata!) && { canHaveChildren: true }),
+            metadata: {
+              ...baseNode.metadata,
+              // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
+              ...(!('subtype' in baseNode) &&
+                (node as IArrayNode).additionalItems && { additional: (node as IArrayNode).additionalItems }),
+            },
+          } as SchemaTreeListNode;
+
+          if (Array.isArray(schema.items)) {
+            for (const [i, property] of schema.items.entries()) {
+              yield* renderSchema(property, dereferencedSchema, level + 1, {
+                path: [...path, 'items', i],
+              });
+            }
+          } else if (schema.items) {
+            switch (baseNode.metadata && baseNode.metadata.subtype) {
+              case SchemaKind.Object:
+                yield* getProperties(schema.items, dereferencedSchema, level + 1, {
+                  ...meta,
+                  path: [...path, 'items'],
+                });
+                break;
+              case SchemaKind.Array:
+                yield* renderSchema(schema.items, dereferencedSchema, level + 1, {
+                  path,
+                });
+                break;
+            }
+          }
+
+          break;
+        case SchemaKind.Object:
+          yield {
+            ...baseNode,
+            ...('properties' in node && !_isEmpty(node.properties) && { canHaveChildren: true }),
+            metadata: {
+              ...baseNode.metadata,
+              ...((node as IObjectNode).additionalProperties && {
+                additional: (node as IObjectNode).additionalProperties,
+              }),
+            },
+          } as SchemaTreeListNode;
+
+          yield* getProperties(schema, dereferencedSchema, level, {
+            path: [...path, 'properties'],
+          });
+
+          yield* getPatternProperties(schema, dereferencedSchema, level, {
+            path: [...path, 'patternProperties'],
+          });
+
+          break;
+        default:
+          yield baseNode;
+      }
     }
   }
 };
