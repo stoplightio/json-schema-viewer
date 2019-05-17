@@ -1,3 +1,6 @@
+export const GUTTER_WIDTH = 15;
+export const DEFAULT_PADDING = 20;
+
 export * from './assignId';
 export * from './formatRef';
 export * from './getAnnotations';

@@ -1,92 +1,50 @@
-import { TreeList, TreeListMouseEventHandler, TreeStore } from '@stoplight/tree-list';
-import { Omit } from '@stoplight/types';
-import { Box, IBox, ThemeZone } from '@stoplight/ui-kit';
+import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
-import { isEmpty as _isEmpty } from 'lodash';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useMetadata } from '../hooks';
-import { useTheme } from '../theme';
-import { IMasking, SchemaNodeWithMeta } from '../types';
-import { lookupRef } from '../utils';
-import { IJsonSchemaViewer } from './JsonSchemaViewer';
-import { MaskedSchema } from './MaskedSchema';
-import { ISchemaRow, SchemaRow } from './SchemaRow';
-import { TopBar } from './TopBar';
+
+import { SchemaRow } from './';
+
+export interface ISchemaTree {
+  treeStore: TreeStore;
+  schema: JSONSchema4;
+  className?: string;
+  name?: string;
+  dereferencedSchema?: JSONSchema4;
+  hideTopBar?: boolean;
+  expanded?: boolean;
+  maxRows?: number;
+}
 
 const canDrag = () => false;
 
-export interface ISchemaTree extends Omit<IBox, 'onSelect'>, IMasking {
-  name?: string;
-  dereferencedSchema?: JSONSchema4;
-  schema: JSONSchema4;
-  expanded?: boolean;
-  hideTopBar?: boolean;
-  treeStore: TreeStore;
-}
+export const SchemaTree = observer<ISchemaTree>(props => {
+  const { hideTopBar, name, treeStore, maxRows, className } = props;
 
-export const SchemaTree: React.FunctionComponent<ISchemaTree> = props => {
-  const {
-    emptyText,
-    expanded = false,
-    schema,
-    dereferencedSchema,
-    hideTopBar,
-    selected,
-    canSelect,
-    onSelect,
-    name,
-    treeStore,
-    ...rest
-  } = props;
-
-  const theme = useTheme() as IJsonSchemaViewer;
-  const [maskedSchema, setMaskedSchema] = React.useState<JSONSchema4 | null>(null);
-
-  const metadata = useMetadata(schema);
-
-  const handleMaskEdit = React.useCallback<ISchemaRow['onMaskEdit']>(
-    node => {
-      setMaskedSchema(lookupRef(node.path, dereferencedSchema));
-    },
-    [dereferencedSchema]
-  );
-
-  const handleNodeClick = React.useCallback<TreeListMouseEventHandler>(
-    (e, node) => {
-      treeStore.toggleExpand(node);
-    },
-    [treeStore]
-  );
-
-  const handleMaskedSchemaClose = React.useCallback(() => {
-    setMaskedSchema(null);
-  }, []);
-
-  const shouldRenderTopBar = !hideTopBar && (name || !_isEmpty(metadata));
+  treeStore.on(TreeListEvents.NodeClick, (e, node) => treeStore.toggleExpand(node));
 
   const itemData = {
-    onSelect,
-    onMaskEdit: handleMaskEdit,
-    selected,
-    canSelect,
+    treeStore,
+    count: treeStore.nodes.length,
   };
 
-  return (
-    <Box backgroundColor={theme.canvas.bg} color={theme.canvas.fg} {...rest}>
-      {maskedSchema && (
-        <MaskedSchema onClose={handleMaskedSchemaClose} onSelect={onSelect} selected={selected} schema={maskedSchema} />
-      )}
-      {shouldRenderTopBar && <TopBar name={name} metadata={metadata} />}
-      <ThemeZone name="tree-list">
-        <TreeList
-          top={shouldRenderTopBar ? '40px' : 0}
-          rowHeight={40}
-          canDrag={canDrag}
-          store={treeStore}
-          onNodeClick={handleNodeClick}
-          rowRenderer={node => <SchemaRow node={node.metadata as SchemaNodeWithMeta} {...itemData} />}
-        />
-      </ThemeZone>
-    </Box>
+  const rowRenderer = React.useCallback(
+    (node, rowOptions) => <SchemaRow node={node} rowOptions={rowOptions} {...itemData} />,
+    [itemData],
   );
-};
+
+  return (
+    <div className={cn(className, 'flex flex-col h-full w-full')}>
+      {name &&
+        !hideTopBar && (
+          <div className="flex items-center text-sm px-6 font-semibold" style={{ height: 30 }}>
+            {name}
+          </div>
+        )}
+
+      <TreeList striped maxRows={maxRows} store={treeStore} rowRenderer={rowRenderer} canDrag={canDrag} />
+    </div>
+  );
+});
+SchemaTree.displayName = 'JsonSchemaViewer.SchemaTree';

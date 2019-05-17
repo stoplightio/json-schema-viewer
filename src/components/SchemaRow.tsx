@@ -1,132 +1,157 @@
-import { Omit } from '@stoplight/types';
-import { Box, Button, Checkbox, Flex, IBox } from '@stoplight/ui-kit';
+import { MarkdownViewer } from '@stoplight/markdown-viewer';
+import { IRowRendererOptions, ITreeListNode, TreeStore } from '@stoplight/tree-list';
+import { Colors, Icon, Popover } from '@stoplight/ui-kit';
+import * as cn from 'classnames';
 import * as React from 'react';
-import { IMasking, SchemaNodeWithMeta } from '../types';
-import { formatRef, isCombiner, isRef, pathToString } from '../utils';
-import { Additional } from './Additional';
-import { MutedText } from './common/MutedText';
-import { Divider } from './Divider';
-import { Enum } from './Enum';
-import { Type } from './Type';
-import { Types } from './Types';
-import { Validations } from './Validations';
 
-export interface ISchemaRow extends Omit<IBox, 'onClick'>, IMasking {
-  node: SchemaNodeWithMeta;
-  onMaskEdit(node: SchemaNodeWithMeta): void;
+import get = require('lodash/get');
+import map = require('lodash/map');
+import size = require('lodash/size');
+
+import { SchemaNodeWithMeta } from '../types';
+import { isCombiner, isRef } from '../utils';
+import { Types } from './';
+
+export interface ISchemaRow {
+  node: ITreeListNode<object>;
+  rowOptions: IRowRendererOptions;
+  treeStore: TreeStore;
 }
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
-  node,
-  canSelect,
-  onSelect,
-  onMaskEdit,
-  selected,
-  ...props
-}) => {
-  const handleEditMask = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(
-    e => {
-      e.stopPropagation();
-      onMaskEdit(node);
-    },
-    [onMaskEdit]
-  );
+const ICON_SIZE = 12;
+const ICON_DIMENSION = 20;
+const ROW_OFFSET = 7;
 
-  const handleChange = React.useCallback(
-    () => {
-      if (onSelect !== undefined) {
-        onSelect(pathToString(node.path));
-      }
-    },
-    [onSelect]
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore }) => {
+  const schemaNode = node.metadata as SchemaNodeWithMeta;
+  const { name, $ref, subtype, required } = schemaNode;
+
+  const type = isRef(schemaNode) ? '$ref' : isCombiner(schemaNode) ? schemaNode.combiner : schemaNode.type;
+  const description = get(schemaNode, 'annotations.description');
+  const childrenCount = size(get(schemaNode, 'properties'));
+
+  const nodeValidations = {
+    ...('annotations' in schemaNode && schemaNode.annotations.default
+      ? { default: schemaNode.annotations.default }
+      : {}),
+    ...get(schemaNode, 'validations', {}),
+  };
+  const validationCount = Object.keys(nodeValidations).length;
+
+  const requiredElem = (
+    <span className={cn(required ? 'font-semibold' : 'text-darken-7')}>
+      {required ? 'required' : 'optional'}
+      {validationCount ? `+${validationCount}` : ''}
+    </span>
   );
 
   return (
-    <Flex
-      alignItems="center"
-      fontSize="0.8rem"
-      lineHeight="1rem"
-      position="relative"
-      width="calc(100% - 30px)"
-      ml="-15px"
-      css={{ userSelect: 'text' }}
-      {...props}
-    >
-      {node.divider && (
-        <Divider ml="-24px" width={`calc(100% + 24px)`}>
-          {node.divider}
-        </Divider>
-      )}
-
-      <Box overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">
-        <Flex alignItems="baseline">
-          {'name' in node && node.name !== undefined ? (
-            <Box as="span" mr={11}>
-              {node.name}
-            </Box>
-          ) : null}
-
-          {isRef(node) ? (
-            <Type type="$ref">{`[${node.$ref}]`}</Type>
-          ) : (
-            <Types type={isCombiner(node) ? node.combiner : node.type} subtype={node.subtype} />
-          )}
-
-          {'pattern' in node && node.pattern ? (
-            <MutedText as="span" fontSize="0.6rem" position="relative" top="-10px" pl={3}>
-              pattern
-            </MutedText>
-          ) : null}
-
-          {node.inheritedFrom ? (
-            <>
-              <MutedText as="span" ml={6}>{`{${formatRef(node.inheritedFrom)}}`}</MutedText>
-              {onMaskEdit !== undefined && (
-                <Button
-                  border="0 none"
-                  css={{
-                    '&, &:hover': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}
-                  px={6}
-                  py={0}
-                  fontSize="0.8rem"
-                  onClick={handleEditMask}
-                >
-                  (edit mask)
-                </Button>
-              )}
-            </>
-          ) : null}
-        </Flex>
-
-        {'annotations' in node && node.annotations.description ? (
-          <MutedText as="span" pt={1} fontSize=".8rem" title={node.annotations.description}>
-            {node.annotations.description}
-          </MutedText>
-        ) : null}
-      </Box>
-
-      <Flex alignItems="center" textAlign="right" fontSize=".75rem" ml="auto" pl={14}>
-        {canSelect ? (
-          <Checkbox onChange={handleChange} checked={selected && selected.includes(pathToString(node.path))} ml={12} />
-        ) : (
-          <>
-            {'enum' in node && <Enum value={node.enum} />}
-
-            {'additional' in node && <Additional additional={node.additional} />}
-
-            {'validations' in node && node.validations !== undefined && <Validations validations={node.validations} />}
-
-            {node.required && (
-              <Box as="span" fontWeight={700} ml={6}>
-                required
-              </Box>
-            )}
-          </>
+    <div className="flex-1 flex items-center" style={{ marginLeft: ROW_OFFSET, marginRight: ROW_OFFSET }}>
+      <div
+        className="flex flex-1 items-center text-sm leading-tight w-full h-full relative"
+        style={{
+          marginLeft: ICON_DIMENSION * (node.level + 1) + ROW_OFFSET, // offset for spacing
+        }}
+      >
+        {node.canHaveChildren && (
+          <div
+            className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
+            style={{
+              left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+              width: ICON_DIMENSION,
+              height: ICON_DIMENSION,
+            }}
+          >
+            <Icon
+              iconSize={ICON_SIZE}
+              icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
+              color={Colors.GRAY1}
+            />
+          </div>
         )}
-      </Flex>
-    </Flex>
+
+        {schemaNode.divider && (
+          <div className="flex items-center w-full h-2 absolute" style={{ top: -11, left: -16 }}>
+            <div className="font-bold text-darken-7 pr-2 uppercase">{schemaNode.divider}</div>
+            <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
+          </div>
+        )}
+
+        <div className="flex-1 truncate">
+          <div className="flex items-baseline">
+            {name && <span className="mr-2">{name}</span>}
+
+            <Types type={type} subtype={subtype}>
+              {type === '$ref' ? `[${$ref}]` : null}
+            </Types>
+
+            {node.canHaveChildren && <span className="ml-2 text-darken-7">{`{${childrenCount}}`}</span>}
+
+            {'pattern' in schemaNode && schemaNode.pattern ? (
+              <span className="text-darken-7 ml-2">(pattern property)</span>
+            ) : null}
+
+            {description && (
+              <Popover
+                boundary="window"
+                interactionKind="hover"
+                target={<span className="ml-2 text-darken-7">{description}</span>}
+                content={
+                  <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
+                    <MarkdownViewer markdown={description} />
+                  </div>
+                }
+              />
+            )}
+          </div>
+        </div>
+
+        {validationCount ? (
+          <Popover
+            boundary="window"
+            interactionKind="hover"
+            content={
+              <div className="p-3">
+                {map(Object.keys(nodeValidations), (key, index) => {
+                  const validation = nodeValidations[key];
+
+                  let elem = [];
+                  if (Array.isArray(validation)) {
+                    elem = validation.map(v => (
+                      <span key={v} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                        {v}
+                      </span>
+                    ));
+                  } else if (typeof validation === 'object') {
+                    elem = [
+                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                        {'{...}'}
+                      </span>,
+                    ];
+                  } else {
+                    elem = [
+                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                        {JSON.stringify(validation)}
+                      </span>,
+                    ];
+                  }
+
+                  return (
+                    <div key={index} className="py-1">
+                      <span className="font-medium pr-2">{key}:</span>
+                      <span className="px-1 bg-red-2 text-red-7 text-sm rounded">{elem}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            }
+            target={requiredElem}
+          />
+        ) : (
+          requiredElem
+        )}
+      </div>
+    </div>
   );
 };
+SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';

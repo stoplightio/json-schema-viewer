@@ -1,27 +1,26 @@
 import { TreeStore } from '@stoplight/tree-list';
-import { Omit } from '@stoplight/types';
 import { runInAction } from 'mobx';
 import * as React from 'react';
-import { ThemeZone } from '../theme';
-import { isSchemaViewerEmpty, renderSchema } from '../utils';
-import { ErrorMessage } from './common/ErrorMessage';
-import { MutedText } from './common/MutedText';
-import { ISchemaTree, SchemaTree } from './SchemaTree';
+import ErrorBoundary, { ErrorBoundaryProps, FallbackProps } from 'react-error-boundary';
 
-export interface IJsonSchemaViewer extends Omit<ISchemaTree, 'emptyText' | 'treeStore'> {
+import { JSONSchema4 } from 'json-schema';
+import { isSchemaViewerEmpty, renderSchema } from '../utils';
+import { SchemaTree } from './SchemaTree';
+
+export interface IJsonSchemaViewer extends ErrorBoundaryProps {
+  schema: JSONSchema4;
+  dereferencedSchema?: JSONSchema4;
+  style?: object;
   emptyText?: string;
   defaultExpandedDepth?: number;
+  expanded?: boolean;
+  className?: string;
+  name?: string;
+  hideTopBar?: boolean;
+  maxRows?: number;
 }
 
-export interface IJsonSchemaViewerState {
-  error: null | string;
-}
-
-export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJsonSchemaViewerState> {
-  public state = {
-    error: null,
-  };
-
+export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
   protected treeStore: TreeStore;
 
   constructor(props: IJsonSchemaViewer) {
@@ -31,11 +30,6 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
       defaultExpandedDepth: this.expandedDepth,
       nodes: Array.from(renderSchema(props.dereferencedSchema || props.schema, 0, { path: [] }, { mergeAllOf: true })),
     });
-  }
-
-  // there is no error hook yet, see https://reactjs.org/docs/hooks-faq.html#how-do-lifecycle-methods-correspond-to-hooks
-  public static getDerivedStateFromError(error: Error): { error: IJsonSchemaViewerState['error'] } {
-    return { error: `Error rendering schema. ${error.message}` };
   }
 
   protected get expandedDepth(): number {
@@ -60,7 +54,7 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
     if (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema) {
       runInAction(() => {
         this.treeStore.nodes = Array.from(
-          renderSchema(this.props.dereferencedSchema || this.props.schema, 0, { path: [] }, { mergeAllOf: true })
+          renderSchema(this.props.dereferencedSchema || this.props.schema, 0, { path: [] }, { mergeAllOf: true }),
         );
       });
     }
@@ -69,30 +63,35 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
   public render() {
     const {
       props: { emptyText = 'No schema defined', name, schema, expanded, defaultExpandedDepth, ...props },
-      state: { error },
     } = this;
-
-    if (error) {
-      return (
-        <ThemeZone name="json-schema-viewer">
-          <ErrorMessage>{error}</ErrorMessage>
-        </ThemeZone>
-      );
-    }
 
     // an empty array or object is still a valid response, schema is ONLY really empty when a combiner type has no information
     if (isSchemaViewerEmpty(schema)) {
-      return (
-        <ThemeZone name="json-schema-viewer">
-          <MutedText>{emptyText}</MutedText>
-        </ThemeZone>
-      );
+      return <div>{emptyText}</div>;
     }
 
-    return (
-      <ThemeZone name="json-schema-viewer">
-        <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
-      </ThemeZone>
-    );
+    return <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />;
   }
 }
+
+const JsonSchemaFallbackComponent: React.FunctionComponent<FallbackProps> = ({ error }) => {
+  return (
+    <div className="p-4">
+      <b>Error</b>
+      {error && `: ${error.message}`}
+    </div>
+  );
+};
+
+export const JsonSchemaViewer: React.FunctionComponent<IJsonSchemaViewer> = ({
+  onError,
+  FallbackComponent = JsonSchemaFallbackComponent,
+  ...props
+}) => {
+  return (
+    <ErrorBoundary onError={onError} FallbackComponent={FallbackComponent}>
+      <JsonSchemaViewerComponent {...props} />
+    </ErrorBoundary>
+  );
+};
+JsonSchemaViewer.displayName = 'JsonSchemaViewer';

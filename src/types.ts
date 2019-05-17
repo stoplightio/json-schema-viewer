@@ -67,9 +67,3 @@ export interface ITreeNodeMeta {
 export type SchemaNodeWithMeta = SchemaNode & ITreeNodeMeta;
 
 export type SchemaTreeListNode = TreeListNode<SchemaNodeWithMeta>;
-
-export interface IMasking {
-  selected?: string[];
-  canSelect?: boolean;
-  onSelect?(path: string): void;
-}
