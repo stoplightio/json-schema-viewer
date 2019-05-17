@@ -72,7 +72,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
 
         {schemaNode.divider && (
           <div className="flex items-center w-full h-2 absolute" style={{ top: -11, left: -16 }}>
-            <div className="font-bold text-darken-7 pr-2">{schemaNode.divider}</div>
+            <div className="font-bold text-darken-7 pr-2 uppercase">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5" style={{ height: 2 }} />
           </div>
         )}
