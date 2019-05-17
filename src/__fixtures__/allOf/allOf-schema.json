@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "properties": {
+    "AllOfMergeObjects": {
+      "allOf": [
+        {
+          "properties": {
+            "Object1Property": {
+              "type": "string",
+              "minLength": 1,
+              "x-val": "lol"
+            }
+          }
+        },
+        {
+          "properties": {
+            "Object2Property": {
+              "type": "number",
+              "maximum": 2
+            }
+          }
+        }
+      ],
+      "type": "object"
+    },
+    "AllOfMergeValidations": {
+      "allOf": [
+        {
+          "minLength": 1
+        },
+        {
+          "maxLength": 2
+        }
+      ],
+      "type": "string"
+    },
+    "AllOfMergeTakeMoreLogicalValidation": {
+      "allOf": [
+        {
+          "maximum": 1
+        },
+        {
+          "maximum": 2
+        }
+      ],
+      "type": "number"
+    },
+    "AllOfMergeObjectPropertyValidations": {
+      "allOf": [
+        {
+          "properties": {
+            "Property": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "Property": {
+              "type": "string",
+              "maxLength": 2
+            }
+          }
+        }
+      ],
+      "type": "object"
+    },
+    "AllOfMergeRefs": {
+      "allOf": [
+        { "$ref": "#/definitions/ref1" },
+        {
+          "type": "object",
+          "properties": {
+            "zipCode": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+
+  "definitions": {
+    "ref1": {
+      "type": "object",
+      "properties": {
+        "street_address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "required": ["street_address", "city", "state"]
+    },
+    "ref2": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

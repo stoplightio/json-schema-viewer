@@ -29,7 +29,7 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
 
     this.treeStore = new TreeStore({
       defaultExpandedDepth: this.expandedDepth,
-      nodes: Array.from(renderSchema(props.schema, props.dereferencedSchema)),
+      nodes: Array.from(renderSchema(props.dereferencedSchema || props.schema, 0, { path: [] }, { mergeAllOf: true })),
     });
   }
 
@@ -59,14 +59,16 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, IJs
 
     if (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema) {
       runInAction(() => {
-        this.treeStore.nodes = Array.from(renderSchema(this.props.schema, this.props.dereferencedSchema));
+        this.treeStore.nodes = Array.from(
+          renderSchema(this.props.dereferencedSchema || this.props.schema, 0, { path: [] }, { mergeAllOf: true })
+        );
       });
     }
   }
 
   public render() {
     const {
-      props: { emptyText = 'No schema defined', name, schema, schemas, expanded, defaultExpandedDepth, ...props },
+      props: { emptyText = 'No schema defined', name, schema, expanded, defaultExpandedDepth, ...props },
       state: { error },
     } = this;
 

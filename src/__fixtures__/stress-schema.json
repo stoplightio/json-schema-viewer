@@ -1,4 +1,4 @@
-{ 
+{
   "title": "Confirmation Combined",
   "allOf": [
     {
@@ -16,16 +16,7 @@
         "systemOfRecord": {
           "title": "System Of Record",
           "type": "string",
-          "enum": [
-            "LOREM",
-            "HEART",
-            "IPSUM_CENTER",
-            "SECURITY",
-            "BAR",
-            "FOO",
-            "BUDDY",
-            "BONUS"
-          ]
+          "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
         },
         "systemOfRecordTransactionDate": {
           "title": "Date Time Extended",
@@ -57,9 +48,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "value"
-          ]
+          "required": ["value"]
         },
         "dateOfLoss": {
           "title": "Date Time Extended",
@@ -91,9 +80,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "value"
-          ]
+          "required": ["value"]
         },
         "reportedDate": {
           "title": "Date Time Extended",
@@ -125,9 +112,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "value"
-          ]
+          "required": ["value"]
         },
         "effectiveDate": {
           "title": "Date Time Extended",
@@ -159,9 +144,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "value"
-          ]
+          "required": ["value"]
         },
         "exportedAt": {
           "type": "string",
@@ -183,10 +166,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "code",
-            "codeDescription"
-          ]
+          "required": ["code", "codeDescription"]
         },
         "status": {
           "type": "string",
@@ -234,9 +214,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "amount"
-          ]
+          "required": ["amount"]
         },
         "insurancePolicy": {
           "type": "object",
@@ -248,16 +226,7 @@
             "systemOfRecord": {
               "title": "System Of Record",
               "type": "string",
-              "enum": [
-                "LOREM",
-                "HEART",
-                "IPSUM_CENTER",
-                "SECURITY",
-                "BAR",
-                "FOO",
-                "BUDDY",
-                "BONUS"
-              ]
+              "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
             },
             "policyId": {
               "type": "string",
@@ -271,10 +240,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "systemOfRecord",
-            "policyId"
-          ]
+          "required": ["systemOfRecord", "policyId"]
         },
         "underlyingInsurancePolicy": {
           "title": "Insurance Policy Base",
@@ -288,16 +254,7 @@
             "systemOfRecord": {
               "title": "System Of Record",
               "type": "string",
-              "enum": [
-                "LOREM",
-                "HEART",
-                "IPSUM_CENTER",
-                "SECURITY",
-                "BAR",
-                "FOO",
-                "BUDDY",
-                "BONUS"
-              ]
+              "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
             },
             "systemOfRecordTransactionDate": {
               "title": "Date Time Extended",
@@ -329,9 +286,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             "originalInceptionDate": {
               "title": "Date Time Extended",
@@ -363,9 +318,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             "inceptionDate": {
               "title": "Date Time Extended",
@@ -397,9 +350,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             "expiryDate": {
               "title": "Date Time Extended",
@@ -431,9 +382,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             "effectiveDate": {
               "title": "Date Time Extended",
@@ -465,9 +414,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             "cancellationDate": {
               "title": "Date Time Extended",
@@ -499,9 +446,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             "reviewDate": {
               "title": "Date Time Extended",
@@ -533,9 +478,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             "exportedAt": {
               "type": "string",
@@ -577,16 +520,7 @@
                   "systemOfRecord": {
                     "title": "System Of Record",
                     "type": "string",
-                    "enum": [
-                      "LOREM",
-                      "HEART",
-                      "IPSUM_CENTER",
-                      "SECURITY",
-                      "BAR",
-                      "FOO",
-                      "BUDDY",
-                      "BONUS"
-                    ]
+                    "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
                   },
                   "partyRoles": {
                     "type": "array",
@@ -724,9 +658,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "value"
-                    ]
+                    "required": ["value"]
                   },
                   "effectiveDate": {
                     "title": "Date Time Extended",
@@ -758,9 +690,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "value"
-                    ]
+                    "required": ["value"]
                   },
                   "endDate": {
                     "title": "Date Time Extended",
@@ -792,9 +722,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "value"
-                    ]
+                    "required": ["value"]
                   },
                   "externalReferences": {
                     "description": "This is thirdPartyRiskID",
@@ -852,9 +780,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "text": {
                           "type": "string"
@@ -941,9 +867,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "rateDate": {
                           "title": "Date Only Extended",
@@ -955,16 +879,10 @@
                             },
                             "format": {
                               "type": "string",
-                              "enum": [
-                                "yyyy-MM-dd",
-                                "yyyy-MM",
-                                "yyyy"
-                              ]
+                              "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "endDate": {
                           "title": "Date Time Extended",
@@ -996,9 +914,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "placesInvolved": {
                           "description": "",
@@ -1030,14 +946,7 @@
                                       "addressPurpose": {
                                         "title": "Address Purpose",
                                         "type": "string",
-                                        "enum": [
-                                          "BILLING",
-                                          "BUSINESS",
-                                          "HOME",
-                                          "OTHER",
-                                          "MAILING",
-                                          "CONTACT"
-                                        ]
+                                        "enum": ["BILLING", "BUSINESS", "HOME", "OTHER", "MAILING", "CONTACT"]
                                       },
                                       "boxNumber": {
                                         "type": "string"
@@ -1200,14 +1109,7 @@
                                       "addressPurpose": {
                                         "title": "Address Purpose",
                                         "type": "string",
-                                        "enum": [
-                                          "BILLING",
-                                          "BUSINESS",
-                                          "HOME",
-                                          "OTHER",
-                                          "MAILING",
-                                          "CONTACT"
-                                        ]
+                                        "enum": ["BILLING", "BUSINESS", "HOME", "OTHER", "MAILING", "CONTACT"]
                                       },
                                       "boxNumber": {
                                         "type": "string"
@@ -1359,12 +1261,7 @@
                               "roleType": {
                                 "type": "string",
                                 "description": "**OTHER_INSURER**: An organisation that is an interested party in the insurance",
-                                "enum": [
-                                  "SUBCONTRACTOR",
-                                  "NEW_INSURER",
-                                  "PREVIOUS_INSURER",
-                                  "OTHER_INSURER"
-                                ]
+                                "enum": ["SUBCONTRACTOR", "NEW_INSURER", "PREVIOUS_INSURER", "OTHER_INSURER"]
                               },
                               "interestedIn": {
                                 "type": "string"
@@ -1399,9 +1296,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               }
                             }
                           }
@@ -1457,10 +1352,7 @@
                           "properties": {
                             "role": {
                               "type": "string",
-                              "enum": [
-                                "LEAD",
-                                "NON_LEAD"
-                              ]
+                              "enum": ["LEAD", "NON_LEAD"]
                             },
                             "startDate": {
                               "title": "Date Time Extended",
@@ -1492,9 +1384,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "value"
-                              ]
+                              "required": ["value"]
                             },
                             "endDate": {
                               "title": "Date Time Extended",
@@ -1526,9 +1416,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "value"
-                              ]
+                              "required": ["value"]
                             },
                             "sharePercentage": {
                               "type": "number",
@@ -1592,9 +1480,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "text": {
                                 "type": "string"
@@ -1655,9 +1541,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "category": {
                                 "type": "string",
@@ -1697,9 +1581,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "startDate": {
                                       "title": "Date Time Extended",
@@ -1731,9 +1613,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "endDate": {
                                       "title": "Date Time Extended",
@@ -1765,9 +1645,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "name": {
                                       "type": "string",
@@ -1860,12 +1738,7 @@
                               },
                               "discountType": {
                                 "type": "string",
-                                "enum": [
-                                  "PERCENT",
-                                  "RATE",
-                                  "DOLLAR_AMOUNT",
-                                  "OTHER"
-                                ]
+                                "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT", "OTHER"]
                               },
                               "amount": {
                                 "title": "Amount Extended",
@@ -1890,18 +1763,14 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "priority": {
                                 "type": "integer",
                                 "description": "Order in which the discount is applied"
                               }
                             },
-                            "required": [
-                              "discountType"
-                            ]
+                            "required": ["discountType"]
                           }
                         },
                         "excesses": {
@@ -1958,9 +1827,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "maximumAmount": {
                                 "title": "Amount Extended",
@@ -1985,9 +1852,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "references": {
                                 "type": "array",
@@ -1996,9 +1861,7 @@
                                   "properties": {
                                     "namespace": {
                                       "type": "string",
-                                      "enum": [
-                                        "NAMED_DRIVER_ID"
-                                      ]
+                                      "enum": ["NAMED_DRIVER_ID"]
                                     },
                                     "identifier": {
                                       "type": "string"
@@ -2018,9 +1881,7 @@
                                 "type": "number"
                               }
                             },
-                            "required": [
-                              "excessCategory"
-                            ]
+                            "required": ["excessCategory"]
                           }
                         },
                         "rates": {
@@ -2053,9 +1914,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "startDate": {
                                 "title": "Date Time Extended",
@@ -2087,9 +1946,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "endDate": {
                                 "title": "Date Time Extended",
@@ -2121,9 +1978,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "name": {
                                 "type": "string"
@@ -2194,9 +2049,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "category": {
                                       "type": "string",
@@ -2236,9 +2089,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": [
-                                              "amount"
-                                            ]
+                                            "required": ["amount"]
                                           },
                                           "startDate": {
                                             "title": "Date Time Extended",
@@ -2270,9 +2121,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": [
-                                              "value"
-                                            ]
+                                            "required": ["value"]
                                           },
                                           "endDate": {
                                             "title": "Date Time Extended",
@@ -2304,9 +2153,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": [
-                                              "value"
-                                            ]
+                                            "required": ["value"]
                                           },
                                           "name": {
                                             "type": "string",
@@ -2403,9 +2250,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "maximumAmount": {
                                       "title": "Amount Extended",
@@ -2430,9 +2275,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "references": {
                                       "type": "array",
@@ -2441,9 +2284,7 @@
                                         "properties": {
                                           "namespace": {
                                             "type": "string",
-                                            "enum": [
-                                              "NAMED_DRIVER_ID"
-                                            ]
+                                            "enum": ["NAMED_DRIVER_ID"]
                                           },
                                           "identifier": {
                                             "type": "string"
@@ -2463,9 +2304,7 @@
                                       "type": "number"
                                     }
                                   },
-                                  "required": [
-                                    "excessCategory"
-                                  ]
+                                  "required": ["excessCategory"]
                                 }
                               },
                               "discounts": {
@@ -2488,12 +2327,7 @@
                                     },
                                     "discountType": {
                                       "type": "string",
-                                      "enum": [
-                                        "PERCENT",
-                                        "RATE",
-                                        "DOLLAR_AMOUNT",
-                                        "OTHER"
-                                      ]
+                                      "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT", "OTHER"]
                                     },
                                     "amount": {
                                       "title": "Amount Extended",
@@ -2518,18 +2352,14 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "priority": {
                                       "type": "integer",
                                       "description": "Order in which the discount is applied"
                                     }
                                   },
-                                  "required": [
-                                    "discountType"
-                                  ]
+                                  "required": ["discountType"]
                                 }
                               },
                               "physicalConditions": {
@@ -2575,9 +2405,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "physicalConditionType": {
                                       "type": "string",
@@ -2618,9 +2446,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "code": {
                                       "type": "string"
@@ -2658,9 +2484,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "startDate": {
                                       "title": "Date Time Extended",
@@ -2692,9 +2516,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "endDate": {
                                       "title": "Date Time Extended",
@@ -2726,9 +2548,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "name": {
                                       "type": "string"
@@ -2833,9 +2653,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             },
                                             "adjustmentFactor": {
                                               "type": "number"
@@ -2863,9 +2681,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             }
                                           }
                                         }
@@ -2953,9 +2769,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             },
                                             "adjustmentFactor": {
                                               "type": "number"
@@ -2983,9 +2797,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             }
                                           }
                                         }
@@ -3073,9 +2885,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             },
                                             "adjustmentFactor": {
                                               "type": "number"
@@ -3103,9 +2913,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             }
                                           }
                                         }
@@ -3193,9 +3001,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             },
                                             "adjustmentFactor": {
                                               "type": "number"
@@ -3223,9 +3029,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             }
                                           }
                                         }
@@ -3313,9 +3117,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             },
                                             "adjustmentFactor": {
                                               "type": "number"
@@ -3343,9 +3145,7 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "required": [
-                                                "amount"
-                                              ]
+                                              "required": ["amount"]
                                             }
                                           }
                                         }
@@ -3400,9 +3200,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "code": {
                                       "type": "string",
@@ -3416,11 +3214,7 @@
                                     },
                                     "adjustmentType": {
                                       "type": "string",
-                                      "enum": [
-                                        "PERCENT",
-                                        "RATE",
-                                        "DOLLAR_AMOUNT"
-                                      ]
+                                      "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT"]
                                     },
                                     "name": {
                                       "type": "string",
@@ -3431,9 +3225,7 @@
                                       "description": "Order in which the discount is applied"
                                     }
                                   },
-                                  "required": [
-                                    "adjustmentType"
-                                  ]
+                                  "required": ["adjustmentType"]
                                 }
                               },
                               "conditions": {
@@ -3473,12 +3265,7 @@
                               },
                               "settlementBasis": {
                                 "type": "string",
-                                "enum": [
-                                  "AGREED_VALUE",
-                                  "FIXED_VALUE",
-                                  "MARKET_VALUE",
-                                  "SUM_INSURED"
-                                ],
+                                "enum": ["AGREED_VALUE", "FIXED_VALUE", "MARKET_VALUE", "SUM_INSURED"],
                                 "description": "Basis on which the confirmation would be settled for this coverageItem. Only required if it differes from the insuredRisks.settlementBasis"
                               },
                               "externalReferences": {
@@ -3553,9 +3340,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": [
-                                              "amount"
-                                            ]
+                                            "required": ["amount"]
                                           }
                                         }
                                       }
@@ -3581,23 +3366,14 @@
                                     },
                                     "description": {
                                       "type": "string",
-                                      "enum": [
-                                        "STANDARD",
-                                        "VOLUNTARY",
-                                        "IMPOSED"
-                                      ]
+                                      "enum": ["STANDARD", "VOLUNTARY", "IMPOSED"]
                                     },
                                     "length": {
                                       "type": "number"
                                     },
                                     "period": {
                                       "type": "string",
-                                      "enum": [
-                                        "HOURS",
-                                        "DAYS",
-                                        "WEEKS",
-                                        "MONTHS"
-                                      ]
+                                      "enum": ["HOURS", "DAYS", "WEEKS", "MONTHS"]
                                     }
                                   }
                                 }
@@ -3719,9 +3495,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -3749,9 +3523,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -3839,9 +3611,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -3869,9 +3639,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -3959,9 +3727,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -3989,9 +3755,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -4079,9 +3843,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -4109,9 +3871,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -4199,9 +3959,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -4229,9 +3987,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -4244,14 +4000,7 @@
                                 "title": "Premium Frequency",
                                 "type": "string",
                                 "description": "",
-                                "enum": [
-                                  "ANNUALLY",
-                                  "QUARTERLY",
-                                  "MONTHLY",
-                                  "FORTNIGHTLY",
-                                  "ONE_OFF",
-                                  "HALF_YEARLY"
-                                ]
+                                "enum": ["ANNUALLY", "QUARTERLY", "MONTHLY", "FORTNIGHTLY", "ONE_OFF", "HALF_YEARLY"]
                               }
                             }
                           }
@@ -4286,9 +4035,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "code": {
                                 "type": "string",
@@ -4302,11 +4049,7 @@
                               },
                               "adjustmentType": {
                                 "type": "string",
-                                "enum": [
-                                  "PERCENT",
-                                  "RATE",
-                                  "DOLLAR_AMOUNT"
-                                ]
+                                "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT"]
                               },
                               "name": {
                                 "type": "string",
@@ -4317,9 +4060,7 @@
                                 "description": "Order in which the discount is applied"
                               }
                             },
-                            "required": [
-                              "adjustmentType"
-                            ]
+                            "required": ["adjustmentType"]
                           }
                         },
                         "questionAnswers": {
@@ -4346,9 +4087,7 @@
                                             "description": "Internal unique id generated by our DB or system"
                                           }
                                         },
-                                        "required": [
-                                          "id"
-                                        ]
+                                        "required": ["id"]
                                       },
                                       {
                                         "title": "Question Base",
@@ -4356,11 +4095,7 @@
                                         "properties": {
                                           "questionType": {
                                             "type": "string",
-                                            "enum": [
-                                              "GROUP",
-                                              "QUESTION",
-                                              "HIDDEN"
-                                            ]
+                                            "enum": ["GROUP", "QUESTION", "HIDDEN"]
                                           },
                                           "text": {
                                             "type": "string",
@@ -4416,10 +4151,7 @@
                                                       "description": "Whether the current value should be preselected for the user as default value"
                                                     }
                                                   },
-                                                  "required": [
-                                                    "value",
-                                                    "description"
-                                                  ]
+                                                  "required": ["value", "description"]
                                                 }
                                               },
                                               "multiSelect": {
@@ -4443,9 +4175,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": [
-                                              "dataType"
-                                            ]
+                                            "required": ["dataType"]
                                           },
                                           "effectiveDate": {
                                             "type": "string",
@@ -4458,9 +4188,7 @@
                                             "description": "Date from which this question will expire or become inactive"
                                           }
                                         },
-                                        "required": [
-                                          "questionType"
-                                        ]
+                                        "required": ["questionType"]
                                       }
                                     ]
                                   },
@@ -4559,10 +4287,7 @@
                               },
                               "askIfSetOperator": {
                                 "type": "string",
-                                "enum": [
-                                  "ALL_OF",
-                                  "ANY_OF"
-                                ]
+                                "enum": ["ALL_OF", "ANY_OF"]
                               }
                             }
                           }
@@ -4610,9 +4335,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "physicalConditionType": {
                                 "type": "string",
@@ -4653,9 +4376,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "code": {
                                 "type": "string"
@@ -4721,14 +4442,7 @@
                                       "addressPurpose": {
                                         "title": "Address Purpose",
                                         "type": "string",
-                                        "enum": [
-                                          "BILLING",
-                                          "BUSINESS",
-                                          "HOME",
-                                          "OTHER",
-                                          "MAILING",
-                                          "CONTACT"
-                                        ]
+                                        "enum": ["BILLING", "BUSINESS", "HOME", "OTHER", "MAILING", "CONTACT"]
                                       },
                                       "boxNumber": {
                                         "type": "string"
@@ -4890,9 +4604,7 @@
                                 "type": "integer"
                               }
                             },
-                            "required": [
-                              "activityType"
-                            ]
+                            "required": ["activityType"]
                           }
                         },
                         "undergoneActivityOccurrences": {
@@ -4938,9 +4650,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "objective": {
                                 "type": "string"
@@ -4975,9 +4685,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               }
                             }
                           }
@@ -5009,9 +4717,7 @@
                               },
                               "acquisitionMethod": {
                                 "type": "string",
-                                "enum": [
-                                  "MORTGAGEE_SALE"
-                                ],
+                                "enum": ["MORTGAGEE_SALE"],
                                 "description": "The method by which the physical object was acquired"
                               },
                               "isFirstOwner": {
@@ -5182,10 +4888,7 @@
                                                 "properties": {
                                                   "product": {
                                                     "type": "string",
-                                                    "enum": [
-                                                      "State PMV",
-                                                      "FI PMV"
-                                                    ]
+                                                    "enum": ["State PMV", "FI PMV"]
                                                   },
                                                   "name": {
                                                     "type": "string"
@@ -5363,10 +5066,7 @@
                                                   "properties": {
                                                     "product": {
                                                       "type": "string",
-                                                      "enum": [
-                                                        "State PMV",
-                                                        "FI PMV"
-                                                      ]
+                                                      "enum": ["State PMV", "FI PMV"]
                                                     },
                                                     "name": {
                                                       "type": "string"
@@ -5688,14 +5388,7 @@
                                         "addressPurpose": {
                                           "title": "Address Purpose",
                                           "type": "string",
-                                          "enum": [
-                                            "BILLING",
-                                            "BUSINESS",
-                                            "HOME",
-                                            "OTHER",
-                                            "MAILING",
-                                            "CONTACT"
-                                          ]
+                                          "enum": ["BILLING", "BUSINESS", "HOME", "OTHER", "MAILING", "CONTACT"]
                                         },
                                         "boxNumber": {
                                           "type": "string"
@@ -5838,13 +5531,7 @@
                                     },
                                     "matchLevel": {
                                       "type": "string",
-                                      "enum": [
-                                        "EXACT",
-                                        "PRIMARY",
-                                        "SUBURB_LEVEL",
-                                        "STREET_LEVEL",
-                                        "NONE"
-                                      ]
+                                      "enum": ["EXACT", "PRIMARY", "SUBURB_LEVEL", "STREET_LEVEL", "NONE"]
                                     },
                                     "geoLocationId": {
                                       "type": "string",
@@ -6038,11 +5725,7 @@
                             },
                             "liabilityType": {
                               "type": "string",
-                              "enum": [
-                                "EMPLOYERS_LIABILITY",
-                                "GENERAL_LIABILITY",
-                                "STATUTORY_LIABILITY"
-                              ]
+                              "enum": ["EMPLOYERS_LIABILITY", "GENERAL_LIABILITY", "STATUTORY_LIABILITY"]
                             },
                             "liabilityCover": {
                               "title": "Liability Cover",
@@ -6082,9 +5765,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "oldestYearOfConstruction": {
                                   "type": "integer"
@@ -6129,9 +5810,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "retroactiveType": {
                                   "type": "string"
@@ -6173,9 +5852,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "retroactiveType": {
                                   "type": "string"
@@ -6619,14 +6296,7 @@
                                         "addressPurpose": {
                                           "title": "Address Purpose",
                                           "type": "string",
-                                          "enum": [
-                                            "BILLING",
-                                            "BUSINESS",
-                                            "HOME",
-                                            "OTHER",
-                                            "MAILING",
-                                            "CONTACT"
-                                          ]
+                                          "enum": ["BILLING", "BUSINESS", "HOME", "OTHER", "MAILING", "CONTACT"]
                                         },
                                         "boxNumber": {
                                           "type": "string"
@@ -6769,13 +6439,7 @@
                                     },
                                     "matchLevel": {
                                       "type": "string",
-                                      "enum": [
-                                        "EXACT",
-                                        "PRIMARY",
-                                        "SUBURB_LEVEL",
-                                        "STREET_LEVEL",
-                                        "NONE"
-                                      ]
+                                      "enum": ["EXACT", "PRIMARY", "SUBURB_LEVEL", "STREET_LEVEL", "NONE"]
                                     },
                                     "geoLocationId": {
                                       "type": "string",
@@ -6983,10 +6647,7 @@
                                             "properties": {
                                               "product": {
                                                 "type": "string",
-                                                "enum": [
-                                                  "State PMV",
-                                                  "FI PMV"
-                                                ]
+                                                "enum": ["State PMV", "FI PMV"]
                                               },
                                               "name": {
                                                 "type": "string"
@@ -7164,10 +6825,7 @@
                                               "properties": {
                                                 "product": {
                                                   "type": "string",
-                                                  "enum": [
-                                                    "State PMV",
-                                                    "FI PMV"
-                                                  ]
+                                                  "enum": ["State PMV", "FI PMV"]
                                                 },
                                                 "name": {
                                                   "type": "string"
@@ -7399,16 +7057,10 @@
                                   },
                                   "format": {
                                     "type": "string",
-                                    "enum": [
-                                      "yyyy-MM-dd",
-                                      "yyyy-MM",
-                                      "yyyy"
-                                    ]
+                                    "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "reasons": {
                                 "type": "array",
@@ -7417,11 +7069,7 @@
                                   "properties": {
                                     "status": {
                                       "type": "string",
-                                      "enum": [
-                                        "REFER",
-                                        "COMMENT",
-                                        "FAIL"
-                                      ]
+                                      "enum": ["REFER", "COMMENT", "FAIL"]
                                     },
                                     "code": {
                                       "type": "string"
@@ -7478,9 +7126,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "numberOfConfirmations": {
                                 "type": "integer"
@@ -7530,16 +7176,10 @@
                                         },
                                         "format": {
                                           "type": "string",
-                                          "enum": [
-                                            "yyyy-MM-dd",
-                                            "yyyy-MM",
-                                            "yyyy"
-                                          ]
+                                          "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "costOfConfirmation": {
                                       "title": "Amount Extended",
@@ -7564,9 +7204,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "code": {
                                       "type": "string"
@@ -7586,16 +7224,7 @@
                             "systemOfRecord": {
                               "title": "System Of Record",
                               "type": "string",
-                              "enum": [
-                                "LOREM",
-                                "HEART",
-                                "IPSUM_CENTER",
-                                "SECURITY",
-                                "BAR",
-                                "FOO",
-                                "BUDDY",
-                                "BONUS"
-                              ]
+                              "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
                             },
                             "partyRole": {
                               "title": "Party Role",
@@ -7672,9 +7301,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "value"
-                              ]
+                              "required": ["value"]
                             },
                             "retroactiveType": {
                               "type": "string"
@@ -7712,9 +7339,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "value"
-                              ]
+                              "required": ["value"]
                             },
                             "continuityDate": {
                               "title": "Date Time Extended",
@@ -7746,9 +7371,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "value"
-                              ]
+                              "required": ["value"]
                             },
                             "eligibilityPeriod": {
                               "title": "Time Period",
@@ -7784,9 +7407,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "endDate": {
                                   "title": "Date Time Extended",
@@ -7818,22 +7439,14 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "length": {
                                   "type": "number"
                                 },
                                 "lengthUnit": {
                                   "type": "string",
-                                  "enum": [
-                                    "HOURS",
-                                    "DAYS",
-                                    "WEEKS",
-                                    "MONTHS",
-                                    "YEARS"
-                                  ]
+                                  "enum": ["HOURS", "DAYS", "WEEKS", "MONTHS", "YEARS"]
                                 },
                                 "description": {
                                   "type": "string"
@@ -7874,9 +7487,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "endDate": {
                                   "title": "Date Time Extended",
@@ -7908,22 +7519,14 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "length": {
                                   "type": "number"
                                 },
                                 "lengthUnit": {
                                   "type": "string",
-                                  "enum": [
-                                    "HOURS",
-                                    "DAYS",
-                                    "WEEKS",
-                                    "MONTHS",
-                                    "YEARS"
-                                  ]
+                                  "enum": ["HOURS", "DAYS", "WEEKS", "MONTHS", "YEARS"]
                                 },
                                 "description": {
                                   "type": "string"
@@ -7950,12 +7553,7 @@
                                 },
                                 "insuredType": {
                                   "type": "string",
-                                  "enum": [
-                                    "UNKNOWN",
-                                    "PRINCIPLE",
-                                    "CONTRACTOR",
-                                    "SUB_CONTRACTOR"
-                                  ]
+                                  "enum": ["UNKNOWN", "PRINCIPLE", "CONTRACTOR", "SUB_CONTRACTOR"]
                                 }
                               }
                             },
@@ -7993,9 +7591,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "endDate": {
                                   "title": "Date Time Extended",
@@ -8027,22 +7623,14 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "length": {
                                   "type": "number"
                                 },
                                 "lengthUnit": {
                                   "type": "string",
-                                  "enum": [
-                                    "HOURS",
-                                    "DAYS",
-                                    "WEEKS",
-                                    "MONTHS",
-                                    "YEARS"
-                                  ]
+                                  "enum": ["HOURS", "DAYS", "WEEKS", "MONTHS", "YEARS"]
                                 },
                                 "description": {
                                   "type": "string"
@@ -8083,9 +7671,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "endDate": {
                                   "title": "Date Time Extended",
@@ -8117,22 +7703,14 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "required": ["value"]
                                 },
                                 "length": {
                                   "type": "number"
                                 },
                                 "lengthUnit": {
                                   "type": "string",
-                                  "enum": [
-                                    "HOURS",
-                                    "DAYS",
-                                    "WEEKS",
-                                    "MONTHS",
-                                    "YEARS"
-                                  ]
+                                  "enum": ["HOURS", "DAYS", "WEEKS", "MONTHS", "YEARS"]
                                 },
                                 "description": {
                                   "type": "string"
@@ -8152,27 +7730,16 @@
                                 },
                                 "format": {
                                   "type": "string",
-                                  "enum": [
-                                    "yyyy-MM-dd",
-                                    "yyyy-MM",
-                                    "yyyy"
-                                  ]
+                                  "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                                 }
                               },
-                              "required": [
-                                "value"
-                              ]
+                              "required": ["value"]
                             }
                           }
                         },
                         "settlementBasis": {
                           "type": "string",
-                          "enum": [
-                            "AGREED_VALUE",
-                            "FIXED_VALUE",
-                            "MARKET_VALUE",
-                            "SUM_INSURED"
-                          ],
+                          "enum": ["AGREED_VALUE", "FIXED_VALUE", "MARKET_VALUE", "SUM_INSURED"],
                           "description": "The basis on which the confirmation would be settled on this risk"
                         },
                         "isDisabled": {
@@ -8210,23 +7777,14 @@
                               },
                               "description": {
                                 "type": "string",
-                                "enum": [
-                                  "STANDARD",
-                                  "VOLUNTARY",
-                                  "IMPOSED"
-                                ]
+                                "enum": ["STANDARD", "VOLUNTARY", "IMPOSED"]
                               },
                               "length": {
                                 "type": "number"
                               },
                               "period": {
                                 "type": "string",
-                                "enum": [
-                                  "HOURS",
-                                  "DAYS",
-                                  "WEEKS",
-                                  "MONTHS"
-                                ]
+                                "enum": ["HOURS", "DAYS", "WEEKS", "MONTHS"]
                               }
                             }
                           }
@@ -8240,16 +7798,7 @@
                             "systemOfRecord": {
                               "title": "System Of Record",
                               "type": "string",
-                              "enum": [
-                                "LOREM",
-                                "HEART",
-                                "IPSUM_CENTER",
-                                "SECURITY",
-                                "BAR",
-                                "FOO",
-                                "BUDDY",
-                                "BONUS"
-                              ]
+                              "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
                             },
                             "partyRole": {
                               "title": "Party Role",
@@ -8456,10 +8005,7 @@
                       },
                       "ratingLine": {
                         "type": "string",
-                        "enum": [
-                          "PERSONAL",
-                          "COMMERCIAL"
-                        ]
+                        "enum": ["PERSONAL", "COMMERCIAL"]
                       },
                       "ratingProductName": {
                         "type": "string"
@@ -8493,9 +8039,7 @@
                                       "description": "Internal unique id generated by our DB or system"
                                     }
                                   },
-                                  "required": [
-                                    "id"
-                                  ]
+                                  "required": ["id"]
                                 },
                                 {
                                   "title": "Question Base",
@@ -8503,11 +8047,7 @@
                                   "properties": {
                                     "questionType": {
                                       "type": "string",
-                                      "enum": [
-                                        "GROUP",
-                                        "QUESTION",
-                                        "HIDDEN"
-                                      ]
+                                      "enum": ["GROUP", "QUESTION", "HIDDEN"]
                                     },
                                     "text": {
                                       "type": "string",
@@ -8563,10 +8103,7 @@
                                                 "description": "Whether the current value should be preselected for the user as default value"
                                               }
                                             },
-                                            "required": [
-                                              "value",
-                                              "description"
-                                            ]
+                                            "required": ["value", "description"]
                                           }
                                         },
                                         "multiSelect": {
@@ -8590,9 +8127,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "dataType"
-                                      ]
+                                      "required": ["dataType"]
                                     },
                                     "effectiveDate": {
                                       "type": "string",
@@ -8605,9 +8140,7 @@
                                       "description": "Date from which this question will expire or become inactive"
                                     }
                                   },
-                                  "required": [
-                                    "questionType"
-                                  ]
+                                  "required": ["questionType"]
                                 }
                               ]
                             },
@@ -8706,10 +8239,7 @@
                         },
                         "askIfSetOperator": {
                           "type": "string",
-                          "enum": [
-                            "ALL_OF",
-                            "ANY_OF"
-                          ]
+                          "enum": ["ALL_OF", "ANY_OF"]
                         }
                       }
                     }
@@ -8744,9 +8274,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "category": {
                           "type": "string",
@@ -8786,9 +8314,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "startDate": {
                                 "title": "Date Time Extended",
@@ -8820,9 +8346,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "endDate": {
                                 "title": "Date Time Extended",
@@ -8854,9 +8378,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "name": {
                                 "type": "string",
@@ -8919,12 +8441,7 @@
                         },
                         "discountType": {
                           "type": "string",
-                          "enum": [
-                            "PERCENT",
-                            "RATE",
-                            "DOLLAR_AMOUNT",
-                            "OTHER"
-                          ]
+                          "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT", "OTHER"]
                         },
                         "amount": {
                           "title": "Amount Extended",
@@ -8949,18 +8466,14 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "priority": {
                           "type": "integer",
                           "description": "Order in which the discount is applied"
                         }
                       },
-                      "required": [
-                        "discountType"
-                      ]
+                      "required": ["discountType"]
                     }
                   },
                   "excesses": {
@@ -9017,9 +8530,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "maximumAmount": {
                           "title": "Amount Extended",
@@ -9044,9 +8555,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "references": {
                           "type": "array",
@@ -9055,9 +8564,7 @@
                             "properties": {
                               "namespace": {
                                 "type": "string",
-                                "enum": [
-                                  "NAMED_DRIVER_ID"
-                                ]
+                                "enum": ["NAMED_DRIVER_ID"]
                               },
                               "identifier": {
                                 "type": "string"
@@ -9077,9 +8584,7 @@
                           "type": "number"
                         }
                       },
-                      "required": [
-                        "excessCategory"
-                      ]
+                      "required": ["excessCategory"]
                     }
                   },
                   "rates": {
@@ -9112,9 +8617,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "startDate": {
                           "title": "Date Time Extended",
@@ -9146,9 +8649,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "endDate": {
                           "title": "Date Time Extended",
@@ -9180,9 +8681,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "name": {
                           "type": "string"
@@ -9301,9 +8800,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 },
                                 "adjustmentFactor": {
                                   "type": "number"
@@ -9331,9 +8828,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 }
                               }
                             }
@@ -9421,9 +8916,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 },
                                 "adjustmentFactor": {
                                   "type": "number"
@@ -9451,9 +8944,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 }
                               }
                             }
@@ -9541,9 +9032,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 },
                                 "adjustmentFactor": {
                                   "type": "number"
@@ -9571,9 +9060,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 }
                               }
                             }
@@ -9661,9 +9148,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 },
                                 "adjustmentFactor": {
                                   "type": "number"
@@ -9691,9 +9176,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 }
                               }
                             }
@@ -9781,9 +9264,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 },
                                 "adjustmentFactor": {
                                   "type": "number"
@@ -9811,9 +9292,7 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": [
-                                    "amount"
-                                  ]
+                                  "required": ["amount"]
                                 }
                               }
                             }
@@ -9826,14 +9305,7 @@
                           "title": "Premium Frequency",
                           "type": "string",
                           "description": "",
-                          "enum": [
-                            "ANNUALLY",
-                            "QUARTERLY",
-                            "MONTHLY",
-                            "FORTNIGHTLY",
-                            "ONE_OFF",
-                            "HALF_YEARLY"
-                          ]
+                          "enum": ["ANNUALLY", "QUARTERLY", "MONTHLY", "FORTNIGHTLY", "ONE_OFF", "HALF_YEARLY"]
                         }
                       }
                     }
@@ -9868,9 +9340,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "code": {
                           "type": "string",
@@ -9884,11 +9354,7 @@
                         },
                         "adjustmentType": {
                           "type": "string",
-                          "enum": [
-                            "PERCENT",
-                            "RATE",
-                            "DOLLAR_AMOUNT"
-                          ]
+                          "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT"]
                         },
                         "name": {
                           "type": "string",
@@ -9899,9 +9365,7 @@
                           "description": "Order in which the discount is applied"
                         }
                       },
-                      "required": [
-                        "adjustmentType"
-                      ]
+                      "required": ["adjustmentType"]
                     }
                   },
                   "coverageItems": {
@@ -9963,9 +9427,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "category": {
                                 "type": "string",
@@ -10005,9 +9467,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     },
                                     "startDate": {
                                       "title": "Date Time Extended",
@@ -10039,9 +9499,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "endDate": {
                                       "title": "Date Time Extended",
@@ -10073,9 +9531,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "value"
-                                      ]
+                                      "required": ["value"]
                                     },
                                     "name": {
                                       "type": "string",
@@ -10172,9 +9628,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "maximumAmount": {
                                 "title": "Amount Extended",
@@ -10199,9 +9653,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "references": {
                                 "type": "array",
@@ -10210,9 +9662,7 @@
                                   "properties": {
                                     "namespace": {
                                       "type": "string",
-                                      "enum": [
-                                        "NAMED_DRIVER_ID"
-                                      ]
+                                      "enum": ["NAMED_DRIVER_ID"]
                                     },
                                     "identifier": {
                                       "type": "string"
@@ -10232,9 +9682,7 @@
                                 "type": "number"
                               }
                             },
-                            "required": [
-                              "excessCategory"
-                            ]
+                            "required": ["excessCategory"]
                           }
                         },
                         "discounts": {
@@ -10257,12 +9705,7 @@
                               },
                               "discountType": {
                                 "type": "string",
-                                "enum": [
-                                  "PERCENT",
-                                  "RATE",
-                                  "DOLLAR_AMOUNT",
-                                  "OTHER"
-                                ]
+                                "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT", "OTHER"]
                               },
                               "amount": {
                                 "title": "Amount Extended",
@@ -10287,18 +9730,14 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "priority": {
                                 "type": "integer",
                                 "description": "Order in which the discount is applied"
                               }
                             },
-                            "required": [
-                              "discountType"
-                            ]
+                            "required": ["discountType"]
                           }
                         },
                         "physicalConditions": {
@@ -10344,9 +9783,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "physicalConditionType": {
                                 "type": "string",
@@ -10387,9 +9824,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "code": {
                                 "type": "string"
@@ -10427,9 +9862,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "startDate": {
                                 "title": "Date Time Extended",
@@ -10461,9 +9894,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "endDate": {
                                 "title": "Date Time Extended",
@@ -10495,9 +9926,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "value"
-                                ]
+                                "required": ["value"]
                               },
                               "name": {
                                 "type": "string"
@@ -10602,9 +10031,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -10632,9 +10059,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -10722,9 +10147,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -10752,9 +10175,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -10842,9 +10263,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -10872,9 +10291,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -10962,9 +10379,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -10992,9 +10407,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -11082,9 +10495,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       },
                                       "adjustmentFactor": {
                                         "type": "number"
@@ -11112,9 +10523,7 @@
                                             "type": "string"
                                           }
                                         },
-                                        "required": [
-                                          "amount"
-                                        ]
+                                        "required": ["amount"]
                                       }
                                     }
                                   }
@@ -11127,14 +10536,7 @@
                                 "title": "Premium Frequency",
                                 "type": "string",
                                 "description": "",
-                                "enum": [
-                                  "ANNUALLY",
-                                  "QUARTERLY",
-                                  "MONTHLY",
-                                  "FORTNIGHTLY",
-                                  "ONE_OFF",
-                                  "HALF_YEARLY"
-                                ]
+                                "enum": ["ANNUALLY", "QUARTERLY", "MONTHLY", "FORTNIGHTLY", "ONE_OFF", "HALF_YEARLY"]
                               }
                             }
                           }
@@ -11169,9 +10571,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "amount"
-                                ]
+                                "required": ["amount"]
                               },
                               "code": {
                                 "type": "string",
@@ -11185,11 +10585,7 @@
                               },
                               "adjustmentType": {
                                 "type": "string",
-                                "enum": [
-                                  "PERCENT",
-                                  "RATE",
-                                  "DOLLAR_AMOUNT"
-                                ]
+                                "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT"]
                               },
                               "name": {
                                 "type": "string",
@@ -11200,9 +10596,7 @@
                                 "description": "Order in which the discount is applied"
                               }
                             },
-                            "required": [
-                              "adjustmentType"
-                            ]
+                            "required": ["adjustmentType"]
                           }
                         },
                         "conditions": {
@@ -11265,12 +10659,7 @@
                         },
                         "settlementBasis": {
                           "type": "string",
-                          "enum": [
-                            "AGREED_VALUE",
-                            "FIXED_VALUE",
-                            "MARKET_VALUE",
-                            "SUM_INSURED"
-                          ],
+                          "enum": ["AGREED_VALUE", "FIXED_VALUE", "MARKET_VALUE", "SUM_INSURED"],
                           "description": "Basis on which the confirmation would be settled for this coverageItem. Only required if it differes from the insuredRisks.settlementBasis"
                         },
                         "externalReferences": {
@@ -11345,9 +10734,7 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": [
-                                        "amount"
-                                      ]
+                                      "required": ["amount"]
                                     }
                                   }
                                 }
@@ -11373,23 +10760,14 @@
                               },
                               "description": {
                                 "type": "string",
-                                "enum": [
-                                  "STANDARD",
-                                  "VOLUNTARY",
-                                  "IMPOSED"
-                                ]
+                                "enum": ["STANDARD", "VOLUNTARY", "IMPOSED"]
                               },
                               "length": {
                                 "type": "number"
                               },
                               "period": {
                                 "type": "string",
-                                "enum": [
-                                  "HOURS",
-                                  "DAYS",
-                                  "WEEKS",
-                                  "MONTHS"
-                                ]
+                                "enum": ["HOURS", "DAYS", "WEEKS", "MONTHS"]
                               }
                             }
                           }
@@ -11400,10 +10778,7 @@
                   "groupSubType": {
                     "type": "string",
                     "description": "",
-                    "enum": [
-                      "FLEET",
-                      "NON_FLEET"
-                    ]
+                    "enum": ["FLEET", "NON_FLEET"]
                   }
                 }
               }
@@ -11441,16 +10816,7 @@
                       "systemOfRecord": {
                         "title": "System Of Record",
                         "type": "string",
-                        "enum": [
-                          "LOREM",
-                          "HEART",
-                          "IPSUM_CENTER",
-                          "SECURITY",
-                          "BAR",
-                          "FOO",
-                          "BUDDY",
-                          "BONUS"
-                        ]
+                        "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
                       },
                       "systemOfRecordTransactionDate": {
                         "title": "Date Time Extended",
@@ -11482,9 +10848,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "dateOfLoss": {
                         "title": "Date Time Extended",
@@ -11516,9 +10880,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "reportedDate": {
                         "title": "Date Time Extended",
@@ -11550,9 +10912,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "effectiveDate": {
                         "title": "Date Time Extended",
@@ -11584,9 +10944,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "exportedAt": {
                         "type": "string",
@@ -11608,10 +10966,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "code",
-                          "codeDescription"
-                        ]
+                        "required": ["code", "codeDescription"]
                       },
                       "status": {
                         "type": "string",
@@ -11659,9 +11014,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "amount"
-                        ]
+                        "required": ["amount"]
                       },
                       "insurancePolicy": {
                         "type": "object",
@@ -11673,16 +11026,7 @@
                           "systemOfRecord": {
                             "title": "System Of Record",
                             "type": "string",
-                            "enum": [
-                              "LOREM",
-                              "HEART",
-                              "IPSUM_CENTER",
-                              "SECURITY",
-                              "BAR",
-                              "FOO",
-                              "BUDDY",
-                              "BONUS"
-                            ]
+                            "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
                           },
                           "policyId": {
                             "type": "string",
@@ -11696,10 +11040,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "systemOfRecord",
-                          "policyId"
-                        ]
+                        "required": ["systemOfRecord", "policyId"]
                       },
                       "underlyingInsurancePolicy": {
                         "$ref": "./InsurancePolicies.oas2.yml#/definitions/insurance-policy-base"
@@ -11746,9 +11087,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "amount"
-                    ]
+                    "required": ["amount"]
                   },
                   "numberOfConfirmations": {
                     "type": "integer"
@@ -11798,16 +11137,10 @@
                             },
                             "format": {
                               "type": "string",
-                              "enum": [
-                                "yyyy-MM-dd",
-                                "yyyy-MM",
-                                "yyyy"
-                              ]
+                              "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "costOfConfirmation": {
                           "title": "Amount Extended",
@@ -11832,9 +11165,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "code": {
                           "type": "string"
@@ -12060,10 +11391,7 @@
                                 "properties": {
                                   "role": {
                                     "type": "string",
-                                    "enum": [
-                                      "LEAD",
-                                      "NON_LEAD"
-                                    ]
+                                    "enum": ["LEAD", "NON_LEAD"]
                                   },
                                   "startDate": {
                                     "$ref": "./common.oas2.yml#/definitions/date-time-extended"
@@ -12243,14 +11571,7 @@
                                             "addressPurpose": {
                                               "title": "Address Purpose",
                                               "type": "string",
-                                              "enum": [
-                                                "BILLING",
-                                                "BUSINESS",
-                                                "HOME",
-                                                "OTHER",
-                                                "MAILING",
-                                                "CONTACT"
-                                              ]
+                                              "enum": ["BILLING", "BUSINESS", "HOME", "OTHER", "MAILING", "CONTACT"]
                                             },
                                             "boxNumber": {
                                               "type": "string"
@@ -12412,9 +11733,7 @@
                                       "type": "integer"
                                     }
                                   },
-                                  "required": [
-                                    "activityType"
-                                  ]
+                                  "required": ["activityType"]
                                 }
                               },
                               "undergoneActivityOccurrences": {
@@ -12578,10 +11897,7 @@
                                                   "properties": {
                                                     "product": {
                                                       "type": "string",
-                                                      "enum": [
-                                                        "State PMV",
-                                                        "FI PMV"
-                                                      ]
+                                                      "enum": ["State PMV", "FI PMV"]
                                                     },
                                                     "name": {
                                                       "type": "string"
@@ -12759,10 +12075,7 @@
                                                     "properties": {
                                                       "product": {
                                                         "type": "string",
-                                                        "enum": [
-                                                          "State PMV",
-                                                          "FI PMV"
-                                                        ]
+                                                        "enum": ["State PMV", "FI PMV"]
                                                       },
                                                       "name": {
                                                         "type": "string"
@@ -13027,12 +12340,7 @@
                               },
                               "settlementBasis": {
                                 "type": "string",
-                                "enum": [
-                                  "AGREED_VALUE",
-                                  "FIXED_VALUE",
-                                  "MARKET_VALUE",
-                                  "SUM_INSURED"
-                                ],
+                                "enum": ["AGREED_VALUE", "FIXED_VALUE", "MARKET_VALUE", "SUM_INSURED"],
                                 "description": "The basis on which the confirmation would be settled on this risk"
                               },
                               "isDisabled": {
@@ -13165,10 +12473,7 @@
                         "groupSubType": {
                           "type": "string",
                           "description": "",
-                          "enum": [
-                            "FLEET",
-                            "NON_FLEET"
-                          ]
+                          "enum": ["FLEET", "NON_FLEET"]
                         }
                       }
                     }
@@ -13177,9 +12482,7 @@
                     "title": "Action Code",
                     "description": " TERMINATE",
                     "type": "string",
-                    "enum": [
-                      "TERMINATE"
-                    ]
+                    "enum": ["TERMINATE"]
                   }
                 }
               }
@@ -13221,9 +12524,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "value"
-                    ]
+                    "required": ["value"]
                   },
                   "text": {
                     "type": "string"
@@ -13304,14 +12605,7 @@
             },
             "status": {
               "type": "string",
-              "enum": [
-                "IN_FORCE",
-                "EXPIRED",
-                "CANCELLED",
-                "SUSPENDED",
-                "PENDING",
-                "CANCELLATION_PENDING"
-              ],
+              "enum": ["IN_FORCE", "EXPIRED", "CANCELLED", "SUSPENDED", "PENDING", "CANCELLATION_PENDING"],
               "description": "Current state of the policy i.e. whether active, cancelled, lapsed, at effective date"
             },
             "transactionData": {
@@ -13334,14 +12628,7 @@
                       },
                       "paymentMethod": {
                         "type": "string",
-                        "enum": [
-                          "CASH",
-                          "CHEQUE",
-                          "DIRECT_DEBIT",
-                          "DIRECT_CREDIT",
-                          "CREDIT_CARD",
-                          "BANK_TRANSFER"
-                        ]
+                        "enum": ["CASH", "CHEQUE", "DIRECT_DEBIT", "DIRECT_CREDIT", "CREDIT_CARD", "BANK_TRANSFER"]
                       },
                       "transactionReference": {
                         "type": "string"
@@ -13369,9 +12656,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "amount"
-                        ]
+                        "required": ["amount"]
                       },
                       "transactionDate": {
                         "title": "Date Time Extended",
@@ -13403,9 +12688,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "cardType": {
                         "type": "string"
@@ -13455,9 +12738,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "value"
-                  ]
+                  "required": ["value"]
                 },
                 "nextDueDate": {
                   "title": "Date Time Extended",
@@ -13489,22 +12770,13 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "value"
-                  ]
+                  "required": ["value"]
                 },
                 "paymentFrequency": {
                   "title": "Premium Frequency",
                   "type": "string",
                   "description": "",
-                  "enum": [
-                    "ANNUALLY",
-                    "QUARTERLY",
-                    "MONTHLY",
-                    "FORTNIGHTLY",
-                    "ONE_OFF",
-                    "HALF_YEARLY"
-                  ]
+                  "enum": ["ANNUALLY", "QUARTERLY", "MONTHLY", "FORTNIGHTLY", "ONE_OFF", "HALF_YEARLY"]
                 },
                 "paymentDetails": {
                   "type": "array",
@@ -13515,10 +12787,7 @@
                     "properties": {
                       "paymentType": {
                         "type": "string",
-                        "enum": [
-                          "INITIAL",
-                          "RECURRING"
-                        ]
+                        "enum": ["INITIAL", "RECURRING"]
                       },
                       "accountName": {
                         "type": "string",
@@ -13533,14 +12802,7 @@
                       },
                       "paymentMethod": {
                         "type": "string",
-                        "enum": [
-                          "CASH",
-                          "CHEQUE",
-                          "DIRECT_DEBIT",
-                          "DIRECT_CREDIT",
-                          "CREDIT_CARD",
-                          "BANK_TRANSFER"
-                        ]
+                        "enum": ["CASH", "CHEQUE", "DIRECT_DEBIT", "DIRECT_CREDIT", "CREDIT_CARD", "BANK_TRANSFER"]
                       },
                       "personName": {
                         "type": "string",
@@ -13585,9 +12847,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "amount"
-                        ]
+                        "required": ["amount"]
                       },
                       "merchantReference": {
                         "type": "string"
@@ -13625,9 +12885,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "value"
-                  ]
+                  "required": ["value"]
                 },
                 "paymentPlanCode": {
                   "type": "string"
@@ -13664,9 +12922,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "amount"
-                    ]
+                    "required": ["amount"]
                   },
                   "category": {
                     "type": "string",
@@ -13706,9 +12962,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "amount"
-                          ]
+                          "required": ["amount"]
                         },
                         "startDate": {
                           "title": "Date Time Extended",
@@ -13740,9 +12994,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "endDate": {
                           "title": "Date Time Extended",
@@ -13774,9 +13026,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "value"
-                          ]
+                          "required": ["value"]
                         },
                         "name": {
                           "type": "string",
@@ -13873,9 +13123,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "amount"
-                    ]
+                    "required": ["amount"]
                   },
                   "maximumAmount": {
                     "title": "Amount Extended",
@@ -13900,9 +13148,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "amount"
-                    ]
+                    "required": ["amount"]
                   },
                   "references": {
                     "type": "array",
@@ -13911,9 +13157,7 @@
                       "properties": {
                         "namespace": {
                           "type": "string",
-                          "enum": [
-                            "NAMED_DRIVER_ID"
-                          ]
+                          "enum": ["NAMED_DRIVER_ID"]
                         },
                         "identifier": {
                           "type": "string"
@@ -13933,9 +13177,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "excessCategory"
-                ]
+                "required": ["excessCategory"]
               }
             },
             "discounts": {
@@ -13958,12 +13200,7 @@
                   },
                   "discountType": {
                     "type": "string",
-                    "enum": [
-                      "PERCENT",
-                      "RATE",
-                      "DOLLAR_AMOUNT",
-                      "OTHER"
-                    ]
+                    "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT", "OTHER"]
                   },
                   "amount": {
                     "title": "Amount Extended",
@@ -13988,18 +13225,14 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "amount"
-                    ]
+                    "required": ["amount"]
                   },
                   "priority": {
                     "type": "integer",
                     "description": "Order in which the discount is applied"
                   }
                 },
-                "required": [
-                  "discountType"
-                ]
+                "required": ["discountType"]
               }
             },
             "adjustments": {
@@ -14032,9 +13265,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "amount"
-                    ]
+                    "required": ["amount"]
                   },
                   "code": {
                     "type": "string",
@@ -14048,11 +13279,7 @@
                   },
                   "adjustmentType": {
                     "type": "string",
-                    "enum": [
-                      "PERCENT",
-                      "RATE",
-                      "DOLLAR_AMOUNT"
-                    ]
+                    "enum": ["PERCENT", "RATE", "DOLLAR_AMOUNT"]
                   },
                   "name": {
                     "type": "string",
@@ -14063,9 +13290,7 @@
                     "description": "Order in which the discount is applied"
                   }
                 },
-                "required": [
-                  "adjustmentType"
-                ]
+                "required": ["adjustmentType"]
               }
             },
             "premiumDetails": {
@@ -14163,9 +13388,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           },
                           "adjustmentFactor": {
                             "type": "number"
@@ -14193,9 +13416,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           }
                         }
                       }
@@ -14283,9 +13504,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           },
                           "adjustmentFactor": {
                             "type": "number"
@@ -14313,9 +13532,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           }
                         }
                       }
@@ -14403,9 +13620,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           },
                           "adjustmentFactor": {
                             "type": "number"
@@ -14433,9 +13648,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           }
                         }
                       }
@@ -14523,9 +13736,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           },
                           "adjustmentFactor": {
                             "type": "number"
@@ -14553,9 +13764,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           }
                         }
                       }
@@ -14643,9 +13852,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           },
                           "adjustmentFactor": {
                             "type": "number"
@@ -14673,9 +13880,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "amount"
-                            ]
+                            "required": ["amount"]
                           }
                         }
                       }
@@ -14688,14 +13893,7 @@
                     "title": "Premium Frequency",
                     "type": "string",
                     "description": "",
-                    "enum": [
-                      "ANNUALLY",
-                      "QUARTERLY",
-                      "MONTHLY",
-                      "FORTNIGHTLY",
-                      "ONE_OFF",
-                      "HALF_YEARLY"
-                    ]
+                    "enum": ["ANNUALLY", "QUARTERLY", "MONTHLY", "FORTNIGHTLY", "ONE_OFF", "HALF_YEARLY"]
                   }
                 }
               }
@@ -14817,10 +14015,7 @@
                 },
                 "ratingLine": {
                   "type": "string",
-                  "enum": [
-                    "PERSONAL",
-                    "COMMERCIAL"
-                  ]
+                  "enum": ["PERSONAL", "COMMERCIAL"]
                 },
                 "ratingProductName": {
                   "type": "string"
@@ -14859,16 +14054,10 @@
                       },
                       "format": {
                         "type": "string",
-                        "enum": [
-                          "yyyy-MM-dd",
-                          "yyyy-MM",
-                          "yyyy"
-                        ]
+                        "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                       }
                     },
-                    "required": [
-                      "value"
-                    ]
+                    "required": ["value"]
                   }
                 }
               }
@@ -14901,13 +14090,7 @@
                 "properties": {
                   "eventType": {
                     "type": "string",
-                    "enum": [
-                      "DRIVING_OFFENCE",
-                      "CRIMINAL_OFFENCE",
-                      "LOSS_HISTORY",
-                      "INSURANCE_HISTORY",
-                      "UNSPECIFIED"
-                    ]
+                    "enum": ["DRIVING_OFFENCE", "CRIMINAL_OFFENCE", "LOSS_HISTORY", "INSURANCE_HISTORY", "UNSPECIFIED"]
                   },
                   "disclosureDate": {
                     "title": "Date Only Extended",
@@ -14919,16 +14102,10 @@
                       },
                       "format": {
                         "type": "string",
-                        "enum": [
-                          "yyyy-MM-dd",
-                          "yyyy-MM",
-                          "yyyy"
-                        ]
+                        "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                       }
                     },
-                    "required": [
-                      "value"
-                    ]
+                    "required": ["value"]
                   },
                   "declaration": {
                     "type": "object",
@@ -14941,12 +14118,7 @@
                       },
                       "period": {
                         "type": "string",
-                        "enum": [
-                          "LAST_5_YEARS",
-                          "LAST_7_YEARS",
-                          "EVER",
-                          "LAST_YEAR"
-                        ]
+                        "enum": ["LAST_5_YEARS", "LAST_7_YEARS", "EVER", "LAST_YEAR"]
                       },
                       "value": {
                         "type": "string",
@@ -14979,9 +14151,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "amount"
-                        ]
+                        "required": ["amount"]
                       }
                     }
                   },
@@ -15001,16 +14171,10 @@
                           },
                           "format": {
                             "type": "string",
-                            "enum": [
-                              "yyyy-MM-dd",
-                              "yyyy-MM",
-                              "yyyy"
-                            ]
+                            "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "wasDrugOrAlcoholRelated": {
                         "type": "boolean"
@@ -15048,16 +14212,10 @@
                           },
                           "format": {
                             "type": "string",
-                            "enum": [
-                              "yyyy-MM-dd",
-                              "yyyy-MM",
-                              "yyyy"
-                            ]
+                            "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "endDate": {
                         "title": "Date Only Extended",
@@ -15069,16 +14227,10 @@
                           },
                           "format": {
                             "type": "string",
-                            "enum": [
-                              "yyyy-MM-dd",
-                              "yyyy-MM",
-                              "yyyy"
-                            ]
+                            "enum": ["yyyy-MM-dd", "yyyy-MM", "yyyy"]
                           }
                         },
-                        "required": [
-                          "value"
-                        ]
+                        "required": ["value"]
                       },
                       "reason": {
                         "type": "string"
@@ -15115,9 +14267,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "amount"
-                        ]
+                        "required": ["amount"]
                       },
                       "periodImposed": {
                         "type": "string"
@@ -15209,16 +14359,7 @@
                             "systemOfRecord": {
                               "title": "System Of Record",
                               "type": "string",
-                              "enum": [
-                                "LOREM",
-                                "HEART",
-                                "IPSUM_CENTER",
-                                "SECURITY",
-                                "BAR",
-                                "FOO",
-                                "BUDDY",
-                                "BONUS"
-                              ]
+                              "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
                             },
                             "partyRoles": {
                               "type": "array",
@@ -15253,11 +14394,7 @@
             },
             "confirmationSpecialHandlingType": {
               "type": "string",
-              "enum": [
-                "EMPLOYEE",
-                "SENSITIVE",
-                "NONE"
-              ]
+              "enum": ["EMPLOYEE", "SENSITIVE", "NONE"]
             },
             "transactionDescription": {
               "type": "string"
@@ -15278,16 +14415,7 @@
         "systemOfRecord": {
           "title": "System Of Record",
           "type": "string",
-          "enum": [
-            "LOREM",
-            "HEART",
-            "IPSUM_CENTER",
-            "SECURITY",
-            "BAR",
-            "FOO",
-            "BUDDY",
-            "BONUS"
-          ]
+          "enum": ["LOREM", "HEART", "IPSUM_CENTER", "SECURITY", "BAR", "FOO", "BUDDY", "BONUS"]
         },
         "systemOfRecordTransactionDate": {
           "title": "Date Time Extended",
@@ -15319,9 +14447,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "value"
-          ]
+          "required": ["value"]
         },
         "dateOfLoss": {
           "title": "Date Time Extended",
@@ -15353,17 +14479,12 @@
               "type": "string"
             }
           },
-          "required": [
-            "value"
-          ]
+          "required": ["value"]
         },
         "lossCause": {
           "type": "object",
           "description": "System of record loss code and its description",
-          "required": [
-            "code",
-            "codeDescription"
-          ],
+          "required": ["code", "codeDescription"],
           "properties": {
             "code": {
               "type": "string"
@@ -15375,12 +14496,7 @@
         },
         "status": {
           "type": "string",
-          "enum": [
-            "ARCHIVED",
-            "CLOSED",
-            "OPEN",
-            "DRAFT"
-          ]
+          "enum": ["ARCHIVED", "CLOSED", "OPEN", "DRAFT"]
         },
         "costOfConfirmation": {
           "title": "Amount Extended",
@@ -15405,9 +14521,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "amount"
-          ]
+          "required": ["amount"]
         },
         "exportedAt": {
           "type": "string"

@@ -68,6 +68,18 @@ function processNode(node: JSONSchema4): SchemaNode | void {
     return base;
   }
 
+  // combiners can have type that propagate to children
+  if (combiner !== undefined) {
+    return {
+      id: assignId(node),
+      combiner,
+      type: getType(node),
+      properties: node[combiner],
+      annotations: getAnnotations(node),
+      ...(node.type !== undefined && { type: node.type }),
+    } as ICombinerNode;
+  }
+
   if ('enum' in node) {
     return {
       id: assignId(node),
@@ -82,16 +94,6 @@ function processNode(node: JSONSchema4): SchemaNode | void {
       id: assignId(node),
       $ref: node.$ref,
     } as IRefNode;
-  }
-
-  if (combiner !== undefined) {
-    return {
-      id: assignId(node),
-      combiner,
-      properties: node[combiner],
-      annotations: getAnnotations(node),
-      ...(node.type !== undefined && { type: node.type }),
-    } as ICombinerNode;
   }
 
   // if ('not' in node) {
