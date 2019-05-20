@@ -88,7 +88,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
           {node.canHaveChildren && <div className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</div>}
 
           {'pattern' in schemaNode && schemaNode.pattern ? (
-            <div className="ml-2 text-darken-7 dark:text-lighten-6">(pattern property)</div>
+            <div className="ml-2 text-darken-7 dark:text-lighten-6 truncate">(pattern property)</div>
           ) : null}
 
           {description && (
