@@ -16,7 +16,7 @@ export interface IType {
 
 export const Type: React.FunctionComponent<IType> = ({ className, children, type, subtype }) => {
   return (
-    <span className={cn(className, PropertyTypeColors[type])}>
+    <span className={cn(className, PropertyTypeColors[type], 'truncate')}>
       {type === 'array' && subtype && subtype !== 'array' ? `array[${subtype}]` : type}
 
       {children}
@@ -42,7 +42,7 @@ export const Types: React.FunctionComponent<ITypes> = ({ className, type, subtyp
   }
 
   return (
-    <div className={cn(className, 'overflow-hidden')}>
+    <div className={cn(className, 'truncate')}>
       <>
         {type.map((name, i, { length }) => (
           <React.Fragment key={i}>
