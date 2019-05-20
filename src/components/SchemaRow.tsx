@@ -39,19 +39,16 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
   const validationCount = Object.keys(nodeValidations).length;
 
   const requiredElem = (
-    <span className={cn(required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
+    <div className={cn('ml-2', required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
       {required ? 'required' : 'optional'}
       {validationCount ? `+${validationCount}` : ''}
-    </span>
+    </div>
   );
 
   return (
-    <div
-      className="flex-1 flex items-center overflow-hidden"
-      style={{ marginLeft: ROW_OFFSET, marginRight: ROW_OFFSET }}
-    >
+    <div className="px-2 flex-1 w-full">
       <div
-        className="flex flex-1 items-center text-sm leading-tight w-full h-full relative overflow-hidden"
+        className="flex items-center text-sm relative"
         style={{
           marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
@@ -76,47 +73,38 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
 
         {schemaNode.divider && (
           <div className="flex items-center w-full absolute" style={{ top: -9, height: 1 }}>
-            <div
-              className="font-medium text-darken-7 dark:text-lighten-7 pr-2 uppercase text-xs"
-              style={{ marginLeft: -10 }}
-            >
-              {schemaNode.divider}
-            </div>
+            <div className="text-darken-7 dark:text-lighten-7 uppercase text-xs pr-2 -ml-4">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
         )}
 
-        <div className="flex-1 truncate">
-          <div className="flex items-baseline">
-            {name && <span className="mr-2">{name}</span>}
+        <div className="flex-1 flex truncate">
+          {name && <div className="mr-2">{name}</div>}
 
-            <Types type={type} subtype={subtype}>
-              {type === '$ref' ? `[${$ref}]` : null}
-            </Types>
+          <Types type={type} subtype={subtype}>
+            {type === '$ref' ? `[${$ref}]` : null}
+          </Types>
 
-            {node.canHaveChildren && (
-              <span className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</span>
-            )}
+          {node.canHaveChildren && <div className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</div>}
 
-            {'pattern' in schemaNode && schemaNode.pattern ? (
-              <span className="text-darken-7 dark:text-lighten-6 ml-2">(pattern property)</span>
-            ) : null}
+          {'pattern' in schemaNode && schemaNode.pattern ? (
+            <div className="ml-2 text-darken-7 dark:text-lighten-6 truncate">(pattern property)</div>
+          ) : null}
 
-            {description && (
-              <Popover
-                boundary="window"
-                interactionKind="hover"
-                className="overflow-hidden JSV--Popover"
-                targetClassName="overflow-hidden block"
-                target={<div className="ml-2 text-darken-7 dark:text-lighten-6 truncate">{description}</div>}
-                content={
-                  <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
-                    <MarkdownViewer markdown={description} />
-                  </div>
-                }
-              />
-            )}
-          </div>
+          {description && (
+            <Popover
+              boundary="window"
+              interactionKind="hover"
+              className="ml-2 flex-1 truncate flex items-baseline"
+              target={<div className="text-darken-7 dark:text-lighten-6 w-full truncate">{description}</div>}
+              targetClassName="text-darken-7 dark:text-lighten-6 w-full truncate"
+              content={
+                <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
+                  <MarkdownViewer markdown={description} />
+                </div>
+              }
+            />
+          )}
         </div>
 
         {validationCount ? (
@@ -124,35 +112,38 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
             boundary="window"
             interactionKind="hover"
             content={
-              <div className="p-3">
+              <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
                 {map(Object.keys(nodeValidations), (key, index) => {
                   const validation = nodeValidations[key];
 
-                  let elem = [];
+                  let elem = null;
                   if (Array.isArray(validation)) {
-                    elem = validation.map(v => (
-                      <span key={v} className="px-1 bg-red-2 text-red-7 text-sm rounded">
-                        {v}
-                      </span>
+                    elem = validation.map((v, i) => (
+                      <div className="mt-1 mr-1 flex items-center">
+                        <div className="px-1 bg-gray-2 font-bold text-sm rounded" key={i}>
+                          {v}
+                        </div>
+                        {i < validation.length - 1 ? <div>,</div> : null}
+                      </div>
                     ));
                   } else if (typeof validation === 'object') {
-                    elem = [
-                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                    elem = (
+                      <div className="m-1 px-1 bg-gray-2 font-bold text-sm rounded" key={index}>
                         {'{...}'}
-                      </span>,
-                    ];
+                      </div>
+                    );
                   } else {
-                    elem = [
-                      <span key={index} className="px-1 bg-red-2 text-red-7 text-sm rounded">
+                    elem = (
+                      <div className="m-1 px-1 bg-gray-2 font-bold text-sm rounded" key={index}>
                         {JSON.stringify(validation)}
-                      </span>,
-                    ];
+                      </div>
+                    );
                   }
 
                   return (
-                    <div key={index} className="py-1">
-                      <span className="font-medium pr-2">{key}:</span>
-                      <span className="px-1 bg-red-2 text-red-7 text-sm rounded">{elem}</span>
+                    <div key={index} className="py-1 flex items-baseline">
+                      <div className="font-medium pr-2 w-24">{key}:</div>
+                      <div className="flex-1 flex flex-wrap text-center">{elem}</div>
                     </div>
                   );
                 })}

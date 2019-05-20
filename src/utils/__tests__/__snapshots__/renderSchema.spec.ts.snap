@@ -374,6 +374,7 @@ Array [
           "type": "string",
         },
         "items": Object {
+          "description": "This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!",
           "items": Object {
             "type": Array [
               "string",
@@ -386,7 +387,7 @@ Array [
           ],
         },
         "name": Object {
-          "description": "The user's full name.",
+          "description": "The user's full name. This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!",
           "type": "string",
         },
         "permissions": Object {
@@ -442,7 +443,7 @@ Array [
     "level": 1,
     "metadata": Object {
       "annotations": Object {
-        "description": "The user's full name.",
+        "description": "The user's full name. This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!",
       },
       "enum": undefined,
       "id": "random-id",
@@ -503,7 +504,9 @@ Array [
     "level": 1,
     "metadata": Object {
       "additionalItems": undefined,
-      "annotations": Object {},
+      "annotations": Object {
+        "description": "This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!",
+      },
       "enum": undefined,
       "id": "random-id",
       "items": undefined,
