@@ -119,22 +119,20 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
                   let elem = null;
                   if (Array.isArray(validation)) {
                     elem = validation.map((v, i) => (
-                      <div className="mt-1 mr-1 flex items-center">
-                        <div className="px-1 bg-gray-2 font-bold text-sm rounded" key={i}>
-                          {v}
-                        </div>
+                      <div key={i} className="mt-1 mr-1 flex items-center">
+                        <div className="px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded">{v}</div>
                         {i < validation.length - 1 ? <div>,</div> : null}
                       </div>
                     ));
                   } else if (typeof validation === 'object') {
                     elem = (
-                      <div className="m-1 px-1 bg-gray-2 font-bold text-sm rounded" key={index}>
+                      <div className="m-1 px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded" key={index}>
                         {'{...}'}
                       </div>
                     );
                   } else {
                     elem = (
-                      <div className="m-1 px-1 bg-gray-2 font-bold text-sm rounded" key={index}>
+                      <div className="m-1 px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded" key={index}>
                         {JSON.stringify(validation)}
                       </div>
                     );
