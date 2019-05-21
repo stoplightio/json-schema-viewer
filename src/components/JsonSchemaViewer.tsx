@@ -5,6 +5,7 @@ import * as React from 'react';
 import ErrorBoundary, { ErrorBoundaryProps, FallbackProps } from 'react-error-boundary';
 
 import { JSONSchema4 } from 'json-schema';
+import { GetRefDetailsFn } from '../types';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
 import { SchemaTree } from './SchemaTree';
 
@@ -19,6 +20,7 @@ export interface IJsonSchemaViewer extends ErrorBoundaryProps {
   name?: string;
   hideTopBar?: boolean;
   maxRows?: number;
+  getRefDetails: GetRefDetailsFn;
 }
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {

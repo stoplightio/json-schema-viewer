@@ -51,7 +51,7 @@ describe('SchemaTree component', () => {
 
   describe('tree-list', () => {
     test('should be rendered', () => {
-      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} />);
+      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} getRefDetails={jest.fn()} />);
 
       expect(wrapper.find(TreeList)).toExist();
       expect(wrapper.find(TreeList)).toHaveProp({
@@ -60,7 +60,9 @@ describe('SchemaTree component', () => {
     });
 
     test('should be not draggable', () => {
-      const treeList = shallow(<SchemaTree schema={schema} treeStore={store} />).find(TreeList);
+      const treeList = shallow(<SchemaTree schema={schema} treeStore={store} getRefDetails={jest.fn()} />).find(
+        TreeList,
+      );
 
       expect(treeList.prop('canDrag')).toHaveLength(0);
       expect(treeList.prop('canDrag')!({} as any)).toBe(false);
