@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { State, Store } from '@sambego/storybook-state';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JsonSchemaViewer } from '../components';
@@ -12,13 +13,7 @@ import * as schema from '../__fixtures__/default-schema.json';
 import * as schemaWithRefs from '../__fixtures__/ref/original.json';
 import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
 import * as stressSchema from '../__fixtures__/stress-schema.json';
-import { GetRefDetailsFn } from '../types';
 import { Wrapper } from './utils/Wrapper';
-
-const getRefDetails: GetRefDetailsFn = node => ({
-  fullName: 'full path to ref?',
-  url: `https://www.stoplight.io?ref=${node.metadata!.$ref}`,
-});
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -30,7 +25,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
-      getRefDetails={getRefDetails}
+      onGoToRef={action('onGoToRef')}
     />
   ))
   .add('with dereferenced schema', () => {
@@ -47,7 +42,7 @@ storiesOf('JsonSchemaViewer', module)
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
           expanded={boolean('expanded', true)}
           hideTopBar={boolean('hideTopBar', false)}
-          getRefDetails={getRefDetails}
+          onGoToRef={action('onGoToRef')}
         />
       </State>
     );
@@ -58,7 +53,7 @@ storiesOf('JsonSchemaViewer', module)
       schema={object('schema', {})}
       expanded={boolean('expanded', true)}
       hideTopBar={boolean('hideTopBar', false)}
-      getRefDetails={getRefDetails}
+      onGoToRef={action('onGoToRef')}
     />
   ))
   .add('stress-test schema', () => (
@@ -68,7 +63,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
-      getRefDetails={getRefDetails}
+      onGoToRef={action('onGoToRef')}
     />
   ))
   .add('allOf-schema', () => (
@@ -78,7 +73,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
-      getRefDetails={getRefDetails}
+      onGoToRef={action('onGoToRef')}
     />
   ))
   .add('error boundary', () => (
@@ -90,7 +85,7 @@ storiesOf('JsonSchemaViewer', module)
       expanded={boolean('expanded', false)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       hideTopBar={boolean('hideTopBar', false)}
-      getRefDetails={getRefDetails}
+      onGoToRef={action('onGoToRef')}
     />
   ))
   .add('dark', () => (
@@ -101,7 +96,7 @@ storiesOf('JsonSchemaViewer', module)
         defaultExpandedDepth={number('defaultExpandedDepth', 2)}
         expanded={boolean('expanded', false)}
         hideTopBar={boolean('hideTopBar', false)}
-        getRefDetails={getRefDetails}
+        onGoToRef={action('onGoToRef')}
       />
     </div>
   ));

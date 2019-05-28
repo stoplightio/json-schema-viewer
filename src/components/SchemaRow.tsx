@@ -8,23 +8,22 @@ import get = require('lodash/get');
 import map = require('lodash/map');
 import size = require('lodash/size');
 
-import { GetRefDetailsFn, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
+import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
-import { RefDetails } from './RefDetails';
 
 export interface ISchemaRow {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   treeStore: TreeStore;
-  getRefDetails: GetRefDetailsFn;
+  onGoToRef?: GoToRefHandler;
 }
 
 const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore, getRefDetails }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore, onGoToRef }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
   const { name, $ref, subtype, required } = schemaNode;
 
@@ -39,7 +38,14 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
     ...get(schemaNode, 'validations', {}),
   };
   const validationCount = Object.keys(nodeValidations).length;
-  const refDetails = isRef(schemaNode) ? getRefDetails(node) : null;
+  const handleGoToRef = React.useCallback<React.MouseEventHandler>(
+    () => {
+      if (onGoToRef) {
+        onGoToRef($ref!, node);
+      }
+    },
+    [onGoToRef, node, $ref],
+  );
 
   const requiredElem = (
     <div className={cn('ml-2', required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
@@ -85,17 +91,14 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
           {name && <div className="mr-2">{name}</div>}
 
           <Types type={type} subtype={subtype}>
-            {type === '$ref' ? (
-              <Popover
-                disabled={refDetails === null}
-                content={<RefDetails {...refDetails} />}
-                boundary="window"
-                interactionKind="hover"
-              >
-                {`[${$ref}]`}
-              </Popover>
-            ) : null}
+            {type === '$ref' ? `[${$ref}]` : null}
           </Types>
+
+          {type === '$ref' && onGoToRef ? (
+            <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>
+              (go to ref)
+            </a>
+          ) : null}
 
           {node.canHaveChildren && <div className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</div>}
 

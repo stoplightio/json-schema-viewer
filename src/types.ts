@@ -68,9 +68,4 @@ export type SchemaNodeWithMeta = SchemaNode & ITreeNodeMeta;
 
 export type SchemaTreeListNode = TreeListNode<SchemaNodeWithMeta>;
 
-export interface IRefDetails {
-  url: string;
-  fullName?: string;
-}
-
-export type GetRefDetailsFn = (node: SchemaTreeListNode) => IRefDetails | null;
+export type GoToRefHandler = (path: string, node: SchemaTreeListNode) => void;
