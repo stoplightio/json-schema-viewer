@@ -67,3 +67,5 @@ export interface ITreeNodeMeta {
 export type SchemaNodeWithMeta = SchemaNode & ITreeNodeMeta;
 
 export type SchemaTreeListNode = TreeListNode<SchemaNodeWithMeta>;
+
+export type GoToRefHandler = (path: string, node: SchemaTreeListNode) => void;

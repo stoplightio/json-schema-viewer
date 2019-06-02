@@ -4,6 +4,7 @@ import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
+import { GoToRefHandler } from '../types';
 import { SchemaRow } from './';
 
 export interface ISchemaTree {
@@ -15,23 +16,25 @@ export interface ISchemaTree {
   hideTopBar?: boolean;
   expanded?: boolean;
   maxRows?: number;
+  onGoToRef?: GoToRefHandler;
 }
 
 const canDrag = () => false;
 
 export const SchemaTree = observer<ISchemaTree>(props => {
-  const { hideTopBar, name, treeStore, maxRows, className } = props;
+  const { hideTopBar, name, treeStore, maxRows, className, onGoToRef } = props;
 
   treeStore.on(TreeListEvents.NodeClick, (e, node) => treeStore.toggleExpand(node));
 
   const itemData = {
     treeStore,
     count: treeStore.nodes.length,
+    onGoToRef,
   };
 
   const rowRenderer = React.useCallback(
     (node, rowOptions) => <SchemaRow node={node} rowOptions={rowOptions} {...itemData} />,
-    [itemData],
+    [itemData.count],
   );
 
   return (

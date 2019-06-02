@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { State, Store } from '@sambego/storybook-state';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JsonSchemaViewer } from '../components';
@@ -16,16 +17,16 @@ import { Wrapper } from './utils/Wrapper';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
+  .addDecorator(storyFn => <Wrapper>{storyFn()}</Wrapper>)
   .add('default', () => (
-    <Wrapper>
-      <JsonSchemaViewer
-        name={text('name', 'my schema')}
-        schema={schema as JSONSchema4}
-        defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-        expanded={boolean('expanded', false)}
-        hideTopBar={boolean('hideTopBar', false)}
-      />
-    </Wrapper>
+    <JsonSchemaViewer
+      name={text('name', 'my schema')}
+      schema={schema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
+      onGoToRef={action('onGoToRef')}
+    />
   ))
   .add('with dereferenced schema', () => {
     const store = new Store<{ selected: string[] }>({
@@ -34,74 +35,68 @@ storiesOf('JsonSchemaViewer', module)
 
     return (
       <State store={store}>
-        <Wrapper>
-          <JsonSchemaViewer
-            name={text('name', 'name')}
-            schema={schemaWithRefs as JSONSchema4}
-            dereferencedSchema={dereferencedSchema as JSONSchema4}
-            defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-            expanded={boolean('expanded', true)}
-            hideTopBar={boolean('hideTopBar', false)}
-          />
-        </Wrapper>
+        <JsonSchemaViewer
+          name={text('name', 'name')}
+          schema={schemaWithRefs as JSONSchema4}
+          dereferencedSchema={dereferencedSchema as JSONSchema4}
+          defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+          expanded={boolean('expanded', true)}
+          hideTopBar={boolean('hideTopBar', false)}
+          onGoToRef={action('onGoToRef')}
+        />
       </State>
     );
   })
   .add('custom schema', () => (
-    <Wrapper>
-      <JsonSchemaViewer
-        name={text('name', 'my schema')}
-        schema={object('schema', {})}
-        expanded={boolean('expanded', true)}
-        hideTopBar={boolean('hideTopBar', false)}
-      />
-    </Wrapper>
+    <JsonSchemaViewer
+      name={text('name', 'my schema')}
+      schema={object('schema', {})}
+      expanded={boolean('expanded', true)}
+      hideTopBar={boolean('hideTopBar', false)}
+      onGoToRef={action('onGoToRef')}
+    />
   ))
   .add('stress-test schema', () => (
-    <Wrapper>
+    <JsonSchemaViewer
+      name={text('name', 'my stress schema')}
+      schema={stressSchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('allOf-schema', () => (
+    <JsonSchemaViewer
+      schema={allOfSchema as JSONSchema4}
+      dereferencedSchema={allOfSchemaResolved as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('error boundary', () => (
+    <JsonSchemaViewer
+      name={text('name', 'throw me an error!')}
+      // @ts-ignore
+      schema={null}
+      onError={(error: any) => console.log('You can hook into the onError handler too!', error)}
+      expanded={boolean('expanded', false)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      hideTopBar={boolean('hideTopBar', false)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('dark', () => (
+    <div style={{ height: '100vh' }} className="bp3-dark bg-gray-8">
       <JsonSchemaViewer
         name={text('name', 'my stress schema')}
         schema={stressSchema as JSONSchema4}
         defaultExpandedDepth={number('defaultExpandedDepth', 2)}
         expanded={boolean('expanded', false)}
         hideTopBar={boolean('hideTopBar', false)}
+        onGoToRef={action('onGoToRef')}
       />
-    </Wrapper>
-  ))
-  .add('allOf-schema', () => (
-    <Wrapper>
-      <JsonSchemaViewer
-        schema={allOfSchema as JSONSchema4}
-        dereferencedSchema={allOfSchemaResolved as JSONSchema4}
-        defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-        expanded={boolean('expanded', false)}
-        hideTopBar={boolean('hideTopBar', false)}
-      />
-    </Wrapper>
-  ))
-  .add('error boundary', () => (
-    <Wrapper>
-      <JsonSchemaViewer
-        name={text('name', 'throw me an error!')}
-        // @ts-ignore
-        schema={null}
-        onError={(error: any) => console.log('You can hook into the onError handler too!', error)}
-        expanded={boolean('expanded', false)}
-        defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-        hideTopBar={boolean('hideTopBar', false)}
-      />
-    </Wrapper>
-  ))
-  .add('dark', () => (
-    <div style={{ height: '100vh' }} className="bp3-dark bg-gray-8">
-      <Wrapper>
-        <JsonSchemaViewer
-          name={text('name', 'my stress schema')}
-          schema={stressSchema as JSONSchema4}
-          defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          expanded={boolean('expanded', false)}
-          hideTopBar={boolean('hideTopBar', false)}
-        />
-      </Wrapper>
     </div>
   ));

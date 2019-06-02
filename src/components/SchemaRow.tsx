@@ -1,5 +1,5 @@
 import { MarkdownViewer } from '@stoplight/markdown-viewer';
-import { IRowRendererOptions, ITreeListNode, TreeStore } from '@stoplight/tree-list';
+import { IRowRendererOptions, TreeStore } from '@stoplight/tree-list';
 import { Colors, Icon, Popover } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import * as React from 'react';
@@ -8,21 +8,22 @@ import get = require('lodash/get');
 import map = require('lodash/map');
 import size = require('lodash/size');
 
-import { SchemaNodeWithMeta } from '../types';
+import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
 export interface ISchemaRow {
-  node: ITreeListNode<object>;
+  node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   treeStore: TreeStore;
+  onGoToRef?: GoToRefHandler;
 }
 
 const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore, onGoToRef }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
   const { name, $ref, subtype, required } = schemaNode;
 
@@ -37,6 +38,14 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
     ...get(schemaNode, 'validations', {}),
   };
   const validationCount = Object.keys(nodeValidations).length;
+  const handleGoToRef = React.useCallback<React.MouseEventHandler>(
+    () => {
+      if (onGoToRef) {
+        onGoToRef($ref!, node);
+      }
+    },
+    [onGoToRef, node, $ref],
+  );
 
   const requiredElem = (
     <div className={cn('ml-2', required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
@@ -84,6 +93,12 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
           <Types type={type} subtype={subtype}>
             {type === '$ref' ? `[${$ref}]` : null}
           </Types>
+
+          {type === '$ref' && onGoToRef ? (
+            <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>
+              (go to ref)
+            </a>
+          ) : null}
 
           {node.canHaveChildren && <div className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</div>}
 
