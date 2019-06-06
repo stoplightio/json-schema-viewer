@@ -129,7 +129,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
             ...baseNode,
             ...('items' in node &&
               !_isEmpty(node.items) &&
-              !('subtype' in baseNode.metadata!) && { canHaveChildren: true }),
+              (baseNode.metadata!.subtype === 'object' || Array.isArray(node.items)) && { canHaveChildren: true }),
             metadata: {
               ...baseNode.metadata,
               // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
@@ -147,13 +147,13 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
           } else if (parsedSchema.items) {
             switch (baseNode.metadata && baseNode.metadata.subtype) {
               case SchemaKind.Object:
-                yield* getProperties(parsedSchema.items, level + 1, {
+                yield* getProperties(parsedSchema.items, level, {
                   ...meta,
                   path: [...path, 'items'],
                 });
                 break;
               case SchemaKind.Array:
-                yield* renderSchema(parsedSchema.items, level + 1, {
+                yield* renderSchema(parsedSchema.items, level, {
                   path,
                 });
                 break;

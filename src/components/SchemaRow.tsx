@@ -29,7 +29,12 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
 
   const type = isRef(schemaNode) ? '$ref' : isCombiner(schemaNode) ? schemaNode.combiner : schemaNode.type;
   const description = get(schemaNode, 'annotations.description');
-  const childrenCount = size(get(schemaNode, 'properties'));
+  const childrenCount =
+    type === 'object'
+      ? size(get(schemaNode, 'properties'))
+      : subtype === 'object'
+        ? size(get(schemaNode, 'items.properties'))
+        : size(get(schemaNode, 'items'));
 
   const nodeValidations = {
     ...('annotations' in schemaNode && schemaNode.annotations.default

@@ -34,6 +34,7 @@ Array [
     "name": "",
   },
   Object {
+    "canHaveChildren": true,
     "id": "random-id",
     "level": 1,
     "metadata": Object {
@@ -41,7 +42,14 @@ Array [
       "annotations": Object {},
       "enum": undefined,
       "id": "random-id",
-      "items": undefined,
+      "items": Object {
+        "properties": Object {
+          "ArrayObjectProperty": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
       "name": "propertyIsArrayOfObjects",
       "path": Array [
         "properties",
@@ -58,7 +66,7 @@ Array [
   },
   Object {
     "id": "random-id",
-    "level": 3,
+    "level": 2,
     "metadata": Object {
       "annotations": Object {},
       "enum": undefined,
@@ -89,7 +97,9 @@ Array [
       "annotations": Object {},
       "enum": undefined,
       "id": "random-id",
-      "items": undefined,
+      "items": Object {
+        "$ref": "./models/todo-full.json",
+      },
       "path": Array [],
       "subtype": "$ref( ./models/todo-full.json )",
       "type": "array",
@@ -509,7 +519,12 @@ Array [
       },
       "enum": undefined,
       "id": "random-id",
-      "items": undefined,
+      "items": Object {
+        "type": Array [
+          "string",
+          "number",
+        ],
+      },
       "name": "items",
       "path": Array [
         "properties",
@@ -671,7 +686,9 @@ Array [
       "divider": "and/or",
       "enum": undefined,
       "id": "random-id",
-      "items": undefined,
+      "items": Object {
+        "type": "integer",
+      },
       "path": Array [
         "properties",
         "plan",
@@ -724,7 +741,9 @@ Array [
       "annotations": Object {},
       "enum": undefined,
       "id": "random-id",
-      "items": undefined,
+      "items": Object {
+        "type": "integer",
+      },
       "name": "ids",
       "path": Array [
         "properties",
@@ -864,6 +883,877 @@ Array [
         "shipping_address",
       ],
       "required": false,
+    },
+    "name": "",
+  },
+]
+`;
+
+exports[`renderSchema util should match tickets.schema.json 1`] = `
+Array [
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 0,
+    "metadata": Object {
+      "additionalProperties": undefined,
+      "annotations": Object {
+        "description": "This section allows the selection of the ticketing options for all sales of the order.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "path": Array [],
+      "patternProperties": undefined,
+      "properties": Object {
+        "availableTicketingOptions": Object {
+          "description": "List of ticketing options of the order.",
+          "items": Object {
+            "$ref": "../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml",
+          },
+          "type": "array",
+        },
+        "commonTicketingOptions": Object {
+          "description": "Common ticketing options to all order items.",
+          "items": Object {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "ticketingOptionChoice": Object {
+          "description": "Ticketing option selection per order item.",
+          "items": Object {
+            "properties": Object {
+              "orderItemBreakdown": Object {
+                "description": "Structure that contains ticketing options per order item.",
+                "items": Object {
+                  "properties": Object {
+                    "options": Object {
+                      "description": "Available ticketing options for a given order item.",
+                      "items": Object {
+                        "properties": Object {
+                          "additionalRequiredInfo": Object {
+                            "description": "Additional passenger required info specific to the given ticketing option.",
+                            "type": "string",
+                          },
+                          "deliveryInfo": Object {
+                            "description": "Data for ticket delivery.",
+                            "properties": Object {
+                              "availableDeliveryTypes": Object {
+                                "items": Object {
+                                  "enum": Array [
+                                    "POSTAL",
+                                    "PICK_UP_STATION",
+                                    "E-MAIL",
+                                    "LOYALTY_CARD",
+                                  ],
+                                  "type": "string",
+                                },
+                                "type": "array",
+                              },
+                              "ccEmail": Object {
+                                "format": "email",
+                                "type": "string",
+                              },
+                              "pickUpAtStation": Object {
+                                "description": "The name of the Station in case you select pick up at station as a delivery type",
+                                "type": "string",
+                              },
+                              "postalAddress": Object {
+                                "$ref": "../Address/Address.v0-1.yaml",
+                              },
+                              "ticketRecipients": Object {
+                                "items": Object {
+                                  "enum": Array [
+                                    "BOOKER",
+                                    "CUSTOMER",
+                                    "PASSENGER",
+                                    "THIRD_PARTY",
+                                  ],
+                                  "type": "string",
+                                },
+                                "type": "array",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "selected": Object {
+                            "description": "Flag to specify which ticketing option is selected. Only one option is allowed to be selected.",
+                            "example": true,
+                            "type": "boolean",
+                          },
+                          "title": Object {
+                            "description": "Ticketing option short-description.",
+                            "enum": Array [
+                              "HOMEPRINT",
+                              "TICKETLESS",
+                              "PRINT_AT_KIOSK",
+                              "SECURE_PAPER",
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "type": "array",
+                    },
+                    "orderItemId": Object {
+                      "format": "uuid",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
+              "state": Object {
+                "default": "ACTIVE",
+                "description": "The status that addresses if a specific ticket option is active or not. The status active is used before ticketing or before exchange confirmation. After ticketing, the status changes in completed. This allows to store ticketing options already used at ticketing time and to clean up all non selected options after ticketing or exchanged confirmation.",
+                "enum": Array [
+                  "COMPLETED",
+                  "ACTIVE",
+                ],
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "type": "array",
+        },
+      },
+      "type": "object",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 1,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {
+        "description": "List of ticketing options of the order.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "$ref": "../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml",
+      },
+      "name": "availableTicketingOptions",
+      "path": Array [
+        "properties",
+        "availableTicketingOptions",
+      ],
+      "required": false,
+      "subtype": "$ref( ../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml )",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 1,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {
+        "description": "Common ticketing options to all order items.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "type": "string",
+      },
+      "name": "commonTicketingOptions",
+      "path": Array [
+        "properties",
+        "commonTicketingOptions",
+      ],
+      "required": false,
+      "subtype": "string",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 1,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {
+        "description": "Ticketing option selection per order item.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "properties": Object {
+          "orderItemBreakdown": Object {
+            "description": "Structure that contains ticketing options per order item.",
+            "items": Object {
+              "properties": Object {
+                "options": Object {
+                  "description": "Available ticketing options for a given order item.",
+                  "items": Object {
+                    "properties": Object {
+                      "additionalRequiredInfo": Object {
+                        "description": "Additional passenger required info specific to the given ticketing option.",
+                        "type": "string",
+                      },
+                      "deliveryInfo": Object {
+                        "description": "Data for ticket delivery.",
+                        "properties": Object {
+                          "availableDeliveryTypes": Object {
+                            "items": Object {
+                              "enum": Array [
+                                "POSTAL",
+                                "PICK_UP_STATION",
+                                "E-MAIL",
+                                "LOYALTY_CARD",
+                              ],
+                              "type": "string",
+                            },
+                            "type": "array",
+                          },
+                          "ccEmail": Object {
+                            "format": "email",
+                            "type": "string",
+                          },
+                          "pickUpAtStation": Object {
+                            "description": "The name of the Station in case you select pick up at station as a delivery type",
+                            "type": "string",
+                          },
+                          "postalAddress": Object {
+                            "$ref": "../Address/Address.v0-1.yaml",
+                          },
+                          "ticketRecipients": Object {
+                            "items": Object {
+                              "enum": Array [
+                                "BOOKER",
+                                "CUSTOMER",
+                                "PASSENGER",
+                                "THIRD_PARTY",
+                              ],
+                              "type": "string",
+                            },
+                            "type": "array",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "selected": Object {
+                        "description": "Flag to specify which ticketing option is selected. Only one option is allowed to be selected.",
+                        "example": true,
+                        "type": "boolean",
+                      },
+                      "title": Object {
+                        "description": "Ticketing option short-description.",
+                        "enum": Array [
+                          "HOMEPRINT",
+                          "TICKETLESS",
+                          "PRINT_AT_KIOSK",
+                          "SECURE_PAPER",
+                        ],
+                        "readOnly": true,
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "orderItemId": Object {
+                  "format": "uuid",
+                  "type": "string",
+                },
+              },
+              "type": "object",
+            },
+            "type": "array",
+          },
+          "state": Object {
+            "default": "ACTIVE",
+            "description": "The status that addresses if a specific ticket option is active or not. The status active is used before ticketing or before exchange confirmation. After ticketing, the status changes in completed. This allows to store ticketing options already used at ticketing time and to clean up all non selected options after ticketing or exchanged confirmation.",
+            "enum": Array [
+              "COMPLETED",
+              "ACTIVE",
+            ],
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "name": "ticketingOptionChoice",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+      ],
+      "required": false,
+      "subtype": "object",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 2,
+    "metadata": Object {
+      "annotations": Object {
+        "default": "ACTIVE",
+        "description": "The status that addresses if a specific ticket option is active or not. The status active is used before ticketing or before exchange confirmation. After ticketing, the status changes in completed. This allows to store ticketing options already used at ticketing time and to clean up all non selected options after ticketing or exchanged confirmation.",
+      },
+      "enum": Array [
+        "COMPLETED",
+        "ACTIVE",
+      ],
+      "id": "random-id",
+      "name": "state",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "state",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {
+        "enum": Array [
+          "COMPLETED",
+          "ACTIVE",
+        ],
+      },
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 2,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {
+        "description": "Structure that contains ticketing options per order item.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "properties": Object {
+          "options": Object {
+            "description": "Available ticketing options for a given order item.",
+            "items": Object {
+              "properties": Object {
+                "additionalRequiredInfo": Object {
+                  "description": "Additional passenger required info specific to the given ticketing option.",
+                  "type": "string",
+                },
+                "deliveryInfo": Object {
+                  "description": "Data for ticket delivery.",
+                  "properties": Object {
+                    "availableDeliveryTypes": Object {
+                      "items": Object {
+                        "enum": Array [
+                          "POSTAL",
+                          "PICK_UP_STATION",
+                          "E-MAIL",
+                          "LOYALTY_CARD",
+                        ],
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "ccEmail": Object {
+                      "format": "email",
+                      "type": "string",
+                    },
+                    "pickUpAtStation": Object {
+                      "description": "The name of the Station in case you select pick up at station as a delivery type",
+                      "type": "string",
+                    },
+                    "postalAddress": Object {
+                      "$ref": "../Address/Address.v0-1.yaml",
+                    },
+                    "ticketRecipients": Object {
+                      "items": Object {
+                        "enum": Array [
+                          "BOOKER",
+                          "CUSTOMER",
+                          "PASSENGER",
+                          "THIRD_PARTY",
+                        ],
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                  },
+                  "type": "object",
+                },
+                "selected": Object {
+                  "description": "Flag to specify which ticketing option is selected. Only one option is allowed to be selected.",
+                  "example": true,
+                  "type": "boolean",
+                },
+                "title": Object {
+                  "description": "Ticketing option short-description.",
+                  "enum": Array [
+                    "HOMEPRINT",
+                    "TICKETLESS",
+                    "PRINT_AT_KIOSK",
+                    "SECURE_PAPER",
+                  ],
+                  "readOnly": true,
+                  "type": "string",
+                },
+              },
+              "type": "object",
+            },
+            "type": "array",
+          },
+          "orderItemId": Object {
+            "format": "uuid",
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "name": "orderItemBreakdown",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+      ],
+      "required": false,
+      "subtype": "object",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 3,
+    "metadata": Object {
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "name": "orderItemId",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "orderItemId",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {
+        "format": "uuid",
+      },
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 3,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {
+        "description": "Available ticketing options for a given order item.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "properties": Object {
+          "additionalRequiredInfo": Object {
+            "description": "Additional passenger required info specific to the given ticketing option.",
+            "type": "string",
+          },
+          "deliveryInfo": Object {
+            "description": "Data for ticket delivery.",
+            "properties": Object {
+              "availableDeliveryTypes": Object {
+                "items": Object {
+                  "enum": Array [
+                    "POSTAL",
+                    "PICK_UP_STATION",
+                    "E-MAIL",
+                    "LOYALTY_CARD",
+                  ],
+                  "type": "string",
+                },
+                "type": "array",
+              },
+              "ccEmail": Object {
+                "format": "email",
+                "type": "string",
+              },
+              "pickUpAtStation": Object {
+                "description": "The name of the Station in case you select pick up at station as a delivery type",
+                "type": "string",
+              },
+              "postalAddress": Object {
+                "$ref": "../Address/Address.v0-1.yaml",
+              },
+              "ticketRecipients": Object {
+                "items": Object {
+                  "enum": Array [
+                    "BOOKER",
+                    "CUSTOMER",
+                    "PASSENGER",
+                    "THIRD_PARTY",
+                  ],
+                  "type": "string",
+                },
+                "type": "array",
+              },
+            },
+            "type": "object",
+          },
+          "selected": Object {
+            "description": "Flag to specify which ticketing option is selected. Only one option is allowed to be selected.",
+            "example": true,
+            "type": "boolean",
+          },
+          "title": Object {
+            "description": "Ticketing option short-description.",
+            "enum": Array [
+              "HOMEPRINT",
+              "TICKETLESS",
+              "PRINT_AT_KIOSK",
+              "SECURE_PAPER",
+            ],
+            "readOnly": true,
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "name": "options",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+      ],
+      "required": false,
+      "subtype": "object",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 4,
+    "metadata": Object {
+      "annotations": Object {
+        "description": "Ticketing option short-description.",
+      },
+      "enum": Array [
+        "HOMEPRINT",
+        "TICKETLESS",
+        "PRINT_AT_KIOSK",
+        "SECURE_PAPER",
+      ],
+      "id": "random-id",
+      "name": "title",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "title",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {
+        "enum": Array [
+          "HOMEPRINT",
+          "TICKETLESS",
+          "PRINT_AT_KIOSK",
+          "SECURE_PAPER",
+        ],
+      },
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 4,
+    "metadata": Object {
+      "annotations": Object {
+        "description": "Flag to specify which ticketing option is selected. Only one option is allowed to be selected.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "name": "selected",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "selected",
+      ],
+      "required": false,
+      "type": "boolean",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 4,
+    "metadata": Object {
+      "annotations": Object {
+        "description": "Additional passenger required info specific to the given ticketing option.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "name": "additionalRequiredInfo",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "additionalRequiredInfo",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 4,
+    "metadata": Object {
+      "additionalProperties": undefined,
+      "annotations": Object {
+        "description": "Data for ticket delivery.",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "name": "deliveryInfo",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "deliveryInfo",
+      ],
+      "patternProperties": undefined,
+      "properties": Object {
+        "availableDeliveryTypes": Object {
+          "items": Object {
+            "enum": Array [
+              "POSTAL",
+              "PICK_UP_STATION",
+              "E-MAIL",
+              "LOYALTY_CARD",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "ccEmail": Object {
+          "format": "email",
+          "type": "string",
+        },
+        "pickUpAtStation": Object {
+          "description": "The name of the Station in case you select pick up at station as a delivery type",
+          "type": "string",
+        },
+        "postalAddress": Object {
+          "$ref": "../Address/Address.v0-1.yaml",
+        },
+        "ticketRecipients": Object {
+          "items": Object {
+            "enum": Array [
+              "BOOKER",
+              "CUSTOMER",
+              "PASSENGER",
+              "THIRD_PARTY",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+      },
+      "required": false,
+      "type": "object",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 5,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "enum": Array [
+          "POSTAL",
+          "PICK_UP_STATION",
+          "E-MAIL",
+          "LOYALTY_CARD",
+        ],
+        "type": "string",
+      },
+      "name": "availableDeliveryTypes",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "deliveryInfo",
+        "properties",
+        "availableDeliveryTypes",
+      ],
+      "required": false,
+      "subtype": "string",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 5,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "enum": Array [
+          "BOOKER",
+          "CUSTOMER",
+          "PASSENGER",
+          "THIRD_PARTY",
+        ],
+        "type": "string",
+      },
+      "name": "ticketRecipients",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "deliveryInfo",
+        "properties",
+        "ticketRecipients",
+      ],
+      "required": false,
+      "subtype": "string",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 5,
+    "metadata": Object {
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "name": "ccEmail",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "deliveryInfo",
+        "properties",
+        "ccEmail",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {
+        "format": "email",
+      },
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 5,
+    "metadata": Object {
+      "$ref": "../Address/Address.v0-1.yaml",
+      "id": "random-id",
+      "name": "postalAddress",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "deliveryInfo",
+        "properties",
+        "postalAddress",
+      ],
+      "required": false,
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 5,
+    "metadata": Object {
+      "annotations": Object {
+        "description": "The name of the Station in case you select pick up at station as a delivery type",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "name": "pickUpAtStation",
+      "path": Array [
+        "properties",
+        "ticketingOptionChoice",
+        "items",
+        "orderItemBreakdown",
+        "items",
+        "options",
+        "items",
+        "deliveryInfo",
+        "properties",
+        "pickUpAtStation",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {},
     },
     "name": "",
   },
