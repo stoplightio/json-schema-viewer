@@ -1,0 +1,121 @@
+{
+  "type": "object",
+  "description": "This section allows the selection of the ticketing options for all sales of the order.",
+  "properties": {
+    "availableTicketingOptions": {
+      "description": "List of ticketing options of the order.",
+      "type": "array",
+      "items": {
+        "$ref": "../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml"
+      }
+    },
+    "commonTicketingOptions": {
+      "type": "array",
+      "description": "Common ticketing options to all order items.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ticketingOptionChoice": {
+      "type": "array",
+      "description": "Ticketing option selection per order item.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "description": "The status that addresses if a specific ticket option is active or not. The status active is used before ticketing or before exchange confirmation. After ticketing, the status changes in completed. This allows to store ticketing options already used at ticketing time and to clean up all non selected options after ticketing or exchanged confirmation.",
+            "type": "string",
+            "default": "ACTIVE",
+            "enum": [
+              "COMPLETED",
+              "ACTIVE"
+            ]
+          },
+          "orderItemBreakdown": {
+            "description": "Structure that contains ticketing options per order item.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "orderItemId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "options": {
+                  "description": "Available ticketing options for a given order item.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "description": "Ticketing option short-description.",
+                        "type": "string",
+                        "readOnly": true,
+                        "enum": [
+                          "HOMEPRINT",
+                          "TICKETLESS",
+                          "PRINT_AT_KIOSK",
+                          "SECURE_PAPER"
+                        ]
+                      },
+                      "selected": {
+                        "description": "Flag to specify which ticketing option is selected. Only one option is allowed to be selected.",
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "additionalRequiredInfo": {
+                        "description": "Additional passenger required info specific to the given ticketing option.",
+                        "type": "string"
+                      },
+                      "deliveryInfo": {
+                        "description": "Data for ticket delivery.",
+                        "type": "object",
+                        "properties": {
+                          "availableDeliveryTypes": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "POSTAL",
+                                "PICK_UP_STATION",
+                                "E-MAIL",
+                                "LOYALTY_CARD"
+                              ]
+                            }
+                          },
+                          "ticketRecipients": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "BOOKER",
+                                "CUSTOMER",
+                                "PASSENGER",
+                                "THIRD_PARTY"
+                              ]
+                            }
+                          },
+                          "ccEmail": {
+                            "type": "string",
+                            "format": "email"
+                          },
+                          "postalAddress": {
+                            "$ref": "../Address/Address.v0-1.yaml"
+                          },
+                          "pickUpAtStation": {
+                            "description": "The name of the Station in case you select pick up at station as a delivery type",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

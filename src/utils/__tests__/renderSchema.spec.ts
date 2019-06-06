@@ -15,6 +15,7 @@ describe('renderSchema util', () => {
     ['combiner-schema.json', ''],
     ['array-of-objects.json', ''],
     ['array-of-refs.json', ''],
+    ['tickets.schema.json', ''],
   ])('should match %s', (schema, dereferenced) => {
     expect(
       Array.from(renderSchema(JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf-8')))),

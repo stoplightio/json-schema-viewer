@@ -24,7 +24,7 @@ const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   switch (getPrimaryType(node)) {
     case SchemaKind.Array:
-      (base as IArrayNode).items = node.array;
+      (base as IArrayNode).items = node.items;
       (base as IArrayNode).additionalItems = node.additionalItems;
       break;
     case SchemaKind.Object:
