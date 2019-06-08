@@ -46,7 +46,13 @@ export const SchemaTree = observer<ISchemaTree>(props => {
           </div>
         )}
 
-      <TreeList striped maxRows={maxRows} store={treeStore} rowRenderer={rowRenderer} canDrag={canDrag} />
+      <TreeList
+        striped
+        maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
+        store={treeStore}
+        rowRenderer={rowRenderer}
+        canDrag={canDrag}
+      />
     </div>
   );
 });

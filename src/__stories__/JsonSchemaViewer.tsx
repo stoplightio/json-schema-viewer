@@ -54,6 +54,7 @@ storiesOf('JsonSchemaViewer', module)
       expanded={boolean('expanded', true)}
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
+      maxRows={number('maxRows', 5)}
     />
   ))
   .add('stress-test schema', () => (
@@ -64,6 +65,7 @@ storiesOf('JsonSchemaViewer', module)
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
+      maxRows={number('maxRows', 10)}
     />
   ))
   .add('allOf-schema', () => (
@@ -92,7 +94,7 @@ storiesOf('JsonSchemaViewer', module)
     <div style={{ height: '100vh' }} className="bp3-dark bg-gray-8">
       <JsonSchemaViewer
         name={text('name', 'my stress schema')}
-        schema={stressSchema as JSONSchema4}
+        schema={schema as JSONSchema4}
         defaultExpandedDepth={number('defaultExpandedDepth', 2)}
         expanded={boolean('expanded', false)}
         hideTopBar={boolean('hideTopBar', false)}

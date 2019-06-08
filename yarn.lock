@@ -1776,9 +1776,9 @@
     webpack "4.30.0"
 
 "@stoplight/tree-list@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/tree-list/-/tree-list-4.0.0.tgz#c0f32a8c0d12a823a9dbd568db4117d59eb79289"
-  integrity sha512-CZoMmJYLly56E/2MCufmKarRNeaIyzgtyuhcSnOjhNJi9pmrlsi8EHdJGVvsGjWVRt/KU1CvspFSN+8NiSXMsg==
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/tree-list/-/tree-list-4.3.1.tgz#5063e9fcfb22a0ac2f49603b31b6d3b95cb215ef"
+  integrity sha512-//pQPH+h0wymqXx0m8gtBMA2dgrAXiAkQa2I0IJgYrbpt7Xd3EczrRXNi+CKbwX6jvM8XHBac5CJWwG5hARV1w==
   dependencies:
     "@stoplight/lifecycle" "2.x.x"
     classnames "2.x.x"
@@ -1801,10 +1801,10 @@
   resolved "https://registry.yarnpkg.com/@stoplight/types/-/types-5.1.0.tgz#33fb18d8927e2538b2f0b19edc076d6f7e3a9978"
   integrity sha512-GKOcgmwDMJyg09WmI4irIiq7d32hwlqyrdAqpV4b/Eg6/XT2e3g8spguiOsQKIqQSvZqSrrfpGWn/ENCPBvFEA==
 
-"@stoplight/ui-kit@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/ui-kit/-/ui-kit-2.0.0.tgz#7c0714ca2509b238ed0bbb7bead2e5c7d8ff8ef2"
-  integrity sha512-riqYporkodtC/q1vr0HQuPgo1uGWGNenPjByM4qEuSqgqdepl+3u2xZlWlJ+SjVnzy/pWP0WWbWPd3jVsY5cMQ==
+"@stoplight/ui-kit@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/ui-kit/-/ui-kit-2.4.0.tgz#2a23f58335c6f9fc0ea138b72a3527814cae8075"
+  integrity sha512-uQsa9xBGPnYy+qnopHyR9hteGk06UROzNsZhWnakP2rKp7+N+NVlIPjTxEoTV6wdJ4UYmMIoWDDtjlVf3a4DdA==
   dependencies:
     "@blueprintjs/core" "^3.15.1"
     "@blueprintjs/icons" "^3.8.0"
