@@ -1,6 +1,6 @@
 import { MarkdownViewer } from '@stoplight/markdown-viewer';
 import { IRowRendererOptions, TreeStore } from '@stoplight/tree-list';
-import { Colors, Icon, Popover } from '@stoplight/ui-kit';
+import { Icon, Popover } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import * as React from 'react';
 
@@ -80,14 +80,14 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
               <Icon
                 iconSize={ICON_SIZE}
                 icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
-                color={Colors.GRAY1}
+                className="text-darken-9 dark:text-lighten-9"
               />
             </div>
           )}
 
         {schemaNode.divider && (
           <div className="flex items-center w-full absolute" style={{ top: -9, height: 1 }}>
-            <div className="text-darken-7 dark:text-lighten-7 uppercase text-xs pr-2 -ml-4">{schemaNode.divider}</div>
+            <div className="text-darken-7 dark:text-lighten-8 uppercase text-xs pr-2 -ml-4">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
         )}
@@ -105,10 +105,10 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
             </a>
           ) : null}
 
-          {node.canHaveChildren && <div className="ml-2 text-darken-7 dark:text-lighten-6">{`{${childrenCount}}`}</div>}
+          {node.canHaveChildren && <div className="ml-2 text-darken-7 dark:text-lighten-7">{`{${childrenCount}}`}</div>}
 
           {'pattern' in schemaNode && schemaNode.pattern ? (
-            <div className="ml-2 text-darken-7 dark:text-lighten-6 truncate">(pattern property)</div>
+            <div className="ml-2 text-darken-7 dark:text-lighten-7 truncate">(pattern property)</div>
           ) : null}
 
           {description && (
@@ -116,7 +116,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
               boundary="window"
               interactionKind="hover"
               className="ml-2 flex-1 truncate flex items-baseline"
-              target={<div className="text-darken-7 dark:text-lighten-6 w-full truncate">{description}</div>}
+              target={<div className="text-darken-7 dark:text-lighten-7 w-full truncate">{description}</div>}
               targetClassName="text-darken-7 dark:text-lighten-6 w-full truncate"
               content={
                 <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
