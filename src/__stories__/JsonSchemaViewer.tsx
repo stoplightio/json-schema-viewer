@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { State, Store } from '@sambego/storybook-state';
 import { action } from '@storybook/addon-actions';
-import { boolean, number, object, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number, object, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JsonSchemaViewer } from '../components';
 
@@ -80,7 +80,14 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       name={text('name', 'throw me an error!')}
       // @ts-ignore
-      schema={null}
+      schema={select(
+        'schema',
+        {
+          'null (throws error)': null,
+          'object (recovers from error)': schema,
+        },
+        null,
+      )}
       onError={(error: any) => console.log('You can hook into the onError handler too!', error)}
       expanded={boolean('expanded', false)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
