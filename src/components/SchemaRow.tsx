@@ -140,7 +140,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
                   if (Array.isArray(validation)) {
                     elem = validation.map((v, i) => (
                       <div key={i} className="mt-1 mr-1 flex items-center">
-                        <div className="px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded">{v}</div>
+                        <div className="px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded">{String(v)}</div>
                         {i < validation.length - 1 ? <div>,</div> : null}
                       </div>
                     ));
