@@ -1,5 +1,5 @@
 import { MarkdownViewer } from '@stoplight/markdown-viewer';
-import { IRowRendererOptions, TreeStore } from '@stoplight/tree-list';
+import { IRowRendererOptions } from '@stoplight/tree-list';
 import { Icon, Popover } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import * as React from 'react';
@@ -15,7 +15,6 @@ import { Types } from './';
 export interface ISchemaRow {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
-  treeStore: TreeStore;
   onGoToRef?: GoToRefHandler;
 }
 
@@ -23,7 +22,7 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore, onGoToRef }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOptions, onGoToRef }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
   const { name, $ref, subtype, required } = schemaNode;
 
@@ -79,7 +78,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, treeStore
             >
               <Icon
                 iconSize={ICON_SIZE}
-                icon={treeStore.isNodeExpanded(node) ? 'caret-down' : 'caret-right'}
+                icon={rowOptions.isExpanded ? 'caret-down' : 'caret-right'}
                 className="text-darken-9 dark:text-lighten-9"
               />
             </div>
