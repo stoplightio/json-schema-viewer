@@ -1,11 +1,14 @@
 import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { Button } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
+import {ReactElement} from "react";
 import * as React from 'react';
-
+import { useState } from 'react';
 import { GoToRefHandler } from '../types';
 import { SchemaRow } from './';
+import MaskControls from './MaskControls';
 
 export interface ISchemaTree {
   treeStore: TreeStore;
@@ -17,6 +20,9 @@ export interface ISchemaTree {
   expanded?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
+  maskControlsHandler?: (attrs: Array<{ path: string; required: boolean }>) => string[];
+  updateMaskProp?: () => ReactElement;
+  maskProps?: Array<{ path: string; required: boolean }>;
 }
 
 const canDrag = () => false;
@@ -32,9 +38,30 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     onGoToRef,
   };
 
+  const [selectedProps, setSelectedProps] = useState((props.maskProps || []) as Array<{
+    path: string;
+    required: any;
+  }>);
+
   const rowRenderer = React.useCallback(
-    (node, rowOptions) => <SchemaRow node={node} rowOptions={rowOptions} {...itemData} />,
-    [itemData.count],
+    (node, rowOptions) => {
+      return (
+        <SchemaRow
+          maskControls={() => (
+            <MaskControls
+              node={node}
+              maskControlsHandler={props.maskControlsHandler}
+              setSelectedProps={setSelectedProps}
+              selectedProps={selectedProps}
+            />
+          )}
+          node={node}
+          rowOptions={rowOptions}
+          {...itemData}
+        />
+      );
+    },
+    [itemData.count, selectedProps],
   );
 
   return (
@@ -53,6 +80,26 @@ export const SchemaTree = observer<ISchemaTree>(props => {
         rowRenderer={rowRenderer}
         canDrag={canDrag}
       />
+
+      {props.maskControlsHandler && (
+        <div className="pt-4 flex" style={{ alignSelf: 'flex-end', justifyContent: 'space-between' }}>
+          {props.updateMaskProp && props.updateMaskProp()}
+
+          <Button
+            intent="none"
+            title="clear selection"
+            onClick={() => {
+              setSelectedProps([]);
+
+              if (props.maskControlsHandler) {
+                props.maskControlsHandler([]);
+              }
+            }}
+          >
+            clear selection
+          </Button>
+        </div>
+      )}
     </div>
   );
 });

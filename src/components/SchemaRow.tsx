@@ -3,6 +3,7 @@ import { IRowRendererOptions } from '@stoplight/tree-list';
 import { Icon, Popover } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import * as React from 'react';
+import { ReactElement } from 'react';
 
 import get = require('lodash/get');
 import map = require('lodash/map');
@@ -16,13 +17,14 @@ export interface ISchemaRow {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
+  maskControls?: () => ReactElement;
 }
 
 const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOptions, onGoToRef }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOptions, onGoToRef, maskControls }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
   const { name, $ref, subtype, required } = schemaNode;
 
@@ -59,13 +61,15 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
   );
 
   return (
-    <div className="px-2 flex-1 w-full">
+    <div className="px-6 flex-1 w-full">
       <div
         className="flex items-center text-sm relative"
         style={{
           marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
       >
+        {maskControls && maskControls()}
+
         {node.canHaveChildren &&
           node.level > 0 && (
             <div
