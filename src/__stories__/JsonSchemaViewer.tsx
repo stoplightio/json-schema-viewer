@@ -20,6 +20,7 @@ storiesOf('JsonSchemaViewer', module)
   .addDecorator(storyFn => <Wrapper>{storyFn()}</Wrapper>)
   .add('default', () => (
     <JsonSchemaViewer
+      maskControlsHandler={() => ['properties/name']}
       name={text('name', 'my schema')}
       schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
