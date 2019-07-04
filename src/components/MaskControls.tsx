@@ -94,7 +94,7 @@ const Required = ({ idx, setIdx, setSelectedProps, maskControlsHandler, node }: 
       <Button
         small
         minimal
-        title={['no-change', 'required', 'not-required'][idx]}
+        title={['No Change', 'Required', 'Not Required'][idx]}
         icon={<Icon color={[Colors.GRAY1, Colors.RED3, Colors.GREEN2][idx]} iconSize={ICON_SIZE} icon="issue" />}
         onClick={() => {
           setIdx((prev: number) => {
