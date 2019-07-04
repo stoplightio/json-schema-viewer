@@ -110,7 +110,7 @@ const Required = ({ idx, setIdx, setSelectedProps, maskControlsHandler, node }: 
 
 const Checkbox = ({ isChecked, setSelectedProps, maskControlsHandler, node }: ICheckbox) => {
   return (
-    <label className="flex pt-2 items-center">
+    <label className="flex pt-1 items-center">
       <input
         checked={isChecked}
         onChange={evt => {
