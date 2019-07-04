@@ -20,7 +20,6 @@ storiesOf('JsonSchemaViewer', module)
   .addDecorator(storyFn => <Wrapper>{storyFn()}</Wrapper>)
   .add('default', () => (
     <JsonSchemaViewer
-      maskControlsHandler={() => ['properties/name']}
       name={text('name', 'my schema')}
       schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
@@ -109,4 +108,15 @@ storiesOf('JsonSchemaViewer', module)
         onGoToRef={action('onGoToRef')}
       />
     </div>
+  ))
+  .add('with mask controls', () => (
+    <JsonSchemaViewer
+      maskControlsHandler={() => ['properties/name']}
+      name={text('name', 'my schema')}
+      schema={schema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      expanded={boolean('expanded', false)}
+      hideTopBar={boolean('hideTopBar', false)}
+      onGoToRef={action('onGoToRef')}
+    />
   ));
