@@ -67,7 +67,8 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
 
   const { path } = meta;
 
-  for (const node of walk(parsedSchema)) {
+  // TODO: make use of mergeAllOf (is this needed?)
+  for (const node of walk(resolvedSchema)) {
     const baseNode: SchemaTreeListNode = {
       id: node.id,
       level,
