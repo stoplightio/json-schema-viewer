@@ -3,7 +3,6 @@ import { Button } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
-import { ReactElement } from 'react';
 import * as React from 'react';
 import { useState } from 'react';
 import { GoToRefHandler } from '../types';
@@ -21,7 +20,7 @@ export interface ISchemaTree {
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   maskControlsHandler?: (attrs: SelectedPaths) => string[];
-  updateMaskProp?: () => ReactElement;
+  updateMaskProp?: () => React.ReactElement;
   maskProps?: SelectedPaths;
 }
 

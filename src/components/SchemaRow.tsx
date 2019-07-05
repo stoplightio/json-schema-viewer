@@ -3,7 +3,6 @@ import { IRowRendererOptions } from '@stoplight/tree-list';
 import { Icon, Popover } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import * as React from 'react';
-import { ReactElement } from 'react';
 
 import get = require('lodash/get');
 import map = require('lodash/map');
@@ -17,7 +16,7 @@ export interface ISchemaRow {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
-  maskControls?: () => ReactElement;
+  maskControls?: () => React.ReactElement;
   toggleExpand: () => void;
 }
 
