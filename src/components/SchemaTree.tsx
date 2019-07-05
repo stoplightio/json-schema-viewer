@@ -8,7 +8,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { GoToRefHandler } from '../types';
 import { SchemaRow } from './';
-import MaskControls from './MaskControls';
+import MaskControls, { SelectedPaths } from './MaskControls';
 
 export interface ISchemaTree {
   treeStore: TreeStore;
@@ -20,9 +20,9 @@ export interface ISchemaTree {
   expanded?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
-  maskControlsHandler?: (attrs: Array<{ path: string; required: boolean }>) => string[];
+  maskControlsHandler?: (attrs: SelectedPaths) => string[];
   updateMaskProp?: () => ReactElement;
-  maskProps?: Array<{ path: string; required: boolean }>;
+  maskProps?: SelectedPaths;
 }
 
 const canDrag = () => false;

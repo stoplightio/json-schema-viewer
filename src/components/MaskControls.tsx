@@ -4,14 +4,16 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 const ICON_SIZE = 12;
 
+export type SelectedPaths = Array<{ path: string; required: boolean }>;
+
 interface IMaskGenericControls {
   node: { level: number; metadata: { path: string[] } };
-  maskControlsHandler?: (attrs: Array<{ path: string; required: boolean }>) => string[];
+  maskControlsHandler?: (attrs: SelectedPaths) => string[];
   setSelectedProps: Dispatch<SetStateAction<Array<{ path: string; required: number }>>>;
 }
 
 interface IMaskControls extends IMaskGenericControls {
-  selectedProps: Array<{ path: string; required: boolean }>;
+  selectedProps: SelectedPaths;
 }
 interface ICheckbox extends IMaskGenericControls {
   isChecked: boolean;
@@ -72,7 +74,7 @@ function updateMaskAttrs(
   isChecked: boolean,
   node: { metadata: { path: string[] } },
   idx: number,
-  maskControlsHandler?: (attrs: Array<{ path: string; required: boolean }>) => string[],
+  maskControlsHandler?: (attrs: SelectedPaths) => string[],
 ) {
   setSelectedProps(oldProps => {
     const nodePath = toNodePath(node);

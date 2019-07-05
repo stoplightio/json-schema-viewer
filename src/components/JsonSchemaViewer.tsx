@@ -7,6 +7,7 @@ import * as React from 'react';
 import { JSONSchema4 } from 'json-schema';
 import { GoToRefHandler } from '../types';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
+import { SelectedPaths } from './MaskControls';
 import { SchemaTree } from './SchemaTree';
 
 export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
@@ -23,9 +24,9 @@ export interface IJsonSchemaViewer {
   hideTopBar?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
-  maskControlsHandler?: (attrs: Array<{ path: string; required: boolean }>) => string[];
+  maskControlsHandler?: (attrs: SelectedPaths) => string[];
   updateMaskProp?: () => ReactElement;
-  maskProps?: Array<{ path: string; required: boolean }>;
+  maskProps?: SelectedPaths;
   FallbackComponent?: FallbackComponent;
 }
 
