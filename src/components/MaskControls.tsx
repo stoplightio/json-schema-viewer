@@ -114,8 +114,7 @@ const Required = ({ idx, setIdx, setSelectedProps, maskControlsHandler, node }: 
 const Checkbox = ({ isChecked, setSelectedProps, maskControlsHandler, node }: ICheckbox) => {
   return (
     <UIKitCheckbox
-      className="m-0"
-      style={{ alignSelf: 'center' }}
+      className="m-0 self-center"
       checked={isChecked}
       onChange={(evt: any) => {
         evt.persist();
