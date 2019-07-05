@@ -1,4 +1,4 @@
-import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { TreeList, TreeStore } from '@stoplight/tree-list';
 import { Button } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
@@ -30,8 +30,6 @@ const canDrag = () => false;
 export const SchemaTree = observer<ISchemaTree>(props => {
   const { hideTopBar, name, treeStore, maxRows, className, onGoToRef } = props;
 
-  treeStore.on(TreeListEvents.NodeClick, (e, node) => treeStore.toggleExpand(node));
-
   const itemData = {
     treeStore,
     count: treeStore.nodes.length,
@@ -45,16 +43,25 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   const rowRenderer = React.useCallback(
     (node, rowOptions) => {
+      const possibleProps = props.maskControlsHandler
+        ? {
+            maskControls: () => (
+              <MaskControls
+                node={node}
+                maskControlsHandler={props.maskControlsHandler}
+                setSelectedProps={setSelectedProps}
+                selectedProps={selectedProps}
+              />
+            ),
+          }
+        : {};
+
       return (
         <SchemaRow
-          maskControls={() => (
-            <MaskControls
-              node={node}
-              maskControlsHandler={props.maskControlsHandler}
-              setSelectedProps={setSelectedProps}
-              selectedProps={selectedProps}
-            />
-          )}
+          toggleExpand={() => {
+            treeStore.toggleExpand(node);
+          }}
+          {...possibleProps}
           node={node}
           rowOptions={rowOptions}
           {...itemData}
@@ -96,7 +103,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
               }
             }}
           >
-            clear selection
+            Clear Selection
           </Button>
         </div>
       )}

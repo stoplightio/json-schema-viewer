@@ -1,4 +1,4 @@
-import { Button, Colors, Icon, Tooltip } from '@stoplight/ui-kit';
+import { Button, Checkbox as UIKitCheckbox, Colors, Icon, Tooltip } from '@stoplight/ui-kit';
 import * as React from 'react';
 import { Dispatch, SetStateAction, useState } from 'react';
 
@@ -92,11 +92,14 @@ const Required = ({ idx, setIdx, setSelectedProps, maskControlsHandler, node }: 
   return (
     <Tooltip boundary="window" position="top">
       <Button
+        style={{ paddingRight: '1em' }}
         small
         minimal
         title={['No Change', 'Required', 'Not Required'][idx]}
         icon={<Icon color={[Colors.GRAY1, Colors.RED3, Colors.GREEN2][idx]} iconSize={ICON_SIZE} icon="issue" />}
-        onClick={() => {
+        onClick={(evt: { stopPropagation: () => void }) => {
+          evt.stopPropagation();
+
           setIdx((prev: number) => {
             return prev >= 2 ? 0 : prev + 1;
           });
@@ -110,17 +113,16 @@ const Required = ({ idx, setIdx, setSelectedProps, maskControlsHandler, node }: 
 
 const Checkbox = ({ isChecked, setSelectedProps, maskControlsHandler, node }: ICheckbox) => {
   return (
-    <label className="flex pt-1 items-center">
-      <input
-        checked={isChecked}
-        onChange={evt => {
-          evt.persist();
+    <UIKitCheckbox
+      className="m-0"
+      style={{ alignSelf: 'center' }}
+      checked={isChecked}
+      onChange={(evt: any) => {
+        evt.persist();
 
-          updateMaskAttrs(setSelectedProps, evt.target.checked, node, 0, maskControlsHandler);
-        }}
-        type="checkbox"
-      />
-    </label>
+        updateMaskAttrs(setSelectedProps, evt.target.checked, node, 0, maskControlsHandler);
+      }}
+    />
   );
 };
 

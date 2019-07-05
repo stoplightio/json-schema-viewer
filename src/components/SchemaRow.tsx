@@ -18,13 +18,20 @@ export interface ISchemaRow {
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
   maskControls?: () => ReactElement;
+  toggleExpand: () => void;
 }
 
 const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOptions, onGoToRef, maskControls }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
+  node,
+  rowOptions,
+  onGoToRef,
+  maskControls,
+  toggleExpand,
+}) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
   const { name, $ref, subtype, required } = schemaNode;
 
@@ -61,7 +68,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
   );
 
   return (
-    <div className="px-6 flex-1 w-full">
+    <div onClick={toggleExpand} className="px-6 flex-1 w-full">
       <div
         className="flex items-center text-sm relative"
         style={{
@@ -89,7 +96,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
           )}
 
         {schemaNode.divider && (
-          <div className="flex items-center w-full absolute" style={{ top: -9, height: 1 }}>
+          <div className="flex items-center w-full absolute" style={{ top: maskControls ? -3 : -9, height: 1 }}>
             <div className="text-darken-7 dark:text-lighten-8 uppercase text-xs pr-2 -ml-4">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
