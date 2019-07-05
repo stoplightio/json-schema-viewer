@@ -31,7 +31,7 @@ function addAttr(old: Array<{ path: string; required: number }>, path: string, r
     ? old.map(oldAttr => {
         return oldAttr.path === path ? Object.assign({}, oldAttr, { required }) : oldAttr;
       })
-    : old.concat(Object.assign({}, { path }, { required }));
+    : old.concat({ path, required });
 }
 
 function updateSelectedAttrs(
@@ -90,7 +90,13 @@ function updateMaskAttrs(
   });
 }
 
-const Required = ({ idx, setIdx, setSelectedProps, maskControlsHandler, node }: IRequired) => {
+const Required: React.FunctionComponent<IRequired> = ({
+  idx,
+  setIdx,
+  setSelectedProps,
+  maskControlsHandler,
+  node,
+}: IRequired) => {
   return (
     <Tooltip boundary="window" position="top">
       <Button
@@ -113,7 +119,12 @@ const Required = ({ idx, setIdx, setSelectedProps, maskControlsHandler, node }: 
   );
 };
 
-const Checkbox = ({ isChecked, setSelectedProps, maskControlsHandler, node }: ICheckbox) => {
+const Checkbox: React.FunctionComponent<ICheckbox> = ({
+  isChecked,
+  setSelectedProps,
+  maskControlsHandler,
+  node,
+}: ICheckbox) => {
   return (
     <UIKitCheckbox
       className="m-0 self-center"
@@ -127,7 +138,12 @@ const Checkbox = ({ isChecked, setSelectedProps, maskControlsHandler, node }: IC
   );
 };
 
-const MaskControls = ({ node, maskControlsHandler, setSelectedProps, selectedProps }: IMaskControls) => {
+const MaskControls: React.FunctionComponent<IMaskControls> = ({
+  node,
+  maskControlsHandler,
+  setSelectedProps,
+  selectedProps,
+}: IMaskControls) => {
   const theNode = selectedProps.find(({ path }: { path: string }) => path === toNodePath(node));
   const isChecked = !!theNode;
   const [idx, setIdx] = useState(toRequiredNumForm(theNode));
