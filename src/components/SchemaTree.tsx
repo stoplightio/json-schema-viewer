@@ -88,7 +88,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
       />
 
       {props.maskControlsHandler && (
-        <div className="pt-4 flex" style={{ alignSelf: 'flex-end', justifyContent: 'space-between' }}>
+        <div className="pt-4 flex self-end justify-between">
           {props.updateMaskProp && props.updateMaskProp()}
 
           <Button
