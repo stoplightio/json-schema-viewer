@@ -119,7 +119,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
 
           yield* renderSchema(property, level + 1, {
             ...(i !== 0 && { divider: DIVIDERS[node.combiner] }),
-            path: [...path, schema.allOf ? 'allOf' : 'properties', i],
+            path: [...path, node.combiner, i],
           });
         }
       }
