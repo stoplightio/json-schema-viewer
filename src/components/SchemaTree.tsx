@@ -19,7 +19,7 @@ export interface ISchemaTree {
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   maskControlsHandler?: (attrs: SelectedPaths) => string[];
-  updateMaskProp?: () => React.ReactElement;
+  maskUpdater?: () => React.ReactElement;
   maskProps?: SelectedPaths;
 }
 
@@ -85,7 +85,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
       {props.maskControlsHandler && (
         <div className="pt-4 flex self-end justify-between">
-          {props.updateMaskProp && props.updateMaskProp()}
+          {props.maskUpdater && props.maskUpdater()}
 
           <Button
             intent="none"

@@ -24,7 +24,7 @@ export interface IJsonSchemaViewer {
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   maskControlsHandler?: (attrs: SelectedPaths) => string[];
-  updateMaskProp?: () => React.ReactElement;
+  maskUpdater?: () => React.ReactElement;
   maskProps?: SelectedPaths;
   FallbackComponent?: FallbackComponent;
 }
