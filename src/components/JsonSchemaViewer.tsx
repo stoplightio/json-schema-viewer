@@ -1,7 +1,6 @@
 import { TreeStore } from '@stoplight/tree-list';
 import * as cn from 'classnames';
 import { runInAction } from 'mobx';
-import { ReactElement } from 'react';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
@@ -25,7 +24,7 @@ export interface IJsonSchemaViewer {
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   maskControlsHandler?: (attrs: SelectedPaths) => string[];
-  updateMaskProp?: () => ReactElement;
+  updateMaskProp?: () => React.ReactElement;
   maskProps?: SelectedPaths;
   FallbackComponent?: FallbackComponent;
 }
