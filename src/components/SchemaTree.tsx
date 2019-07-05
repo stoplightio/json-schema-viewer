@@ -4,10 +4,9 @@ import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useState } from 'react';
 import { GoToRefHandler } from '../types';
 import { SchemaRow } from './';
-import MaskControls, { SelectedPaths } from './MaskControls';
+import MaskControls, { MaskingProps, SelectedPaths } from './MaskControls';
 
 export interface ISchemaTree {
   treeStore: TreeStore;
@@ -35,10 +34,7 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     onGoToRef,
   };
 
-  const [selectedProps, setSelectedProps] = useState((props.maskProps || []) as Array<{
-    path: string;
-    required: any;
-  }>);
+  const [selectedProps, setSelectedProps] = React.useState<MaskingProps>((props.maskProps || []) as MaskingProps);
 
   const rowRenderer = React.useCallback(
     (node, rowOptions) => {

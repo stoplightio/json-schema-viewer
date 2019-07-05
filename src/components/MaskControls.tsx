@@ -6,6 +6,8 @@ const ICON_SIZE = 12;
 
 export type SelectedPaths = Array<{ path: string; required: boolean }>;
 
+export type MaskingProps = Array<{ path: string; required: any }>;
+
 interface IMaskGenericControls {
   node: { level: number; metadata: { path: string[] } };
   maskControlsHandler?: (attrs: SelectedPaths) => string[];
