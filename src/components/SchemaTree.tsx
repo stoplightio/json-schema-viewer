@@ -1,14 +1,12 @@
 import { TreeList, TreeStore } from '@stoplight/tree-list';
-import { Button } from '@stoplight/ui-kit';
 import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { GoToRefHandler } from '../types';
+import { GoToRefHandler, IExtendableRenderers, SchemaTreeListNode } from '../types';
 import { SchemaRow } from './';
-import MaskControls, { MaskingProps, SelectedPaths } from './MaskControls';
 
-export interface ISchemaTree {
+export interface ISchemaTree extends IExtendableRenderers {
   treeStore: TreeStore;
   schema: JSONSchema4;
   className?: string;
@@ -18,9 +16,6 @@ export interface ISchemaTree {
   expanded?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
-  maskControlsHandler?: (attrs: SelectedPaths) => string[];
-  maskUpdater?: () => React.ReactElement;
-  maskProps?: SelectedPaths;
 }
 
 const canDrag = () => false;
@@ -34,37 +29,22 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     onGoToRef,
   };
 
-  const [selectedProps, setSelectedProps] = React.useState<MaskingProps>((props.maskProps || []) as MaskingProps);
-
-  const rowRenderer = React.useCallback(
-    (node, rowOptions) => {
-      const possibleProps = props.maskControlsHandler
-        ? {
-            maskControls: () => (
-              <MaskControls
-                node={node}
-                maskControlsHandler={props.maskControlsHandler}
-                setSelectedProps={setSelectedProps}
-                selectedProps={selectedProps}
-              />
-            ),
-          }
-        : {};
-
-      return (
-        <SchemaRow
-          toggleExpand={() => {
-            treeStore.toggleExpand(node);
-          }}
-          {...possibleProps}
-          node={node}
-          rowOptions={rowOptions}
-          {...itemData}
-        />
-      );
-    },
-    [itemData.count, selectedProps],
-  );
+  // const rowRenderer = React.useCallback(
+  //   (node, rowOptions) => {
+  //     return (
+  //       <SchemaRow
+  //         toggleExpand={() => {
+  //           treeStore.toggleExpand(node);
+  //         }}
+  //         rowRendererRight={props.rowRendererRight}
+  //         node={node}
+  //         rowOptions={rowOptions}
+  //         {...itemData}
+  //       />
+  //     );
+  //   },
+  //   [itemData.count],
+  // );
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')}>
@@ -79,29 +59,22 @@ export const SchemaTree = observer<ISchemaTree>(props => {
         striped
         maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
         store={treeStore}
-        rowRenderer={rowRenderer}
+        rowRenderer={(node, rowOptions) => {
+          return (
+            <SchemaRow
+              toggleExpand={() => {
+                treeStore.toggleExpand(node);
+              }}
+              rowRendererRight={props.rowRendererRight}
+              node={node as SchemaTreeListNode}
+              rowOptions={rowOptions}
+              {...itemData}
+            />
+          );
+        }}
         canDrag={canDrag}
       />
-
-      {props.maskControlsHandler && (
-        <div className="pt-4 flex self-end justify-between">
-          {props.maskUpdater && props.maskUpdater()}
-
-          <Button
-            intent="none"
-            title="clear selection"
-            onClick={() => {
-              setSelectedProps([]);
-
-              if (props.maskControlsHandler) {
-                props.maskControlsHandler([]);
-              }
-            }}
-          >
-            Clear Selection
-          </Button>
-        </div>
-      )}
+      {props.schemaControlsRenderer && props.schemaControlsRenderer()}
     </div>
   );
 });

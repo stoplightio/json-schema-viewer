@@ -14,6 +14,7 @@ import * as schemaWithRefs from '../__fixtures__/ref/original.json';
 import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
 import * as stressSchema from '../__fixtures__/stress-schema.json';
 import { Wrapper } from './utils/Wrapper';
+import { Checkbox } from '@blueprintjs/core';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -109,9 +110,9 @@ storiesOf('JsonSchemaViewer', module)
       />
     </div>
   ))
-  .add('with mask controls', () => (
+  .add('with rowRendererRight', () => (
     <JsonSchemaViewer
-      maskControlsHandler={() => ['properties/name']}
+      rowRendererRight={() => <span>RIGHT!</span>}
       name={text('name', 'my schema')}
       schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}

@@ -4,14 +4,13 @@ import { runInAction } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { GoToRefHandler } from '../types';
+import { GoToRefHandler, IExtendableRenderers } from '../types';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
-import { SelectedPaths } from './MaskControls';
 import { SchemaTree } from './SchemaTree';
 
 export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
 
-export interface IJsonSchemaViewer {
+export interface IJsonSchemaViewer extends IExtendableRenderers {
   schema: JSONSchema4;
   dereferencedSchema?: JSONSchema4;
   style?: object;
@@ -23,9 +22,7 @@ export interface IJsonSchemaViewer {
   hideTopBar?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
-  maskControlsHandler?: (attrs: SelectedPaths) => string[];
-  maskUpdater?: () => React.ReactElement;
-  maskProps?: SelectedPaths;
+  mergeAllOf?: boolean;
   FallbackComponent?: FallbackComponent;
 }
 
@@ -38,12 +35,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     this.treeStore = new TreeStore({
       defaultExpandedDepth: this.expandedDepth,
       nodes: Array.from(
-        renderSchema(
-          props.dereferencedSchema || props.schema,
-          0,
-          { path: [] },
-          { mergeAllOf: !props.maskControlsHandler },
-        ),
+        renderSchema(props.dereferencedSchema || props.schema, 0, { path: [] }, { mergeAllOf: !!props.mergeAllOf }),
       ),
     });
   }

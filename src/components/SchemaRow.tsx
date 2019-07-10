@@ -8,15 +8,14 @@ import get = require('lodash/get');
 import map = require('lodash/map');
 import size = require('lodash/size');
 
-import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
+import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode, IExtendableRenderers } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
-export interface ISchemaRow {
+export interface ISchemaRow extends IExtendableRenderers {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
-  maskControls?: () => React.ReactElement;
   toggleExpand: () => void;
 }
 
@@ -28,7 +27,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
   node,
   rowOptions,
   onGoToRef,
-  maskControls,
+  rowRendererRight,
   toggleExpand,
 }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
@@ -74,8 +73,6 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
           marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
       >
-        {maskControls && maskControls()}
-
         {node.canHaveChildren &&
           node.level > 0 && (
             <div
@@ -95,7 +92,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
           )}
 
         {schemaNode.divider && (
-          <div className="flex items-center w-full absolute" style={{ top: maskControls ? -3 : -9, height: 1 }}>
+          <div className="flex items-center w-full absolute" style={{ top: rowRendererRight ? -3 : -9, height: 1 }}>
             <div className="text-darken-7 dark:text-lighten-8 uppercase text-xs pr-2 -ml-4">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
@@ -181,6 +178,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
         ) : (
           requiredElem
         )}
+        {rowRendererRight && rowRendererRight(node)}
       </div>
     </div>
   );

@@ -2,6 +2,11 @@ import { TreeListNode } from '@stoplight/tree-list';
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 
+export interface IExtendableRenderers {
+  rowRendererRight?: (node: any) => React.ReactElement;
+  schemaControlsRenderer?: () => React.ReactElement;
+}
+
 export const enum SchemaKind {
   Any = 'any',
   String = 'string',
