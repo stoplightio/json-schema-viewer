@@ -176,7 +176,7 @@ Array [
       "enum": undefined,
       "id": "random-id",
       "path": Array [
-        "properties",
+        "allOf",
         0,
       ],
       "patternProperties": undefined,
@@ -199,7 +199,7 @@ Array [
       "id": "random-id",
       "name": "test",
       "path": Array [
-        "properties",
+        "allOf",
         0,
         "properties",
         "test",
@@ -221,7 +221,7 @@ Array [
       "enum": undefined,
       "id": "random-id",
       "path": Array [
-        "properties",
+        "allOf",
         1,
       ],
       "patternProperties": undefined,
@@ -261,7 +261,7 @@ Array [
       "id": "random-id",
       "name": "id",
       "path": Array [
-        "properties",
+        "allOf",
         1,
         "properties",
         "id",
@@ -281,7 +281,7 @@ Array [
       "id": "random-id",
       "name": "completed_at",
       "path": Array [
-        "properties",
+        "allOf",
         1,
         "properties",
         "completed_at",
@@ -306,7 +306,7 @@ Array [
       "id": "random-id",
       "name": "created_at",
       "path": Array [
-        "properties",
+        "allOf",
         1,
         "properties",
         "created_at",
@@ -328,7 +328,7 @@ Array [
       "id": "random-id",
       "name": "updated_at",
       "path": Array [
-        "properties",
+        "allOf",
         1,
         "properties",
         "updated_at",
@@ -617,7 +617,7 @@ Array [
       "path": Array [
         "properties",
         "plan",
-        "properties",
+        "anyOf",
         0,
       ],
       "patternProperties": undefined,
@@ -645,7 +645,7 @@ Array [
       "path": Array [
         "properties",
         "plan",
-        "properties",
+        "anyOf",
         0,
         "properties",
         "foo",
@@ -667,7 +667,7 @@ Array [
       "path": Array [
         "properties",
         "plan",
-        "properties",
+        "anyOf",
         0,
         "properties",
         "bar",
@@ -693,7 +693,7 @@ Array [
       "path": Array [
         "properties",
         "plan",
-        "properties",
+        "anyOf",
         1,
       ],
       "subtype": "integer",
