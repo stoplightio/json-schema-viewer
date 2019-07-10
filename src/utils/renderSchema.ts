@@ -118,7 +118,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
 
           yield* renderSchema(property, level + 1, {
             ...(i !== 0 && { divider: DIVIDERS[node.combiner] }),
-            path: [...path, 'properties', i],
+            path: [...path, node.combiner, i],
           });
         }
       }
@@ -149,12 +149,13 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
               case SchemaKind.Object:
                 yield* getProperties(parsedSchema.items, level, {
                   ...meta,
-                  path: [...path, 'items'],
+                  path: [...path, 'items', 'properties'],
                 });
                 break;
               case SchemaKind.Array:
                 yield* renderSchema(parsedSchema.items, level, {
-                  path,
+                  ...meta,
+                  path: [...path, 'items'],
                 });
                 break;
             }
