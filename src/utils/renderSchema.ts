@@ -149,12 +149,13 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
               case SchemaKind.Object:
                 yield* getProperties(parsedSchema.items, level, {
                   ...meta,
-                  path: [...path, 'items'],
+                  path: [...path, 'items', 'properties'],
                 });
                 break;
               case SchemaKind.Array:
                 yield* renderSchema(parsedSchema.items, level, {
-                  path,
+                  ...meta,
+                  path: [...path, 'items'],
                 });
                 break;
             }
