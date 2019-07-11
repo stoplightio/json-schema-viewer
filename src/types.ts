@@ -3,7 +3,7 @@ import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 
 export interface IExtendableRenderers {
-  rowRendererRight?: (node: any) => React.ReactElement;
+  rowRendererRight?: (node: SchemaTreeListNode) => React.ReactElement;
   schemaControlsRenderer?: () => React.ReactElement;
 }
 

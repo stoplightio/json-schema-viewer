@@ -6,6 +6,7 @@ import { boolean, number, object, select, text, withKnobs } from '@storybook/add
 import { storiesOf } from '@storybook/react';
 import { JsonSchemaViewer } from '../components';
 
+import { Checkbox } from '@blueprintjs/core';
 import { JSONSchema4 } from 'json-schema';
 import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';
 import * as allOfSchema from '../__fixtures__/allOf/allOf-schema.json';
@@ -14,7 +15,6 @@ import * as schemaWithRefs from '../__fixtures__/ref/original.json';
 import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
 import * as stressSchema from '../__fixtures__/stress-schema.json';
 import { Wrapper } from './utils/Wrapper';
-import { Checkbox } from '@blueprintjs/core';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -112,7 +112,11 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('with rowRendererRight', () => (
     <JsonSchemaViewer
-      rowRendererRight={() => <span>RIGHT!</span>}
+      rowRendererRight={() => (
+        <span style={{ position: 'relative', top: '5px' }}>
+          <Checkbox />
+        </span>
+      )}
       name={text('name', 'my schema')}
       schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}

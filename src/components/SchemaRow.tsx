@@ -8,7 +8,7 @@ import get = require('lodash/get');
 import map = require('lodash/map');
 import size = require('lodash/size');
 
-import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode, IExtendableRenderers } from '../types';
+import { GoToRefHandler, IExtendableRenderers, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
@@ -67,8 +67,9 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
 
   return (
     <div onClick={toggleExpand} className="px-6 flex-1 w-full">
+      {/* Do not set position: relative. Divider must be relative to the parent container in order to avoid bugs related to this container calculated height changes. */}
       <div
-        className="flex items-center text-sm relative"
+        className="flex items-center text-sm"
         style={{
           marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
@@ -92,7 +93,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
           )}
 
         {schemaNode.divider && (
-          <div className="flex items-center w-full absolute" style={{ top: rowRendererRight ? -3 : -9, height: 1 }}>
+          <div className="flex items-center w-full absolute" style={{ top: 0, height: 1 }}>
             <div className="text-darken-7 dark:text-lighten-8 uppercase text-xs pr-2 -ml-4">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
@@ -178,7 +179,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
         ) : (
           requiredElem
         )}
-        {rowRendererRight && rowRendererRight(node)}
+        <div className="ml-2">{rowRendererRight && rowRendererRight(node)}</div>
       </div>
     </div>
   );

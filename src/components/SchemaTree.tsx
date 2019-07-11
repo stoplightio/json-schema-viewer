@@ -29,23 +29,6 @@ export const SchemaTree = observer<ISchemaTree>(props => {
     onGoToRef,
   };
 
-  // const rowRenderer = React.useCallback(
-  //   (node, rowOptions) => {
-  //     return (
-  //       <SchemaRow
-  //         toggleExpand={() => {
-  //           treeStore.toggleExpand(node);
-  //         }}
-  //         rowRendererRight={props.rowRendererRight}
-  //         node={node}
-  //         rowOptions={rowOptions}
-  //         {...itemData}
-  //       />
-  //     );
-  //   },
-  //   [itemData.count],
-  // );
-
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')}>
       {name &&
