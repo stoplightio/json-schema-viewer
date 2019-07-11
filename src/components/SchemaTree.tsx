@@ -43,6 +43,8 @@ export const SchemaTree = observer<ISchemaTree>(props => {
         maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
         store={treeStore}
         rowRenderer={(node, rowOptions) => {
+          // TODO: add a React.useCallback to rerender only when either itemData.count or maskProps (to be found in studio) change
+
           return (
             <SchemaRow
               toggleExpand={() => {
