@@ -6,7 +6,7 @@ import { boolean, number, object, select, text, withKnobs } from '@storybook/add
 import { storiesOf } from '@storybook/react';
 import { JsonSchemaViewer } from '../components';
 
-import { Checkbox } from '@blueprintjs/core';
+import { Checkbox } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
 import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';
 import * as allOfSchema from '../__fixtures__/allOf/allOf-schema.json';
