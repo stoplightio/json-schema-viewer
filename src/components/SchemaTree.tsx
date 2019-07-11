@@ -1,13 +1,12 @@
-import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { TreeList, TreeStore } from '@stoplight/tree-list';
 import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-
-import { GoToRefHandler } from '../types';
+import { GoToRefHandler, IExtendableRenderers, SchemaTreeListNode } from '../types';
 import { SchemaRow } from './';
 
-export interface ISchemaTree {
+export interface ISchemaTree extends IExtendableRenderers {
   treeStore: TreeStore;
   schema: JSONSchema4;
   className?: string;
@@ -24,18 +23,11 @@ const canDrag = () => false;
 export const SchemaTree = observer<ISchemaTree>(props => {
   const { hideTopBar, name, treeStore, maxRows, className, onGoToRef } = props;
 
-  treeStore.on(TreeListEvents.NodeClick, (e, node) => treeStore.toggleExpand(node));
-
   const itemData = {
     treeStore,
     count: treeStore.nodes.length,
     onGoToRef,
   };
-
-  const rowRenderer = React.useCallback(
-    (node, rowOptions) => <SchemaRow node={node} rowOptions={rowOptions} {...itemData} />,
-    [itemData.count],
-  );
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')}>
@@ -50,9 +42,24 @@ export const SchemaTree = observer<ISchemaTree>(props => {
         striped
         maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
         store={treeStore}
-        rowRenderer={rowRenderer}
+        rowRenderer={(node, rowOptions) => {
+          // TODO: add a React.useCallback to rerender only when either itemData.count or maskProps (to be found in studio) change
+
+          return (
+            <SchemaRow
+              toggleExpand={() => {
+                treeStore.toggleExpand(node);
+              }}
+              rowRendererRight={props.rowRendererRight}
+              node={node as SchemaTreeListNode}
+              rowOptions={rowOptions}
+              {...itemData}
+            />
+          );
+        }}
         canDrag={canDrag}
       />
+      {props.schemaControlsRenderer && props.schemaControlsRenderer()}
     </div>
   );
 });

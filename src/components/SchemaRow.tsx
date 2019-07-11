@@ -8,21 +8,27 @@ import get = require('lodash/get');
 import map = require('lodash/map');
 import size = require('lodash/size');
 
-import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
+import { GoToRefHandler, IExtendableRenderers, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
-export interface ISchemaRow {
+export interface ISchemaRow extends IExtendableRenderers {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
+  toggleExpand: () => void;
 }
 
 const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
-const ROW_OFFSET = 7;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOptions, onGoToRef }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
+  node,
+  rowOptions,
+  onGoToRef,
+  rowRendererRight,
+  toggleExpand,
+}) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
   const { name, $ref, subtype, required } = schemaNode;
 
@@ -58,12 +64,14 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
     </div>
   );
 
+  const combinerOffset = ICON_DIMENSION * node.level;
   return (
-    <div className="px-2 flex-1 w-full">
+    <div onClick={toggleExpand} className="px-6 flex-1 w-full">
+      {/* Do not set position: relative. Divider must be relative to the parent container in order to avoid bugs related to this container calculated height changes. */}
       <div
-        className="flex items-center text-sm relative"
+        className="flex items-center text-sm"
         style={{
-          marginLeft: ICON_DIMENSION * node.level, // offset for spacing
+          marginLeft: combinerOffset,
         }}
       >
         {node.canHaveChildren &&
@@ -71,7 +79,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
             <div
               className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
               style={{
-                left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+                left: combinerOffset,
                 width: ICON_DIMENSION,
                 height: ICON_DIMENSION,
               }}
@@ -85,7 +93,14 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
           )}
 
         {schemaNode.divider && (
-          <div className="flex items-center w-full absolute" style={{ top: -9, height: 1 }}>
+          <div
+            className="flex items-center absolute"
+            style={{
+              top: 0,
+              height: 1,
+              width: `calc(100% - ${combinerOffset}px - 1.5rem)`,
+            }}
+          >
             <div className="text-darken-7 dark:text-lighten-8 uppercase text-xs pr-2 -ml-4">{schemaNode.divider}</div>
             <div className="flex-1 bg-darken-5 dark:bg-lighten-5" style={{ height: 1 }} />
           </div>
@@ -171,6 +186,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
         ) : (
           requiredElem
         )}
+        {rowRendererRight && <div className="ml-2">{rowRendererRight(node)}</div>}
       </div>
     </div>
   );
