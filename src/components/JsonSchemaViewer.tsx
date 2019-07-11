@@ -35,7 +35,14 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     this.treeStore = new TreeStore({
       defaultExpandedDepth: this.expandedDepth,
       nodes: Array.from(
-        renderSchema(props.dereferencedSchema || props.schema, 0, { path: [] }, { mergeAllOf: !!props.mergeAllOf }),
+        renderSchema(
+          props.dereferencedSchema || props.schema,
+          0,
+          { path: [] },
+          {
+            mergeAllOf: props.mergeAllOf === undefined ? true : props.mergeAllOf,
+          },
+        ),
       ),
     });
   }
