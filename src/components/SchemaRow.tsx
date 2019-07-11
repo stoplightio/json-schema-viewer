@@ -21,7 +21,6 @@ export interface ISchemaRow extends IExtendableRenderers {
 
 const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
-const ROW_OFFSET = 7;
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
   node,
@@ -80,7 +79,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
             <div
               className="absolute flex justify-center cursor-pointer p-1 rounded hover:bg-darken-3"
               style={{
-                left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+                left: combinerOffset,
                 width: ICON_DIMENSION,
                 height: ICON_DIMENSION,
               }}
