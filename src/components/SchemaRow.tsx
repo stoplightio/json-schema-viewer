@@ -187,7 +187,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({
         ) : (
           requiredElem
         )}
-        <div className="ml-2">{rowRendererRight && rowRendererRight(node)}</div>
+        {rowRendererRight && <div className="ml-2">{rowRendererRight(node)}</div>}
       </div>
     </div>
   );
