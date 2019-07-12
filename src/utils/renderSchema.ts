@@ -11,6 +11,7 @@ import { walk } from './walk';
 
 // @ts-ignore no typings
 import * as resolveAllOf from 'json-schema-merge-allof';
+import { inferType } from './inferType';
 
 type Walker = (
   schema: JSONSchema4,
@@ -80,9 +81,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
             subtype:
               '$ref' in parsedSchema.items
                 ? `$ref( ${parsedSchema.items.$ref} )`
-                : parsedSchema.items.type ||
-                  (parsedSchema.items.properties && 'object') ||
-                  (parsedSchema.items.items && 'array'),
+                : parsedSchema.items.type || inferType(parsedSchema.items),
           }),
         path,
       },
