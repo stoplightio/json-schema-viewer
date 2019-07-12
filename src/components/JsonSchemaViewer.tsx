@@ -4,13 +4,13 @@ import { runInAction } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { GoToRefHandler, IExtendableRenderers } from '../types';
+import { GoToRefHandler } from '../types';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
 import { SchemaTree } from './SchemaTree';
 
 export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
 
-export interface IJsonSchemaViewer extends IExtendableRenderers {
+export interface IJsonSchemaViewer {
   schema: JSONSchema4;
   dereferencedSchema?: JSONSchema4;
   style?: object;
@@ -22,7 +22,6 @@ export interface IJsonSchemaViewer extends IExtendableRenderers {
   hideTopBar?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
-  mergeAllOf?: boolean;
   FallbackComponent?: FallbackComponent;
 }
 
@@ -34,16 +33,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     this.treeStore = new TreeStore({
       defaultExpandedDepth: this.expandedDepth,
-      nodes: Array.from(
-        renderSchema(
-          props.dereferencedSchema || props.schema,
-          0,
-          { path: [] },
-          {
-            mergeAllOf: props.mergeAllOf === undefined ? true : props.mergeAllOf,
-          },
-        ),
-      ),
+      nodes: Array.from(renderSchema(props.dereferencedSchema || props.schema, 0, { path: [] }, { mergeAllOf: true })),
     });
   }
 

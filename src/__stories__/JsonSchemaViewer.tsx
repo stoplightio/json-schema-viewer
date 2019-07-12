@@ -6,7 +6,6 @@ import { boolean, number, object, select, text, withKnobs } from '@storybook/add
 import { storiesOf } from '@storybook/react';
 import { JsonSchemaViewer } from '../components';
 
-import { Checkbox } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
 import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';
 import * as allOfSchema from '../__fixtures__/allOf/allOf-schema.json';
@@ -109,19 +108,4 @@ storiesOf('JsonSchemaViewer', module)
         onGoToRef={action('onGoToRef')}
       />
     </div>
-  ))
-  .add('with rowRendererRight', () => (
-    <JsonSchemaViewer
-      rowRendererRight={() => (
-        <span style={{ position: 'relative', top: '5px' }}>
-          <Checkbox />
-        </span>
-      )}
-      name={text('name', 'my schema')}
-      schema={schema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      expanded={boolean('expanded', false)}
-      hideTopBar={boolean('hideTopBar', false)}
-      onGoToRef={action('onGoToRef')}
-    />
   ));

@@ -27,9 +27,7 @@ describe('SchemaRow component', () => {
       isExpanded: true,
     };
 
-    const wrapper = shallow(shallow(
-      <SchemaRow toggleExpand={() => null} node={node as SchemaTreeListNode} rowOptions={rowOptions} />,
-    )
+    const wrapper = shallow(shallow(<SchemaRow node={node as SchemaTreeListNode} rowOptions={rowOptions} />)
       .find(Popover)
       .prop('content') as React.ReactElement);
 
