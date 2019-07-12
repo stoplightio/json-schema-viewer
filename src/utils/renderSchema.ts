@@ -77,7 +77,12 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
         ...meta,
         ...(parsedSchema.items !== undefined &&
           !Array.isArray(parsedSchema.items) && {
-            subtype: '$ref' in parsedSchema.items ? `$ref( ${parsedSchema.items.$ref} )` : parsedSchema.items.type,
+            subtype:
+              '$ref' in parsedSchema.items
+                ? `$ref( ${parsedSchema.items.$ref} )`
+                : parsedSchema.items.type ||
+                  (parsedSchema.items.properties && 'object') ||
+                  (parsedSchema.items.items && 'array'),
           }),
         path,
       },
