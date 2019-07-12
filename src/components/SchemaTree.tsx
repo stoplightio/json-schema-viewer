@@ -59,7 +59,6 @@ export const SchemaTree = observer<ISchemaTree>(props => {
         }}
         canDrag={canDrag}
       />
-      {props.schemaControlsRenderer && props.schemaControlsRenderer()}
     </div>
   );
 });
