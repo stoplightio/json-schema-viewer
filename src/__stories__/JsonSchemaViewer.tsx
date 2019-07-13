@@ -43,6 +43,7 @@ storiesOf('JsonSchemaViewer', module)
           expanded={boolean('expanded', true)}
           hideTopBar={boolean('hideTopBar', false)}
           onGoToRef={action('onGoToRef')}
+          mergeAllOf={boolean('mergeAllOf', true)}
         />
       </State>
     );
@@ -55,6 +56,7 @@ storiesOf('JsonSchemaViewer', module)
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 5)}
+      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
   .add('stress-test schema', () => (
@@ -66,6 +68,7 @@ storiesOf('JsonSchemaViewer', module)
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 10)}
+      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
   .add('allOf-schema', () => (
@@ -75,6 +78,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
+      mergeAllOf={boolean('mergeAllOf', true)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -95,6 +99,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
+      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
   .add('dark', () => (
@@ -106,6 +111,7 @@ storiesOf('JsonSchemaViewer', module)
         expanded={boolean('expanded', false)}
         hideTopBar={boolean('hideTopBar', false)}
         onGoToRef={action('onGoToRef')}
+        mergeAllOf={boolean('mergeAllOf', true)}
       />
     </div>
   ));

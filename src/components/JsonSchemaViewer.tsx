@@ -22,6 +22,7 @@ export interface IJsonSchemaViewer {
   hideTopBar?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
+  mergeAllOf?: boolean;
   FallbackComponent?: FallbackComponent;
 }
 
@@ -33,7 +34,14 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     this.treeStore = new TreeStore({
       defaultExpandedDepth: this.expandedDepth,
-      nodes: Array.from(renderSchema(props.dereferencedSchema || props.schema, 0, { path: [] }, { mergeAllOf: true })),
+      nodes: Array.from(
+        renderSchema(
+          props.dereferencedSchema || props.schema,
+          0,
+          { path: [] },
+          { mergeAllOf: props.mergeAllOf !== false },
+        ),
+      ),
     });
   }
 
@@ -56,10 +64,19 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       });
     }
 
-    if (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema) {
+    if (
+      prevProps.schema !== this.props.schema ||
+      prevProps.dereferencedSchema !== this.props.dereferencedSchema ||
+      prevProps.mergeAllOf !== this.props.mergeAllOf
+    ) {
       runInAction(() => {
         this.treeStore.nodes = Array.from(
-          renderSchema(this.props.dereferencedSchema || this.props.schema, 0, { path: [] }, { mergeAllOf: true }),
+          renderSchema(
+            this.props.dereferencedSchema || this.props.schema,
+            0,
+            { path: [] },
+            { mergeAllOf: this.props.mergeAllOf !== false },
+          ),
         );
       });
     }
