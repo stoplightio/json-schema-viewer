@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
-import { ITreeNodeMeta, JSONSchema4CombinerName } from '../types';
+import { ITreeNodeMeta, JSONSchema4CombinerName } from '../../types';
 
 /**
  * TYPE

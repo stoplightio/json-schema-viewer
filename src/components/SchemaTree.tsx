@@ -4,7 +4,7 @@ import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
-import { GoToRefHandler } from '../types';
+import { GoToRefHandler, RowRenderer } from '../types';
 import { SchemaRow } from './';
 
 export interface ISchemaTree {
@@ -17,24 +17,36 @@ export interface ISchemaTree {
   expanded?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
+  rowRenderer?: RowRenderer;
 }
 
 const canDrag = () => false;
 
 export const SchemaTree = observer<ISchemaTree>(props => {
-  const { hideTopBar, name, treeStore, maxRows, className, onGoToRef } = props;
+  const { hideTopBar, name, treeStore, maxRows, className, onGoToRef, rowRenderer: customRowRenderer } = props;
 
-  treeStore.on(TreeListEvents.NodeClick, (e, node) => treeStore.toggleExpand(node));
+  React.useEffect(
+    () => {
+      treeStore.on(TreeListEvents.NodeClick, (e, node) => {
+        treeStore.toggleExpand(node);
+      });
 
-  const itemData = {
-    treeStore,
-    count: treeStore.nodes.length,
-    onGoToRef,
-  };
+      return () => {
+        treeStore.dispose();
+      };
+    },
+    [treeStore],
+  );
 
   const rowRenderer = React.useCallback(
-    (node, rowOptions) => <SchemaRow node={node} rowOptions={rowOptions} {...itemData} />,
-    [itemData.count],
+    (node, rowOptions) => {
+      if (customRowRenderer !== undefined) {
+        return customRowRenderer(node, rowOptions);
+      }
+
+      return <SchemaRow node={node} rowOptions={rowOptions} onGoToRef={onGoToRef} />;
+    },
+    [onGoToRef, customRowRenderer],
   );
 
   return (

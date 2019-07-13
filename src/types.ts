@@ -1,4 +1,4 @@
-import { TreeListNode } from '@stoplight/tree-list';
+import { TreeListNode, IRowRendererOptions } from '@stoplight/tree-list';
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 
@@ -68,4 +68,6 @@ export type SchemaNodeWithMeta = SchemaNode & ITreeNodeMeta;
 
 export type SchemaTreeListNode = TreeListNode<SchemaNodeWithMeta>;
 
-export type GoToRefHandler = (path: string, node: SchemaTreeListNode) => void;
+export type GoToRefHandler = (path: string, node: SchemaNodeWithMeta) => void;
+
+export type RowRenderer = (node: SchemaTreeListNode, rowOptions: IRowRendererOptions) => React.ReactNode;
