@@ -8,15 +8,16 @@ import get = require('lodash/get');
 import map = require('lodash/map');
 import size = require('lodash/size');
 
-import { GoToRefHandler, IExtendableRenderers, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
+import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
 import { isCombiner, isRef } from '../utils';
 import { Types } from './';
 
-export interface ISchemaRow extends IExtendableRenderers {
+export interface ISchemaRow {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
   toggleExpand: () => void;
+  rowRendererRight?: (node: SchemaTreeListNode) => React.ReactElement;
 }
 
 const ICON_SIZE = 12;

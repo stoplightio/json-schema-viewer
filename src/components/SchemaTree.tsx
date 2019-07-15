@@ -50,7 +50,9 @@ export const SchemaTree = observer<ISchemaTree>(props => {
               toggleExpand={() => {
                 treeStore.toggleExpand(node);
               }}
-              rowRendererRight={props.rowRendererRight}
+              rowRendererRight={
+                props.rowRendererRight && props.rowRendererRight.bind({}, treeStore.nodes as SchemaTreeListNode[])
+              }
               node={node as SchemaTreeListNode}
               rowOptions={rowOptions}
               {...itemData}
