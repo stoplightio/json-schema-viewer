@@ -41,12 +41,12 @@ export const SchemaTree = observer<ISchemaTree>(props => {
   const rowRenderer = React.useCallback(
     (node, rowOptions) => {
       if (customRowRenderer !== undefined) {
-        return customRowRenderer(node, rowOptions);
+        return customRowRenderer(node, rowOptions, treeStore);
       }
 
       return <SchemaRow node={node} rowOptions={rowOptions} onGoToRef={onGoToRef} />;
     },
-    [onGoToRef, customRowRenderer],
+    [onGoToRef, customRowRenderer, treeStore],
   );
 
   return (
