@@ -4,7 +4,7 @@ import { runInAction } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { GoToRefHandler } from '../types';
+import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
 import { SchemaTree } from './SchemaTree';
 
@@ -24,6 +24,7 @@ export interface IJsonSchemaViewer {
   onGoToRef?: GoToRefHandler;
   mergeAllOf?: boolean;
   FallbackComponent?: FallbackComponent;
+  rowRenderer?: RowRenderer;
 }
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {

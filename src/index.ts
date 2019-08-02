@@ -1,1 +1,1 @@
-export * from './components/JsonSchemaViewer';
+export * from './components';

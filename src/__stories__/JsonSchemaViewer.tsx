@@ -4,7 +4,7 @@ import { State, Store } from '@sambego/storybook-state';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { JsonSchemaViewer } from '../components';
+import { JsonSchemaViewer, Property, Types } from '../components';
 
 import { JSONSchema4 } from 'json-schema';
 import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';
@@ -13,6 +13,7 @@ import * as schema from '../__fixtures__/default-schema.json';
 import * as schemaWithRefs from '../__fixtures__/ref/original.json';
 import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
 import * as stressSchema from '../__fixtures__/stress-schema.json';
+import { RowRenderer, SchemaNodeWithMeta } from '../types';
 import { Wrapper } from './utils/Wrapper';
 
 storiesOf('JsonSchemaViewer', module)
@@ -59,6 +60,28 @@ storiesOf('JsonSchemaViewer', module)
       mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
+  .add('custom row renderer', () => {
+    const customRowRenderer: RowRenderer = node => {
+      return (
+        <div className="text-sm flex" style={{ paddingLeft: node.level * 15 + 15 }}>
+          <Property node={node.metadata as SchemaNodeWithMeta} />
+        </div>
+      );
+    };
+
+    return (
+      <JsonSchemaViewer
+        name={text('name', 'my schema')}
+        schema={object('schema', schema)}
+        expanded={boolean('expanded', true)}
+        hideTopBar={boolean('hideTopBar', false)}
+        onGoToRef={action('onGoToRef')}
+        maxRows={number('maxRows', 5)}
+        mergeAllOf={boolean('mergeAllOf', true)}
+        rowRenderer={customRowRenderer}
+      />
+    );
+  })
   .add('stress-test schema', () => (
     <JsonSchemaViewer
       name={text('name', 'my stress schema')}
