@@ -49,7 +49,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOption
 
         <div className="flex-1 flex truncate">
           <Property node={schemaNode} onGoToRef={onGoToRef} />
-          {description && <Description>{description}</Description>}
+          {description && <Description value={description} />}
         </div>
 
         <Validations
