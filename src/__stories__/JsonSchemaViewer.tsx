@@ -1,19 +1,20 @@
 import * as React from 'react';
 
 import { State, Store } from '@sambego/storybook-state';
+import { Button, Checkbox, Icon } from '@stoplight/ui-kit';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { JsonSchemaViewer, Property, Types } from '../components';
-
 import { JSONSchema4 } from 'json-schema';
+import { JsonSchemaViewer, SchemaRow } from '../components';
+
 import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';
 import * as allOfSchema from '../__fixtures__/allOf/allOf-schema.json';
 import * as schema from '../__fixtures__/default-schema.json';
 import * as schemaWithRefs from '../__fixtures__/ref/original.json';
 import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
 import * as stressSchema from '../__fixtures__/stress-schema.json';
-import { RowRenderer, SchemaNodeWithMeta } from '../types';
+import { RowRenderer } from '../types';
 import { Wrapper } from './utils/Wrapper';
 
 storiesOf('JsonSchemaViewer', module)
@@ -61,11 +62,15 @@ storiesOf('JsonSchemaViewer', module)
     />
   ))
   .add('custom row renderer', () => {
-    const customRowRenderer: RowRenderer = node => {
+    const customRowRenderer: RowRenderer = (node, rowOptions) => {
       return (
-        <div className="text-sm flex" style={{ paddingLeft: node.level * 15 + 15 }}>
-          <Property node={node.metadata as SchemaNodeWithMeta} />
-        </div>
+        <>
+          <SchemaRow node={node} rowOptions={rowOptions} />
+          <div className="flex h-full items-center">
+            <Button className="pl-1 mr-1" small minimal icon={<Icon color="grey" iconSize={12} icon="issue" />} />
+            <Checkbox className="mb-0" />
+          </div>
+        </>
       );
     };
 
