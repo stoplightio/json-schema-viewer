@@ -1,6 +1,7 @@
 import { IRowRendererOptions } from '@stoplight/tree-list';
 import * as React from 'react';
 import { Divider } from './shared/Divider';
+import cn from 'classnames';
 
 import get = require('lodash/get');
 
@@ -11,6 +12,7 @@ import { Property } from './shared/Property';
 import { Validations } from './shared/Validations';
 
 export interface ISchemaRow {
+  className?: string;
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
@@ -20,12 +22,12 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ node, rowOptions, onGoToRef }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
   const description = get(schemaNode, 'annotations.description');
 
   return (
-    <div className="px-2 flex-1 w-full">
+    <div className={cn('px-2 flex-1 w-full', className)}>
       <div
         className="flex items-center text-sm relative"
         style={{
