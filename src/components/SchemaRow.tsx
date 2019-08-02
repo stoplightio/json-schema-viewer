@@ -1,7 +1,7 @@
 import { IRowRendererOptions } from '@stoplight/tree-list';
+import cn from 'classnames';
 import * as React from 'react';
 import { Divider } from './shared/Divider';
-import cn from 'classnames';
 
 import get = require('lodash/get');
 

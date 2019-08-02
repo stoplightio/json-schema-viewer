@@ -77,7 +77,7 @@ storiesOf('JsonSchemaViewer', module)
     return (
       <JsonSchemaViewer
         name={text('name', 'my schema')}
-        schema={object('schema', schema)}
+        schema={object('schema', schema as JSONSchema4)}
         expanded={boolean('expanded', true)}
         hideTopBar={boolean('hideTopBar', false)}
         onGoToRef={action('onGoToRef')}
