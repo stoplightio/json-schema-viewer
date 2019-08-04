@@ -1,15 +1,10 @@
 import { IRowRendererOptions } from '@stoplight/tree-list';
 import cn from 'classnames';
+import { get } from 'lodash';
 import * as React from 'react';
-import { Divider } from './shared/Divider';
-
-import get = require('lodash/get');
 
 import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
-import { Caret } from './shared/Caret';
-import { Description } from './shared/Description';
-import { Property } from './shared/Property';
-import { Validations } from './shared/Validations';
+import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
   className?: string;

@@ -1,7 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
-import _cloneDeep = require('lodash/cloneDeep');
-import _isEmpty = require('lodash/isEmpty');
-import _merge = require('lodash/merge');
+import { cloneDeep as _cloneDeep, isEmpty as _isEmpty, merge as _merge } from 'lodash';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
 import { getPrimaryType } from './getPrimaryType';
