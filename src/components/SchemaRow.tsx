@@ -1,6 +1,7 @@
 import { IRowRendererOptions } from '@stoplight/tree-list';
 import cn from 'classnames';
-import { get } from 'lodash';
+// @ts-ignore
+import get from 'lodash/get';
 import * as React from 'react';
 
 import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';

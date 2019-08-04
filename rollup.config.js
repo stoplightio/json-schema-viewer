@@ -1,17 +1,16 @@
-import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 import config from '@stoplight/scripts/rollup.config';
-const typescript = require('rollup-plugin-typescript2');
-import autoExternal from 'rollup-plugin-auto-external';
+import webWorkerLoader from 'rollup-plugin-web-worker-loader';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 
-config.plugins = [
-  autoExternal(),
-  typescript({
-    tsconfig: './tsconfig.json',
-    include: ['src/**/*.{ts,tsx}'],
+config.plugins.push(
+  resolve({
+    only: ['json-schema-merge-allof', /lodash\/?.*/],
   }),
   webWorkerLoader({
     inline: true,
   }),
-];
+  commonjs(),
+);
 
 export default config;

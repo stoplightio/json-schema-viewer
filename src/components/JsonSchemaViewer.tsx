@@ -7,7 +7,7 @@ import SchemaWorker from 'web-worker:../workers/schema.ts';
 import { JSONSchema4 } from 'json-schema';
 import { GoToRefHandler, RowRenderer, SchemaTreeListNode } from '../types';
 import { renderSchema } from '../utils';
-import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty'
+import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { ComputeSchemaMessage, RenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree } from './SchemaTree';
 
@@ -71,7 +71,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     if (data.instanceId === this.instanceId) {
       runInAction(() => {
-        this.setState({ computing: false })
+        this.setState({ computing: false });
         this.treeStore.nodes = data.nodes;
       });
     }
@@ -84,7 +84,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       0,
       { path: [] },
       {
-        mergeAllOf: this.props.mergeAllOf !== false,
         depth: this.expandedDepth,
       },
     );
@@ -115,6 +114,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     const message: ComputeSchemaMessage = {
       instanceId: this.instanceId,
       schema: this.schema,
+      mergeAllOf: this.props.mergeAllOf !== false,
     };
 
     schemaWorker.postMessage(message);

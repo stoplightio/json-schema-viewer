@@ -5,7 +5,7 @@ export const isEmpty = (obj: unknown) => {
     return obj.length === 0;
   }
 
-  for (let p in obj) {
+  for (const p in obj) {
     if (Object.hasOwnProperty.call(obj, p)) return true;
   }
 

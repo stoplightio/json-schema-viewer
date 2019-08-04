@@ -8,12 +8,7 @@ import { isRef } from './isRef';
 import { isEmpty } from './object';
 import { walk } from './walk';
 
-// const resolveAllOf = require('json-schema-merge-allof');
-
-const resolveAllOf = (x: any, a: any) => x;
-
 export type WalkingOptions = {
-  mergeAllOf?: boolean;
   depth?: number;
 };
 
@@ -50,7 +45,7 @@ const getPatternProperties: Walker = function*(schema, level = 0, meta) {
   }
 };
 
-export const renderSchema: Walker = function*(schema, level = 0, meta = { path: [] }, options = { mergeAllOf: false }) {
+export const renderSchema: Walker = function*(schema, level = 0, meta = { path: [] }, options = {}) {
   if (typeof schema !== 'object' || schema === null) {
     throw new TypeError(
       `Expected schema to be an "object" but received ${schema === null ? '"null"' : `a "${typeof schema}"`}`,
@@ -59,18 +54,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
 
   if (options.depth !== undefined && level >= options.depth) return;
 
-  const shouldMerge = options.mergeAllOf && level === 0;
-
-  const resolvedSchema = shouldMerge ? JSON.parse(JSON.stringify(schema)) : schema;
-  const parsedSchema = shouldMerge
-    ? resolveAllOf(resolvedSchema, {
-        resolvers: {
-          defaultResolver(values: any) {
-            return Object.assign({}, ...values);
-          },
-        },
-      })
-    : resolvedSchema;
+  const parsedSchema = schema;
 
   const { path } = meta;
 

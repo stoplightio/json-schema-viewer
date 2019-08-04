@@ -4,6 +4,7 @@ import { SchemaTreeListNode } from '../types';
 export type ComputeSchemaMessage = {
   instanceId: string;
   schema: JSONSchema4;
+  mergeAllOf: boolean;
 };
 
 export type RenderedSchemaMessage = {
