@@ -2,10 +2,13 @@ import { TreeStore } from '@stoplight/tree-list';
 import cn from 'classnames';
 import { runInAction } from 'mobx';
 import * as React from 'react';
+import SchemaWorker from 'web-worker:../workers/schema.ts';
 
 import { JSONSchema4 } from 'json-schema';
-import { GoToRefHandler, RowRenderer } from '../types';
-import { isSchemaViewerEmpty, renderSchema } from '../utils';
+import { GoToRefHandler, RowRenderer, SchemaTreeListNode } from '../types';
+import { renderSchema } from '../utils';
+import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty'
+import { ComputeSchemaMessage, RenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree } from './SchemaTree';
 
 export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
@@ -27,23 +30,23 @@ export interface IJsonSchemaViewer {
   rowRenderer?: RowRenderer;
 }
 
+const schemaWorker = new SchemaWorker();
+
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
   protected treeStore: TreeStore;
+  protected instanceId: string;
 
   constructor(props: IJsonSchemaViewer) {
     super(props);
 
     this.treeStore = new TreeStore({
       defaultExpandedDepth: this.expandedDepth,
-      nodes: Array.from(
-        renderSchema(
-          props.dereferencedSchema || props.schema,
-          0,
-          { path: [] },
-          { mergeAllOf: props.mergeAllOf !== false },
-        ),
-      ),
+      nodes: [],
     });
+
+    this.instanceId = Math.random().toString(36);
+
+    schemaWorker.addEventListener('message', this.handleWorkerMessage);
   }
 
   protected get expandedDepth(): number {
@@ -58,6 +61,73 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     return 1;
   }
 
+  protected get schema() {
+    return this.props.dereferencedSchema || this.props.schema;
+  }
+
+  protected handleWorkerMessage = (message: MessageEvent) => {
+    if (!message.data || !('instanceId' in message.data) || !('nodes' in message.data)) return;
+    const data = message.data as RenderedSchemaMessage;
+
+    if (data.instanceId === this.instanceId) {
+      runInAction(() => {
+        this.setState({ computing: false })
+        this.treeStore.nodes = data.nodes;
+      });
+    }
+  };
+
+  protected prerenderSchema() {
+    const schema = this.schema;
+    const renderedSchema = renderSchema(
+      schema,
+      0,
+      { path: [] },
+      {
+        mergeAllOf: this.props.mergeAllOf !== false,
+        depth: this.expandedDepth,
+      },
+    );
+
+    const nodes: SchemaTreeListNode[] = [];
+
+    if (this.props.maxRows !== undefined) {
+      let i = this.props.maxRows;
+      for (const node of renderedSchema) {
+        if (i === 0) break;
+        i--;
+        nodes.push(node);
+      }
+    } else {
+      nodes.push(...Array.from(renderedSchema));
+    }
+
+    runInAction(() => {
+      this.treeStore.nodes = nodes;
+    });
+  }
+
+  protected renderSchema() {
+    this.prerenderSchema();
+
+    this.setState({ computing: true });
+
+    const message: ComputeSchemaMessage = {
+      instanceId: this.instanceId,
+      schema: this.schema,
+    };
+
+    schemaWorker.postMessage(message);
+  }
+
+  public componentDidMount() {
+    this.renderSchema();
+  }
+
+  public componentWillUnmount() {
+    schemaWorker.removeEventListener('message', this.handleWorkerMessage);
+  }
+
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
       runInAction(() => {
@@ -70,16 +140,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       prevProps.dereferencedSchema !== this.props.dereferencedSchema ||
       prevProps.mergeAllOf !== this.props.mergeAllOf
     ) {
-      runInAction(() => {
-        this.treeStore.nodes = Array.from(
-          renderSchema(
-            this.props.dereferencedSchema || this.props.schema,
-            0,
-            { path: [] },
-            { mergeAllOf: this.props.mergeAllOf !== false },
-          ),
-        );
-      });
+      this.renderSchema();
     }
   }
 

@@ -1,20 +1,27 @@
 import { JSONSchema4 } from 'json-schema';
-import { cloneDeep as _cloneDeep, isEmpty as _isEmpty, merge as _merge } from 'lodash';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
 import { getPrimaryType } from './getPrimaryType';
 import { inferType } from './inferType';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
+import { isEmpty } from './object';
 import { walk } from './walk';
 
-const resolveAllOf = require('json-schema-merge-allof');
+// const resolveAllOf = require('json-schema-merge-allof');
 
-type Walker = (
+const resolveAllOf = (x: any, a: any) => x;
+
+export type WalkingOptions = {
+  mergeAllOf?: boolean;
+  depth?: number;
+};
+
+export type Walker = (
   schema: JSONSchema4,
   level?: number,
   meta?: ITreeNodeMeta,
-  options?: { mergeAllOf?: boolean },
+  options?: WalkingOptions,
 ) => IterableIterator<SchemaTreeListNode>;
 
 const getProperties: Walker = function*(schema, level = 0, meta) {
@@ -50,14 +57,16 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
     );
   }
 
-  const resolvedSchema = _cloneDeep(schema);
-  const parsedSchema = options.mergeAllOf
+  if (options.depth !== undefined && level >= options.depth) return;
+
+  const shouldMerge = options.mergeAllOf && level === 0;
+
+  const resolvedSchema = shouldMerge ? JSON.parse(JSON.stringify(schema)) : schema;
+  const parsedSchema = shouldMerge
     ? resolveAllOf(resolvedSchema, {
         resolvers: {
           defaultResolver(values: any) {
-            // Handle merging unknown properties
-            // @ts-ignore not accepting values
-            return _merge(...values);
+            return Object.assign({}, ...values);
           },
         },
       })
@@ -129,7 +138,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
           yield {
             ...baseNode,
             ...('items' in node &&
-              !_isEmpty(node.items) &&
+              !isEmpty(node.items) &&
               (baseNode.metadata!.subtype === 'object' || Array.isArray(node.items)) && { canHaveChildren: true }),
             metadata: {
               ...baseNode.metadata,
@@ -166,7 +175,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
         case SchemaKind.Object:
           yield {
             ...baseNode,
-            ...('properties' in node && !_isEmpty(node.properties) && { canHaveChildren: true }),
+            ...('properties' in node && !isEmpty(node.properties) && { canHaveChildren: true }),
             metadata: {
               ...baseNode.metadata,
               ...((node as IObjectNode).additionalProperties && {

@@ -3,5 +3,8 @@
   // target all ts files
   "include": [
     "."
-  ]
+  ],
+  "compilerOptions": {
+    "lib": ["dom", "webworker", "es2019"]
+  }
 }

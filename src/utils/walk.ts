@@ -54,6 +54,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
       id: assignId(node),
       type: node.type || inferType(node),
       validations: getValidations(node),
+      // @ts-ignore
       annotations: getAnnotations(node),
       enum: node.enum,
     };
@@ -64,6 +65,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
   }
 
   if ('enum' in node) {
+    // @ts-ignore
     return {
       id: assignId(node),
       validations: getValidations(node),
