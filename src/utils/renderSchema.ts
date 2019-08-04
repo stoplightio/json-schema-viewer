@@ -3,13 +3,12 @@ import { cloneDeep as _cloneDeep, isEmpty as _isEmpty, merge as _merge } from 'l
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
 import { getPrimaryType } from './getPrimaryType';
+import { inferType } from './inferType';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
 import { walk } from './walk';
 
-// @ts-ignore no typings
-import * as resolveAllOf from 'json-schema-merge-allof';
-import { inferType } from './inferType';
+const resolveAllOf = require('json-schema-merge-allof');
 
 type Walker = (
   schema: JSONSchema4,

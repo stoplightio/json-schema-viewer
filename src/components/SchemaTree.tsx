@@ -1,5 +1,5 @@
 import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
-import * as cn from 'classnames';
+import cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';

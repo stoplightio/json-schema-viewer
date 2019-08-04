@@ -1,5 +1,5 @@
 import { TreeStore } from '@stoplight/tree-list';
-import * as cn from 'classnames';
+import cn from 'classnames';
 import { runInAction } from 'mobx';
 import * as React from 'react';
 
