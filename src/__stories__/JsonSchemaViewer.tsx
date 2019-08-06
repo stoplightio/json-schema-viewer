@@ -6,15 +6,14 @@ import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
-import { JsonSchemaViewer, SchemaRow } from '../components';
+import { JsonSchemaViewer, SchemaRow, RowRenderer } from '../';
 
-import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';
-import * as allOfSchema from '../__fixtures__/allOf/allOf-schema.json';
-import * as schema from '../__fixtures__/default-schema.json';
-import * as schemaWithRefs from '../__fixtures__/ref/original.json';
-import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
-import * as stressSchema from '../__fixtures__/stress-schema.json';
-import { RowRenderer } from '../types';
+const allOfSchemaResolved = require ('../__fixtures__/allOf/allOf-resolved.json');
+const allOfSchema = require('../__fixtures__/allOf/allOf-schema.json');
+const schema = require('../__fixtures__/default-schema.json');
+const schemaWithRefs = require('../__fixtures__/ref/original.json');
+const dereferencedSchema = require( '../__fixtures__/ref/resolved.json');
+const stressSchema = require(  '../__fixtures__/stress-schema.json');
 import { Wrapper } from './utils/Wrapper';
 
 storiesOf('JsonSchemaViewer', module)
