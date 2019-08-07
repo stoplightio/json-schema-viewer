@@ -1,9 +1,9 @@
-import { Popover } from '@stoplight/ui-kit';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
 import { SchemaTreeListNode } from '../../types';
 import { SchemaRow } from '../SchemaRow';
+import { Validations } from '../shared/Validations';
 
 describe('SchemaRow component', () => {
   test('should render falsy validations', () => {
@@ -27,10 +27,9 @@ describe('SchemaRow component', () => {
       isExpanded: true,
     };
 
-    const wrapper = shallow(shallow(
-      <SchemaRow toggleExpand={() => null} node={node as SchemaTreeListNode} rowOptions={rowOptions} />,
-    )
-      .find(Popover)
+    const wrapper = shallow(shallow(<SchemaRow node={node as SchemaTreeListNode} rowOptions={rowOptions} />)
+      .find(Validations)
+      .shallow()
       .prop('content') as React.ReactElement);
 
     expect(wrapper).toHaveText('enum:null,0,false');

@@ -1,11 +1,7 @@
-import { TreeListNode } from '@stoplight/tree-list';
+import { IRowRendererOptions, TreeListNode, TreeStore } from '@stoplight/tree-list';
 import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
-
-export interface IExtendableRenderers {
-  rowRendererRight?: (node: SchemaTreeListNode) => React.ReactElement;
-  schemaControlsRenderer?: () => React.ReactElement;
-}
+import * as React from 'react';
 
 export const enum SchemaKind {
   Any = 'any',
@@ -73,4 +69,10 @@ export type SchemaNodeWithMeta = SchemaNode & ITreeNodeMeta;
 
 export type SchemaTreeListNode = TreeListNode<SchemaNodeWithMeta>;
 
-export type GoToRefHandler = (path: string, node: SchemaTreeListNode) => void;
+export type GoToRefHandler = (path: string, node: SchemaNodeWithMeta) => void;
+
+export type RowRenderer = (
+  node: SchemaTreeListNode,
+  rowOptions: IRowRendererOptions,
+  treeStore: TreeStore,
+) => React.ReactNode;

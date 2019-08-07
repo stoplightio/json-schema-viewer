@@ -1,19 +1,20 @@
 import * as React from 'react';
 
 import { State, Store } from '@sambego/storybook-state';
+import { Button, Checkbox, Icon } from '@stoplight/ui-kit';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { JsonSchemaViewer } from '../components';
-
-import { Checkbox } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
+import { JsonSchemaViewer, SchemaRow } from '../components';
+
 import * as allOfSchemaResolved from '../__fixtures__/allOf/allOf-resolved.json';
 import * as allOfSchema from '../__fixtures__/allOf/allOf-schema.json';
 import * as schema from '../__fixtures__/default-schema.json';
 import * as schemaWithRefs from '../__fixtures__/ref/original.json';
 import * as dereferencedSchema from '../__fixtures__/ref/resolved.json';
 import * as stressSchema from '../__fixtures__/stress-schema.json';
+import { RowRenderer } from '../types';
 import { Wrapper } from './utils/Wrapper';
 
 storiesOf('JsonSchemaViewer', module)
@@ -44,6 +45,7 @@ storiesOf('JsonSchemaViewer', module)
           expanded={boolean('expanded', true)}
           hideTopBar={boolean('hideTopBar', false)}
           onGoToRef={action('onGoToRef')}
+          mergeAllOf={boolean('mergeAllOf', true)}
         />
       </State>
     );
@@ -56,8 +58,35 @@ storiesOf('JsonSchemaViewer', module)
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 5)}
+      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
+  .add('custom row renderer', () => {
+    const customRowRenderer: RowRenderer = (node, rowOptions) => {
+      return (
+        <>
+          <SchemaRow node={node} rowOptions={rowOptions} />
+          <div className="flex h-full items-center">
+            <Button className="pl-1 mr-1" small minimal icon={<Icon color="grey" iconSize={12} icon="issue" />} />
+            <Checkbox className="mb-0" />
+          </div>
+        </>
+      );
+    };
+
+    return (
+      <JsonSchemaViewer
+        name={text('name', 'my schema')}
+        schema={object('schema', schema as JSONSchema4)}
+        expanded={boolean('expanded', true)}
+        hideTopBar={boolean('hideTopBar', false)}
+        onGoToRef={action('onGoToRef')}
+        maxRows={number('maxRows', 5)}
+        mergeAllOf={boolean('mergeAllOf', true)}
+        rowRenderer={customRowRenderer}
+      />
+    );
+  })
   .add('stress-test schema', () => (
     <JsonSchemaViewer
       name={text('name', 'my stress schema')}
@@ -67,6 +96,7 @@ storiesOf('JsonSchemaViewer', module)
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 10)}
+      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
   .add('allOf-schema', () => (
@@ -76,6 +106,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
+      mergeAllOf={boolean('mergeAllOf', true)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -96,6 +127,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
+      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
   .add('dark', () => (
@@ -107,21 +139,7 @@ storiesOf('JsonSchemaViewer', module)
         expanded={boolean('expanded', false)}
         hideTopBar={boolean('hideTopBar', false)}
         onGoToRef={action('onGoToRef')}
+        mergeAllOf={boolean('mergeAllOf', true)}
       />
     </div>
-  ))
-  .add('with rowRendererRight', () => (
-    <JsonSchemaViewer
-      rowRendererRight={() => (
-        <span style={{ position: 'relative', top: '5px' }}>
-          <Checkbox />
-        </span>
-      )}
-      name={text('name', 'my schema')}
-      schema={schema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      expanded={boolean('expanded', false)}
-      hideTopBar={boolean('hideTopBar', false)}
-      onGoToRef={action('onGoToRef')}
-    />
   ));

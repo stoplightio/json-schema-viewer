@@ -1,12 +1,13 @@
-import { TreeList, TreeStore } from '@stoplight/tree-list';
+import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
 import * as cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { GoToRefHandler, IExtendableRenderers, SchemaTreeListNode } from '../types';
+
+import { GoToRefHandler, RowRenderer } from '../types';
 import { SchemaRow } from './';
 
-export interface ISchemaTree extends IExtendableRenderers {
+export interface ISchemaTree {
   treeStore: TreeStore;
   schema: JSONSchema4;
   className?: string;
@@ -16,18 +17,37 @@ export interface ISchemaTree extends IExtendableRenderers {
   expanded?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
+  rowRenderer?: RowRenderer;
 }
 
 const canDrag = () => false;
 
 export const SchemaTree = observer<ISchemaTree>(props => {
-  const { hideTopBar, name, treeStore, maxRows, className, onGoToRef } = props;
+  const { hideTopBar, name, treeStore, maxRows, className, onGoToRef, rowRenderer: customRowRenderer } = props;
 
-  const itemData = {
-    treeStore,
-    count: treeStore.nodes.length,
-    onGoToRef,
-  };
+  React.useEffect(
+    () => {
+      treeStore.on(TreeListEvents.NodeClick, (e, node) => {
+        treeStore.toggleExpand(node);
+      });
+
+      return () => {
+        treeStore.dispose();
+      };
+    },
+    [treeStore],
+  );
+
+  const rowRenderer = React.useCallback(
+    (node, rowOptions) => {
+      if (customRowRenderer !== undefined) {
+        return customRowRenderer(node, rowOptions, treeStore);
+      }
+
+      return <SchemaRow node={node} rowOptions={rowOptions} onGoToRef={onGoToRef} />;
+    },
+    [onGoToRef, customRowRenderer, treeStore],
+  );
 
   return (
     <div className={cn(className, 'flex flex-col h-full w-full')}>
@@ -42,24 +62,9 @@ export const SchemaTree = observer<ISchemaTree>(props => {
         striped
         maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
         store={treeStore}
-        rowRenderer={(node, rowOptions) => {
-          // TODO: add a React.useCallback to rerender only when either itemData.count or maskProps (to be found in studio) change
-
-          return (
-            <SchemaRow
-              toggleExpand={() => {
-                treeStore.toggleExpand(node);
-              }}
-              rowRendererRight={props.rowRendererRight}
-              node={node as SchemaTreeListNode}
-              rowOptions={rowOptions}
-              {...itemData}
-            />
-          );
-        }}
+        rowRenderer={rowRenderer}
         canDrag={canDrag}
       />
-      {props.schemaControlsRenderer && props.schemaControlsRenderer()}
     </div>
   );
 });

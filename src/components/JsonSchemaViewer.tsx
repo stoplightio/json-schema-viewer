@@ -4,13 +4,13 @@ import { runInAction } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { GoToRefHandler, IExtendableRenderers } from '../types';
+import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty, renderSchema } from '../utils';
 import { SchemaTree } from './SchemaTree';
 
 export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
 
-export interface IJsonSchemaViewer extends IExtendableRenderers {
+export interface IJsonSchemaViewer {
   schema: JSONSchema4;
   dereferencedSchema?: JSONSchema4;
   style?: object;
@@ -24,6 +24,7 @@ export interface IJsonSchemaViewer extends IExtendableRenderers {
   onGoToRef?: GoToRefHandler;
   mergeAllOf?: boolean;
   FallbackComponent?: FallbackComponent;
+  rowRenderer?: RowRenderer;
 }
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
@@ -39,9 +40,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
           props.dereferencedSchema || props.schema,
           0,
           { path: [] },
-          {
-            mergeAllOf: props.mergeAllOf === undefined ? true : props.mergeAllOf,
-          },
+          { mergeAllOf: props.mergeAllOf !== false },
         ),
       ),
     });
@@ -66,10 +65,19 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       });
     }
 
-    if (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema) {
+    if (
+      prevProps.schema !== this.props.schema ||
+      prevProps.dereferencedSchema !== this.props.dereferencedSchema ||
+      prevProps.mergeAllOf !== this.props.mergeAllOf
+    ) {
       runInAction(() => {
         this.treeStore.nodes = Array.from(
-          renderSchema(this.props.dereferencedSchema || this.props.schema, 0, { path: [] }, { mergeAllOf: true }),
+          renderSchema(
+            this.props.dereferencedSchema || this.props.schema,
+            0,
+            { path: [] },
+            { mergeAllOf: this.props.mergeAllOf !== false },
+          ),
         );
       });
     }
