@@ -5,6 +5,7 @@
     "."
   ],
   "compilerOptions": {
-    "lib": ["dom", "webworker", "es2019"]
+    "lib": ["dom", "webworker", "es2017"],
+    "target": "es2017"
   }
 }
