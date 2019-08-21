@@ -1,9 +1,9 @@
 import { size as _size } from 'lodash-es';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
+import { inferType } from '../../utils/inferType';
 import { isCombiner } from '../../utils/isCombiner';
 import { isRef } from '../../utils/isRef';
-import { inferType } from '../../utils/inferType';
 import { Types } from './Types';
 
 export interface IProperty {
