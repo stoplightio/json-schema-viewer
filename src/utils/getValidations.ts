@@ -1,6 +1,6 @@
 import { Dictionary } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
-import { flatMap as _flatMap, pick as _pick } from 'lodash';
+import { flatMap as _flatMap, pick as _pick } from 'lodash-es';
 
 export const COMMON_VALIDATION_TYPES = [
   'enum', // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1
@@ -16,7 +16,7 @@ const VALIDATION_TYPES = {
 
 function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): string[] {
   if (Array.isArray(type)) {
-    return _flatMap<JSONSchema4TypeName, string>(type, getTypeValidations);
+    return _flatMap(type, getTypeValidations);
   }
 
   return VALIDATION_TYPES[type] || [];

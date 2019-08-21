@@ -31,11 +31,10 @@ export interface IJsonSchemaViewer {
   rowRenderer?: RowRenderer;
 }
 
-const schemaWorker = new SchemaWorker();
-
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer, { computing: boolean }> {
   protected treeStore: TreeStore;
   protected instanceId: string;
+  protected schemaWorker?: Worker;
 
   public state = {
     computing: false,
@@ -50,8 +49,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     });
 
     this.instanceId = Math.random().toString(36);
-
-    schemaWorker.addEventListener('message', this.handleWorkerMessage);
   }
 
   protected get expandedDepth(): number {
@@ -118,18 +115,24 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       mergeAllOf: this.props.mergeAllOf !== false,
     };
 
-    schemaWorker.postMessage(message);
+    if (this.schemaWorker) {
+      this.schemaWorker.postMessage(message);
+    }
 
     this.prerenderSchema();
     this.setState({ computing: true });
   }
 
   public componentDidMount() {
+    this.schemaWorker = new SchemaWorker();
+    this.schemaWorker.addEventListener('message', this.handleWorkerMessage);
     this.renderSchema();
   }
 
   public componentWillUnmount() {
-    schemaWorker.removeEventListener('message', this.handleWorkerMessage);
+    if (this.schemaWorker !== void 0) {
+      this.schemaWorker.terminate();
+    }
   }
 
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {

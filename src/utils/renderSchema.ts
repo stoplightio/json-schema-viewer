@@ -1,5 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
-import { isEmpty as _isEmpty } from 'lodash';
+import { isEmpty as _isEmpty } from 'lodash-es';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
 import { getPrimaryType } from './getPrimaryType';

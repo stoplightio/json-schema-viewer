@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 import { GoToRefHandler, RowRenderer } from '../types';
-import { SchemaRow } from './';
+import { SchemaRow } from './SchemaRow';
 
 export interface ISchemaTree {
   treeStore: TreeStore;

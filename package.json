@@ -46,6 +46,7 @@
     "@stoplight/json": "3.0.3",
     "classnames": "^2.2.6",
     "json-schema-merge-allof": "https://github.com/stoplightio/json-schema-merge-allof",
+    "lodash-es": "^4.17.15",
     "mobx-react-lite": "^1.4.1",
     "pluralize": "^8.0.0"
   },

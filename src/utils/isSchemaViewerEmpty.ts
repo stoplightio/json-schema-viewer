@@ -1,5 +1,4 @@
-// @ts-ignore
-import { get as _get, isEmpty as _isEmpty } from 'lodash';
+import { get as _get, isEmpty as _isEmpty } from 'lodash-es';
 
 const combinerTypes = ['allOf', 'oneOf', 'anyOf'];
 

@@ -1,5 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
-import { pick as _pick } from 'lodash';
+import { pick as _pick } from 'lodash-es';
 import { JSONSchema4Metadata } from '../types';
 
 const METADATA: JSONSchema4Metadata[] = ['id', '$schema'];
