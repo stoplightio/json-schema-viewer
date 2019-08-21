@@ -23,7 +23,7 @@
     "build": "sl-scripts build --sourcemap",
     "build.docs": "build-storybook -c .storybook -o docs-auto",
     "commit": "git-cz",
-    "lint": "tslint -c tslint.json 'src/**/*.ts?'",
+    "lint": "tslint -c tslint.json -p tsconfig.json 'src/**/*.ts?'",
     "lint.fix": "yarn lint --fix",
     "release": "sl-scripts release",
     "release.docs": "sl-scripts release:docs",
