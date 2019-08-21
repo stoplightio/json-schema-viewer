@@ -1,5 +1,4 @@
-// @ts-ignore
-import size from 'lodash/size';
+import {size} from 'lodash';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
 import { isCombiner, isRef } from '../../utils';

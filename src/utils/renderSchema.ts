@@ -1,11 +1,11 @@
 import { JSONSchema4 } from 'json-schema';
+import { isEmpty as _isEmpty } from 'lodash';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
 import { getPrimaryType } from './getPrimaryType';
 import { inferType } from './inferType';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
-import { isEmpty } from './object';
 import { walk } from './walk';
 
 export type WalkingOptions = {
@@ -122,7 +122,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
           yield {
             ...baseNode,
             ...('items' in node &&
-              !isEmpty(node.items) &&
+              !_isEmpty(node.items) &&
               (baseNode.metadata!.subtype === 'object' || Array.isArray(node.items)) && { canHaveChildren: true }),
             metadata: {
               ...baseNode.metadata,
@@ -159,7 +159,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
         case SchemaKind.Object:
           yield {
             ...baseNode,
-            ...('properties' in node && !isEmpty(node.properties) && { canHaveChildren: true }),
+            ...('properties' in node && !_isEmpty(node.properties) && { canHaveChildren: true }),
             metadata: {
               ...baseNode.metadata,
               ...((node as IObjectNode).additionalProperties && {

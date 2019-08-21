@@ -11,4 +11,3 @@ export type RenderedSchemaMessage = {
   instanceId: string;
   nodes: SchemaTreeListNode[];
 };
-
