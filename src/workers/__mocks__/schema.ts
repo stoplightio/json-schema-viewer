@@ -1,7 +1,7 @@
-const SchemaWorker = jest.fn();
+const SchemaWorkerMock = jest.fn();
 
-SchemaWorker.prototype.addEventListener = jest.fn();
-SchemaWorker.prototype.terminate = jest.fn();
-SchemaWorker.prototype.postMessage = jest.fn();
+SchemaWorkerMock.prototype.addEventListener = jest.fn();
+SchemaWorkerMock.prototype.terminate = jest.fn();
+SchemaWorkerMock.prototype.postMessage = jest.fn();
 
-module.exports.default = SchemaWorker;
+module.exports.default = SchemaWorkerMock;
