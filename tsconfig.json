@@ -4,6 +4,7 @@
   "include": [
     "."
   ],
+  "exclude": ["**/__mocks__/**"],
   "compilerOptions": {
     "lib": ["dom", "webworker", "es2017"],
     "target": "es2017"
