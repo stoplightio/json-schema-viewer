@@ -11,6 +11,7 @@ import { renderSchema } from '../utils/renderSchema';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { ComputeSchemaMessage, RenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree } from './SchemaTree';
+import { isCombiner } from '../utils/isCombiner';
 
 export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
 
@@ -81,6 +82,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
   protected prerenderSchema() {
     const schema = this.schema;
+    let needsFullRendering = true;
     const renderedSchema = renderSchema(
       schema,
       0,
@@ -94,11 +96,19 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     if (this.props.maxRows !== undefined) {
       let i = this.props.maxRows;
+      let hasAllOf = false;
       for (const node of renderedSchema) {
         if (i === 0) break;
         i--;
+
+        if (!hasAllOf && node.metadata && isCombiner(node.metadata) && node.metadata.combiner === 'allOf') {
+          hasAllOf = true;
+        }
+
         nodes.push(node);
       }
+
+      needsFullRendering = hasAllOf || this.props.maxRows <= nodes.length;
     } else {
       nodes.push(...Array.from(renderedSchema));
     }
@@ -106,9 +116,16 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     runInAction(() => {
       this.treeStore.nodes = nodes;
     });
+
+    return needsFullRendering;
   }
 
   protected renderSchema() {
+    const needsFullRendering = this.prerenderSchema();
+    if (!needsFullRendering) {
+      return;
+    }
+
     const message: ComputeSchemaMessage = {
       instanceId: this.instanceId,
       schema: this.schema,
@@ -119,7 +136,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.schemaWorker.postMessage(message);
     }
 
-    this.prerenderSchema();
     this.setState({ computing: true });
   }
 
