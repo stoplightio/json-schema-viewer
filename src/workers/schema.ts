@@ -1,5 +1,5 @@
-import { renderSchema } from '../utils';
 import { mergeAllOf } from '../utils/mergeAllOf';
+import { renderSchema } from '../utils/renderSchema';
 import { ComputeSchemaMessage } from './messages';
 
 declare const self: DedicatedWorkerGlobalScope;
