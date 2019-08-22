@@ -101,7 +101,13 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
         if (i === 0) break;
         i--;
 
-        if (!hasAllOf && node.metadata && isCombiner(node.metadata) && node.metadata.combiner === 'allOf') {
+        if (
+          !hasAllOf &&
+          this.props.mergeAllOf !== false &&
+          node.metadata &&
+          isCombiner(node.metadata) &&
+          node.metadata.combiner === 'allOf'
+        ) {
           hasAllOf = true;
         }
 
