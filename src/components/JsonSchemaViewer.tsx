@@ -95,7 +95,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     const nodes: SchemaTreeListNode[] = [];
 
     if (this.props.maxRows !== undefined) {
-      let i = this.props.maxRows + 1;
+      let i = this.props.maxRows;
       let hasAllOf = false;
       for (const node of renderedSchema) {
         if (i === 0) break;
