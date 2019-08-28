@@ -4,7 +4,7 @@ module.exports = {
   setupFilesAfterEnv: ['./setupTests.ts'],
   moduleNameMapper: {
     '\\.css$': '<rootDir>/__mocks__/styleMock.js',
-    'web-worker:../(.+)$': '<rootDir>/src/$1'
+    'web-worker:\\.\\./(.+)$': '<rootDir>/src/$1'
   },
   testMatch: ['<rootDir>/src/**/__tests__/*.(ts|js)?(x)'],
   transformIgnorePatterns: ['/node_modules/(?!lodash-es)/'],
