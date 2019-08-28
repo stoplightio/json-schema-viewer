@@ -2,7 +2,7 @@ import { size } from 'lodash';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
 import { isCombiner, isRef } from '../../utils';
-import { getNodeType } from '../../utils/getNodeType';
+import { inferType } from '../../utils/inferType';
 import { Types } from './Types';
 
 export interface IProperty {
@@ -14,7 +14,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }
   const type = isRef(node) ? '$ref' : isCombiner(node) ? node.combiner : node.type;
   const subtype =
     type === SchemaKind.Array && (node as IArrayNode).items !== undefined
-      ? getNodeType((node as IArrayNode).items!)
+      ? inferType((node as IArrayNode).items!)
       : undefined;
 
   const childrenCount = React.useMemo<number | null>(
