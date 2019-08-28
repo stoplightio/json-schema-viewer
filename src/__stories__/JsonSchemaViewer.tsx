@@ -87,16 +87,32 @@ storiesOf('JsonSchemaViewer', module)
     );
   })
   .add('stress-test schema', () => (
-    <JsonSchemaViewer
-      name={text('name', 'my stress schema')}
-      schema={stressSchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      expanded={boolean('expanded', false)}
-      hideTopBar={boolean('hideTopBar', false)}
-      onGoToRef={action('onGoToRef')}
-      maxRows={number('maxRows', 10)}
-      mergeAllOf={boolean('mergeAllOf', true)}
-    />
+    <>
+      <div style={{ height: 345 }}>
+        <JsonSchemaViewer
+          name={text('name', 'my stress schema')}
+          schema={stressSchema as JSONSchema4}
+          defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+          expanded={boolean('expanded', false)}
+          hideTopBar={boolean('hideTopBar', false)}
+          onGoToRef={action('onGoToRef')}
+          maxRows={number('maxRows', 10)}
+          mergeAllOf={boolean('mergeAllOf', true)}
+        />
+      </div>
+      <div style={{ height: 345 }}>
+        <JsonSchemaViewer
+          name={text('name', 'my stress schema 2')}
+          schema={stressSchema as JSONSchema4}
+          defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+          expanded={boolean('expanded', false)}
+          hideTopBar={boolean('hideTopBar', false)}
+          onGoToRef={action('onGoToRef')}
+          maxRows={number('maxRows', 10)}
+          mergeAllOf={boolean('mergeAllOf', true)}
+        />
+      </div>
+    </>
   ))
   .add('allOf-schema', () => (
     <JsonSchemaViewer

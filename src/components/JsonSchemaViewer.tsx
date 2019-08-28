@@ -32,7 +32,7 @@ export interface IJsonSchemaViewer {
   rowRenderer?: RowRenderer;
 }
 
-export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer, { computing: boolean }> {
+export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
   protected treeStore: TreeStore;
   protected instanceId: string;
   protected schemaWorker?: Worker;
@@ -95,7 +95,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     const nodes: SchemaTreeListNode[] = [];
 
     if (this.props.maxRows !== undefined) {
-      let i = this.props.maxRows;
+      let i = this.props.maxRows + 1;
       let hasAllOf = false;
       for (const node of renderedSchema) {
         if (i === 0) break;
@@ -186,14 +186,13 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col h-full w-full relative')}>
-        <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
-
         {computing && (
           <div className="flex justify-center items-center absolute w-full h-full left-0 top-0">
             <div className="absolute w-full h-full left-0 top-0 opacity-25 bg-gray-2 dark:bg-gray-6" />
-            <Spinner className="z-10 relative" intent={Intent.PRIMARY} size={Spinner.SIZE_LARGE} />
+            <Spinner className="relative" intent={Intent.PRIMARY} size={Spinner.SIZE_LARGE} />
           </div>
         )}
+        <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
       </div>
     );
   }
