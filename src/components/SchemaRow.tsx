@@ -1,15 +1,10 @@
 import { IRowRendererOptions } from '@stoplight/tree-list';
 import cn from 'classnames';
+import { get as _get } from 'lodash-es';
 import * as React from 'react';
-import { Divider } from './shared/Divider';
-
-import get = require('lodash/get');
 
 import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
-import { Caret } from './shared/Caret';
-import { Description } from './shared/Description';
-import { Property } from './shared/Property';
-import { Validations } from './shared/Validations';
+import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
   className?: string;
@@ -24,7 +19,7 @@ const ROW_OFFSET = 7;
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
   const schemaNode = node.metadata as SchemaNodeWithMeta;
-  const description = get(schemaNode, 'annotations.description');
+  const description = _get(schemaNode, 'annotations.description');
 
   return (
     <div className={cn('px-2 flex-1 w-full', className)}>

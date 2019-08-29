@@ -1,23 +1,22 @@
 import { JSONSchema4 } from 'json-schema';
-import _cloneDeep = require('lodash/cloneDeep');
-import _isEmpty = require('lodash/isEmpty');
-import _merge = require('lodash/merge');
+import { isEmpty as _isEmpty } from 'lodash-es';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
 import { getPrimaryType } from './getPrimaryType';
+import { inferType } from './inferType';
 import { isCombiner } from './isCombiner';
 import { isRef } from './isRef';
 import { walk } from './walk';
 
-// @ts-ignore no typings
-import * as resolveAllOf from 'json-schema-merge-allof';
-import { inferType } from './inferType';
+export type WalkingOptions = {
+  depth?: number;
+};
 
-type Walker = (
+export type Walker = (
   schema: JSONSchema4,
   level?: number,
   meta?: ITreeNodeMeta,
-  options?: { mergeAllOf?: boolean },
+  options?: WalkingOptions,
 ) => IterableIterator<SchemaTreeListNode>;
 
 const getProperties: Walker = function*(schema, level = 0, meta) {
@@ -46,25 +45,16 @@ const getPatternProperties: Walker = function*(schema, level = 0, meta) {
   }
 };
 
-export const renderSchema: Walker = function*(schema, level = 0, meta = { path: [] }, options = { mergeAllOf: false }) {
+export const renderSchema: Walker = function*(schema, level = 0, meta = { path: [] }, options = {}) {
   if (typeof schema !== 'object' || schema === null) {
     throw new TypeError(
       `Expected schema to be an "object" but received ${schema === null ? '"null"' : `a "${typeof schema}"`}`,
     );
   }
 
-  const resolvedSchema = _cloneDeep(schema);
-  const parsedSchema = options.mergeAllOf
-    ? resolveAllOf(resolvedSchema, {
-        resolvers: {
-          defaultResolver(values: any) {
-            // Handle merging unknown properties
-            // @ts-ignore not accepting values
-            return _merge(...values);
-          },
-        },
-      })
-    : resolvedSchema;
+  if (options.depth !== undefined && level >= options.depth) return;
+
+  const parsedSchema = schema;
 
   const { path } = meta;
 

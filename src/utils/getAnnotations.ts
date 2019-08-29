@@ -1,5 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
-import { pick as _pick } from 'lodash';
+import { pick as _pick } from 'lodash-es';
 import { JSONSchema4Annotations } from '../types';
 
 const ANNOTATIONS: JSONSchema4Annotations[] = ['title', 'description', 'default', 'examples'];

@@ -1,9 +1,8 @@
-import { ISchema } from '@stoplight/types';
-import { get as _get, isEmpty as _isEmpty } from 'lodash';
+import { get as _get, isEmpty as _isEmpty } from 'lodash-es';
 
 const combinerTypes = ['allOf', 'oneOf', 'anyOf'];
 
-export const isSchemaViewerEmpty = (schema: ISchema) => {
+export const isSchemaViewerEmpty = (schema: unknown) => {
   if (typeof schema !== 'object' || schema === null) return true;
 
   const objectKeys = Object.keys(schema);

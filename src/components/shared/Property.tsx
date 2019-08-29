@@ -1,8 +1,9 @@
-import { size } from 'lodash';
+import { size as _size } from 'lodash-es';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
-import { isCombiner, isRef } from '../../utils';
 import { inferType } from '../../utils/inferType';
+import { isCombiner } from '../../utils/isCombiner';
+import { isRef } from '../../utils/isRef';
 import { Types } from './Types';
 
 export interface IProperty {
@@ -20,15 +21,15 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }
   const childrenCount = React.useMemo<number | null>(
     () => {
       if (type === SchemaKind.Object) {
-        return size((node as IObjectNode).properties);
+        return _size((node as IObjectNode).properties);
       }
 
       if (subtype === SchemaKind.Object) {
-        return size(((node as IArrayNode).items as IObjectNode).properties);
+        return _size(((node as IArrayNode).items as IObjectNode).properties);
       }
 
       if (subtype === SchemaKind.Array) {
-        return size((node as IArrayNode).items as IArrayNode);
+        return _size((node as IArrayNode).items as IArrayNode);
       }
 
       return null;

@@ -5,7 +5,7 @@ import * as React from 'react';
 
 export interface IValidations {
   required: boolean;
-  validations: Dictionary<unknown>;
+  validations: Dictionary<unknown> | {};
 }
 
 export const Validations: React.FunctionComponent<IValidations> = ({ required, validations }) => {
