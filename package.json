@@ -114,5 +114,6 @@
   },
   "release": {
     "extends": "@stoplight/scripts/release"
-  }
+  },
+  "typings": "src/index.d.ts"
 }
