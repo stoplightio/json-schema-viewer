@@ -35,15 +35,15 @@
     "test.watch": "yarn test --watch"
   },
   "peerDependencies": {
-    "@stoplight/markdown-viewer": "3.x.x",
-    "@stoplight/tree-list": "4.x.x",
-    "@stoplight/ui-kit": "2.x.x",
-    "mobx": "5.x.x",
+    "@stoplight/markdown-viewer": "^3",
+    "@stoplight/tree-list": "^4",
+    "@stoplight/ui-kit": "^2",
+    "mobx": "^5",
     "react": ">=16.8",
     "react-dom": ">=16.8"
   },
   "dependencies": {
-    "@stoplight/json": "3.0.3",
+    "@stoplight/json": "^3.1.1",
     "classnames": "^2.2.6",
     "json-schema-merge-allof": "https://github.com/stoplightio/json-schema-merge-allof",
     "lodash-es": "^4.17.15",
@@ -81,13 +81,13 @@
     "mobx": "^5.13.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-web-worker-loader": "p0lip/rollup-plugin-web-worker-loader",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "tslint-config-stoplight": "^1.2.0",
-    "typescript": "3.5.3",
+    "typescript": "3.6.2",
     "worker-loader": "^2.0.0"
   },
   "lint-staged": {
