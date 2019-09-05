@@ -1,10 +1,16 @@
 declare module 'web-worker:*' {
-  declare var WebWorker: {
-    prototype: Worker;
-    new (): Worker;
+  // tslint:disable-next-line:interface-name
+  declare interface ShimmedWebWorker extends Worker {
+    isShim: true;
+  }
+
+  declare const WebWorker: {
+    prototype: Worker | ShimmedWebWorker;
+    new (): Worker | ShimmedWebWorker;
   };
 
   export default WebWorker;
+  export type WebWorker = Worker | ShimmedWebWorker;
 }
 
 declare module 'rollup-plugin-web-worker-loader-helper' {
