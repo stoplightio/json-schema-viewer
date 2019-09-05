@@ -3,7 +3,7 @@ import { Intent, Spinner } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import { runInAction } from 'mobx';
 import * as React from 'react';
-import SchemaWorker from 'web-worker:../workers/schema.ts';
+import SchemaWorker, { WebWorker } from 'web-worker:../workers/schema.ts';
 
 import { JSONSchema4 } from 'json-schema';
 import { GoToRefHandler, RowRenderer, SchemaTreeListNode } from '../types';
@@ -35,7 +35,7 @@ export interface IJsonSchemaViewer {
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
   protected treeStore: TreeStore;
   protected instanceId: string;
-  protected schemaWorker?: Worker;
+  protected schemaWorker?: WebWorker;
 
   public state = {
     computing: false,
@@ -82,19 +82,23 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
   protected prerenderSchema() {
     const schema = this.schema;
-    let needsFullRendering = true;
+    const isWorkerSpawn = this.schemaWorker !== void 0 && !('isShim' in this.schemaWorker);
+    let needsFullRendering = isWorkerSpawn;
+
     const renderedSchema = renderSchema(
       schema,
       0,
       { path: [] },
-      {
-        depth: this.expandedDepth + 1,
-      },
+      isWorkerSpawn
+        ? {
+            depth: this.expandedDepth + 1,
+          }
+        : void 0,
     );
 
     const nodes: SchemaTreeListNode[] = [];
 
-    if (this.props.maxRows !== undefined) {
+    if (isWorkerSpawn && this.props.maxRows !== undefined) {
       let i = this.props.maxRows;
       let hasAllOf = false;
       for (const node of renderedSchema) {

@@ -41,6 +41,10 @@ describe('JSON Schema Viewer component', () => {
     (SchemaWorker.prototype.addEventListener as jest.Mock).mockClear();
   });
 
+  afterEach(() => {
+    delete SchemaWorker.prototype.isShim;
+  });
+
   test('should render empty message if schema is empty', () => {
     (isSchemaViewerEmpty as jest.Mock).mockReturnValue(true);
     const wrapper = shallow(<JsonSchemaViewerComponent schema={{}} />);
@@ -153,6 +157,14 @@ describe('JSON Schema Viewer component', () => {
     });
 
     expect(wrapper.instance()).toHaveProperty('treeStore.nodes', nodes);
+  });
+
+  test('should render all nodes on main thread when worker cannot be spawned regardless of maxRows or schema', () => {
+    SchemaWorker.prototype.isShim = true;
+    const wrapper = shallow(<JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={1} />);
+
+    expect(SchemaWorker.prototype.postMessage).not.toHaveBeenCalled();
+    expect(wrapper.instance()).toHaveProperty('treeStore.nodes.length', 4);
   });
 
   test('should not apply result of full processing in a worker if instance ids do not match', () => {

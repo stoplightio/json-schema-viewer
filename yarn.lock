@@ -13014,9 +13014,9 @@ rollup-plugin-typescript2@^0.21.1:
     rollup-pluginutils "2.6.0"
     tslib "1.9.3"
 
-rollup-plugin-web-worker-loader@p0lip/rollup-plugin-web-worker-loader:
+rollup-plugin-web-worker-loader@p0lip/rollup-plugin-web-worker-loader#shim:
   version "0.5.2"
-  resolved "https://codeload.github.com/p0lip/rollup-plugin-web-worker-loader/tar.gz/c06acd26282c537e03d30848dcabecd4581e4111"
+  resolved "https://codeload.github.com/p0lip/rollup-plugin-web-worker-loader/tar.gz/8ad95a47f5d753913563dcbb183c7328ea144b8c"
 
 rollup-pluginutils@2.6.0:
   version "2.6.0"
