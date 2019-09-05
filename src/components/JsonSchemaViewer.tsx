@@ -32,7 +32,11 @@ export interface IJsonSchemaViewer {
   rowRenderer?: RowRenderer;
 }
 
-export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer> {
+export interface IJsonSchemaViewerComponent extends Omit<IJsonSchemaViewer, 'FallbackComponent'> {
+  onError(err: Error): void;
+}
+
+export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewerComponent> {
   protected treeStore: TreeStore;
   protected instanceId: string;
   protected schemaWorker?: WebWorker;
@@ -41,7 +45,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     computing: false,
   };
 
-  constructor(props: IJsonSchemaViewer) {
+  constructor(props: IJsonSchemaViewerComponent) {
     super(props);
 
     this.treeStore = new TreeStore({
@@ -76,6 +80,8 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.setState({ computing: false });
       if (data.error === null) {
         this.treeStore.nodes = data.nodes;
+      } else {
+        this.props.onError(new Error(data.error));
       }
     }
   });
@@ -231,12 +237,16 @@ export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, { e
     return { error };
   }
 
+  private onError: IJsonSchemaViewerComponent['onError'] = error => {
+    this.setState({ error });
+  };
+
   public render() {
     const { FallbackComponent: Fallback = JsonSchemaFallbackComponent, ...props } = this.props;
     if (this.state.error) {
       return <Fallback error={this.state.error} />;
     }
 
-    return <JsonSchemaViewerComponent {...props} />;
+    return <JsonSchemaViewerComponent {...props} onError={this.onError} />;
   }
 }
