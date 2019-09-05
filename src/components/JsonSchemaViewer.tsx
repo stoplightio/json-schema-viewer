@@ -1,7 +1,7 @@
 import { TreeStore } from '@stoplight/tree-list';
 import { Intent, Spinner } from '@stoplight/ui-kit';
 import cn from 'classnames';
-import { runInAction } from 'mobx';
+import { action, runInAction } from 'mobx';
 import * as React from 'react';
 import SchemaWorker, { WebWorker } from 'web-worker:../workers/schema.ts';
 
@@ -10,7 +10,7 @@ import { GoToRefHandler, RowRenderer, SchemaTreeListNode } from '../types';
 import { isCombiner } from '../utils/isCombiner';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { renderSchema } from '../utils/renderSchema';
-import { ComputeSchemaMessage, RenderedSchemaMessage } from '../workers/messages';
+import { ComputeSchemaMessageData, isRenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree } from './SchemaTree';
 
 export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
@@ -68,17 +68,17 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     return this.props.dereferencedSchema || this.props.schema;
   }
 
-  protected handleWorkerMessage = (message: MessageEvent) => {
-    if (!message.data || !('instanceId' in message.data) || !('nodes' in message.data)) return;
-    const data = message.data as RenderedSchemaMessage;
+  protected handleWorkerMessage = action<(message: MessageEvent) => void>(message => {
+    if (!isRenderedSchemaMessage(message)) return;
+    const { data } = message;
 
     if (data.instanceId === this.instanceId) {
-      runInAction(() => {
-        this.setState({ computing: false });
+      this.setState({ computing: false });
+      if (data.error === null) {
         this.treeStore.nodes = data.nodes;
-      });
+      }
     }
-  };
+  });
 
   protected prerenderSchema() {
     const schema = this.schema;
@@ -136,7 +136,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       return;
     }
 
-    const message: ComputeSchemaMessage = {
+    const message: ComputeSchemaMessageData = {
       instanceId: this.instanceId,
       schema: this.schema,
       mergeAllOf: this.props.mergeAllOf !== false,
