@@ -1,17 +1,26 @@
 import { mergeAllOf } from '../utils/mergeAllOf';
 import { renderSchema } from '../utils/renderSchema';
-import { ComputeSchemaMessage } from './messages';
+import { isComputeSchemaMessage, RenderedSchemaErrorMessageData, RenderedSchemaSuccessMessageData } from './messages';
 
 declare const self: DedicatedWorkerGlobalScope;
 
 self.addEventListener('message', e => {
-  const msg = e.data;
-  if (typeof msg !== 'object' || msg === null || !('schema' in msg) || !('instanceId' in msg)) return;
+  if (!isComputeSchemaMessage(e)) return;
+  const {
+    data: { instanceId, schema, mergeAllOf: shouldMergeAllOf },
+  } = e;
 
-  const schema = (msg as ComputeSchemaMessage).schema;
-
-  self.postMessage({
-    instanceId: (msg as ComputeSchemaMessage).instanceId,
-    nodes: Array.from(renderSchema((msg as ComputeSchemaMessage).mergeAllOf ? mergeAllOf(schema) : schema)),
-  });
+  try {
+    self.postMessage({
+      instanceId,
+      error: null,
+      nodes: Array.from(renderSchema(shouldMergeAllOf ? mergeAllOf(schema) : schema)),
+    } as RenderedSchemaSuccessMessageData);
+  } catch (ex) {
+    self.postMessage({
+      instanceId,
+      error: ex.message,
+      nodes: null,
+    } as RenderedSchemaErrorMessageData);
+  }
 });
