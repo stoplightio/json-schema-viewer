@@ -5,7 +5,6 @@ import {
   ICombinerNode,
   IObjectNode,
   IRefNode,
-  JSONSchema4CombinerName,
   SchemaKind,
   SchemaNode,
 } from '../types';
@@ -14,12 +13,7 @@ import { getAnnotations } from './getAnnotations';
 import { getPrimaryType } from './getPrimaryType';
 import { getValidations } from './getValidations';
 import { inferType } from './inferType';
-
-const getCombiner = (node: JSONSchema4): JSONSchema4CombinerName | void => {
-  if ('allOf' in node) return 'allOf';
-  if ('anyOf' in node) return 'anyOf';
-  if ('oneOf' in node) return 'oneOf';
-};
+import { getCombiner } from './getCombiner';
 
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   switch (getPrimaryType(node)) {

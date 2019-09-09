@@ -2,8 +2,7 @@ import { size as _size } from 'lodash-es';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
 import { inferType } from '../../utils/inferType';
-import { isCombiner } from '../../utils/isCombiner';
-import { isRef } from '../../utils/isRef';
+import { isCombinerNode, isRefNode } from '../../utils/nodes';
 import { Types } from './Types';
 
 export interface IProperty {
@@ -12,7 +11,7 @@ export interface IProperty {
 }
 
 export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }) => {
-  const type = isRef(node) ? '$ref' : isCombiner(node) ? node.combiner : node.type;
+  const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype =
     type === SchemaKind.Array && (node as IArrayNode).items !== undefined
       ? inferType((node as IArrayNode).items!)

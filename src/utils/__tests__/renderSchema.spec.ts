@@ -15,6 +15,7 @@ describe('renderSchema util', () => {
     ['combiner-schema.json', ''],
     ['array-of-objects.json', ''],
     ['array-of-refs.json', ''],
+    ['array-of-allofs.json', ''],
     ['tickets.schema.json', ''],
   ])('should match %s', (schema, dereferenced) => {
     expect(

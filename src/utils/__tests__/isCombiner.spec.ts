@@ -1,12 +1,12 @@
-import { isCombiner } from '../isCombiner';
+import { isCombinerNode } from '../nodes';
 
-describe('isCombiner function', () => {
+describe('isCombinerNode function', () => {
   test('should return false if object without combiner is given', () => {
-    expect(isCombiner({} as any)).toBe(false);
-    expect(isCombiner({ properties: [] } as any)).toBe(false);
+    expect(isCombinerNode({} as any)).toBe(false);
+    expect(isCombinerNode({ properties: [] } as any)).toBe(false);
   });
 
   test.each(['allOf', 'anyOf', 'oneOf'])('should return true if object with %s is given', combiner => {
-    expect(isCombiner({ combiner } as any)).toBe(true);
+    expect(isCombinerNode({ combiner } as any)).toBe(true);
   });
 });
