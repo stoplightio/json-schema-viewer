@@ -1,5 +1,234 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renderSchema util should match array-of-allofs.json 1`] = `
+Array [
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 0,
+    "metadata": Object {
+      "additionalProperties": undefined,
+      "annotations": Object {
+        "title": "Test",
+      },
+      "enum": undefined,
+      "id": "random-id",
+      "path": Array [],
+      "patternProperties": undefined,
+      "properties": Object {
+        "array-all-objects": Object {
+          "items": Object {
+            "allOf": Array [
+              Object {
+                "properties": Object {
+                  "foo": Object {
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+              Object {
+                "properties": Object {
+                  "bar": Object {
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            ],
+            "type": "object",
+          },
+          "type": "array",
+        },
+      },
+      "type": "object",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 1,
+    "metadata": Object {
+      "additionalItems": undefined,
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "items": Object {
+        "allOf": Array [
+          Object {
+            "properties": Object {
+              "foo": Object {
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          Object {
+            "properties": Object {
+              "bar": Object {
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+        ],
+        "type": "object",
+      },
+      "name": "array-all-objects",
+      "path": Array [
+        "properties",
+        "array-all-objects",
+      ],
+      "required": false,
+      "subtype": "allOf",
+      "type": "array",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 2,
+    "metadata": Object {
+      "annotations": Object {},
+      "combiner": "allOf",
+      "id": "random-id",
+      "name": "array-all-objects",
+      "path": Array [
+        "properties",
+        "array-all-objects",
+        "items",
+      ],
+      "properties": Array [
+        Object {
+          "properties": Object {
+            "foo": Object {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        Object {
+          "properties": Object {
+            "bar": Object {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+      ],
+      "required": false,
+      "type": "object",
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 3,
+    "metadata": Object {
+      "additionalProperties": undefined,
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "path": Array [
+        "properties",
+        "array-all-objects",
+        "items",
+        "allOf",
+        0,
+      ],
+      "patternProperties": undefined,
+      "properties": Object {
+        "foo": Object {
+          "type": "string",
+        },
+      },
+      "type": "object",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 4,
+    "metadata": Object {
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "name": "foo",
+      "path": Array [
+        "properties",
+        "array-all-objects",
+        "items",
+        "allOf",
+        0,
+        "properties",
+        "foo",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "canHaveChildren": true,
+    "id": "random-id",
+    "level": 3,
+    "metadata": Object {
+      "additionalProperties": undefined,
+      "annotations": Object {},
+      "divider": "and",
+      "enum": undefined,
+      "id": "random-id",
+      "path": Array [
+        "properties",
+        "array-all-objects",
+        "items",
+        "allOf",
+        1,
+      ],
+      "patternProperties": undefined,
+      "properties": Object {
+        "bar": Object {
+          "type": "string",
+        },
+      },
+      "type": "object",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+  Object {
+    "id": "random-id",
+    "level": 4,
+    "metadata": Object {
+      "annotations": Object {},
+      "enum": undefined,
+      "id": "random-id",
+      "name": "bar",
+      "path": Array [
+        "properties",
+        "array-all-objects",
+        "items",
+        "allOf",
+        1,
+        "properties",
+        "bar",
+      ],
+      "required": false,
+      "type": "string",
+      "validations": Object {},
+    },
+    "name": "",
+  },
+]
+`;
+
 exports[`renderSchema util should match array-of-objects.json 1`] = `
 Array [
   Object {

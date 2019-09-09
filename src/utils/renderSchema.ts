@@ -2,10 +2,10 @@ import { JSONSchema4 } from 'json-schema';
 import { isEmpty as _isEmpty } from 'lodash-es';
 import { IArrayNode, IObjectNode, ITreeNodeMeta, SchemaKind, SchemaTreeListNode } from '../types';
 import { DIVIDERS } from './dividers';
+import { getArraySubtype } from './getArraySubtype';
 import { getPrimaryType } from './getPrimaryType';
-import { inferType } from './inferType';
 import { isCombiner } from './isCombiner';
-import { isRef } from './isRef';
+import { isCombinerNode, isRefNode } from './nodes';
 import { walk } from './walk';
 
 export type WalkingOptions = {
@@ -68,16 +68,13 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
         ...meta,
         ...(parsedSchema.items !== undefined &&
           !Array.isArray(parsedSchema.items) && {
-            subtype:
-              '$ref' in parsedSchema.items
-                ? `$ref( ${parsedSchema.items.$ref} )`
-                : parsedSchema.items.type || inferType(parsedSchema.items),
+            subtype: getArraySubtype(parsedSchema as IArrayNode),
           }),
         path,
       },
     };
 
-    if (isRef(node)) {
+    if (isRefNode(node)) {
       // we expect the schema to be dereferenced
       // const resolved = lookupRef(path, dereferencedSchema);
       // if (resolved) {
@@ -98,7 +95,7 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
           $ref: node.$ref,
         },
       } as SchemaTreeListNode;
-    } else if (isCombiner(node)) {
+    } else if (isCombinerNode(node)) {
       yield {
         ...baseNode,
         canHaveChildren: true,
@@ -123,7 +120,11 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
             ...baseNode,
             ...('items' in node &&
               !_isEmpty(node.items) &&
-              (baseNode.metadata!.subtype === 'object' || Array.isArray(node.items)) && { canHaveChildren: true }),
+              (baseNode.metadata!.subtype === 'object' ||
+                Array.isArray(node.items) ||
+                (typeof baseNode.metadata!.subtype === 'string' && isCombiner(baseNode.metadata!.subtype))) && {
+                canHaveChildren: true,
+              }),
             metadata: {
               ...baseNode.metadata,
               // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.1.2
@@ -139,7 +140,8 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
               });
             }
           } else if (parsedSchema.items) {
-            switch (baseNode.metadata && baseNode.metadata.subtype) {
+            const subtype = baseNode.metadata!.subtype;
+            switch (subtype) {
               case SchemaKind.Object:
                 yield* getProperties(parsedSchema.items, level, {
                   ...meta,
@@ -152,6 +154,13 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
                   path: [...path, 'items'],
                 });
                 break;
+              default:
+                if (typeof subtype === 'string' && isCombiner(subtype)) {
+                  yield* renderSchema(parsedSchema.items, level + 1, {
+                    ...meta,
+                    path: [...path, 'items'],
+                  });
+                }
             }
           }
 

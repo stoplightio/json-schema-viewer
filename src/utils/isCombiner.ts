@@ -1,3 +1,5 @@
-import { ICombinerNode, SchemaNode } from '../types';
+import { JSONSchema4CombinerName } from '../types';
 
-export const isCombiner = (node: SchemaNode): node is ICombinerNode => 'combiner' in node;
+const combinerTypes = ['allOf', 'oneOf', 'anyOf'];
+
+export const isCombiner = (type: string): type is JSONSchema4CombinerName => combinerTypes.includes(type);

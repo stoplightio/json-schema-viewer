@@ -6,9 +6,10 @@ import * as React from 'react';
 import SchemaWorker, { WebWorker } from 'web-worker:../workers/schema.ts';
 
 import { JSONSchema4 } from 'json-schema';
-import { GoToRefHandler, RowRenderer, SchemaTreeListNode } from '../types';
-import { isCombiner } from '../utils/isCombiner';
+import { GoToRefHandler, IArrayNode, IBaseNode, RowRenderer, SchemaKind, SchemaTreeListNode } from '../types';
+import { getArraySubtype } from '../utils/getArraySubtype';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
+import { isCombinerNode } from '../utils/nodes';
 import { renderSchema } from '../utils/renderSchema';
 import { ComputeSchemaMessageData, isRenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree } from './SchemaTree';
@@ -111,17 +112,14 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
         if (i === 0) break;
         i--;
 
-        if (
-          !hasAllOf &&
-          this.props.mergeAllOf !== false &&
-          node.metadata &&
-          isCombiner(node.metadata) &&
-          node.metadata.combiner === 'allOf'
-        ) {
-          hasAllOf = true;
-        }
-
         nodes.push(node);
+
+        if (hasAllOf || this.props.mergeAllOf === false || !node.metadata) continue;
+
+        hasAllOf =
+          ((node.metadata as IBaseNode).type === SchemaKind.Array &&
+            getArraySubtype(node.metadata as IArrayNode) === 'allOf') ||
+          (node.metadata && isCombinerNode(node.metadata) && node.metadata.combiner === 'allOf');
       }
 
       needsFullRendering = hasAllOf || this.props.maxRows <= nodes.length;
