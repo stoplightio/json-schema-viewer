@@ -210,4 +210,19 @@ describe('JSON Schema Viewer component', () => {
 
     expect(wrapper.instance()).toHaveProperty('treeStore.nodes', []);
   });
+
+  test('should create one shared instance of schema worker one mounted for a first time and keep it', () => {
+    const worker = (shallow(
+      <JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />,
+    ).instance()!.constructor as any).schemaWorker;
+
+    expect(SchemaWorker).toHaveBeenCalledTimes(1);
+
+    expect(worker).toBe(
+      (shallow(<JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />).instance()!
+        .constructor as any).schemaWorker,
+    );
+
+    expect(SchemaWorker).toHaveBeenCalledTimes(1);
+  });
 });
