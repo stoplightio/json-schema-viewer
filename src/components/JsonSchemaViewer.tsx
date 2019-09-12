@@ -40,7 +40,7 @@ export interface IJsonSchemaViewerComponent extends Omit<IJsonSchemaViewer, 'Fal
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewerComponent> {
   protected treeStore: TreeStore;
   protected instanceId: string;
-  protected schemaWorker?: WebWorker;
+  public static schemaWorker?: WebWorker;
 
   public state = {
     computing: false,
@@ -89,7 +89,8 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
   protected prerenderSchema() {
     const schema = this.schema;
-    const isWorkerSpawn = this.schemaWorker !== void 0 && !('isShim' in this.schemaWorker);
+    const isWorkerSpawn =
+      JsonSchemaViewerComponent.schemaWorker !== void 0 && !('isShim' in JsonSchemaViewerComponent.schemaWorker);
     let needsFullRendering = isWorkerSpawn;
 
     const renderedSchema = renderSchema(
@@ -146,23 +147,21 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       mergeAllOf: this.props.mergeAllOf !== false,
     };
 
-    if (this.schemaWorker) {
-      this.schemaWorker.postMessage(message);
+    if (JsonSchemaViewerComponent.schemaWorker !== void 0) {
+      JsonSchemaViewerComponent.schemaWorker.postMessage(message);
     }
 
     this.setState({ computing: true });
   }
 
   public componentDidMount() {
-    this.schemaWorker = new SchemaWorker();
-    this.schemaWorker.addEventListener('message', this.handleWorkerMessage);
-    this.renderSchema();
-  }
-
-  public componentWillUnmount() {
-    if (this.schemaWorker !== void 0) {
-      this.schemaWorker.terminate();
+    // let's initialize it lazily
+    if (JsonSchemaViewerComponent.schemaWorker === void 0) {
+      JsonSchemaViewerComponent.schemaWorker = new SchemaWorker();
     }
+
+    JsonSchemaViewerComponent.schemaWorker.addEventListener('message', this.handleWorkerMessage);
+    this.renderSchema();
   }
 
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
