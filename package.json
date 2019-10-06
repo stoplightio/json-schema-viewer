@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@stoplight/json": "^3.1.1",
+    "@stoplight/react-error-boundary": "^1.0.0",
     "classnames": "^2.2.6",
     "json-schema-merge-allof": "https://github.com/stoplightio/json-schema-merge-allof",
     "lodash-es": "^4.17.15",

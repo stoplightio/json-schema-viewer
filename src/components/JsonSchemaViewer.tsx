@@ -1,3 +1,4 @@
+import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
 import { TreeStore } from '@stoplight/tree-list';
 import { Intent, Spinner } from '@stoplight/ui-kit';
 import cn from 'classnames';
@@ -14,8 +15,6 @@ import { renderSchema } from '../utils/renderSchema';
 import { ComputeSchemaMessageData, isRenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree } from './SchemaTree';
 
-export type FallbackComponent = React.ComponentType<{ error: Error | null }>;
-
 export interface IJsonSchemaViewer {
   schema: JSONSchema4;
   dereferencedSchema?: JSONSchema4;
@@ -29,15 +28,11 @@ export interface IJsonSchemaViewer {
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   mergeAllOf?: boolean;
-  FallbackComponent?: FallbackComponent;
+  FallbackComponent?: typeof FallbackComponent;
   rowRenderer?: RowRenderer;
 }
 
-export interface IJsonSchemaViewerComponent extends Omit<IJsonSchemaViewer, 'FallbackComponent'> {
-  onError(err: Error): void;
-}
-
-export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewerComponent> {
+export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
   protected treeStore: TreeStore;
   protected instanceId: string;
   public static schemaWorker?: WebWorker;
@@ -46,7 +41,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     computing: false,
   };
 
-  constructor(props: IJsonSchemaViewerComponent) {
+  constructor(props: IJsonSchemaViewer & ErrorBoundaryForwardedProps) {
     super(props);
 
     this.treeStore = new TreeStore({
@@ -81,8 +76,8 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.setState({ computing: false });
       if (data.error === null) {
         this.treeStore.nodes = data.nodes;
-      } else {
-        this.props.onError(new Error(data.error));
+      } else if (this.props.boundaryRef.current !== null) {
+        this.props.boundaryRef.current.throwError(new Error(data.error));
       }
     }
   });
@@ -205,7 +200,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   }
 }
 
-const JsonSchemaFallbackComponent: FallbackComponent = ({ error }) => {
+const JsonSchemaFallbackComponent: typeof FallbackComponent = ({ error }) => {
   return (
     <div className="p-4">
       <b className="text-danger">Error</b>
@@ -214,36 +209,8 @@ const JsonSchemaFallbackComponent: FallbackComponent = ({ error }) => {
   );
 };
 
-// react-error-boundary does not support recovering, see  https://github.com/bvaughn/react-error-boundary/pull/16/files
-export class JsonSchemaViewer extends React.PureComponent<IJsonSchemaViewer, { error: null | Error }> {
-  public state = {
-    error: null,
-  };
-
-  public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
-    if (
-      this.state.error !== null &&
-      (prevProps.schema !== this.props.schema || prevProps.dereferencedSchema !== this.props.dereferencedSchema)
-    ) {
-      this.setState({ error: null });
-    }
-  }
-
-  // there is no error hook yet, see https://reactjs.org/docs/hooks-faq.html#how-do-lifecycle-methods-correspond-to-hooks
-  public static getDerivedStateFromError(error: Error) {
-    return { error };
-  }
-
-  private onError: IJsonSchemaViewerComponent['onError'] = error => {
-    this.setState({ error });
-  };
-
-  public render() {
-    const { FallbackComponent: Fallback = JsonSchemaFallbackComponent, ...props } = this.props;
-    if (this.state.error) {
-      return <Fallback error={this.state.error} />;
-    }
-
-    return <JsonSchemaViewerComponent {...props} onError={this.onError} />;
-  }
-}
+export const JsonSchemaViewer = withErrorBoundary<IJsonSchemaViewer>(JsonSchemaViewerComponent, {
+  FallbackComponent: JsonSchemaFallbackComponent,
+  recoverableProps: ['schema', 'dereferencedSchema'],
+  reportErrors: false,
+});
