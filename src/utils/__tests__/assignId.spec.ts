@@ -1,6 +1,6 @@
-import { assignId } from '../assignId';
+import { generateId } from '../generateId';
 
-describe('assignId util', () => {
+describe('generateId util', () => {
   let mathRandomSpy: jest.SpyInstance;
 
   beforeEach(() => {
@@ -14,16 +14,7 @@ describe('assignId util', () => {
   test('should generate random id', () => {
     mathRandomSpy.mockReturnValueOnce(0.54444).mockReturnValueOnce(0.321);
 
-    expect(assignId({})).toEqual('0.jlle4v0fcep');
-    expect(assignId({})).toEqual('0.bk0kqhutdje');
-  });
-
-  test('should return previously stored id for same node', () => {
-    mathRandomSpy.mockReturnValueOnce(0.23);
-
-    const node = {};
-    const id = assignId(node);
-
-    expect(assignId(node)).toEqual(id);
+    expect(generateId()).toEqual('0.jlle4v0fcep');
+    expect(generateId()).toEqual('0.bk0kqhutdje');
   });
 });

@@ -8,7 +8,7 @@ import {
   SchemaKind,
   SchemaNode,
 } from '../types';
-import { assignId } from './assignId';
+import { generateId } from './generateId';
 import { getAnnotations } from './getAnnotations';
 import { getPrimaryType } from './getPrimaryType';
 import { getValidations } from './getValidations';
@@ -35,7 +35,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
 
   if (combiner) {
     return {
-      id: assignId(node),
+      id: generateId(),
       combiner,
       properties: node[combiner],
       annotations: getAnnotations(node),
@@ -45,7 +45,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
 
   if (type) {
     const base: IBaseNode = {
-      id: assignId(node),
+      id: generateId(),
       type: node.type || inferType(node),
       validations: getValidations(node),
       annotations: getAnnotations(node),
@@ -59,7 +59,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
 
   if ('enum' in node) {
     return {
-      id: assignId(node),
+      id: generateId(),
       validations: getValidations(node),
       annotations: getAnnotations(node),
       enum: node.enum,
@@ -68,7 +68,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
 
   if ('$ref' in node) {
     return {
-      id: assignId(node),
+      id: generateId(),
       $ref: node.$ref,
     } as IRefNode;
   }
