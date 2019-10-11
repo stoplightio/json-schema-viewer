@@ -4,8 +4,8 @@ import { renderSchema } from '../renderSchema';
 
 const BASE_PATH = path.resolve(__dirname, '../../__fixtures__/');
 
-jest.mock('../assignId', () => ({
-  assignId: jest.fn(() => 'random-id'),
+jest.mock('../generateId', () => ({
+  generateId: jest.fn(() => 'random-id'),
 }));
 
 describe('renderSchema util', () => {
