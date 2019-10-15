@@ -34,10 +34,11 @@ function processNode(node: JSONSchema4): SchemaNode | void {
   const type = node.type || inferType(node);
 
   if (combiner) {
+    const properties = node[combiner];
     return {
       id: generateId(),
       combiner,
-      properties: node[combiner],
+      properties: Array.isArray(properties) ? properties.slice() : properties,
       annotations: getAnnotations(node),
       ...(type !== undefined && { type }),
     } as ICombinerNode;

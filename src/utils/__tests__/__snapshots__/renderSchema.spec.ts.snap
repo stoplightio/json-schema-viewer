@@ -25,7 +25,6 @@ Array [
                     "type": "string",
                   },
                 },
-                "type": "object",
               },
               Object {
                 "properties": Object {
@@ -33,7 +32,6 @@ Array [
                     "type": "string",
                   },
                 },
-                "type": "object",
               },
             ],
             "type": "object",
@@ -63,7 +61,6 @@ Array [
                 "type": "string",
               },
             },
-            "type": "object",
           },
           Object {
             "properties": Object {
@@ -71,7 +68,6 @@ Array [
                 "type": "string",
               },
             },
-            "type": "object",
           },
         ],
         "type": "object",
