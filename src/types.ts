@@ -3,7 +3,7 @@ import { Dictionary, JsonPath } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
-export const enum SchemaKind {
+export enum SchemaKind {
   Any = 'any',
   String = 'string',
   Number = 'number',
