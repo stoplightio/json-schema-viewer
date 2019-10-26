@@ -41,6 +41,8 @@ describe('renderSchema util', () => {
           ],
         } as any),
       ),
-    ).toThrow('Complex types are not supported.');
+    ).toThrow(
+      'The "type" property must be a string, or an array of strings. Objects and array of objects are not valid.',
+    );
   });
 });

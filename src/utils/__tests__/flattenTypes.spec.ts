@@ -45,6 +45,8 @@ describe('flattenTypes util', () => {
     { type: 'number', minimum: 1 },
     { additionalProperties: 1 },
   ])('throws when complex type is met', type => {
-    expect(flattenTypes.bind(null, type)).toThrow('Complex types are not supported');
+    expect(flattenTypes.bind(null, type)).toThrow(
+      'The "type" property must be a string, or an array of strings. Objects and array of objects are not valid.',
+    );
   });
 });

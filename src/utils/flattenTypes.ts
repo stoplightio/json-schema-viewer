@@ -2,11 +2,13 @@ import { Optional } from '@stoplight/types';
 import { JSONSchema4TypeName } from 'json-schema';
 import { isValidType } from './isValidType';
 
-function getTypeFromObject(obj: object): Optional<JSONSchema4TypeName>  {
+function getTypeFromObject(obj: object): Optional<JSONSchema4TypeName> {
   const size = Object.keys(obj).length;
 
   if (size > 1 || !('type' in obj)) {
-    throw new Error('Complex types are not supported.');
+    throw new Error(
+      'The "type" property must be a string, or an array of strings. Objects and array of objects are not valid.',
+    );
   }
 
   if ('type' in obj && isValidType((obj as { type: string }).type)) {
