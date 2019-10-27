@@ -19,7 +19,30 @@ describe('renderSchema util', () => {
     ['tickets.schema.json', ''],
   ])('should match %s', (schema, dereferenced) => {
     expect(
-      Array.from(renderSchema(JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf-8')))),
+      Array.from(renderSchema(JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf8')))),
     ).toMatchSnapshot();
+  });
+
+  it('given schema with complex types, throws', () => {
+    expect(() =>
+      Array.from(
+        renderSchema({
+          type: [
+            'null',
+            {
+              type: 'object',
+              properties: {
+                taskId: {
+                  type: 'string',
+                  format: 'uuid',
+                },
+              },
+            },
+          ],
+        } as any),
+      ),
+    ).toThrow(
+      'The "type" property must be a string, or an array of strings. Objects and array of objects are not valid.',
+    );
   });
 });

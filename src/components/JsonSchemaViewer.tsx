@@ -208,7 +208,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 const JsonSchemaFallbackComponent: FallbackComponent = ({ error }) => {
   return (
     <div className="p-4">
-      <b>Error</b>
+      <b className="text-danger">Error</b>
       {error && `: ${error.message}`}
     </div>
   );
