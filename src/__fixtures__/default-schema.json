@@ -9,7 +9,10 @@
     "age": {
       "type": "number",
       "minimum": 0,
-      "maximum": 150
+      "maximum": 150,
+      "multipleOf": 10,
+      "exclusiveMinimum": true,
+      "exclusiveMaximum": true
     },
     "completed_at": {
       "type": "string",
