@@ -600,8 +600,11 @@ Array [
       },
       "properties": Object {
         "age": Object {
+          "exclusiveMaximum": true,
+          "exclusiveMinimum": true,
           "maximum": 150,
           "minimum": 0,
+          "multipleOf": 10,
           "type": "number",
         },
         "completed_at": Object {
@@ -713,8 +716,11 @@ Array [
       "required": true,
       "type": "number",
       "validations": Object {
+        "exclusiveMaximum": true,
+        "exclusiveMinimum": true,
         "maximum": 150,
         "minimum": 0,
+        "multipleOf": 10,
       },
     },
     "name": "",

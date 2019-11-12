@@ -51,8 +51,8 @@ export const Validations: React.FunctionComponent<IValidations> = ({ required, v
 
             return (
               <div key={index} className="py-1 flex items-baseline">
-                <div className="font-medium pr-2 w-24">{key}:</div>
-                <div className="flex-1 flex flex-wrap text-center">{elem}</div>
+                <div className="font-medium pr-2">{key}:</div>
+                <div className="flex-1 flex flex-wrap justify-end">{elem}</div>
               </div>
             );
           })}
