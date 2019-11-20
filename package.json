@@ -56,7 +56,7 @@
     "@emotion/styled": "^10.0.15",
     "@sambego/storybook-state": "^1.3.6",
     "@stoplight/markdown-viewer": "^3.5.5",
-    "@stoplight/scripts": "7.0.3",
+    "@stoplight/scripts": "7.0.4",
     "@stoplight/storybook-config": "^2.0.4",
     "@stoplight/tree-list": "^4.8.0",
     "@stoplight/types": "11.0.0",
@@ -79,6 +79,7 @@
     "jest": "^24.9.0",
     "jest-enzyme": "7.1.0",
     "mobx": "^5.13.0",
+    "prettier": "^1.19.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -115,5 +116,10 @@
   "release": {
     "extends": "@stoplight/scripts/release"
   },
-  "typings": "src/index.d.ts"
+  "typings": "src/index.d.ts",
+  "prettier": {
+    "printWidth": 120,
+    "trailingComma": "es5",
+    "singleQuote": true
+  }
 }
