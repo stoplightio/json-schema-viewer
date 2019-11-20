@@ -1851,10 +1851,10 @@
     unified "~8.3.2"
     unist-util-select "~2.0"
 
-"@stoplight/scripts@7.0.3":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@stoplight/scripts/-/scripts-7.0.3.tgz#024805f3a97c349836a50821b5ddf68d142be27d"
-  integrity sha512-7QybaFhfWTnI9O7MOFEHwWx0FfXMPgt7I16RvRv85CGFIzQxg3lBIhCsil7JuGvOVnpN19bHvjojhBbXAVrUfg==
+"@stoplight/scripts@7.0.4":
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@stoplight/scripts/-/scripts-7.0.4.tgz#0099f9f7ef8e2e480bc38cc646d196e15f4c33d2"
+  integrity sha512-D4WUumY5Y5poX1BX928xQ0hoKw4gROTrgcrodtr5lfi8OgY3iokS2nuO/abzh/Ns1ZfCmVKeLylHhT2TQdBSDA==
   dependencies:
     "@commitlint/cli" "7.6.1"
     "@commitlint/config-conventional" "7.6.0"
@@ -11582,6 +11582,11 @@ prettier@1.14.x:
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.3.tgz#90238dd4c0684b7edce5f83b0fb7328e48bd0895"
   integrity sha512-qZDVnCrnpsRJJq5nSsiHCE3BYMED2OtsI+cmzIzF1QIfqm5ALf8tEJcO27zV1gKNKRPdhjO0dNWnrzssDQ1tFg==
+
+prettier@^1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
+  integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
 
 pretty-error@^2.1.1:
   version "2.1.1"

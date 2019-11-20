@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "@stoplight/scripts/tslint.json"
-  ]
+  "extends": ["tslint-config-stoplight"]
 }
