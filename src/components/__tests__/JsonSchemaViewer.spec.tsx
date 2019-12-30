@@ -1,9 +1,9 @@
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { JsonSchemaViewerComponent, SchemaTree } from '../../components';
+import { JsonSchemaViewer, SchemaTree } from '../../components';
 import { isSchemaViewerEmpty } from '../../utils/isSchemaViewerEmpty';
 import { renderSchema } from '../../utils/renderSchema';
 
@@ -47,21 +47,25 @@ describe('JSON Schema Viewer component', () => {
 
   test('should render empty message if schema is empty', () => {
     (isSchemaViewerEmpty as jest.Mock).mockReturnValue(true);
-    const wrapper = shallow(<JsonSchemaViewerComponent schema={{}} onError={jest.fn()} />);
+    const wrapper = shallow(<JsonSchemaViewer schema={{}} onError={jest.fn()} />)
+      .dive()
+      .dive();
     expect(isSchemaViewerEmpty).toHaveBeenCalledWith({});
     expect(wrapper.find(SchemaTree)).not.toExist();
   });
 
   test('should render SchemaView if schema is provided', () => {
-    const wrapper = shallow(<JsonSchemaViewerComponent schema={schema as JSONSchema4} onError={jest.fn()} />);
+    const wrapper = shallow(<JsonSchemaViewer schema={schema as JSONSchema4} onError={jest.fn()} />)
+      .dive()
+      .dive();
     expect(isSchemaViewerEmpty).toHaveBeenCalledWith(schema);
     expect(wrapper.find(SchemaTree)).toExist();
   });
 
   test('should not perform full processing in a worker if provided schema has fewer nodes than maxRows', () => {
-    const wrapper = shallow(
-      <JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={10} onError={jest.fn()} />,
-    );
+    const wrapper = shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={10} onError={jest.fn()} />)
+      .dive()
+      .dive();
     expect(SchemaWorker.prototype.postMessage).not.toHaveBeenCalled();
     expect(wrapper.instance()).toHaveProperty('treeStore.nodes.length', 4);
   });
@@ -81,7 +85,9 @@ describe('JSON Schema Viewer component', () => {
       ],
     };
 
-    shallow(<JsonSchemaViewerComponent schema={schemaAllOf} maxRows={10} onError={jest.fn()} />);
+    shallow(<JsonSchemaViewer schema={schemaAllOf} maxRows={10} onError={jest.fn()} />)
+      .dive()
+      .dive();
 
     expect(SchemaWorker.prototype.postMessage).toHaveBeenCalledWith({
       instanceId: expect.any(String),
@@ -105,15 +111,17 @@ describe('JSON Schema Viewer component', () => {
       ],
     };
 
-    shallow(<JsonSchemaViewerComponent schema={schemaAllOf} maxRows={10} mergeAllOf={false} onError={jest.fn()} />);
+    shallow(<JsonSchemaViewer schema={schemaAllOf} maxRows={10} mergeAllOf={false} onError={jest.fn()} />)
+      .dive()
+      .dive();
 
     expect(SchemaWorker.prototype.postMessage).not.toHaveBeenCalledWith();
   });
 
   test('should pre-render maxRows nodes and perform full processing in a worker if provided schema has more nodes than maxRows', () => {
-    const wrapper = shallow(
-      <JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={1} onError={jest.fn()} />,
-    );
+    const wrapper = shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={1} onError={jest.fn()} />)
+      .dive()
+      .dive();
     expect(SchemaWorker.prototype.postMessage).toHaveBeenCalledWith({
       instanceId: expect.any(String),
       mergeAllOf: true,
@@ -166,9 +174,9 @@ describe('JSON Schema Viewer component', () => {
 
   test('should render all nodes on main thread when worker cannot be spawned regardless of maxRows or schema', () => {
     SchemaWorker.prototype.isShim = true;
-    const wrapper = shallow(
-      <JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={1} onError={jest.fn()} />,
-    );
+    const wrapper = shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={1} onError={jest.fn()} />)
+      .dive()
+      .dive();
 
     expect(SchemaWorker.prototype.postMessage).not.toHaveBeenCalled();
     expect(wrapper.instance()).toHaveProperty('treeStore.nodes.length', 4);
@@ -176,7 +184,7 @@ describe('JSON Schema Viewer component', () => {
 
   test('should handle exceptions that may occur during full rendering', () => {
     const onError = jest.fn();
-    shallow(<JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={1} onError={onError} />);
+    const wrapper = mount(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={1} onError={onError} />);
 
     SchemaWorker.prototype.addEventListener.mock.calls[0][1]({
       data: {
@@ -186,13 +194,14 @@ describe('JSON Schema Viewer component', () => {
       },
     });
 
-    expect(onError).toHaveBeenCalledWith(new Error('error occurred'));
+    expect(onError).toHaveBeenCalledWith(new Error('error occurred'), null);
+    wrapper.unmount();
   });
 
   test('should not apply result of full processing in a worker if instance ids do not match', () => {
-    const wrapper = shallow(
-      <JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />,
-    );
+    const wrapper = shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />)
+      .dive()
+      .dive();
     expect(SchemaWorker.prototype.postMessage).toHaveBeenCalledWith({
       instanceId: expect.any(String),
       mergeAllOf: true,
@@ -212,15 +221,18 @@ describe('JSON Schema Viewer component', () => {
   });
 
   test('should create one shared instance of schema worker one mounted for a first time and keep it', () => {
-    const worker = (shallow(
-      <JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />,
-    ).instance()!.constructor as any).schemaWorker;
+    const worker = (shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />)
+      .dive()
+      .dive()
+      .instance()!.constructor as any).schemaWorker;
 
     expect(SchemaWorker).toHaveBeenCalledTimes(1);
 
     expect(worker).toBe(
-      (shallow(<JsonSchemaViewerComponent schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />).instance()!
-        .constructor as any).schemaWorker,
+      (shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />)
+        .dive()
+        .dive()
+        .instance()!.constructor as any).schemaWorker,
     );
 
     expect(SchemaWorker).toHaveBeenCalledTimes(1);

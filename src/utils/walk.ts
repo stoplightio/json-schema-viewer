@@ -1,19 +1,12 @@
 import { JSONSchema4 } from 'json-schema';
-import {
-  IArrayNode,
-  IBaseNode,
-  ICombinerNode,
-  IObjectNode,
-  IRefNode,
-  SchemaKind,
-  SchemaNode,
-} from '../types';
+import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, IRefNode, SchemaKind, SchemaNode } from '../types';
+import { flattenTypes } from './flattenTypes';
 import { generateId } from './generateId';
 import { getAnnotations } from './getAnnotations';
+import { getCombiner } from './getCombiner';
 import { getPrimaryType } from './getPrimaryType';
 import { getValidations } from './getValidations';
 import { inferType } from './inferType';
-import { getCombiner } from './getCombiner';
 
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   switch (getPrimaryType(node)) {
@@ -47,7 +40,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
   if (type) {
     const base: IBaseNode = {
       id: generateId(),
-      type: node.type || inferType(node),
+      type: flattenTypes(type),
       validations: getValidations(node),
       annotations: getAnnotations(node),
       enum: node.enum,

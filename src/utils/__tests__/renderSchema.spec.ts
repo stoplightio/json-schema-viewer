@@ -39,4 +39,27 @@ describe('renderSchema util', () => {
 
     expect(input).toStrictEqual(JSON.parse(content));
   });
+
+  it('given schema with complex types, throws', () => {
+    expect(() =>
+      Array.from(
+        renderSchema({
+          type: [
+            'null',
+            {
+              type: 'object',
+              properties: {
+                taskId: {
+                  type: 'string',
+                  format: 'uuid',
+                },
+              },
+            },
+          ],
+        } as any),
+      ),
+    ).toThrow(
+      'The "type" property must be a string, or an array of strings. Objects and array of objects are not valid.',
+    );
+  });
 });

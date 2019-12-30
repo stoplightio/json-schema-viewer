@@ -596,8 +596,11 @@ Array [
       },
       "properties": Object {
         "age": Object {
+          "exclusiveMaximum": true,
+          "exclusiveMinimum": true,
           "maximum": 150,
           "minimum": 0,
+          "multipleOf": 10,
           "type": "number",
         },
         "completed_at": Object {
@@ -605,6 +608,8 @@ Array [
           "type": "string",
         },
         "email": Object {
+          "deprecated": true,
+          "example": "email@email.com",
           "format": "email",
           "minLength": 2,
           "type": "string",
@@ -643,6 +648,8 @@ Array [
         "plan": Object {
           "anyOf": Array [
             Object {
+              "deprecated": false,
+              "example": "hi",
               "properties": Object {
                 "bar": Object {
                   "type": "string",
@@ -709,8 +716,11 @@ Array [
       "required": true,
       "type": "number",
       "validations": Object {
+        "exclusiveMaximum": true,
+        "exclusiveMinimum": true,
         "maximum": 150,
         "minimum": 0,
+        "multipleOf": 10,
       },
     },
     "name": "",
@@ -784,6 +794,8 @@ Array [
       "required": false,
       "type": "string",
       "validations": Object {
+        "deprecated": true,
+        "example": "email@email.com",
         "format": "email",
         "minLength": 2,
       },
@@ -805,6 +817,8 @@ Array [
       ],
       "properties": Array [
         Object {
+          "deprecated": false,
+          "example": "hi",
           "properties": Object {
             "bar": Object {
               "type": "string",
@@ -855,7 +869,10 @@ Array [
         },
       },
       "type": "object",
-      "validations": Object {},
+      "validations": Object {
+        "deprecated": false,
+        "example": "hi",
+      },
     },
     "name": "",
   },
@@ -1446,6 +1463,7 @@ Array [
       "required": false,
       "type": "string",
       "validations": Object {
+        "default": "ACTIVE",
         "enum": Array [
           "COMPLETED",
           "ACTIVE",
@@ -1746,7 +1764,9 @@ Array [
       ],
       "required": false,
       "type": "boolean",
-      "validations": Object {},
+      "validations": Object {
+        "example": true,
+      },
     },
     "name": "",
   },

@@ -137,7 +137,38 @@ storiesOf('JsonSchemaViewer', module)
         },
         null,
       )}
-      onError={(error: any) => console.log('You can hook into the onError handler too!', error)}
+      expanded={boolean('expanded', false)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      hideTopBar={boolean('hideTopBar', false)}
+      onGoToRef={action('onGoToRef')}
+      mergeAllOf={boolean('mergeAllOf', true)}
+    />
+  ))
+  .add('invalid types property pretty error message', () => (
+    <JsonSchemaViewer
+      schema={{
+        type: 'object',
+        // @ts-ignore
+        properties: {
+          id: {
+            type: 'string',
+          },
+          address: {
+            type: [
+              'null',
+              {
+                type: 'object',
+                properties: {
+                  taskId: {
+                    type: 'string',
+                    format: 'uuid',
+                  },
+                },
+              },
+            ],
+          },
+        },
+      }}
       expanded={boolean('expanded', false)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       hideTopBar={boolean('hideTopBar', false)}
