@@ -10,17 +10,34 @@ jest.mock('../generateId', () => ({
 
 describe('renderSchema util', () => {
   it.each([
-    ['default-schema.json', ''],
-    ['ref/original.json', 'ref/resolved.json'],
-    ['combiner-schema.json', ''],
-    ['array-of-objects.json', ''],
-    ['array-of-refs.json', ''],
-    ['array-of-allofs.json', ''],
-    ['tickets.schema.json', ''],
-  ])('should match %s', (schema, dereferenced) => {
+    'default-schema.json',
+    'ref/original.json',
+    'combiner-schema.json',
+    'array-of-objects.json',
+    'array-of-refs.json',
+    'array-of-allofs.json',
+    'tickets.schema.json',
+  ])('should match %s', schema => {
     expect(
       Array.from(renderSchema(JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf8')))),
     ).toMatchSnapshot();
+  });
+
+  it.each([
+    'default-schema.json',
+    'ref/original.json',
+    'combiner-schema.json',
+    'array-of-objects.json',
+    'array-of-refs.json',
+    'array-of-allofs.json',
+    'tickets.schema.json',
+  ])('should not mutate original object %s', schema => {
+    const content = fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf8');
+    const input = JSON.parse(content);
+
+    Array.from(renderSchema(input));
+
+    expect(input).toStrictEqual(JSON.parse(content));
   });
 
   it('given schema with complex types, throws', () => {

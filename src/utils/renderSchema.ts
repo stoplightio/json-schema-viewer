@@ -104,10 +104,13 @@ export const renderSchema: Walker = function*(schema, level = 0, meta = { path: 
       if (node.properties !== undefined) {
         for (const [i, property] of node.properties.entries()) {
           if ('type' in node) {
-            property.type = property.type || node.type;
+            node.properties[i] = {
+              ...property,
+              type: property.type || node.type,
+            };
           }
 
-          yield* renderSchema(property, level + 1, {
+          yield* renderSchema(node.properties[i], level + 1, {
             ...(i !== 0 && { divider: DIVIDERS[node.combiner] }),
             path: [...path, node.combiner, i],
           });
