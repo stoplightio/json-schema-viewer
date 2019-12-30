@@ -9,7 +9,10 @@
     "age": {
       "type": "number",
       "minimum": 0,
-      "maximum": 150
+      "maximum": 150,
+      "multipleOf": 10,
+      "exclusiveMinimum": true,
+      "exclusiveMaximum": true
     },
     "completed_at": {
       "type": "string",
@@ -25,6 +28,8 @@
     "email": {
       "type": "string",
       "format": "email",
+      "example": "email@email.com",
+      "deprecated": true,
       "minLength": 2
     },
     "plan": {
@@ -39,6 +44,8 @@
               "type": "string"
             }
           },
+          "deprecated": false,
+          "example": "hi",
           "required": ["foo", "bar"]
         },
         {
