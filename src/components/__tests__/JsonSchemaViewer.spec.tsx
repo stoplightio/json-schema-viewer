@@ -221,15 +221,18 @@ describe('JSON Schema Viewer component', () => {
   });
 
   test('should create one shared instance of schema worker one mounted for a first time and keep it', () => {
-    const worker = (shallow(
-      <JsonSchemaViewer schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />,
-    ).instance()!.constructor as any).schemaWorker;
+    const worker = (shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />)
+      .dive()
+      .dive()
+      .instance()!.constructor as any).schemaWorker;
 
     expect(SchemaWorker).toHaveBeenCalledTimes(1);
 
     expect(worker).toBe(
-      (shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />).instance()!
-        .constructor as any).schemaWorker,
+      (shallow(<JsonSchemaViewer schema={schema as JSONSchema4} maxRows={0} onError={jest.fn()} />)
+        .dive()
+        .dive()
+        .instance()!.constructor as any).schemaWorker,
     );
 
     expect(SchemaWorker).toHaveBeenCalledTimes(1);
