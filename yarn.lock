@@ -1851,6 +1851,13 @@
     unified "~8.3.2"
     unist-util-select "~2.0"
 
+"@stoplight/react-error-boundary@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/react-error-boundary/-/react-error-boundary-1.0.0.tgz#758dbee1ae3afa8f2cc42f6fc82aefc9d4efaa67"
+  integrity sha512-UH5ZyNqzQp8w/fm8cpq0tmsc63xtMBFmfp7g6ZYW4+/Bhnm/T1RhRpG/5d7/3ZkMLiJ7avsoslbHJ2JU6geEDQ==
+  dependencies:
+    "@stoplight/types" "^11.1.0"
+
 "@stoplight/scripts@7.0.4":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@stoplight/scripts/-/scripts-7.0.4.tgz#0099f9f7ef8e2e480bc38cc646d196e15f4c33d2"
@@ -1938,6 +1945,13 @@
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/@stoplight/types/-/types-10.0.1.tgz#aad7ddf667fc4a86b71b4813a22285e959300595"
   integrity sha512-NC/LV+p9UQL18RfiKuTmPnuyA/ZqRFpYaQYGU0Z60/snluiRDDBIsq3FPjPwQQFYn0L5lqbNMiRcPs0yUZ2wNA==
+  dependencies:
+    "@types/json-schema" "^7.0.3"
+
+"@stoplight/types@^11.1.0":
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/types/-/types-11.1.1.tgz#a92d1833adb580a72439f42ba73de8f560fd68b4"
+  integrity sha512-IU8U9y/uO548z15DX/Jl053u9VQG8gCwNtypuD4RtskUA7pvHZl4+zzGK3klgIcO6Ql3Jk4/fcrFaN9vjmdEWg==
   dependencies:
     "@types/json-schema" "^7.0.3"
 
