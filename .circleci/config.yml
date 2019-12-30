@@ -1,9 +1,9 @@
 version: 2
 
 jobs:
-  test_node_8:
+  test_node_10:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10
     steps:
       - checkout
       - run:
@@ -24,7 +24,7 @@ jobs:
 
   release:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10
     steps:
       - checkout
       - run: yarn
@@ -37,10 +37,10 @@ workflows:
   version: 2
   test_and_release:
     jobs:
-      - test_node_8
+      - test_node_10
       - release:
           filters:
             branches:
               only: master
           requires:
-            - test_node_8
+            - test_node_10
