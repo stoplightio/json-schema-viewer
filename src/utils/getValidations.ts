@@ -8,6 +8,12 @@ export const COMMON_VALIDATION_TYPES = [
   'default',
   'example',
   'deprecated',
+  'nullable',
+  'discriminator',
+  'readOnly',
+  'writeOnly',
+  'xml',
+  'externalDocs',
 ];
 
 const VALIDATION_TYPES = {

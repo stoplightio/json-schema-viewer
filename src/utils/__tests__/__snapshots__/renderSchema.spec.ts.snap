@@ -254,7 +254,11 @@ Array [
         },
       },
       "type": "object",
-      "validations": Object {},
+      "validations": Object {
+        "xml": Object {
+          "name": "Pet",
+        },
+      },
     },
     "name": "",
   },
@@ -1735,6 +1739,7 @@ Array [
           "PRINT_AT_KIOSK",
           "SECURE_PAPER",
         ],
+        "readOnly": true,
       },
     },
     "name": "",
