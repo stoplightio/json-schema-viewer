@@ -1,4 +1,4 @@
-import { size as _size } from 'lodash-es';
+import { isObjectLike as _isObjectLike, size as _size } from 'lodash-es';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
 import { inferType } from '../../utils/inferType';
@@ -13,7 +13,7 @@ export interface IProperty {
 export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }) => {
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype =
-    type === SchemaKind.Array && (node as IArrayNode).items !== undefined
+    type === SchemaKind.Array && _isObjectLike((node as IArrayNode).items)
       ? inferType((node as IArrayNode).items!)
       : undefined;
 
