@@ -1,6 +1,7 @@
-import { isObjectLike as _isObjectLike, size as _size } from 'lodash-es';
+import { size as _size } from 'lodash-es';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
+import { isArrayNodeWithItems } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
 import { isCombinerNode, isRefNode } from '../../utils/nodes';
 import { Types } from './Types';
@@ -12,10 +13,7 @@ export interface IProperty {
 
 export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }) => {
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
-  const subtype =
-    type === SchemaKind.Array && _isObjectLike((node as IArrayNode).items)
-      ? inferType((node as IArrayNode).items!)
-      : undefined;
+  const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : undefined;
 
   const childrenCount = React.useMemo<number | null>(
     () => {
