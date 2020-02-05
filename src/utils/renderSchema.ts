@@ -47,9 +47,9 @@ const getPatternProperties: Walker = function*(schema, level = 0, meta) {
 
 export const renderSchema: Walker = function*(schema, level = 0, meta = { path: [] }, options = {}) {
   if (typeof schema !== 'object' || schema === null) {
-    throw new TypeError(
-      `Expected schema to be an "object" but received ${schema === null ? '"null"' : `a "${typeof schema}"`}`,
-    );
+    const error = `Expected schema to be an "object" but received ${schema === null ? '"null"' : `a "${typeof schema}"`} at path ${JSON.stringify(meta.path)}`;
+    console.warn(error);
+    return;
   }
 
   if (options.depth !== undefined && level >= options.depth) return;
