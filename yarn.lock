@@ -1825,13 +1825,13 @@
     lodash "^4.17.15"
     safe-stable-stringify "^1.1"
 
-"@stoplight/lifecycle@2.x.x":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@stoplight/lifecycle/-/lifecycle-2.0.1.tgz#ac2eb1728f96f97addb13c9f13360bce021d0c72"
-  integrity sha512-PDgDPgvoeWvzoWOK3wWXSCNG4ncn86IiCpn14XWMzRFV0yGEhpAtWPfsiWB/CdR7N8rp8MhzQY+/gKRSyJn5kQ==
+"@stoplight/lifecycle@^2.1.3":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/lifecycle/-/lifecycle-2.2.1.tgz#bfa837d1dd3bd97eab96d8c8cf1bc3ea5ddcd263"
+  integrity sha512-XOyfoJyWp5tXRFWq43mvnOoYTvkupwqGjDQnQ2o1qRNnfTrE70bjNK5ptD9A6m3zajAXgbl0puFa7P2CMg7+ew==
   dependencies:
     strict-event-emitter-types "^2.0.0"
-    wolfy87-eventemitter "5.2.6"
+    wolfy87-eventemitter "~5.2.8"
 
 "@stoplight/markdown-viewer@^3.5.5":
   version "3.5.6"
@@ -1933,16 +1933,14 @@
     ts-loader "5.4.5"
     webpack "4.30.0"
 
-"@stoplight/tree-list@^4.8.0":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/tree-list/-/tree-list-4.8.0.tgz#6117f1e7ea17a5d0c1ac73b160bc792792215b74"
-  integrity sha512-F2hGIi1tklAr+xmUhxkMj7E/Vf1+bofOQyDzNcTsUJb20eWCdZT59wL4HSKTL4+7MJG2tQK34W2hbxCnMRzViw==
+"@stoplight/tree-list@file:.yalc/@stoplight/tree-list":
+  version "0.0.1-2d0c8d7d"
   dependencies:
-    "@stoplight/lifecycle" "2.x.x"
-    classnames "2.x.x"
-    mobx-react-lite "1.x.x"
-    react-error-boundary "^1.2.5"
-    strict-event-emitter-types "2.x.x"
+    "@stoplight/lifecycle" "^2.1.3"
+    "@stoplight/react-error-boundary" "^1.0.0"
+    classnames "^2.2.6"
+    mobx-react-lite "^1.5.0"
+    strict-event-emitter-types "^2.0.0"
 
 "@stoplight/types@11.0.0", "@stoplight/types@^11.0.0":
   version "11.0.0"
@@ -4457,7 +4455,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.x.x, classnames@^2, classnames@^2.2, classnames@^2.2.0, classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2, classnames@^2.2, classnames@^2.2.0, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -10057,10 +10055,15 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdir
   dependencies:
     minimist "0.0.8"
 
-mobx-react-lite@1.x.x, mobx-react-lite@^1.4.1:
+mobx-react-lite@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.4.1.tgz#7307a45901f97f9a07ebed32b654235507644e1a"
   integrity sha512-XmM+gzNv+GyXZYDLZMIGox3DufIiKULYgJsLhQj0U6Wlf+J5jv/h7limrL0aS1bEUtNilG62g9nwTeQ0KHzLFg==
+
+mobx-react-lite@^1.5.0:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.5.2.tgz#c4395b0568b9cb16f07669d8869cc4efa1b8656d"
+  integrity sha512-PyZmARqqWtpuQaAoHF5pKX7h6TKNLwq6vtovm4zZvG6sEbMRHHSqioGXSeQbpRmG8Kw8uln3q/W1yMO5IfL5Sg==
 
 mobx@^5.13.0:
   version "5.13.0"
@@ -12042,7 +12045,7 @@ react-draggable@^3.1.1, react-draggable@^3.3.0:
     classnames "^2.2.5"
     prop-types "^15.6.0"
 
-react-error-boundary@^1, react-error-boundary@^1.2.5:
+react-error-boundary@^1:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-1.2.5.tgz#a362cb799d2e58ff8f114f7c4bc25677ce4e4149"
   integrity sha512-5CPSeLJA2igJNppAgFRwnTL9aK3ojenk65enNzhVyoxYNbHpIJXnChUO7+4vPhkncRA9wvQMXq6Azp2XeXd+iQ==
@@ -13835,7 +13838,7 @@ stream-shift@^1.0.0:
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
   integrity sha1-1cdSgl5TZ+eG944Y5EXqIjoVWVI=
 
-strict-event-emitter-types@2.x.x, strict-event-emitter-types@^2.0.0:
+strict-event-emitter-types@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/strict-event-emitter-types/-/strict-event-emitter-types-2.0.0.tgz#05e15549cb4da1694478a53543e4e2f4abcf277f"
   integrity sha512-Nk/brWYpD85WlOgzw5h173aci0Teyv8YdIAEtV+N88nDB0dLlazZyJMIsN6eo1/AR61l+p6CJTG1JIyFaoNEEA==
@@ -15290,10 +15293,10 @@ windows-release@^3.1.0:
   dependencies:
     execa "^1.0.0"
 
-wolfy87-eventemitter@5.2.6:
-  version "5.2.6"
-  resolved "https://registry.yarnpkg.com/wolfy87-eventemitter/-/wolfy87-eventemitter-5.2.6.tgz#cc5de965d34099e5c14ec189ee72553802d3ace2"
-  integrity sha512-n+bSucT1j9ZEoosxnfuH81bWqtZG4QEtZ9WEuiXz9YQAHEktGYKoSoMTKWTJEcYux8lWoqp1KqHPBpwvJKFFTw==
+wolfy87-eventemitter@~5.2.8:
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/wolfy87-eventemitter/-/wolfy87-eventemitter-5.2.9.tgz#e879f770b30fbb6512a8afbb330c388591099c2a"
+  integrity sha512-P+6vtWyuDw+MB01X7UeF8TaHBvbCovf4HPEMF/SV7BdDc1SMTiBy13SRD71lQh4ExFTG1d/WNzDGDCyOKSMblw==
 
 word-wrap@^1.0.3:
   version "1.2.3"

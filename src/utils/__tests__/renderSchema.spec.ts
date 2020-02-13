@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { renderSchema } from '../renderSchema';
+import { generateTree } from '../../tree/renderSchema';
 
 const BASE_PATH = path.resolve(__dirname, '../../__fixtures__/');
 
@@ -19,7 +19,7 @@ describe('renderSchema util', () => {
     'tickets.schema.json',
   ])('should match %s', schema => {
     expect(
-      Array.from(renderSchema(JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf8')))),
+      Array.from(generateTree(JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf8')))),
     ).toMatchSnapshot();
   });
 
@@ -35,7 +35,7 @@ describe('renderSchema util', () => {
     const content = fs.readFileSync(path.resolve(BASE_PATH, schema), 'utf8');
     const input = JSON.parse(content);
 
-    Array.from(renderSchema(input));
+    Array.from(generateTree(input));
 
     expect(input).toStrictEqual(JSON.parse(content));
   });
@@ -43,7 +43,7 @@ describe('renderSchema util', () => {
   it('given schema with complex types, throws', () => {
     expect(() =>
       Array.from(
-        renderSchema({
+        generateTree({
           type: [
             'null',
             {

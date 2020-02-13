@@ -1,9 +1,10 @@
-import { IRowRendererOptions } from '@stoplight/tree-list';
+import { IRowRendererOptions, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
-import { get as _get } from 'lodash-es';
 import * as React from 'react';
 
-import { GoToRefHandler, SchemaNodeWithMeta, SchemaTreeListNode } from '../types';
+import { MetadataStore } from '../tree/metadata';
+import { GoToRefHandler, SchemaTreeListNode } from '../types';
+import { DIVIDERS } from '../utils/dividers';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -18,18 +19,23 @@ const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
-  const schemaNode = node.metadata as SchemaNodeWithMeta;
-  const description = _get(schemaNode, 'annotations.description');
+  const metadata = MetadataStore[node.id];
+  if (!metadata) {
+    throw new Error('Missing metadata');
+  }
+
+  const schemaNode = metadata.schema;
+  const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
   return (
     <div className={cn('px-2 flex-1 w-full', className)}>
       <div
         className="flex items-center text-sm relative"
         style={{
-          marginLeft: ICON_DIMENSION * node.level, // offset for spacing
+          marginLeft: ICON_DIMENSION * Tree.getLevel(node), // offset for spacing
         }}
       >
-        {node.canHaveChildren && node.level > 0 && (
+        {'children' in node && Tree.getLevel(node) > 0 && (
           <Caret
             isExpanded={!!rowOptions.isExpanded}
             style={{
@@ -41,15 +47,16 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
           />
         )}
 
-        {schemaNode.divider && <Divider>{schemaNode.divider}</Divider>}
+        {'combiner' in schemaNode && <Divider>{DIVIDERS[schemaNode.combiner]}</Divider>}
 
         <div className="flex-1 flex truncate">
-          <Property node={schemaNode} onGoToRef={onGoToRef} />
+          <Property node={schemaNode} path={metadata.path} onGoToRef={onGoToRef} />
           {description && <Description value={description} />}
         </div>
 
         <Validations
-          required={!!schemaNode.required}
+          required={false}
+          // required={!!schemaNode.required}
           validations={{
             ...('annotations' in schemaNode &&
               schemaNode.annotations.default && { default: schemaNode.annotations.default }),

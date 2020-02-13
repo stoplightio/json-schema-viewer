@@ -24,8 +24,10 @@ export const SchemaTree = observer<ISchemaTree>(props => {
   const { hideTopBar, name, treeStore, maxRows, onGoToRef, rowRenderer: customRowRenderer } = props;
 
   React.useEffect(() => {
-    treeStore.on(TreeListEvents.NodeClick, (e, node) => {
-      treeStore.toggleExpand(node);
+    treeStore.events.on(TreeListEvents.NodeClick, (e, node) => {
+      if ('children' in node) {
+        treeStore.toggleExpand(node);
+      }
     });
 
     return () => {

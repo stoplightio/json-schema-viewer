@@ -59,7 +59,7 @@
     "@stoplight/markdown-viewer": "^3.5.5",
     "@stoplight/scripts": "7.0.4",
     "@stoplight/storybook-config": "^2.0.4",
-    "@stoplight/tree-list": "^4.8.0",
+    "@stoplight/tree-list": "file:.yalc/@stoplight/tree-list",
     "@stoplight/types": "11.0.0",
     "@stoplight/ui-kit": "^2.10.0",
     "@types/classnames": "^2.2.9",

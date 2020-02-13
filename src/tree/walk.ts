@@ -1,12 +1,12 @@
 import { JSONSchema4 } from 'json-schema';
 import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, IRefNode, SchemaKind, SchemaNode } from '../types';
-import { flattenTypes } from './flattenTypes';
-import { generateId } from './generateId';
-import { getAnnotations } from './getAnnotations';
-import { getCombiner } from './getCombiner';
-import { getPrimaryType } from './getPrimaryType';
-import { getValidations } from './getValidations';
-import { inferType } from './inferType';
+import { flattenTypes } from '../utils/flattenTypes';
+import { generateId } from '../utils/generateId';
+import { getAnnotations } from '../utils/getAnnotations';
+import { getCombiner } from '../utils/getCombiner';
+import { getPrimaryType } from '../utils/getPrimaryType';
+import { getValidations } from '../utils/getValidations';
+import { inferType } from '../utils/inferType';
 
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   switch (getPrimaryType(node)) {
@@ -79,7 +79,7 @@ export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<Sch
     }
   } else {
     const node = processNode(schema);
-    if (node !== undefined) {
+    if (node !== void 0 ) {
       yield node;
     }
   }

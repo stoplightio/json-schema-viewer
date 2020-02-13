@@ -1,17 +1,19 @@
+import { JsonPath } from '@stoplight/types';
 import { size as _size } from 'lodash-es';
 import * as React from 'react';
-import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNodeWithMeta } from '../../types';
+import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
 import { isArrayNodeWithItems } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
 import { isCombinerNode, isRefNode } from '../../utils/nodes';
 import { Types } from './Types';
 
 export interface IProperty {
-  node: SchemaNodeWithMeta;
+  node: SchemaNode;
+  path: JsonPath;
   onGoToRef?: GoToRefHandler;
 }
 
-export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }) => {
+export const Property: React.FunctionComponent<IProperty> = ({ node, path, onGoToRef }) => {
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : undefined;
 
@@ -32,20 +34,22 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }
   }, [node]);
 
   const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
-    if (onGoToRef) {
-      onGoToRef(node.$ref!, node);
+    if (onGoToRef && '$ref' in node) {
+      onGoToRef(node.$ref, node);
     }
   }, [onGoToRef, node]);
 
   return (
     <>
-      {node.name && <div className="mr-2">{node.name}</div>}
+      {path.length > 1 && (path[path.length - 2] === 'properties' || path[path.length - 2] === 'patternProperties') && (
+        <div className="mr-2">{path[path.length - 1]}</div>
+      )}
 
       <Types type={type} subtype={subtype}>
-        {type === '$ref' ? `[${node.$ref}]` : null}
+        {'$ref' in node ? `[${node.$ref}]` : null}
       </Types>
 
-      {type === '$ref' && onGoToRef ? (
+      {'$ref' in node && !onGoToRef && !('children' in node) ? (
         <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>
           (go to ref)
         </a>
@@ -53,7 +57,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }
 
       {childrenCount !== null && <div className="ml-2 text-darken-7 dark:text-lighten-7">{`{${childrenCount}}`}</div>}
 
-      {'pattern' in node && node.pattern ? (
+      {path.length > 1 && path[path.length - 2] === 'patternProperties' ? (
         <div className="ml-2 text-darken-7 dark:text-lighten-7 truncate">(pattern property)</div>
       ) : null}
     </>

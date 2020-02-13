@@ -4,8 +4,8 @@ import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
 import { JsonSchemaViewer, SchemaTree } from '../../components';
+import { generateTree } from '../../tree/renderSchema';
 import { isSchemaViewerEmpty } from '../../utils/isSchemaViewerEmpty';
-import { renderSchema } from '../../utils/renderSchema';
 
 const { default: SchemaWorker } = require('../../workers/schema');
 
@@ -159,7 +159,7 @@ describe('JSON Schema Viewer component', () => {
       },
     ]);
 
-    const nodes = Array.from(renderSchema(schema));
+    const nodes = Array.from(generateTree(schema));
 
     SchemaWorker.prototype.addEventListener.mock.calls[0][1]({
       data: {
@@ -208,7 +208,7 @@ describe('JSON Schema Viewer component', () => {
       schema,
     });
 
-    const nodes = Array.from(renderSchema(schema));
+    const nodes = Array.from(generateTree(schema));
 
     SchemaWorker.prototype.addEventListener.mock.calls[0][1]({
       data: {

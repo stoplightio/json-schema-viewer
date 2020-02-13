@@ -1,5 +1,5 @@
 import { IRowRendererOptions, TreeListNode, TreeStore } from '@stoplight/tree-list';
-import { Dictionary, JsonPath } from '@stoplight/types';
+import { Dictionary } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
@@ -12,6 +12,7 @@ export enum SchemaKind {
   Null = 'null',
   Array = 'array',
   Object = 'object',
+  $ref = 'ref'
 }
 
 export type JSONSchema4CombinerName = 'allOf' | 'anyOf' | 'oneOf';
@@ -52,27 +53,12 @@ export interface IObjectPropertyNode extends IBaseNode {
 
 export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | IObjectPropertyNode | IRefNode;
 
-export interface ITreeNodeMeta {
-  name?: string;
-  additional?: IArrayNode['additionalItems'] | IObjectNode['additionalProperties'];
-  path: JsonPath;
-  divider?: string;
-  subtype?: IBaseNode['type'] | string;
-  expanded?: boolean;
-  required?: boolean;
-  inheritedFrom?: string;
-  pattern?: boolean;
-  $ref?: string;
-}
+export type SchemaTreeListNode = TreeListNode;
 
-export type SchemaNodeWithMeta = SchemaNode & ITreeNodeMeta;
-
-export type SchemaTreeListNode = TreeListNode<SchemaNodeWithMeta>;
-
-export type GoToRefHandler = (path: string, node: SchemaNodeWithMeta) => void;
+export type GoToRefHandler = (path: string, node: TreeListNode) => void;
 
 export type RowRenderer = (
-  node: SchemaTreeListNode,
+  node: TreeListNode,
   rowOptions: IRowRendererOptions,
   treeStore: TreeStore,
 ) => React.ReactNode;

@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
-import { SchemaNodeWithMeta } from '../../types';
 import { Property, Types } from '../shared';
 
 describe('Property component', () => {

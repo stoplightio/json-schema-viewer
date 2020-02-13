@@ -1,5 +1,6 @@
+import { populateTree } from '../tree/populateTree';
+import { MetadataStore } from '../tree/metadata';
 import { mergeAllOf } from '../utils/mergeAllOf';
-import { renderSchema } from '../utils/renderSchema';
 import { isComputeSchemaMessage, RenderedSchemaErrorMessageData, RenderedSchemaSuccessMessageData } from './messages';
 
 declare const self: DedicatedWorkerGlobalScope;
@@ -14,13 +15,15 @@ self.addEventListener('message', e => {
     self.postMessage({
       instanceId,
       error: null,
-      nodes: Array.from(renderSchema(shouldMergeAllOf ? mergeAllOf(schema) : schema)),
+      tree: populateTree(shouldMergeAllOf ? mergeAllOf(schema) : schema, null, 0, [], null),
+      metadata: MetadataStore,
     } as RenderedSchemaSuccessMessageData);
   } catch (ex) {
     self.postMessage({
       instanceId,
       error: ex.message,
-      nodes: null,
+      tree: null,
+      metadata: null,
     } as RenderedSchemaErrorMessageData);
   }
 });

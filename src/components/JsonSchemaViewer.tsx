@@ -1,5 +1,5 @@
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
-import { TreeStore } from '@stoplight/tree-list';
+import { Tree, TreeState, TreeStore } from '@stoplight/tree-list';
 import { Intent, Spinner } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import { action, runInAction } from 'mobx';
@@ -7,11 +7,9 @@ import * as React from 'react';
 import SchemaWorker, { WebWorker } from 'web-worker:../workers/schema.ts';
 
 import { JSONSchema4 } from 'json-schema';
-import { GoToRefHandler, IArrayNode, IBaseNode, RowRenderer, SchemaKind, SchemaTreeListNode } from '../types';
-import { getArraySubtype } from '../utils/getArraySubtype';
+import { populateTree } from '../tree/populateTree';
+import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
-import { isCombinerNode } from '../utils/nodes';
-import { renderSchema } from '../utils/renderSchema';
 import { ComputeSchemaMessageData, isRenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree } from './SchemaTree';
 
@@ -33,8 +31,9 @@ export interface IJsonSchemaViewer {
 }
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
-  protected treeStore: TreeStore;
-  protected instanceId: string;
+  protected readonly treeStore: TreeStore;
+  protected readonly tree: Tree;
+  protected readonly instanceId: string;
   public static schemaWorker?: WebWorker;
 
   public state = {
@@ -44,9 +43,9 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   constructor(props: IJsonSchemaViewer & ErrorBoundaryForwardedProps) {
     super(props);
 
-    this.treeStore = new TreeStore({
+    this.tree = new Tree(Tree.createArtificialRoot());
+    this.treeStore = new TreeStore(this.tree, new TreeState(), {
       defaultExpandedDepth: this.expandedDepth,
-      nodes: [],
     });
 
     this.instanceId = Math.random().toString(36);
@@ -75,66 +74,70 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     if (data.instanceId === this.instanceId) {
       this.setState({ computing: false });
       if (data.error === null) {
-        this.treeStore.nodes = data.nodes;
+        this.tree.insertNode(data.tree, null);
       } else if (this.props.boundaryRef.current !== null) {
         this.props.boundaryRef.current.throwError(new Error(data.error));
       }
     }
   });
 
-  protected prerenderSchema() {
-    const schema = this.schema;
-    const isWorkerSpawn =
-      JsonSchemaViewerComponent.schemaWorker !== void 0 && !('isShim' in JsonSchemaViewerComponent.schemaWorker);
-    let needsFullRendering = isWorkerSpawn;
-
-    const renderedSchema = renderSchema(
-      schema,
-      0,
-      { path: [] },
-      isWorkerSpawn
-        ? {
-            depth: this.expandedDepth + 1,
-          }
-        : void 0,
-    );
-
-    const nodes: SchemaTreeListNode[] = [];
-
-    if (isWorkerSpawn && this.props.maxRows !== undefined) {
-      let i = this.props.maxRows;
-      let hasAllOf = false;
-      for (const node of renderedSchema) {
-        if (i === 0) break;
-        i--;
-
-        nodes.push(node);
-
-        if (hasAllOf || this.props.mergeAllOf === false || !node.metadata) continue;
-
-        hasAllOf =
-          ((node.metadata as IBaseNode).type === SchemaKind.Array &&
-            getArraySubtype(node.metadata as IArrayNode) === 'allOf') ||
-          (node.metadata && isCombinerNode(node.metadata) && node.metadata.combiner === 'allOf');
-      }
-
-      needsFullRendering = hasAllOf || this.props.maxRows <= nodes.length;
-    } else {
-      nodes.push(...Array.from(renderedSchema));
-    }
-
-    runInAction(() => {
-      this.treeStore.nodes = nodes;
-    });
-
-    return needsFullRendering;
-  }
+  // protected prerenderSchema() {
+  //   const schema = this.schema;
+  //   const isWorkerSpawn =
+  //     JsonSchemaViewerComponent.schemaWorker !== void 0 && !('isShim' in JsonSchemaViewerComponent.schemaWorker);
+  //   let needsFullRendering = isWorkerSpawn;
+  //
+  //   const renderedSchema = generateTree(
+  //     schema,
+  //     0,
+  //     { path: [] },
+  //     isWorkerSpawn
+  //       ? {
+  //           depth: this.expandedDepth + 1,
+  //         }
+  //       : void 0,
+  //   );
+  //
+  //   const nodes: SchemaTreeListNode[] = [];
+  //
+  //   if (isWorkerSpawn && this.props.maxRows !== undefined) {
+  //     let i = this.props.maxRows;
+  //     let hasAllOf = false;
+  //     for (const node of renderedSchema) {
+  //       if (i === 0) break;
+  //       i--;
+  //
+  //       nodes.push(node);
+  //
+  //       if (hasAllOf || this.props.mergeAllOf === false || !node.metadata) continue;
+  //
+  //       hasAllOf =
+  //         ((node.metadata as IBaseNode).type === SchemaKind.Array &&
+  //           getArraySubtype(node.metadata as IArrayNode) === 'allOf') ||
+  //         (node.metadata && isCombinerNode(node.metadata) && node.metadata.combiner === 'allOf');
+  //     }
+  //
+  //     needsFullRendering = hasAllOf || this.props.maxRows <= nodes.length;
+  //   } else {
+  //     nodes.push(...Array.from(renderedSchema));
+  //   }
+  //
+  //   runInAction(() => {
+  //     this.treeStore.nodes = nodes;
+  //   });
+  //
+  //   return needsFullRendering;
+  // }
 
   protected renderSchema() {
-    const needsFullRendering = this.prerenderSchema();
-    if (!needsFullRendering) {
-      return;
-    }
+    populateTree(this.schema, this.tree.root, 0, [], null);
+    this.tree.root = this.tree.root.children[0];
+    this.tree.invalidate();
+    // const needsFullRendering = true;
+    // this.prerenderSchema();
+    // if (!needsFullRendering) {
+    //   return;
+    // }
 
     const message: ComputeSchemaMessageData = {
       instanceId: this.instanceId,
@@ -146,7 +149,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       JsonSchemaViewerComponent.schemaWorker.postMessage(message);
     }
 
-    this.setState({ computing: true });
+    this.setState({ computing: false });
   }
 
   public componentDidMount() {
