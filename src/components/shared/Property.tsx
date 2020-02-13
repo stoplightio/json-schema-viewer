@@ -2,9 +2,8 @@ import { JsonPath } from '@stoplight/types';
 import { size as _size } from 'lodash-es';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
-import { isArrayNodeWithItems } from '../../utils/guards';
+import { isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
-import { isCombinerNode, isRefNode } from '../../utils/nodes';
 import { Types } from './Types';
 
 export interface IProperty {

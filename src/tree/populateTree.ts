@@ -4,8 +4,8 @@ import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
+import { isCombinerNode, isRefNode } from '../utils/guards';
 import { isCombiner } from '../utils/isCombiner';
-import { isCombinerNode, isRefNode } from '../utils/nodes';
 import { MetadataStore } from './metadata';
 import { walk } from './walk';
 
@@ -39,7 +39,7 @@ export const populateTree: Walker = (schema, parent, level, path, options) => {
     };
 
     if (isRefNode(node) && isLocalRef(node.$ref) && node.$ref !== '#') {
-      (node as TreeListParentNode).children = [];
+      (treeNode as TreeListParentNode).children = [];
     } else if (isCombinerNode(node)) {
       if (node.properties !== void 0) {
         (treeNode as TreeListParentNode).children = [];

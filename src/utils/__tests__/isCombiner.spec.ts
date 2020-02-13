@@ -1,4 +1,4 @@
-import { isCombinerNode } from '../nodes';
+import { isCombinerNode } from '../guards';
 
 describe('isCombinerNode function', () => {
   test('should return false if object without combiner is given', () => {

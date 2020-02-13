@@ -55,7 +55,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
         </div>
 
         <Validations
-          required={false}
+          required={/* todo: implement me */ false}
           // required={!!schemaNode.required}
           validations={{
             ...('annotations' in schemaNode &&
