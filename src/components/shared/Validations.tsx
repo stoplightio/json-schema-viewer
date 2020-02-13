@@ -23,7 +23,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
 
   return (
     <>
-      {deprecated ? <span className="ml-2 text-darken-7 dark:text-lighten-6">deprecated</span> : null}
+      {deprecated ? <span className="ml-2 text-orange-7 dark:text-orange-6">deprecated</span> : null}
       {validationCount ? (
         <Popover
           boundary="window"
