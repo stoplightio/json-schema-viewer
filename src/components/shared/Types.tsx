@@ -3,14 +3,14 @@ import cn from 'classnames';
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
-import { ITreeNodeMeta, JSONSchema4CombinerName } from '../../types';
+import { JSONSchema4CombinerName } from '../../types';
 
 /**
  * TYPE
  */
 export interface IType {
   type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
-  subtype?: ITreeNodeMeta['subtype'];
+  subtype?: JSONSchema4TypeName;
   className?: string;
 }
 
@@ -31,7 +31,7 @@ Type.displayName = 'JsonSchemaViewer.Type';
 interface ITypes {
   className?: string;
   type?: JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref';
-  subtype?: ITreeNodeMeta['subtype'];
+  subtype?: JSONSchema4TypeName;
 }
 
 export const Types: React.FunctionComponent<ITypes> = ({ className, type, subtype, children }) => {

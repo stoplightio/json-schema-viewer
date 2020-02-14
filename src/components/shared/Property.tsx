@@ -33,7 +33,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, path, onGoT
   }, [node]);
 
   const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
-    if (onGoToRef && '$ref' in node) {
+    if (onGoToRef && isRefNode(node)) {
       onGoToRef(node.$ref, node);
     }
   }, [onGoToRef, node]);

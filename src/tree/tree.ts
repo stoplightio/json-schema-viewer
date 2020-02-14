@@ -35,11 +35,9 @@ export class SchemaTree extends Tree {
     const initialLevel = Tree.getLevel(parent);
     const artificialRoot = Tree.createArtificialRoot();
     populateTree(get(this.schema, path), artificialRoot, initialLevel, path, {
-      onNode: (node: SchemaNode, parentTreeNode, level: number): boolean => {
-        return level <= initialLevel + 1;
-      },
+      onNode: (node: SchemaNode, parentTreeNode, level: number) => level <= initialLevel + 1,
     });
-    this.insertTreeFragment(artificialRoot.children[0].children, parent.id);
+    this.insertTreeFragment((artificialRoot.children[0] as TreeListParentNode).children, parent.id);
   }
 
   public unwrap(node: TreeListParentNode) {
@@ -49,7 +47,7 @@ export class SchemaTree extends Tree {
 
     const { path, schema } = MetadataStore[node.id];
     if (isRefNode(schema)) {
-      this.populateTreeFragment(node, pointerToPath(schema.$ref));
+      this.populateTreeFragment(node, pointerToPath(schema.$ref)); // DO NOTE THAT NODES PLACED UNDER THE REF WON'T HAVE CORREC PATHS
     } else {
       this.populateTreeFragment(node, path);
     }

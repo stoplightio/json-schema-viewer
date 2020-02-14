@@ -5,7 +5,6 @@ import * as React from 'react';
 
 import { GoToRefHandler, RowRenderer } from '../types';
 import { SchemaRow } from './SchemaRow';
-import { MetadataStore } from '../tree/metadata';
 
 export interface ISchemaTree {
   treeStore: TreeStore;

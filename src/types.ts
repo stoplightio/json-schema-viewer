@@ -12,7 +12,6 @@ export enum SchemaKind {
   Null = 'null',
   Array = 'array',
   Object = 'object',
-  $ref = 'ref'
 }
 
 export type JSONSchema4CombinerName = 'allOf' | 'anyOf' | 'oneOf';
@@ -55,7 +54,7 @@ export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | 
 
 export type SchemaTreeListNode = TreeListNode;
 
-export type GoToRefHandler = (path: string, node: TreeListNode) => void;
+export type GoToRefHandler = (path: string, node: SchemaTreeListNode) => void;
 
 export type RowRenderer = (
   node: TreeListNode,

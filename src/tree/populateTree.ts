@@ -97,12 +97,12 @@ function processArray(
     const subtype = getPrimaryType(schema.items);
     switch (subtype) {
       case SchemaKind.Object:
-        return processObject(node, schema.items as IObjectNode, level , [...path, 'items'], options);
+        return processObject(node, schema.items as IObjectNode, level, [...path, 'items'], options);
       case SchemaKind.Array:
         return processArray(node, schema.items as IObjectNode, level, [...path, 'items'], options);
       default:
         if (typeof subtype === 'string' && isCombiner(subtype)) {
-          return processArray(node, schema.items as IObjectNode, level , [...path, 'items'], options);
+          return processArray(node, schema.items as IObjectNode, level, [...path, 'items'], options);
         }
     }
   }
