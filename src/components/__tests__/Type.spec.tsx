@@ -5,14 +5,14 @@ import { IType, PropertyTypeColors, Type } from '../shared/Types';
 
 describe('Type component', () => {
   it.each(Object.keys(PropertyTypeColors))('should handle $s type', type => {
-    const wrapper = shallow(<Type type={type as IType['type']} />);
+    const wrapper = shallow(<Type type={type as IType['type']} subtype={void 0} />);
 
     expect(wrapper).toHaveText(type);
   });
 
   it('should handle unknown types', () => {
     // @ts-ignore
-    const wrapper = shallow(<Type type="foo" />);
+    const wrapper = shallow(<Type type="foo" subtype={void 0} />);
 
     expect(wrapper).toHaveText('foo');
   });

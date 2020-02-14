@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { generateTree } from '../../tree/renderSchema';
+import { generateTree } from '../../tree/G';
 
 const BASE_PATH = path.resolve(__dirname, '../../__fixtures__/');
 

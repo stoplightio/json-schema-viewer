@@ -2,7 +2,7 @@ import { IRowRendererOptions, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
 import * as React from 'react';
 
-import { metadataStore } from '../tree/metadata';
+import { getNodeMetadata, metadataStore } from '../tree/metadata';
 import { GoToRefHandler, SchemaTreeListNode } from '../types';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
@@ -18,15 +18,10 @@ const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
-  const metadata = metadataStore[node.id];
-  if (!metadata) {
-    throw new Error('Missing metadata');
-  }
-
+  const metadata = getNodeMetadata(node);
   const { path, schema: schemaNode } = metadata;
 
-  const parentSchemaNode =
-    node.parent === null || !(node.parent.id in metadataStore) ? null : metadataStore[node.parent.id].schema;
+  const parentSchemaNode = (node.parent !== null && metadataStore.get(node.parent)?.schema) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
   return (

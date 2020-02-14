@@ -19,9 +19,9 @@ export type Walker = (
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
-) => void;
+) => undefined;
 
-export const populateTree: Walker = (schema, parent, level, path, options) => {
+export const populateTree: Walker = (schema, parent, level, path, options): undefined => {
   if (typeof schema !== 'object' || schema === null) return;
 
   for (const node of walk(schema)) {
@@ -34,10 +34,10 @@ export const populateTree: Walker = (schema, parent, level, path, options) => {
     };
 
     parent.children.push(treeNode);
-    metadataStore[treeNode.id] = {
+    metadataStore.set(treeNode, {
       schema: node,
       path,
-    };
+    });
 
     if (isRefNode(node) && isLocalRef(node.$ref) && node.$ref !== '#') {
       (treeNode as TreeListParentNode).children = [];

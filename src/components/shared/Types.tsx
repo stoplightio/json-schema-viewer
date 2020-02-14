@@ -9,7 +9,7 @@ import { JSONSchema4CombinerName } from '../../types';
  * TYPE
  */
 export interface IType {
-  type: JSONSchema4TypeName | JSONSchema4CombinerName | '$ref';
+  type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
   subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]>;
   className?: string;
 }
@@ -75,7 +75,7 @@ export const PropertyTypeColors: Dictionary<string, IType['type']> = {
   integer: 'text-red-7 dark:text-red-6',
   number: 'text-red-7 dark:text-red-6',
   boolean: 'text-red-4',
-  // binary: 'text-green-4',
+  binary: 'text-green-4',
   string: 'text-green-7 dark:text-green-5',
   $ref: 'text-purple-6 dark:text-purple-4',
 };
