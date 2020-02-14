@@ -9,7 +9,7 @@ import { getNodeMetadata, metadataStore } from './metadata';
 import { populateTree } from './populateTree';
 
 export class SchemaTree extends Tree {
-  constructor(public schema: JSONSchema4, public state: TreeState, public defaultExpandedDepth: number) {
+  constructor(public schema: JSONSchema4, public state: TreeState, public expandedDepth: number) {
     super(Tree.createArtificialRoot());
   }
 
@@ -26,7 +26,7 @@ export class SchemaTree extends Tree {
         const metadata = metadataStore.get(parentTreeNode);
 
         if (metadata !== void 0 && isRefNode(metadata.schema)) return false;
-        return level <= this.defaultExpandedDepth + 1;
+        return level <= this.expandedDepth + 1;
       },
     });
     this.state.expanded = expanded;

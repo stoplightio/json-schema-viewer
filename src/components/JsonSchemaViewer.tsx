@@ -2,7 +2,7 @@ import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } fro
 import { TreeState, TreeStore } from '@stoplight/tree-list';
 import { Intent, Spinner } from '@stoplight/ui-kit';
 import cn from 'classnames';
-import { action, runInAction } from 'mobx';
+import { action } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
@@ -13,7 +13,6 @@ import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
 export interface IJsonSchemaViewer {
   schema: JSONSchema4;
-  dereferencedSchema?: JSONSchema4;
   style?: object;
   emptyText?: string;
   defaultExpandedDepth?: number;
@@ -32,10 +31,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   protected readonly treeStore: TreeStore;
   protected readonly tree: SchemaTree;
   protected readonly treeState: TreeState;
-
-  public state = {
-    computing: false,
-  };
 
   constructor(props: IJsonSchemaViewer & ErrorBoundaryForwardedProps) {
     super(props);
@@ -60,10 +55,16 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   }
 
   protected get schema() {
-    return this.props.dereferencedSchema || this.props.schema;
+    return this.props.schema;
   }
 
   protected renderSchema() {
+    if (this.tree.count > 1) {
+      for (const child of this.tree) {
+        this.tree.removeNode(child);
+      }
+    }
+
     this.tree.populate();
   }
 
@@ -74,17 +75,11 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   @action
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
-      runInAction(() => {
-        this.treeStore.defaultExpandedDepth = this.expandedDepth;
-      });
-    }
-
-    if (
-      prevProps.schema !== this.props.schema ||
-      prevProps.dereferencedSchema !== this.props.dereferencedSchema ||
-      prevProps.mergeAllOf !== this.props.mergeAllOf
-    ) {
-      // todo: this doesn't work yet
+      this.treeStore.defaultExpandedDepth = this.expandedDepth;
+      this.tree.expandedDepth = this.expandedDepth;
+      this.renderSchema();
+    } else if (prevProps.schema !== this.props.schema || prevProps.mergeAllOf !== this.props.mergeAllOf) {
+      this.tree.schema = this.props.schema;
       this.renderSchema();
     }
   }
@@ -125,6 +120,6 @@ const JsonSchemaFallbackComponent: typeof FallbackComponent = ({ error }) => {
 
 export const JsonSchemaViewer = withErrorBoundary<IJsonSchemaViewer>(JsonSchemaViewerComponent, {
   FallbackComponent: JsonSchemaFallbackComponent,
-  recoverableProps: ['schema', 'dereferencedSchema'],
+  recoverableProps: ['schema'],
   reportErrors: false,
 });
