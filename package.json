@@ -83,14 +83,10 @@
     "prettier": "^1.19.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-web-worker-loader": "p0lip/rollup-plugin-web-worker-loader#d833c63590598ec66d051066826b6ce8d57710a9",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "tslint-config-stoplight": "^1.4.0",
-    "typescript": "^3.7.5",
-    "worker-loader": "^2.0.0"
+    "typescript": "^3.7.5"
   },
   "lint-staged": {
     "*.{ts,tsx}$": [

@@ -9,7 +9,6 @@ import { JSONSchema4 } from 'json-schema';
 import { SchemaTree } from '../tree/tree';
 import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
-import { ComputeSchemaMessageData, isRenderedSchemaMessage } from '../workers/messages';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
 export interface IJsonSchemaViewer {
@@ -33,8 +32,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   protected readonly treeStore: TreeStore;
   protected readonly tree: SchemaTree;
   protected readonly treeState: TreeState;
-  protected readonly instanceId: string;
-  // public static schemaWorker?: WebWorker;
 
   public state = {
     computing: false,
@@ -48,8 +45,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
-
-    this.instanceId = Math.random().toString(36);
   }
 
   protected get expandedDepth(): number {
@@ -68,99 +63,15 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     return this.props.dereferencedSchema || this.props.schema;
   }
 
-  protected handleWorkerMessage = action<(message: MessageEvent) => void>(message => {
-    if (!isRenderedSchemaMessage(message)) return;
-    const { data } = message;
-
-    if (data.instanceId === this.instanceId) {
-      this.setState({ computing: false });
-      if (data.error === null) {
-        this.tree.insertNode(data.tree, null);
-      } else if (this.props.boundaryRef.current !== null) {
-        this.props.boundaryRef.current.throwError(new Error(data.error));
-      }
-    }
-  });
-
-  // protected prerenderSchema() {
-  //   const schema = this.schema;
-  //   const isWorkerSpawn =
-  //     JsonSchemaViewerComponent.schemaWorker !== void 0 && !('isShim' in JsonSchemaViewerComponent.schemaWorker);
-  //   let needsFullRendering = isWorkerSpawn;
-  //
-  //   const renderedSchema = generateTree(
-  //     schema,
-  //     0,
-  //     { path: [] },
-  //     isWorkerSpawn
-  //       ? {
-  //           depth: this.expandedDepth + 1,
-  //         }
-  //       : void 0,
-  //   );
-  //
-  //   const nodes: SchemaTreeListNode[] = [];
-  //
-  //   if (isWorkerSpawn && this.props.maxRows !== undefined) {
-  //     let i = this.props.maxRows;
-  //     let hasAllOf = false;
-  //     for (const node of renderedSchema) {
-  //       if (i === 0) break;
-  //       i--;
-  //
-  //       nodes.push(node);
-  //
-  //       if (hasAllOf || this.props.mergeAllOf === false || !node.metadata) continue;
-  //
-  //       hasAllOf =
-  //         ((node.metadata as IBaseNode).type === SchemaKind.Array &&
-  //           getArraySubtype(node.metadata as IArrayNode) === 'allOf') ||
-  //         (node.metadata && isCombinerNode(node.metadata) && node.metadata.combiner === 'allOf');
-  //     }
-  //
-  //     needsFullRendering = hasAllOf || this.props.maxRows <= nodes.length;
-  //   } else {
-  //     nodes.push(...Array.from(renderedSchema));
-  //   }
-  //
-  //   runInAction(() => {
-  //     this.treeStore.nodes = nodes;
-  //   });
-  //
-  //   return needsFullRendering;
-  // }
-
   protected renderSchema() {
     this.tree.populate();
-    // const needsFullRendering = true;
-    // this.prerenderSchema();
-    // if (!needsFullRendering) {
-    //   return;
-    // }
-
-    // const message: ComputeSchemaMessageData = {
-    //   instanceId: this.instanceId,
-    //   schema: this.schema,
-    //   mergeAllOf: this.props.mergeAllOf !== false,
-    // };
-    //
-    // if (JsonSchemaViewerComponent.schemaWorker !== void 0) {
-    //   JsonSchemaViewerComponent.schemaWorker.postMessage(message);
-    // }
-
-    this.setState({ computing: false });
   }
 
   public componentDidMount() {
-    // let's initialize it lazily
-    // if (JsonSchemaViewerComponent.schemaWorker === void 0) {
-    //   JsonSchemaViewerComponent.schemaWorker = new SchemaWorker();
-    // }
-
-    // JsonSchemaViewerComponent.schemaWorker.addEventListener('message', this.handleWorkerMessage);
     this.renderSchema();
   }
 
+  @action
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
       runInAction(() => {
@@ -173,6 +84,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       prevProps.dereferencedSchema !== this.props.dereferencedSchema ||
       prevProps.mergeAllOf !== this.props.mergeAllOf
     ) {
+      // todo: this doesn't work yet
       this.renderSchema();
     }
   }
