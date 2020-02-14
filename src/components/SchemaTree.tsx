@@ -23,18 +23,15 @@ const canDrag = () => false;
 export const SchemaTree = observer<ISchemaTree>(props => {
   const { hideTopBar, name, treeStore, maxRows, onGoToRef, rowRenderer: customRowRenderer } = props;
 
-  React.useEffect(
-    () => {
-      treeStore.on(TreeListEvents.NodeClick, (e, node) => {
-        treeStore.toggleExpand(node);
-      });
+  React.useEffect(() => {
+    treeStore.on(TreeListEvents.NodeClick, (e, node) => {
+      treeStore.toggleExpand(node);
+    });
 
-      return () => {
-        treeStore.dispose();
-      };
-    },
-    [treeStore],
-  );
+    return () => {
+      treeStore.dispose();
+    };
+  }, [treeStore]);
 
   const rowRenderer = React.useCallback(
     (node, rowOptions) => {
@@ -49,12 +46,11 @@ export const SchemaTree = observer<ISchemaTree>(props => {
 
   return (
     <>
-      {name &&
-        !hideTopBar && (
-          <div className="flex items-center text-sm px-2 font-semibold" style={{ height: 30 }}>
-            {name}
-          </div>
-        )}
+      {name && !hideTopBar && (
+        <div className="flex items-center text-sm px-2 font-semibold" style={{ height: 30 }}>
+          {name}
+        </div>
+      )}
 
       <TreeList
         striped

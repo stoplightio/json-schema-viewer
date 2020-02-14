@@ -43,7 +43,7 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
-    "@stoplight/json": "^3.1.1",
+    "@stoplight/json": "^3.5.1",
     "@stoplight/react-error-boundary": "^1.0.0",
     "classnames": "^2.2.6",
     "json-schema-merge-allof": "https://github.com/stoplightio/json-schema-merge-allof",
@@ -88,8 +88,8 @@
     "rollup-plugin-web-worker-loader": "p0lip/rollup-plugin-web-worker-loader#d833c63590598ec66d051066826b6ce8d57710a9",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
-    "tslint-config-stoplight": "^1.2.0",
-    "typescript": "3.6.2",
+    "tslint-config-stoplight": "^1.4.0",
+    "typescript": "^3.7.5",
     "worker-loader": "^2.0.0"
   },
   "lint-staged": {

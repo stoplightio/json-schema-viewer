@@ -29,18 +29,17 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
           marginLeft: ICON_DIMENSION * node.level, // offset for spacing
         }}
       >
-        {node.canHaveChildren &&
-          node.level > 0 && (
-            <Caret
-              isExpanded={!!rowOptions.isExpanded}
-              style={{
-                left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
-                width: ICON_DIMENSION,
-                height: ICON_DIMENSION,
-              }}
-              size={ICON_SIZE}
-            />
-          )}
+        {node.canHaveChildren && node.level > 0 && (
+          <Caret
+            isExpanded={!!rowOptions.isExpanded}
+            style={{
+              left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+              width: ICON_DIMENSION,
+              height: ICON_DIMENSION,
+            }}
+            size={ICON_SIZE}
+          />
+        )}
 
         {schemaNode.divider && <Divider>{schemaNode.divider}</Divider>}
 

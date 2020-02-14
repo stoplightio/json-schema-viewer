@@ -15,33 +15,27 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, onGoToRef }
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : undefined;
 
-  const childrenCount = React.useMemo<number | null>(
-    () => {
-      if (type === SchemaKind.Object) {
-        return _size((node as IObjectNode).properties);
-      }
+  const childrenCount = React.useMemo<number | null>(() => {
+    if (type === SchemaKind.Object) {
+      return _size((node as IObjectNode).properties);
+    }
 
-      if (subtype === SchemaKind.Object) {
-        return _size(((node as IArrayNode).items as IObjectNode).properties);
-      }
+    if (subtype === SchemaKind.Object) {
+      return _size(((node as IArrayNode).items as IObjectNode).properties);
+    }
 
-      if (subtype === SchemaKind.Array) {
-        return _size((node as IArrayNode).items as IArrayNode);
-      }
+    if (subtype === SchemaKind.Array) {
+      return _size((node as IArrayNode).items as IArrayNode);
+    }
 
-      return null;
-    },
-    [node],
-  );
+    return null;
+  }, [node]);
 
-  const handleGoToRef = React.useCallback<React.MouseEventHandler>(
-    () => {
-      if (onGoToRef) {
-        onGoToRef(node.$ref!, node);
-      }
-    },
-    [onGoToRef, node],
-  );
+  const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
+    if (onGoToRef) {
+      onGoToRef(node.$ref!, node);
+    }
+  }, [onGoToRef, node]);
 
   return (
     <>
