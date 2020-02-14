@@ -6,7 +6,7 @@ import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } f
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../utils/guards';
 import { isCombiner } from '../utils/isCombiner';
-import { MetadataStore } from './metadata';
+import { metadataStore } from './metadata';
 import { walk } from './walk';
 
 export type WalkingOptions = {
@@ -34,7 +34,7 @@ export const populateTree: Walker = (schema, parent, level, path, options) => {
     };
 
     parent.children.push(treeNode);
-    MetadataStore[treeNode.id] = {
+    metadataStore[treeNode.id] = {
       schema: node,
       path,
     };

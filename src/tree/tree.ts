@@ -5,7 +5,7 @@ import { JSONSchema4 } from 'json-schema';
 import { get } from 'lodash-es';
 import { SchemaNode } from '../types';
 import { isRefNode } from '../utils/guards';
-import { MetadataStore } from './metadata';
+import { metadataStore } from './metadata';
 import { populateTree } from './populateTree';
 
 export class SchemaTree extends Tree {
@@ -23,7 +23,7 @@ export class SchemaTree extends Tree {
           expanded[node.id] = false;
         }
 
-        if (MetadataStore[parentTreeNode.id] && isRefNode(MetadataStore[parentTreeNode.id].schema)) return false;
+        if (metadataStore[parentTreeNode.id] && isRefNode(metadataStore[parentTreeNode.id].schema)) return false;
         return level <= this.defaultExpandedDepth + 1;
       },
     });
@@ -45,7 +45,7 @@ export class SchemaTree extends Tree {
       return super.unwrap(node);
     }
 
-    const { path, schema } = MetadataStore[node.id];
+    const { path, schema } = metadataStore[node.id];
     if (isRefNode(schema)) {
       this.populateTreeFragment(node, pointerToPath(schema.$ref)); // DO NOTE THAT NODES PLACED UNDER THE REF WON'T HAVE CORREC PATHS
     } else {

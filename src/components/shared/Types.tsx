@@ -1,4 +1,4 @@
-import { Dictionary } from '@stoplight/types';
+import { Dictionary, Optional } from '@stoplight/types';
 import cn from 'classnames';
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
@@ -9,8 +9,8 @@ import { JSONSchema4CombinerName } from '../../types';
  * TYPE
  */
 export interface IType {
-  type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
-  subtype?: JSONSchema4TypeName;
+  type: JSONSchema4TypeName | JSONSchema4CombinerName | '$ref';
+  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]>;
   className?: string;
 }
 
@@ -30,12 +30,12 @@ Type.displayName = 'JsonSchemaViewer.Type';
  */
 interface ITypes {
   className?: string;
-  type?: JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref';
-  subtype?: JSONSchema4TypeName;
+  type: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref'>;
+  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]>;
 }
 
 export const Types: React.FunctionComponent<ITypes> = ({ className, type, subtype, children }) => {
-  if (!type) return null;
+  if (type === void 0) return null;
 
   if (!Array.isArray(type)) {
     return <Type className={className} type={type} subtype={subtype} children={children} />;
@@ -75,7 +75,7 @@ export const PropertyTypeColors: Dictionary<string, IType['type']> = {
   integer: 'text-red-7 dark:text-red-6',
   number: 'text-red-7 dark:text-red-6',
   boolean: 'text-red-4',
-  binary: 'text-green-4',
+  // binary: 'text-green-4',
   string: 'text-green-7 dark:text-green-5',
   $ref: 'text-purple-6 dark:text-purple-4',
 };

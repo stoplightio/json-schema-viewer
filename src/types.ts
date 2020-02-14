@@ -55,7 +55,7 @@ export type SchemaNode = ICombinerNode | IBaseNode | IArrayNode | IObjectNode | 
 
 export type SchemaTreeListNode = TreeListNode;
 
-export type GoToRefHandler = (path: string, node: SchemaTreeListNode) => void;
+export type GoToRefHandler = (path: string, node: IRefNode) => void;
 
 export type RowRenderer = (
   node: TreeListNode,

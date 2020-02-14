@@ -14,7 +14,7 @@ export interface IProperty {
 
 export const Property: React.FunctionComponent<IProperty> = ({ node, path, onGoToRef }) => {
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
-  const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : undefined;
+  const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : void 0;
 
   const childrenCount = React.useMemo<number | null>(() => {
     if (type === SchemaKind.Object) {
