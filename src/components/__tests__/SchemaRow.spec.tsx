@@ -1,3 +1,4 @@
+import { Popover } from '@stoplight/ui-kit';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
@@ -30,6 +31,7 @@ describe('SchemaRow component', () => {
     const wrapper = shallow(shallow(<SchemaRow node={node as SchemaTreeListNode} rowOptions={rowOptions} />)
       .find(Validations)
       .shallow()
+      .find(Popover)
       .prop('content') as React.ReactElement);
 
     expect(wrapper).toHaveText('enum:null,0,false');

@@ -1,4 +1,4 @@
-import { Dictionary } from '@stoplight/types';
+import { Dictionary, Optional } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 import { flatMap as _flatMap, pick as _pick } from 'lodash-es';
 
@@ -7,7 +7,6 @@ export const COMMON_VALIDATION_TYPES = [
   'format', // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-7
   'default',
   'example',
-  'deprecated',
   'nullable',
   'discriminator',
   'readOnly',
@@ -23,6 +22,18 @@ const VALIDATION_TYPES = {
   array: ['additionalItems', 'minItems', 'maxItems', 'uniqueItems'],
 };
 
+function getDeprecatedValue(node: JSONSchema4): Optional<boolean> {
+  if ('x-deprecated' in node) {
+    return !!node['x-deprecated'];
+  }
+
+  if ('deprecated' in node) {
+    return !!node.deprecated;
+  }
+
+  return;
+}
+
 function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): string[] {
   if (Array.isArray(type)) {
     return _flatMap(type, getTypeValidations);
@@ -33,8 +44,10 @@ function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): 
 
 export const getValidations = (node: JSONSchema4): Dictionary<unknown> => {
   const extraValidations = node.type && getTypeValidations(node.type);
+  const deprecated = getDeprecatedValue(node);
   return {
     ..._pick(node, COMMON_VALIDATION_TYPES),
     ...(extraValidations && _pick(node, extraValidations)),
+    ...(deprecated !== void 0 && { deprecated }),
   };
 };
