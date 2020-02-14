@@ -23,7 +23,10 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
     throw new Error('Missing metadata');
   }
 
-  const schemaNode = metadata.schema;
+  const { path, schema: schemaNode } = metadata;
+
+  const parentSchemaNode =
+    node.parent === null || !(node.parent.id in MetadataStore) ? null : MetadataStore[node.parent.id].schema;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
   return (
@@ -46,7 +49,11 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
           />
         )}
 
-        {'combiner' in schemaNode && <Divider kind={schemaNode.combiner} />}
+        {node.parent !== null &&
+          node.parent.children.length > 0 &&
+          parentSchemaNode !== null &&
+          'combiner' in parentSchemaNode &&
+          node.parent.children[0] !== node && <Divider kind={parentSchemaNode.combiner} />}
 
         <div className="flex-1 flex truncate">
           <Property node={schemaNode} path={metadata.path} onGoToRef={onGoToRef} />
@@ -54,8 +61,12 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
         </div>
 
         <Validations
-          required={/* todo: implement me */ false}
-          // required={!!schemaNode.required}
+          required={
+            parentSchemaNode !== null &&
+            'required' in parentSchemaNode &&
+            Array.isArray(parentSchemaNode.required) &&
+            parentSchemaNode.required.includes(String(path[path.length - 1]))
+          }
           validations={{
             ...('annotations' in schemaNode &&
               schemaNode.annotations.default && { default: schemaNode.annotations.default }),

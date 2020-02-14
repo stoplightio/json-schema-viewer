@@ -7,6 +7,7 @@ import { getCombiner } from '../utils/getCombiner';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { getValidations } from '../utils/getValidations';
 import { inferType } from '../utils/inferType';
+import { normalizeRequired } from '../utils/normalizeRequired';
 
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   switch (getPrimaryType(node)) {
@@ -43,6 +44,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
       type: flattenTypes(type),
       validations: getValidations(node),
       annotations: getAnnotations(node),
+      ...('required' in node && { required: normalizeRequired(node.required) }),
       enum: node.enum,
     };
 
