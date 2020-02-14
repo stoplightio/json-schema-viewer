@@ -1,5 +1,6 @@
-import { isLocalRef } from '@stoplight/json';
+import { isLocalRef, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
+import { JsonPath } from '@stoplight/types/dist';
 import { JSONSchema4 } from 'json-schema';
 import { get } from 'lodash-es';
 import { SchemaNode } from '../types';
@@ -30,8 +31,7 @@ export class SchemaTree extends Tree {
     this.invalidate();
   }
 
-  public populateTreeFragment(parent: TreeListParentNode) {
-    const { path } = MetadataStore[parent.id];
+  public populateTreeFragment(parent: TreeListParentNode, path: JsonPath) {
     const initialLevel = Tree.getLevel(parent);
     const artificialRoot = Tree.createArtificialRoot();
     populateTree(get(this.schema, path), artificialRoot, initialLevel, path, {
@@ -43,12 +43,18 @@ export class SchemaTree extends Tree {
   }
 
   public unwrap(node: TreeListParentNode) {
-    if (isRefNode(MetadataStore[node.id].schema)) {
-    } else if (node.children.length === 0 && !this.visited.has(node)) {
-      this.populateTreeFragment(node);
-      super.unwrap(node);
-    } else {
-      super.unwrap(node);
+    if (node.children.length !== 0 || this.visited.has(node)) {
+      return super.unwrap(node);
     }
+
+    const { path, schema } = MetadataStore[node.id];
+    if (isRefNode(schema)) {
+      this.populateTreeFragment(node, pointerToPath(schema.$ref));
+    } else {
+      this.populateTreeFragment(node, path);
+    }
+
+    this.visited.add(node);
+    return super.unwrap(node);
   }
 }

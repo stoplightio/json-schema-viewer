@@ -68,7 +68,7 @@
       }
     },
     "ref": {
-      "$ref": "#/definitions/error-response"
+      "$ref": "#/properties/permissions"
     }
   },
   "patternProperties": {
