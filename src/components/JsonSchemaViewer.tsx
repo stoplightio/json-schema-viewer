@@ -1,6 +1,5 @@
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
 import { TreeState, TreeStore } from '@stoplight/tree-list';
-import { Intent, Spinner } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import { action } from 'mobx';
 import * as React from 'react';
@@ -87,7 +86,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   public render() {
     const {
       props: { emptyText = 'No schema defined', name, schema, expanded, defaultExpandedDepth, className, ...props },
-      state: { computing },
     } = this;
 
     // an empty array or object is still a valid response, schema is ONLY really empty when a combiner type has no information
@@ -97,12 +95,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col h-full w-full relative')}>
-        {computing && (
-          <div className="flex justify-center items-center absolute w-full h-full left-0 top-0">
-            <div className="absolute w-full h-full left-0 top-0 opacity-25 bg-gray-2 dark:bg-gray-6" />
-            <Spinner className="relative" intent={Intent.PRIMARY} size={Spinner.SIZE_LARGE} />
-          </div>
-        )}
         <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
       </div>
     );
