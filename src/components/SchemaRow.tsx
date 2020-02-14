@@ -4,7 +4,6 @@ import * as React from 'react';
 
 import { MetadataStore } from '../tree/metadata';
 import { GoToRefHandler, SchemaTreeListNode } from '../types';
-import { DIVIDERS } from '../utils/dividers';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -47,7 +46,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
           />
         )}
 
-        {'combiner' in schemaNode && <Divider>{DIVIDERS[schemaNode.combiner]}</Divider>}
+        {'combiner' in schemaNode && <Divider kind={schemaNode.combiner} />}
 
         <div className="flex-1 flex truncate">
           <Property node={schemaNode} path={metadata.path} onGoToRef={onGoToRef} />
