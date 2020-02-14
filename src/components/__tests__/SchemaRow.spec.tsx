@@ -2,7 +2,8 @@ import { Popover } from '@stoplight/ui-kit';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import * as React from 'react';
-import { SchemaTreeListNode } from '../../types';
+import { metadataStore } from '../../tree/metadata';
+import { SchemaKind, SchemaTreeListNode } from '../../types';
 import { SchemaRow } from '../SchemaRow';
 import { Validations } from '../shared/Validations';
 
@@ -10,18 +11,23 @@ describe('SchemaRow component', () => {
   test('should render falsy validations', () => {
     const node: SchemaTreeListNode = {
       id: '0.n1f7tvhzoj',
-      level: 0,
       name: '',
-      metadata: {
-        type: 'object',
+      parent: null,
+    };
+
+    metadataStore.set(node, {
+      schema: {
+        name: '',
+        id: '232',
+        type: SchemaKind.Object,
         validations: {
           enum: [null, 0, false],
         },
         annotations: {},
         enum: [null, 0, false],
-        path: [],
       } as any,
-    };
+      path: [],
+    });
 
     const rowOptions = {
       isEdited: false,
@@ -29,7 +35,7 @@ describe('SchemaRow component', () => {
     };
 
     const wrapper = shallow(
-      shallow(<SchemaRow node={node as SchemaTreeListNode} rowOptions={rowOptions} />)
+      shallow(<SchemaRow node={node} rowOptions={rowOptions} />)
         .find(Validations)
         .shallow()
         .find(Popover)

@@ -1,4 +1,4 @@
-import { TreeList, TreeStore } from '@stoplight/tree-list';
+import { Tree, TreeList, TreeState, TreeStore } from '@stoplight/tree-list';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
@@ -40,7 +40,7 @@ describe('SchemaTree component', () => {
     useStateSpy = jest.spyOn(React, 'useState').mockImplementation(() => [{}, setStateActionSpy]);
     useCallbackSpy = jest.spyOn(React, 'useCallback');
     (useMetadata as jest.Mock).mockReturnValue({});
-    store = new TreeStore();
+    store = new TreeStore(new Tree(Tree.createArtificialRoot()), new TreeState());
   });
 
   afterEach(() => {

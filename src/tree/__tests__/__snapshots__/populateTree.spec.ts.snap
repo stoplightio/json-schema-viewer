@@ -1,0 +1,361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`populateTree util should match array-of-allofs.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+      ],
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
+
+exports[`populateTree util should match array-of-objects.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+          ],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+      ],
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
+
+exports[`populateTree util should match array-of-refs.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
+
+exports[`populateTree util should match combiner-schema.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+          ],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+          ],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+      ],
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
+
+exports[`populateTree util should match default-schema.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "id": "random-id",
+                  "name": "",
+                  "parent": [Circular],
+                },
+                Object {
+                  "id": "random-id",
+                  "name": "",
+                  "parent": [Circular],
+                },
+              ],
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+          ],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+          ],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "children": Array [],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+      ],
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
+
+exports[`populateTree util should match ref/original.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "children": Array [],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+      ],
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
+
+exports[`populateTree util should match tickets.schema.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "id": "random-id",
+                  "name": "",
+                  "parent": [Circular],
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "id": "random-id",
+                      "name": "",
+                      "parent": [Circular],
+                    },
+                    Object {
+                      "id": "random-id",
+                      "name": "",
+                      "parent": [Circular],
+                    },
+                    Object {
+                      "id": "random-id",
+                      "name": "",
+                      "parent": [Circular],
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "id": "random-id",
+                          "name": "",
+                          "parent": [Circular],
+                        },
+                        Object {
+                          "id": "random-id",
+                          "name": "",
+                          "parent": [Circular],
+                        },
+                        Object {
+                          "id": "random-id",
+                          "name": "",
+                          "parent": [Circular],
+                        },
+                        Object {
+                          "id": "random-id",
+                          "name": "",
+                          "parent": [Circular],
+                        },
+                        Object {
+                          "id": "random-id",
+                          "name": "",
+                          "parent": [Circular],
+                        },
+                      ],
+                      "id": "random-id",
+                      "name": "",
+                      "parent": [Circular],
+                    },
+                  ],
+                  "id": "random-id",
+                  "name": "",
+                  "parent": [Circular],
+                },
+              ],
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+          ],
+          "id": "random-id",
+          "name": "",
+          "parent": [Circular],
+        },
+      ],
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
