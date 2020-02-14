@@ -2,7 +2,7 @@ import { isLocalRef, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types/dist';
 import { JSONSchema4 } from 'json-schema';
-import { get } from 'lodash-es';
+import { get as _get } from 'lodash-es';
 import { SchemaNode } from '../types';
 import { isRefNode } from '../utils/guards';
 import { getNodeMetadata, metadataStore } from './metadata';
@@ -36,7 +36,7 @@ export class SchemaTree extends Tree {
   public populateTreeFragment(parent: TreeListParentNode, path: JsonPath) {
     const initialLevel = Tree.getLevel(parent);
     const artificialRoot = Tree.createArtificialRoot();
-    populateTree(get(this.schema, path), artificialRoot, initialLevel, path, {
+    populateTree(_get(this.schema, path), artificialRoot, initialLevel, path, {
       onNode: (node: SchemaNode, parentTreeNode, level: number) => level <= initialLevel + 1,
     });
     this.insertTreeFragment((artificialRoot.children[0] as TreeListParentNode).children, parent.id);
