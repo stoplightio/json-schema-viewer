@@ -28,11 +28,13 @@ describe('SchemaRow component', () => {
       isExpanded: true,
     };
 
-    const wrapper = shallow(shallow(<SchemaRow node={node as SchemaTreeListNode} rowOptions={rowOptions} />)
-      .find(Validations)
-      .shallow()
-      .find(Popover)
-      .prop('content') as React.ReactElement);
+    const wrapper = shallow(
+      shallow(<SchemaRow node={node as SchemaTreeListNode} rowOptions={rowOptions} />)
+        .find(Validations)
+        .shallow()
+        .find(Popover)
+        .prop('content') as React.ReactElement,
+    );
 
     expect(wrapper).toHaveText('enum:null,0,false');
   });
