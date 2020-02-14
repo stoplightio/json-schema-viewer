@@ -2,7 +2,7 @@ import { isLocalRef } from '@stoplight/json';
 import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { IArrayNode, IObjectNode, SchemaKind, SchemaTreeListNode } from '../types';
+import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../utils/guards';
 import { isCombiner } from '../utils/isCombiner';
@@ -10,7 +10,7 @@ import { MetadataStore } from './metadata';
 import { walk } from './walk';
 
 export type WalkingOptions = {
-  depth?: number;
+  onNode?(node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
 };
 
 export type Walker = (
@@ -23,9 +23,10 @@ export type Walker = (
 
 export const populateTree: Walker = (schema, parent, level, path, options) => {
   if (typeof schema !== 'object' || schema === null) return;
-  if (options !== null && options.depth !== void 0 && level >= options.depth) return;
 
   for (const node of walk(schema)) {
+    if (options !== null && options.onNode !== void 0 && !options.onNode(node, parent, level)) continue;
+
     const treeNode: SchemaTreeListNode = {
       id: node.id,
       name: '',
@@ -77,14 +78,14 @@ export const populateTree: Walker = (schema, parent, level, path, options) => {
 };
 
 function processArray(
-  node: TreeListNode,
+  node: SchemaTreeListNode,
   schema: IArrayNode,
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
-): TreeListNode {
+): SchemaTreeListNode {
   if (Array.isArray(schema.items)) {
-    const children: TreeListNode[] = [];
+    const children: SchemaTreeListNode[] = [];
     (node as TreeListParentNode).children = children;
     for (const [i, property] of schema.items.entries()) {
       const child = populateTree(property, node as TreeListParentNode, level + 1, [...path, 'items', i], options);
@@ -96,12 +97,12 @@ function processArray(
     const subtype = getPrimaryType(schema.items);
     switch (subtype) {
       case SchemaKind.Object:
-        return processObject(node, schema.items as IObjectNode, level + 1, [...path, 'items'], options);
+        return processObject(node, schema.items as IObjectNode, level , [...path, 'items'], options);
       case SchemaKind.Array:
-        return processArray(node, schema.items as IObjectNode, level + 1, [...path, 'items'], options);
+        return processArray(node, schema.items as IObjectNode, level, [...path, 'items'], options);
       default:
         if (typeof subtype === 'string' && isCombiner(subtype)) {
-          return processArray(node, schema.items as IObjectNode, level + 1, [...path, 'items'], options);
+          return processArray(node, schema.items as IObjectNode, level , [...path, 'items'], options);
         }
     }
   }

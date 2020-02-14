@@ -1,17 +1,16 @@
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
-import { Tree, TreeState, TreeStore } from '@stoplight/tree-list';
+import { TreeState, TreeStore } from '@stoplight/tree-list';
 import { Intent, Spinner } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import { action, runInAction } from 'mobx';
 import * as React from 'react';
-import SchemaWorker, { WebWorker } from 'web-worker:../workers/schema.ts';
 
 import { JSONSchema4 } from 'json-schema';
-import { populateTree } from '../tree/populateTree';
+import { SchemaTree } from '../tree/tree';
 import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { ComputeSchemaMessageData, isRenderedSchemaMessage } from '../workers/messages';
-import { SchemaTree } from './SchemaTree';
+import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
 export interface IJsonSchemaViewer {
   schema: JSONSchema4;
@@ -32,9 +31,10 @@ export interface IJsonSchemaViewer {
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
   protected readonly treeStore: TreeStore;
-  protected readonly tree: Tree;
+  protected readonly tree: SchemaTree;
+  protected readonly treeState: TreeState;
   protected readonly instanceId: string;
-  public static schemaWorker?: WebWorker;
+  // public static schemaWorker?: WebWorker;
 
   public state = {
     computing: false,
@@ -43,8 +43,9 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   constructor(props: IJsonSchemaViewer & ErrorBoundaryForwardedProps) {
     super(props);
 
-    this.tree = new Tree(Tree.createArtificialRoot());
-    this.treeStore = new TreeStore(this.tree, new TreeState(), {
+    this.treeState = new TreeState();
+    this.tree = new SchemaTree(this.schema, this.treeState, this.expandedDepth);
+    this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
 
@@ -130,35 +131,33 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   // }
 
   protected renderSchema() {
-    populateTree(this.schema, this.tree.root, 0, [], null);
-    this.tree.root = this.tree.root.children[0];
-    this.tree.invalidate();
+    this.tree.populate();
     // const needsFullRendering = true;
     // this.prerenderSchema();
     // if (!needsFullRendering) {
     //   return;
     // }
 
-    const message: ComputeSchemaMessageData = {
-      instanceId: this.instanceId,
-      schema: this.schema,
-      mergeAllOf: this.props.mergeAllOf !== false,
-    };
-
-    if (JsonSchemaViewerComponent.schemaWorker !== void 0) {
-      JsonSchemaViewerComponent.schemaWorker.postMessage(message);
-    }
+    // const message: ComputeSchemaMessageData = {
+    //   instanceId: this.instanceId,
+    //   schema: this.schema,
+    //   mergeAllOf: this.props.mergeAllOf !== false,
+    // };
+    //
+    // if (JsonSchemaViewerComponent.schemaWorker !== void 0) {
+    //   JsonSchemaViewerComponent.schemaWorker.postMessage(message);
+    // }
 
     this.setState({ computing: false });
   }
 
   public componentDidMount() {
     // let's initialize it lazily
-    if (JsonSchemaViewerComponent.schemaWorker === void 0) {
-      JsonSchemaViewerComponent.schemaWorker = new SchemaWorker();
-    }
+    // if (JsonSchemaViewerComponent.schemaWorker === void 0) {
+    //   JsonSchemaViewerComponent.schemaWorker = new SchemaWorker();
+    // }
 
-    JsonSchemaViewerComponent.schemaWorker.addEventListener('message', this.handleWorkerMessage);
+    // JsonSchemaViewerComponent.schemaWorker.addEventListener('message', this.handleWorkerMessage);
     this.renderSchema();
   }
 
@@ -197,7 +196,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
             <Spinner className="relative" intent={Intent.PRIMARY} size={Spinner.SIZE_LARGE} />
           </div>
         )}
-        <SchemaTree expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+        <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
       </div>
     );
   }

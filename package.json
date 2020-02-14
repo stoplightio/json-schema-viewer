@@ -45,6 +45,7 @@
   "dependencies": {
     "@stoplight/json": "^3.5.1",
     "@stoplight/react-error-boundary": "^1.0.0",
+    "@stoplight/tree-list": "file:.yalc/@stoplight/tree-list",
     "classnames": "^2.2.6",
     "json-schema-merge-allof": "https://github.com/stoplightio/json-schema-merge-allof",
     "lodash-es": "^4.17.15",
@@ -59,7 +60,6 @@
     "@stoplight/markdown-viewer": "^3.5.5",
     "@stoplight/scripts": "7.0.4",
     "@stoplight/storybook-config": "^2.0.4",
-    "@stoplight/tree-list": "file:.yalc/@stoplight/tree-list",
     "@stoplight/types": "11.0.0",
     "@stoplight/ui-kit": "^2.10.0",
     "@types/classnames": "^2.2.9",

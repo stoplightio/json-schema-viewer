@@ -79,7 +79,7 @@ export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<Sch
     }
   } else {
     const node = processNode(schema);
-    if (node !== void 0 ) {
+    if (node !== void 0) {
       yield node;
     }
   }

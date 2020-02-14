@@ -23,7 +23,7 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       name={text('name', 'my schema')}
       schema={schema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 0)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}

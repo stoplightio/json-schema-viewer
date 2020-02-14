@@ -3,8 +3,7 @@
   "packages": {
     "@stoplight/tree-list": {
       "signature": "2d0c8d7db40f2b21094b8c818d648978",
-      "file": true,
-      "replaced": "^4.8.0"
+      "file": true
     }
   }
 }
