@@ -13,6 +13,8 @@ export type SchemaTreeOptions = {
   mergeAllOf: boolean;
 };
 
+export { TreeState as SchemaTreeState }
+
 export class SchemaTree extends Tree {
   public expandedDepth: number;
   public mergeAllOf: boolean;

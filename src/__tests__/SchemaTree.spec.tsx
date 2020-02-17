@@ -40,7 +40,7 @@ describe('SchemaTree component', () => {
     useStateSpy = jest.spyOn(React, 'useState').mockImplementation(() => [{}, setStateActionSpy]);
     useCallbackSpy = jest.spyOn(React, 'useCallback');
     (useMetadata as jest.Mock).mockReturnValue({});
-    store = new TreeStore(new Tree(Tree.createArtificialRoot()), new TreeState());
+    store = new TreeStore(new Tree(), new TreeState());
   });
 
   afterEach(() => {
