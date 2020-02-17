@@ -2,6 +2,7 @@ import { isLocalRef } from '@stoplight/json';
 import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
+import { isObject as _isObject } from 'lodash-es';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
 import { mergeAllOf } from '../utils';
 import { getPrimaryType } from '../utils/getPrimaryType';
@@ -56,7 +57,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
     } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
       parent.children.pop();
       populateTree(mergeAllOf(schema), parent, level, path, options);
-    } else if (node.properties !== void 0) {
+    } else if (_isObject(node.properties)) {
       (treeNode as TreeListParentNode).children = [];
 
       for (const [i, property] of node.properties.entries()) {
@@ -97,7 +98,7 @@ function processArray(
         children.push(child);
       }
     }
-  } else if (schema.items !== void 0) {
+  } else if (_isObject(schema.items)) {
     const subtype = getPrimaryType(schema.items);
     switch (subtype) {
       case SchemaKind.Object:
@@ -123,7 +124,7 @@ function processObject(
 ): TreeListNode {
   const children: TreeListNode[] = [];
 
-  if (schema.properties !== void 0) {
+  if (_isObject(schema.properties)) {
     (node as TreeListParentNode).children = children;
 
     for (const [prop, property] of Object.entries(schema.properties)) {
@@ -140,7 +141,7 @@ function processObject(
     }
   }
 
-  if (schema.patternProperties !== void 0) {
+  if (_isObject(schema.patternProperties)) {
     (node as TreeListParentNode).children = children;
 
     for (const [prop, property] of Object.entries(schema.patternProperties)) {
