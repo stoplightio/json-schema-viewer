@@ -3,6 +3,7 @@ import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
+import { mergeAllOf } from '../utils';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../utils/guards';
 import { isCombiner } from '../utils/isCombiner';
@@ -10,6 +11,7 @@ import { metadataStore } from './metadata';
 import { walk } from './walk';
 
 export type WalkingOptions = {
+  mergeAllOf: boolean;
   onNode?(node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
 };
 
@@ -35,34 +37,14 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
 
     parent.children.push(treeNode);
     metadataStore.set(treeNode, {
-      schema: node,
+      schemaNode: node,
+      schema,
       path,
     });
 
     if (isRefNode(node) && isLocalRef(node.$ref) && node.$ref !== '#') {
       (treeNode as TreeListParentNode).children = [];
-    } else if (isCombinerNode(node)) {
-      if (node.properties !== void 0) {
-        (treeNode as TreeListParentNode).children = [];
-
-        for (const [i, property] of node.properties.entries()) {
-          if ('type' in node) {
-            node.properties[i] = {
-              ...property,
-              type: property.type || node.type,
-            };
-          }
-
-          populateTree(
-            node.properties[i],
-            treeNode as TreeListParentNode,
-            level + 1,
-            [...path, node.combiner, i],
-            options,
-          );
-        }
-      }
-    } else {
+    } else if (!isCombinerNode(node)) {
       switch (getPrimaryType(node)) {
         case SchemaKind.Array:
           processArray(treeNode, node as IArrayNode, level, path, options);
@@ -70,6 +52,28 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
         case SchemaKind.Object:
           processObject(treeNode, node as IObjectNode, level, path, options);
           break;
+      }
+    } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
+      parent.children.pop();
+      populateTree(mergeAllOf(schema), parent, level, path, options);
+    } else if (node.properties !== void 0) {
+      (treeNode as TreeListParentNode).children = [];
+
+      for (const [i, property] of node.properties.entries()) {
+        if ('type' in node) {
+          node.properties[i] = {
+            ...property,
+            type: property.type || node.type,
+          };
+        }
+
+        populateTree(
+          node.properties[i],
+          treeNode as TreeListParentNode,
+          level + 1,
+          [...path, node.combiner, i],
+          options,
+        );
       }
     }
   }

@@ -100,6 +100,7 @@ export interface ITreeListNode {
 export interface ITreeListNodeWithChildren extends ITreeListNode {
     children: TreeListNode[];
 }
+export declare type TreeFragment = TreeListNode[];
 export declare type TreeListNode = ITreeListNode | ITreeListNodeWithChildren;
 export declare type TreeListParentNode = ITreeListNodeWithChildren;
 export declare type DeprecatedTreeListNode<T extends object = object> = Omit<TreeListNode, 'parent' | 'children'> & {

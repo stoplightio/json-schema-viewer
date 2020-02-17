@@ -1,5 +1,5 @@
 import { Optional } from '@stoplight/types';
-import { DeprecatedTreeListNode, TreeListNode, TreeListParentNode } from '../types';
+import { DeprecatedTreeListNode, TreeFragment, TreeListNode, TreeListParentNode } from '../types';
 import { IndexLookup } from './cache';
 declare type Arrayish = Pick<typeof Array['prototype'], 'indexOf' | 'every'>;
 declare type Range = {
@@ -12,17 +12,18 @@ export interface ITreeIterationOptions {
     readonly expanded: ((node: TreeListParentNode) => boolean) | null;
 }
 export declare class Tree implements Arrayish {
-    protected readonly tree: TreeListParentNode;
     protected readonly iterationOptions: ITreeIterationOptions | null;
-    root: TreeListParentNode;
+    protected readonly tree: TreeListParentNode;
+    protected _root: TreeListParentNode;
+    get root(): import("../types").ITreeListNodeWithChildren;
     protected readonly indexLookup: IndexLookup<TreeListNode>;
-    private readonly wrapped;
-    private readonly sorted;
-    private readonly filtered;
+    private wrapped;
+    private sorted;
+    private filtered;
     private _count;
     get count(): number;
     set count(val: number);
-    constructor(tree: TreeListParentNode, iterationOptions?: ITreeIterationOptions | null, cacheSize?: number);
+    constructor(iterationOptions?: ITreeIterationOptions | null, tree?: TreeListParentNode, cacheSize?: number);
     static getLevel(node: TreeListNode): any;
     static getDropZoneId(node: TreeListNode): any;
     clearCache(): void;
@@ -38,6 +39,8 @@ export declare class Tree implements Arrayish {
     static getOffsetForNode(node: TreeListNode): number;
     protected _itemAt(node: TreeListParentNode, pos: number, boundaries: Range): Optional<TreeListNode>;
     protected static readonly boundaries: Range;
+    private static getLastItem;
+    protected static getNodeIndex(node: TreeListNode): number;
     private static nextItem;
     nextItem(node: TreeListNode): Optional<TreeListNode>;
     prevItem(node: TreeListNode): Optional<TreeListNode>;
@@ -51,10 +54,11 @@ export declare class Tree implements Arrayish {
     protected invalidateChildren(node: TreeListParentNode): void;
     wrap(node: TreeListParentNode): void;
     unwrap(node: TreeListParentNode): void;
-    moveNode(node: TreeListNode, parentId: string | null): void;
-    insertNode(node: TreeListNode, parentId: string | null): void;
-    insertTreeFragment(fragment: TreeListNode[], parentId: string | null): void;
+    moveNode(node: TreeListNode, parent: TreeListParentNode): void;
+    insertNode(node: TreeListNode, parent: TreeListParentNode): void;
+    insertTreeFragment(fragment: TreeFragment, parent: TreeListParentNode): void;
     removeNode(node: TreeListNode): void;
+    replaceNode(node: TreeListNode, newNode: TreeListNode): void;
     protected getCount(node: TreeListParentNode): any;
     protected resetCounter(node: TreeListParentNode): void;
     protected processTreeFragment(node: TreeListParentNode): number;

@@ -1,6 +1,6 @@
 {
   "name": "@stoplight/tree-list",
-  "version": "0.0.1-2d0c8d7d",
+  "version": "0.0.1-3a4ec67a",
   "description": "A React component that renders a file tree like interface.",
   "keywords": [],
   "sideEffects": false,

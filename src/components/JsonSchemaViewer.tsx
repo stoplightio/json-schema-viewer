@@ -7,7 +7,6 @@ import * as React from 'react';
 import { JSONSchema4 } from 'json-schema';
 import { SchemaTree } from '../tree/tree';
 import { GoToRefHandler, RowRenderer } from '../types';
-import { mergeAllOf } from '../utils';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
@@ -36,11 +35,10 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     super(props);
 
     this.treeState = new TreeState();
-    this.tree = new SchemaTree(
-      props.mergeAllOf ? mergeAllOf(props.schema) : props.schema,
-      this.treeState,
-      this.expandedDepth,
-    );
+    this.tree = new SchemaTree(props.schema, this.treeState, {
+      expandedDepth: this.expandedDepth,
+      mergeAllOf: !!this.props.mergeAllOf,
+    });
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
@@ -79,7 +77,8 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.tree.expandedDepth = this.expandedDepth;
       this.renderSchema();
     } else if (prevProps.schema !== this.props.schema || prevProps.mergeAllOf !== this.props.mergeAllOf) {
-      this.tree.schema = this.props.mergeAllOf ? mergeAllOf(this.props.schema) : this.props.schema;
+      this.tree.mergeAllOf = !!this.props.mergeAllOf;
+      this.tree.schema = this.props.schema;
       this.renderSchema();
     }
   }

@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@stoplight/tree-list": {
-      "signature": "2d0c8d7db40f2b21094b8c818d648978",
+      "signature": "3a4ec67ab4abb12019cfd1bff79c82fa",
       "file": true
     }
   }

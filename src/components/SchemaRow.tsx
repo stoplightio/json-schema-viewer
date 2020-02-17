@@ -19,9 +19,9 @@ const ROW_OFFSET = 7;
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
   const metadata = getNodeMetadata(node);
-  const { path, schema: schemaNode } = metadata;
+  const { path, schemaNode } = metadata;
 
-  const parentSchemaNode = (node.parent !== null && metadataStore.get(node.parent)?.schema) || null;
+  const parentSchemaNode = (node.parent !== null && metadataStore.get(node.parent)?.schemaNode) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
   return (

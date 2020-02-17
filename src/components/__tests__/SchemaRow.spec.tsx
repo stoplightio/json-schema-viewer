@@ -16,7 +16,7 @@ describe('SchemaRow component', () => {
     };
 
     metadataStore.set(node, {
-      schema: {
+      schemaNode: {
         name: '',
         id: '232',
         type: SchemaKind.Object,
@@ -26,6 +26,7 @@ describe('SchemaRow component', () => {
         annotations: {},
         enum: [null, 0, false],
       } as any,
+      schema: {} as any,
       path: [],
     });
 
