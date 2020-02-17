@@ -2,7 +2,7 @@ import { isLocalRef } from '@stoplight/json';
 import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { isObject as _isObject } from 'lodash-es';
+import { isObject as _isObject } from 'lodash';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
 import { mergeAllOf } from '../utils';
 import { getPrimaryType } from '../utils/getPrimaryType';

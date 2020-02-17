@@ -1,6 +1,6 @@
 import { isLocalRef } from '@stoplight/json';
 import { JsonPath } from '@stoplight/types';
-import { size as _size } from 'lodash-es';
+import { size as _size } from 'lodash';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
 import { isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';

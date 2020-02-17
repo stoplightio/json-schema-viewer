@@ -2,7 +2,7 @@ import { isLocalRef, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { get as _get } from 'lodash-es';
+import { get as _get } from 'lodash';
 import { SchemaNode } from '../types';
 import { isRefNode } from '../utils/guards';
 import { getNodeMetadata, metadataStore } from './metadata';
