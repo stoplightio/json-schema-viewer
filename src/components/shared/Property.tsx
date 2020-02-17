@@ -1,3 +1,4 @@
+import { isLocalRef } from '@stoplight/json';
 import { JsonPath } from '@stoplight/types';
 import { size as _size } from 'lodash-es';
 import * as React from 'react';
@@ -48,7 +49,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, path, onGoT
         {'$ref' in node ? `[${node.$ref}]` : null}
       </Types>
 
-      {'$ref' in node && !onGoToRef && !('children' in node) ? (
+      {'$ref' in node && !onGoToRef && !isLocalRef(node.$ref) ? (
         <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>
           (go to ref)
         </a>
