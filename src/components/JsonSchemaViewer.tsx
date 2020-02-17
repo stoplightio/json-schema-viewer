@@ -37,11 +37,15 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     this.treeState = new TreeState();
     this.tree = new SchemaTree(props.schema, this.treeState, {
       expandedDepth: this.expandedDepth,
-      mergeAllOf: !!this.props.mergeAllOf,
+      mergeAllOf: this.mergeAllOf,
     });
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
+  }
+
+  protected get mergeAllOf() {
+    return this.props.mergeAllOf !== false;
   }
 
   protected get expandedDepth(): number {
@@ -77,7 +81,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.tree.expandedDepth = this.expandedDepth;
       this.renderSchema();
     } else if (prevProps.schema !== this.props.schema || prevProps.mergeAllOf !== this.props.mergeAllOf) {
-      this.tree.mergeAllOf = !!this.props.mergeAllOf;
+      this.tree.mergeAllOf = this.mergeAllOf;
       this.tree.schema = this.props.schema;
       this.renderSchema();
     }
