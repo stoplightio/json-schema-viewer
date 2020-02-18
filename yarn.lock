@@ -1579,7 +1579,7 @@
     lodash "^4.17.15"
     safe-stable-stringify "^1.1"
 
-"@stoplight/lifecycle@^2.1.3":
+"@stoplight/lifecycle@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@stoplight/lifecycle/-/lifecycle-2.2.1.tgz#bfa837d1dd3bd97eab96d8c8cf1bc3ea5ddcd263"
   integrity sha512-XOyfoJyWp5tXRFWq43mvnOoYTvkupwqGjDQnQ2o1qRNnfTrE70bjNK5ptD9A6m3zajAXgbl0puFa7P2CMg7+ew==
@@ -1683,13 +1683,15 @@
     ts-loader "^6.2.1"
     webpack "^4.41.5"
 
-"@stoplight/tree-list@file:.yalc/@stoplight/tree-list":
-  version "0.0.1-3a4ec67a"
+"@stoplight/tree-list@5.0.0-beta.1":
+  version "5.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/tree-list/-/tree-list-5.0.0-beta.1.tgz#5ec0b96365af3684d118403ef6fe1f6cc0c754b9"
+  integrity sha512-X2ShK7uugu+Aiunx45txafPUTV+0qxjDX5n9r1y5WcwK8Ds6XMgaM0/FgzTw4I9XWQ310WK77ndsEVNn9axrhQ==
   dependencies:
-    "@stoplight/lifecycle" "^2.1.3"
+    "@stoplight/lifecycle" "^2.2.1"
     "@stoplight/react-error-boundary" "^1.0.0"
     classnames "^2.2.6"
-    mobx-react-lite "^1.5.0"
+    mobx-react-lite "^1.5.2"
     strict-event-emitter-types "^2.0.0"
 
 "@stoplight/types@11.0.0":
@@ -10013,7 +10015,7 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdir
   dependencies:
     minimist "0.0.8"
 
-mobx-react-lite@^1.4.1, mobx-react-lite@^1.5.0:
+mobx-react-lite@^1.4.1, mobx-react-lite@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.5.2.tgz#c4395b0568b9cb16f07669d8869cc4efa1b8656d"
   integrity sha512-PyZmARqqWtpuQaAoHF5pKX7h6TKNLwq6vtovm4zZvG6sEbMRHHSqioGXSeQbpRmG8Kw8uln3q/W1yMO5IfL5Sg==
