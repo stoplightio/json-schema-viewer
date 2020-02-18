@@ -50,7 +50,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
   protected get expandedDepth(): number {
     if (this.props.expanded) {
-      return 2 ** 31 - 3; // tree-list kind of equivalent of expanded: all
+      return Infinity; // tree-list kind of equivalent of expanded: all
     }
 
     if (this.props.defaultExpandedDepth !== undefined) {
