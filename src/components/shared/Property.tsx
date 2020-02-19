@@ -1,6 +1,7 @@
 import { isLocalRef } from '@stoplight/json';
-import { JsonPath } from '@stoplight/types';
-import { size as _size } from 'lodash';
+import { JsonPath, Optional } from '@stoplight/types';
+import { JSONSchema4 } from 'json-schema';
+import { isObject as _isObject, size as _size } from 'lodash';
 import * as React from 'react';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
 import { isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
@@ -13,21 +14,29 @@ export interface IProperty {
   onGoToRef?: GoToRefHandler;
 }
 
+function count(obj: Optional<JSONSchema4 | null>): number | null {
+  if (_isObject(obj)) {
+    return _size(obj);
+  }
+
+  return null;
+}
+
 export const Property: React.FunctionComponent<IProperty> = ({ node, path, onGoToRef }) => {
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : void 0;
 
   const childrenCount = React.useMemo<number | null>(() => {
     if (type === SchemaKind.Object) {
-      return _size((node as IObjectNode).properties);
+      return count((node as IObjectNode).properties);
     }
 
     if (subtype === SchemaKind.Object) {
-      return _size(((node as IArrayNode).items as IObjectNode).properties);
+      return count(((node as IArrayNode).items as IObjectNode).properties);
     }
 
     if (subtype === SchemaKind.Array) {
-      return _size((node as IArrayNode).items as IArrayNode);
+      return count((node as IArrayNode).items as IArrayNode);
     }
 
     return null;
