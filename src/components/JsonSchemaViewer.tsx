@@ -1,5 +1,5 @@
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
-import { TreeState, TreeStore } from '@stoplight/tree-list';
+import { Tree, TreeState, TreeStore } from '@stoplight/tree-list';
 import cn from 'classnames';
 import { action } from 'mobx';
 import * as React from 'react';
@@ -61,10 +61,8 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   }
 
   protected renderSchema() {
-    if (this.tree.count > 1) {
-      for (const child of this.tree) {
-        this.tree.removeNode(child);
-      }
+    if (this.tree.count > 0) {
+      this.tree.setRoot(Tree.createArtificialRoot());
     }
 
     this.tree.populate();
