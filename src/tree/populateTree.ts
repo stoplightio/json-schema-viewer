@@ -5,9 +5,9 @@ import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
 import { mergeAllOf } from '../utils';
+import { getCombiner } from '../utils/getCombiner';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../utils/guards';
-import { isCombiner } from '../utils/isCombiner';
 import { metadataStore } from './metadata';
 import { walk } from './walk';
 
@@ -106,8 +106,10 @@ function processArray(
       case SchemaKind.Array:
         return processArray(node, schema.items as IObjectNode, level, [...path, 'items'], options);
       default:
-        if (typeof subtype === 'string' && isCombiner(subtype)) {
-          return processArray(node, schema.items as IObjectNode, level, [...path, 'items'], options);
+        const combiner = getCombiner(schema.items);
+        if (combiner) {
+          (node as TreeListParentNode).children = [];
+          populateTree(schema.items, node as TreeListParentNode, level, [...path, 'items'], options);
         }
     }
   }
