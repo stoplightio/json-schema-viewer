@@ -1,16 +1,17 @@
 import { isLocalRef } from '@stoplight/json';
-import { JsonPath, Optional } from '@stoplight/types';
+import { Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject, size as _size } from 'lodash';
 import * as React from 'react';
-import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
+import { getNodeMetadata } from '../../tree';
+import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
+import { getPrimaryType } from '../../utils/getPrimaryType';
 import { isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
 import { Types } from './Types';
 
 export interface IProperty {
-  node: SchemaNode;
-  path: JsonPath;
+  node: SchemaTreeListNode;
   onGoToRef?: GoToRefHandler;
 }
 
@@ -22,7 +23,21 @@ function count(obj: Optional<JSONSchema4 | null>): number | null {
   return null;
 }
 
-export const Property: React.FunctionComponent<IProperty> = ({ node, path, onGoToRef }) => {
+function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
+  if (treeNode.parent === null) return false;
+  try {
+    return getPrimaryType(getNodeMetadata(treeNode.parent).schema) === SchemaKind.Object;
+  } catch {
+    return false;
+  }
+}
+
+function isExternalRefSchemaNode(schemaNode: SchemaNode) {
+  return '$ref' in schemaNode && !isLocalRef(schemaNode.$ref);
+}
+
+export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
+  const { path, schemaNode: node } = getNodeMetadata(treeNode);
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : void 0;
 
@@ -50,15 +65,13 @@ export const Property: React.FunctionComponent<IProperty> = ({ node, path, onGoT
 
   return (
     <>
-      {path.length > 1 && (path[path.length - 2] === 'properties' || path[path.length - 2] === 'patternProperties') && (
-        <div className="mr-2">{path[path.length - 1]}</div>
-      )}
+      {path.length > 0 && shouldShowPropertyName(treeNode) && <div className="mr-2">{path[path.length - 1]}</div>}
 
       <Types type={type} subtype={subtype}>
         {'$ref' in node ? `[${node.$ref}]` : null}
       </Types>
 
-      {'$ref' in node && !onGoToRef && !isLocalRef(node.$ref) ? (
+      {onGoToRef && isExternalRefSchemaNode(node) ? (
         <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>
           (go to ref)
         </a>

@@ -2,8 +2,7 @@ import { isLocalRef, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { get as _get } from 'lodash';
-import { SchemaNode } from '../types';
+import { get as _get, isEqual as _isEqual } from 'lodash';
 import { isRefNode } from '../utils/guards';
 import { getNodeMetadata, metadataStore } from './metadata';
 import { populateTree } from './populateTree';
@@ -13,7 +12,7 @@ export type SchemaTreeOptions = {
   mergeAllOf: boolean;
 };
 
-export { TreeState as SchemaTreeState }
+export { TreeState as SchemaTreeState };
 
 export class SchemaTree extends Tree {
   public expandedDepth: number;
@@ -32,7 +31,7 @@ export class SchemaTree extends Tree {
     const expanded = {};
     populateTree(this.schema, this.root, 0, [], {
       mergeAllOf: this.mergeAllOf,
-      onNode: (node: SchemaNode, parentTreeNode, level: number): boolean => {
+      onNode: (node, parentTreeNode, level): boolean => {
         if (isRefNode(node) && isLocalRef(node.$ref)) {
           expanded[node.id] = false;
         }
@@ -52,9 +51,22 @@ export class SchemaTree extends Tree {
     const artificialRoot = Tree.createArtificialRoot();
     populateTree(schema, artificialRoot, initialLevel, path, {
       mergeAllOf: this.mergeAllOf,
-      onNode: (node: SchemaNode, parentTreeNode, level: number) => level <= initialLevel + 1,
+      onNode: (node, parentTreeNode, level) => level <= this.expandedDepth + 1 || level <= initialLevel + 1,
     });
-    this.insertTreeFragment((artificialRoot.children[0] as TreeListParentNode).children, parent);
+
+    if (artificialRoot.children.length === 0) {
+      throw new Error(`Could not expand node ${path.join('.')}`);
+    }
+
+    // todo: improve walk, i.e. add stepIn so that this is not required
+    if (
+      'children' in artificialRoot.children[0] &&
+      _isEqual(getNodeMetadata(parent).path, getNodeMetadata(artificialRoot.children[0]).path)
+    ) {
+      this.insertTreeFragment(artificialRoot.children[0].children, parent);
+    } else {
+      this.insertTreeFragment(artificialRoot.children, parent);
+    }
   }
 
   public unwrap(node: TreeListParentNode) {
@@ -62,10 +74,13 @@ export class SchemaTree extends Tree {
       return super.unwrap(node);
     }
 
-    const { path, schemaNode, schema } = getNodeMetadata(node);
+    const metadata = getNodeMetadata(node);
+    const { path, schemaNode, schema } = metadata;
     if (isRefNode(schemaNode)) {
       const refPath = pointerToPath(schemaNode.$ref);
-      this.populateTreeFragment(node, _get(this.schema, refPath), refPath); // DO NOTE THAT NODES PLACED UNDER THE REF MAY NOT HAVE CORRECT PATHS
+      const schemaFragment = _get(this.schema, refPath);
+      this.populateTreeFragment(node, schemaFragment, path);
+      metadata.schema = schemaFragment;
     } else {
       this.populateTreeFragment(node, schema, path);
     }

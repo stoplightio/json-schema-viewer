@@ -1,86 +1,124 @@
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
-import { SchemaNode } from '../../types';
+import { metadataStore } from '../../tree/metadata';
+import { walk } from '../../tree/walk';
+import { SchemaTreeListNode } from '../../types';
 import { Property, Types } from '../shared';
 
 describe('Property component', () => {
   it('should render Types with proper type and subtype', () => {
-    const node: SchemaNode = {
-      id: '2',
+    const treeNode: SchemaTreeListNode = {
+      id: 'foo',
+      name: '',
+      parent: null,
+    };
+
+    const schema: JSONSchema4 = {
       type: 'array',
       items: {
         type: 'string',
       },
-      annotations: {
-        examples: {},
-      },
-      validations: {},
     };
 
-    const wrapper = shallow(<Property node={node} path={[]} />);
+    metadataStore.set(treeNode, {
+      schemaNode: walk(schema).next().value,
+      path: [],
+      schema,
+    });
+
+    const wrapper = shallow(<Property node={treeNode} />);
     expect(wrapper.find(Types)).toExist();
     expect(wrapper.find(Types)).toHaveProp('type', 'array');
     expect(wrapper.find(Types)).toHaveProp('subtype', 'string');
   });
 
   it('should handle nullish items', () => {
-    const node = {
-      id: '1',
-      type: 'array',
-      items: null,
-      annotations: {
-        examples: {},
-      },
-      validations: {},
-    } as SchemaNode;
+    const treeNode: SchemaTreeListNode = {
+      id: 'foo',
+      name: '',
+      parent: null,
+    };
 
-    const wrapper = shallow(<Property node={node} path={[]} />);
+    const schema: JSONSchema4 = {
+      type: 'array',
+      items: null as any,
+    };
+
+    metadataStore.set(treeNode, {
+      schemaNode: walk(schema).next().value,
+      path: [],
+      schema,
+    });
+
+    const wrapper = shallow(<Property node={treeNode} />);
     expect(wrapper).not.toBeEmptyRender();
   });
 
   describe('properties counter', () => {
     it('given missing properties property, should not display the counter', () => {
-      const node = {
-        id: '1',
-        type: 'object',
-        annotations: {
-          examples: {},
-        },
-        validations: {},
-      } as SchemaNode;
+      const treeNode: SchemaTreeListNode = {
+        id: 'foo',
+        name: '',
+        parent: null,
+      };
 
-      const wrapper = shallow(<Property node={node} path={[]} />);
+      const schema: JSONSchema4 = {
+        type: 'object',
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
       expect(wrapper.findWhere(el => /^\{\d\}$/.test(el.text()))).not.toExist();
     });
 
     it('given nullish properties property, should not display the counter', () => {
-      const node = {
-        id: '1',
-        properties: null,
-        type: 'object',
-        annotations: {
-          examples: {},
-        },
-        validations: {},
-      } as SchemaNode;
+      const treeNode: SchemaTreeListNode = {
+        id: 'foo',
+        name: '',
+        parent: null,
+      };
 
-      const wrapper = shallow(<Property node={node} path={[]} />);
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: null as any,
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
       expect(wrapper.findWhere(el => /^\{\d\}$/.test(el.text()))).not.toExist();
     });
 
     it('given object properties property, should display the counter', () => {
-      const node = {
-        id: '1',
-        properties: {},
-        type: 'object',
-        annotations: {
-          examples: {},
-        },
-        validations: {},
-      } as SchemaNode;
+      const treeNode: SchemaTreeListNode = {
+        id: 'foo',
+        name: '',
+        parent: null,
+      };
 
-      const wrapper = shallow(<Property node={node} path={[]} />);
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {},
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
       expect(wrapper.findWhere(el => /^\{\d\}$/.test(el.text())).first()).toHaveText('{0}');
     });
   });
