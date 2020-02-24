@@ -51,7 +51,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
           node.parent.children[0] !== node && <Divider kind={parentSchemaNode.combiner} />}
 
         <div className="flex-1 flex truncate">
-          <Property node={schemaNode} path={metadata.path} onGoToRef={onGoToRef} />
+          <Property node={node} onGoToRef={onGoToRef} />
           {description && <Description value={description} />}
         </div>
 
