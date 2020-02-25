@@ -26,7 +26,14 @@ function count(obj: Optional<JSONSchema4 | null>): number | null {
 function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
   if (treeNode.parent === null) return false;
   try {
-    return getPrimaryType(getNodeMetadata(treeNode.parent).schema) === SchemaKind.Object;
+    const schema = getNodeMetadata(treeNode.parent).schema;
+    let type = getPrimaryType(schema);
+
+    if (type === SchemaKind.Array && schema.items) {
+      type = getPrimaryType(schema.items);
+    }
+
+    return type === SchemaKind.Object;
   } catch {
     return false;
   }

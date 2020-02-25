@@ -1,7 +1,9 @@
+import { TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
 import { walk } from '../../tree/walk';
 import { SchemaTreeListNode } from '../../types';
@@ -120,6 +122,103 @@ describe('Property component', () => {
 
       const wrapper = shallow(<Property node={treeNode} />);
       expect(wrapper.findWhere(el => /^\{\d\}$/.test(el.text())).first()).toHaveText('{0}');
+    });
+  });
+
+  describe('properties names', () => {
+    test('given an object, should display names its properties', () => {
+      const schema: JSONSchema4 = {
+        properties: {
+          foo: {
+            type: 'string',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new TreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: false,
+        resolveRef: void 0,
+      });
+
+      tree.populate();
+
+      const wrapper = shallow(<Property node={Array.from(tree)[1]} />);
+      expect(wrapper.find('div').first()).toHaveText('foo');
+    });
+
+    test('given an array of objects, should display names of those properties', () => {
+      const schema: JSONSchema4 = {
+        type: 'array',
+        items: {
+          properties: {
+            foo: {
+              type: 'string',
+            },
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new TreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: false,
+        resolveRef: void 0,
+      });
+
+      tree.populate();
+
+      const wrapper = shallow(<Property node={Array.from(tree)[1]} />);
+      expect(wrapper.find('div').first()).toHaveText('foo');
+    });
+
+    test('given a ref pointing at primitive type, should not display property name', () => {
+      const schema: JSONSchema4 = {
+        properties: {
+          foo: {
+            $ref: '#/properties/bar',
+          },
+          bar: {
+            type: 'string',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new TreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: false,
+        resolveRef: void 0,
+      });
+
+      tree.populate();
+      tree.unwrap(Array.from(tree)[1] as TreeListParentNode);
+
+      const wrapper = shallow(<Property node={Array.from(tree)[2]} />);
+      expect(wrapper.find('div').first()).not.toExist();
+    });
+
+    xtest('given a ref pointing at complex type, should not display property name', () => {
+      const schema: JSONSchema4 = {
+        properties: {
+          foo: {
+            $ref: '#/properties/bar',
+          },
+          bar: {
+            type: 'object',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new TreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: false,
+        resolveRef: void 0,
+      });
+
+      tree.populate();
+      tree.unwrap(Array.from(tree)[1] as TreeListParentNode);
+
+      const wrapper = shallow(<Property node={Array.from(tree)[2]} />);
+      expect(wrapper.find('div').first()).not.toExist();
     });
   });
 });
