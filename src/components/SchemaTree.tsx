@@ -10,7 +10,6 @@ export interface ISchemaTree {
   treeStore: TreeStore;
   schema: JSONSchema4;
   name?: string;
-  dereferencedSchema?: JSONSchema4;
   hideTopBar?: boolean;
   expanded?: boolean;
   maxRows?: number;
