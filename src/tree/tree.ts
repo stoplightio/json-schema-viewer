@@ -1,15 +1,18 @@
 import { isLocalRef, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
-import { JsonPath } from '@stoplight/types';
+import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { get as _get, isEqual as _isEqual } from 'lodash';
+import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
 import { isRefNode } from '../utils/guards';
 import { getNodeMetadata, metadataStore } from './metadata';
 import { populateTree } from './populateTree';
 
+export type SchemaTreeRefDereferenceFn = (path: JsonPath, schema: JSONSchema4) => Optional<JSONSchema4>;
+
 export type SchemaTreeOptions = {
   expandedDepth: number;
   mergeAllOf: boolean;
+  resolveRef: Optional<SchemaTreeRefDereferenceFn>;
 };
 
 export { TreeState as SchemaTreeState };
@@ -17,12 +20,14 @@ export { TreeState as SchemaTreeState };
 export class SchemaTree extends Tree {
   public expandedDepth: number;
   public mergeAllOf: boolean;
+  protected resolveRef: Optional<SchemaTreeRefDereferenceFn>;
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
     super();
 
     this.expandedDepth = opts.expandedDepth;
     this.mergeAllOf = opts.mergeAllOf;
+    this.resolveRef = opts.resolveRef;
   }
 
   protected readonly visited = new WeakSet();
@@ -78,7 +83,11 @@ export class SchemaTree extends Tree {
     const { path, schemaNode, schema } = metadata;
     if (isRefNode(schemaNode)) {
       const refPath = pointerToPath(schemaNode.$ref);
-      const schemaFragment = _get(this.schema, refPath);
+      const schemaFragment = this.resolveRef ? this.resolveRef(refPath, this.schema) : _get(this.schema, refPath);
+      if (!_isObject(schemaFragment)) {
+        throw new ReferenceError(`Could not dereference ${refPath.join('.')}`);
+      }
+
       this.populateTreeFragment(node, schemaFragment, path);
       metadata.schema = schemaFragment;
     } else {

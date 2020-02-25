@@ -5,7 +5,7 @@ import { action } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { SchemaTree } from '../tree/tree';
+import { SchemaTree, SchemaTreeRefDereferenceFn } from '../tree/tree';
 import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
@@ -24,6 +24,7 @@ export interface IJsonSchemaViewer {
   mergeAllOf?: boolean;
   FallbackComponent?: typeof FallbackComponent;
   rowRenderer?: RowRenderer;
+  resolveRef?: SchemaTreeRefDereferenceFn;
 }
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
@@ -38,6 +39,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     this.tree = new SchemaTree(props.schema, this.treeState, {
       expandedDepth: this.expandedDepth,
       mergeAllOf: this.mergeAllOf,
+      resolveRef: this.props.resolveRef,
     });
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
