@@ -81,28 +81,28 @@ describe('SchemaRow component', () => {
       });
 
       tree.populate();
-      tree.unwrap(Array.from(tree)[1] as TreeListParentNode);
+      tree.unwrap(tree.itemAt(1) as TreeListParentNode);
     });
 
     test('should preserve the required validation', () => {
-      const wrapper = shallow(<SchemaRow node={Array.from(tree)[5]} rowOptions={{}} />);
+      const wrapper = shallow(<SchemaRow node={tree.itemAt(6)!} rowOptions={{}} />);
       expect(wrapper.find(Validations)).toHaveProp('required', true);
     });
 
     test('should preserve the optional validation', () => {
-      const wrapper = shallow(<SchemaRow node={Array.from(tree)[6]} rowOptions={{}} />);
+      const wrapper = shallow(<SchemaRow node={tree.itemAt(7)!} rowOptions={{}} />);
       expect(wrapper.find(Validations)).toHaveProp('required', false);
     });
 
     describe('given a referenced object', () => {
       test('should preserve the required validation', () => {
-        const wrapper = shallow(<SchemaRow node={Array.from(tree)[2]} rowOptions={{}} />);
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} />);
 
         expect(wrapper.find(Validations)).toHaveProp('required', true);
       });
 
       test('should preserve the optional validation', () => {
-        const wrapper = shallow(<SchemaRow node={Array.from(tree)[3]} rowOptions={{}} />);
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} />);
         expect(wrapper.find(Validations)).toHaveProp('required', false);
       });
     });

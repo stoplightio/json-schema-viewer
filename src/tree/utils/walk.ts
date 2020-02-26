@@ -1,13 +1,13 @@
 import { JSONSchema4 } from 'json-schema';
-import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, SchemaKind, SchemaNode } from '../types';
-import { flattenTypes } from '../utils/flattenTypes';
-import { generateId } from '../utils/generateId';
-import { getAnnotations } from '../utils/getAnnotations';
-import { getCombiner } from '../utils/getCombiner';
-import { getPrimaryType } from '../utils/getPrimaryType';
-import { getValidations } from '../utils/getValidations';
-import { inferType } from '../utils/inferType';
-import { normalizeRequired } from '../utils/normalizeRequired';
+import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
+import { flattenTypes } from '../../utils/flattenTypes';
+import { generateId } from '../../utils/generateId';
+import { getAnnotations } from '../../utils/getAnnotations';
+import { getCombiner } from '../../utils/getCombiner';
+import { getPrimaryType } from '../../utils/getPrimaryType';
+import { getValidations } from '../../utils/getValidations';
+import { inferType } from '../../utils/inferType';
+import { normalizeRequired } from '../../utils/normalizeRequired';
 
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   switch (getPrimaryType(node)) {
@@ -74,7 +74,12 @@ function processNode(node: JSONSchema4): SchemaNode | void {
   // }
 }
 
-export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<SchemaNode> {
+export type WalkerValue = {
+  node: SchemaNode;
+  fragment: JSONSchema4;
+};
+
+export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<WalkerValue> {
   if (Array.isArray(schema)) {
     for (const segment of schema) {
       yield* walk(segment);
@@ -82,7 +87,10 @@ export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<Sch
   } else {
     const node = processNode(schema);
     if (node !== void 0) {
-      yield node;
+      yield {
+        node,
+        fragment: schema,
+      };
     }
   }
 }

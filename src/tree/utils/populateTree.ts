@@ -1,23 +1,24 @@
 import { isLocalRef } from '@stoplight/json';
 import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
-import { JsonPath } from '@stoplight/types';
+import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
-import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../types';
-import { mergeAllOf } from '../utils';
-import { getCombiner } from '../utils/getCombiner';
-import { getPrimaryType } from '../utils/getPrimaryType';
-import { isCombinerNode, isRefNode } from '../utils/guards';
-import { metadataStore } from './metadata';
+import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
+import { mergeAllOf } from '../../utils';
+import { getCombiner } from '../../utils/getCombiner';
+import { getPrimaryType } from '../../utils/getPrimaryType';
+import { isCombinerNode, isRefNode } from '../../utils/guards';
+import { metadataStore } from '../metadata';
 import { walk } from './walk';
 
 export type WalkingOptions = {
   mergeAllOf: boolean;
-  onNode?(node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
+  onNode?(fragment: JSONSchema4, node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
+  stepIn?: boolean;
 };
 
 export type Walker = (
-  schema: JSONSchema4,
+  schema: Optional<JSONSchema4 | null>,
   parent: TreeListParentNode,
   level: number,
   path: JsonPath,
@@ -25,10 +26,10 @@ export type Walker = (
 ) => undefined;
 
 export const populateTree: Walker = (schema, parent, level, path, options): undefined => {
-  if (typeof schema !== 'object' || schema === null) return;
+  if (!_isObject(schema)) return;
 
-  for (const node of walk(schema)) {
-    if (options !== null && options.onNode !== void 0 && !options.onNode(node, parent, level)) continue;
+  for (const { node, fragment } of walk(schema)) {
+    if (options !== null && options.onNode !== void 0 && !options.onNode(fragment, node, parent, level)) continue;
 
     const treeNode: SchemaTreeListNode = {
       id: node.id,
@@ -39,7 +40,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
     parent.children.push(treeNode);
     metadataStore.set(treeNode, {
       schemaNode: node,
-      schema,
+      schema: fragment,
       path,
     });
 
@@ -56,7 +57,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       }
     } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
       parent.children.pop();
-      populateTree(mergeAllOf(schema), parent, level, path, options);
+      populateTree(mergeAllOf(fragment), parent, level, path, options);
     } else if (_isObject(node.properties)) {
       (treeNode as TreeListParentNode).children = [];
 
