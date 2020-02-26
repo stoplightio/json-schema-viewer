@@ -5,7 +5,7 @@ import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
-import { walk } from '../../tree/walk';
+import { walk } from '../../tree/utils/walk';
 import { SchemaTreeListNode } from '../../types';
 import { Property, Types } from '../shared';
 
@@ -25,7 +25,7 @@ describe('Property component', () => {
     };
 
     metadataStore.set(treeNode, {
-      schemaNode: walk(schema).next().value,
+      schemaNode: walk(schema).next().value.node,
       path: [],
       schema,
     });
@@ -49,7 +49,7 @@ describe('Property component', () => {
     };
 
     metadataStore.set(treeNode, {
-      schemaNode: walk(schema).next().value,
+      schemaNode: walk(schema).next().value.node,
       path: [],
       schema,
     });
@@ -70,7 +70,7 @@ describe('Property component', () => {
     };
 
     metadataStore.set(treeNode, {
-      schemaNode: walk(schema).next().value,
+      schemaNode: walk(schema).next().value.node,
       path: [],
       schema,
     });
@@ -92,7 +92,7 @@ describe('Property component', () => {
       };
 
       metadataStore.set(treeNode, {
-        schemaNode: walk(schema).next().value,
+        schemaNode: walk(schema).next().value.node,
         path: [],
         schema,
       });
@@ -114,7 +114,7 @@ describe('Property component', () => {
       };
 
       metadataStore.set(treeNode, {
-        schemaNode: walk(schema).next().value,
+        schemaNode: walk(schema).next().value.node,
         path: [],
         schema,
       });
@@ -136,7 +136,7 @@ describe('Property component', () => {
       };
 
       metadataStore.set(treeNode, {
-        schemaNode: walk(schema).next().value,
+        schemaNode: walk(schema).next().value.node,
         path: [],
         schema,
       });
@@ -164,7 +164,7 @@ describe('Property component', () => {
 
       tree.populate();
 
-      const wrapper = shallow(<Property node={Array.from(tree)[1]} />);
+      const wrapper = shallow(<Property node={tree.itemAt(1)!} />);
       expect(wrapper.find('div').first()).toHaveText('foo');
     });
 
@@ -188,7 +188,7 @@ describe('Property component', () => {
 
       tree.populate();
 
-      const wrapper = shallow(<Property node={Array.from(tree)[1]} />);
+      const wrapper = shallow(<Property node={tree.itemAt(1)!} />);
       expect(wrapper.find('div').first()).toHaveText('foo');
     });
 
@@ -213,11 +213,11 @@ describe('Property component', () => {
       tree.populate();
       tree.unwrap(Array.from(tree)[1] as TreeListParentNode);
 
-      const wrapper = shallow(<Property node={Array.from(tree)[2]} />);
+      const wrapper = shallow(<Property node={tree.itemAt(2)!} />);
       expect(wrapper.find('div').first()).not.toExist();
     });
 
-    xtest('given a ref pointing at complex type, should not display property name', () => {
+    test('given a ref pointing at complex type, should not display property name', () => {
       const schema: JSONSchema4 = {
         properties: {
           foo: {
@@ -238,7 +238,7 @@ describe('Property component', () => {
       tree.populate();
       tree.unwrap(Array.from(tree)[1] as TreeListParentNode);
 
-      const wrapper = shallow(<Property node={Array.from(tree)[2]} />);
+      const wrapper = shallow(<Property node={tree.itemAt(2)!} />);
       expect(wrapper.find('div').first()).not.toExist();
     });
   });

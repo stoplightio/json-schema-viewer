@@ -3,13 +3,13 @@ import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
-import { SchemaTree } from '../components';
-import { useMetadata } from '../hooks/useMetadata';
+import { useMetadata } from '../../hooks/useMetadata';
+import { SchemaTree } from '../index';
 
 jest.mock('mobx-react-lite', () => ({
   observer: (children: any) => children,
 }));
-jest.mock('../hooks/useMetadata');
+jest.mock('../../hooks/useMetadata');
 
 const schema: JSONSchema4 = {
   type: 'object',

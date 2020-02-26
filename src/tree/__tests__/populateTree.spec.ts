@@ -2,7 +2,7 @@ import { Tree } from '@stoplight/tree-list';
 import * as fs from 'fs';
 import * as path from 'path';
 import { generateId } from '../../utils/generateId';
-import { populateTree } from '../populateTree';
+import { populateTree } from '../utils/populateTree';
 
 const BASE_PATH = path.resolve(__dirname, '../../__fixtures__/');
 
