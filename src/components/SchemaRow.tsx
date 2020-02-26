@@ -3,7 +3,8 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { getNodeMetadata, metadataStore } from '../tree/metadata';
-import { GoToRefHandler, SchemaTreeListNode } from '../types';
+import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
+import { getPrimaryType } from '../utils/getPrimaryType';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -17,9 +18,29 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
+function isRequired(treeNode: SchemaTreeListNode) {
+  if (treeNode.parent === null) return false;
+  try {
+    const { path } = getNodeMetadata(treeNode);
+    if (path.length === 0) {
+      return false;
+    }
+
+    const { schema } = getNodeMetadata(treeNode.parent);
+
+    return (
+      getPrimaryType(schema) === SchemaKind.Object &&
+      Array.isArray(schema.required) &&
+      schema.required.includes(String(path[path.length - 1]))
+    );
+  } catch {
+    return false;
+  }
+}
+
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
   const metadata = getNodeMetadata(node);
-  const { path, schemaNode } = metadata;
+  const { schemaNode } = metadata;
 
   const parentSchemaNode = (node.parent !== null && metadataStore.get(node.parent)?.schemaNode) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
@@ -56,12 +77,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
         </div>
 
         <Validations
-          required={
-            parentSchemaNode !== null &&
-            'required' in parentSchemaNode &&
-            Array.isArray(parentSchemaNode.required) &&
-            parentSchemaNode.required.includes(String(path[path.length - 1]))
-          }
+          required={isRequired(node)}
           validations={{
             ...('annotations' in schemaNode &&
               schemaNode.annotations.default && { default: schemaNode.annotations.default }),
