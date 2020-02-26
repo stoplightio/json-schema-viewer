@@ -20,6 +20,7 @@ describe('populateTree util', () => {
     'array-of-allofs.json',
     'todo-allof.schema.json',
     'tickets.schema.json',
+    'nullish-ref.schema.json',
   ])('should match %s', filename => {
     const schema = JSON.parse(fs.readFileSync(path.resolve(BASE_PATH, filename), 'utf8'));
     const root = Tree.createArtificialRoot();

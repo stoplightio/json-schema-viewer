@@ -226,6 +226,21 @@ Object {
 }
 `;
 
+exports[`populateTree util should match nullish-ref.schema.json 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "id": "random-id",
+      "name": "",
+      "parent": [Circular],
+    },
+  ],
+  "id": "random-id",
+  "name": "",
+  "parent": null,
+}
+`;
+
 exports[`populateTree util should match ref/original.json 1`] = `
 Object {
   "children": Array [

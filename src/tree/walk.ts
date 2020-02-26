@@ -1,5 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
-import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, IRefNode, SchemaKind, SchemaNode } from '../types';
+import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, SchemaKind, SchemaNode } from '../types';
 import { flattenTypes } from '../utils/flattenTypes';
 import { generateId } from '../utils/generateId';
 import { getAnnotations } from '../utils/getAnnotations';
@@ -65,8 +65,8 @@ function processNode(node: JSONSchema4): SchemaNode | void {
   if ('$ref' in node) {
     return {
       id: generateId(),
-      $ref: node.$ref,
-    } as IRefNode;
+      $ref: typeof node.$ref !== 'string' ? null : node.$ref,
+    };
   }
 
   // if ('not' in node) {

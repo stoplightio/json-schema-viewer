@@ -58,6 +58,27 @@ describe('Property component', () => {
     expect(wrapper).not.toBeEmptyRender();
   });
 
+  it('should handle nullish $ref', () => {
+    const treeNode: SchemaTreeListNode = {
+      id: 'foo',
+      name: '',
+      parent: null,
+    };
+
+    const schema: JSONSchema4 = {
+      $ref: null as any,
+    };
+
+    metadataStore.set(treeNode, {
+      schemaNode: walk(schema).next().value,
+      path: [],
+      schema,
+    });
+
+    const wrapper = shallow(<Property node={treeNode} onGoToRef={jest.fn()} />);
+    expect(wrapper).not.toBeEmptyRender();
+  });
+
   describe('properties counter', () => {
     it('given missing properties property, should not display the counter', () => {
       const treeNode: SchemaTreeListNode = {
