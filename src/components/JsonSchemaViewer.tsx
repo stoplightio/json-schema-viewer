@@ -76,11 +76,17 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
   @action
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
-    if (this.treeStore.defaultExpandedDepth !== this.expandedDepth) {
+    if (prevProps.resolveRef !== this.props.resolveRef) {
+      this.tree.resolveRef = this.props.resolveRef;
+    }
+
+    if (
+      this.treeStore.defaultExpandedDepth !== this.expandedDepth ||
+      prevProps.schema !== this.props.schema ||
+      prevProps.mergeAllOf !== this.props.mergeAllOf
+    ) {
       this.treeStore.defaultExpandedDepth = this.expandedDepth;
       this.tree.expandedDepth = this.expandedDepth;
-      this.renderSchema();
-    } else if (prevProps.schema !== this.props.schema || prevProps.mergeAllOf !== this.props.mergeAllOf) {
       this.tree.mergeAllOf = this.mergeAllOf;
       this.tree.schema = this.props.schema;
       this.renderSchema();

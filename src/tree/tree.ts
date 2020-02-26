@@ -21,7 +21,7 @@ export { TreeState as SchemaTreeState };
 export class SchemaTree extends Tree {
   public expandedDepth: number;
   public mergeAllOf: boolean;
-  protected resolveRef: Optional<SchemaTreeRefDereferenceFn>;
+  public resolveRef: Optional<SchemaTreeRefDereferenceFn>;
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
     super();
