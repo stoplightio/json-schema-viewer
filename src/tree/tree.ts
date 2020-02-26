@@ -37,7 +37,7 @@ export class SchemaTree extends Tree {
     populateTree(this.schema, this.root, 0, [], {
       mergeAllOf: this.mergeAllOf,
       onNode: (node, parentTreeNode, level): boolean => {
-        if (isRefNode(node) && isLocalRef(node.$ref)) {
+        if (isRefNode(node) && node.$ref !== null && isLocalRef(node.$ref)) {
           expanded[node.id] = false;
         }
 
@@ -81,7 +81,9 @@ export class SchemaTree extends Tree {
 
     const metadata = getNodeMetadata(node);
     const { path, schemaNode, schema } = metadata;
-    if (isRefNode(schemaNode)) {
+    if (!isRefNode(schemaNode)) {
+      this.populateTreeFragment(node, schema, path);
+    } else if (schemaNode.$ref !== null) {
       const refPath = pointerToPath(schemaNode.$ref);
       const schemaFragment = this.resolveRef ? this.resolveRef(refPath, this.schema) : _get(this.schema, refPath);
       if (!_isObject(schemaFragment)) {
@@ -91,7 +93,7 @@ export class SchemaTree extends Tree {
       this.populateTreeFragment(node, schemaFragment, path);
       metadata.schema = schemaFragment;
     } else {
-      this.populateTreeFragment(node, schema, path);
+      throw new Error(`I do know not how not expand node ${path.join('.')}`);
     }
 
     this.visited.add(node);

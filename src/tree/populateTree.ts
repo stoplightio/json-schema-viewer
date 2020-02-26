@@ -43,7 +43,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       path,
     });
 
-    if (isRefNode(node) && isLocalRef(node.$ref) && node.$ref !== '#') {
+    if (isRefNode(node) && node.$ref !== null && isLocalRef(node.$ref) && node.$ref !== '#') {
       (treeNode as TreeListParentNode).children = [];
     } else if (!isCombinerNode(node)) {
       switch (getPrimaryType(node)) {

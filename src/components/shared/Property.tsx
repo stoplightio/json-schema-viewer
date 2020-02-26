@@ -40,7 +40,7 @@ function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
 }
 
 function isExternalRefSchemaNode(schemaNode: SchemaNode) {
-  return '$ref' in schemaNode && !isLocalRef(schemaNode.$ref);
+  return isRefNode(schemaNode) && schemaNode.$ref !== null && !isLocalRef(schemaNode.$ref);
 }
 
 export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
@@ -65,7 +65,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
   }, [node]);
 
   const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
-    if (onGoToRef && isRefNode(node)) {
+    if (onGoToRef && isRefNode(node) && node.$ref !== null) {
       onGoToRef(node.$ref, node);
     }
   }, [onGoToRef, node]);
@@ -75,7 +75,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
       {path.length > 0 && shouldShowPropertyName(treeNode) && <div className="mr-2">{path[path.length - 1]}</div>}
 
       <Types type={type} subtype={subtype}>
-        {'$ref' in node ? `[${node.$ref}]` : null}
+        {isRefNode(node) && node.$ref !== null ? `[${node.$ref}]` : null}
       </Types>
 
       {onGoToRef && isExternalRefSchemaNode(node) ? (

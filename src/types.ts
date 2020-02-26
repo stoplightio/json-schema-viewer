@@ -38,7 +38,7 @@ export interface IBaseNode extends Pick<JSONSchema4, 'enum'> {
 
 export interface IRefNode {
   id: string;
-  $ref: string;
+  $ref: string | null;
 }
 
 export interface IArrayNode extends IBaseNode, Pick<JSONSchema4, 'items' | 'additionalItems'> {}
