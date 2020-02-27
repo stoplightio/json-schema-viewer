@@ -72,6 +72,12 @@ function processNode(node: JSONSchema4): SchemaNode | void {
   // if ('not' in node) {
   //   // todo: shall we support it?
   // }
+
+  return {
+    id: generateId(),
+    validations: {},
+    annotations: {},
+  };
 }
 
 export type WalkerValue = {
