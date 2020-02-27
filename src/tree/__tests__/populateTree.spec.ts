@@ -1,7 +1,9 @@
-import { Tree } from '@stoplight/tree-list';
+import { Tree, TreeListParentNode } from '@stoplight/tree-list';
 import * as fs from 'fs';
+import { JSONSchema4 } from 'json-schema';
 import * as path from 'path';
 import { generateId } from '../../utils/generateId';
+import { getNodeMetadata } from '../metadata';
 import { populateTree } from '../utils/populateTree';
 
 const BASE_PATH = path.resolve(__dirname, '../../__fixtures__/');
@@ -47,9 +49,9 @@ describe('populateTree util', () => {
   });
 
   it('given schema with complex types, throws', () => {
-    const schema = {
+    const schema: JSONSchema4 = {
       type: [
-        'null',
+        'null' as any,
         {
           type: 'object',
           properties: {
@@ -63,8 +65,25 @@ describe('populateTree util', () => {
     };
 
     const root = Tree.createArtificialRoot();
-    expect(() => populateTree(schema as any, root, 0, [], null)).toThrow(
+    expect(() => populateTree(schema, root, 0, [], null)).toThrow(
       'The "type" property must be a string, or an array of strings. Objects and array of objects are not valid.',
     );
+  });
+
+  it('includes properties with unknown types', () => {
+    const schema: JSONSchema4 = {
+      type: 'object',
+      properties: {
+        foo: {
+          __ERROR__: 'dd',
+        },
+      },
+    };
+
+    const root = Tree.createArtificialRoot();
+    populateTree(schema, root, 0, [], null);
+    expect(getNodeMetadata((root.children[0] as TreeListParentNode).children[0])).toHaveProperty('schema', {
+      __ERROR__: 'dd',
+    });
   });
 });
