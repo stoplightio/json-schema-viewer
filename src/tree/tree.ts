@@ -1,14 +1,20 @@
-import { isLocalRef, pointerToPath } from '@stoplight/json';
+import { isLocalRef, pathToPointer, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
+import { SchemaTreeListNode } from '../types';
+import { generateId } from '../utils/generateId';
 import { isRefNode } from '../utils/guards';
-import { getNodeMetadata, metadataStore } from './metadata';
+import { getSchemaNodeMetadata, metadataStore } from './metadata';
 import { canStepIn } from './utils/canStepIn';
 import { populateTree } from './utils/populateTree';
 
-export type SchemaTreeRefDereferenceFn = (path: JsonPath, schema: JSONSchema4) => Optional<JSONSchema4>;
+export type SchemaTreeRefDereferenceFn = (
+  refPath: JsonPath,
+  propertyPath: JsonPath,
+  schema: JSONSchema4,
+) => Optional<JSONSchema4>;
 
 export type SchemaTreeOptions = {
   expandedDepth: number;
@@ -42,7 +48,7 @@ export class SchemaTree extends Tree {
           expanded[node.id] = false;
         }
 
-        const metadata = metadataStore.get(parentTreeNode);
+        const metadata = Tree.getLevel(parentTreeNode) >= 0 ? getSchemaNodeMetadata(parentTreeNode) : void 0;
 
         if (metadata !== void 0 && isRefNode(metadata.schemaNode)) return false;
         return level <= this.expandedDepth + 1;
@@ -59,7 +65,7 @@ export class SchemaTree extends Tree {
       mergeAllOf: this.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level) => {
         if (level <= this.expandedDepth || level <= initialLevel) return true;
-        return stepIn && level <= initialLevel + 1 && canStepIn(getNodeMetadata(parentTreeNode).schema);
+        return stepIn && level <= initialLevel + 1 && canStepIn(getSchemaNodeMetadata(parentTreeNode).schema);
       },
     });
 
@@ -70,11 +76,28 @@ export class SchemaTree extends Tree {
     this.insertTreeFragment(stepIn ? this.stepIn(artificialRoot, parent) : artificialRoot.children, parent);
   }
 
+  protected insertErrorNode(parent: TreeListParentNode, error: string) {
+    const { path } = getSchemaNodeMetadata(parent);
+
+    const errorNode: SchemaTreeListNode = {
+      id: generateId(),
+      name: '',
+      parent,
+    };
+
+    metadataStore.set(errorNode, {
+      path,
+      error,
+    });
+
+    this.insertNode(errorNode, parent);
+  }
+
   protected stepIn(root: TreeListParentNode, parent: TreeListParentNode) {
     if (
       root.children.length > 0 &&
       'children' in root.children[0] &&
-      _isEqual(getNodeMetadata(parent).path, getNodeMetadata(root.children[0]).path)
+      _isEqual(getSchemaNodeMetadata(parent).path, getSchemaNodeMetadata(root.children[0]).path)
     ) {
       return root.children[0].children;
     }
@@ -87,20 +110,26 @@ export class SchemaTree extends Tree {
       return super.unwrap(node);
     }
 
-    const metadata = getNodeMetadata(node);
+    const metadata = getSchemaNodeMetadata(node);
     const { path, schemaNode, schema } = metadata;
-    if (!isRefNode(schemaNode)) {
-      this.populateTreeFragment(node, schema, path, true);
-    } else if (schemaNode.$ref !== null) {
-      const refPath = pointerToPath(schemaNode.$ref);
-      const schemaFragment = this.resolveRef ? this.resolveRef(refPath, this.schema) : _get(this.schema, refPath);
-      if (!_isObject(schemaFragment)) {
-        throw new ReferenceError(`Could not dereference ${refPath.join('.')}`);
-      }
+    try {
+      if (!isRefNode(schemaNode)) {
+        this.populateTreeFragment(node, schema, path, true);
+      } else if (schemaNode.$ref !== null) {
+        const refPath = pointerToPath(schemaNode.$ref);
+        const schemaFragment = this.resolveRef
+          ? this.resolveRef(refPath, path, this.schema)
+          : _get(this.schema, refPath);
+        if (!_isObject(schemaFragment)) {
+          throw new ReferenceError(`Could not dereference "${pathToPointer(refPath)}"`);
+        }
 
-      this.populateTreeFragment(node, schemaFragment, path, false);
-    } else {
-      throw new Error(`I do know not how not expand node ${path.join('.')}`);
+        this.populateTreeFragment(node, schemaFragment, path, false);
+      } else {
+        throw new Error(`I do know not how not expand node ${path.join('.')}`);
+      }
+    } catch (ex) {
+      this.insertErrorNode(node, ex.message);
     }
 
     this.visited.add(node);

@@ -7,7 +7,7 @@ import * as React from 'react';
 import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
 import { SchemaKind, SchemaTreeListNode } from '../../types';
-import { SchemaRow } from '../SchemaRow';
+import { SchemaErrorRow, SchemaPropertyRow, SchemaRow } from '../SchemaRow';
 import { Validations } from '../shared/Validations';
 
 describe('SchemaRow component', () => {
@@ -40,6 +40,8 @@ describe('SchemaRow component', () => {
 
     const wrapper = shallow(
       shallow(<SchemaRow node={node} rowOptions={rowOptions} />)
+        .find(SchemaPropertyRow)
+        .shallow()
         .find(Validations)
         .shallow()
         .find(Popover)
@@ -47,6 +49,52 @@ describe('SchemaRow component', () => {
     );
 
     expect(wrapper).toHaveText('enum:null,0,false');
+  });
+
+  describe('expanding errors', () => {
+    describe('$refs', () => {
+      let tree: SchemaTree;
+
+      beforeEach(() => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            user: {
+              $ref: '#/properties/foo',
+            },
+          },
+        };
+
+        tree = new SchemaTree(schema, new TreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: false,
+          resolveRef: void 0,
+        });
+
+        tree.populate();
+      });
+
+      test('given no custom resolver, should render a generic error message', () => {
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(2)!} rowOptions={{}} />)
+          .find(SchemaErrorRow)
+          .shallow();
+        expect(wrapper).toHaveText(`Could not dereference "#/properties/foo"`);
+      });
+
+      test('given a custom resolver, should render a message thrown by it', () => {
+        const message = "I don't know how to resolve it. Sorry";
+        tree.resolveRef = () => {
+          throw new Error(message);
+        };
+
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(2)!} rowOptions={{}} />)
+          .find(SchemaErrorRow)
+          .shallow();
+        expect(wrapper).toHaveText(message);
+      });
+    });
   });
 
   describe('required property', () => {
@@ -85,24 +133,34 @@ describe('SchemaRow component', () => {
     });
 
     test('should preserve the required validation', () => {
-      const wrapper = shallow(<SchemaRow node={tree.itemAt(6)!} rowOptions={{}} />);
+      const wrapper = shallow(<SchemaRow node={tree.itemAt(6)!} rowOptions={{}} />)
+        .find(SchemaPropertyRow)
+        .shallow();
       expect(wrapper.find(Validations)).toHaveProp('required', true);
     });
 
     test('should preserve the optional validation', () => {
-      const wrapper = shallow(<SchemaRow node={tree.itemAt(7)!} rowOptions={{}} />);
+      const wrapper = shallow(<SchemaRow node={tree.itemAt(7)!} rowOptions={{}} />)
+        .find(SchemaPropertyRow)
+        .shallow();
+
       expect(wrapper.find(Validations)).toHaveProp('required', false);
     });
 
     describe('given a referenced object', () => {
       test('should preserve the required validation', () => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} />);
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} />)
+          .find(SchemaPropertyRow)
+          .shallow();
 
         expect(wrapper.find(Validations)).toHaveProp('required', true);
       });
 
       test('should preserve the optional validation', () => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} />);
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} />)
+          .find(SchemaPropertyRow)
+          .shallow();
+
         expect(wrapper.find(Validations)).toHaveProp('required', false);
       });
     });

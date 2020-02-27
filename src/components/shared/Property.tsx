@@ -3,7 +3,7 @@ import { Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject, size as _size } from 'lodash';
 import * as React from 'react';
-import { getNodeMetadata } from '../../tree';
+import { getSchemaNodeMetadata } from '../../tree/metadata';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
@@ -26,7 +26,7 @@ function count(obj: Optional<JSONSchema4 | null>): number | null {
 function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
   if (treeNode.parent === null) return false;
   try {
-    const { schema } = getNodeMetadata(treeNode.parent);
+    const { schema } = getSchemaNodeMetadata(treeNode.parent);
     let type = getPrimaryType(schema);
 
     if (type === SchemaKind.Array && schema.items) {
@@ -44,7 +44,7 @@ function isExternalRefSchemaNode(schemaNode: SchemaNode) {
 }
 
 export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
-  const { path, schemaNode: node } = getNodeMetadata(treeNode);
+  const { path, schemaNode: node } = getSchemaNodeMetadata(treeNode);
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : void 0;
 

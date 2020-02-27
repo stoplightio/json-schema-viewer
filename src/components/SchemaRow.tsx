@@ -2,7 +2,7 @@ import { IRowRendererOptions, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
 import * as React from 'react';
 
-import { getNodeMetadata, metadataStore } from '../tree/metadata';
+import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { Caret, Description, Divider, Property, Validations } from './shared';
@@ -21,12 +21,12 @@ const ROW_OFFSET = 7;
 function isRequired(treeNode: SchemaTreeListNode) {
   if (treeNode.parent === null) return false;
   try {
-    const { path } = getNodeMetadata(treeNode);
+    const { path } = getSchemaNodeMetadata(treeNode);
     if (path.length === 0) {
       return false;
     }
 
-    const { schema } = getNodeMetadata(treeNode.parent);
+    const { schema } = getSchemaNodeMetadata(treeNode.parent);
 
     return (
       getPrimaryType(schema) === SchemaKind.Object &&
@@ -38,12 +38,59 @@ function isRequired(treeNode: SchemaTreeListNode) {
   }
 }
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
-  const metadata = getNodeMetadata(node);
+export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOptions }) => {
+  const metadata = getSchemaNodeMetadata(node);
   const { schemaNode } = metadata;
 
-  const parentSchemaNode = (node.parent !== null && metadataStore.get(node.parent)?.schemaNode) || null;
+  const parentSchemaNode =
+    (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
+
+  return (
+    <>
+      {'children' in node && Tree.getLevel(node) > 0 && (
+        <Caret
+          isExpanded={!!rowOptions.isExpanded}
+          style={{
+            left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+            width: ICON_DIMENSION,
+            height: ICON_DIMENSION,
+          }}
+          size={ICON_SIZE}
+        />
+      )}
+
+      {node.parent !== null &&
+        node.parent.children.length > 0 &&
+        parentSchemaNode !== null &&
+        'combiner' in parentSchemaNode &&
+        node.parent.children[0] !== node && <Divider kind={parentSchemaNode.combiner} />}
+
+      <div className="flex-1 flex truncate">
+        <Property node={node} onGoToRef={onGoToRef} />
+        {description && <Description value={description} />}
+      </div>
+
+      <Validations
+        required={isRequired(node)}
+        validations={{
+          ...('annotations' in schemaNode &&
+            schemaNode.annotations.default && { default: schemaNode.annotations.default }),
+          ...('validations' in schemaNode && schemaNode.validations),
+        }}
+      />
+    </>
+  );
+};
+SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
+
+export const SchemaErrorRow: React.FunctionComponent<{ message: string }> = ({ message }) => (
+  <span className="text-red-5 dark:text-red-4">{message}</span>
+);
+SchemaErrorRow.displayName = 'JsonSchemaViewer.SchemaErrorRow';
+
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
+  const metadata = getNodeMetadata(node);
 
   return (
     <div className={cn('px-2 flex-1 w-full', className)}>
@@ -53,37 +100,11 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
           marginLeft: ICON_DIMENSION * Tree.getLevel(node), // offset for spacing
         }}
       >
-        {'children' in node && Tree.getLevel(node) > 0 && (
-          <Caret
-            isExpanded={!!rowOptions.isExpanded}
-            style={{
-              left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
-              width: ICON_DIMENSION,
-              height: ICON_DIMENSION,
-            }}
-            size={ICON_SIZE}
-          />
+        {'schema' in metadata ? (
+          <SchemaPropertyRow node={node} onGoToRef={onGoToRef} rowOptions={rowOptions} />
+        ) : (
+          <SchemaErrorRow message={metadata.error} />
         )}
-
-        {node.parent !== null &&
-          node.parent.children.length > 0 &&
-          parentSchemaNode !== null &&
-          'combiner' in parentSchemaNode &&
-          node.parent.children[0] !== node && <Divider kind={parentSchemaNode.combiner} />}
-
-        <div className="flex-1 flex truncate">
-          <Property node={node} onGoToRef={onGoToRef} />
-          {description && <Description value={description} />}
-        </div>
-
-        <Validations
-          required={isRequired(node)}
-          validations={{
-            ...('annotations' in schemaNode &&
-              schemaNode.annotations.default && { default: schemaNode.annotations.default }),
-            ...('validations' in schemaNode && schemaNode.validations),
-          }}
-        />
       </div>
     </div>
   );
