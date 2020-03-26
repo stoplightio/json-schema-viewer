@@ -47,7 +47,7 @@
     "@stoplight/react-error-boundary": "^1.0.0",
     "@stoplight/tree-list": "5.0.0-beta.2",
     "classnames": "^2.2.6",
-    "json-schema-merge-allof": "https://github.com/stoplightio/json-schema-merge-allof",
+    "@stoplight/json-schema-merge-allof": "^0.6.0",
     "lodash": "^4.17.15",
     "mobx-react-lite": "^1.4.1",
     "pluralize": "^8.0.0"
