@@ -1,6 +1,6 @@
 import { JSONSchema4 } from 'json-schema';
 // @ts-ignore
-import resolveAllOf from 'json-schema-merge-allof';
+import resolveAllOf from '@stoplight/json-schema-merge-allof';
 import { cloneDeep } from 'lodash';
 
 export const mergeAllOf = (schema: JSONSchema4) => {

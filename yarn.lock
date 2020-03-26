@@ -1557,6 +1557,15 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
+"@stoplight/json-schema-merge-allof@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-merge-allof/-/json-schema-merge-allof-0.6.0.tgz#c4556c925796df45f8b3a83ed94cf9f99e4bc414"
+  integrity sha512-xQnQZa37Z6bHlf6xv1mcPxg73tHUBPORlSIgs1znYLg6VD7tSAnWAyskvi+tBUXi/zsZYsU1gwPQkmFBORldNA==
+  dependencies:
+    compute-lcm "^1.1.0"
+    json-schema-compare "^0.2.2"
+    lodash "^4.17.4"
+
 "@stoplight/json@^3.0", "@stoplight/json@^3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@stoplight/json/-/json-3.5.1.tgz#afc6ffcbe2ada8f9b16680fd7885688cf9beec7e"
@@ -8701,14 +8710,6 @@ json-schema-compare@^0.2.2:
   resolved "https://registry.yarnpkg.com/json-schema-compare/-/json-schema-compare-0.2.2.tgz#dd601508335a90c7f4cfadb6b2e397225c908e56"
   integrity sha512-c4WYmDKyJXhs7WWvAWm3uIYnfyWFoIp+JEoX34rctVvEkMYCPGhXtvmFFXiffBbxfZsvQ0RNnV5H7GvDF5HCqQ==
   dependencies:
-    lodash "^4.17.4"
-
-"json-schema-merge-allof@https://github.com/stoplightio/json-schema-merge-allof":
-  version "0.6.0"
-  resolved "https://github.com/stoplightio/json-schema-merge-allof#bb02f48aba949226a8eafbbb03f850afcb7d203e"
-  dependencies:
-    compute-lcm "^1.1.0"
-    json-schema-compare "^0.2.2"
     lodash "^4.17.4"
 
 json-schema-traverse@^0.4.1:
