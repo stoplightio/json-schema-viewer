@@ -5,6 +5,7 @@ import { cloneDeep } from 'lodash';
 
 export const mergeAllOf = (schema: JSONSchema4) => {
   return resolveAllOf(cloneDeep(schema), {
+    deep: false,
     resolvers: {
       defaultResolver(values: any) {
         return Object.assign({}, ...values);
