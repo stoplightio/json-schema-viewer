@@ -8,6 +8,7 @@ import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
 import { SchemaKind, SchemaTreeListNode } from '../../types';
 import { SchemaErrorRow, SchemaPropertyRow, SchemaRow } from '../SchemaRow';
+import { Caret } from '../shared';
 import { Validations } from '../shared/Validations';
 
 describe('SchemaRow component', () => {
@@ -49,6 +50,36 @@ describe('SchemaRow component', () => {
     );
 
     expect(wrapper).toHaveText('enum:null,0,false');
+  });
+
+  test('should render caret for top-level $ref', () => {
+    const schema: JSONSchema4 = {
+      $ref: '#/definitions/foo',
+      definitions: {
+        foo: {
+          type: 'string',
+        },
+      },
+    };
+
+    const tree = new SchemaTree(schema, new TreeState(), {
+      expandedDepth: Infinity,
+      mergeAllOf: false,
+      resolveRef: void 0,
+    });
+
+    tree.populate();
+
+    const wrapper = shallow(<SchemaRow node={tree.itemAt(0)!} rowOptions={{}} />)
+      .find(SchemaPropertyRow)
+      .shallow();
+
+    expect(wrapper.find(Caret)).toExist();
+    expect(wrapper.find(Caret)).toHaveProp('style', {
+      height: 20,
+      position: 'relative',
+      width: 20,
+    });
   });
 
   describe('expanding errors', () => {

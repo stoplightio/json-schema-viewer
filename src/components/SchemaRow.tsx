@@ -1,10 +1,11 @@
-import { IRowRendererOptions, Tree } from '@stoplight/tree-list';
+import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
 import * as React from 'react';
 
 import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
+import { isRefNode } from '../utils/guards';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -48,17 +49,23 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
 
   return (
     <>
-      {'children' in node && Tree.getLevel(node) > 0 && (
+      {isRefNode(schemaNode) || (isParentNode(node) && Tree.getLevel(node) > 0) ? (
         <Caret
           isExpanded={!!rowOptions.isExpanded}
           style={{
-            left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
             width: ICON_DIMENSION,
             height: ICON_DIMENSION,
+            ...(isRefNode(schemaNode)
+              ? {
+                  position: 'relative',
+                }
+              : {
+                  left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+                }),
           }}
           size={ICON_SIZE}
         />
-      )}
+      ) : null}
 
       {node.parent !== null &&
         node.parent.children.length > 0 &&
