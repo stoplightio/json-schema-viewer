@@ -9,4 +9,7 @@ export const isArrayNodeWithItems = (
 
 export const isRefNode = (node: SchemaNode): node is IRefNode => '$ref' in node;
 
+export const hasRefItems = (node: SchemaNode): node is Omit<IArrayNode, 'items'> & { items: Omit<IRefNode, 'id'> } =>
+  'items' in node && node.items !== void 0 && '$ref' in node.items;
+
 export const isCombinerNode = (node: SchemaNode): node is ICombinerNode => 'combiner' in node;

@@ -10,14 +10,14 @@ import { JSONSchema4CombinerName } from '../../types';
  */
 export interface IType {
   type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]>;
+  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> | '$ref';
   className?: string;
 }
 
 export const Type: React.FunctionComponent<IType> = ({ className, children, type, subtype }) => {
   return (
     <span className={cn(className, PropertyTypeColors[type], 'truncate')}>
-      {type === 'array' && subtype && subtype !== 'array' ? `array[${subtype}]` : type}
+      {type === 'array' && subtype && subtype !== 'array' && subtype !== '$ref' ? `array[${subtype}]` : type}
 
       {children}
     </span>
@@ -31,7 +31,7 @@ Type.displayName = 'JsonSchemaViewer.Type';
 interface ITypes {
   className?: string;
   type: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref'>;
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]>;
+  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | '$ref'>;
 }
 
 export const Types: React.FunctionComponent<ITypes> = ({ className, type, subtype, children }) => {

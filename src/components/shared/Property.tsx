@@ -6,7 +6,7 @@ import * as React from 'react';
 import { getSchemaNodeMetadata } from '../../tree/metadata';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { getPrimaryType } from '../../utils/getPrimaryType';
-import { isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
+import { isArrayNodeWithItems, isCombinerNode, isRefNode, hasRefItems } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
 import { Types } from './Types';
 
@@ -46,7 +46,7 @@ function isExternalRefSchemaNode(schemaNode: SchemaNode) {
 export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
   const { path, schemaNode: node } = getSchemaNodeMetadata(treeNode);
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
-  const subtype = isArrayNodeWithItems(node) ? inferType(node.items) : void 0;
+  const subtype = isArrayNodeWithItems(node) ? (hasRefItems(node) ? '$ref' : inferType(node.items)) : void 0;
 
   const childrenCount = React.useMemo<number | null>(() => {
     if (type === SchemaKind.Object) {
@@ -76,6 +76,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
 
       <Types type={type} subtype={subtype}>
         {isRefNode(node) && node.$ref !== null ? `[${node.$ref}]` : null}
+        {hasRefItems(node) && node.items.$ref !== null ? `[$ref(${node.items.$ref})]` : null}
       </Types>
 
       {onGoToRef && isExternalRefSchemaNode(node) ? (
