@@ -6,7 +6,7 @@ import * as React from 'react';
 import { getSchemaNodeMetadata } from '../../tree/metadata';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { getPrimaryType } from '../../utils/getPrimaryType';
-import { isArrayNodeWithItems, isCombinerNode, isRefNode, hasRefItems } from '../../utils/guards';
+import { hasRefItems, isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
 import { Types } from './Types';
 
