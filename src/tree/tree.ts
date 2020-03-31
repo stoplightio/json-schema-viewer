@@ -117,9 +117,9 @@ export class SchemaTree extends Tree {
     try {
       if (!isRefNode(schemaNode) && !hasRefItems(schemaNode)) {
         this.populateTreeFragment(node, schema, path, true);
-      } else if ('$ref' in schemaNode && schemaNode.$ref) {
+      } else if (isRefNode(schemaNode)) {
         this.populateRefFragment(node, path, schemaNode.$ref);
-      } else if ('items' in schemaNode && schemaNode.items.$ref) {
+      } else if (hasRefItems(schemaNode)) {
         this.populateRefFragment(node, path, schemaNode.items.$ref);
       } else {
         throw new Error(`I do know not how not expand node ${path.join('.')}`);
@@ -132,7 +132,10 @@ export class SchemaTree extends Tree {
     return super.unwrap(node);
   }
 
-  protected populateRefFragment(node: TreeListParentNode, path: JsonPath, ref: string) {
+  protected populateRefFragment(node: TreeListParentNode, path: JsonPath, ref: string | null) {
+    if (!ref) {
+      throw new Error('Unknown $ref value');
+    }
     const refPath = pointerToPath(ref);
     const schemaFragment = this.resolveRef ? this.resolveRef(refPath, path, this.schema) : _get(this.schema, refPath);
     if (!_isObject(schemaFragment)) {
