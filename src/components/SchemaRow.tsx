@@ -55,7 +55,7 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
           style={{
             width: ICON_DIMENSION,
             height: ICON_DIMENSION,
-            ...(isRefNode(schemaNode)
+            ...(isRefNode(schemaNode) && Tree.getLevel(node) === 0
               ? {
                   position: 'relative',
                 }
