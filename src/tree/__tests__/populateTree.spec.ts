@@ -86,4 +86,31 @@ describe('populateTree util', () => {
       __ERROR__: 'dd',
     });
   });
+
+  it('processes array with refed items correctly', () => {
+    const schema: JSONSchema4 = {
+      type: 'object',
+      properties: {
+        user: {
+          type: 'array',
+          items: {
+            $ref: '#/properties/id',
+          },
+        },
+        id: {
+          type: 'object',
+          required: ['foo'],
+          properties: {
+            foo: {
+              type: 'string',
+            },
+          },
+        },
+      },
+    };
+
+    const root = Tree.createArtificialRoot();
+    populateTree(schema, root, 0, [], null);
+    expect(((root.children[0] as TreeListParentNode).children[0] as TreeListParentNode).children).toHaveLength(0);
+  });
 });
