@@ -106,5 +106,61 @@ describe('SchemaTree', () => {
         );
       });
     });
+
+    describe('array with refed items', () => {
+      let tree: SchemaTree;
+      let schema: JSONSchema4;
+
+      beforeEach(() => {
+        schema = {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'array',
+              items: {
+                $ref: '#/properties/id',
+              },
+            },
+            id: {
+              type: 'object',
+              required: ['foo'],
+              properties: {
+                foo: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        };
+
+        tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: 0,
+          mergeAllOf: false,
+          resolveRef: void 0,
+        });
+
+        tree.populate();
+      });
+
+      test('upon expanded array, should insert object', () => {
+        expect(tree.count).toEqual(3);
+
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+
+        expect(tree.count).toEqual(4);
+        expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty(
+          'schema',
+          expect.objectContaining({
+            type: 'object',
+            required: ['foo'],
+            properties: {
+              foo: {
+                type: 'string',
+              },
+            },
+          }),
+        );
+      });
+    });
   });
 });

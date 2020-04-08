@@ -7,7 +7,7 @@ import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } f
 import { mergeAllOf } from '../../utils';
 import { getCombiner } from '../../utils/getCombiner';
 import { getPrimaryType } from '../../utils/getPrimaryType';
-import { isCombinerNode, isRefNode } from '../../utils/guards';
+import { hasRefItems, isCombinerNode, isRefNode } from '../../utils/guards';
 import { metadataStore } from '../metadata';
 import { walk } from './walk';
 
@@ -90,7 +90,9 @@ function processArray(
   path: JsonPath,
   options: WalkingOptions | null,
 ): SchemaTreeListNode {
-  if (Array.isArray(schema.items)) {
+  if (hasRefItems(schema) && schema.items.$ref && isLocalRef(schema.items.$ref)) {
+    (node as TreeListParentNode).children = [];
+  } else if (Array.isArray(schema.items)) {
     const children: SchemaTreeListNode[] = [];
     (node as TreeListParentNode).children = children;
     for (const [i, property] of schema.items.entries()) {
