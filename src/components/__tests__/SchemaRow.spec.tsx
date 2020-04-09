@@ -82,6 +82,34 @@ describe('SchemaRow component', () => {
     });
   });
 
+  test('should render caret for top-level array with $ref items', () => {
+    const schema: JSONSchema4 = {
+      type: 'array',
+      items: {
+        $ref: '#/foo',
+      },
+    };
+
+    const tree = new SchemaTree(schema, new TreeState(), {
+      expandedDepth: Infinity,
+      mergeAllOf: false,
+      resolveRef: void 0,
+    });
+
+    tree.populate();
+
+    const wrapper = shallow(<SchemaRow node={tree.itemAt(0)!} rowOptions={{}} />)
+      .find(SchemaPropertyRow)
+      .shallow();
+
+    expect(wrapper.find(Caret)).toExist();
+    expect(wrapper.find(Caret)).toHaveProp('style', {
+      height: 20,
+      position: 'relative',
+      width: 20,
+    });
+  });
+
   describe('expanding errors', () => {
     describe('$refs', () => {
       let tree: SchemaTree;
