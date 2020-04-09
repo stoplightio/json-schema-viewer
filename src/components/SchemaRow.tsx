@@ -5,7 +5,7 @@ import * as React from 'react';
 import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
-import { isRefNode } from '../utils/guards';
+import { hasRefItems, isRefNode } from '../utils/guards';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -47,15 +47,17 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
     (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
+  const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaKind.Array && hasRefItems(schemaNode));
+
   return (
     <>
-      {isRefNode(schemaNode) || (isParentNode(node) && Tree.getLevel(node) > 0) ? (
+      {has$Ref || (isParentNode(node) && Tree.getLevel(node) > 0) ? (
         <Caret
           isExpanded={!!rowOptions.isExpanded}
           style={{
             width: ICON_DIMENSION,
             height: ICON_DIMENSION,
-            ...(isRefNode(schemaNode) && Tree.getLevel(node) === 0
+            ...(has$Ref && Tree.getLevel(node) === 0
               ? {
                   position: 'relative',
                 }
