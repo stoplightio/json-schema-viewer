@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "@stoplight/tree-list": {
+      "signature": "024ff27a471df14f120f084d4ebc0d7e",
+      "file": true
+    }
+  }
+}
