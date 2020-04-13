@@ -33,8 +33,7 @@ import { JsonSchemaViewer } from "@stoplight/json-schema-viewer";
 
 <JsonSchemaViewer
   name="Todos Model"
-  dereferencedSchema={schemaWithoutRefs}
-  schema={schemaWithRefs}
+  schema={schema}
   expanded={true}
   hideTopBar={false}
   emptyText="No schema defined"
