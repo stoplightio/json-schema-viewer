@@ -130,7 +130,9 @@ storiesOf('JsonSchemaViewer', module)
           },
           address: {
             type: [
+              // @ts-ignore
               'null',
+              // @ts-ignore
               {
                 type: 'object',
                 properties: {

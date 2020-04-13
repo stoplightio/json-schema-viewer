@@ -16,7 +16,7 @@ export const Caret: React.FunctionComponent<ICaret> = ({ style, size, isExpanded
     <Icon
       iconSize={size}
       icon={isExpanded ? 'caret-down' : 'caret-right'}
-      className="text-darken-9 dark:text-lighten-9"
+      className="text-darken-9 dark:text-lighten-7"
     />
   </span>
 );

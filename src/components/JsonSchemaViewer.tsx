@@ -104,7 +104,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     }
 
     return (
-      <div className={cn(className, 'JsonSchemaViewer flex flex-col h-full w-full relative')}>
+      <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
         <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
       </div>
     );
