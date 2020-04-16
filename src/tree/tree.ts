@@ -120,7 +120,7 @@ export class SchemaTree extends Tree {
       } else if (isRefNode(schemaNode)) {
         this.populateRefFragment(node, path, schemaNode.$ref);
       } else if (hasRefItems(schemaNode)) {
-        this.populateRefFragment(node, path, schemaNode.items.$ref);
+        this.populateRefFragment(node, [...path, 'items'], schemaNode.items.$ref);
       } else {
         throw new Error(`I do know not how not expand node ${path.join('.')}`);
       }
