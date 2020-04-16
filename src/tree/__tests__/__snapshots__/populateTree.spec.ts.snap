@@ -55,6 +55,7 @@ exports[`populateTree util should match array-of-refs.json 1`] = `
 Object {
   "children": Array [
     Object {
+      "children": Array [],
       "id": "random-id",
       "name": "",
       "parent": [Circular],
@@ -276,6 +277,7 @@ Object {
     Object {
       "children": Array [
         Object {
+          "children": Array [],
           "id": "random-id",
           "name": "",
           "parent": [Circular],
@@ -334,6 +336,7 @@ Object {
                           "parent": [Circular],
                         },
                         Object {
+                          "children": Array [],
                           "id": "random-id",
                           "name": "",
                           "parent": [Circular],
