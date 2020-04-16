@@ -1,4 +1,4 @@
-import { isLocalRef, pathToPointer, pointerToPath } from '@stoplight/json';
+import { extractPointerFromRef, extractSourceFromRef, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
@@ -10,8 +10,13 @@ import { getSchemaNodeMetadata, metadataStore } from './metadata';
 import { canStepIn } from './utils/canStepIn';
 import { populateTree } from './utils/populateTree';
 
+export type SchemaTreeRefInfo = {
+  source: string | null;
+  pointer: string | null;
+};
+
 export type SchemaTreeRefDereferenceFn = (
-  refPath: JsonPath,
+  ref: SchemaTreeRefInfo,
   propertyPath: JsonPath,
   schema: JSONSchema4,
 ) => Optional<JSONSchema4>;
@@ -44,10 +49,7 @@ export class SchemaTree extends Tree {
     populateTree(this.schema, this.root, 0, [], {
       mergeAllOf: this.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level): boolean => {
-        if (
-          (isRefNode(node) && node.$ref !== null && isLocalRef(node.$ref)) ||
-          (hasRefItems(node) && node.items.$ref !== null && isLocalRef(node.items.$ref))
-        ) {
+        if ((isRefNode(node) && node.$ref !== null) || (hasRefItems(node) && node.items.$ref !== null)) {
           expanded[node.id] = false;
         }
 
@@ -133,13 +135,27 @@ export class SchemaTree extends Tree {
   }
 
   protected populateRefFragment(node: TreeListParentNode, path: JsonPath, ref: string | null) {
-    if (!ref) {
+    if (ref === null) {
       throw new Error('Unknown $ref value');
     }
-    const refPath = pointerToPath(ref);
-    const schemaFragment = this.resolveRef ? this.resolveRef(refPath, path, this.schema) : _get(this.schema, refPath);
+
+    const source = extractSourceFromRef(ref);
+    const pointer = extractPointerFromRef(ref);
+
+    let schemaFragment: Optional<JSONSchema4>;
+
+    if (this.resolveRef !== void 0) {
+      schemaFragment = this.resolveRef({ source, pointer }, path, this.schema);
+    } else if (source !== null) {
+      throw new ReferenceError('Cannot dereference external references');
+    } else if (pointer === null) {
+      throw new ReferenceError('The pointer is empty');
+    } else {
+      schemaFragment = _get(this.schema, pointerToPath(pointer));
+    }
+
     if (!_isObject(schemaFragment)) {
-      throw new ReferenceError(`Could not dereference "${pathToPointer(refPath)}"`);
+      throw new ReferenceError(`Could not dereference "${ref}"`);
     }
 
     this.populateTreeFragment(node, schemaFragment, path, false);

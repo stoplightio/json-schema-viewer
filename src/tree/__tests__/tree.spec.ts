@@ -162,6 +162,126 @@ describe('SchemaTree', () => {
         );
       });
     });
+
+    describe('empty $ref', () => {
+      let schema: JSONSchema4;
+
+      beforeEach(() => {
+        schema = {
+          type: 'object',
+          properties: {
+            id: {
+              $ref: '',
+            },
+          },
+        };
+      });
+
+      test('given no custom resolver, should generate an error', () => {
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: 0,
+          mergeAllOf: false,
+          resolveRef: void 0,
+        });
+
+        tree.populate();
+
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+        expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
+          'error',
+          'The pointer is empty',
+        );
+      });
+
+      test('given a custom resolver, should attempt to resolve the reference', () => {
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: 0,
+          mergeAllOf: false,
+          resolveRef() {
+            throw new ReferenceError('Seems like you do not want this to be empty.');
+          },
+        });
+
+        tree.populate();
+
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+        expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
+          'error',
+          'Seems like you do not want this to be empty.'
+        );
+      });
+    });
+
+    describe('external $refs', () => {
+      let schema: JSONSchema4;
+
+      beforeEach(() => {
+        schema = {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'array',
+              items: {
+                $ref: '../test#',
+              },
+            },
+            id: {
+              $ref: '../foo#id',
+            },
+          },
+        };
+      });
+
+      test('given no custom resolver, should generate an error', () => {
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: 0,
+          mergeAllOf: false,
+          resolveRef: void 0,
+        });
+
+        tree.populate();
+
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+        expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
+          'error',
+          'Cannot dereference external references',
+        );
+
+        tree.unwrap(tree.itemAt(3) as TreeListParentNode);
+        expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
+          'error',
+          'Cannot dereference external references',
+        );
+      });
+
+      test('given a custom resolver, should attempt to resolve the reference', () => {
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: 0,
+          mergeAllOf: false,
+          resolveRef({ source, pointer }) {
+            if (source === '../test') {
+              throw new ReferenceError(`Could not read "${source}"`);
+            }
+
+            throw new ReferenceError(`Pointer "${pointer}" is missing`);
+          },
+        });
+
+        tree.populate();
+
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+        expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
+          'error',
+          'Could not read "../test"',
+        );
+
+        tree.unwrap(tree.itemAt(3) as TreeListParentNode);
+        expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
+          'error',
+          'Pointer "#id" is missing',
+        );
+      });
+    });
   });
 
   describe('paths generation', () => {

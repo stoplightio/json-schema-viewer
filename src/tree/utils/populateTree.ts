@@ -1,4 +1,3 @@
-import { isLocalRef } from '@stoplight/json';
 import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
@@ -44,7 +43,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       path,
     });
 
-    if (isRefNode(node) && node.$ref !== null && isLocalRef(node.$ref) && node.$ref !== '#') {
+    if (isRefNode(node) && node.$ref !== null) {
       (treeNode as TreeListParentNode).children = [];
     } else if (!isCombinerNode(node)) {
       switch (getPrimaryType(node)) {
@@ -90,7 +89,7 @@ function processArray(
   path: JsonPath,
   options: WalkingOptions | null,
 ): SchemaTreeListNode {
-  if (hasRefItems(schema) && schema.items.$ref && isLocalRef(schema.items.$ref)) {
+  if (hasRefItems(schema) && schema.items.$ref) {
     (node as TreeListParentNode).children = [];
   } else if (Array.isArray(schema.items)) {
     const children: SchemaTreeListNode[] = [];
