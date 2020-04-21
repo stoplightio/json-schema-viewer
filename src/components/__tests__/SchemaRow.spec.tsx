@@ -143,7 +143,7 @@ describe('SchemaRow component', () => {
 
       test('given a custom resolver, should render a message thrown by it', () => {
         const message = "I don't know how to resolve it. Sorry";
-        tree.resolveRef = () => {
+        tree.resolver = () => {
           throw new Error(message);
         };
 

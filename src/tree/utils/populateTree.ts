@@ -10,10 +10,13 @@ import { hasRefItems, isCombinerNode, isRefNode } from '../../utils/guards';
 import { metadataStore } from '../metadata';
 import { walk } from './walk';
 
+export type WalkerRefResolver = (path: JsonPath | null, $ref: string) => JSONSchema4;
+
 export type WalkingOptions = {
   mergeAllOf: boolean;
   onNode?(fragment: JSONSchema4, node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
   stepIn?: boolean;
+  resolveRef: WalkerRefResolver;
 };
 
 export type Walker = (
@@ -56,7 +59,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       }
     } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
       parent.children.pop();
-      populateTree(mergeAllOf(fragment), parent, level, path, options);
+      populateTree(mergeAllOf(fragment, options.resolveRef), parent, level, path, options);
     } else if (_isObject(node.properties)) {
       (treeNode as TreeListParentNode).children = [];
 

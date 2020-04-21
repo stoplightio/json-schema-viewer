@@ -77,7 +77,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   @action
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (prevProps.resolveRef !== this.props.resolveRef) {
-      this.tree.resolveRef = this.props.resolveRef;
+      this.tree.resolver = this.props.resolveRef;
     }
 
     if (

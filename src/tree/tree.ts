@@ -8,7 +8,7 @@ import { generateId } from '../utils/generateId';
 import { hasRefItems, isRefNode } from '../utils/guards';
 import { getSchemaNodeMetadata, metadataStore } from './metadata';
 import { canStepIn } from './utils/canStepIn';
-import { populateTree } from './utils/populateTree';
+import { populateTree, WalkerRefResolver } from './utils/populateTree';
 
 export type SchemaTreeRefInfo = {
   source: string | null;
@@ -17,7 +17,7 @@ export type SchemaTreeRefInfo = {
 
 export type SchemaTreeRefDereferenceFn = (
   ref: SchemaTreeRefInfo,
-  propertyPath: JsonPath,
+  propertyPath: JsonPath | null,
   schema: JSONSchema4,
 ) => Optional<JSONSchema4>;
 
@@ -32,14 +32,14 @@ export { TreeState as SchemaTreeState };
 export class SchemaTree extends Tree {
   public expandedDepth: number;
   public mergeAllOf: boolean;
-  public resolveRef: Optional<SchemaTreeRefDereferenceFn>;
+  public resolver: Optional<SchemaTreeRefDereferenceFn>;
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
     super();
 
     this.expandedDepth = opts.expandedDepth;
     this.mergeAllOf = opts.mergeAllOf;
-    this.resolveRef = opts.resolveRef;
+    this.resolver = opts.resolveRef;
   }
 
   protected readonly visited = new WeakSet();
@@ -58,6 +58,7 @@ export class SchemaTree extends Tree {
         if (metadata !== void 0 && isRefNode(metadata.schemaNode)) return false;
         return level <= this.expandedDepth + 1;
       },
+      resolveRef: this.resolveRef,
     });
     this.state.expanded = expanded;
     this.invalidate();
@@ -72,6 +73,7 @@ export class SchemaTree extends Tree {
         if (level <= this.expandedDepth || level <= initialLevel) return true;
         return stepIn && level <= initialLevel + 1 && canStepIn(getSchemaNodeMetadata(parentTreeNode).schema);
       },
+      resolveRef: this.resolveRef,
     });
 
     if (artificialRoot.children.length === 0) {
@@ -134,28 +136,30 @@ export class SchemaTree extends Tree {
     return super.unwrap(node);
   }
 
-  protected populateRefFragment(node: TreeListParentNode, path: JsonPath, ref: string | null) {
-    if (ref === null) {
-      throw new Error('Unknown $ref value');
-    }
+  protected resolveRef: WalkerRefResolver = (path, $ref) => {
+    const source = extractSourceFromRef($ref);
+    const pointer = extractPointerFromRef($ref);
 
-    const source = extractSourceFromRef(ref);
-    const pointer = extractPointerFromRef(ref);
-
-    let schemaFragment: Optional<JSONSchema4>;
-
-    if (this.resolveRef !== void 0) {
-      schemaFragment = this.resolveRef({ source, pointer }, path, this.schema);
+    if (this.resolver !== void 0) {
+      return this.resolver({ source, pointer }, path, this.schema);
     } else if (source !== null) {
       throw new ReferenceError('Cannot dereference external references');
     } else if (pointer === null) {
       throw new ReferenceError('The pointer is empty');
     } else {
-      schemaFragment = _get(this.schema, pointerToPath(pointer));
+      return _get(this.schema, pointerToPath(pointer));
+    }
+  };
+
+  protected populateRefFragment(node: TreeListParentNode, path: JsonPath, $ref: string | null) {
+    if ($ref === null) {
+      throw new Error('Unknown $ref value');
     }
 
+    const schemaFragment = this.resolveRef(path, $ref);
+
     if (!_isObject(schemaFragment)) {
-      throw new ReferenceError(`Could not dereference "${ref}"`);
+      throw new ReferenceError(`Could not dereference "${$ref}"`);
     }
 
     this.populateTreeFragment(node, schemaFragment, path, false);
