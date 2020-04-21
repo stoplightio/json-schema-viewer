@@ -2,6 +2,7 @@ import { TreeListParentNode } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
 import { getNodeMetadata } from '../metadata';
 import { SchemaTree, SchemaTreeState } from '../tree';
+import { printTree } from './utils/printTree';
 
 describe('SchemaTree', () => {
   describe('expanding', () => {
@@ -61,7 +62,7 @@ describe('SchemaTree', () => {
                 },
               },
             ],
-          }),
+          })
         );
       });
 
@@ -82,7 +83,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          }),
+          })
         );
       });
 
@@ -102,7 +103,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          }),
+          })
         );
       });
     });
@@ -158,7 +159,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          }),
+          })
         );
       });
     });
@@ -187,10 +188,7 @@ describe('SchemaTree', () => {
         tree.populate();
 
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
-        expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
-          'error',
-          'The pointer is empty',
-        );
+        expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty('error', 'The pointer is empty');
       });
 
       test('given a custom resolver, should attempt to resolve the reference', () => {
@@ -244,13 +242,13 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references',
+          'Cannot dereference external references'
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references',
+          'Cannot dereference external references'
         );
       });
 
@@ -272,14 +270,254 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Could not read "../test"',
+          'Could not read "../test"'
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Pointer "#id" is missing',
+          'Pointer "#id" is missing'
         );
+      });
+    });
+
+    describe('$refs in allOf', () => {
+      test('given $ref in allOf', () => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            foo: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                },
+                id: {
+                  type: 'number',
+                },
+              },
+            },
+            bar: {
+              allOf: [
+                {
+                  $ref: '#/properties/foo',
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    address: {
+                      type: 'string',
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        };
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+        });
+
+        tree.populate();
+        expect(printTree(tree)).toMatchInlineSnapshot(`
+          "└─ #
+             ├─ type: object
+             └─ children
+                ├─ 0
+                │  └─ #/properties/foo
+                │     ├─ type: object
+                │     └─ children
+                │        ├─ 0
+                │        │  └─ #/properties/foo/properties/name
+                │        │     └─ type: string
+                │        └─ 1
+                │           └─ #/properties/foo/properties/id
+                │              └─ type: number
+                └─ 1
+                   └─ #/properties/bar
+                      ├─ type: object
+                      └─ children
+                         ├─ 0
+                         │  └─ #/properties/bar/properties/name
+                         │     └─ type: string
+                         ├─ 1
+                         │  └─ #/properties/bar/properties/id
+                         │     └─ type: number
+                         └─ 2
+                            └─ #/properties/bar/properties/address
+                               └─ type: string
+          "
+        `);
+      });
+
+      test('given $ref in allOf pointing at another allOf, should keep merging', () => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            baz: {
+              type: 'object',
+            },
+            foo: {
+              allOf: [
+                {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                    },
+                    id: {
+                      type: 'number',
+                    },
+                  },
+                },
+                {
+                  $ref: '#/properties/baz',
+                },
+              ],
+            },
+            bar: {
+              allOf: [
+                {
+                  $ref: '#/properties/foo',
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    address: {
+                      type: 'string',
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        };
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+        });
+
+        tree.populate();
+        expect(printTree(tree)).toMatchInlineSnapshot(`
+          "└─ #
+             ├─ type: object
+             └─ children
+                ├─ 0
+                │  └─ #/properties/baz
+                │     └─ type: object
+                ├─ 1
+                │  └─ #/properties/foo
+                │     ├─ type: object
+                │     └─ children
+                │        ├─ 0
+                │        │  └─ #/properties/foo/properties/name
+                │        │     └─ type: string
+                │        └─ 1
+                │           └─ #/properties/foo/properties/id
+                │              └─ type: number
+                └─ 2
+                   └─ #/properties/bar
+                      ├─ type: object
+                      └─ children
+                         ├─ 0
+                         │  └─ #/properties/bar/properties/name
+                         │     └─ type: string
+                         ├─ 1
+                         │  └─ #/properties/bar/properties/id
+                         │     └─ type: number
+                         └─ 2
+                            └─ #/properties/bar/properties/address
+                               └─ type: string
+          "
+        `);
+      });
+
+      test('given direct circular reference pointing at allOf, should throw', () => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            foo: {
+              allOf: [
+                {
+                  $ref: '#/properties/bar',
+                },
+              ],
+            },
+            bar: {
+              allOf: [
+                {
+                  $ref: '#/properties/foo',
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        };
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+        });
+
+        expect(tree.populate.bind(tree)).toThrowError('Circular reference detected');
+      });
+
+      test('given indirect circular reference pointing at allOf, should throw', () => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            baz: {
+              allOf: [
+                {
+                  $ref: '#/properties/bar',
+                },
+              ],
+            },
+            foo: {
+              allOf: [
+                {
+                  $ref: '#/properties/baz',
+                },
+              ],
+            },
+            bar: {
+              allOf: [
+                {
+                  $ref: '#/properties/foo',
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        };
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+        });
+
+        expect(tree.populate.bind(tree)).toThrowError('Circular reference detected');
       });
     });
   });
@@ -328,30 +566,19 @@ describe('SchemaTree', () => {
     test('for plain object member', () => {
       tree.populate();
 
-      expect(getNodeMetadata(tree.itemAt(1)!)).toHaveProperty('path', [
-        'properties',
-        'user'
-      ]);
+      expect(getNodeMetadata(tree.itemAt(1)!)).toHaveProperty('path', ['properties', 'user']);
     });
 
     test('for deep object member', () => {
       tree.populate();
 
-      expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty('path', [
-        'properties',
-        'user',
-        'properties',
-        'name',
-      ]);
+      expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty('path', ['properties', 'user', 'properties', 'name']);
     });
 
     test('for array items', () => {
       tree.populate();
 
-      expect(getNodeMetadata(tree.itemAt(tree.count - 1)!)).toHaveProperty('path', [
-        'properties',
-        'permissions',
-      ]);
+      expect(getNodeMetadata(tree.itemAt(tree.count - 1)!)).toHaveProperty('path', ['properties', 'permissions']);
     });
 
     test('for $reffed array items', () => {

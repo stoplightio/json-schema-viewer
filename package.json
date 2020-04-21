@@ -36,7 +36,6 @@
   },
   "peerDependencies": {
     "@stoplight/markdown-viewer": "^3",
-    "@stoplight/tree-list": "^4",
     "@stoplight/ui-kit": "^2",
     "mobx": "^5",
     "react": ">=16.8",
@@ -44,10 +43,10 @@
   },
   "dependencies": {
     "@stoplight/json": "^3.5.1",
+    "@stoplight/json-schema-merge-allof": "^0.7.0",
     "@stoplight/react-error-boundary": "^1.0.0",
     "@stoplight/tree-list": "5.0.0-beta.2",
     "classnames": "^2.2.6",
-    "@stoplight/json-schema-merge-allof": "^0.6.0",
     "lodash": "^4.17.15",
     "mobx-react-lite": "^1.4.1",
     "pluralize": "^8.0.0"
@@ -84,6 +83,7 @@
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "rollup-plugin-commonjs": "^10.1.0",
+    "treeify": "^1.1.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "tslint-config-stoplight": "^1.4.0",
