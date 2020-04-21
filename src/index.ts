@@ -2,3 +2,4 @@ export { JsonSchemaViewer, SchemaRow, SchemaTree as SchemaTreeComponent, Propert
 export * from './tree';
 export * from './types';
 export * from './utils';
+export * from './errors';
