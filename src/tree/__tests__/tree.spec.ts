@@ -1,5 +1,6 @@
 import { TreeListParentNode } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
+import { ResolvingError } from '../../errors';
 import { getNodeMetadata } from '../metadata';
 import { SchemaTree, SchemaTreeState } from '../tree';
 import { printTree } from './utils/printTree';
@@ -62,7 +63,7 @@ describe('SchemaTree', () => {
                 },
               },
             ],
-          })
+          }),
         );
       });
 
@@ -83,7 +84,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          })
+          }),
         );
       });
 
@@ -103,7 +104,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          })
+          }),
         );
       });
     });
@@ -159,7 +160,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          })
+          }),
         );
       });
     });
@@ -196,7 +197,7 @@ describe('SchemaTree', () => {
           expandedDepth: 0,
           mergeAllOf: false,
           resolveRef() {
-            throw new ReferenceError('Seems like you do not want this to be empty.');
+            throw new ResolvingError('Seems like you do not want this to be empty.');
           },
         });
 
@@ -205,7 +206,7 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Seems like you do not want this to be empty.'
+          'Seems like you do not want this to be empty.',
         );
       });
     });
@@ -242,13 +243,13 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references'
+          'Cannot dereference external references',
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references'
+          'Cannot dereference external references',
         );
       });
 
@@ -258,10 +259,10 @@ describe('SchemaTree', () => {
           mergeAllOf: false,
           resolveRef({ source, pointer }) {
             if (source === '../test') {
-              throw new ReferenceError(`Could not read "${source}"`);
+              throw new ResolvingError(`Could not read "${source}"`);
             }
 
-            throw new ReferenceError(`Pointer "${pointer}" is missing`);
+            throw new ResolvingError(`Pointer "${pointer}" is missing`);
           },
         });
 
@@ -270,13 +271,13 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Could not read "../test"'
+          'Could not read "../test"',
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Pointer "#id" is missing'
+          'Pointer "#id" is missing',
         );
       });
     });
@@ -437,7 +438,7 @@ describe('SchemaTree', () => {
         `);
       });
 
-      test('given direct circular reference pointing at allOf, should throw', () => {
+      test('given direct circular reference pointing at allOf, should bail out and display unmerged allOf', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -472,10 +473,39 @@ describe('SchemaTree', () => {
           resolveRef: void 0,
         });
 
-        expect(tree.populate.bind(tree)).toThrowError('Circular reference detected');
+        expect(tree.populate.bind(tree)).not.toThrow();
+        expect(printTree(tree)).toMatchInlineSnapshot(`
+          "└─ #
+             ├─ type: object
+             └─ children
+                ├─ 0
+                │  └─ #/properties/foo
+                │     ├─ type: undefined
+                │     └─ children
+                │        └─ 0
+                │           └─ #/properties/foo/allOf/0
+                │              ├─ type: undefined
+                │              └─ children
+                └─ 1
+                   └─ #/properties/bar
+                      ├─ type: undefined
+                      └─ children
+                         ├─ 0
+                         │  └─ #/properties/bar/allOf/0
+                         │     ├─ type: undefined
+                         │     └─ children
+                         └─ 1
+                            └─ #/properties/bar/allOf/1
+                               ├─ type: object
+                               └─ children
+                                  └─ 0
+                                     └─ #/properties/bar/allOf/1/properties/name
+                                        └─ type: string
+          "
+        `);
       });
 
-      test('given indirect circular reference pointing at allOf, should throw', () => {
+      test('given indirect circular reference pointing at allOf, should bail out and display unmerged allOf', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -517,8 +547,95 @@ describe('SchemaTree', () => {
           resolveRef: void 0,
         });
 
-        expect(tree.populate.bind(tree)).toThrowError('Circular reference detected');
+        expect(tree.populate.bind(tree)).not.toThrow();
+        expect(printTree(tree)).toMatchInlineSnapshot(`
+          "└─ #
+             ├─ type: object
+             └─ children
+                ├─ 0
+                │  └─ #/properties/baz
+                │     ├─ type: undefined
+                │     └─ children
+                │        └─ 0
+                │           └─ #/properties/baz/allOf/0
+                │              ├─ type: undefined
+                │              └─ children
+                ├─ 1
+                │  └─ #/properties/foo
+                │     ├─ type: undefined
+                │     └─ children
+                │        └─ 0
+                │           └─ #/properties/foo/allOf/0
+                │              ├─ type: undefined
+                │              └─ children
+                └─ 2
+                   └─ #/properties/bar
+                      ├─ type: undefined
+                      └─ children
+                         ├─ 0
+                         │  └─ #/properties/bar/allOf/0
+                         │     ├─ type: undefined
+                         │     └─ children
+                         └─ 1
+                            └─ #/properties/bar/allOf/1
+                               ├─ type: object
+                               └─ children
+                                  └─ 0
+                                     └─ #/properties/bar/allOf/1/properties/name
+                                        └─ type: string
+          "
+        `);
       });
+    });
+  });
+
+  describe('allOf failures', () => {
+    test('given incompatible values, should bail out and display unmerged allOf', () => {
+      const schema: JSONSchema4 = {
+        allOf: [
+          {
+            type: 'string',
+          },
+          {
+            type: 'number',
+          },
+          {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+        ],
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+      });
+
+      expect(tree.populate.bind(tree)).not.toThrow();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type: undefined
+           └─ children
+              ├─ 0
+              │  └─ #/allOf/0
+              │     └─ type: string
+              ├─ 1
+              │  └─ #/allOf/1
+              │     └─ type: number
+              └─ 2
+                 └─ #/allOf/2
+                    ├─ type: object
+                    └─ children
+                       └─ 0
+                          └─ #/allOf/2/properties/name
+                             └─ type: string
+        "
+      `);
     });
   });
 

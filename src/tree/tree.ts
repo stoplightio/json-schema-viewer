@@ -3,6 +3,7 @@ import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
+import { ResolvingError } from '../errors';
 import { SchemaTreeListNode } from '../types';
 import { generateId } from '../utils/generateId';
 import { hasRefItems, isRefNode } from '../utils/guards';
@@ -143,9 +144,9 @@ export class SchemaTree extends Tree {
     if (this.resolver !== void 0) {
       return this.resolver({ source, pointer }, path, this.schema);
     } else if (source !== null) {
-      throw new ReferenceError('Cannot dereference external references');
+      throw new ResolvingError('Cannot dereference external references');
     } else if (pointer === null) {
-      throw new ReferenceError('The pointer is empty');
+      throw new ResolvingError('The pointer is empty');
     } else {
       return _get(this.schema, pointerToPath(pointer));
     }
@@ -159,7 +160,7 @@ export class SchemaTree extends Tree {
     const schemaFragment = this.resolveRef(path, $ref);
 
     if (!_isObject(schemaFragment)) {
-      throw new ReferenceError(`Could not dereference "${$ref}"`);
+      throw new ResolvingError(`Could not dereference "${$ref}"`);
     }
 
     this.populateTreeFragment(node, schemaFragment, path, false);

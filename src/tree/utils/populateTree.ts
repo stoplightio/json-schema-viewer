@@ -58,8 +58,16 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
           break;
       }
     } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
-      parent.children.pop();
-      populateTree(mergeAllOf(fragment, options.resolveRef), parent, level, path, options);
+      try {
+        const merged = mergeAllOf(fragment, options.resolveRef);
+        parent.children.pop();
+        populateTree(merged, parent, level, path, options);
+      } catch (ex) {
+        if (Array.isArray(fragment.allOf)) {
+          (treeNode as TreeListParentNode).children = [];
+          bailAllOf(treeNode as TreeListParentNode, fragment, level + 1, [...path, 'allOf'], options);
+        }
+      }
     } else if (_isObject(node.properties)) {
       (treeNode as TreeListParentNode).children = [];
 
@@ -166,4 +174,18 @@ function processObject(
   }
 
   return node;
+}
+
+function bailAllOf(
+  node: TreeListParentNode,
+  schema: JSONSchema4,
+  level: number,
+  path: JsonPath,
+  options: WalkingOptions | null,
+) {
+  if (Array.isArray(schema.allOf)) {
+    for (const [i, item] of schema.allOf.entries()) {
+      populateTree(item, node, level, [...path, i], options);
+    }
+  }
 }

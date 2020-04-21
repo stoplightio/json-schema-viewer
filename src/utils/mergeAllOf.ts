@@ -1,5 +1,6 @@
 import { JSONSchema4 } from 'json-schema';
 import { cloneDeep, isObject } from 'lodash';
+import { ResolvingError } from '../errors';
 import { WalkerRefResolver } from '../tree/utils/populateTree';
 
 const resolveAllOf = require('@stoplight/json-schema-merge-allof');
@@ -22,7 +23,7 @@ function _mergeAllOf(schema: JSONSchema4, resolveRef: WalkerRefResolver, seen: S
 
       const resolved = resolveRef(null, $ref);
       if (seen.has($ref)) {
-        throw new ReferenceError('Circular reference detected');
+        throw new ResolvingError('Circular reference detected');
       }
 
       seen.add($ref);
