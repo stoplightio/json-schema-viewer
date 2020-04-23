@@ -2,8 +2,80 @@ import { JSONSchema4 } from 'json-schema';
 import { mergeAllOf } from '../mergeAllOf';
 
 describe('mergeAllOf util', () => {
+  describe('example merging', () => {
+    test('given incompatible, should leave empty', () => {
+      const schema: JSONSchema4 = {
+        allOf: [
+          {
+            type: 'object',
+            properties: {
+              bar: {
+                type: 'string',
+                example: 'hello',
+              },
+            },
+          },
+          {
+            type: 'object',
+            properties: {
+              bar: {
+                type: 'string',
+                example: 'bye',
+              },
+            },
+          },
+        ],
+      };
+
+      expect(mergeAllOf(schema, [], jest.fn())).toEqual({
+        properties: {
+          bar: {
+            example: null,
+            type: 'string',
+          },
+        },
+        type: 'object',
+      });
+    });
+
+    test('given compatible, should merge normally', () => {
+      const schema: JSONSchema4 = {
+        allOf: [
+          {
+            type: 'object',
+            properties: {
+              bar: {
+                type: 'string',
+                example: 'hello',
+              },
+            },
+          },
+          {
+            type: 'object',
+            properties: {
+              bar: {
+                type: 'string',
+                example: 'hello',
+              },
+            },
+          },
+        ],
+      };
+
+      expect(mergeAllOf(schema, [], jest.fn())).toEqual({
+        properties: {
+          bar: {
+            example: 'hello',
+            type: 'string',
+          },
+        },
+        type: 'object',
+      });
+    });
+  });
+
   describe('enums merging', () => {
-    test('given incompatible, should mark enum as empty', () => {
+    test('given incompatible, should leave empty', () => {
       const schema: JSONSchema4 = {
         allOf: [
           {
@@ -38,7 +110,7 @@ describe('mergeAllOf util', () => {
       });
     });
 
-    test('given incompatible, should merge normally', () => {
+    test('given compatible, should merge normally', () => {
       const schema: JSONSchema4 = {
         allOf: [
           {

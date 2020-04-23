@@ -11,8 +11,15 @@ function _mergeAllOf(schema: JSONSchema4, path: JsonPath, resolveRef: WalkerRefR
   return resolveAllOf(cloneDeep(schema), {
     deep: false,
     resolvers: {
-      defaultResolver(values: any) {
-        return Object.assign({}, ...values);
+      defaultResolver(values: unknown) {
+        if (Array.isArray(values)) {
+          return values;
+        }
+
+        return Object.assign({}, ...Object(values));
+      },
+      example(values: unknown[]) {
+        return resolveAllOf.options.resolvers.enum(values) || null;
       },
       enum(values: unknown[]) {
         return resolveAllOf.options.resolvers.enum(compact(values)) || [];
