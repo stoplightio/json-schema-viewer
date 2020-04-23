@@ -1,11 +1,13 @@
+import { pathToPointer } from '@stoplight/json';
+import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { cloneDeep, isObject } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { ResolvingError } from '../errors';
 import { WalkerRefResolver } from '../tree/utils/populateTree';
 
 const resolveAllOf = require('@stoplight/json-schema-merge-allof');
 
-function _mergeAllOf(schema: JSONSchema4, resolveRef: WalkerRefResolver, seen: Set<string>) {
+function _mergeAllOf(schema: JSONSchema4, path: JsonPath, resolveRef: WalkerRefResolver) {
   return resolveAllOf(cloneDeep(schema), {
     deep: false,
     resolvers: {
@@ -21,16 +23,20 @@ function _mergeAllOf(schema: JSONSchema4, resolveRef: WalkerRefResolver, seen: S
         return {};
       }
 
-      const resolved = resolveRef(null, $ref);
-      if (seen.has($ref)) {
+      if (pathToPointer(path).startsWith($ref)) {
         throw new ResolvingError('Circular reference detected');
       }
 
-      seen.add($ref);
-      return isObject(resolved) && 'allOf' in resolved ? _mergeAllOf(resolved, resolveRef, seen) : resolved;
+      return resolveRef(null, $ref);
     },
   });
 }
 
-export const mergeAllOf = (schema: JSONSchema4, resolveRef: WalkerRefResolver) =>
-  _mergeAllOf(schema, resolveRef, new Set());
+export const mergeAllOf = (schema: JSONSchema4, path: JsonPath, resolveRef: WalkerRefResolver) => {
+  try {
+    return _mergeAllOf(schema, path, resolveRef);
+  } catch (ex) {
+    console.error(ex.message);
+    throw ex;
+  }
+};

@@ -63,7 +63,7 @@ describe('SchemaTree', () => {
                 },
               },
             ],
-          }),
+          })
         );
       });
 
@@ -84,7 +84,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          }),
+          })
         );
       });
 
@@ -104,7 +104,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          }),
+          })
         );
       });
     });
@@ -160,7 +160,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          }),
+          })
         );
       });
     });
@@ -206,7 +206,7 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Seems like you do not want this to be empty.',
+          'Seems like you do not want this to be empty.'
         );
       });
     });
@@ -243,13 +243,13 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references',
+          'Cannot dereference external references'
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references',
+          'Cannot dereference external references'
         );
       });
 
@@ -271,13 +271,13 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Could not read "../test"',
+          'Could not read "../test"'
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Pointer "#id" is missing',
+          'Pointer "#id" is missing'
         );
       });
     });
@@ -426,14 +426,14 @@ describe('SchemaTree', () => {
                       ├─ type: object
                       └─ children
                          ├─ 0
-                         │  └─ #/properties/bar/properties/name
+                         │  └─ #/properties/bar/properties/address
                          │     └─ type: string
                          ├─ 1
-                         │  └─ #/properties/bar/properties/id
-                         │     └─ type: number
+                         │  └─ #/properties/bar/properties/name
+                         │     └─ type: string
                          └─ 2
-                            └─ #/properties/bar/properties/address
-                               └─ type: string
+                            └─ #/properties/bar/properties/id
+                               └─ type: number
           "
         `);
       });
@@ -482,25 +482,25 @@ describe('SchemaTree', () => {
                 │  └─ #/properties/foo
                 │     ├─ type: undefined
                 │     └─ children
-                │        └─ 0
-                │           └─ #/properties/foo/allOf/0
-                │              ├─ type: undefined
+                │        ├─ 0
+                │        │  └─ #/properties/foo/allOf/0
+                │        │     ├─ type: undefined
+                │        │     └─ children
+                │        └─ 1
+                │           └─ #/properties/foo/allOf/1
+                │              ├─ type: object
                 │              └─ children
+                │                 └─ 0
+                │                    └─ #/properties/foo/allOf/1/properties/name
+                │                       └─ type: string
                 └─ 1
                    └─ #/properties/bar
-                      ├─ type: undefined
+                      ├─ type: object
                       └─ children
-                         ├─ 0
-                         │  └─ #/properties/bar/allOf/0
-                         │     ├─ type: undefined
-                         │     └─ children
-                         └─ 1
-                            └─ #/properties/bar/allOf/1
-                               ├─ type: object
+                         └─ 0
+                            └─ #/properties/bar/allOf/0
+                               ├─ type: undefined
                                └─ children
-                                  └─ 0
-                                     └─ #/properties/bar/allOf/1/properties/name
-                                        └─ type: string
           "
         `);
       });
@@ -554,7 +554,7 @@ describe('SchemaTree', () => {
              └─ children
                 ├─ 0
                 │  └─ #/properties/baz
-                │     ├─ type: undefined
+                │     ├─ type: object
                 │     └─ children
                 │        └─ 0
                 │           └─ #/properties/baz/allOf/0
@@ -564,25 +564,159 @@ describe('SchemaTree', () => {
                 │  └─ #/properties/foo
                 │     ├─ type: undefined
                 │     └─ children
-                │        └─ 0
-                │           └─ #/properties/foo/allOf/0
-                │              ├─ type: undefined
+                │        ├─ 0
+                │        │  └─ #/properties/foo/allOf/0
+                │        │     ├─ type: undefined
+                │        │     └─ children
+                │        └─ 1
+                │           └─ #/properties/foo/allOf/1
+                │              ├─ type: object
                 │              └─ children
+                │                 └─ 0
+                │                    └─ #/properties/foo/allOf/1/properties/name
+                │                       └─ type: string
                 └─ 2
                    └─ #/properties/bar
-                      ├─ type: undefined
+                      ├─ type: object
+                      └─ children
+                         └─ 0
+                            └─ #/properties/bar/allOf/0
+                               ├─ type: undefined
+                               └─ children
+          "
+        `);
+      });
+
+      test('given circular reference pointing at allOf that are not at top-level, should merge top-level allOf normally', () => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            baz: {
+              allOf: [
+                {
+                  $ref: '#/properties/bar',
+                },
+              ],
+            },
+            foo: {
+              allOf: [
+                {
+                  $ref: '#/properties/baz',
+                },
+              ],
+            },
+            bar: {
+              allOf: [
+                {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                    },
+                    address: {
+                      type: 'object',
+                      properties: {
+                        street: {
+                          $ref: '#/properties/foo',
+                        },
+                      },
+                    },
+                  },
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        };
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+        });
+
+        expect(tree.populate.bind(tree)).not.toThrow();
+        expect(printTree(tree)).toMatchInlineSnapshot(`
+          "└─ #
+             ├─ type: object
+             └─ children
+                ├─ 0
+                │  └─ #/properties/baz
+                │     ├─ type: object
+                │     └─ children
+                │        ├─ 0
+                │        │  └─ #/properties/baz/properties/id
+                │        │     └─ type: string
+                │        ├─ 1
+                │        │  └─ #/properties/baz/properties/address
+                │        │     ├─ type: object
+                │        │     └─ children
+                │        │        └─ 0
+                │        │           └─ #/properties/baz/properties/address/properties/street
+                │        │              ├─ type: undefined
+                │        │              └─ children
+                │        │                 └─ 0
+                │        │                    └─ #/properties/baz/properties/address/properties/street/allOf/0
+                │        │                       ├─ type: undefined
+                │        │                       └─ children
+                │        └─ 2
+                │           └─ #/properties/baz/properties/name
+                │              └─ type: string
+                ├─ 1
+                │  └─ #/properties/foo
+                │     ├─ type: undefined
+                │     └─ children
+                │        ├─ 0
+                │        │  └─ #/properties/foo/allOf/0
+                │        │     ├─ type: object
+                │        │     └─ children
+                │        │        ├─ 0
+                │        │        │  └─ #/properties/foo/allOf/0/properties/id
+                │        │        │     └─ type: string
+                │        │        └─ 1
+                │        │           └─ #/properties/foo/allOf/0/properties/address
+                │        │              ├─ type: object
+                │        │              └─ children
+                │        │                 └─ 0
+                │        │                    └─ #/properties/foo/allOf/0/properties/address/properties/street
+                │        │                       ├─ type: undefined
+                │        │                       └─ children
+                │        └─ 1
+                │           └─ #/properties/foo/allOf/1
+                │              ├─ type: object
+                │              └─ children
+                │                 └─ 0
+                │                    └─ #/properties/foo/allOf/1/properties/name
+                │                       └─ type: string
+                └─ 2
+                   └─ #/properties/bar
+                      ├─ type: object
                       └─ children
                          ├─ 0
-                         │  └─ #/properties/bar/allOf/0
-                         │     ├─ type: undefined
+                         │  └─ #/properties/bar/properties/id
+                         │     └─ type: string
+                         ├─ 1
+                         │  └─ #/properties/bar/properties/address
+                         │     ├─ type: object
                          │     └─ children
-                         └─ 1
-                            └─ #/properties/bar/allOf/1
-                               ├─ type: object
-                               └─ children
-                                  └─ 0
-                                     └─ #/properties/bar/allOf/1/properties/name
-                                        └─ type: string
+                         │        └─ 0
+                         │           └─ #/properties/bar/properties/address/properties/street
+                         │              ├─ type: undefined
+                         │              └─ children
+                         │                 └─ 0
+                         │                    └─ #/properties/bar/properties/address/properties/street/allOf/0
+                         │                       ├─ type: undefined
+                         │                       └─ children
+                         └─ 2
+                            └─ #/properties/bar/properties/name
+                               └─ type: string
           "
         `);
       });
