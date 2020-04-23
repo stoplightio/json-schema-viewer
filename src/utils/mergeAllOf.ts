@@ -1,7 +1,7 @@
 import { pathToPointer } from '@stoplight/json';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, compact } from 'lodash';
 import { ResolvingError } from '../errors';
 import { WalkerRefResolver } from '../tree/utils/populateTree';
 
@@ -13,6 +13,9 @@ function _mergeAllOf(schema: JSONSchema4, path: JsonPath, resolveRef: WalkerRefR
     resolvers: {
       defaultResolver(values: any) {
         return Object.assign({}, ...values);
+      },
+      enum(values: unknown[]) {
+        return resolveAllOf.options.resolvers.enum(compact(values)) || [];
       },
       $ref(values: unknown) {
         return {};
