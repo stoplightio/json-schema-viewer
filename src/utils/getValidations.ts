@@ -18,6 +18,9 @@ export const COMMON_VALIDATION_TYPES = [
 const VALIDATION_TYPES = {
   string: ['minLength', 'maxLength', 'pattern'],
   number: ['multipleOf', 'minimum', 'exclusiveMinimum', 'maximum', 'exclusiveMaximum'],
+  get integer() {
+    return this.number;
+  },
   object: ['additionalProperties', 'minProperties', 'maxProperties'],
   array: ['additionalItems', 'minItems', 'maxItems', 'uniqueItems'],
 };
