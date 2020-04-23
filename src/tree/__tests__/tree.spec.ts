@@ -480,11 +480,11 @@ describe('SchemaTree', () => {
              └─ children
                 ├─ 0
                 │  └─ #/properties/foo
-                │     ├─ type: undefined
+                │     ├─ combiner: allOf
                 │     └─ children
                 │        ├─ 0
                 │        │  └─ #/properties/foo/allOf/0
-                │        │     ├─ type: undefined
+                │        │     ├─ $ref: #/properties/foo
                 │        │     └─ children
                 │        └─ 1
                 │           └─ #/properties/foo/allOf/1
@@ -496,10 +496,11 @@ describe('SchemaTree', () => {
                 └─ 1
                    └─ #/properties/bar
                       ├─ type: object
+                      ├─ combiner: allOf
                       └─ children
                          └─ 0
                             └─ #/properties/bar/allOf/0
-                               ├─ type: undefined
+                               ├─ $ref: #/properties/bar
                                └─ children
           "
         `);
@@ -555,18 +556,19 @@ describe('SchemaTree', () => {
                 ├─ 0
                 │  └─ #/properties/baz
                 │     ├─ type: object
+                │     ├─ combiner: allOf
                 │     └─ children
                 │        └─ 0
                 │           └─ #/properties/baz/allOf/0
-                │              ├─ type: undefined
+                │              ├─ $ref: #/properties/baz
                 │              └─ children
                 ├─ 1
                 │  └─ #/properties/foo
-                │     ├─ type: undefined
+                │     ├─ combiner: allOf
                 │     └─ children
                 │        ├─ 0
                 │        │  └─ #/properties/foo/allOf/0
-                │        │     ├─ type: undefined
+                │        │     ├─ $ref: #/properties/foo
                 │        │     └─ children
                 │        └─ 1
                 │           └─ #/properties/foo/allOf/1
@@ -578,10 +580,11 @@ describe('SchemaTree', () => {
                 └─ 2
                    └─ #/properties/bar
                       ├─ type: object
+                      ├─ combiner: allOf
                       └─ children
                          └─ 0
                             └─ #/properties/bar/allOf/0
-                               ├─ type: undefined
+                               ├─ $ref: #/properties/bar
                                └─ children
           "
         `);
@@ -660,18 +663,18 @@ describe('SchemaTree', () => {
                 │        │     └─ children
                 │        │        └─ 0
                 │        │           └─ #/properties/baz/properties/address/properties/street
-                │        │              ├─ type: undefined
+                │        │              ├─ combiner: allOf
                 │        │              └─ children
                 │        │                 └─ 0
                 │        │                    └─ #/properties/baz/properties/address/properties/street/allOf/0
-                │        │                       ├─ type: undefined
+                │        │                       ├─ $ref: #/properties/baz
                 │        │                       └─ children
                 │        └─ 2
                 │           └─ #/properties/baz/properties/name
                 │              └─ type: string
                 ├─ 1
                 │  └─ #/properties/foo
-                │     ├─ type: undefined
+                │     ├─ combiner: allOf
                 │     └─ children
                 │        ├─ 0
                 │        │  └─ #/properties/foo/allOf/0
@@ -686,7 +689,7 @@ describe('SchemaTree', () => {
                 │        │              └─ children
                 │        │                 └─ 0
                 │        │                    └─ #/properties/foo/allOf/0/properties/address/properties/street
-                │        │                       ├─ type: undefined
+                │        │                       ├─ $ref: #/properties/foo
                 │        │                       └─ children
                 │        └─ 1
                 │           └─ #/properties/foo/allOf/1
@@ -708,11 +711,11 @@ describe('SchemaTree', () => {
                          │     └─ children
                          │        └─ 0
                          │           └─ #/properties/bar/properties/address/properties/street
-                         │              ├─ type: undefined
+                         │              ├─ combiner: allOf
                          │              └─ children
                          │                 └─ 0
                          │                    └─ #/properties/bar/properties/address/properties/street/allOf/0
-                         │                       ├─ type: undefined
+                         │                       ├─ $ref: #/properties/bar
                          │                       └─ children
                          └─ 2
                             └─ #/properties/bar/properties/name
@@ -753,7 +756,7 @@ describe('SchemaTree', () => {
       expect(tree.populate.bind(tree)).not.toThrow();
       expect(printTree(tree)).toMatchInlineSnapshot(`
         "└─ #
-           ├─ type: undefined
+           ├─ combiner: allOf
            └─ children
               ├─ 0
               │  └─ #/allOf/0
