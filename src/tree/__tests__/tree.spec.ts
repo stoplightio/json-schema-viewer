@@ -38,6 +38,7 @@ describe('SchemaTree', () => {
           expandedDepth: 0,
           mergeAllOf: false,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -139,6 +140,7 @@ describe('SchemaTree', () => {
           expandedDepth: 0,
           mergeAllOf: false,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -184,6 +186,7 @@ describe('SchemaTree', () => {
           expandedDepth: 0,
           mergeAllOf: false,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -199,6 +202,7 @@ describe('SchemaTree', () => {
           resolveRef() {
             throw new ResolvingError('Seems like you do not want this to be empty.');
           },
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -236,6 +240,7 @@ describe('SchemaTree', () => {
           expandedDepth: 0,
           mergeAllOf: false,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -264,6 +269,7 @@ describe('SchemaTree', () => {
 
             throw new ResolvingError(`Pointer "${pointer}" is missing`);
           },
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -320,6 +326,7 @@ describe('SchemaTree', () => {
           expandedDepth: Infinity,
           mergeAllOf: true,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -401,6 +408,7 @@ describe('SchemaTree', () => {
           expandedDepth: Infinity,
           mergeAllOf: true,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -471,6 +479,7 @@ describe('SchemaTree', () => {
           expandedDepth: Infinity,
           mergeAllOf: true,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         expect(tree.populate.bind(tree)).not.toThrow();
@@ -546,6 +555,7 @@ describe('SchemaTree', () => {
           expandedDepth: Infinity,
           mergeAllOf: true,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         expect(tree.populate.bind(tree)).not.toThrow();
@@ -643,6 +653,7 @@ describe('SchemaTree', () => {
           expandedDepth: Infinity,
           mergeAllOf: true,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         expect(tree.populate.bind(tree)).not.toThrow();
@@ -751,6 +762,7 @@ describe('SchemaTree', () => {
         expandedDepth: Infinity,
         mergeAllOf: true,
         resolveRef: void 0,
+        shouldResolveEagerly: false,
       });
 
       expect(tree.populate.bind(tree)).not.toThrow();
@@ -808,6 +820,7 @@ describe('SchemaTree', () => {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
+        shouldResolveEagerly: false,
       });
     });
 
@@ -861,5 +874,122 @@ describe('SchemaTree', () => {
         'address',
       ]);
     });
+  });
+
+  describe('eager $ref resolving', () => {
+    test('given a plain object with properties, should resolve', () => {
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          foo: {
+            $ref: '#/properties/bar',
+          },
+          bar: {
+            type: 'boolean',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type: object
+           └─ children
+              ├─ 0
+              │  └─ #/properties/foo
+              │     └─ type: boolean
+              └─ 1
+                 └─ #/properties/bar
+                    └─ type: boolean
+        "
+      `);
+    });
+
+    test('given an array with $reffed items, should resolve', () => {
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'array',
+            items: {
+              $ref: '#/properties/bar',
+            },
+          },
+          bar: {
+            type: 'boolean',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type: object
+           └─ children
+              ├─ 0
+              │  └─ #/properties/foo
+              │     ├─ type: array
+              │     └─ subtype: boolean
+              └─ 1
+                 └─ #/properties/bar
+                    └─ type: boolean
+        "
+      `);
+    });
+
+    test('should leave broken $refs', () => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            foo: {
+              type: 'array',
+              items: {
+                $ref: '#/properties/baz',
+              },
+            },
+            bar: {
+              $ref: '#/properties/bazinga',
+            },
+          },
+        };
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+          shouldResolveEagerly: true,
+        });
+
+        tree.populate();
+        expect(printTree(tree)).toMatchInlineSnapshot(`
+          "└─ #
+             ├─ type: object
+             └─ children
+                ├─ 0
+                │  └─ #/properties/foo
+                │     ├─ type: array
+                │     ├─ subtype: $ref[#/properties/baz]
+                │     └─ children
+                └─ 1
+                   └─ #/properties/bar
+                      ├─ $ref: #/properties/bazinga
+                      └─ children
+          "
+        `);
+      });
   });
 });

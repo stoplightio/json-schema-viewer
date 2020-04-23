@@ -66,6 +66,7 @@ describe('SchemaRow component', () => {
       expandedDepth: Infinity,
       mergeAllOf: false,
       resolveRef: void 0,
+      shouldResolveEagerly: false,
     });
 
     tree.populate();
@@ -94,6 +95,7 @@ describe('SchemaRow component', () => {
       expandedDepth: Infinity,
       mergeAllOf: false,
       resolveRef: void 0,
+      shouldResolveEagerly: false,
     });
 
     tree.populate();
@@ -128,6 +130,7 @@ describe('SchemaRow component', () => {
           expandedDepth: Infinity,
           mergeAllOf: false,
           resolveRef: void 0,
+          shouldResolveEagerly: false,
         });
 
         tree.populate();
@@ -143,7 +146,7 @@ describe('SchemaRow component', () => {
 
       test('given a custom resolver, should render a message thrown by it', () => {
         const message = "I don't know how to resolve it. Sorry";
-        tree.resolver = () => {
+        tree.treeOptions.resolveRef = () => {
           throw new Error(message);
         };
 
@@ -185,6 +188,7 @@ describe('SchemaRow component', () => {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
+        shouldResolveEagerly: false,
       });
 
       tree.populate();

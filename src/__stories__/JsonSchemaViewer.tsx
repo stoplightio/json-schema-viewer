@@ -22,6 +22,7 @@ storiesOf('JsonSchemaViewer', module)
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
       expanded={boolean('expanded', false)}
       hideTopBar={boolean('hideTopBar', false)}
+      shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -34,6 +35,7 @@ storiesOf('JsonSchemaViewer', module)
       onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 5)}
       mergeAllOf={boolean('mergeAllOf', true)}
+      shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
     />
   ))
   .add('custom row renderer', () => {

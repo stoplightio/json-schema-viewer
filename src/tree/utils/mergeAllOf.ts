@@ -2,8 +2,8 @@ import { pathToPointer } from '@stoplight/json';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { cloneDeep, compact } from 'lodash';
-import { ResolvingError } from '../errors';
-import { WalkerRefResolver } from '../tree/utils/populateTree';
+import { ResolvingError } from '../../errors';
+import { WalkerRefResolver } from './populateTree';
 
 const resolveAllOf = require('@stoplight/json-schema-merge-allof');
 

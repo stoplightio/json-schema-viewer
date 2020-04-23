@@ -5,7 +5,7 @@ import { action } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { SchemaTree, SchemaTreeRefDereferenceFn } from '../tree/tree';
+import { SchemaTree, SchemaTreeOptions, SchemaTreeRefDereferenceFn } from '../tree/tree';
 import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
@@ -25,6 +25,7 @@ export interface IJsonSchemaViewer {
   FallbackComponent?: typeof FallbackComponent;
   rowRenderer?: RowRenderer;
   resolveRef?: SchemaTreeRefDereferenceFn;
+  shouldResolveEagerly?: boolean;
 }
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
@@ -36,14 +37,19 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     super(props);
 
     this.treeState = new TreeState();
-    this.tree = new SchemaTree(props.schema, this.treeState, {
-      expandedDepth: this.expandedDepth,
-      mergeAllOf: this.mergeAllOf,
-      resolveRef: this.props.resolveRef,
-    });
+    this.tree = new SchemaTree(props.schema, this.treeState, this.treeOptions);
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
+  }
+
+  protected get treeOptions(): SchemaTreeOptions {
+    return {
+      expandedDepth: this.expandedDepth,
+      mergeAllOf: this.mergeAllOf,
+      resolveRef: this.props.resolveRef,
+      shouldResolveEagerly: !!this.props.shouldResolveEagerly,
+    };
   }
 
   protected get mergeAllOf() {
@@ -77,17 +83,17 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   @action
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (prevProps.resolveRef !== this.props.resolveRef) {
-      this.tree.resolver = this.props.resolveRef;
+      this.tree.treeOptions.resolveRef = this.props.resolveRef;
     }
 
     if (
       this.treeStore.defaultExpandedDepth !== this.expandedDepth ||
       prevProps.schema !== this.props.schema ||
-      prevProps.mergeAllOf !== this.props.mergeAllOf
+      prevProps.mergeAllOf !== this.props.mergeAllOf ||
+      prevProps.shouldResolveEagerly !== this.props.shouldResolveEagerly
     ) {
       this.treeStore.defaultExpandedDepth = this.expandedDepth;
-      this.tree.expandedDepth = this.expandedDepth;
-      this.tree.mergeAllOf = this.mergeAllOf;
+      this.tree.treeOptions = this.treeOptions;
       this.tree.schema = this.props.schema;
       this.renderSchema();
     }

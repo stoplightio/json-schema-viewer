@@ -3,11 +3,12 @@ import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
-import { mergeAllOf } from '../../utils';
 import { getCombiner } from '../../utils/getCombiner';
 import { getPrimaryType } from '../../utils/getPrimaryType';
-import { hasRefItems, isCombinerNode, isRefNode } from '../../utils/guards';
-import { metadataStore } from '../metadata';
+import { isCombinerNode, isRefNode } from '../../utils/guards';
+import { getNodeMetadata, metadataStore } from '../metadata';
+import { createErrorTreeNode } from './createErrorTreeNode';
+import { mergeAllOf } from './mergeAllOf';
 import { walk } from './walk';
 
 export type WalkerRefResolver = (path: JsonPath | null, $ref: string) => JSONSchema4;
@@ -17,6 +18,7 @@ export type WalkingOptions = {
   onNode?(fragment: JSONSchema4, node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
   stepIn?: boolean;
   resolveRef: WalkerRefResolver;
+  shouldResolveEagerly: boolean;
 };
 
 export type Walker = (
@@ -28,9 +30,11 @@ export type Walker = (
 ) => undefined;
 
 export const populateTree: Walker = (schema, parent, level, path, options): undefined => {
-  if (!_isObject(schema)) return;
+  const actualSchema = prepareSchema(schema, parent, path, options);
 
-  for (const { node, fragment } of walk(schema)) {
+  if (!_isObject(actualSchema)) return;
+
+  for (const { node, fragment } of walk(actualSchema)) {
     if (options !== null && options.onNode !== void 0 && !options.onNode(fragment, node, parent, level)) continue;
 
     const treeNode: SchemaTreeListNode = {
@@ -100,29 +104,41 @@ function processArray(
   path: JsonPath,
   options: WalkingOptions | null,
 ): SchemaTreeListNode {
-  if (hasRefItems(schema) && schema.items.$ref) {
+  const items = prepareSchema(schema.items, node, path, options);
+
+  if (!_isObject(items)) return node;
+
+  if (items !== schema.items) {
+    // we need to update the stored metadata to make sure the subtype of given array correctly inferred by Property component
+    const metadata = getNodeMetadata(node);
+    if ('schemaNode' in metadata) {
+      (metadata.schemaNode as IArrayNode).items = items;
+    }
+  }
+
+  if ('$ref' in items) {
     (node as TreeListParentNode).children = [];
-  } else if (Array.isArray(schema.items)) {
+  } else if (Array.isArray(items)) {
     const children: SchemaTreeListNode[] = [];
     (node as TreeListParentNode).children = children;
-    for (const [i, property] of schema.items.entries()) {
+    for (const [i, property] of items.entries()) {
       const child = populateTree(property, node as TreeListParentNode, level + 1, [...path, 'items', i], options);
       if (child !== void 0) {
         children.push(child);
       }
     }
-  } else if (_isObject(schema.items)) {
-    const subtype = getPrimaryType(schema.items);
+  } else {
+    const subtype = getPrimaryType(items);
     switch (subtype) {
       case SchemaKind.Object:
-        return processObject(node, schema.items as IObjectNode, level, [...path, 'items'], options);
+        return processObject(node, items as IObjectNode, level, [...path, 'items'], options);
       case SchemaKind.Array:
-        return processArray(node, schema.items as IObjectNode, level, [...path, 'items'], options);
+        return processArray(node, items as IObjectNode, level, [...path, 'items'], options);
       default:
-        const combiner = getCombiner(schema.items);
+        const combiner = getCombiner(items);
         if (combiner) {
           (node as TreeListParentNode).children = [];
-          populateTree(schema.items, node as TreeListParentNode, level, [...path, 'items'], options);
+          populateTree(items, node as TreeListParentNode, level, [...path, 'items'], options);
         }
     }
   }
@@ -187,5 +203,29 @@ function bailAllOf(
     for (const [i, item] of schema.allOf.entries()) {
       populateTree(item, node, level, [...path, i], options);
     }
+  }
+}
+
+function prepareSchema(
+  schema: Optional<JSONSchema4 | null>,
+  node: TreeListNode,
+  path: JsonPath,
+  options: WalkingOptions | null,
+): Optional<JSONSchema4 | null> {
+  if (
+    !_isObject(schema) ||
+    options === null ||
+    !options.shouldResolveEagerly ||
+    !('$ref' in schema) ||
+    typeof schema.$ref !== 'string'
+  )
+    return schema;
+
+  try {
+    const resolved = options.resolveRef(path, schema.$ref);
+    return _isObject(resolved) ? resolved : schema;
+  } catch (ex) {
+    (node as TreeListParentNode).children = [];
+    return void (node as TreeListParentNode).children.push(createErrorTreeNode(node as TreeListParentNode, ex.message));
   }
 }

@@ -160,6 +160,7 @@ describe('Property component', () => {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
+        shouldResolveEagerly: false,
       });
 
       tree.populate();
@@ -184,6 +185,7 @@ describe('Property component', () => {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
+        shouldResolveEagerly: false,
       });
 
       tree.populate();
@@ -208,6 +210,7 @@ describe('Property component', () => {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
+        shouldResolveEagerly: false,
       });
 
       tree.populate();
@@ -233,6 +236,7 @@ describe('Property component', () => {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
+        shouldResolveEagerly: false,
       });
 
       tree.populate();

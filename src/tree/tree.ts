@@ -4,11 +4,10 @@ import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
 import { ResolvingError } from '../errors';
-import { SchemaTreeListNode } from '../types';
-import { generateId } from '../utils/generateId';
 import { hasRefItems, isRefNode } from '../utils/guards';
-import { getSchemaNodeMetadata, metadataStore } from './metadata';
+import { getSchemaNodeMetadata } from './metadata';
 import { canStepIn } from './utils/canStepIn';
+import { createErrorTreeNode } from './utils/createErrorTreeNode';
 import { populateTree, WalkerRefResolver } from './utils/populateTree';
 
 export type SchemaTreeRefInfo = {
@@ -26,21 +25,18 @@ export type SchemaTreeOptions = {
   expandedDepth: number;
   mergeAllOf: boolean;
   resolveRef: Optional<SchemaTreeRefDereferenceFn>;
+  shouldResolveEagerly: boolean;
 };
 
 export { TreeState as SchemaTreeState };
 
 export class SchemaTree extends Tree {
-  public expandedDepth: number;
-  public mergeAllOf: boolean;
-  public resolver: Optional<SchemaTreeRefDereferenceFn>;
+  public treeOptions: SchemaTreeOptions;
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
     super();
 
-    this.expandedDepth = opts.expandedDepth;
-    this.mergeAllOf = opts.mergeAllOf;
-    this.resolver = opts.resolveRef;
+    this.treeOptions = opts;
   }
 
   protected readonly visited = new WeakSet();
@@ -48,7 +44,7 @@ export class SchemaTree extends Tree {
   public populate() {
     const expanded = {};
     populateTree(this.schema, this.root, 0, [], {
-      mergeAllOf: this.mergeAllOf,
+      mergeAllOf: this.treeOptions.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level): boolean => {
         if ((isRefNode(node) && node.$ref !== null) || (hasRefItems(node) && node.items.$ref !== null)) {
           expanded[node.id] = false;
@@ -57,9 +53,10 @@ export class SchemaTree extends Tree {
         const metadata = Tree.getLevel(parentTreeNode) >= 0 ? getSchemaNodeMetadata(parentTreeNode) : void 0;
 
         if (metadata !== void 0 && isRefNode(metadata.schemaNode)) return false;
-        return level <= this.expandedDepth + 1;
+        return level <= this.treeOptions.expandedDepth + 1;
       },
       resolveRef: this.resolveRef,
+      shouldResolveEagerly: this.treeOptions.shouldResolveEagerly,
     });
     this.state.expanded = expanded;
     this.invalidate();
@@ -69,12 +66,13 @@ export class SchemaTree extends Tree {
     const initialLevel = Tree.getLevel(parent);
     const artificialRoot = Tree.createArtificialRoot();
     populateTree(schema, artificialRoot, initialLevel, path, {
-      mergeAllOf: this.mergeAllOf,
+      mergeAllOf: this.treeOptions.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level) => {
-        if (level <= this.expandedDepth || level <= initialLevel) return true;
+        if (level <= this.treeOptions.expandedDepth || level <= initialLevel) return true;
         return stepIn && level <= initialLevel + 1 && canStepIn(getSchemaNodeMetadata(parentTreeNode).schema);
       },
       resolveRef: this.resolveRef,
+      shouldResolveEagerly: true,
     });
 
     if (artificialRoot.children.length === 0) {
@@ -85,20 +83,7 @@ export class SchemaTree extends Tree {
   }
 
   protected insertErrorNode(parent: TreeListParentNode, error: string) {
-    const { path } = getSchemaNodeMetadata(parent);
-
-    const errorNode: SchemaTreeListNode = {
-      id: generateId(),
-      name: '',
-      parent,
-    };
-
-    metadataStore.set(errorNode, {
-      path,
-      error,
-    });
-
-    this.insertNode(errorNode, parent);
+    this.insertNode(createErrorTreeNode(parent, error), parent);
   }
 
   protected stepIn(root: TreeListParentNode, parent: TreeListParentNode) {
@@ -141,8 +126,8 @@ export class SchemaTree extends Tree {
     const source = extractSourceFromRef($ref);
     const pointer = extractPointerFromRef($ref);
 
-    if (this.resolver !== void 0) {
-      return this.resolver({ source, pointer }, path, this.schema);
+    if (this.treeOptions.resolveRef !== void 0) {
+      return this.treeOptions.resolveRef({ source, pointer }, path, this.schema);
     } else if (source !== null) {
       throw new ResolvingError('Cannot dereference external references');
     } else if (pointer === null) {
