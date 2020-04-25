@@ -40,7 +40,10 @@ describe('flattenTypes util', () => {
   });
 
   it.each([
-    [{ type: 'array', items: {} }, { type: 'object', properties: {} }],
+    [
+      { type: 'array', items: {} },
+      { type: 'object', properties: {} },
+    ],
     [{ type: 'string', enum: [] }],
     { type: 'number', minimum: 1 },
     { additionalProperties: 1 },

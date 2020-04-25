@@ -39,6 +39,7 @@ describe('SchemaTree', () => {
           mergeAllOf: false,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -64,7 +65,7 @@ describe('SchemaTree', () => {
                 },
               },
             ],
-          })
+          }),
         );
       });
 
@@ -85,7 +86,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          })
+          }),
         );
       });
 
@@ -105,7 +106,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          })
+          }),
         );
       });
     });
@@ -141,6 +142,7 @@ describe('SchemaTree', () => {
           mergeAllOf: false,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -162,7 +164,7 @@ describe('SchemaTree', () => {
                 type: 'string',
               },
             },
-          })
+          }),
         );
       });
     });
@@ -187,6 +189,7 @@ describe('SchemaTree', () => {
           mergeAllOf: false,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -203,6 +206,7 @@ describe('SchemaTree', () => {
             throw new ResolvingError('Seems like you do not want this to be empty.');
           },
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -210,7 +214,7 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Seems like you do not want this to be empty.'
+          'Seems like you do not want this to be empty.',
         );
       });
     });
@@ -241,6 +245,7 @@ describe('SchemaTree', () => {
           mergeAllOf: false,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -248,13 +253,13 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references'
+          'Cannot dereference external references',
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Cannot dereference external references'
+          'Cannot dereference external references',
         );
       });
 
@@ -270,6 +275,7 @@ describe('SchemaTree', () => {
             throw new ResolvingError(`Pointer "${pointer}" is missing`);
           },
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -277,13 +283,13 @@ describe('SchemaTree', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Could not read "../test"'
+          'Could not read "../test"',
         );
 
         tree.unwrap(tree.itemAt(3) as TreeListParentNode);
         expect(getNodeMetadata(tree.itemAt(4) as TreeListParentNode)).toHaveProperty(
           'error',
-          'Pointer "#id" is missing'
+          'Pointer "#id" is missing',
         );
       });
     });
@@ -327,6 +333,7 @@ describe('SchemaTree', () => {
           mergeAllOf: true,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -409,6 +416,7 @@ describe('SchemaTree', () => {
           mergeAllOf: true,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         tree.populate();
@@ -480,6 +488,7 @@ describe('SchemaTree', () => {
           mergeAllOf: true,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         expect(tree.populate.bind(tree)).not.toThrow();
@@ -556,6 +565,7 @@ describe('SchemaTree', () => {
           mergeAllOf: true,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         expect(tree.populate.bind(tree)).not.toThrow();
@@ -654,6 +664,7 @@ describe('SchemaTree', () => {
           mergeAllOf: true,
           resolveRef: void 0,
           shouldResolveEagerly: false,
+          onPopulate: void 0,
         });
 
         expect(tree.populate.bind(tree)).not.toThrow();
@@ -763,6 +774,7 @@ describe('SchemaTree', () => {
         mergeAllOf: true,
         resolveRef: void 0,
         shouldResolveEagerly: false,
+        onPopulate: void 0,
       });
 
       expect(tree.populate.bind(tree)).not.toThrow();
@@ -821,6 +833,7 @@ describe('SchemaTree', () => {
         mergeAllOf: false,
         resolveRef: void 0,
         shouldResolveEagerly: false,
+        onPopulate: void 0,
       });
     });
 
@@ -895,6 +908,7 @@ describe('SchemaTree', () => {
         mergeAllOf: true,
         resolveRef: void 0,
         shouldResolveEagerly: true,
+        onPopulate: void 0,
       });
 
       tree.populate();
@@ -933,6 +947,7 @@ describe('SchemaTree', () => {
         mergeAllOf: true,
         resolveRef: void 0,
         shouldResolveEagerly: true,
+        onPopulate: void 0,
       });
 
       tree.populate();
@@ -952,30 +967,31 @@ describe('SchemaTree', () => {
     });
 
     test('should leave broken $refs', () => {
-        const schema: JSONSchema4 = {
-          type: 'object',
-          properties: {
-            foo: {
-              type: 'array',
-              items: {
-                $ref: '#/properties/baz',
-              },
-            },
-            bar: {
-              $ref: '#/properties/bazinga',
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'array',
+            items: {
+              $ref: '#/properties/baz',
             },
           },
-        };
+          bar: {
+            $ref: '#/properties/bazinga',
+          },
+        },
+      };
 
-        const tree = new SchemaTree(schema, new SchemaTreeState(), {
-          expandedDepth: Infinity,
-          mergeAllOf: true,
-          resolveRef: void 0,
-          shouldResolveEagerly: true,
-        });
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
 
-        tree.populate();
-        expect(printTree(tree)).toMatchInlineSnapshot(`
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
           "└─ #
              ├─ type: object
              └─ children
@@ -990,6 +1006,153 @@ describe('SchemaTree', () => {
                       └─ children
           "
         `);
+    });
+
+    test('should handle circular references', () => {
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                user: {
+                  $ref: '#/properties/bar',
+                },
+              },
+            },
+          },
+          bar: {
+            $ref: '#/properties/baz',
+          },
+          baz: {
+            $ref: '#/properties/foo',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
       });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type: object
+           └─ children
+              ├─ 0
+              │  └─ #/properties/foo
+              │     ├─ type: array
+              │     ├─ subtype: object
+              │     └─ children
+              │        └─ 0
+              │           └─ #/properties/foo/items/properties/user
+              │              ├─ $ref: #/properties/baz
+              │              └─ children
+              ├─ 1
+              │  └─ #/properties/bar
+              │     ├─ $ref: #/properties/foo
+              │     └─ children
+              └─ 2
+                 └─ #/properties/baz
+                    ├─ type: array
+                    ├─ subtype: object
+                    └─ children
+                       └─ 0
+                          └─ #/properties/baz/items/properties/user
+                             ├─ $ref: #/properties/baz
+                             └─ children
+        "
+      `);
+    });
+  });
+
+  describe('onPopulate handler', () => {
+    let schema: JSONSchema4;
+
+    beforeEach(() => {
+      schema = {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'array',
+            items: {
+              $ref: '#/properties/bar',
+            },
+          },
+          bar: {
+            type: 'boolean',
+          },
+        },
+      };
+    });
+
+    test('should be called when tree is computed for a first time', () => {
+      const onPopulate = jest.fn();
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: false,
+        onPopulate,
+      });
+
+      expect(onPopulate).not.toBeCalled();
+
+      tree.populate();
+
+      expect(onPopulate).toBeCalledTimes(1);
+      expect(onPopulate).toBeCalledWith(tree.root);
+    });
+
+    test('given $ref resolution, should be called', () => {
+      const onPopulate = jest.fn();
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: false,
+        onPopulate,
+      });
+
+      expect(onPopulate).not.toBeCalled();
+
+      tree.populate();
+
+      tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+
+      expect(onPopulate).toBeCalledTimes(2);
+      expect(onPopulate).nthCalledWith(1, tree.root);
+      expect(onPopulate).nthCalledWith(2, tree.itemAt(1));
+    });
+
+    test('given expanding, should be called', () => {
+      const onPopulate = jest.fn();
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: -1,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: false,
+        onPopulate,
+      });
+
+      expect(onPopulate).not.toBeCalled();
+
+      tree.populate();
+
+      tree.unwrap(tree.itemAt(0) as TreeListParentNode);
+
+      expect(onPopulate).toBeCalledTimes(2);
+      expect(onPopulate).nthCalledWith(1, tree.root);
+      expect(onPopulate).nthCalledWith(2, tree.itemAt(0));
+    });
   });
 });

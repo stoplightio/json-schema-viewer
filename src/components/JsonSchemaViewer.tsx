@@ -5,7 +5,7 @@ import { action } from 'mobx';
 import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
-import { SchemaTree, SchemaTreeOptions, SchemaTreeRefDereferenceFn } from '../tree/tree';
+import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
 import { GoToRefHandler, RowRenderer } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
@@ -24,6 +24,7 @@ export interface IJsonSchemaViewer {
   mergeAllOf?: boolean;
   FallbackComponent?: typeof FallbackComponent;
   rowRenderer?: RowRenderer;
+  onTreePopulate?: SchemaTreePopulateHandler;
   resolveRef?: SchemaTreeRefDereferenceFn;
   shouldResolveEagerly?: boolean;
 }
@@ -49,6 +50,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       mergeAllOf: this.mergeAllOf,
       resolveRef: this.props.resolveRef,
       shouldResolveEagerly: !!this.props.shouldResolveEagerly,
+      onPopulate: this.props.onTreePopulate,
     };
   }
 
@@ -84,6 +86,10 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
   public componentDidUpdate(prevProps: Readonly<IJsonSchemaViewer>) {
     if (prevProps.resolveRef !== this.props.resolveRef) {
       this.tree.treeOptions.resolveRef = this.props.resolveRef;
+    }
+
+    if (prevProps.onTreePopulate !== this.props.onTreePopulate) {
+      this.tree.treeOptions.onPopulate = this.props.onTreePopulate;
     }
 
     if (

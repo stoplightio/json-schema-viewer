@@ -21,11 +21,14 @@ export type SchemaTreeRefDereferenceFn = (
   schema: JSONSchema4,
 ) => Optional<JSONSchema4>;
 
+export type SchemaTreePopulateHandler = (node: TreeListParentNode) => void;
+
 export type SchemaTreeOptions = {
   expandedDepth: number;
   mergeAllOf: boolean;
   resolveRef: Optional<SchemaTreeRefDereferenceFn>;
   shouldResolveEagerly: boolean;
+  onPopulate: Optional<SchemaTreePopulateHandler>;
 };
 
 export { TreeState as SchemaTreeState };
@@ -46,7 +49,10 @@ export class SchemaTree extends Tree {
     populateTree(this.schema, this.root, 0, [], {
       mergeAllOf: this.treeOptions.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level): boolean => {
-        if ((isRefNode(node) && node.$ref !== null) || (hasRefItems(node) && node.items.$ref !== null)) {
+        if (
+          !this.treeOptions.shouldResolveEagerly &&
+          ((isRefNode(node) && node.$ref !== null) || (hasRefItems(node) && node.items.$ref !== null))
+        ) {
           expanded[node.id] = false;
         }
 
@@ -60,6 +66,7 @@ export class SchemaTree extends Tree {
     });
     this.state.expanded = expanded;
     this.invalidate();
+    this.treeOptions.onPopulate?.(this.root);
   }
 
   public populateTreeFragment(parent: TreeListParentNode, schema: JSONSchema4, path: JsonPath, stepIn: boolean) {
@@ -72,7 +79,7 @@ export class SchemaTree extends Tree {
         return stepIn && level <= initialLevel + 1 && canStepIn(getSchemaNodeMetadata(parentTreeNode).schema);
       },
       resolveRef: this.resolveRef,
-      shouldResolveEagerly: true,
+      shouldResolveEagerly: this.treeOptions.shouldResolveEagerly,
     });
 
     if (artificialRoot.children.length === 0) {
@@ -80,6 +87,8 @@ export class SchemaTree extends Tree {
     }
 
     this.insertTreeFragment(stepIn ? this.stepIn(artificialRoot, parent) : artificialRoot.children, parent);
+
+    this.treeOptions.onPopulate?.(parent);
   }
 
   protected insertErrorNode(parent: TreeListParentNode, error: string) {
