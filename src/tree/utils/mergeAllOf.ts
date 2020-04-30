@@ -3,11 +3,13 @@ import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { cloneDeep, compact } from 'lodash';
 import { ResolvingError } from '../../errors';
-import { WalkerRefResolver } from './populateTree';
+import { WalkingOptions } from './populateTree';
 
 const resolveAllOf = require('@stoplight/json-schema-merge-allof');
 
-function _mergeAllOf(schema: JSONSchema4, path: JsonPath, resolveRef: WalkerRefResolver) {
+const store = new WeakMap<WalkingOptions, WeakMap<JSONSchema4, string[]>>();
+
+function _mergeAllOf(schema: JSONSchema4, path: JsonPath, opts: WalkingOptions) {
   return resolveAllOf(cloneDeep(schema), {
     deep: false,
     resolvers: {
@@ -37,14 +39,29 @@ function _mergeAllOf(schema: JSONSchema4, path: JsonPath, resolveRef: WalkerRefR
         throw new ResolvingError('Circular reference detected');
       }
 
-      return resolveRef(null, $ref);
+      const allRefs = store.get(opts)!;
+      const schemaRefs = allRefs.get(schema);
+
+      if (schemaRefs === void 0) {
+        allRefs.set(schema, [$ref]);
+      } else if (schemaRefs.includes($ref)) {
+        throw new ResolvingError('Circular reference detected');
+      } else {
+        schemaRefs.push($ref);
+      }
+
+      return opts.resolveRef(null, $ref);
     },
   });
 }
 
-export const mergeAllOf = (schema: JSONSchema4, path: JsonPath, resolveRef: WalkerRefResolver) => {
+export const mergeAllOf = (schema: JSONSchema4, path: JsonPath, opts: WalkingOptions) => {
   try {
-    return _mergeAllOf(schema, path, resolveRef);
+    if (!store.has(opts)) {
+      store.set(opts, new WeakMap());
+    }
+
+    return _mergeAllOf(schema, path, opts);
   } catch (ex) {
     console.error(ex.message);
     throw ex;

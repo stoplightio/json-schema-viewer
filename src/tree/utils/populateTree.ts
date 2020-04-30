@@ -63,7 +63,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       }
     } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
       try {
-        const merged = mergeAllOf(fragment, path, options.resolveRef);
+        const merged = mergeAllOf(fragment, path, options);
         parent.children.pop();
         populateTree(merged, parent, level, path, options);
       } catch (ex) {

@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SchemaTree expanding $refs in allOf given very complex model with circular references, should bail out and display unmerged allOf 1`] = `
+"└─ #
+   ├─ type: object
+   └─ children
+      ├─ 0
+      │  └─ #/properties/foo
+      │     ├─ type: object
+      │     └─ children
+      │        └─ 0
+      │           └─ #/properties/foo/properties/user
+      │              ├─ combiner: allOf
+      │              └─ children
+      │                 └─ 0
+      │                    └─ #/properties/foo/properties/user/allOf/0
+      │                       ├─ type: object
+      │                       └─ children
+      │                          ├─ 0
+      │                          │  └─ #/properties/foo/properties/user/allOf/0/properties/names
+      │                          │     ├─ type: array
+      │                          │     ├─ subtype: $ref[#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name]
+      │                          │     └─ children
+      │                          └─ 1
+      │                             └─ #/properties/foo/properties/user/allOf/0/properties/users
+      │                                ├─ type: array
+      │                                ├─ subtype: object
+      │                                └─ children
+      │                                   ├─ 0
+      │                                   │  └─ #/properties/foo/properties/user/allOf/0/properties/users/items/properties/creation
+      │                                   │     ├─ $ref: #/allOf/0/allOf/0/properties/foo
+      │                                   │     └─ children
+      │                                   ├─ 1
+      │                                   │  └─ #/properties/foo/properties/user/allOf/0/properties/users/items/properties/foo
+      │                                   │     ├─ $ref: #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+      │                                   │     └─ children
+      │                                   └─ 2
+      │                                      └─ #/properties/foo/properties/user/allOf/0/properties/users/items/properties/products
+      │                                         ├─ $ref: #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+      │                                         └─ children
+      └─ 1
+         └─ #/properties/bar
+            ├─ type: object
+            └─ children
+               └─ 0
+                  └─ #/properties/bar/properties/foo
+                     ├─ type: object
+                     └─ children
+                        └─ 0
+                           └─ #/properties/bar/properties/foo/properties/user
+                              ├─ combiner: allOf
+                              └─ children
+                                 └─ 0
+                                    └─ #/properties/bar/properties/foo/properties/user/allOf/0
+                                       ├─ type: object
+                                       └─ children
+                                          ├─ 0
+                                          │  └─ #/properties/bar/properties/foo/properties/user/allOf/0/properties/names
+                                          │     ├─ type: array
+                                          │     ├─ subtype: $ref[#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name]
+                                          │     └─ children
+                                          └─ 1
+                                             └─ #/properties/bar/properties/foo/properties/user/allOf/0/properties/users
+                                                ├─ type: array
+                                                ├─ subtype: object
+                                                └─ children
+                                                   ├─ 0
+                                                   │  └─ #/properties/bar/properties/foo/properties/user/allOf/0/properties/users/items/properties/creation
+                                                   │     ├─ $ref: #/allOf/0/allOf/0/properties/foo
+                                                   │     └─ children
+                                                   ├─ 1
+                                                   │  └─ #/properties/bar/properties/foo/properties/user/allOf/0/properties/users/items/properties/foo
+                                                   │     ├─ $ref: #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+                                                   │     └─ children
+                                                   └─ 2
+                                                      └─ #/properties/bar/properties/foo/properties/user/allOf/0/properties/users/items/properties/products
+                                                         ├─ $ref: #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+                                                         └─ children
+"
+`;

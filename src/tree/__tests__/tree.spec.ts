@@ -610,6 +610,21 @@ describe('SchemaTree', () => {
         `);
       });
 
+      test('given very complex model with circular references, should bail out and display unmerged allOf', () => {
+        const schema = require('./__fixtures__/complex-allOf-model.json');
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+          shouldResolveEagerly: false,
+          onPopulate: void 0,
+        });
+
+        expect(tree.populate.bind(tree)).not.toThrow();
+        expect(printTree(tree)).toMatchSnapshot();
+      });
+
       test('given circular reference pointing at allOf that are not at top-level, should merge top-level allOf normally', () => {
         const schema: JSONSchema4 = {
           type: 'object',
