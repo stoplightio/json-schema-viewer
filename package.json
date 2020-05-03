@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@stoplight/json": "^3.5.1",
-    "@stoplight/json-schema-merge-allof": "^0.7.0",
+    "@stoplight/json-schema-merge-allof": "^0.7.1",
     "@stoplight/react-error-boundary": "^1.0.0",
     "@stoplight/tree-list": "^5.0.0",
     "classnames": "^2.2.6",

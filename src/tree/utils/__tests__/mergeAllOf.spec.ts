@@ -27,7 +27,7 @@ describe('mergeAllOf util', () => {
         ],
       };
 
-      expect(mergeAllOf(schema, [], jest.fn())).toEqual({
+      expect(mergeAllOf(schema, [], {} as any)).toEqual({
         properties: {
           bar: {
             example: null,
@@ -62,7 +62,7 @@ describe('mergeAllOf util', () => {
         ],
       };
 
-      expect(mergeAllOf(schema, [], jest.fn())).toEqual({
+      expect(mergeAllOf(schema, [], {} as any)).toEqual({
         properties: {
           bar: {
             example: 'hello',
@@ -99,7 +99,7 @@ describe('mergeAllOf util', () => {
         ],
       };
 
-      expect(mergeAllOf(schema, [], jest.fn())).toEqual({
+      expect(mergeAllOf(schema, [], {} as any)).toEqual({
         properties: {
           bar: {
             enum: [],
@@ -134,7 +134,7 @@ describe('mergeAllOf util', () => {
         ],
       };
 
-      expect(mergeAllOf(schema, [], jest.fn())).toEqual({
+      expect(mergeAllOf(schema, [], {} as any)).toEqual({
         properties: {
           bar: {
             enum: ['jonas', 'frederik'],

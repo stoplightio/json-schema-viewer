@@ -1,7 +1,7 @@
 import { pathToPointer } from '@stoplight/json';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
-import { cloneDeep, compact } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { ResolvingError } from '../../errors';
 import { WalkingOptions } from './populateTree';
 
@@ -12,24 +12,7 @@ const store = new WeakMap<WalkingOptions, WeakMap<JSONSchema4, string[]>>();
 function _mergeAllOf(schema: JSONSchema4, path: JsonPath, opts: WalkingOptions) {
   return resolveAllOf(cloneDeep(schema), {
     deep: false,
-    resolvers: {
-      defaultResolver(values: unknown) {
-        if (Array.isArray(values)) {
-          return values;
-        }
-
-        return Object.assign({}, ...Object(values));
-      },
-      example(values: unknown[]) {
-        return resolveAllOf.options.resolvers.enum(values) || null;
-      },
-      enum(values: unknown[]) {
-        return resolveAllOf.options.resolvers.enum(compact(values)) || [];
-      },
-      $ref(values: unknown) {
-        return {};
-      },
-    },
+    resolvers: resolveAllOf.stoplightResolvers,
     $refResolver($ref: unknown) {
       if (typeof $ref !== 'string') {
         return {};
