@@ -1123,7 +1123,7 @@ describe('SchemaTree', () => {
       tree.populate();
 
       expect(onPopulate).toBeCalledTimes(1);
-      expect(onPopulate).toBeCalledWith(tree.root);
+      expect(onPopulate).toBeCalledWith(tree, tree.root);
     });
 
     test('given $ref resolution, should be called', () => {
@@ -1144,8 +1144,8 @@ describe('SchemaTree', () => {
       tree.unwrap(tree.itemAt(1) as TreeListParentNode);
 
       expect(onPopulate).toBeCalledTimes(2);
-      expect(onPopulate).nthCalledWith(1, tree.root);
-      expect(onPopulate).nthCalledWith(2, tree.itemAt(1));
+      expect(onPopulate).nthCalledWith(1, tree, tree.root);
+      expect(onPopulate).nthCalledWith(2, tree, tree.itemAt(1));
     });
 
     test('given expanding, should be called', () => {
@@ -1166,8 +1166,8 @@ describe('SchemaTree', () => {
       tree.unwrap(tree.itemAt(0) as TreeListParentNode);
 
       expect(onPopulate).toBeCalledTimes(2);
-      expect(onPopulate).nthCalledWith(1, tree.root);
-      expect(onPopulate).nthCalledWith(2, tree.itemAt(0));
+      expect(onPopulate).nthCalledWith(1, tree, tree.root);
+      expect(onPopulate).nthCalledWith(2, tree, tree.itemAt(0));
     });
   });
 });

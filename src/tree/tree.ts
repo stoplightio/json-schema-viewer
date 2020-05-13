@@ -21,7 +21,7 @@ export type SchemaTreeRefDereferenceFn = (
   schema: JSONSchema4,
 ) => Optional<JSONSchema4>;
 
-export type SchemaTreePopulateHandler = (node: TreeListParentNode) => void;
+export type SchemaTreePopulateHandler = (tree: SchemaTree, node: TreeListParentNode) => void;
 
 export type SchemaTreeOptions = {
   expandedDepth: number;
@@ -37,7 +37,11 @@ export class SchemaTree extends Tree {
   public treeOptions: SchemaTreeOptions;
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
-    super();
+    super({
+      expanded: node =>
+        (!(node.id in state.expanded) && SchemaTree.getLevel(node) <= opts.expandedDepth) ||
+        state.expanded[node.id] === true,
+    });
 
     this.treeOptions = opts;
   }
@@ -66,7 +70,7 @@ export class SchemaTree extends Tree {
     });
     this.state.expanded = expanded;
     this.invalidate();
-    this.treeOptions.onPopulate?.(this.root);
+    this.treeOptions.onPopulate?.(this, this.root);
   }
 
   public populateTreeFragment(parent: TreeListParentNode, schema: JSONSchema4, path: JsonPath, stepIn: boolean) {
@@ -88,7 +92,7 @@ export class SchemaTree extends Tree {
 
     this.insertTreeFragment(stepIn ? this.stepIn(artificialRoot, parent) : artificialRoot.children, parent);
 
-    this.treeOptions.onPopulate?.(parent);
+    this.treeOptions.onPopulate?.(this, parent);
   }
 
   protected insertErrorNode(parent: TreeListParentNode, error: string) {
@@ -121,7 +125,7 @@ export class SchemaTree extends Tree {
       } else if (hasRefItems(schemaNode)) {
         this.populateRefFragment(node, [...path, 'items'], schemaNode.items.$ref);
       } else {
-        throw new Error(`I do know not how not expand node ${path.join('.')}`);
+        throw new Error(`I do know not how to expand this node ${path.join('.')}`);
       }
     } catch (ex) {
       this.insertErrorNode(node, ex.message);
