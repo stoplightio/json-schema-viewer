@@ -1,4 +1,6 @@
+import { Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
+import { isObject as _isObject } from 'lodash';
 import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
 import { flattenTypes } from '../../utils/flattenTypes';
 import { generateId } from '../../utils/generateId';
@@ -12,13 +14,17 @@ import { normalizeRequired } from '../../utils/normalizeRequired';
 function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   switch (getPrimaryType(node)) {
     case SchemaKind.Array:
-      (base as IArrayNode).items = node.items;
-      (base as IArrayNode).additionalItems = node.additionalItems;
+      (base as IArrayNode).items = unwrapItemsOrUndefined(node.items);
+      (base as IArrayNode).additionalItems =
+        typeof node.additionalItems === 'boolean' ? node.additionalItems : unwrapItemsOrUndefined(node.additionalItems);
       break;
     case SchemaKind.Object:
-      (base as IObjectNode).properties = node.properties;
-      (base as IObjectNode).patternProperties = node.patternProperties;
-      (base as IObjectNode).additionalProperties = node.additionalProperties;
+      (base as IObjectNode).properties = unwrapPropertiesOrUndefined(node.properties);
+      (base as IObjectNode).patternProperties = unwrapPropertiesOrUndefined(node.patternProperties);
+      (base as IObjectNode).additionalProperties =
+        typeof node.additionalProperties === 'boolean'
+          ? node.additionalProperties
+          : unwrapPropertiesOrUndefined(node.additionalProperties);
       break;
   }
 }
@@ -99,4 +105,12 @@ export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<Wal
       };
     }
   }
+}
+
+function unwrapItemsOrUndefined<T = unknown>(value: T): Optional<T> {
+  return _isObject(value) ? value : void 0;
+}
+
+function unwrapPropertiesOrUndefined<T = unknown>(value: T): Optional<T> {
+  return _isObject(value) && !Array.isArray(value) ? value : void 0;
 }
