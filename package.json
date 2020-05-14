@@ -45,7 +45,7 @@
     "@stoplight/json": "^3.5.1",
     "@stoplight/json-schema-merge-allof": "^0.7.1",
     "@stoplight/react-error-boundary": "^1.0.0",
-    "@stoplight/tree-list": "^5.0.1",
+    "@stoplight/tree-list": "^5.0.3",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "mobx-react-lite": "^1.4.1",
