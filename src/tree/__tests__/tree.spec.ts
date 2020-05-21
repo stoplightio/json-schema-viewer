@@ -1170,4 +1170,43 @@ describe('SchemaTree', () => {
       expect(onPopulate).nthCalledWith(2, tree, tree.itemAt(0));
     });
   });
+
+  describe('tree correctness', () => {
+    // you can put tests verifying whether we generate expected tree
+    test('given multiple object and string type, should process properties', () => {
+      const schema: JSONSchema4 = {
+        type: ['string', 'object'],
+        properties: {
+          ids: {
+            type: 'array',
+            items: {
+              type: 'integer',
+            },
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type
+           │  ├─ 0: string
+           │  └─ 1: object
+           └─ children
+              └─ 0
+                 └─ #/properties/ids
+                    ├─ type: array
+                    └─ subtype: integer
+        "
+      `);
+    });
+  });
 });

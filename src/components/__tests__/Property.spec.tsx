@@ -80,6 +80,35 @@ describe('Property component', () => {
   });
 
   describe('properties counter', () => {
+    test('given an object among other types, should still display the counter', () => {
+      const treeNode: SchemaTreeListNode = {
+        id: 'foo',
+        name: '',
+        parent: null,
+      };
+
+      const schema: JSONSchema4 = {
+        type: ['string', 'object'],
+        properties: {
+          foo: {
+            type: 'array',
+            items: {
+              type: 'integer',
+            },
+          },
+        },
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value.node,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
+      expect(wrapper.findWhere(el => /^{\d\}$/.test(el.text())).first()).toHaveText('{1}');
+    });
+
     it('given missing properties property, should not display the counter', () => {
       const treeNode: SchemaTreeListNode = {
         id: 'foo',
@@ -98,7 +127,7 @@ describe('Property component', () => {
       });
 
       const wrapper = shallow(<Property node={treeNode} />);
-      expect(wrapper.findWhere(el => /^\{\d\}$/.test(el.text()))).not.toExist();
+      expect(wrapper.findWhere(el => /^{\d\}$/.test(el.text()))).not.toExist();
     });
 
     it('given nullish properties property, should not display the counter', () => {
@@ -120,7 +149,7 @@ describe('Property component', () => {
       });
 
       const wrapper = shallow(<Property node={treeNode} />);
-      expect(wrapper.findWhere(el => /^\{\d\}$/.test(el.text()))).not.toExist();
+      expect(wrapper.findWhere(el => /^{\d\}$/.test(el.text()))).not.toExist();
     });
 
     it('given object properties property, should display the counter', () => {
@@ -142,7 +171,7 @@ describe('Property component', () => {
       });
 
       const wrapper = shallow(<Property node={treeNode} />);
-      expect(wrapper.findWhere(el => /^\{\d\}$/.test(el.text())).first()).toHaveText('{0}');
+      expect(wrapper.findWhere(el => /^{\d\}$/.test(el.text())).first()).toHaveText('{0}');
     });
   });
 
@@ -152,6 +181,33 @@ describe('Property component', () => {
         properties: {
           foo: {
             type: 'string',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new TreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: false,
+        resolveRef: void 0,
+        shouldResolveEagerly: false,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+
+      const wrapper = shallow(<Property node={tree.itemAt(1)!} />);
+      expect(wrapper.find('div').first()).toHaveText('foo');
+    });
+
+    test('given an object among other types, should still display its properties', () => {
+      const schema: JSONSchema4 = {
+        type: ['string', 'object'],
+        properties: {
+          foo: {
+            type: 'array',
+            items: {
+              type: 'integer',
+            },
           },
         },
       };
