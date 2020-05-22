@@ -47,10 +47,35 @@ function isExternalRefSchemaNode(schemaNode: SchemaNode) {
   return isRefNode(schemaNode) && schemaNode.$ref !== null && !isLocalRef(schemaNode.$ref);
 }
 
+function retrieve$ref(node: SchemaNode): Optional<string> {
+  if (isRefNode(node) && node.$ref !== null) {
+    return node.$ref;
+  }
+
+  if (hasRefItems(node) && node.items.$ref !== null) {
+    return `$ref(${node.items.$ref})`;
+  }
+
+  return;
+}
+
+function getTitle(node: SchemaNode): Optional<string> {
+  if (isArrayNodeWithItems(node)) {
+    if (Array.isArray(node.items) || !node.items.title) {
+      return retrieve$ref(node);
+    }
+
+    return node.items.title;
+  }
+
+  return node.title || retrieve$ref(node);
+}
+
 export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
   const { path, schemaNode: node } = getSchemaNodeMetadata(treeNode);
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype = isArrayNodeWithItems(node) ? (hasRefItems(node) ? '$ref' : inferType(node.items)) : void 0;
+  const title = getTitle(node);
 
   const childrenCount = React.useMemo<number | null>(() => {
     if (type === SchemaKind.Object || (Array.isArray(type) && type.includes(SchemaKind.Object))) {
@@ -78,10 +103,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
     <>
       {path.length > 0 && shouldShowPropertyName(treeNode) && <div className="mr-2">{path[path.length - 1]}</div>}
 
-      <Types type={type} subtype={subtype}>
-        {isRefNode(node) && node.$ref !== null ? `[${node.$ref}]` : null}
-        {hasRefItems(node) && node.items.$ref !== null ? `[$ref(${node.items.$ref})]` : null}
-      </Types>
+      <Types type={type} subtype={subtype} title={title} />
 
       {onGoToRef && isExternalRefSchemaNode(node) ? (
         <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>

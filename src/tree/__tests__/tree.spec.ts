@@ -7,18 +7,54 @@ import { printTree } from './utils/printTree';
 
 describe('SchemaTree', () => {
   describe('expanding', () => {
-    describe('oneOf combiner', () => {
-      let tree: SchemaTree;
-      let schema: JSONSchema4;
+    describe('internal $refs', () => {
+      describe('oneOf combiner', () => {
+        let tree: SchemaTree;
+        let schema: JSONSchema4;
 
-      beforeEach(() => {
-        schema = {
-          type: 'object',
-          properties: {
-            user: {
-              $ref: '#/properties/id',
+        beforeEach(() => {
+          schema = {
+            type: 'object',
+            properties: {
+              user: {
+                $ref: '#/properties/id',
+              },
+              id: {
+                oneOf: [
+                  {
+                    type: 'object',
+                    required: ['foo'],
+                    properties: {
+                      foo: {
+                        type: 'string',
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            id: {
+          };
+
+          tree = new SchemaTree(schema, new SchemaTreeState(), {
+            expandedDepth: 0,
+            mergeAllOf: false,
+            resolveRef: void 0,
+            shouldResolveEagerly: false,
+            onPopulate: void 0,
+          });
+
+          tree.populate();
+        });
+
+        test('upon expanded $ref, should insert only oneOf combiner', () => {
+          expect(tree.count).toEqual(3);
+
+          tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+
+          expect(tree.count).toEqual(4);
+          expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty(
+            'schema',
+            expect.objectContaining({
               oneOf: [
                 {
                   type: 'object',
@@ -30,32 +66,67 @@ describe('SchemaTree', () => {
                   },
                 },
               ],
-            },
-          },
-        };
-
-        tree = new SchemaTree(schema, new SchemaTreeState(), {
-          expandedDepth: 0,
-          mergeAllOf: false,
-          resolveRef: void 0,
-          shouldResolveEagerly: false,
-          onPopulate: void 0,
+            }),
+          );
         });
 
-        tree.populate();
+        test('upon expanded $ref and expanded oneOf combiner, should insert object', () => {
+          expect(tree.count).toEqual(3);
+
+          tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+          tree.unwrap(tree.itemAt(2) as TreeListParentNode);
+
+          expect(tree.count).toEqual(5);
+          expect(getNodeMetadata(tree.itemAt(3)!)).toHaveProperty(
+            'schema',
+            expect.objectContaining({
+              type: 'object',
+              required: ['foo'],
+              properties: {
+                foo: {
+                  type: 'string',
+                },
+              },
+            }),
+          );
+        });
+
+        test('upon expanded id property, should insert object', () => {
+          expect(tree.count).toEqual(3);
+
+          tree.unwrap(tree.itemAt(2) as TreeListParentNode);
+
+          expect(tree.count).toEqual(4);
+          expect(getNodeMetadata(tree.itemAt(3)!)).toHaveProperty(
+            'schema',
+            expect.objectContaining({
+              type: 'object',
+              required: ['foo'],
+              properties: {
+                foo: {
+                  type: 'string',
+                },
+              },
+            }),
+          );
+        });
       });
 
-      test('upon expanded $ref, should insert only oneOf combiner', () => {
-        expect(tree.count).toEqual(3);
+      describe('array with $reffed items', () => {
+        let tree: SchemaTree;
+        let schema: JSONSchema4;
 
-        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
-
-        expect(tree.count).toEqual(4);
-        expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty(
-          'schema',
-          expect.objectContaining({
-            oneOf: [
-              {
+        beforeEach(() => {
+          schema = {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  $ref: '#/properties/id',
+                },
+              },
+              id: {
                 type: 'object',
                 required: ['foo'],
                 properties: {
@@ -64,68 +135,29 @@ describe('SchemaTree', () => {
                   },
                 },
               },
-            ],
-          }),
-        );
-      });
-
-      test('upon expanded $ref and expanded oneOf combiner, should insert object', () => {
-        expect(tree.count).toEqual(3);
-
-        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
-        tree.unwrap(tree.itemAt(2) as TreeListParentNode);
-
-        expect(tree.count).toEqual(5);
-        expect(getNodeMetadata(tree.itemAt(3)!)).toHaveProperty(
-          'schema',
-          expect.objectContaining({
-            type: 'object',
-            required: ['foo'],
-            properties: {
-              foo: {
-                type: 'string',
-              },
             },
-          }),
-        );
-      });
+          };
 
-      test('upon expanded id property, should insert object', () => {
-        expect(tree.count).toEqual(3);
+          tree = new SchemaTree(schema, new SchemaTreeState(), {
+            expandedDepth: 0,
+            mergeAllOf: false,
+            resolveRef: void 0,
+            shouldResolveEagerly: false,
+            onPopulate: void 0,
+          });
 
-        tree.unwrap(tree.itemAt(2) as TreeListParentNode);
+          tree.populate();
+        });
 
-        expect(tree.count).toEqual(4);
-        expect(getNodeMetadata(tree.itemAt(3)!)).toHaveProperty(
-          'schema',
-          expect.objectContaining({
-            type: 'object',
-            required: ['foo'],
-            properties: {
-              foo: {
-                type: 'string',
-              },
-            },
-          }),
-        );
-      });
-    });
+        test('upon expanded array, should insert object', () => {
+          expect(tree.count).toEqual(3);
 
-    describe('array with $reffed items', () => {
-      let tree: SchemaTree;
-      let schema: JSONSchema4;
+          tree.unwrap(tree.itemAt(1) as TreeListParentNode);
 
-      beforeEach(() => {
-        schema = {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'array',
-              items: {
-                $ref: '#/properties/id',
-              },
-            },
-            id: {
+          expect(tree.count).toEqual(4);
+          expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty(
+            'schema',
+            expect.objectContaining({
               type: 'object',
               required: ['foo'],
               properties: {
@@ -133,11 +165,36 @@ describe('SchemaTree', () => {
                   type: 'string',
                 },
               },
+            }),
+          );
+        });
+      });
+
+      test('should try to inject the title', () => {
+        const schema: JSONSchema4 = {
+          type: 'object',
+          properties: {
+            bar: {
+              type: 'object',
+              properties: {
+                foo: {
+                  $ref: '#/properties/user',
+                },
+              },
+            },
+            user: {
+              title: 'User',
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                },
+              },
             },
           },
         };
 
-        tree = new SchemaTree(schema, new SchemaTreeState(), {
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: 0,
           mergeAllOf: false,
           resolveRef: void 0,
@@ -146,24 +203,13 @@ describe('SchemaTree', () => {
         });
 
         tree.populate();
-      });
-
-      test('upon expanded array, should insert object', () => {
-        expect(tree.count).toEqual(3);
-
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
 
-        expect(tree.count).toEqual(4);
         expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty(
-          'schema',
+          'schemaNode',
           expect.objectContaining({
-            type: 'object',
-            required: ['foo'],
-            properties: {
-              foo: {
-                type: 'string',
-              },
-            },
+            $ref: '#/properties/user',
+            title: 'User',
           }),
         );
       });
@@ -1208,5 +1254,44 @@ describe('SchemaTree', () => {
         "
       `);
     });
+  });
+
+  test('given visible $ref node, should try to inject the title immediately', () => {
+    const schema: JSONSchema4 = {
+      type: 'object',
+      properties: {
+        foo: {
+          $ref: '#/properties/user',
+        },
+        user: {
+          title: 'User',
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+            },
+          },
+        },
+      },
+    };
+
+    const tree = new SchemaTree(schema, new SchemaTreeState(), {
+      expandedDepth: 0,
+      mergeAllOf: false,
+      resolveRef: void 0,
+      shouldResolveEagerly: false,
+      onPopulate: void 0,
+    });
+
+    tree.populate();
+    // tree.unwrap(tree.itemAt(0) as TreeListParentNode);
+
+    expect(getNodeMetadata(tree.itemAt(1)!)).toHaveProperty(
+      'schemaNode',
+      expect.objectContaining({
+        $ref: '#/properties/user',
+        title: 'User',
+      }),
+    );
   });
 });

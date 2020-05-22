@@ -20,7 +20,7 @@ storiesOf('JsonSchemaViewer', module)
       name={text('name', 'my schema')}
       schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
-      expanded={boolean('expanded', false)}
+      expanded={boolean('expanded', true)}
       hideTopBar={boolean('hideTopBar', false)}
       shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
       onGoToRef={action('onGoToRef')}

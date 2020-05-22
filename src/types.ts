@@ -26,6 +26,7 @@ export interface ICombinerNode {
   properties?: JSONSchema4[];
   annotations: Pick<JSONSchema4, JSONSchema4Annotations>;
   readonly type?: JSONSchema4TypeName | JSONSchema4TypeName[];
+  title?: string;
 }
 
 export interface IBaseNode extends Pick<JSONSchema4, 'enum'> {
@@ -34,11 +35,13 @@ export interface IBaseNode extends Pick<JSONSchema4, 'enum'> {
   annotations: Partial<Pick<JSONSchema4, JSONSchema4Annotations>>;
   validations: Dictionary<unknown>;
   required?: string[];
+  title?: string;
 }
 
 export interface IRefNode {
   id: string;
   $ref: string | null;
+  title?: string;
 }
 
 export interface IArrayNode extends IBaseNode, Pick<JSONSchema4, 'items' | 'additionalItems'> {}

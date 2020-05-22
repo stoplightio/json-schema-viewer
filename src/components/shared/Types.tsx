@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema4CombinerName } from '../../types';
+import { JSONSchema4CombinerName, SchemaKind } from '../../types';
 
 /**
  * TYPE
@@ -12,14 +12,22 @@ export interface IType {
   type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
   subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> | '$ref';
   className?: string;
+  title: Optional<string>;
 }
 
-export const Type: React.FunctionComponent<IType> = ({ className, children, type, subtype }) => {
+function shouldRenderTitle(type: string): boolean {
+  return type === SchemaKind.Array || type === SchemaKind.Object || type === '$ref';
+}
+
+export const Type: React.FunctionComponent<IType> = ({ className, title, type, subtype }) => {
+  const shouldRenderArraySubtype =
+    type === SchemaKind.Array && subtype && subtype !== SchemaKind.Array && subtype !== '$ref';
+
   return (
     <span className={cn(className, PropertyTypeColors[type], 'truncate')}>
-      {type === 'array' && subtype && subtype !== 'array' && subtype !== '$ref' ? `array[${subtype}]` : type}
-
-      {children}
+      {shouldRenderArraySubtype
+        ? `array[${(!Array.isArray(subtype) && shouldRenderTitle(subtype!) && title) || subtype}]`
+        : `${type}${shouldRenderTitle(type) && title ? `[${title}]` : ''}`}
     </span>
   );
 };
@@ -32,13 +40,14 @@ interface ITypes {
   className?: string;
   type: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref'>;
   subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | '$ref'>;
+  title: Optional<string>;
 }
 
-export const Types: React.FunctionComponent<ITypes> = ({ className, type, subtype, children }) => {
+export const Types: React.FunctionComponent<ITypes> = ({ className, title, type, subtype }) => {
   if (type === void 0) return null;
 
   if (!Array.isArray(type)) {
-    return <Type className={className} type={type} subtype={subtype} children={children} />;
+    return <Type className={className} type={type} subtype={subtype} title={title} />;
   }
 
   return (
@@ -46,7 +55,7 @@ export const Types: React.FunctionComponent<ITypes> = ({ className, type, subtyp
       <>
         {type.map((name, i, { length }) => (
           <React.Fragment key={i}>
-            <Type key={i} type={name} subtype={subtype} />
+            <Type key={i} type={name} subtype={subtype} title={title} />
 
             {i < length - 1 && (
               <span key={`${i}-sep`} className="text-darken-7 dark:text-lighten-6">

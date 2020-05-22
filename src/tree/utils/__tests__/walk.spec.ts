@@ -1,4 +1,5 @@
-import { SchemaKind } from '../../../types';
+import { JSONSchema4 } from 'json-schema';
+import { JSONSchema4CombinerName, SchemaKind } from '../../../types';
 import { walk } from '../walk';
 
 describe('Schema Walker', () => {
@@ -96,5 +97,95 @@ describe('Schema Walker', () => {
         });
       },
     );
+  });
+
+  describe('title', () => {
+    describe.each<JSONSchema4CombinerName>(['allOf', 'oneOf', 'anyOf'])('when combiner equals %s', combiner => {
+      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+        const schema = {
+          [combiner]: [],
+          title,
+        };
+
+        const { value: node } = walk(schema as any).next();
+        expect(node).not.toHaveProperty('node.title');
+      });
+
+      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+        const schema: JSONSchema4 = {
+          [combiner]: [],
+          title,
+        };
+
+        const { value: node } = walk(schema).next();
+        expect(node).toHaveProperty('node.title', title);
+      });
+    });
+
+    describe.each(Object.values(SchemaKind))('when type equals %s', type => {
+      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+        const schema = {
+          type,
+          title,
+        };
+
+        const { value: node } = walk(schema as any).next();
+        expect(node).not.toHaveProperty('node.title');
+      });
+
+      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+        const schema: JSONSchema4 = {
+          type,
+          title,
+        };
+
+        const { value: node } = walk(schema).next();
+        expect(node).toHaveProperty('node.title', title);
+      });
+    });
+
+    describe('given node with $ref', () => {
+      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+        const schema = {
+          $ref: '#/foo',
+          title,
+        };
+
+        const { value: node } = walk(schema as any).next();
+        expect(node).not.toHaveProperty('node.title');
+      });
+
+      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+        const schema: JSONSchema4 = {
+          $ref: '#/foo',
+          title,
+        };
+
+        const { value: node } = walk(schema).next();
+        expect(node).toHaveProperty('node.title', title);
+      });
+    });
+
+    describe('given node with enum', () => {
+      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+        const schema = {
+          enum: [],
+          title,
+        };
+
+        const { value: node } = walk(schema as any).next();
+        expect(node).not.toHaveProperty('node.title');
+      });
+
+      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+        const schema: JSONSchema4 = {
+          enum: [],
+          title,
+        };
+
+        const { value: node } = walk(schema).next();
+        expect(node).toHaveProperty('node.title', title);
+      });
+    });
   });
 });
