@@ -35,13 +35,13 @@ describe('Type component', () => {
       it('given object type, should display title', () => {
         const wrapper = shallow(<Type type={SchemaKind.Array} subtype={SchemaKind.Object} title="foo" />);
 
-        expect(wrapper).toHaveText('array[foo]');
+        expect(wrapper).toHaveText('foo[]');
       });
 
       it('given array type, should display title', () => {
         const wrapper = shallow(<Type type={SchemaKind.Array} subtype={SchemaKind.Array} title="foo" />);
 
-        expect(wrapper).toHaveText('array[foo]');
+        expect(wrapper).toHaveText('foo[]');
       });
 
       it('given primitive type, should not display title', () => {
@@ -61,20 +61,20 @@ describe('Type component', () => {
       it('given $ref type, should display title', () => {
         const wrapper = shallow(<Type type={SchemaKind.Array} subtype="$ref" title="foo" />);
 
-        expect(wrapper).toHaveText('array[foo]');
+        expect(wrapper).toHaveText('foo[]');
       });
     });
 
     it('given object type, should always display title', () => {
       const wrapper = shallow(<Type type={SchemaKind.Object} subtype={void 0} title="foo" />);
 
-      expect(wrapper).toHaveText('object[foo]');
+      expect(wrapper).toHaveText('foo');
     });
 
     it('given $ref type, should always display title', () => {
       const wrapper = shallow(<Type type="$ref" subtype={void 0} title="foo" />);
 
-      expect(wrapper).toHaveText('$ref[foo]');
+      expect(wrapper).toHaveText('foo');
     });
 
     it.each([SchemaKind.Null, SchemaKind.Integer, SchemaKind.Number, SchemaKind.Boolean, SchemaKind.String])(

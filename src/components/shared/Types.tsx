@@ -19,15 +19,38 @@ function shouldRenderTitle(type: string): boolean {
   return type === SchemaKind.Array || type === SchemaKind.Object || type === '$ref';
 }
 
-export const Type: React.FunctionComponent<IType> = ({ className, title, type, subtype }) => {
-  const shouldRenderArraySubtype =
-    type === SchemaKind.Array && subtype && subtype !== SchemaKind.Array && subtype !== '$ref';
+function getPrintableArrayType(subtype: IType['subtype'], title: IType['title']): string {
+  if (!subtype) return SchemaKind.Array;
 
+  if (Array.isArray(subtype)) {
+    return `${SchemaKind.Array}[${subtype.join(',')}]`;
+  }
+
+  if (title && shouldRenderTitle(subtype)) {
+    return `${title}[]`;
+  }
+
+  if (subtype !== SchemaKind.Array && subtype !== '$ref') {
+    return `${SchemaKind.Array}[${subtype}]`;
+  }
+
+  return SchemaKind.Array;
+}
+
+function getPrintableType(type: IType['type'], subtype: IType['subtype'], title: IType['title']): string {
+  if (type === SchemaKind.Array) {
+    return getPrintableArrayType(subtype, title);
+  } else if (title && shouldRenderTitle(type)) {
+    return title;
+  } else {
+    return type;
+  }
+}
+
+export const Type: React.FunctionComponent<IType> = ({ className, title, type, subtype }) => {
   return (
     <span className={cn(className, PropertyTypeColors[type], 'truncate')}>
-      {shouldRenderArraySubtype
-        ? `array[${(!Array.isArray(subtype) && shouldRenderTitle(subtype!) && title) || subtype}]`
-        : `${type}${shouldRenderTitle(type) && title ? `[${title}]` : ''}`}
+      {getPrintableType(type, subtype, title)}
     </span>
   );
 };
