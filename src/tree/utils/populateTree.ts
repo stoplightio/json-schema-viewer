@@ -6,7 +6,7 @@ import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } f
 import { getCombiner } from '../../utils/getCombiner';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../../utils/guards';
-import { getNodeMetadata, metadataStore } from '../metadata';
+import { getNodeMetadata, getSchemaNodeMetadata, metadataStore } from '../metadata';
 import { createErrorTreeNode } from './createErrorTreeNode';
 import { mergeAllOf } from './mergeAllOf';
 import { walk } from './walk';
@@ -51,7 +51,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
     });
 
     if (isRefNode(node) && node.$ref !== null) {
-      (treeNode as TreeListParentNode).children = [];
+      processRef(treeNode, node as JSONSchema4, level, path, options);
     } else if (!isCombinerNode(node)) {
       switch (getPrimaryType(node)) {
         case SchemaKind.Array:
@@ -117,7 +117,7 @@ function processArray(
   }
 
   if ('$ref' in items) {
-    (node as TreeListParentNode).children = [];
+    processRef(node, items, level, path, options);
   } else if (Array.isArray(items)) {
     const children: SchemaTreeListNode[] = [];
     (node as TreeListParentNode).children = children;
@@ -192,6 +192,25 @@ function processObject(
   return node;
 }
 
+function processRef(
+  node: TreeListNode,
+  schema: JSONSchema4,
+  level: number,
+  path: JsonPath,
+  options: WalkingOptions | null,
+) {
+  (node as TreeListParentNode).children = [];
+  try {
+    const resolved = resolveSchema(schema, path, options);
+    if (_isObject(resolved) && typeof resolved.title === 'string') {
+      const { schemaNode } = getSchemaNodeMetadata(node);
+      schemaNode.title = resolved.title;
+    }
+  } catch {
+    // resolving failed, nothing bad. We just won't have the title
+  }
+}
+
 function bailAllOf(
   node: TreeListParentNode,
   schema: JSONSchema4,
@@ -206,24 +225,25 @@ function bailAllOf(
   }
 }
 
+function resolveSchema(schema: Optional<JSONSchema4 | null>, path: JsonPath, options: WalkingOptions | null) {
+  if (!_isObject(schema) || options === null || !('$ref' in schema) || typeof schema.$ref !== 'string') {
+    return schema;
+  }
+
+  const resolved = options.resolveRef(path, schema.$ref);
+  return _isObject(resolved) ? resolved : schema;
+}
+
 function prepareSchema(
   schema: Optional<JSONSchema4 | null>,
   node: TreeListNode,
   path: JsonPath,
   options: WalkingOptions | null,
 ): Optional<JSONSchema4 | null> {
-  if (
-    !_isObject(schema) ||
-    options === null ||
-    !options.shouldResolveEagerly ||
-    !('$ref' in schema) ||
-    typeof schema.$ref !== 'string'
-  )
-    return schema;
+  if (options === null || !options.shouldResolveEagerly) return schema;
 
   try {
-    const resolved = options.resolveRef(path, schema.$ref);
-    return _isObject(resolved) ? resolved : schema;
+    return resolveSchema(schema, path, options);
   } catch (ex) {
     (node as TreeListParentNode).children = [];
     return void (node as TreeListParentNode).children.push(createErrorTreeNode(node as TreeListParentNode, ex.message));

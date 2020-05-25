@@ -32,6 +32,7 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
 function processNode(node: JSONSchema4): SchemaNode | void {
   const combiner = getCombiner(node);
   const type = node.type || inferType(node);
+  const title = typeof node.title === 'string' ? { title: node.title } : null;
 
   if (combiner) {
     const properties = node[combiner];
@@ -41,6 +42,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
       properties: Array.isArray(properties) ? properties.slice() : properties,
       annotations: getAnnotations(node),
       ...(type !== undefined && { type }),
+      ...title,
     } as ICombinerNode;
   }
 
@@ -52,6 +54,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
       annotations: getAnnotations(node),
       ...('required' in node && { required: normalizeRequired(node.required) }),
       enum: node.enum,
+      ...title,
     };
 
     assignNodeSpecificFields(base, node);
@@ -65,6 +68,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
       validations: getValidations(node),
       annotations: getAnnotations(node),
       enum: node.enum,
+      ...title,
     };
   }
 
@@ -72,6 +76,7 @@ function processNode(node: JSONSchema4): SchemaNode | void {
     return {
       id: generateId(),
       $ref: typeof node.$ref !== 'string' ? null : node.$ref,
+      ...title,
     };
   }
 

@@ -306,4 +306,114 @@ describe('Property component', () => {
       expect(wrapper.find('div').first()).not.toExist();
     });
   });
+
+  describe('properties titles', () => {
+    let treeNode: SchemaTreeListNode;
+
+    beforeEach(() => {
+      treeNode = {
+        id: 'foo',
+        name: '',
+        parent: null,
+      };
+    });
+
+    it('given object type, should render title', () => {
+      const schema: JSONSchema4 = {
+        title: 'User',
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string',
+          },
+        },
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value.node,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
+      expect(wrapper.find(Types)).toExist();
+      expect(wrapper.find(Types)).toHaveProp('type', 'object');
+      expect(wrapper.find(Types)).toHaveProp('subtype', void 0);
+      expect(wrapper.find(Types)).toHaveProp('title', 'User');
+    });
+
+    it('given array type with non-array items, should render title', () => {
+      const schema: JSONSchema4 = {
+        type: 'array',
+        items: {
+          title: 'User',
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+            },
+          },
+        },
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value.node,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
+      expect(wrapper.find(Types)).toExist();
+      expect(wrapper.find(Types)).toHaveProp('type', 'array');
+      expect(wrapper.find(Types)).toHaveProp('subtype', 'object');
+      expect(wrapper.find(Types)).toHaveProp('title', 'User');
+    });
+
+    it('given array with no items, should render title', () => {
+      const schema: JSONSchema4 = {
+        type: 'array',
+        title: 'User',
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value.node,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
+      expect(wrapper.find(Types)).toExist();
+      expect(wrapper.find(Types)).toHaveProp('type', 'array');
+      expect(wrapper.find(Types)).toHaveProp('subtype', void 0);
+      expect(wrapper.find(Types)).toHaveProp('title', 'User');
+    });
+
+    it('given array with defined items, should not render title', () => {
+      const schema: JSONSchema4 = {
+        type: 'array',
+        items: [
+          {
+            title: 'foo',
+            type: 'string',
+          },
+          {
+            title: 'bar',
+            type: 'number',
+          },
+        ],
+      };
+
+      metadataStore.set(treeNode, {
+        schemaNode: walk(schema).next().value.node,
+        path: [],
+        schema,
+      });
+
+      const wrapper = shallow(<Property node={treeNode} />);
+      expect(wrapper.find(Types)).toExist();
+      expect(wrapper.find(Types)).toHaveProp('type', 'array');
+      expect(wrapper.find(Types)).toHaveProp('subtype', void 0);
+      expect(wrapper.find(Types)).toHaveProp('title', void 0);
+    });
+  });
 });
