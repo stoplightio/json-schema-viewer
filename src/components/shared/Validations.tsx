@@ -1,3 +1,4 @@
+import { safeStringify } from '@stoplight/json';
 import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
 import cn from 'classnames';
@@ -50,7 +51,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
                 } else {
                   elem = (
                     <div className="m-1 px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded" key={index}>
-                      {typeof validation === 'string' ? `"${validation}"` : String(validation)}
+                      {typeof validation === 'string' ? `"${validation}"` : safeStringify(validation)}
                     </div>
                   );
                 }
