@@ -231,5 +231,107 @@ describe('SchemaRow component', () => {
         expect(wrapper.find(Validations)).toHaveProp('required', false);
       });
     });
+
+    describe('given array with items', () => {
+      beforeEach(() => {
+        const schema: JSONSchema4 = {
+          title: 'test',
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              code: {
+                type: 'number',
+              },
+              msg: {
+                type: 'string',
+              },
+              ref: {
+                type: 'string',
+              },
+            },
+            required: ['code', 'msg'],
+          },
+        };
+
+        tree = new SchemaTree(schema, new TreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: false,
+          resolveRef: void 0,
+          shouldResolveEagerly: false,
+          onPopulate: void 0,
+        });
+
+        tree.populate();
+      });
+
+      test.each([1, 2])('should preserve the required validation for %i item', pos => {
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(pos)!} rowOptions={{}} />)
+          .find(SchemaPropertyRow)
+          .shallow();
+
+        expect(wrapper.find(Validations)).toHaveProp('required', true);
+      });
+
+      test('should preserve the optional validation', () => {
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} />)
+          .find(SchemaPropertyRow)
+          .shallow();
+
+        expect(wrapper.find(Validations)).toHaveProp('required', false);
+      });
+    });
+
+    describe('given array with arrayish items', () => {
+      beforeEach(() => {
+        const schema: JSONSchema4 = {
+          title: 'test',
+          type: 'array',
+          items: [
+            {
+              type: 'object',
+              properties: {
+                code: {
+                  type: 'number',
+                },
+                msg: {
+                  type: 'string',
+                },
+                ref: {
+                  type: 'string',
+                },
+              },
+              required: ['code', 'msg'],
+            },
+          ],
+        };
+
+        tree = new SchemaTree(schema, new TreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: false,
+          resolveRef: void 0,
+          shouldResolveEagerly: false,
+          onPopulate: void 0,
+        });
+
+        tree.populate();
+      });
+
+      test.each([2, 3])('should preserve the required validation for %i item', pos => {
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(pos)!} rowOptions={{}} />)
+          .find(SchemaPropertyRow)
+          .shallow();
+
+        expect(wrapper.find(Validations)).toHaveProp('required', true);
+      });
+
+      test('should preserve the optional validation', () => {
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} />)
+          .find(SchemaPropertyRow)
+          .shallow();
+
+        expect(wrapper.find(Validations)).toHaveProp('required', false);
+      });
+    });
   });
 });

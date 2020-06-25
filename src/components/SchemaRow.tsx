@@ -1,11 +1,12 @@
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
-import { hasRefItems, isRefNode } from '../utils/guards';
+import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -19,6 +20,16 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
+function getRelevantSchemaForRequireCheck(treeNode: SchemaTreeListNode): JSONSchema4 | JSONSchema4[] | null {
+  const metadata = getNodeMetadata(treeNode);
+  if (!('schemaNode' in metadata)) return null;
+  if (isArrayNodeWithItems(metadata.schemaNode)) {
+    return metadata.schemaNode.items;
+  }
+
+  return metadata.schema;
+}
+
 function isRequired(treeNode: SchemaTreeListNode) {
   if (treeNode.parent === null) return false;
   try {
@@ -27,9 +38,11 @@ function isRequired(treeNode: SchemaTreeListNode) {
       return false;
     }
 
-    const { schema } = getSchemaNodeMetadata(treeNode.parent);
+    const schema = getRelevantSchemaForRequireCheck(treeNode.parent);
 
     return (
+      schema !== null &&
+      !Array.isArray(schema) &&
       getPrimaryType(schema) === SchemaKind.Object &&
       Array.isArray(schema.required) &&
       schema.required.includes(String(path[path.length - 1]))
