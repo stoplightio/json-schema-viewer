@@ -3,13 +3,14 @@ import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
+import { generateId } from '../../utils/generateId';
 import { getCombiner } from '../../utils/getCombiner';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../../utils/guards';
 import { getNodeMetadata, getSchemaNodeMetadata, metadataStore } from '../metadata';
 import { createErrorTreeNode } from './createErrorTreeNode';
 import { mergeAllOf } from './mergeAllOf';
-import { walk } from './walk';
+import { processNode, walk } from './walk';
 
 export type WalkerRefResolver = (path: JsonPath | null, $ref: string) => JSONSchema4;
 
@@ -245,7 +246,22 @@ function prepareSchema(
   try {
     return resolveSchema(schema, path, options);
   } catch (ex) {
-    (node as TreeListParentNode).children = [];
-    return void (node as TreeListParentNode).children.push(createErrorTreeNode(node as TreeListParentNode, ex.message));
+    const treeNode: SchemaTreeListNode = {
+      id: generateId(),
+      name: '',
+      parent: node as TreeListParentNode,
+      children: [],
+    };
+
+    (node as TreeListParentNode).children.push(treeNode);
+    metadataStore.set(treeNode, {
+      schemaNode: processNode(schema || {}),
+      schema: schema || {},
+      path,
+    });
+
+    treeNode.children.push(createErrorTreeNode(treeNode, ex.message));
+
+    return null;
   }
 }

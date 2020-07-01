@@ -29,7 +29,7 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   }
 }
 
-function processNode(node: JSONSchema4): SchemaNode | void {
+export function processNode(node: JSONSchema4): SchemaNode {
   const combiner = getCombiner(node);
   const type = node.type || inferType(node);
   const title = typeof node.title === 'string' ? { title: node.title } : null;
