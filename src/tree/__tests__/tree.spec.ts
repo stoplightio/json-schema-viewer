@@ -1131,6 +1131,35 @@ describe('SchemaTree', () => {
         "
       `);
     });
+
+    test('should handle resolving errors', () => {
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'string',
+          },
+          bar: {
+            $ref: 'http://localhost:8080/some/not/existing/path',
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: () => {
+          throw new Error('resolving error');
+        },
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+
+      expect(tree.count).toEqual(4);
+      expect(getNodeMetadata(tree.itemAt(3)!)).toHaveProperty('error', 'resolving error');
+    });
   });
 
   describe('onPopulate handler', () => {
