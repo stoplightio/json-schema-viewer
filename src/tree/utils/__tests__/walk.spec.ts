@@ -188,4 +188,46 @@ describe('Schema Walker', () => {
       });
     });
   });
+
+  test('should pick all combiners', () => {
+    const schema: JSONSchema4 = {
+      type: 'object',
+      allOf: [],
+      oneOf: [],
+      anyOf: [],
+    };
+
+    expect(Array.from(walk(schema))).toEqual([
+      {
+        fragment: schema,
+        node: {
+          annotations: {},
+          combiner: 'anyOf',
+          id: expect.any(String),
+          properties: [],
+          type: 'object',
+        },
+      },
+      {
+        fragment: schema,
+        node: {
+          annotations: {},
+          combiner: 'oneOf',
+          id: expect.any(String),
+          properties: [],
+          type: 'object',
+        },
+      },
+      {
+        fragment: schema,
+        node: {
+          annotations: {},
+          combiner: 'allOf',
+          id: expect.any(String),
+          properties: [],
+          type: 'object',
+        },
+      },
+    ]);
+  });
 });

@@ -1283,6 +1283,88 @@ describe('SchemaTree', () => {
         "
       `);
     });
+
+    describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {
+      let schema: JSONSchema4;
+
+      beforeEach(() => {
+        schema = {
+          type: 'object',
+          title: 'Account',
+          allOf: [
+            {
+              type: 'object',
+              properties: {
+                type: {
+                  type: 'string',
+                  enum: ['admin', 'editor'],
+                },
+                enabled: {
+                  type: 'boolean',
+                  description: 'Is this account enabled',
+                },
+              },
+              required: ['type'],
+            },
+          ],
+          [combiner]: [
+            {
+              type: 'object',
+              title: 'Admin',
+              properties: {
+                root: {
+                  type: 'boolean',
+                },
+                group: {
+                  type: 'string',
+                },
+                expirationDate: {
+                  type: 'string',
+                },
+              },
+            },
+            {
+              type: 'object',
+              title: 'Editor',
+              properties: {
+                supervisor: {
+                  type: 'string',
+                },
+                key: {
+                  type: 'string',
+                },
+              },
+            },
+          ],
+        };
+      });
+
+      test('given allOf merging disabled, should preserve both combiners', () => {
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: false,
+          resolveRef: void 0,
+          shouldResolveEagerly: true,
+          onPopulate: void 0,
+        });
+
+        tree.populate();
+        expect(printTree(tree)).toMatchSnapshot();
+      });
+
+      test('given allOf merging enabled, should merge contents of allOf combiners', () => {
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+          shouldResolveEagerly: true,
+          onPopulate: void 0,
+        });
+
+        tree.populate();
+        expect(printTree(tree)).toMatchSnapshot();
+      });
+    });
   });
 
   test('given visible $ref node, should try to inject the title immediately', () => {

@@ -4,12 +4,13 @@ import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { generateId } from '../../utils/generateId';
-import { getCombiner } from '../../utils/getCombiner';
+import { getCombiners } from '../../utils/getCombiners';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../../utils/guards';
 import { getNodeMetadata, getSchemaNodeMetadata, metadataStore } from '../metadata';
 import { createErrorTreeNode } from './createErrorTreeNode';
 import { mergeAllOf } from './mergeAllOf';
+import { mergeOneOrAnyOf } from './mergeOneOrAnyOf';
 import { processNode, walk } from './walk';
 
 export type WalkerRefResolver = (path: JsonPath | null, $ref: string) => JSONSchema4;
@@ -63,6 +64,11 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
           break;
       }
     } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
+      if ('oneOf' in fragment || 'anyOf' in fragment) {
+        parent.children.pop();
+        continue;
+      }
+
       try {
         const merged = mergeAllOf(fragment, path, options);
         parent.children.pop();
@@ -75,6 +81,13 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       }
     } else if (_isObject(node.properties)) {
       (treeNode as TreeListParentNode).children = [];
+
+      if (options?.mergeAllOf && (node.combiner === 'oneOf' || node.combiner === 'anyOf')) {
+        const merged = mergeOneOrAnyOf(fragment, node.combiner);
+        if (merged.length > 0) {
+          node.properties = merged;
+        }
+      }
 
       for (const [i, property] of node.properties.entries()) {
         if ('type' in node) {
@@ -136,8 +149,8 @@ function processArray(
       case SchemaKind.Array:
         return processArray(node, items as IObjectNode, level, [...path, 'items'], options);
       default:
-        const combiner = getCombiner(items);
-        if (combiner) {
+        const combiners = getCombiners(items);
+        if (combiners !== void 0) {
           (node as TreeListParentNode).children = [];
           populateTree(items, node as TreeListParentNode, level, [...path, 'items'], options);
         }
@@ -255,7 +268,7 @@ function prepareSchema(
 
     (node as TreeListParentNode).children.push(treeNode);
     metadataStore.set(treeNode, {
-      schemaNode: processNode(schema || {}),
+      schemaNode: processNode(schema || {}).next().value,
       schema: schema || {},
       path,
     });
