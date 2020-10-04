@@ -10,7 +10,7 @@ export function mergeOneOrAnyOf(schema: JSONSchema4, combiner: 'oneOf' | 'anyOf'
   if (Array.isArray(items)) {
     for (const item of items) {
       merged.push({
-        allOf: [item, ...schema.allOf],
+        allOf: [...schema.allOf, item],
       });
     }
   }

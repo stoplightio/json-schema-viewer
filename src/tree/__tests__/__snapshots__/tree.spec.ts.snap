@@ -136,36 +136,36 @@ exports[`SchemaTree tree correctness given anyOf combiner placed next to allOf g
       │     ├─ type: object
       │     └─ children
       │        ├─ 0
-      │        │  └─ #/anyOf/0/properties/root
-      │        │     └─ type: boolean
-      │        ├─ 1
-      │        │  └─ #/anyOf/0/properties/group
-      │        │     └─ type: string
-      │        ├─ 2
-      │        │  └─ #/anyOf/0/properties/expirationDate
-      │        │     └─ type: string
-      │        ├─ 3
       │        │  └─ #/anyOf/0/properties/type
       │        │     └─ type: string
+      │        ├─ 1
+      │        │  └─ #/anyOf/0/properties/enabled
+      │        │     └─ type: boolean
+      │        ├─ 2
+      │        │  └─ #/anyOf/0/properties/root
+      │        │     └─ type: boolean
+      │        ├─ 3
+      │        │  └─ #/anyOf/0/properties/group
+      │        │     └─ type: string
       │        └─ 4
-      │           └─ #/anyOf/0/properties/enabled
-      │              └─ type: boolean
+      │           └─ #/anyOf/0/properties/expirationDate
+      │              └─ type: string
       └─ 1
          └─ #/anyOf/1
             ├─ type: object
             └─ children
                ├─ 0
-               │  └─ #/anyOf/1/properties/supervisor
-               │     └─ type: string
-               ├─ 1
-               │  └─ #/anyOf/1/properties/key
-               │     └─ type: string
-               ├─ 2
                │  └─ #/anyOf/1/properties/type
                │     └─ type: string
+               ├─ 1
+               │  └─ #/anyOf/1/properties/enabled
+               │     └─ type: boolean
+               ├─ 2
+               │  └─ #/anyOf/1/properties/supervisor
+               │     └─ type: string
                └─ 3
-                  └─ #/anyOf/1/properties/enabled
-                     └─ type: boolean
+                  └─ #/anyOf/1/properties/key
+                     └─ type: string
 "
 `;
 
@@ -226,35 +226,35 @@ exports[`SchemaTree tree correctness given oneOf combiner placed next to allOf g
       │     ├─ type: object
       │     └─ children
       │        ├─ 0
-      │        │  └─ #/oneOf/0/properties/root
-      │        │     └─ type: boolean
-      │        ├─ 1
-      │        │  └─ #/oneOf/0/properties/group
-      │        │     └─ type: string
-      │        ├─ 2
-      │        │  └─ #/oneOf/0/properties/expirationDate
-      │        │     └─ type: string
-      │        ├─ 3
       │        │  └─ #/oneOf/0/properties/type
       │        │     └─ type: string
+      │        ├─ 1
+      │        │  └─ #/oneOf/0/properties/enabled
+      │        │     └─ type: boolean
+      │        ├─ 2
+      │        │  └─ #/oneOf/0/properties/root
+      │        │     └─ type: boolean
+      │        ├─ 3
+      │        │  └─ #/oneOf/0/properties/group
+      │        │     └─ type: string
       │        └─ 4
-      │           └─ #/oneOf/0/properties/enabled
-      │              └─ type: boolean
+      │           └─ #/oneOf/0/properties/expirationDate
+      │              └─ type: string
       └─ 1
          └─ #/oneOf/1
             ├─ type: object
             └─ children
                ├─ 0
-               │  └─ #/oneOf/1/properties/supervisor
-               │     └─ type: string
-               ├─ 1
-               │  └─ #/oneOf/1/properties/key
-               │     └─ type: string
-               ├─ 2
                │  └─ #/oneOf/1/properties/type
                │     └─ type: string
+               ├─ 1
+               │  └─ #/oneOf/1/properties/enabled
+               │     └─ type: boolean
+               ├─ 2
+               │  └─ #/oneOf/1/properties/supervisor
+               │     └─ type: string
                └─ 3
-                  └─ #/oneOf/1/properties/enabled
-                     └─ type: boolean
+                  └─ #/oneOf/1/properties/key
+                     └─ type: string
 "
 `;
