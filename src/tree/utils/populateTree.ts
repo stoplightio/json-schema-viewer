@@ -83,10 +83,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       (treeNode as TreeListParentNode).children = [];
 
       if (options?.mergeAllOf && (node.combiner === 'oneOf' || node.combiner === 'anyOf')) {
-        const merged = mergeOneOrAnyOf(fragment, node.combiner);
-        if (merged.length > 0) {
-          node.properties = merged;
-        }
+        node.properties = mergeOneOrAnyOf(fragment, node.combiner);
       }
 
       for (const [i, property] of node.properties.entries()) {
