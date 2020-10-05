@@ -1,10 +1,10 @@
 import { JSONSchema4 } from 'json-schema';
 import { SchemaKind } from '../../types';
-import { getCombiner } from '../../utils/getCombiner';
+import { getCombiners } from '../../utils/getCombiners';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 
 export const canStepIn = (fragment: JSONSchema4) => {
-  if (getCombiner(fragment)) {
+  if (getCombiners(fragment) !== void 0) {
     return true;
   }
 

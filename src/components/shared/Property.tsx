@@ -27,7 +27,7 @@ function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
   if (treeNode.parent === null) return false;
   try {
     const { schemaNode } = getSchemaNodeMetadata(treeNode.parent);
-    if (!('type' in schemaNode)) {
+    if (!('type' in schemaNode) || 'combiner' in schemaNode) {
       return false;
     }
 

@@ -9,7 +9,10 @@ import { getNodeMetadata } from '../../metadata';
 import { SchemaTree } from '../../tree';
 
 export function printTree(tree: SchemaTree) {
-  return treeify.asTree(prepareTree(tree.root.children[0]) as treeify.TreeObject, true, true);
+  const root: unknown =
+    tree.root.children.length > 1 ? tree.root.children.map(prepareTree) : prepareTree(tree.root.children[0]);
+
+  return treeify.asTree(root as treeify.TreeObject, true, true);
 }
 
 type PrintableNode = {

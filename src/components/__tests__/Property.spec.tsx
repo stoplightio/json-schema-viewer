@@ -416,4 +416,68 @@ describe('Property component', () => {
       expect(wrapper.find(Types)).toHaveProp('title', void 0);
     });
   });
+
+  test("no title for combiner's children", () => {
+    const schema: JSONSchema4 = {
+      type: 'object',
+      title: 'Account',
+      allOf: [
+        {
+          type: 'object',
+          properties: {
+            type: {
+              type: 'string',
+              enum: ['admin', 'editor'],
+            },
+            enabled: {
+              type: 'boolean',
+              description: 'Is this account enabled',
+            },
+          },
+          required: ['type'],
+        },
+      ],
+      oneOf: [
+        {
+          type: 'object',
+          title: 'Admin',
+          properties: {
+            root: {
+              type: 'boolean',
+            },
+            group: {
+              type: 'string',
+            },
+            expirationDate: {
+              type: 'string',
+            },
+          },
+        },
+        {
+          type: 'object',
+          title: 'Editor',
+          properties: {
+            supervisor: {
+              type: 'string',
+            },
+            key: {
+              type: 'string',
+            },
+          },
+        },
+      ],
+    };
+
+    const tree = new SchemaTree(schema, new TreeState(), {
+      expandedDepth: Infinity,
+      mergeAllOf: true,
+      resolveRef: void 0,
+      shouldResolveEagerly: false,
+      onPopulate: void 0,
+    });
+
+    tree.populate();
+    const wrapper = shallow(<Property node={Array.from(tree)[1]} />);
+    expect(wrapper.children().first()).toEqual(wrapper.find(Types));
+  });
 });

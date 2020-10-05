@@ -5,7 +5,7 @@ import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, SchemaKind, SchemaNo
 import { flattenTypes } from '../../utils/flattenTypes';
 import { generateId } from '../../utils/generateId';
 import { getAnnotations } from '../../utils/getAnnotations';
-import { getCombiner } from '../../utils/getCombiner';
+import { getCombiners } from '../../utils/getCombiners';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { getValidations } from '../../utils/getValidations';
 import { inferType } from '../../utils/inferType';
@@ -29,24 +29,26 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   }
 }
 
-export function processNode(node: JSONSchema4): SchemaNode {
-  const combiner = getCombiner(node);
+export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
+  const combiners = getCombiners(node);
   const type = node.type || inferType(node);
   const title = typeof node.title === 'string' ? { title: node.title } : null;
 
-  if (combiner) {
-    const properties = node[combiner];
-    return {
-      id: generateId(),
-      combiner,
-      properties: Array.isArray(properties) ? properties.slice() : properties,
-      annotations: getAnnotations(node),
-      ...(type !== undefined && { type }),
-      ...title,
-    } as ICombinerNode;
-  }
+  if (combiners !== void 0) {
+    for (const combiner of combiners) {
+      const properties = node[combiner];
+      const combinerNode: ICombinerNode = {
+        id: generateId(),
+        combiner,
+        properties: Array.isArray(properties) ? properties.slice() : properties,
+        annotations: getAnnotations(node),
+        ...(type !== undefined && { type }),
+        ...title,
+      };
 
-  if (type) {
+      yield combinerNode;
+    }
+  } else if (type) {
     const base: IBaseNode = {
       id: generateId(),
       type: flattenTypes(type),
@@ -59,36 +61,30 @@ export function processNode(node: JSONSchema4): SchemaNode {
 
     assignNodeSpecificFields(base, node);
 
-    return base;
-  }
-
-  if ('enum' in node) {
-    return {
+    yield base;
+  } else if ('enum' in node) {
+    yield {
       id: generateId(),
       validations: getValidations(node),
       annotations: getAnnotations(node),
       enum: node.enum,
       ...title,
     };
-  }
-
-  if ('$ref' in node) {
-    return {
+  } else if ('$ref' in node) {
+    yield {
       id: generateId(),
       $ref: typeof node.$ref !== 'string' ? null : node.$ref,
       ...title,
     };
+  } else if ('not' in node) {
+    // todo: shall we support it?
+  } else {
+    yield {
+      id: generateId(),
+      validations: {},
+      annotations: {},
+    };
   }
-
-  // if ('not' in node) {
-  //   // todo: shall we support it?
-  // }
-
-  return {
-    id: generateId(),
-    validations: {},
-    annotations: {},
-  };
 }
 
 export type WalkerValue = {
@@ -102,8 +98,7 @@ export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<Wal
       yield* walk(segment);
     }
   } else {
-    const node = processNode(schema);
-    if (node !== void 0) {
+    for (const node of processNode(schema)) {
       yield {
         node,
         fragment: schema,
