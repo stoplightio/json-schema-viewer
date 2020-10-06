@@ -1543,10 +1543,10 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
-"@stoplight/json-schema-merge-allof@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-merge-allof/-/json-schema-merge-allof-0.7.1.tgz#7a2c99da9448c5b6b5cbd9afd9f1fb4957d5cbeb"
-  integrity sha512-S+pemVEAhqZPb88WstIbRg8yCMoYr6/+MjPS3/ngXPZ/y+hgG/ax26lTr0E8gmFc9kByIIixjF18ZqmC0DlGHg==
+"@stoplight/json-schema-merge-allof@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-merge-allof/-/json-schema-merge-allof-0.7.2.tgz#a9f4d95b4a95e943afa567c695a1d4a2add9b74a"
+  integrity sha512-fVS5GqYBlxZfX1fA9+ULiny8VaCR3O62p3BHYd7+30rf378pVW6UPPydeB5AXs5U621LJKYdrGyndpOdTJ5dFA==
   dependencies:
     compute-lcm "^1.1.0"
     json-schema-compare "^0.2.2"
