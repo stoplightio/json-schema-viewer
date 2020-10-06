@@ -115,7 +115,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
   const metadata = getNodeMetadata(node);
 
   return (
-    <div className={cn('px-2 flex-1 w-full', className)}>
+    <div className={cn('px-2 flex-1 w-full max-w-full', className)}>
       <div
         className="flex items-center text-sm relative"
         style={{
