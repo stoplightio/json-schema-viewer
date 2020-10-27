@@ -3,16 +3,18 @@ import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import * as React from 'react';
+import { Context as ViewContext } from '../JsonSchemaViewer';
 
 export interface IValidations {
   required: boolean;
-  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean };
+  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: boolean; writeOnly?: boolean };
 }
 
 export const Validations: React.FunctionComponent<IValidations> = ({
   required,
-  validations: { deprecated, ...validations },
+  validations: { deprecated, readOnly, writeOnly, ...validations },
 }) => {
+  const viewMode = React.useContext(ViewContext);
   const validationCount = Object.keys(validations).length;
 
   const requiredElem = (
@@ -22,9 +24,17 @@ export const Validations: React.FunctionComponent<IValidations> = ({
     </div>
   );
 
+  const visibility =
+    viewMode !== 'standalone' || (readOnly && writeOnly) ? null : readOnly ? (
+      <span className="ml-2 text-darken-7 dark:text-lighten-6">read-only</span>
+    ) : writeOnly ? (
+      <span className="ml-2 text-darken-7 dark:text-lighten-6">write-only</span>
+    ) : null;
+
   return (
     <>
       {deprecated ? <span className="ml-2 text-orange-7 dark:text-orange-6">deprecated</span> : null}
+      {visibility}
       {validationCount ? (
         <Popover
           boundary="window"

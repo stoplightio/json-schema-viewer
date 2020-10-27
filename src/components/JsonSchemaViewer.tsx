@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
 import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
-import { GoToRefHandler, RowRenderer } from '../types';
+import { GoToRefHandler, RowRenderer, ViewContext } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
@@ -27,7 +27,11 @@ export interface IJsonSchemaViewer {
   onTreePopulate?: SchemaTreePopulateHandler;
   resolveRef?: SchemaTreeRefDereferenceFn;
   shouldResolveEagerly?: boolean;
+  context?: ViewContext;
 }
+
+export const Context = React.createContext<ViewContext>('standalone');
+Context.displayName = 'ViewContext';
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
   protected readonly treeStore: TreeStore;
@@ -51,6 +55,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       resolveRef: this.props.resolveRef,
       shouldResolveEagerly: !!this.props.shouldResolveEagerly,
       onPopulate: this.props.onTreePopulate,
+      context: this.props.context,
     };
   }
 
@@ -103,6 +108,11 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.tree.schema = this.props.schema;
       this.renderSchema();
     }
+
+    if (prevProps.context !== this.props.context) {
+      this.tree.treeOptions.context = this.props.context ?? 'standalone';
+      this.renderSchema();
+    }
   }
 
   public render() {
@@ -117,7 +127,9 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
-        <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+        <Context.Provider value={this.props.context ?? 'standalone'}>
+          <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+        </Context.Provider>
       </div>
     );
   }

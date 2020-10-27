@@ -12,11 +12,13 @@
       "maximum": 150,
       "multipleOf": 10,
       "exclusiveMinimum": true,
-      "exclusiveMaximum": true
+      "exclusiveMaximum": true,
+      "readOnly": true
     },
     "completed_at": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "writeOnly": true
     },
     "items": {
       "type": ["null", "array"],
