@@ -13,7 +13,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   required,
   validations: { deprecated, ...validations },
 }) => {
-  const validationCount = Object.keys(validations).length;
+  const validationCount = Object.keys(validations).filter(validation => validation !== 'format').length;
 
   const requiredElem = (
     <div className={cn('ml-2', required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
@@ -31,7 +31,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
           interactionKind="hover"
           content={
             <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
-              {Object.keys(validations).map((key, index) => {
+              {Object.keys(validations).filter(validation => validation !== 'format').map((key, index) => {
                 const validation = validations[key];
 
                 let elem = null;
