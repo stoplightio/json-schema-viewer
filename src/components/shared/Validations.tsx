@@ -7,7 +7,7 @@ import { Context as ViewContext } from '../JsonSchemaViewer';
 
 export interface IValidations {
   required: boolean;
-  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: boolean; writeOnly?: boolean };
+  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: unknown; writeOnly?: unknown };
 }
 
 export const Validations: React.FunctionComponent<IValidations> = ({
@@ -24,12 +24,15 @@ export const Validations: React.FunctionComponent<IValidations> = ({
     </div>
   );
 
-  const visibility =
-    viewMode !== 'standalone' || (readOnly && writeOnly) ? null : readOnly ? (
+  // Show readOnly writeOnly validations only in standalone mode and only if just one of them is present
+  const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
+  const visibility = showVisibilityValidations ? (
+    readOnly ? (
       <span className="ml-2 text-darken-7 dark:text-lighten-6">read-only</span>
-    ) : writeOnly ? (
+    ) : (
       <span className="ml-2 text-darken-7 dark:text-lighten-6">write-only</span>
-    ) : null;
+    )
+  ) : null;
 
   return (
     <>
