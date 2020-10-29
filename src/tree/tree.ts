@@ -56,8 +56,9 @@ export class SchemaTree extends Tree {
       mergeAllOf: this.treeOptions.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level): boolean => {
         if (
-          (this.treeOptions.context === 'read' && fragment.writeOnly) ||
-          (this.treeOptions.context === 'write' && fragment.readOnly)
+          !!fragment.writeOnly !== !!fragment.readOnly &&
+          ((this.treeOptions.context === 'read' && fragment.writeOnly) ||
+            (this.treeOptions.context === 'write' && fragment.readOnly))
         ) {
           return false;
         }
