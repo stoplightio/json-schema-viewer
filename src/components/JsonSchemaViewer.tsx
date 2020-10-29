@@ -101,16 +101,12 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.treeStore.defaultExpandedDepth !== this.expandedDepth ||
       prevProps.schema !== this.props.schema ||
       prevProps.mergeAllOf !== this.props.mergeAllOf ||
-      prevProps.shouldResolveEagerly !== this.props.shouldResolveEagerly
+      prevProps.shouldResolveEagerly !== this.props.shouldResolveEagerly ||
+      prevProps.context !== this.props.context
     ) {
       this.treeStore.defaultExpandedDepth = this.expandedDepth;
       this.tree.treeOptions = this.treeOptions;
       this.tree.schema = this.props.schema;
-      this.renderSchema();
-    }
-
-    if (prevProps.context !== this.props.context) {
-      this.tree.treeOptions.context = this.props.context ?? 'standalone';
       this.renderSchema();
     }
   }
