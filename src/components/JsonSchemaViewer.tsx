@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
 import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
-import { GoToRefHandler, RowRenderer, ViewContext } from '../types';
+import { GoToRefHandler, RowRenderer, ViewMode } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
@@ -27,11 +27,11 @@ export interface IJsonSchemaViewer {
   onTreePopulate?: SchemaTreePopulateHandler;
   resolveRef?: SchemaTreeRefDereferenceFn;
   shouldResolveEagerly?: boolean;
-  context?: ViewContext;
+  viewMode?: ViewMode;
 }
 
-export const Context = React.createContext<ViewContext>('standalone');
-Context.displayName = 'ViewContext';
+export const ViewModeContext = React.createContext<ViewMode>('standalone');
+ViewModeContext.displayName = 'ViewModeContext';
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
   protected readonly treeStore: TreeStore;
@@ -55,7 +55,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       resolveRef: this.props.resolveRef,
       shouldResolveEagerly: !!this.props.shouldResolveEagerly,
       onPopulate: this.props.onTreePopulate,
-      context: this.props.context,
+      viewMode: this.props.viewMode,
     };
   }
 
@@ -102,7 +102,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       prevProps.schema !== this.props.schema ||
       prevProps.mergeAllOf !== this.props.mergeAllOf ||
       prevProps.shouldResolveEagerly !== this.props.shouldResolveEagerly ||
-      prevProps.context !== this.props.context
+      prevProps.viewMode !== this.props.viewMode
     ) {
       this.treeStore.defaultExpandedDepth = this.expandedDepth;
       this.tree.treeOptions = this.treeOptions;
@@ -123,9 +123,9 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
-        <Context.Provider value={this.props.context ?? 'standalone'}>
+        <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
           <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
-        </Context.Provider>
+        </ViewModeContext.Provider>
       </div>
     );
   }

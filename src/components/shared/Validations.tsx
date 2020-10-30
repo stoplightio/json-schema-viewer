@@ -3,7 +3,7 @@ import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import * as React from 'react';
-import { Context as ViewContext } from '../JsonSchemaViewer';
+import { ViewModeContext } from '../JsonSchemaViewer';
 
 export interface IValidations {
   required: boolean;
@@ -14,7 +14,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   required,
   validations: { deprecated, readOnly, writeOnly, ...validations },
 }) => {
-  const viewMode = React.useContext(ViewContext);
+  const viewMode = React.useContext(ViewModeContext);
   const validationCount = Object.keys(validations).length;
 
   const requiredElem = (

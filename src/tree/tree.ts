@@ -4,7 +4,7 @@ import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
 import { ResolvingError } from '../errors';
-import { ViewContext } from '../types';
+import { ViewMode } from '../types';
 import { hasRefItems, isRefNode } from '../utils/guards';
 import { getSchemaNodeMetadata } from './metadata';
 import { canStepIn } from './utils/canStepIn';
@@ -30,7 +30,7 @@ export type SchemaTreeOptions = {
   resolveRef: Optional<SchemaTreeRefDereferenceFn>;
   shouldResolveEagerly: boolean;
   onPopulate: Optional<SchemaTreePopulateHandler>;
-  context?: ViewContext;
+  viewMode?: ViewMode;
 };
 
 export { TreeState as SchemaTreeState };
@@ -57,8 +57,8 @@ export class SchemaTree extends Tree {
       onNode: (fragment, node, parentTreeNode, level): boolean => {
         if (
           !!fragment.writeOnly !== !!fragment.readOnly &&
-          ((this.treeOptions.context === 'read' && fragment.writeOnly) ||
-            (this.treeOptions.context === 'write' && fragment.readOnly))
+          ((this.treeOptions.viewMode === 'read' && fragment.writeOnly) ||
+            (this.treeOptions.viewMode === 'write' && fragment.readOnly))
         ) {
           return false;
         }

@@ -24,8 +24,8 @@ storiesOf('JsonSchemaViewer', module)
       hideTopBar={boolean('hideTopBar', false)}
       shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
       onGoToRef={action('onGoToRef')}
-      context={select(
-        'context',
+      viewMode={select(
+        'viewMode',
         {
           standalone: 'standalone',
           read: 'read',

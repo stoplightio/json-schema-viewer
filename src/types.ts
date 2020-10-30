@@ -66,4 +66,4 @@ export type RowRenderer = (
   treeStore: TreeStore,
 ) => React.ReactNode;
 
-export type ViewContext = 'read' | 'write' | 'standalone';
+export type ViewMode = 'read' | 'write' | 'standalone';
