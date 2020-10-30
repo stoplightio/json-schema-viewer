@@ -7,7 +7,7 @@ import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
-import { Caret, Description, Divider, Property, PropertyTypeColors, Validations } from './shared';
+import { Caret, Description, Divider, Format, Property, Validations } from './shared';
 
 export interface ISchemaRow {
   className?: string;
@@ -62,18 +62,6 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
 
   const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaKind.Array && hasRefItems(schemaNode));
 
-  const DisplayFormat: React.FunctionComponent = () => {
-    return (
-      <div
-        {...(typeof metadata.schema.type === 'string'
-          ? { className: 'ml-2 ' + PropertyTypeColors[metadata.schema.type as string] }
-          : { className: 'ml-2' })}
-      >
-        {`<${metadata.schema.format}>`}
-      </div>
-    );
-  };
-
   return (
     <>
       {has$Ref || (isParentNode(node) && Tree.getLevel(node) > 0) ? (
@@ -102,7 +90,7 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
 
       <div className="flex-1 flex truncate">
         <Property node={node} onGoToRef={onGoToRef} />
-        {metadata.schema.type && metadata.schema.format ? <DisplayFormat /> : null}
+        {metadata.schema.type && metadata.schema.format && <Format schemaNode={metadata.schema} />}
         {description && <Description value={description} />}
       </div>
 

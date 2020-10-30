@@ -1,0 +1,41 @@
+{
+  "title": "model-with-formats",
+  "type": "object",
+  "properties": {
+    "date-of-birth": {
+      "type": [
+        "number",
+        "string",
+        "array"
+      ],
+      "format": "date-time",
+      "items": {}
+    },
+    "name": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number",
+      "format": "float"
+    },
+    "notype": {
+        "format": "date-time"
+    },
+    "permissions": {
+      "type": [
+        "string",
+        "object"
+      ],
+      "format": "password",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}

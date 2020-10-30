@@ -2,7 +2,9 @@ import { safeStringify } from '@stoplight/json';
 import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
 import cn from 'classnames';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+import { PropertyTypeColors } from './Types';
 
 export interface IValidations {
   required: boolean;
@@ -73,5 +75,17 @@ export const Validations: React.FunctionComponent<IValidations> = ({
         requiredElem
       )}
     </>
+  );
+};
+
+export const Format: React.FunctionComponent<{ schemaNode: JSONSchema4 }> = ({ schemaNode }) => {
+  return (
+    <div
+      {...(typeof schemaNode.type === 'string'
+        ? { className: 'ml-2 ' + PropertyTypeColors[schemaNode.type as string] }
+        : { className: 'ml-2' })}
+    >
+      {`<${schemaNode.format}>`}
+    </div>
   );
 };
