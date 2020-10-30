@@ -31,38 +31,40 @@ export const Validations: React.FunctionComponent<IValidations> = ({
           interactionKind="hover"
           content={
             <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
-              {Object.keys(validations).filter(validation => validation !== 'format').map((key, index) => {
-                const validation = validations[key];
+              {Object.keys(validations)
+                .filter(validation => validation !== 'format')
+                .map((key, index) => {
+                  const validation = validations[key];
 
-                let elem = null;
-                if (Array.isArray(validation)) {
-                  elem = validation.map((v, i) => (
-                    <div key={i} className="mt-1 mr-1 flex items-center">
-                      <div className="px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded">{String(v)}</div>
-                      {i < validation.length - 1 ? <div>,</div> : null}
-                    </div>
-                  ));
-                } else if (typeof validation === 'object') {
-                  elem = (
-                    <div className="m-1 px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded" key={index}>
-                      {'{...}'}
+                  let elem = null;
+                  if (Array.isArray(validation)) {
+                    elem = validation.map((v, i) => (
+                      <div key={i} className="mt-1 mr-1 flex items-center">
+                        <div className="px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded">{String(v)}</div>
+                        {i < validation.length - 1 ? <div>,</div> : null}
+                      </div>
+                    ));
+                  } else if (typeof validation === 'object') {
+                    elem = (
+                      <div className="m-1 px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded" key={index}>
+                        {'{...}'}
+                      </div>
+                    );
+                  } else {
+                    elem = (
+                      <div className="m-1 px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded" key={index}>
+                        {typeof validation === 'string' ? `"${validation}"` : safeStringify(validation)}
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div key={index} className="py-1 flex items-baseline">
+                      <div className="font-medium pr-2">{key}:</div>
+                      <div className="flex-1 flex flex-wrap justify-end">{elem}</div>
                     </div>
                   );
-                } else {
-                  elem = (
-                    <div className="m-1 px-1 bg-gray-2 dark:bg-gray-8 font-bold text-sm rounded" key={index}>
-                      {typeof validation === 'string' ? `"${validation}"` : safeStringify(validation)}
-                    </div>
-                  );
-                }
-
-                return (
-                  <div key={index} className="py-1 flex items-baseline">
-                    <div className="font-medium pr-2">{key}:</div>
-                    <div className="flex-1 flex flex-wrap justify-end">{elem}</div>
-                  </div>
-                );
-              })}
+                })}
             </div>
           }
           target={requiredElem}

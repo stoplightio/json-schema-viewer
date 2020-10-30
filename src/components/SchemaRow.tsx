@@ -63,13 +63,16 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
   const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaKind.Array && hasRefItems(schemaNode));
 
   const DisplayFormat: React.FunctionComponent = () => {
-    return(
-      <div {...(typeof metadata.schema.type =='string' ? (
-        {className: 'ml-2 ' + PropertyTypeColors[metadata.schema.type as string]}
-        ) : {className: 'ml-2'})}>
-      {`<${metadata.schema.format}>`}</div>
-    )
-  }
+    return (
+      <div
+        {...(typeof metadata.schema.type === 'string'
+          ? { className: 'ml-2 ' + PropertyTypeColors[metadata.schema.type as string] }
+          : { className: 'ml-2' })}
+      >
+        {`<${metadata.schema.format}>`}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -99,8 +102,7 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
 
       <div className="flex-1 flex truncate">
         <Property node={node} onGoToRef={onGoToRef} />
-        {metadata.schema.type && metadata.schema.format ?
-        <DisplayFormat /> : null}
+        {metadata.schema.type && metadata.schema.format ? <DisplayFormat /> : null}
         {description && <Description value={description} />}
       </div>
 
