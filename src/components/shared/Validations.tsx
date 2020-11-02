@@ -3,16 +3,18 @@ import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import * as React from 'react';
+import { ViewModeContext } from '../JsonSchemaViewer';
 
 export interface IValidations {
   required: boolean;
-  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean };
+  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: unknown; writeOnly?: unknown };
 }
 
 export const Validations: React.FunctionComponent<IValidations> = ({
   required,
-  validations: { deprecated, ...validations },
+  validations: { deprecated, readOnly, writeOnly, ...validations },
 }) => {
+  const viewMode = React.useContext(ViewModeContext);
   const validationCount = Object.keys(validations).length;
 
   const requiredElem = (
@@ -22,9 +24,20 @@ export const Validations: React.FunctionComponent<IValidations> = ({
     </div>
   );
 
+  // Show readOnly writeOnly validations only in standalone mode and only if just one of them is present
+  const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
+  const visibility = showVisibilityValidations ? (
+    readOnly ? (
+      <span className="ml-2 text-darken-7 dark:text-lighten-6">read-only</span>
+    ) : (
+      <span className="ml-2 text-darken-7 dark:text-lighten-6">write-only</span>
+    )
+  ) : null;
+
   return (
     <>
       {deprecated ? <span className="ml-2 text-orange-7 dark:text-orange-6">deprecated</span> : null}
+      {visibility}
       {validationCount ? (
         <Popover
           boundary="window"

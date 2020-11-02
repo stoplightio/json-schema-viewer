@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import { JSONSchema4 } from 'json-schema';
 import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
-import { GoToRefHandler, RowRenderer } from '../types';
+import { GoToRefHandler, RowRenderer, ViewMode } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
@@ -27,7 +27,11 @@ export interface IJsonSchemaViewer {
   onTreePopulate?: SchemaTreePopulateHandler;
   resolveRef?: SchemaTreeRefDereferenceFn;
   shouldResolveEagerly?: boolean;
+  viewMode?: ViewMode;
 }
+
+export const ViewModeContext = React.createContext<ViewMode>('standalone');
+ViewModeContext.displayName = 'ViewModeContext';
 
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
   protected readonly treeStore: TreeStore;
@@ -51,6 +55,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       resolveRef: this.props.resolveRef,
       shouldResolveEagerly: !!this.props.shouldResolveEagerly,
       onPopulate: this.props.onTreePopulate,
+      viewMode: this.props.viewMode,
     };
   }
 
@@ -96,7 +101,8 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.treeStore.defaultExpandedDepth !== this.expandedDepth ||
       prevProps.schema !== this.props.schema ||
       prevProps.mergeAllOf !== this.props.mergeAllOf ||
-      prevProps.shouldResolveEagerly !== this.props.shouldResolveEagerly
+      prevProps.shouldResolveEagerly !== this.props.shouldResolveEagerly ||
+      prevProps.viewMode !== this.props.viewMode
     ) {
       this.treeStore.defaultExpandedDepth = this.expandedDepth;
       this.tree.treeOptions = this.treeOptions;
@@ -117,7 +123,9 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
-        <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+        <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
+          <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+        </ViewModeContext.Provider>
       </div>
     );
   }

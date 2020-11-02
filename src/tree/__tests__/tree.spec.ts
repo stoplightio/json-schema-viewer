@@ -1,6 +1,7 @@
 import { TreeListParentNode } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
 import { ResolvingError } from '../../errors';
+import { ViewMode } from '../../types';
 import { getNodeMetadata } from '../metadata';
 import { SchemaTree, SchemaTreeState } from '../tree';
 import { printTree } from './utils/printTree';
@@ -1364,6 +1365,34 @@ describe('SchemaTree', () => {
         tree.populate();
         expect(printTree(tree)).toMatchSnapshot();
       });
+    });
+
+    test.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
+      const schema: JSONSchema4 = {
+        type: ['string', 'object'],
+        properties: {
+          id: {
+            type: 'string',
+            readOnly: true,
+          },
+          description: {
+            type: 'string',
+            writeOnly: true,
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+        viewMode: mode as ViewMode,
+      });
+
+      tree.populate();
+      expect(tree.count).toEqual(mode === 'standalone' ? 3 : 2);
     });
   });
 
