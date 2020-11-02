@@ -90,7 +90,7 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
 
       <div className="flex-1 flex truncate">
         <Property node={node} onGoToRef={onGoToRef} />
-        {metadata.schema.type && metadata.schema.format && <Format schemaNode={metadata.schema} />}
+        {metadata.schema.type && typeof metadata.schema.format === 'string' && <Format schemaNode={metadata.schema} />}
         {description && <Description value={description} />}
       </div>
 

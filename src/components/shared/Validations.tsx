@@ -81,8 +81,8 @@ export const Validations: React.FunctionComponent<IValidations> = ({
 export const Format: React.FunctionComponent<{ schemaNode: JSONSchema4 }> = ({ schemaNode }) => {
   return (
     <div
-      {...(typeof schemaNode.type === 'string'
-        ? { className: 'ml-2 ' + PropertyTypeColors[schemaNode.type as string] }
+      {...(typeof schemaNode.type === 'string' && schemaNode.type in PropertyTypeColors
+        ? { className: `ml-2 ${PropertyTypeColors[schemaNode.type as string]}` }
         : { className: 'ml-2' })}
     >
       {`<${schemaNode.format}>`}
