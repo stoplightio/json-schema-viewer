@@ -4,8 +4,8 @@ import { Popover } from '@stoplight/ui-kit';
 import cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
-import { PropertyTypeColors } from './Types';
 import { ViewModeContext } from '../JsonSchemaViewer';
+import { PropertyTypeColors } from './Types';
 
 export interface IValidations {
   required: boolean;
