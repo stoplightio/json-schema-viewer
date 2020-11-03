@@ -24,6 +24,15 @@ storiesOf('JsonSchemaViewer', module)
       hideTopBar={boolean('hideTopBar', false)}
       shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
       onGoToRef={action('onGoToRef')}
+      viewMode={select(
+        'viewMode',
+        {
+          standalone: 'standalone',
+          read: 'read',
+          write: 'write',
+        },
+        'standalone',
+      )}
     />
   ))
   .add('custom schema', () => (

@@ -5,17 +5,19 @@ import cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { PropertyTypeColors } from './Types';
+import { ViewModeContext } from '../JsonSchemaViewer';
 
 export interface IValidations {
   required: boolean;
-  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean };
+  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: unknown; writeOnly?: unknown };
 }
 
 export const Validations: React.FunctionComponent<IValidations> = ({
   required,
-  validations: { deprecated, ...validations },
+  validations: { deprecated, readOnly, writeOnly, ...validations },
 }) => {
   const validationCount = Object.keys(validations).filter(validation => validation !== 'format').length;
+  const viewMode = React.useContext(ViewModeContext);
 
   const requiredElem = (
     <div className={cn('ml-2', required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
@@ -24,9 +26,20 @@ export const Validations: React.FunctionComponent<IValidations> = ({
     </div>
   );
 
+  // Show readOnly writeOnly validations only in standalone mode and only if just one of them is present
+  const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
+  const visibility = showVisibilityValidations ? (
+    readOnly ? (
+      <span className="ml-2 text-darken-7 dark:text-lighten-6">read-only</span>
+    ) : (
+      <span className="ml-2 text-darken-7 dark:text-lighten-6">write-only</span>
+    )
+  ) : null;
+
   return (
     <>
       {deprecated ? <span className="ml-2 text-orange-7 dark:text-orange-6">deprecated</span> : null}
+      {visibility}
       {validationCount ? (
         <Popover
           boundary="window"
