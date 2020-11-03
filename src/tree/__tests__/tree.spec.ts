@@ -1285,6 +1285,46 @@ describe('SchemaTree', () => {
       `);
     });
 
+    test('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          items: {
+            type: ['null', 'array'],
+            items: {
+              type: ['string', 'number'],
+            },
+            description:
+              "This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!",
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type: object
+           └─ children
+              └─ 0
+                 └─ #/properties/items
+                    ├─ type
+                    │  ├─ 0: null
+                    │  └─ 1: array
+                    └─ subtype
+                       ├─ 0: string
+                       └─ 1: number
+        "
+      `);
+    });
+
     describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {
       let schema: JSONSchema4;
 
