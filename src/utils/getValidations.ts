@@ -4,7 +4,7 @@ import { flatMap as _flatMap, pick as _pick } from 'lodash';
 
 export const COMMON_VALIDATION_TYPES = [
   'enum', // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1
-  'format',
+  'format', // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-7
   'default',
   'example',
   'nullable',
