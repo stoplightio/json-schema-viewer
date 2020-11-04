@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `
+"└─ #
+   ├─ type: object
+   └─ children
+      └─ 0
+         └─ #/properties/array-all-objects
+            ├─ type: array
+            ├─ subtype: object
+            └─ children
+               ├─ 0
+               │  └─ #/properties/array-all-objects/items/properties/foo
+               │     └─ type: string
+               └─ 1
+                  └─ #/properties/array-all-objects/items/properties/bar
+                     └─ type: string
+"
+`;
+
 exports[`SchemaTree expanding $refs in allOf given very complex model with circular references, should bail out and display unmerged allOf 1`] = `
 "└─ #
    ├─ type: object

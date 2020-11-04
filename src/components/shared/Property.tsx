@@ -31,10 +31,11 @@ function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
       return false;
     }
 
-    let type = getPrimaryType(schemaNode);
+    const type = getPrimaryType(schemaNode);
 
     if (type === SchemaKind.Array && (schemaNode as IArrayNode).items) {
-      type = getPrimaryType((schemaNode as IArrayNode).items!);
+      const { schemaNode: itemsSchemaNode } = getSchemaNodeMetadata(treeNode);
+      return !('combiner' in itemsSchemaNode);
     }
 
     return type === SchemaKind.Object;
