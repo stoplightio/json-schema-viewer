@@ -9,12 +9,12 @@ import { PropertyTypeColors } from './Types';
 
 export interface IValidations {
   required: boolean;
-  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: unknown; writeOnly?: unknown };
+  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: unknown; writeOnly?: unknown, format?:unknown };
 }
 
 export const Validations: React.FunctionComponent<IValidations> = ({
   required,
-  validations: { deprecated, readOnly, writeOnly, ...validations },
+  validations: { deprecated, readOnly, writeOnly, format, ...validations },
 }) => {
   const validationCount = Object.keys(validations).length;
   const viewMode = React.useContext(ViewModeContext);
@@ -89,7 +89,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   );
 };
 
-export const Format: React.FunctionComponent<{ schemaNode: JSONSchema4 }> = ({ schemaNode }) => {
+export const Format: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
   return (
     <div
       {...(typeof schemaNode.type === 'string' && schemaNode.type in PropertyTypeColors
