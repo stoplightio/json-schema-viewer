@@ -16,8 +16,8 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   required,
   validations: { deprecated, readOnly, writeOnly, format, ...validations },
 }) => {
-  const validationCount = Object.keys(validations).length;
   const viewMode = React.useContext(ViewModeContext);
+  const validationCount = Object.keys(validations).length;
 
   const requiredElem = (
     <div className={cn('ml-2', required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
