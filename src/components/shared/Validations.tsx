@@ -18,7 +18,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
 
   const requiredElem = (
     <div>
-      {required && <span className="ml-2 text-orange-7 dark:text-lighten-6">required</span>}
+      {required && <span className="ml-2 text-orange-7 dark:text-orange-6">required</span>}
       {validationCount ? <span className="ml-1 text-darken-7 dark:text-lighten-6">+{validationCount}</span> : null}
     </div>
   );
