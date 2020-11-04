@@ -16,7 +16,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   required,
   validations: { deprecated, readOnly, writeOnly, ...validations },
 }) => {
-  const validationCount = Object.keys(validations).filter(validation => validation !== 'format').length;
+  const validationCount = Object.keys(validations).length;
   const viewMode = React.useContext(ViewModeContext);
 
   const requiredElem = (
@@ -47,7 +47,6 @@ export const Validations: React.FunctionComponent<IValidations> = ({
           content={
             <div className="p-5" style={{ maxHeight: 500, maxWidth: 400 }}>
               {Object.keys(validations)
-                .filter(validation => validation !== 'format')
                 .map((key, index) => {
                   const validation = validations[key];
 
