@@ -9,7 +9,12 @@ import { PropertyTypeColors } from './Types';
 
 export interface IValidations {
   required: boolean;
-  validations: (Dictionary<unknown> | {}) & { deprecated?: boolean; readOnly?: unknown; writeOnly?: unknown, format?:unknown };
+  validations: (Dictionary<unknown> | {}) & {
+    deprecated?: boolean;
+    readOnly?: unknown;
+    writeOnly?: unknown;
+    format?: unknown;
+  };
 }
 
 export const Validations: React.FunctionComponent<IValidations> = ({
@@ -89,14 +94,14 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   );
 };
 
-export const Format: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
+export const Format: React.FunctionComponent<{ nodeSchema: JSONSchema4 }> = ({ nodeSchema }) => {
   return (
     <div
-      {...(typeof schemaNode.type === 'string' && schemaNode.type in PropertyTypeColors
-        ? { className: `ml-2 ${PropertyTypeColors[schemaNode.type as string]}` }
+      {...(typeof nodeSchema.type === 'string' && nodeSchema.type in PropertyTypeColors
+        ? { className: `ml-2 ${PropertyTypeColors[nodeSchema.type as string]}` }
         : { className: 'ml-2' })}
     >
-      {`<${schemaNode.format}>`}
+      {`<${nodeSchema.format}>`}
     </div>
   );
 };
