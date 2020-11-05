@@ -1,5 +1,6 @@
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
+import { isEmpty as _isEmpty } from 'lodash';
 import { mergeAllOf } from './mergeAllOf';
 import { WalkingOptions } from './populateTree';
 
@@ -28,15 +29,21 @@ export function mergeOneOrAnyOf(
       const prunedSchema = { ...schema };
       delete prunedSchema[combiner];
 
-      merged.push(
-        mergeAllOf(
-          {
-            allOf: [prunedSchema, item],
-          },
-          path,
-          options,
-        ),
-      );
+      const resolvedItem = typeof item.$ref === 'string' ? options.resolveRef(null, item.$ref) : item;
+
+      if (_isEmpty(prunedSchema)) {
+        merged.push(resolvedItem);
+      } else {
+        const mergedSchema = {
+          allOf: [prunedSchema, resolvedItem],
+        };
+
+        try {
+          merged.push(mergeAllOf(mergedSchema, path, options));
+        } catch {
+          merged.push(mergedSchema);
+        }
+      }
     }
   }
 

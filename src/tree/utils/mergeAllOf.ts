@@ -22,18 +22,29 @@ function _mergeAllOf(schema: JSONSchema4, path: JsonPath, opts: WalkingOptions) 
       }
 
       const allRefs = store.get(opts)!;
-      const schemaRefs = allRefs.get(schema);
+      let schemaRefs = allRefs.get(schema);
 
       if (schemaRefs === void 0) {
-        allRefs.set(schema, [$ref]);
+        schemaRefs = [$ref];
+        allRefs.set(schema, schemaRefs);
       } else if (schemaRefs.includes($ref)) {
-        const resolved = JSON.parse(safeStringify(opts.resolveRef(null, $ref)));
-        return 'allOf' in resolved ? _mergeAllOf(resolved, path, opts) : resolved;
+        const safelyResolved = JSON.parse(safeStringify(opts.resolveRef(null, $ref)));
+        return 'allOf' in safelyResolved ? _mergeAllOf(safelyResolved, path, opts) : safelyResolved;
       } else {
         schemaRefs.push($ref);
       }
 
-      return opts.resolveRef(null, $ref);
+      const resolved = opts.resolveRef(null, $ref);
+
+      if (Array.isArray(resolved.allOf)) {
+        for (const member of resolved.allOf) {
+          if (typeof member.$ref === 'string' && schemaRefs.includes(member.$ref)) {
+            throw new ResolvingError('Circular reference detected');
+          }
+        }
+      }
+
+      return resolved;
     },
   });
 }
