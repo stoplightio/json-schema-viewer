@@ -1,7 +1,6 @@
 import { safeStringify } from '@stoplight/json';
 import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
-import cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { ViewModeContext } from '../JsonSchemaViewer';
@@ -25,9 +24,9 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   const validationCount = Object.keys(validations).length;
 
   const requiredElem = (
-    <div className={cn('ml-2', required ? 'font-medium' : 'text-darken-7 dark:text-lighten-6')}>
-      {required ? 'required' : 'optional'}
-      {validationCount ? `+${validationCount}` : ''}
+    <div>
+      {required && <span className="ml-2 text-orange-7 dark:text-orange-6">required</span>}
+      {validationCount ? <span className="ml-1 text-darken-7 dark:text-lighten-6">+{validationCount}</span> : null}
     </div>
   );
 

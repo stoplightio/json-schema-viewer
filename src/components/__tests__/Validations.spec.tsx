@@ -22,8 +22,8 @@ describe('Validations component', () => {
     test('should exclude deprecated from general validations', () => {
       const wrapper = shallow(<Validations required={false} validations={validations} />).find(Popover);
 
-      expect(shallow(wrapper.prop('target') as React.ReactElement)).toHaveText('optional+2');
       expect(shallow(wrapper.prop('content') as React.ReactElement)).toHaveText('default:"foo"minLength:2');
+      expect(shallow(wrapper.prop('target') as React.ReactElement)).toHaveText('+2');
     });
 
     test('should render deprecated box next to popover', () => {
