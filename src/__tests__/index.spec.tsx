@@ -8,6 +8,7 @@ import { dumpDom } from './utils/dumpDom';
 describe('HTML Output', () => {
   test.each([
     'ref/original.json',
+    'allof-with-type.json',
     'array-of-allofs.json',
     'array-of-objects.json',
     'array-of-refs.json',
@@ -16,6 +17,7 @@ describe('HTML Output', () => {
     'default-schema.json',
     'formats-schema.json',
     'nullish-ref.schema.json',
+    'oneof-with-array-type.json',
     'todo-allof.schema.json',
     'tickets.schema.json',
   ])('should match %s', filename => {
@@ -79,13 +81,33 @@ describe('HTML Output', () => {
       };
     });
 
-    test('given allOf merging disabled, should preserve both combiners', () => {
+    test('given allOf merging disabled, should still merge', () => {
       expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf={false} />)).toMatchSnapshot();
     });
 
     test('given allOf merging enabled, should merge contents of allOf combiners', () => {
       expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
     });
+  });
+
+  test('given array with oneOf containing items, should merge it correctly', () => {
+    const schema: JSONSchema4 = {
+      oneOf: [
+        {
+          items: {
+            type: 'string',
+          },
+        },
+        {
+          items: {
+            type: 'number',
+          },
+        },
+      ],
+      type: 'array',
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} />)).toMatchSnapshot();
   });
 
   test.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {

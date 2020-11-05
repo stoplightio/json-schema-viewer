@@ -1,0 +1,38 @@
+{
+  "oneOf": [
+    {
+      "items": {
+        "properties": {
+          "foo": {
+            "type": "string",
+            "enum": ["test"]
+          }
+        }
+      }
+    },
+    {
+      "items": {
+        "properties": {
+          "foo": {
+            "type": "number"
+          },
+          "bar": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "foo": {
+        "type": ["string", "number"]
+      },
+      "baz": {
+        "type": "integer"
+      }
+    }
+  }
+}

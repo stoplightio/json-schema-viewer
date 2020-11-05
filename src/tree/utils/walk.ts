@@ -42,7 +42,7 @@ export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
         combiner,
         properties: Array.isArray(properties) ? properties.slice() : properties,
         annotations: getAnnotations(node),
-        ...(type !== undefined && { type }),
+        ...(type !== void 0 && { type: flattenTypes(type) }),
         ...title,
       };
 

@@ -739,12 +739,36 @@ describe('SchemaTree', () => {
                                └─ children
                                   ├─ 0
                                   │  └─ #/properties/Discount/oneOf/0
-                                  │     ├─ $ref: #/components/schemas/Coupon
+                                  │     ├─ type: object
+                                  │     ├─ combiner: allOf
                                   │     └─ children
+                                  │        ├─ 0
+                                  │        │  └─ #/properties/Discount/oneOf/0/allOf/0
+                                  │        │     ├─ $ref: #/components/schemas/Discount
+                                  │        │     └─ children
+                                  │        └─ 1
+                                  │           └─ #/properties/Discount/oneOf/0/allOf/1
+                                  │              ├─ type: object
+                                  │              └─ children
+                                  │                 └─ 0
+                                  │                    └─ #/properties/Discount/oneOf/0/allOf/1/properties/endDate
+                                  │                       └─ type: number
                                   └─ 1
                                      └─ #/properties/Discount/oneOf/1
-                                        ├─ $ref: #/components/schemas/Campaign
+                                        ├─ type: object
+                                        ├─ combiner: allOf
                                         └─ children
+                                           ├─ 0
+                                           │  └─ #/properties/Discount/oneOf/1/allOf/0
+                                           │     ├─ $ref: #/components/schemas/Discount
+                                           │     └─ children
+                                           └─ 1
+                                              └─ #/properties/Discount/oneOf/1/allOf/1
+                                                 ├─ type: object
+                                                 └─ children
+                                                    └─ 0
+                                                       └─ #/properties/Discount/oneOf/1/allOf/1/properties/startDate
+                                                          └─ type: number
           "
         `);
       });
@@ -1472,7 +1496,7 @@ describe('SchemaTree', () => {
         };
       });
 
-      test('given allOf merging disabled, should preserve both combiners', () => {
+      test('given allOf merging disabled, should still merge', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
           mergeAllOf: false,
@@ -1497,6 +1521,49 @@ describe('SchemaTree', () => {
         tree.populate();
         expect(printTree(tree)).toMatchSnapshot();
       });
+    });
+
+    test('given array with oneOf containing items, should merge it correctly', () => {
+      const schema: JSONSchema4 = {
+        oneOf: [
+          {
+            items: {
+              type: 'string',
+            },
+          },
+          {
+            items: {
+              type: 'number',
+            },
+          },
+        ],
+        type: 'array',
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type: array
+           ├─ combiner: oneOf
+           └─ children
+              ├─ 0
+              │  └─ #/oneOf/0
+              │     ├─ type: array
+              │     └─ subtype: string
+              └─ 1
+                 └─ #/oneOf/1
+                    ├─ type: array
+                    └─ subtype: number
+        "
+      `);
     });
 
     test.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
