@@ -28,7 +28,7 @@ export type Walker = (
   parent: TreeListParentNode,
   level: number,
   path: JsonPath,
-  options: WalkingOptions | null,
+  options: WalkingOptions,
 ) => undefined;
 
 export const populateTree: Walker = (schema, parent, level, path, options): undefined => {
@@ -82,8 +82,12 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
     } else if (_isObject(node.properties)) {
       (treeNode as TreeListParentNode).children = [];
 
-      if (options?.mergeAllOf && (node.combiner === 'oneOf' || node.combiner === 'anyOf')) {
-        node.properties = mergeOneOrAnyOf(fragment, node.combiner);
+      if (node.combiner === 'oneOf' || node.combiner === 'anyOf') {
+        try {
+          node.properties = mergeOneOrAnyOf(fragment, node.combiner, path, options);
+        } catch {
+          // merging failed, let's try render what we've got
+        }
       }
 
       for (const [i, property] of node.properties.entries()) {
@@ -113,7 +117,7 @@ function processArray(
   schema: IArrayNode,
   level: number,
   path: JsonPath,
-  options: WalkingOptions | null,
+  options: WalkingOptions,
 ): SchemaTreeListNode {
   const items = prepareSchema(schema.items, node, path, options);
 
@@ -175,7 +179,7 @@ function processObject(
   schema: IObjectNode,
   level: number,
   path: JsonPath,
-  options: WalkingOptions | null,
+  options: WalkingOptions,
 ): TreeListNode {
   const children: TreeListNode[] = [];
 
@@ -240,7 +244,7 @@ function bailAllOf(
   schema: JSONSchema4,
   level: number,
   path: JsonPath,
-  options: WalkingOptions | null,
+  options: WalkingOptions,
 ) {
   if (Array.isArray(schema.allOf)) {
     for (const [i, item] of schema.allOf.entries()) {

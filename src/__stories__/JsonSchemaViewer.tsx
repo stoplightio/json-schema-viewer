@@ -42,7 +42,7 @@ storiesOf('JsonSchemaViewer', module)
       expanded={boolean('expanded', true)}
       hideTopBar={boolean('hideTopBar', false)}
       onGoToRef={action('onGoToRef')}
-      maxRows={number('maxRows', 5)}
+      maxRows={number('maxRows', Infinity)}
       mergeAllOf={boolean('mergeAllOf', true)}
       shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
     />

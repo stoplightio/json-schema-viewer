@@ -19,6 +19,8 @@ type PrintableNode = {
   [key in string]: {
     type?: unknown;
     combiner?: JSONSchema4CombinerName;
+    enum?: unknown;
+    required?: unknown;
     subtype?: unknown;
     $ref?: unknown;
     children?: PrintableNode[];
@@ -44,6 +46,8 @@ function prepareTree(node: TreeListNode): PrintableNode {
       ...(schema && {
         ...('$ref' in schema && { $ref: schema.$ref }),
         ...('combiner' in schema && { combiner: schema.combiner }),
+        ...('enum' in schema && schema.enum !== void 0 && { enum: schema.enum }),
+        ...('required' in schema && schema.required !== void 0 && { required: schema.required }),
       }),
       ...('children' in node && { children: node.children.map(prepareTree) }),
     },

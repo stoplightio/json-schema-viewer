@@ -1,0 +1,81 @@
+{
+  "title": "BugExample",
+  "description": "An example model to demonstrate a bug.",
+  "allOf": [
+    {
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "Cancel",
+            "Confirm",
+            "Create",
+            "Update"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier of the existing reservation."
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "calculateCosts": {
+          "type": "boolean"
+        },
+        "calculateDates": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "actionType",
+        "items"
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "actionType": {
+              "type": "string",
+              "enum": [
+                "Cancel",
+                "Confirm",
+                "Update"
+              ]
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "actionType",
+            "id"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actionType": {
+              "type": "string",
+              "enum": [
+                "Create"
+              ]
+            }
+          },
+          "required": [
+            "actionType"
+          ]
+        }
+      ]
+    }
+  ],
+  "type": "object"
+}

@@ -1342,7 +1342,7 @@ describe('SchemaTree', () => {
         };
       });
 
-      test('given allOf merging disabled, should preserve both combiners', () => {
+      test('given allOf merging disabled, should still merge', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
           mergeAllOf: false,
@@ -1367,6 +1367,49 @@ describe('SchemaTree', () => {
         tree.populate();
         expect(printTree(tree)).toMatchSnapshot();
       });
+    });
+
+    test('given array with oneOf containing items, should merge it correctly', () => {
+      const schema: JSONSchema4 = {
+        oneOf: [
+          {
+            items: {
+              type: 'string',
+            },
+          },
+          {
+            items: {
+              type: 'number',
+            },
+          },
+        ],
+        type: 'array',
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchInlineSnapshot(`
+        "└─ #
+           ├─ type: array
+           ├─ combiner: oneOf
+           └─ children
+              ├─ 0
+              │  └─ #/oneOf/0
+              │     ├─ type: array
+              │     └─ subtype: string
+              └─ 1
+                 └─ #/oneOf/1
+                    ├─ type: array
+                    └─ subtype: number
+        "
+      `);
     });
 
     test.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
@@ -1397,19 +1440,22 @@ describe('SchemaTree', () => {
       expect(tree.count).toEqual(mode === 'standalone' ? 3 : 2);
     });
 
-    describe.each(['array-of-allofs.json'])('should match %s', filename => {
-      const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '__fixtures__', filename), 'utf8'));
-      const tree = new SchemaTree(schema, new SchemaTreeState(), {
-        expandedDepth: Infinity,
-        mergeAllOf: true,
-        resolveRef: void 0,
-        shouldResolveEagerly: true,
-        onPopulate: void 0,
-      });
+    test.each(['array-of-allofs.json', 'allof-with-type.json', 'oneof-with-array-type.json'])(
+      'should generate valid tree for %s',
+      filename => {
+        const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '__fixtures__', filename), 'utf8'));
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+          shouldResolveEagerly: true,
+          onPopulate: void 0,
+        });
 
-      tree.populate();
-      expect(printTree(tree)).toMatchSnapshot();
-    });
+        tree.populate();
+        expect(printTree(tree)).toMatchSnapshot();
+      },
+    );
   });
 
   test('given visible $ref node, should try to inject the title immediately', () => {
