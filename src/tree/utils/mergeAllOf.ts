@@ -57,7 +57,7 @@ export const mergeAllOf = (schema: JSONSchema4, path: JsonPath, opts: WalkingOpt
 
     return _mergeAllOf(schema, path, opts);
   } catch (ex) {
-    console.error(ex.message);
+    console.info(ex.message);
     throw ex;
   }
 };
