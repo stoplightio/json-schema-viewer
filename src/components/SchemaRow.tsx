@@ -7,7 +7,7 @@ import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
-import { Caret, Description, Divider, Property, Validations } from './shared';
+import { Caret, Description, Divider, Format, Property, Validations } from './shared';
 
 export interface ISchemaRow {
   className?: string;
@@ -90,6 +90,7 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
 
       <div className="flex-1 flex truncate">
         <Property node={node} onGoToRef={onGoToRef} />
+        {metadata.schema.type && typeof metadata.schema.format === 'string' && <Format schema={metadata.schema} />}
         {description && <Description value={description} />}
       </div>
 
