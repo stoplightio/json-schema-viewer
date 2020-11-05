@@ -93,14 +93,14 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   );
 };
 
-export const Format: React.FunctionComponent<{ nodeSchema: JSONSchema4 }> = ({ nodeSchema }) => {
+export const Format: React.FunctionComponent<{ schema: JSONSchema4 }> = ({ schema }) => {
   return (
     <div
-      {...(typeof nodeSchema.type === 'string' && nodeSchema.type in PropertyTypeColors
-        ? { className: `ml-2 ${PropertyTypeColors[nodeSchema.type as string]}` }
+      {...(typeof schema.type === 'string' && schema.type in PropertyTypeColors
+        ? { className: `ml-2 ${PropertyTypeColors[schema.type as string]}` }
         : { className: 'ml-2' })}
     >
-      {`<${nodeSchema.format}>`}
+      {`<${schema.format}>`}
     </div>
   );
 };
