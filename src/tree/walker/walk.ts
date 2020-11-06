@@ -1,20 +1,18 @@
-import { JSONSchema4 } from 'json-schema';
 import { mergeAllOf } from './mergers/mergeAllOf';
 import { mergeOneOrAnyOf } from './mergers/mergeOneOrAnyOf';
 import { SchemaNode } from './nodes/types';
-import Traverse from './traverse';
 import { SchemaCombinerName, SchemaFragment, WalkingOptions } from './types';
 import { SchemaRegularNode } from './nodes/RegularNode';
 
 export function* processNode(
   fragment: SchemaFragment,
-  traverse: Traverse,
+  path: string[],
   walkingOptions: WalkingOptions,
 ): IterableIterator<SchemaNode> {
   if ('$ref' in fragment) {
     if (walkingOptions.shouldResolveEagerly && typeof fragment.$ref === 'string') {
       try {
-        fragment = walkingOptions.resolveRef(traverse.path, fragment.$ref);
+        fragment = walkingOptions.resolveRef(path, fragment.$ref);
       } catch {
         return yield new ErrorNode()
       }
@@ -33,8 +31,8 @@ export function* processNode(
 
   if (SchemaCombinerName.OneOf in fragment || SchemaCombinerName.AnyOf in fragment) {
     try {
-      for (const item of mergeOneOrAnyOf(fragment, traverse.path, walkingOptions)) {
-        yield new SchemaRegularNode(item, traverse.path);
+      for (const item of mergeOneOrAnyOf(fragment, path, walkingOptions)) {
+        yield new SchemaRegularNode(item, path);
       }
 
       return;
@@ -43,7 +41,7 @@ export function* processNode(
     }
   }
 
-  yield new SchemaRegularNode(fragment, traverse.path);
+  yield new SchemaRegularNode(fragment, path);
 }
 
 export type WalkerValue = {
@@ -51,17 +49,8 @@ export type WalkerValue = {
   fragment: SchemaFragment;
 };
 
-export function* walk(fragment: JSONSchema4[] | JSONSchema4): IterableIterator<WalkerValue> {
-  if (Array.isArray(fragment)) {
-    for (const segment of fragment) {
-      yield* walk(segment);
-    }
-  } else {
-    for (const node of processNode(fragment)) {
-      yield {
-        node,
-        fragment: fragment,
-      };
-    }
+export class Walker {
+  public enter(fragment: SchemaFragment): IterableIterator<WalkerValue> {
+    yield *processNode(fragment, path);
   }
 }

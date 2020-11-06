@@ -1,12 +1,10 @@
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
-import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
-import { GoToRefHandler, SchemaNodeKind, SchemaTreeListNode } from '../types';
-import { getPrimaryType } from '../utils/getPrimaryType';
-import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
+import { getNodeMetadata } from '../tree/metadata';
+import { GoToRefHandler, SchemaTreeListNode } from '../types';
+import { hasRefItems, isRefNode } from '../utils/guards';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -20,47 +18,34 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-function getRelevantSchemaForRequireCheck(treeNode: SchemaTreeListNode): JSONSchema4 | JSONSchema4[] | null {
-  const metadata = getNodeMetadata(treeNode);
-  if (!('schemaNode' in metadata)) return null;
-  if (isArrayNodeWithItems(metadata.schemaNode)) {
-    return metadata.schemaNode.items;
-  }
 
-  return metadata.schema;
-}
 
 function isRequired(treeNode: SchemaTreeListNode) {
   if (treeNode.parent === null) return false;
   try {
-    const { path } = getSchemaNodeMetadata(treeNode);
+    const {
+      node: { path },
+    } = getNodeMetadata(treeNode);
     if (path.length === 0) {
       return false;
     }
 
-    const schema = getRelevantSchemaForRequireCheck(treeNode.parent);
+    const { node } = getNodeMetadata(treeNode.parent);
 
-    return (
-      schema !== null &&
-      !Array.isArray(schema) &&
-      getPrimaryType(schema) === SchemaNodeKind.Object &&
-      Array.isArray(schema.required) &&
-      schema.required.includes(String(path[path.length - 1]))
-    );
+    return node.required.includes(String(path[path.length - 1]));
   } catch {
     return false;
   }
 }
 
 export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOptions }) => {
-  const metadata = getSchemaNodeMetadata(node);
+  const metadata = getNodeMetadata(node);
   const { schemaNode } = metadata;
 
-  const parentSchemaNode =
-    (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
-  const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaNodeKind.Array && hasRefItems(schemaNode));
+  const has$Ref =
+    isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaNodeKind.Array && hasRefItems(schemaNode));
 
   return (
     <>
@@ -122,10 +107,10 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
           marginLeft: ICON_DIMENSION * Tree.getLevel(node), // offset for spacing
         }}
       >
-        {'schema' in metadata ? (
-          <SchemaPropertyRow node={node} onGoToRef={onGoToRef} rowOptions={rowOptions} />
+        {'error' in metadata.node ? (
+          <SchemaErrorRow message={metadata.node.error} />
         ) : (
-          <SchemaErrorRow message={metadata.error} />
+          <SchemaPropertyRow node={node} onGoToRef={onGoToRef} rowOptions={rowOptions} />
         )}
       </div>
     </div>
