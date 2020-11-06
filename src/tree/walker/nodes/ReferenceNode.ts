@@ -1,8 +1,13 @@
-import { Dictionary } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
+import { unwrapStringOrNull } from '../accessors/unwrap';
+import { SchemaFragment } from '../types';
+import { BaseNode } from './BaseNode';
 
-export class SchemaReferenceNode {
-  constructor(fragment: Dictionary<unknown, keyof JSONSchema4>) {
+export class ReferenceNode extends BaseNode {
+  protected readonly value: string | null;
 
+  constructor(fragment: SchemaFragment, path: string[]) {
+    super(path);
+
+    this.value = unwrapStringOrNull(fragment.$ref);
   }
 }

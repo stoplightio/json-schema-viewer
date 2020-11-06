@@ -2,17 +2,19 @@ import { Dictionary, Optional } from '@stoplight/types';
 import cn from 'classnames';
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
+import { useSchemaNode } from '../../hooks/useSchemaNode';
+import { RegularNode } from '../../tree/walker/nodes';
+import { SchemaNodeKind } from '../../tree/walker/nodes/types';
 
-import { JSONSchema4CombinerName, SchemaNodeKind } from '../../types';
 
 /**
  * TYPE
  */
 export interface IType {
-  type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> | '$ref';
   className?: string;
-  title: Optional<string>;
+  type: JSONSchema4TypeName | JSONSchema4CombinerName | '$ref';
+  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> | '$ref';
+  title: string | null;
 }
 
 function shouldRenderTitle(type: string): boolean {
@@ -61,24 +63,18 @@ Type.displayName = 'JsonSchemaViewer.Type';
  */
 interface ITypes {
   className?: string;
-  type: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref'>;
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | '$ref'>;
-  title: Optional<string>;
 }
 
-export const Types: React.FunctionComponent<ITypes> = ({ className, title, type, subtype }) => {
-  if (type === void 0) return null;
-
-  if (!Array.isArray(type)) {
-    return <Type className={className} type={type} subtype={subtype} title={title} />;
-  }
+export const Types: React.FunctionComponent<ITypes> = ({ className }) => {
+  const schemaNode = useSchemaNode();
+  if (!(schemaNode instanceof RegularNode) || schemaNode.type === null) return null;
 
   return (
     <div className={cn(className, 'truncate')}>
       <>
-        {type.map((name, i, { length }) => (
+        {schemaNode.type.map((name, i, { length }) => (
           <React.Fragment key={i}>
-            <Type key={i} type={name} subtype={subtype} title={title} />
+            <Type type={name} subtype={subtype} title={schemaNode.title} />
 
             {i < length - 1 && (
               <span key={`${i}-sep`} className="text-darken-7 dark:text-lighten-6">

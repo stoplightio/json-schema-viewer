@@ -1,12 +1,15 @@
 import { isLocalRef } from '@stoplight/json';
 import { isParentNode } from '@stoplight/tree-list';
-import { Optional } from '@stoplight/types';
 import * as React from 'react';
 import { Types } from './Types';
 import { getNodeMetadata } from '../../tree';
+import { SchemaNode } from '../../tree/walker/nodes/types';
+import { useSchemaNode } from '../../hooks/useSchemaNode';
+import { GoToRefHandler } from '../../types';
+import { ReferenceNode } from '../../tree/walker/nodes';
 
 export interface IProperty {
-  node: SchemaTreeListNode;
+  treeNode: SchemaNode;
   onGoToRef?: GoToRefHandler;
 }
 
@@ -33,23 +36,21 @@ function isExternalRefSchemaNode(schemaNode: SchemaNode) {
   return isRefNode(schemaNode) && schemaNode.$ref !== null && !isLocalRef(schemaNode.$ref);
 }
 
-
-
-export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
-  const { node } = getNodeMetadata(treeNode);
-  const { path } = node;
+export const Property: React.FunctionComponent<IProperty> = ({ treeNode, onGoToRef }) => {
+  const schemaNode = useSchemaNode();
+  const { path } = schemaNode;
 
   const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
-    if (onGoToRef && '$ref' in node) {
-      onGoToRef(node.$ref, node);
+    if (onGoToRef && schemaNode instanceof ReferenceNode) {
+      onGoToRef(schemaNode);
     }
-  }, [onGoToRef, node]);
+  }, [onGoToRef, schemaNode]);
 
   return (
     <>
       {path.length > 0 && shouldShowPropertyName(treeNode) && <div className="mr-2">{path[path.length - 1]}</div>}
 
-      <Types node={node} />
+      <Types />
 
       {onGoToRef && isExternalRefSchemaNode(node) ? (
         <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>

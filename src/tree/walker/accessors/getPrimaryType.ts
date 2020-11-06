@@ -1,6 +1,5 @@
 import { SchemaNodeKind } from '../../types';
 import { Dictionary } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
 
 export function getPrimaryType(fragment: Dictionary<unknown, keyof JSONSchema4>, types: SchemaNodeKind[] | null) {
   if (types !== null) {

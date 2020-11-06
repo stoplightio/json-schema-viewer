@@ -1,10 +1,10 @@
 import { IRowRendererOptions, TreeListNode, TreeStore } from '@stoplight/tree-list';
 import * as React from 'react';
-import { SchemaReferenceNode } from './tree/walker/nodes/ReferenceNode';
+import { ReferenceNode } from './tree/walker/nodes/ReferenceNode';
 
 export type SchemaTreeListNode = TreeListNode;
 
-export type GoToRefHandler = (path: string, node: SchemaReferenceNode) => void;
+export type GoToRefHandler = (schemaNode: ReferenceNode) => void;
 
 export type RowRenderer = (
   node: TreeListNode,

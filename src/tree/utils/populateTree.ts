@@ -1,49 +1,30 @@
-import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
-
+import { isParentNode, TreeListParentNode } from '@stoplight/tree-list';
+import { SchemaTreeListNode } from '../../types';
 import { metadataStore } from '../metadata';
-import { SchemaNode, SchemaTreeListNode } from '../walker/nodes/types';
+import { SchemaNode } from '../walker/nodes/types';
 import { SchemaFragment } from '../walker/types';
 import { Walker } from '../walker/walk';
 
-export type PopulateOptions = {
-  onNode?(fragment: SchemaFragment, node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
-};
+const map = new WeakMap<SchemaNode, SchemaTreeListNode>();
 
-export function populateTree(
-  fragment: SchemaFragment,
-  parent: TreeListParentNode,
-  level: number,
-  walker: Walker,
-  options: PopulateOptions,
-): void {
-  for (const { node, fragment: currentFragment } of walker.enter(fragment)) {
-    if (options !== null && options.onNode !== void 0 && !options.onNode(currentFragment, node, parent, level)) {
-      continue;
-    }
+export function populateTree(fragment: SchemaFragment, parentFragment: SchemaFragment | null, walker: Walker): void {
+  for (const { node: schemaNode, parentNode: parentSchemaNode } of walker.walk(fragment, parentFragment)) {
+
+    const parent = parentSchemaNode === null ? null : map.get(parentSchemaNode) || null;
 
     const treeNode: SchemaTreeListNode = {
-      id: node.id,
+      id: schemaNode.id,
       name: '',
-      parent,
+      parent: parent as TreeListParentNode | null,
     };
 
-    parent.children.push(treeNode);
-    metadataStore.set(treeNode, {
-      node,
-      fragment: currentFragment,
-    });
+    metadataStore.set(treeNode, schemaNode);
 
-    if ('queryChildren' in node) {
-      for (const child of node.queryChildren()) {
-        if (!('children' in treeNode)) {
-          (treeNode as TreeListParentNode).children = [];
-        }
-
-        const { length } = node.path;
-        node.path.push(...child.relativePath);
-        populateTree(child.value, treeNode as TreeListParentNode, level + 1, walker, options);
-        node.path.length = length;
-      }
+    if (parent === null) continue;
+    if (!isParentNode(parent)) {
+      (parent as TreeListParentNode).children = [treeNode];
+    } else {
+      parent.children.push(treeNode);
     }
   }
 }
