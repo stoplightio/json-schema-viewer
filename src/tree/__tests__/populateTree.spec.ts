@@ -19,7 +19,6 @@ describe('populateTree util', () => {
     'combiner-schema.json',
     'array-of-objects.json',
     'array-of-refs.json',
-    'array-of-allofs.json',
     'todo-allof.schema.json',
     'tickets.schema.json',
     'nullish-ref.schema.json',
@@ -37,7 +36,6 @@ describe('populateTree util', () => {
     'combiner-schema.json',
     'array-of-objects.json',
     'array-of-refs.json',
-    'array-of-allofs.json',
     'tickets.schema.json',
   ])('should not mutate original object %s', filename => {
     const content = fs.readFileSync(path.resolve(BASE_PATH, filename), 'utf8');

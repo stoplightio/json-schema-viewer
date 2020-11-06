@@ -2,9 +2,9 @@ import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
+
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { generateId } from '../../utils/generateId';
-import { getCombiners } from '../../utils/getCombiners';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../../utils/guards';
 import { getNodeMetadata, getSchemaNodeMetadata, metadataStore } from '../metadata';
@@ -139,18 +139,31 @@ function processArray(
       }
     }
   } else {
-    const subtype = getPrimaryType(items);
-    switch (subtype) {
-      case SchemaKind.Object:
-        return processObject(node, items as IObjectNode, level, [...path, 'items'], options);
-      case SchemaKind.Array:
-        return processArray(node, items as IObjectNode, level, [...path, 'items'], options);
-      default:
-        const combiners = getCombiners(items);
-        if (combiners !== void 0) {
-          (node as TreeListParentNode).children = [];
-          populateTree(items, node as TreeListParentNode, level, [...path, 'items'], options);
+    const children: TreeListNode[] = [];
+    (node as TreeListParentNode).children = children;
+    populateTree(items, node as TreeListParentNode, level, [...path, 'items'], options);
+
+    // optional flattening
+    if (children.length === 1) {
+      let schemaNode;
+      try {
+        ({ schemaNode } = getSchemaNodeMetadata(children[0]));
+      } catch {
+        return node;
+      }
+
+      if (!('children' in children[0])) {
+        // we'll render this in subtype next to array, i.e. array[subtype], so let's get rid of these redundant nodes
+        // @ts-ignore
+        delete node.children;
+      } else if (!('combiner' in schemaNode)) {
+        for (const child of children[0].children) {
+          // re-parenting
+          child.parent = node as TreeListParentNode;
         }
+
+        children.splice(0, children.length, ...children[0].children);
+      }
     }
   }
 

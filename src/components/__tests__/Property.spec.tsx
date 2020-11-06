@@ -252,6 +252,80 @@ describe('Property component', () => {
       expect(wrapper.find('div').first()).toHaveText('foo');
     });
 
+    test('given an array with a combiner inside, should just render the type of combiner', () => {
+      const schema: JSONSchema4 = {
+        type: 'array',
+        items: {
+          oneOf: [
+            {
+              properties: {},
+            },
+          ],
+          type: 'object',
+        },
+      };
+
+      const tree = new SchemaTree(schema, new TreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: false,
+        resolveRef: void 0,
+        shouldResolveEagerly: false,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+
+      const wrapper = shallow(<Property node={tree.itemAt(1)!} />);
+      expect(wrapper).toHaveHTML('<span class="text-orange-5 truncate">oneOf</span>');
+    });
+
+    test('given an array with an allOf inside and enabled allOf merging, should display the name of properties', () => {
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          'array-all-objects': {
+            type: 'array',
+            items: {
+              allOf: [
+                {
+                  properties: {
+                    foo: {
+                      type: 'string',
+                    },
+                  },
+                },
+                {
+                  properties: {
+                    bar: {
+                      type: 'string',
+                    },
+                  },
+                },
+              ],
+              type: 'object',
+            },
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new TreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: false,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+
+      expect(shallow(<Property node={tree.itemAt(2)!} />)).toHaveHTML(
+        '<div class="mr-2">foo</div><span class="text-green-7 dark:text-green-5 truncate">string</span>',
+      );
+      expect(shallow(<Property node={tree.itemAt(3)!} />)).toHaveHTML(
+        '<div class="mr-2">bar</div><span class="text-green-7 dark:text-green-5 truncate">string</span>',
+      );
+    });
+
     test('given a ref pointing at primitive type, should not display property name', () => {
       const schema: JSONSchema4 = {
         properties: {

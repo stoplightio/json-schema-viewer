@@ -1,5 +1,7 @@
 import { TreeListParentNode } from '@stoplight/tree-list';
+import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
+import * as path from 'path';
 import { ResolvingError } from '../../errors';
 import { ViewMode } from '../../types';
 import { getNodeMetadata } from '../metadata';
@@ -1433,6 +1435,20 @@ describe('SchemaTree', () => {
 
       tree.populate();
       expect(tree.count).toEqual(mode === 'standalone' ? 3 : 2);
+    });
+
+    describe.each(['array-of-allofs.json'])('should match %s', filename => {
+      const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '__fixtures__', filename), 'utf8'));
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchSnapshot();
     });
   });
 
