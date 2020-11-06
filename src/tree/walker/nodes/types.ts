@@ -1,3 +1,12 @@
+import { SchemaRegularNode } from './RegularNode';
+
+export type BaseNode = {
+  readonly path: ReadonlyArray<string>;
+  readonly id: string;
+}
+
+export type SchemaNode = SchemaRegularNode | SchemaReferenceNode;
+
 import { IRowRendererOptions, TreeListNode, TreeStore } from '@stoplight/tree-list';
 import { Dictionary } from '@stoplight/types';
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';

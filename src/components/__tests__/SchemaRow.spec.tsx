@@ -6,7 +6,7 @@ import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
-import { SchemaKind, SchemaTreeListNode } from '../../types';
+import { SchemaNodeKind, SchemaTreeListNode } from '../../types';
 import { SchemaErrorRow, SchemaPropertyRow, SchemaRow } from '../SchemaRow';
 import { Caret } from '../shared';
 import { Validations } from '../shared/Validations';
@@ -23,7 +23,7 @@ describe('SchemaRow component', () => {
       schemaNode: {
         name: '',
         id: '232',
-        type: SchemaKind.Object,
+        type: SchemaNodeKind.Object,
         validations: {
           enum: [null, 0, false],
         },

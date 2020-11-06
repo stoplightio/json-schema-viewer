@@ -1,35 +1,35 @@
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isEmpty as _isEmpty } from 'lodash';
+import { SchemaCombinerName, SchemaFragment, WalkingOptions } from '../types';
 import { mergeAllOf } from './mergeAllOf';
-import { WalkingOptions } from './populateTree';
 
 export function mergeOneOrAnyOf(
-  schema: JSONSchema4,
-  combiner: 'oneOf' | 'anyOf',
+  fragment: SchemaFragment,
   path: JsonPath,
-  options: WalkingOptions,
-): JSONSchema4[] {
-  const items = schema[combiner];
+  walkingOptions: WalkingOptions,
+): SchemaFragment[] {
+  const items =
+    SchemaCombinerName.OneOf in fragment ? fragment[SchemaCombinerName.OneOf] : fragment[SchemaCombinerName.AnyOf];
 
   if (!Array.isArray(items)) return []; // just in case
 
   const merged: JSONSchema4[] = [];
 
-  if (Array.isArray(schema.allOf) && Array.isArray(items)) {
+  if (Array.isArray(fragment.allOf) && Array.isArray(items)) {
     for (const item of items) {
       merged.push({
-        allOf: [...schema.allOf, item],
+        allOf: [...fragment.allOf, item],
       });
     }
 
     return merged;
   } else {
     for (const item of items) {
-      const prunedSchema = { ...schema };
+      const prunedSchema = { ...fragment };
       delete prunedSchema[combiner];
 
-      const resolvedItem = typeof item.$ref === 'string' ? options.resolveRef(null, item.$ref) : item;
+      const resolvedItem = typeof item.$ref === 'string' ? walkingOptions.resolveRef(null, item.$ref) : item;
 
       if (_isEmpty(prunedSchema)) {
         merged.push(resolvedItem);
@@ -39,7 +39,7 @@ export function mergeOneOrAnyOf(
         };
 
         try {
-          merged.push(mergeAllOf(mergedSchema, path, options));
+          merged.push(mergeAllOf(mergedSchema, path, walkingOptions));
         } catch {
           merged.push(mergedSchema);
         }

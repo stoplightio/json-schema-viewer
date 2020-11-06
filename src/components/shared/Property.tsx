@@ -4,7 +4,7 @@ import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject, size as _size } from 'lodash';
 import * as React from 'react';
 import { getSchemaNodeMetadata } from '../../tree/metadata';
-import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
+import { GoToRefHandler, IArrayNode, IObjectNode, SchemaNodeKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
@@ -33,12 +33,12 @@ function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
 
     const type = getPrimaryType(schemaNode);
 
-    if (type === SchemaKind.Array && (schemaNode as IArrayNode).items) {
+    if (type === SchemaNodeKind.Array && (schemaNode as IArrayNode).items) {
       const { schemaNode: itemsSchemaNode } = getSchemaNodeMetadata(treeNode);
       return !('combiner' in itemsSchemaNode);
     }
 
-    return type === SchemaKind.Object;
+    return type === SchemaNodeKind.Object;
   } catch {
     return false;
   }
@@ -79,15 +79,15 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
   const title = getTitle(node);
 
   const childrenCount = React.useMemo<number | null>(() => {
-    if (type === SchemaKind.Object || (Array.isArray(type) && type.includes(SchemaKind.Object))) {
+    if (type === SchemaNodeKind.Object || (Array.isArray(type) && type.includes(SchemaNodeKind.Object))) {
       return count((node as IObjectNode).properties);
     }
 
-    if (subtype === SchemaKind.Object) {
+    if (subtype === SchemaNodeKind.Object) {
       return count(((node as IArrayNode).items as IObjectNode).properties);
     }
 
-    if (subtype === SchemaKind.Array) {
+    if (subtype === SchemaNodeKind.Array) {
       return count((node as IArrayNode).items as IArrayNode);
     }
 

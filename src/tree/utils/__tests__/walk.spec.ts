@@ -1,12 +1,12 @@
 import { JSONSchema4 } from 'json-schema';
-import { JSONSchema4CombinerName, SchemaKind } from '../../../types';
+import { JSONSchema4CombinerName, SchemaNodeKind } from '../../../types';
 import { walk } from '../walk';
 
 describe('Schema Walker', () => {
   describe('when type equals array', () => {
     test.each(['[circular]', 2, null])('given invalid items, should normalize them %s', items => {
       const schema = {
-        type: SchemaKind.Array,
+        type: SchemaNodeKind.Array,
         items,
       };
       const { value: node } = walk(schema as any).next();
@@ -15,7 +15,7 @@ describe('Schema Walker', () => {
         fragment: schema,
         node: {
           id: expect.any(String),
-          type: SchemaKind.Array,
+          type: SchemaNodeKind.Array,
           annotations: {},
           enum: void 0,
           validations: {},
@@ -29,7 +29,7 @@ describe('Schema Walker', () => {
       'given valid items, should leave them untouched %s',
       items => {
         const schema = {
-          type: SchemaKind.Array,
+          type: SchemaNodeKind.Array,
           items,
         };
         const { value: node } = walk(schema as any).next();
@@ -38,7 +38,7 @@ describe('Schema Walker', () => {
           fragment: schema,
           node: {
             id: expect.any(String),
-            type: SchemaKind.Array,
+            type: SchemaNodeKind.Array,
             annotations: {},
             enum: void 0,
             validations: {},
@@ -53,7 +53,7 @@ describe('Schema Walker', () => {
   describe('when type equals object', () => {
     test.each(['[circular]', 2, null, [{}]])('given invalid properties, should normalize them %s', properties => {
       const schema = {
-        type: SchemaKind.Object,
+        type: SchemaNodeKind.Object,
         properties,
       };
       const { value: node } = walk(schema as any).next();
@@ -62,7 +62,7 @@ describe('Schema Walker', () => {
         fragment: schema,
         node: {
           id: expect.any(String),
-          type: SchemaKind.Object,
+          type: SchemaNodeKind.Object,
           annotations: {},
           enum: void 0,
           validations: {},
@@ -77,7 +77,7 @@ describe('Schema Walker', () => {
       'given valid properties, should leave them untouched %s',
       properties => {
         const schema = {
-          type: SchemaKind.Object,
+          type: SchemaNodeKind.Object,
           properties,
         };
         const { value: node } = walk(schema as any).next();
@@ -86,7 +86,7 @@ describe('Schema Walker', () => {
           fragment: schema,
           node: {
             id: expect.any(String),
-            type: SchemaKind.Object,
+            type: SchemaNodeKind.Object,
             annotations: {},
             enum: void 0,
             validations: {},
@@ -122,7 +122,7 @@ describe('Schema Walker', () => {
       });
     });
 
-    describe.each(Object.values(SchemaKind))('when type equals %s', type => {
+    describe.each(Object.values(SchemaNodeKind))('when type equals %s', type => {
       test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
         const schema = {
           type,

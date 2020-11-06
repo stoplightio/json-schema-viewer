@@ -37,20 +37,20 @@ function getDeprecatedValue(node: JSONSchema4): Optional<boolean> {
   return;
 }
 
-function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): string[] {
-  if (Array.isArray(type)) {
-    return _flatMap(type, getTypeValidations);
+function getTypeValidations(fragment: JSONSchema4TypeName | JSONSchema4TypeName[]): string[] {
+  if (Array.isArray(fragment)) {
+    return _flatMap(fragment, getTypeValidations);
   }
 
-  return VALIDATION_TYPES[type] || [];
+  return VALIDATION_TYPES[fragment] || [];
 }
 
-export const getValidations = (node: JSONSchema4): Dictionary<unknown> => {
-  const extraValidations = node.type && getTypeValidations(node.type);
-  const deprecated = getDeprecatedValue(node);
+export const getValidations = (fragment: JSONSchema4): Dictionary<unknown> => {
+  const extraValidations = fragment.type && getTypeValidations(fragment.type);
+  const deprecated = getDeprecatedValue(fragment);
   return {
-    ..._pick(node, COMMON_VALIDATION_TYPES),
-    ...(extraValidations && _pick(node, extraValidations)),
+    ..._pick(fragment, COMMON_VALIDATION_TYPES),
+    ...(extraValidations && _pick(fragment, extraValidations)),
     ...(deprecated !== void 0 && { deprecated }),
   };
 };

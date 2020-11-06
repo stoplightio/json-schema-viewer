@@ -4,7 +4,7 @@ import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
-import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
+import { GoToRefHandler, SchemaNodeKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
 import { Caret, Description, Divider, Property, Validations } from './shared';
@@ -43,7 +43,7 @@ function isRequired(treeNode: SchemaTreeListNode) {
     return (
       schema !== null &&
       !Array.isArray(schema) &&
-      getPrimaryType(schema) === SchemaKind.Object &&
+      getPrimaryType(schema) === SchemaNodeKind.Object &&
       Array.isArray(schema.required) &&
       schema.required.includes(String(path[path.length - 1]))
     );
@@ -60,7 +60,7 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
     (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
-  const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaKind.Array && hasRefItems(schemaNode));
+  const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaNodeKind.Array && hasRefItems(schemaNode));
 
   return (
     <>

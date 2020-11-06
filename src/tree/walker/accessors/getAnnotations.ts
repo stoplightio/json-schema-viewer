@@ -4,6 +4,6 @@ import { JSONSchema4Annotations } from '../types';
 
 const ANNOTATIONS: JSONSchema4Annotations[] = ['description', 'default', 'examples'];
 
-export function getAnnotations(node: JSONSchema4) {
-  return _pick(node, ANNOTATIONS);
+export function getAnnotations(fragment: JSONSchema4) {
+  return _pick(fragment, ANNOTATIONS);
 }

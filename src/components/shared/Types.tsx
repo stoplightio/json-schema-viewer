@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema4CombinerName, SchemaKind } from '../../types';
+import { JSONSchema4CombinerName, SchemaNodeKind } from '../../types';
 
 /**
  * TYPE
@@ -16,29 +16,29 @@ export interface IType {
 }
 
 function shouldRenderTitle(type: string): boolean {
-  return type === SchemaKind.Array || type === SchemaKind.Object || type === '$ref';
+  return type === SchemaNodeKind.Array || type === SchemaNodeKind.Object || type === '$ref';
 }
 
 function getPrintableArrayType(subtype: IType['subtype'], title: IType['title']): string {
-  if (!subtype) return SchemaKind.Array;
+  if (!subtype) return SchemaNodeKind.Array;
 
   if (Array.isArray(subtype)) {
-    return `${SchemaKind.Array}[${subtype.join(',')}]`;
+    return `${SchemaNodeKind.Array}[${subtype.join(',')}]`;
   }
 
   if (title && shouldRenderTitle(subtype)) {
     return `${title}[]`;
   }
 
-  if (subtype !== SchemaKind.Array && subtype !== '$ref') {
-    return `${SchemaKind.Array}[${subtype}]`;
+  if (subtype !== SchemaNodeKind.Array && subtype !== '$ref') {
+    return `${SchemaNodeKind.Array}[${subtype}]`;
   }
 
-  return SchemaKind.Array;
+  return SchemaNodeKind.Array;
 }
 
 function getPrintableType(type: IType['type'], subtype: IType['subtype'], title: IType['title']): string {
-  if (type === SchemaKind.Array) {
+  if (type === SchemaNodeKind.Array) {
     return getPrintableArrayType(subtype, title);
   } else if (title && shouldRenderTitle(type)) {
     return title;
