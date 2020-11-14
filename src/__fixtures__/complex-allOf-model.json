@@ -1,0 +1,66 @@
+{
+  "allOf": [
+    {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "foo": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "$ref": "#/allOf/0/allOf/0/properties/foo/definitions/event"
+                }
+              },
+              "definitions": {
+                "event": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "names": {
+                          "items": {
+                            "$ref": "#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name"
+                          }
+                        },
+                        "users": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "creation": {
+                                "$ref": "#/allOf/0/allOf/0/properties/foo"
+                              },
+                              "foo": {
+                                "$ref": "#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts"
+                              },
+                              "products": {
+                                "$ref": "#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "bar": {
+          "allOf": [
+            {
+              "$ref": "#/allOf/0/allOf/0"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
