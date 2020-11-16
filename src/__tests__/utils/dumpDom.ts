@@ -1,4 +1,5 @@
-import { ReactWrapper } from 'enzyme';
+import { mount } from 'enzyme';
+import { ReactElement } from 'react';
 
 const prettier = require('prettier');
 
@@ -35,14 +36,16 @@ function stripTailwindClasses(node: HTMLElement) {
   }
 }
 
-export function dumpDom(root: ReactWrapper) {
-  const wrapper = root.find('.ScrollbarsCustom-Content > div');
-  wrapper.getDOMNode().removeAttribute('style');
+export function dumpDom(element: ReactElement) {
+  const wrapper = mount(element);
 
-  stripTailwindClasses(wrapper.getDOMNode());
+  const root = wrapper.find('.ScrollbarsCustom-Content > div');
+  root.getDOMNode().removeAttribute('style');
+
+  stripTailwindClasses(root.getDOMNode());
 
   // let's strip tree-list rows' related attributes that aren't worth any assertion (at least for the time being)
-  wrapper.find('.TreeListItem').forEach(treeRow => {
+  root.find('.TreeListItem').forEach(treeRow => {
     const attributes = treeRow.getDOMNode().attributes;
     for (const { name } of Object.values(attributes)) {
       attributes.removeNamedItem(name);
@@ -50,14 +53,20 @@ export function dumpDom(root: ReactWrapper) {
   });
 
   // let's remove icons
-  wrapper.find('svg[data-icon]').forEach(icon => {
+  root.find('svg[data-icon]').forEach(icon => {
     const iconDomNode = icon.getDOMNode();
     iconDomNode.parentElement?.removeAttribute('class');
     iconDomNode.remove();
   });
 
-  const html = wrapper.html();
-  root.unmount();
+  // let's remove tabIndex attributes, they don't bring any value
+  root.find('[tabIndex]').forEach(nodeWithTabIndex => {
+    const domNode = nodeWithTabIndex.getDOMNode();
+    domNode.removeAttribute('tabindex');
+  });
+
+  const html = root.html();
+  wrapper.unmount();
 
   return prettier.format(html, {
     printWidth: 120,

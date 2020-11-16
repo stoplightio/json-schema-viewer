@@ -1,4 +1,3 @@
-import { mount } from 'enzyme';
 import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
 import * as path from 'path';
@@ -22,9 +21,7 @@ describe('HTML Output', () => {
   ])('should match %s', filename => {
     const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../__fixtures__/', filename), 'utf8'));
 
-    const wrapper = mount(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />);
-
-    expect(dumpDom(wrapper)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
   });
 
   describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {
@@ -83,15 +80,11 @@ describe('HTML Output', () => {
     });
 
     test('given allOf merging disabled, should preserve both combiners', () => {
-      const wrapper = mount(<JsonSchemaViewer schema={schema} expanded={true} />);
-
-      expect(dumpDom(wrapper)).toMatchSnapshot();
+      expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} />)).toMatchSnapshot();
     });
 
     test('given allOf merging enabled, should merge contents of allOf combiners', () => {
-      const wrapper = mount(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />);
-
-      expect(dumpDom(wrapper)).toMatchSnapshot();
+      expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
     });
   });
 
@@ -110,9 +103,7 @@ describe('HTML Output', () => {
       },
     };
 
-    const wrapper = mount(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />);
-
-    expect(dumpDom(wrapper)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
   });
 
   test('given multiple object and string type, should process properties', () => {
@@ -128,8 +119,7 @@ describe('HTML Output', () => {
       },
     };
 
-    const wrapper = mount(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />);
-    expect(dumpDom(wrapper)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
   });
 
   test('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
@@ -147,8 +137,7 @@ describe('HTML Output', () => {
       },
     };
 
-    const wrapper = mount(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />);
-    expect(dumpDom(wrapper)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
   });
 
   test('given visible $ref node, should try to inject the title immediately', () => {
@@ -170,7 +159,6 @@ describe('HTML Output', () => {
       },
     };
 
-    const wrapper = mount(<JsonSchemaViewer schema={schema} />);
-    expect(dumpDom(wrapper)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchSnapshot();
   });
 });
