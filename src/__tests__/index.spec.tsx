@@ -80,7 +80,7 @@ describe('HTML Output', () => {
     });
 
     test('given allOf merging disabled, should preserve both combiners', () => {
-      expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} />)).toMatchSnapshot();
+      expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf={false} />)).toMatchSnapshot();
     });
 
     test('given allOf merging enabled, should merge contents of allOf combiners', () => {

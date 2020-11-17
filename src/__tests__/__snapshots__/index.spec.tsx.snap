@@ -18,41 +18,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
         </span>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Admin</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{5}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>type</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <span class=\\"bp3-popover-wrapper\\">
-          <span class=\\"bp3-popover-target\\">
-            <div>
-              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
-              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
-            </div>
-          </span>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>enabled</div>
-          <span class=\\"text-red-4\\">boolean</span>
-          <span class=\\"bp3-popover-wrapper\\">
-            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
-              <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
-            </span>
-          </span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
         </div>
         <div></div>
       </div>
@@ -103,7 +69,51 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{4}</div>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>supervisor</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>key</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px;\\">
+        <div><span class=\\"text-orange-5\\">allOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
         </div>
         <div></div>
       </div>
@@ -138,28 +148,6 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
               <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
             </span>
           </span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>supervisor</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>key</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
         </div>
         <div></div>
       </div>
@@ -428,41 +416,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
         </span>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Admin</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{5}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>type</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <span class=\\"bp3-popover-wrapper\\">
-          <span class=\\"bp3-popover-target\\">
-            <div>
-              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
-              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
-            </div>
-          </span>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>enabled</div>
-          <span class=\\"text-red-4\\">boolean</span>
-          <span class=\\"bp3-popover-wrapper\\">
-            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
-              <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
-            </span>
-          </span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
         </div>
         <div></div>
       </div>
@@ -513,7 +467,51 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{4}</div>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>supervisor</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>key</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px;\\">
+        <div><span class=\\"text-orange-5\\">allOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
         </div>
         <div></div>
       </div>
@@ -548,28 +546,6 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
               <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
             </span>
           </span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>supervisor</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div>
-          <div>key</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
         </div>
         <div></div>
       </div>
