@@ -660,7 +660,7 @@ describe('SchemaTree', () => {
       });
 
       test('given very complex model with circular references, should bail out and display unmerged allOf', () => {
-        const schema = require('./__fixtures__/complex-allOf-model.json');
+        const schema = require('../../__fixtures__/complex-allOf-model.json');
 
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
@@ -1437,8 +1437,8 @@ describe('SchemaTree', () => {
       expect(tree.count).toEqual(mode === 'standalone' ? 3 : 2);
     });
 
-    describe.each(['array-of-allofs.json'])('should match %s', filename => {
-      const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '__fixtures__', filename), 'utf8'));
+    test.each(['array-of-allofs.json'])('should match %s', filename => {
+      const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../__fixtures__', filename), 'utf8'));
       const tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
         mergeAllOf: true,

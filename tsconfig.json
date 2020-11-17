@@ -4,7 +4,7 @@
   "include": ["."],
   "exclude": ["**/__mocks__/**", "dist/"],
   "compilerOptions": {
-    "lib": ["dom", "webworker", "es2017"],
+    "lib": ["dom", "webworker", "es2017", "dom.iterable"],
     "target": "es2017"
   }
 }
