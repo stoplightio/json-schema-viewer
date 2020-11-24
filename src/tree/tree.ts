@@ -3,6 +3,7 @@ import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
+import { SchemaTreeState } from '../components';
 import { ResolvingError } from '../errors';
 import { ViewMode } from '../types';
 import { hasRefItems, isRefNode } from '../utils/guards';
@@ -33,12 +34,10 @@ export type SchemaTreeOptions = {
   viewMode?: ViewMode;
 };
 
-export { TreeState as SchemaTreeState };
-
 export class SchemaTree extends Tree {
   public treeOptions: SchemaTreeOptions;
 
-  constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
+  constructor(public schema: JSONSchema4, public state: SchemaTreeState, opts: SchemaTreeOptions) {
     super({
       expanded: node =>
         (!(node.id in state.expanded) && SchemaTree.getLevel(node) <= opts.expandedDepth) ||
@@ -76,10 +75,20 @@ export class SchemaTree extends Tree {
       },
       resolveRef: this.resolveRef,
       shouldResolveEagerly: this.treeOptions.shouldResolveEagerly,
-    });
+    }, this.state.getChoiceForNode.bind(this.state));
     this.state.expanded = expanded;
     this.invalidate();
     this.treeOptions.onPopulate?.(this, this.root);
+  }
+
+  public populateCombiner(parent: TreeListParentNode, schema: JSONSchema4, path: JsonPath, stepIn: boolean)  {
+    if(parent.children.length > 0) {
+      parent.children.forEach(child => {
+        this.removeNode(child);
+      });
+    }
+
+    this.populateTreeFragment(parent, schema, path, stepIn);
   }
 
   public populateTreeFragment(parent: TreeListParentNode, schema: JSONSchema4, path: JsonPath, stepIn: boolean) {
@@ -93,7 +102,7 @@ export class SchemaTree extends Tree {
       },
       resolveRef: this.resolveRef,
       shouldResolveEagerly: this.treeOptions.shouldResolveEagerly,
-    });
+    }, this.state.getChoiceForNode.bind(this.state));
 
     if (artificialRoot.children.length === 0) {
       throw new Error(`Could not expand node ${path.join('.')}`);

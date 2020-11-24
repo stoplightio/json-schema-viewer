@@ -1434,4 +1434,35 @@ describe('SchemaTree', () => {
       }),
     );
   });
+
+  describe('oneOf', () => {
+    test('should match snapshot', () => {
+      const schema: JSONSchema4 = {
+        type: 'object',
+        properties: {
+          foo: {
+            oneOf: [
+              {
+                type: 'string',
+              },
+              {
+                type: 'number',
+              }
+            ]
+          },
+        },
+      };
+
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
+        expandedDepth: Infinity,
+        mergeAllOf: true,
+        resolveRef: void 0,
+        shouldResolveEagerly: true,
+        onPopulate: void 0,
+      });
+
+      tree.populate();
+      expect(printTree(tree)).toMatchSnapshot();
+    });
+  });
 });

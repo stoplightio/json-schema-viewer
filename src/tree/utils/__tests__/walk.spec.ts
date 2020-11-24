@@ -193,7 +193,10 @@ describe('Schema Walker', () => {
     const schema: JSONSchema4 = {
       type: 'object',
       allOf: [],
-      oneOf: [],
+      oneOf: [
+        { type: "array", items: { type: "string" } },
+        { type: "number" }
+      ],
       anyOf: [],
     };
 
@@ -214,7 +217,10 @@ describe('Schema Walker', () => {
           annotations: {},
           combiner: 'oneOf',
           id: expect.any(String),
-          properties: [],
+          properties: [
+            { type: "array", items: { type: "string" } },
+            { type: "number" }
+          ],
           type: 'object',
         },
       },

@@ -10,6 +10,7 @@ import { JsonSchemaViewer, RowRenderer, SchemaRow } from '../';
 const allOfSchemaResolved = require('../__fixtures__/allOf/allOf-resolved.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
+const anyOfOneOfSchema = require('../__fixtures__/anyof-oneof-schema.json');
 import { Wrapper } from './utils/Wrapper';
 
 storiesOf('JsonSchemaViewer', module)
@@ -176,4 +177,24 @@ storiesOf('JsonSchemaViewer', module)
         mergeAllOf={boolean('mergeAllOf', true)}
       />
     </div>
+  ))
+  .add('anyOf/oneOf', () => (
+    <JsonSchemaViewer
+      name={text('name', 'my schema')}
+      schema={anyOfOneOfSchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 0)}
+      expanded={boolean('expanded', true)}
+      hideTopBar={boolean('hideTopBar', false)}
+      shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
+      onGoToRef={action('onGoToRef')}
+      viewMode={select(
+        'viewMode',
+        {
+          standalone: 'standalone',
+          read: 'read',
+          write: 'write',
+        },
+        'standalone',
+      )}
+    />
   ));

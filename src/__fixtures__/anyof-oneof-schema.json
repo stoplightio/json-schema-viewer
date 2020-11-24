@@ -1,0 +1,55 @@
+{
+    "title": "User",
+    "type": "object",
+    "properties": {
+      "something": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "a": {
+                "type": "number"
+              },
+              "b": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "nestedOneOf": {
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    }
+  }
+  

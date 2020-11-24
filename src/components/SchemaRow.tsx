@@ -1,12 +1,15 @@
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import { SchemaTree } from '../tree';
 
 import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
+import { SchemaTreeState } from './SchemaTree';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 
 export interface ISchemaRow {
@@ -14,6 +17,7 @@ export interface ISchemaRow {
   node: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
+  schemaTree: SchemaTree;
 }
 
 const ICON_SIZE = 12;
@@ -52,9 +56,9 @@ function isRequired(treeNode: SchemaTreeListNode) {
   }
 }
 
-export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOptions }) => {
+export const SchemaPropertyRow = observer<ISchemaRow>(({ node, onGoToRef, rowOptions, schemaTree }) => {
   const metadata = getSchemaNodeMetadata(node);
-  const { schemaNode } = metadata;
+  const { schemaNode, path } = metadata;
 
   const parentSchemaNode =
     (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
@@ -92,7 +96,21 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
         <Property node={node} onGoToRef={onGoToRef} />
         {description && <Description value={description} />}
       </div>
-
+      <div>{(node.metadata as any)?.properties.map((schema: any, index: number) => (
+        <span 
+          className={cn('p-2')}
+          onClick={(e) => {
+            e.stopPropagation();
+            console.log(schemaNode);
+            if(!(node as any).children) {
+              (node as any).children = [];
+            }
+            schemaTree.populateCombiner(node as any, schema, path.concat(index), false)
+          }}
+        >
+          {schema.type}
+        </span>
+      ))}</div>
       <Validations
         required={isRequired(node)}
         validations={{
@@ -103,7 +121,7 @@ export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOption
       />
     </>
   );
-};
+});
 SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
 
 export const SchemaErrorRow: React.FunctionComponent<{ message: string }> = ({ message }) => (
@@ -111,7 +129,7 @@ export const SchemaErrorRow: React.FunctionComponent<{ message: string }> = ({ m
 );
 SchemaErrorRow.displayName = 'JsonSchemaViewer.SchemaErrorRow';
 
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef, schemaTree }) => {
   const metadata = getNodeMetadata(node);
 
   return (
@@ -123,7 +141,7 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node
         }}
       >
         {'schema' in metadata ? (
-          <SchemaPropertyRow node={node} onGoToRef={onGoToRef} rowOptions={rowOptions} />
+          <SchemaPropertyRow node={node} onGoToRef={onGoToRef} rowOptions={rowOptions} schemaTree={schemaTree} />
         ) : (
           <SchemaErrorRow message={metadata.error} />
         )}

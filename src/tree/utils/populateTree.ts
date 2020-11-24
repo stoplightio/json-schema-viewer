@@ -29,9 +29,10 @@ export type Walker = (
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
+  getChosenNode: (node: string) => number
 ) => undefined;
 
-export const populateTree: Walker = (schema, parent, level, path, options): undefined => {
+export const populateTree: Walker = (schema, parent, level, path, options, getChosenNode): undefined => {
   const actualSchema = prepareSchema(schema, parent, path, options);
 
   if (!_isObject(actualSchema)) return;
@@ -57,10 +58,10 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
     } else if (!isCombinerNode(node)) {
       switch (getPrimaryType(node)) {
         case SchemaKind.Array:
-          processArray(treeNode, node as IArrayNode, level, path, options);
+          processArray(treeNode, node as IArrayNode, level, path, options, getChosenNode);
           break;
         case SchemaKind.Object:
-          processObject(treeNode, node as IObjectNode, level, path, options);
+          processObject(treeNode, node as IObjectNode, level, path, options, getChosenNode);
           break;
       }
     } else if (node.combiner === 'allOf' && options?.mergeAllOf) {
@@ -72,17 +73,27 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
       try {
         const merged = mergeAllOf(fragment, path, options);
         parent.children.pop();
-        populateTree(merged, parent, level, path, options);
+        populateTree(merged, parent, level, path, options, getChosenNode);
       } catch (ex) {
         if (Array.isArray(fragment.allOf)) {
           (treeNode as TreeListParentNode).children = [];
-          bailAllOf(treeNode as TreeListParentNode, fragment, level + 1, [...path, 'allOf'], options);
+          bailAllOf(treeNode as TreeListParentNode, fragment, level + 1, [...path, 'allOf'], options, getChosenNode);
         }
       }
+    } else if (node.combiner === 'oneOf') {
+      parent.children.pop();
+
+      const chosenNode = getChosenNode(node.id);
+
+      if (node.properties && node.properties[chosenNode]) {
+        populateTree(node.properties[chosenNode], parent, level + 1, path, options, getChosenNode)
+        parent.children[parent.children.length - 1].metadata = { properties: node.properties }
+      }
+
     } else if (_isObject(node.properties)) {
       (treeNode as TreeListParentNode).children = [];
 
-      if (options?.mergeAllOf && (node.combiner === 'oneOf' || node.combiner === 'anyOf')) {
+      if (options?.mergeAllOf && (node.combiner === 'anyOf')) {
         node.properties = mergeOneOrAnyOf(fragment, node.combiner);
       }
 
@@ -100,6 +111,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
           level + 1,
           [...path, node.combiner, i],
           options,
+          getChosenNode
         );
       }
     }
@@ -114,6 +126,7 @@ function processArray(
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
+  getChosenNode: (node: string) => number,
 ): SchemaTreeListNode {
   const items = prepareSchema(schema.items, node, path, options);
 
@@ -133,7 +146,7 @@ function processArray(
     const children: SchemaTreeListNode[] = [];
     (node as TreeListParentNode).children = children;
     for (const [i, property] of items.entries()) {
-      const child = populateTree(property, node as TreeListParentNode, level + 1, [...path, 'items', i], options);
+      const child = populateTree(property, node as TreeListParentNode, level + 1, [...path, 'items', i], options, getChosenNode);
       if (child !== void 0) {
         children.push(child);
       }
@@ -142,14 +155,14 @@ function processArray(
     const subtype = getPrimaryType(items);
     switch (subtype) {
       case SchemaKind.Object:
-        return processObject(node, items as IObjectNode, level, [...path, 'items'], options);
+        return processObject(node, items as IObjectNode, level, [...path, 'items'], options, getChosenNode);
       case SchemaKind.Array:
-        return processArray(node, items as IObjectNode, level, [...path, 'items'], options);
+        return processArray(node, items as IObjectNode, level, [...path, 'items'], options, getChosenNode);
       default:
         const combiners = getCombiners(items);
         if (combiners !== void 0) {
           (node as TreeListParentNode).children = [];
-          populateTree(items, node as TreeListParentNode, level, [...path, 'items'], options);
+          populateTree(items, node as TreeListParentNode, level, [...path, 'items'], options, getChosenNode);
         }
     }
   }
@@ -163,6 +176,7 @@ function processObject(
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
+  getChosenNode: (node: string) => number,
 ): TreeListNode {
   const children: TreeListNode[] = [];
 
@@ -176,6 +190,7 @@ function processObject(
         level + 1,
         [...path, 'properties', prop],
         options,
+        getChosenNode
       );
       if (child !== void 0) {
         children.push(child);
@@ -193,6 +208,7 @@ function processObject(
         level + 1,
         [...path, 'patternProperties', prop],
         options,
+        getChosenNode
       );
       if (child !== void 0) {
         children.push(child);
@@ -228,10 +244,11 @@ function bailAllOf(
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
+  getChosenNode: (node: string) => number,
 ) {
   if (Array.isArray(schema.allOf)) {
     for (const [i, item] of schema.allOf.entries()) {
-      populateTree(item, node, level, [...path, i], options);
+      populateTree(item, node, level, [...path, i], options, getChosenNode);
     }
   }
 }
