@@ -739,36 +739,12 @@ describe('SchemaTree', () => {
                                └─ children
                                   ├─ 0
                                   │  └─ #/properties/Discount/oneOf/0
-                                  │     ├─ type: object
-                                  │     ├─ combiner: allOf
+                                  │     ├─ $ref: #/components/schemas/Coupon
                                   │     └─ children
-                                  │        ├─ 0
-                                  │        │  └─ #/properties/Discount/oneOf/0/allOf/0
-                                  │        │     ├─ $ref: #/components/schemas/Discount
-                                  │        │     └─ children
-                                  │        └─ 1
-                                  │           └─ #/properties/Discount/oneOf/0/allOf/1
-                                  │              ├─ type: object
-                                  │              └─ children
-                                  │                 └─ 0
-                                  │                    └─ #/properties/Discount/oneOf/0/allOf/1/properties/endDate
-                                  │                       └─ type: number
                                   └─ 1
                                      └─ #/properties/Discount/oneOf/1
-                                        ├─ type: object
-                                        ├─ combiner: allOf
+                                        ├─ $ref: #/components/schemas/Campaign
                                         └─ children
-                                           ├─ 0
-                                           │  └─ #/properties/Discount/oneOf/1/allOf/0
-                                           │     ├─ $ref: #/components/schemas/Discount
-                                           │     └─ children
-                                           └─ 1
-                                              └─ #/properties/Discount/oneOf/1/allOf/1
-                                                 ├─ type: object
-                                                 └─ children
-                                                    └─ 0
-                                                       └─ #/properties/Discount/oneOf/1/allOf/1/properties/startDate
-                                                          └─ type: number
           "
         `);
       });
