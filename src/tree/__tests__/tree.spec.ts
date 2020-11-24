@@ -659,6 +659,96 @@ describe('SchemaTree', () => {
         `);
       });
 
+      test('given circular reference inside of resolved allOf member, should bail out and display unmerged allOf', () => {
+        const schema: JSONSchema4 = {
+          components: {
+            schemas: {
+              Campaign: {
+                type: 'object',
+                allOf: [
+                  {
+                    $ref: '#/components/schemas/Discount',
+                  },
+                  {
+                    properties: {
+                      startDate: {
+                        type: 'number',
+                      },
+                    },
+                  },
+                ],
+              },
+              Coupon: {
+                type: 'object',
+                allOf: [
+                  {
+                    $ref: '#/components/schemas/Discount',
+                  },
+                  {
+                    properties: {
+                      endDate: {
+                        type: 'number',
+                      },
+                    },
+                  },
+                ],
+              },
+              Discount: {
+                oneOf: [
+                  {
+                    $ref: '#/components/schemas/Coupon',
+                  },
+                  {
+                    $ref: '#/components/schemas/Campaign',
+                  },
+                ],
+              },
+            },
+          },
+          properties: {
+            Discount: {
+              $ref: '#/components/schemas/Discount',
+            },
+          },
+        };
+
+        const tree = new SchemaTree(schema, new SchemaTreeState(), {
+          expandedDepth: Infinity,
+          mergeAllOf: true,
+          resolveRef: void 0,
+          shouldResolveEagerly: false,
+          onPopulate: void 0,
+        });
+
+        expect(tree.populate.bind(tree)).not.toThrow();
+
+        tree.unwrap(tree.itemAt(1) as TreeListParentNode);
+        tree.unwrap(tree.itemAt(2) as TreeListParentNode);
+
+        expect(printTree(tree)).toMatchInlineSnapshot(`
+          "└─ #
+             ├─ type: object
+             └─ children
+                └─ 0
+                   └─ #/properties/Discount
+                      ├─ $ref: #/components/schemas/Discount
+                      └─ children
+                         └─ 0
+                            └─ #/properties/Discount
+                               ├─ combiner: oneOf
+                               └─ children
+                                  ├─ 0
+                                  │  └─ #/properties/Discount/oneOf/0
+                                  │     ├─ $ref: #/components/schemas/Coupon
+                                  │     └─ children
+                                  └─ 1
+                                     └─ #/properties/Discount/oneOf/1
+                                        ├─ $ref: #/components/schemas/Campaign
+                                        └─ children
+          "
+        `);
+      });
+
       test('given very complex model with circular references, should bail out and display unmerged allOf', () => {
         const schema = require('../../__fixtures__/complex-allOf-model.json');
 
