@@ -73,7 +73,12 @@ function getTitle(node: SchemaNode): Optional<string> {
 
 export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
   const { path, schemaNode: node } = getSchemaNodeMetadata(treeNode);
-  const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
+  const type = isRefNode(node) ? 
+    '$ref' : 
+    (isCombinerNode(node) ? 
+      (node.combiner === 'oneOf' ? '' : node.combiner) : 
+      node.type
+    );
   const subtype = isArrayNodeWithItems(node) ? (hasRefItems(node) ? '$ref' : inferType(node.items)) : void 0;
   const title = getTitle(node);
 

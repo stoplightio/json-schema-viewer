@@ -81,12 +81,13 @@ export const populateTree: Walker = (schema, parent, level, path, options, getCh
         }
       }
     } else if (node.combiner === 'oneOf') {
-      parent.children.pop();
-
       const chosenNode = getChosenNode(node.id);
+      if (!(parent.children[parent.children.length - 1] as any).children) {
+        (parent.children[parent.children.length - 1] as any).children = [];
+      }
 
       if (node.properties && node.properties[chosenNode]) {
-        populateTree(node.properties[chosenNode], parent, level + 1, path, options, getChosenNode)
+        populateTree(node.properties[chosenNode], parent.children[parent.children.length - 1] as any, level + 1, path, options, getChosenNode)
         parent.children[parent.children.length - 1].metadata = { properties: node.properties }
       }
 

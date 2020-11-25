@@ -11,6 +11,8 @@ import { getPrimaryType } from '../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
 import { SchemaTreeState } from './SchemaTree';
 import { Caret, Description, Divider, Property, Validations } from './shared';
+import { Select } from '@stoplight/ui-kit/Select'
+import { Button } from '@stoplight/ui-kit';
 
 export interface ISchemaRow {
   className?: string;
@@ -23,6 +25,8 @@ export interface ISchemaRow {
 const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
+
+const StringSelect = Select.ofType<any>();
 
 function getRelevantSchemaForRequireCheck(treeNode: SchemaTreeListNode): JSONSchema4 | JSONSchema4[] | null {
   const metadata = getNodeMetadata(treeNode);
@@ -58,13 +62,19 @@ function isRequired(treeNode: SchemaTreeListNode) {
 
 export const SchemaPropertyRow = observer<ISchemaRow>(({ node, onGoToRef, rowOptions, schemaTree }) => {
   const metadata = getSchemaNodeMetadata(node);
-  const { schemaNode, path } = metadata;
+  const { schemaNode, path, schema: mainSchema } = metadata;
 
   const parentSchemaNode =
     (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
   const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
 
   const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaKind.Array && hasRefItems(schemaNode));
+
+  const chosenPropertyIndex = (schemaTree.state as SchemaTreeState).getChoiceForNode(node.id);
+
+  const items = (node.metadata as any)?.properties.map((schema: any, index: number) => (
+    [schema, index]
+  ));
 
   return (
     <>
@@ -94,23 +104,51 @@ export const SchemaPropertyRow = observer<ISchemaRow>(({ node, onGoToRef, rowOpt
 
       <div className="flex-1 flex truncate">
         <Property node={node} onGoToRef={onGoToRef} />
+        {node.metadata &&
+            <div onClick={e => e.stopPropagation()}>
+            <StringSelect
+              items={items}
+              filterable={false}
+              itemRenderer={([item], { handleClick }) => 
+                <div style={{padding: 10, cursor: 'pointer'}} onClick={handleClick}>{item.type}</div>}
+              onItemSelect={([item, index], e) => {
+                e?.preventDefault();
+                (schemaTree.state as SchemaTreeState).setChoiceForNode(node.id, index);
+    
+                if(!(node as any).children) {
+                  (node as any).children = [];
+                }
+    
+                schemaTree.populateCombiner(node as any, item, path.concat(index), false)
+              }}
+            >
+              <Button
+                text={items[chosenPropertyIndex][0].type} 
+                rightIcon="double-caret-vertical"
+              />
+            </StringSelect>
+            </div>
+        }
+        {/* <div>{(node.metadata as any)?.properties.map((schema: any, index: number) => (
+          <span 
+            className={cn('p-2', index === chosenPropertyIndex && 'font-bold')}
+            onClick={(e) => {
+              e.stopPropagation();
+
+              (schemaTree.state as SchemaTreeState).setChoiceForNode(node.id, index);
+
+              if(!(node as any).children) {
+                (node as any).children = [];
+              }
+
+              schemaTree.populateCombiner(node as any, schema, path.concat(index), false)
+            }}
+          >
+            {schema.type}
+          </span>
+        ))}</div> */}
         {description && <Description value={description} />}
       </div>
-      <div>{(node.metadata as any)?.properties.map((schema: any, index: number) => (
-        <span 
-          className={cn('p-2')}
-          onClick={(e) => {
-            e.stopPropagation();
-            console.log(schemaNode);
-            if(!(node as any).children) {
-              (node as any).children = [];
-            }
-            schemaTree.populateCombiner(node as any, schema, path.concat(index), false)
-          }}
-        >
-          {schema.type}
-        </span>
-      ))}</div>
       <Validations
         required={isRequired(node)}
         validations={{
