@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HTML Output given anyOf combiner placed next to allOf given allOf merging disabled, should preserve both combiners 1`] = `
+exports[`HTML Output given anyOf combiner placed next to allOf given allOf merging disabled, should still merge 1`] = `
 "<div>
   <div>
     <div>
@@ -16,6 +16,69 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
         <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
           <span icon=\\"caret-down\\"></span>
         </span>
+        <div><span class=\\"text-orange-5\\">allOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>type</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>enabled</div>
+          <span class=\\"text-red-4\\">boolean</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div style=\\"top: -9px; height: 1px;\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+        </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Admin</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
@@ -26,7 +89,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>root</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -37,7 +100,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>group</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -48,7 +111,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>expirationDate</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -67,6 +130,69 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and/or</div>
           <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
         </div>
+        <div><span class=\\"text-orange-5\\">allOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>type</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>enabled</div>
+          <span class=\\"text-red-4\\">boolean</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div style=\\"top: -9px; height: 1px;\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+        </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
@@ -77,7 +203,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>supervisor</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -88,7 +214,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>key</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -326,6 +452,40 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
 "
 `;
 
+exports[`HTML Output given array with oneOf containing items, should merge it correctly 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px;\\">
+        <div><span class=\\"text-orange-5\\">oneOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <div><span class=\\"text-green-6 dark:text-green-4\\">array[string]</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <div style=\\"top: -9px; height: 1px;\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+        </div>
+        <div><span class=\\"text-green-6 dark:text-green-4\\">array[number]</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
 exports[`HTML Output given complex type that includes array and complex array subtype, should not ignore subtype 1`] = `
 "<div>
   <div>
@@ -398,7 +558,7 @@ exports[`HTML Output given multiple object and string type, should process prope
 "
 `;
 
-exports[`HTML Output given oneOf combiner placed next to allOf given allOf merging disabled, should preserve both combiners 1`] = `
+exports[`HTML Output given oneOf combiner placed next to allOf given allOf merging disabled, should still merge 1`] = `
 "<div>
   <div>
     <div>
@@ -414,6 +574,69 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
         <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
           <span icon=\\"caret-down\\"></span>
         </span>
+        <div><span class=\\"text-orange-5\\">allOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>type</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>enabled</div>
+          <span class=\\"text-red-4\\">boolean</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div style=\\"top: -9px; height: 1px;\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+        </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Admin</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
@@ -424,7 +647,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>root</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -435,7 +658,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>group</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -446,7 +669,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>expirationDate</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -465,6 +688,69 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
           <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
           <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
         </div>
+        <div><span class=\\"text-orange-5\\">allOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>type</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px;\\">
+        <div>
+          <div>enabled</div>
+          <span class=\\"text-red-4\\">boolean</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">Is this account enabled</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div style=\\"top: -9px; height: 1px;\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+        </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
@@ -475,7 +761,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>supervisor</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -486,7 +772,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 60px;\\">
         <div>
           <div>key</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -909,6 +1195,225 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
         </div>
         <span class=\\"text-darken-7 dark:text-lighten-6\\">write-only</span>
         <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match allof-with-type.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px;\\">
+        <div>
+          <span class=\\"text-orange-5\\">oneOf</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">An example model to demonstrate a bug.</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">BugExample</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{6}</div>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">An example model to demonstrate a bug.</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>actionType</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>id</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">The identifier of the existing reservation.</div>
+            </span>
+          </span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>externalId</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>calculateCosts</div>
+          <span class=\\"text-red-4\\">boolean</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>calculateDates</div>
+          <span class=\\"text-red-4\\">boolean</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>items</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div style=\\"top: -9px; height: 1px;\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+        </div>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">BugExample</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{6}</div>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">An example model to demonstrate a bug.</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>actionType</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>id</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">The identifier of the existing reservation.</div>
+            </span>
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>externalId</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>calculateCosts</div>
+          <span class=\\"text-red-4\\">boolean</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>calculateDates</div>
+          <span class=\\"text-red-4\\">boolean</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>items</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
       </div>
     </div>
   </div>
@@ -1751,6 +2256,111 @@ exports[`HTML Output should match nullish-ref.schema.json 1`] = `
           <span icon=\\"caret-right\\"></span>
         </span>
         <div><span class=\\"text-purple-6 dark:text-purple-4\\">$ref</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match oneof-with-array-type.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px;\\">
+        <div><span class=\\"text-orange-5\\">oneOf</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>foo</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>baz</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px;\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div style=\\"top: -9px; height: 1px;\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+        </div>
+        <div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>foo</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>baz</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px;\\">
+        <div>
+          <div>bar</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
         <div></div>
       </div>
     </div>

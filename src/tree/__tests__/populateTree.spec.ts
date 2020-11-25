@@ -21,7 +21,17 @@ describe('populateTree util', () => {
     };
 
     const root = Tree.createArtificialRoot();
-    expect(() => populateTree(schema, root, 0, [], null)).toThrow(
+    expect(() =>
+      populateTree(schema, root, 0, [], {
+        mergeAllOf: false,
+        onNode: void 0,
+        shouldResolveEagerly: false,
+        stepIn: void 0,
+        resolveRef() {
+          return {};
+        },
+      }),
+    ).toThrow(
       'The "type" property must be a string, or an array of strings. Objects and array of objects are not valid.',
     );
   });
@@ -37,7 +47,15 @@ describe('populateTree util', () => {
     };
 
     const root = Tree.createArtificialRoot();
-    populateTree(schema, root, 0, [], null);
+    populateTree(schema, root, 0, [], {
+      mergeAllOf: false,
+      onNode: void 0,
+      shouldResolveEagerly: false,
+      stepIn: void 0,
+      resolveRef() {
+        return {};
+      },
+    });
     expect(getNodeMetadata((root.children[0] as TreeListParentNode).children[0])).toHaveProperty('schema', {
       __ERROR__: 'dd',
     });
@@ -66,7 +84,15 @@ describe('populateTree util', () => {
     };
 
     const root = Tree.createArtificialRoot();
-    populateTree(schema, root, 0, [], null);
+    populateTree(schema, root, 0, [], {
+      mergeAllOf: false,
+      onNode: void 0,
+      shouldResolveEagerly: false,
+      stepIn: void 0,
+      resolveRef() {
+        return {};
+      },
+    });
     expect(((root.children[0] as TreeListParentNode).children[0] as TreeListParentNode).children).toHaveLength(0);
   });
 });
