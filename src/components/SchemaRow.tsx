@@ -1,4 +1,4 @@
-import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
+import { IRowRendererOptions, isParentNode, Tree, TreeListNode } from '@stoplight/tree-list';
 import cn from 'classnames';
 import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
@@ -9,10 +9,10 @@ import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
 import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
-import { SchemaTreeState } from './SchemaTree';
 import { Caret, Description, Divider, Property, Validations } from './shared';
 import { Select } from '@stoplight/ui-kit/Select'
 import { Button } from '@stoplight/ui-kit';
+import { addChildrenToTreeListNode } from '../utils/addChildrenToTreeListNode';
 
 export interface ISchemaRow {
   className?: string;
@@ -26,7 +26,7 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-const StringSelect = Select.ofType<any>();
+const NodesSelect = Select.ofType<JSONSchema4>();
 
 function getRelevantSchemaForRequireCheck(treeNode: SchemaTreeListNode): JSONSchema4 | JSONSchema4[] | null {
   const metadata = getNodeMetadata(treeNode);
@@ -60,9 +60,17 @@ function isRequired(treeNode: SchemaTreeListNode) {
   }
 }
 
+const getCombinerOptions = (node: TreeListNode): JSONSchema4[] => {
+  if (typeof node.metadata === 'object' && node.metadata !== null) {
+    return node.metadata['properties'];
+  }
+
+  return [];
+}
+
 export const SchemaPropertyRow = observer<ISchemaRow>(({ node, onGoToRef, rowOptions, schemaTree }) => {
   const metadata = getSchemaNodeMetadata(node);
-  const { schemaNode, path, schema: mainSchema } = metadata;
+  const { schemaNode, path } = metadata;
 
   const parentSchemaNode =
     (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
@@ -70,11 +78,9 @@ export const SchemaPropertyRow = observer<ISchemaRow>(({ node, onGoToRef, rowOpt
 
   const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaKind.Array && hasRefItems(schemaNode));
 
-  const chosenPropertyIndex = (schemaTree.state as SchemaTreeState).getChoiceForNode(node.id);
+  const chosenPropertyIndex = schemaTree.state.getChoiceForNode(node.id);
 
-  const items = (node.metadata as any)?.properties.map((schema: any, index: number) => (
-    [schema, index]
-  ));
+  const items = getCombinerOptions(node);
 
   return (
     <>
@@ -106,47 +112,25 @@ export const SchemaPropertyRow = observer<ISchemaRow>(({ node, onGoToRef, rowOpt
         <Property node={node} onGoToRef={onGoToRef} />
         {node.metadata &&
             <div onClick={e => e.stopPropagation()}>
-            <StringSelect
+            <NodesSelect
               items={items}
               filterable={false}
-              itemRenderer={([item], { handleClick }) => 
+              itemRenderer={(item, { handleClick }) => 
                 <div style={{padding: 10, cursor: 'pointer'}} onClick={handleClick}>{item.type}</div>}
-              onItemSelect={([item, index], e) => {
+              onItemSelect={(item, e) => {
                 e?.preventDefault();
-                (schemaTree.state as SchemaTreeState).setChoiceForNode(node.id, index);
-    
-                if(!(node as any).children) {
-                  (node as any).children = [];
-                }
-    
-                schemaTree.populateCombiner(node as any, item, path.concat(index), false)
+                const index = items.indexOf(item);
+                schemaTree.state.setChoiceForNode(node.id, index);
+                schemaTree.populateCombiner(addChildrenToTreeListNode(node), item, path.concat(index), false)
               }}
             >
               <Button
-                text={items[chosenPropertyIndex][0].type} 
+                text={items[chosenPropertyIndex].type} 
                 rightIcon="double-caret-vertical"
               />
-            </StringSelect>
+            </NodesSelect>
             </div>
         }
-        {/* <div>{(node.metadata as any)?.properties.map((schema: any, index: number) => (
-          <span 
-            className={cn('p-2', index === chosenPropertyIndex && 'font-bold')}
-            onClick={(e) => {
-              e.stopPropagation();
-
-              (schemaTree.state as SchemaTreeState).setChoiceForNode(node.id, index);
-
-              if(!(node as any).children) {
-                (node as any).children = [];
-              }
-
-              schemaTree.populateCombiner(node as any, schema, path.concat(index), false)
-            }}
-          >
-            {schema.type}
-          </span>
-        ))}</div> */}
         {description && <Description value={description} />}
       </div>
       <Validations

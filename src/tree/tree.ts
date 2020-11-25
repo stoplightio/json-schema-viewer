@@ -1,11 +1,12 @@
 import { extractPointerFromRef, extractSourceFromRef, pointerToPath } from '@stoplight/json';
-import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
+import { Tree, TreeListNode, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
 import { SchemaTreeState } from '../components';
 import { ResolvingError } from '../errors';
 import { ViewMode } from '../types';
+import { addChildrenToTreeListNode } from '../utils/addChildrenToTreeListNode';
 import { hasRefItems, isRefNode } from '../utils/guards';
 import { getSchemaNodeMetadata } from './metadata';
 import { canStepIn } from './utils/canStepIn';
@@ -87,7 +88,6 @@ export class SchemaTree extends Tree {
         this.removeNode(child);
       });
     }
-
     this.populateTreeFragment(parent, schema, path, stepIn);
   }
 

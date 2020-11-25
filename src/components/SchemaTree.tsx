@@ -1,6 +1,5 @@
-import { TreeList, TreeListEvents, TreeState, TreeStore } from '@stoplight/tree-list';
-import { JSONSchema4 } from 'json-schema';
-import { action, observable } from 'mobx';
+import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { JSONSchema4 } from 'json-schema'
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
@@ -19,25 +18,6 @@ export interface ISchemaTree {
 }
 
 const canDrag = () => false;
-
-export class SchemaTreeState extends TreeState {
-  @observable
-  public nodesToChoices = {};
-
-  @action
-  setChoiceForNode(node: string, choice: number): void {
-    this.nodesToChoices[node] = choice;
-  }
-
-  @action
-  resetChoiceForNode(node: string): void {
-    delete this.nodesToChoices[node];
-  }
-
-  getChoiceForNode(node: string): number {
-    return this.nodesToChoices[node] || 0;
-  }
-}
 
 export const SchemaTree = observer<ISchemaTree>(props => {
   const { hideTopBar, name, treeStore, maxRows, onGoToRef, rowRenderer: customRowRenderer } = props;

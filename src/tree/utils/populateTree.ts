@@ -3,6 +3,7 @@ import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
 import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
+import { addChildrenToTreeListNode } from '../../utils/addChildrenToTreeListNode';
 import { generateId } from '../../utils/generateId';
 import { getCombiners } from '../../utils/getCombiners';
 import { getPrimaryType } from '../../utils/getPrimaryType';
@@ -82,13 +83,13 @@ export const populateTree: Walker = (schema, parent, level, path, options, getCh
       }
     } else if (node.combiner === 'oneOf') {
       const chosenNode = getChosenNode(node.id);
-      if (!(parent.children[parent.children.length - 1] as any).children) {
-        (parent.children[parent.children.length - 1] as any).children = [];
-      }
+      const combinerChild = parent.children[parent.children.length - 1];
+
+      const parentizedCombinerChild = addChildrenToTreeListNode(combinerChild);
 
       if (node.properties && node.properties[chosenNode]) {
-        populateTree(node.properties[chosenNode], parent.children[parent.children.length - 1] as any, level + 1, path, options, getChosenNode)
-        parent.children[parent.children.length - 1].metadata = { properties: node.properties }
+        populateTree(node.properties[chosenNode], parentizedCombinerChild, level + 1, path, options, getChosenNode)
+        parentizedCombinerChild.metadata = { properties: node.properties }
       }
 
     } else if (_isObject(node.properties)) {

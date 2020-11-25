@@ -8,7 +8,8 @@ import { JSONSchema4 } from 'json-schema';
 import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
 import { GoToRefHandler, RowRenderer, ViewMode } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
-import { SchemaTree as SchemaTreeComponent, SchemaTreeState } from './SchemaTree';
+import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
+import { SchemaTreeState } from '../tree/state';
 
 export interface IJsonSchemaViewer {
   schema: JSONSchema4;
@@ -36,13 +37,13 @@ ViewModeContext.displayName = 'ViewModeContext';
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
   protected readonly treeStore: TreeStore;
   protected readonly tree: SchemaTree;
-  protected readonly treeState: TreeState;
+  protected readonly treeState: SchemaTreeState;
 
   constructor(props: IJsonSchemaViewer & ErrorBoundaryForwardedProps) {
     super(props);
 
     this.treeState = new SchemaTreeState();
-    this.tree = new SchemaTree(props.schema, this.treeState as SchemaTreeState, this.treeOptions);
+    this.tree = new SchemaTree(props.schema, this.treeState, this.treeOptions);
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
