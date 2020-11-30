@@ -1,5 +1,5 @@
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
-import { Tree, TreeState, TreeStore } from '@stoplight/tree-list';
+import { Tree, TreeStore } from '@stoplight/tree-list';
 import cn from 'classnames';
 import { action } from 'mobx';
 import * as React from 'react';

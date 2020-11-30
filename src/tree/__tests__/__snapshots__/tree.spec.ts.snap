@@ -85,7 +85,11 @@ exports[`SchemaTree oneOf should match snapshot 1`] = `
    └─ children
       └─ 0
          └─ #/properties/foo
-            └─ type: string
+            ├─ combiner: oneOf
+            └─ children
+               └─ 0
+                  └─ #/properties/foo
+                     └─ type: string
 "
 `;
 
@@ -183,16 +187,21 @@ exports[`SchemaTree tree correctness given oneOf combiner placed next to allOf g
 "├─ 0
 │  └─ #
 │     ├─ type: object
+│     ├─ combiner: oneOf
 │     └─ children
-│        ├─ 0
-│        │  └─ #/properties/root
-│        │     └─ type: boolean
-│        ├─ 1
-│        │  └─ #/properties/group
-│        │     └─ type: string
-│        └─ 2
-│           └─ #/properties/expirationDate
-│              └─ type: string
+│        └─ 0
+│           └─ #
+│              ├─ type: object
+│              └─ children
+│                 ├─ 0
+│                 │  └─ #/properties/root
+│                 │     └─ type: boolean
+│                 ├─ 1
+│                 │  └─ #/properties/group
+│                 │     └─ type: string
+│                 └─ 2
+│                    └─ #/properties/expirationDate
+│                       └─ type: string
 └─ 1
    └─ #
       ├─ type: object
@@ -214,15 +223,20 @@ exports[`SchemaTree tree correctness given oneOf combiner placed next to allOf g
 exports[`SchemaTree tree correctness given oneOf combiner placed next to allOf given allOf merging enabled, should merge contents of allOf combiners 1`] = `
 "└─ #
    ├─ type: object
+   ├─ combiner: oneOf
    └─ children
-      ├─ 0
-      │  └─ #/properties/root
-      │     └─ type: boolean
-      ├─ 1
-      │  └─ #/properties/group
-      │     └─ type: string
-      └─ 2
-         └─ #/properties/expirationDate
-            └─ type: string
+      └─ 0
+         └─ #
+            ├─ type: object
+            └─ children
+               ├─ 0
+               │  └─ #/properties/root
+               │     └─ type: boolean
+               ├─ 1
+               │  └─ #/properties/group
+               │     └─ type: string
+               └─ 2
+                  └─ #/properties/expirationDate
+                     └─ type: string
 "
 `;

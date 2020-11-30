@@ -1,4 +1,4 @@
-import { TreeListParentNode, TreeState } from '@stoplight/tree-list';
+import { TreeListParentNode } from '@stoplight/tree-list';
 import { Popover } from '@stoplight/ui-kit';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -6,6 +6,7 @@ import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
+import { SchemaTreeState } from '../../tree/state';
 import { SchemaKind, SchemaTreeListNode } from '../../types';
 import { SchemaErrorRow, SchemaPropertyRow, SchemaRow } from '../SchemaRow';
 import { Caret } from '../shared';
@@ -39,8 +40,25 @@ describe('SchemaRow component', () => {
       isExpanded: true,
     };
 
+    const schema: JSONSchema4 = {
+      $ref: '#/definitions/foo',
+      definitions: {
+        foo: {
+          type: 'string',
+        },
+      },
+    };
+
+    const tree = new SchemaTree(schema, new SchemaTreeState(), {
+      expandedDepth: Infinity,
+      mergeAllOf: false,
+      resolveRef: void 0,
+      shouldResolveEagerly: false,
+      onPopulate: void 0,
+    });
+
     const wrapper = shallow(
-      shallow(<SchemaRow node={node} rowOptions={rowOptions} />)
+      shallow(<SchemaRow node={node} rowOptions={rowOptions} schemaTree={tree} />)
         .find(SchemaPropertyRow)
         .shallow()
         .find(Validations)
@@ -62,7 +80,7 @@ describe('SchemaRow component', () => {
       },
     };
 
-    const tree = new SchemaTree(schema, new TreeState(), {
+    const tree = new SchemaTree(schema, new SchemaTreeState(), {
       expandedDepth: Infinity,
       mergeAllOf: false,
       resolveRef: void 0,
@@ -72,7 +90,7 @@ describe('SchemaRow component', () => {
 
     tree.populate();
 
-    const wrapper = shallow(<SchemaRow node={tree.itemAt(0)!} rowOptions={{}} />)
+    const wrapper = shallow(<SchemaRow node={tree.itemAt(0)!} rowOptions={{}} schemaTree={tree} />)
       .find(SchemaPropertyRow)
       .shallow();
 
@@ -92,7 +110,7 @@ describe('SchemaRow component', () => {
       },
     };
 
-    const tree = new SchemaTree(schema, new TreeState(), {
+    const tree = new SchemaTree(schema, new SchemaTreeState(), {
       expandedDepth: Infinity,
       mergeAllOf: false,
       resolveRef: void 0,
@@ -102,7 +120,7 @@ describe('SchemaRow component', () => {
 
     tree.populate();
 
-    const wrapper = shallow(<SchemaRow node={tree.itemAt(0)!} rowOptions={{}} />)
+    const wrapper = shallow(<SchemaRow node={tree.itemAt(0)!} rowOptions={{}} schemaTree={tree} />)
       .find(SchemaPropertyRow)
       .shallow();
 
@@ -128,7 +146,7 @@ describe('SchemaRow component', () => {
           },
         };
 
-        tree = new SchemaTree(schema, new TreeState(), {
+        tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
           mergeAllOf: false,
           resolveRef: void 0,
@@ -141,7 +159,7 @@ describe('SchemaRow component', () => {
 
       test('given no custom resolver, should render a generic error message', () => {
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(2)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(2)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaErrorRow)
           .shallow();
         expect(wrapper).toHaveText(`Could not dereference "#/properties/foo"`);
@@ -154,7 +172,7 @@ describe('SchemaRow component', () => {
         };
 
         tree.unwrap(tree.itemAt(1) as TreeListParentNode);
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(2)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(2)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaErrorRow)
           .shallow();
         expect(wrapper).toHaveText(message);
@@ -187,7 +205,7 @@ describe('SchemaRow component', () => {
         },
       };
 
-      tree = new SchemaTree(schema, new TreeState(), {
+      tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
@@ -200,14 +218,14 @@ describe('SchemaRow component', () => {
     });
 
     test('should preserve the required validation', () => {
-      const wrapper = shallow(<SchemaRow node={tree.itemAt(6)!} rowOptions={{}} />)
+      const wrapper = shallow(<SchemaRow node={tree.itemAt(6)!} rowOptions={{}} schemaTree={tree} />)
         .find(SchemaPropertyRow)
         .shallow();
       expect(wrapper.find(Validations)).toHaveProp('required', true);
     });
 
     test('should preserve the optional validation', () => {
-      const wrapper = shallow(<SchemaRow node={tree.itemAt(7)!} rowOptions={{}} />)
+      const wrapper = shallow(<SchemaRow node={tree.itemAt(7)!} rowOptions={{}} schemaTree={tree} />)
         .find(SchemaPropertyRow)
         .shallow();
 
@@ -216,7 +234,7 @@ describe('SchemaRow component', () => {
 
     describe('given a referenced object', () => {
       test('should preserve the required validation', () => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaPropertyRow)
           .shallow();
 
@@ -224,7 +242,7 @@ describe('SchemaRow component', () => {
       });
 
       test('should preserve the optional validation', () => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaPropertyRow)
           .shallow();
 
@@ -254,7 +272,7 @@ describe('SchemaRow component', () => {
           },
         };
 
-        tree = new SchemaTree(schema, new TreeState(), {
+        tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
           mergeAllOf: false,
           resolveRef: void 0,
@@ -266,7 +284,7 @@ describe('SchemaRow component', () => {
       });
 
       test.each([1, 2])('should preserve the required validation for %i item', pos => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(pos)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(pos)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaPropertyRow)
           .shallow();
 
@@ -274,7 +292,7 @@ describe('SchemaRow component', () => {
       });
 
       test('should preserve the optional validation', () => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(3)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaPropertyRow)
           .shallow();
 
@@ -306,7 +324,7 @@ describe('SchemaRow component', () => {
           ],
         };
 
-        tree = new SchemaTree(schema, new TreeState(), {
+        tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
           mergeAllOf: false,
           resolveRef: void 0,
@@ -318,7 +336,7 @@ describe('SchemaRow component', () => {
       });
 
       test.each([2, 3])('should preserve the required validation for %i item', pos => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(pos)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(pos)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaPropertyRow)
           .shallow();
 
@@ -326,7 +344,7 @@ describe('SchemaRow component', () => {
       });
 
       test('should preserve the optional validation', () => {
-        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} />)
+        const wrapper = shallow(<SchemaRow node={tree.itemAt(4)!} rowOptions={{}} schemaTree={tree} />)
           .find(SchemaPropertyRow)
           .shallow();
 

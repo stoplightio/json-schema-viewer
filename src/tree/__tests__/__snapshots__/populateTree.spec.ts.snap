@@ -6,11 +6,6 @@ Object {
     Object {
       "children": Array [
         Object {
-          "id": "random-id",
-          "name": "",
-          "parent": [Circular],
-        },
-        Object {
           "children": Array [
             Object {
               "id": "random-id",
@@ -19,6 +14,100 @@ Object {
             },
           ],
           "id": "random-id",
+          "metadata": Object {
+            "properties": Array [
+              Object {
+                "type": "string",
+              },
+              Object {
+                "properties": Object {
+                  "a": Object {
+                    "type": "number",
+                  },
+                  "b": Object {
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            ],
+          },
+          "name": "",
+          "parent": [Circular],
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "id": "random-id",
+                      "name": "",
+                      "parent": [Circular],
+                    },
+                  ],
+                  "id": "random-id",
+                  "metadata": Object {
+                    "properties": Array [
+                      Object {
+                        "type": "number",
+                      },
+                      Object {
+                        "items": Object {
+                          "oneOf": Array [
+                            Object {
+                              "type": "string",
+                            },
+                            Object {
+                              "type": "number",
+                            },
+                          ],
+                        },
+                        "type": "array",
+                      },
+                    ],
+                  },
+                  "name": "",
+                  "parent": [Circular],
+                },
+              ],
+              "id": "random-id",
+              "name": "",
+              "parent": [Circular],
+            },
+          ],
+          "id": "random-id",
+          "metadata": Object {
+            "properties": Array [
+              Object {
+                "items": Object {
+                  "oneOf": Array [
+                    Object {
+                      "type": "number",
+                    },
+                    Object {
+                      "items": Object {
+                        "oneOf": Array [
+                          Object {
+                            "type": "string",
+                          },
+                          Object {
+                            "type": "number",
+                          },
+                        ],
+                      },
+                      "type": "array",
+                    },
+                  ],
+                },
+                "type": "array",
+              },
+              Object {
+                "type": "string",
+              },
+            ],
+          },
           "name": "",
           "parent": [Circular],
         },

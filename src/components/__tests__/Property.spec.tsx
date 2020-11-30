@@ -1,10 +1,11 @@
-import { TreeListParentNode, TreeState } from '@stoplight/tree-list';
+import { TreeListParentNode } from '@stoplight/tree-list';
 import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
+import { SchemaTreeState } from '../../tree/state';
 import { walk } from '../../tree/utils/walk';
 import { SchemaTreeListNode } from '../../types';
 import { Property, Types } from '../shared';
@@ -185,7 +186,7 @@ describe('Property component', () => {
         },
       };
 
-      const tree = new SchemaTree(schema, new TreeState(), {
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
@@ -212,7 +213,7 @@ describe('Property component', () => {
         },
       };
 
-      const tree = new SchemaTree(schema, new TreeState(), {
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
@@ -238,7 +239,7 @@ describe('Property component', () => {
         },
       };
 
-      const tree = new SchemaTree(schema, new TreeState(), {
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
@@ -264,7 +265,7 @@ describe('Property component', () => {
         },
       };
 
-      const tree = new SchemaTree(schema, new TreeState(), {
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
@@ -291,7 +292,7 @@ describe('Property component', () => {
         },
       };
 
-      const tree = new SchemaTree(schema, new TreeState(), {
+      const tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
         mergeAllOf: false,
         resolveRef: void 0,
@@ -468,7 +469,7 @@ describe('Property component', () => {
       ],
     };
 
-    const tree = new SchemaTree(schema, new TreeState(), {
+    const tree = new SchemaTree(schema, new SchemaTreeState(), {
       expandedDepth: Infinity,
       mergeAllOf: true,
       resolveRef: void 0,

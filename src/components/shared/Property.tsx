@@ -76,7 +76,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
   const type = isRefNode(node) ? 
     '$ref' : 
     (isCombinerNode(node) ? 
-      (node.combiner === 'oneOf' ? '' : node.combiner) : 
+      (node.combiner === 'oneOf' ? undefined : node.combiner) : 
       node.type
     );
   const subtype = isArrayNodeWithItems(node) ? (hasRefItems(node) ? '$ref' : inferType(node.items)) : void 0;

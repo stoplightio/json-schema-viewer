@@ -30,10 +30,10 @@ export type Walker = (
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
-  getChosenNode: (node: string) => number
+  getChosenNode?: (node: string) => number
 ) => undefined;
 
-export const populateTree: Walker = (schema, parent, level, path, options, getChosenNode): undefined => {
+export const populateTree: Walker = (schema, parent, level, path, options, getChosenNode = () => 0): undefined => {
   const actualSchema = prepareSchema(schema, parent, path, options);
 
   if (!_isObject(actualSchema)) return;

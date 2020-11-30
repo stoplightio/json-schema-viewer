@@ -1,14 +1,13 @@
 import { extractPointerFromRef, extractSourceFromRef, pointerToPath } from '@stoplight/json';
-import { Tree, TreeListNode, TreeListParentNode, TreeState } from '@stoplight/tree-list';
+import { Tree, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
-import { SchemaTreeState } from '../components';
 import { ResolvingError } from '../errors';
 import { ViewMode } from '../types';
-import { addChildrenToTreeListNode } from '../utils/addChildrenToTreeListNode';
 import { hasRefItems, isRefNode } from '../utils/guards';
 import { getSchemaNodeMetadata } from './metadata';
+import { SchemaTreeState } from './state';
 import { canStepIn } from './utils/canStepIn';
 import { createErrorTreeNode } from './utils/createErrorTreeNode';
 import { populateTree, WalkerRefResolver } from './utils/populateTree';

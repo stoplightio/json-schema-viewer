@@ -3,7 +3,8 @@ import { JSONSchema4 } from 'json-schema';
 import { ResolvingError } from '../../errors';
 import { ViewMode } from '../../types';
 import { getNodeMetadata } from '../metadata';
-import { SchemaTree, SchemaTreeState } from '../tree';
+import { SchemaTreeState } from '../state';
+import { SchemaTree } from '../tree';
 import { printTree } from './utils/printTree';
 
 describe('SchemaTree', () => {

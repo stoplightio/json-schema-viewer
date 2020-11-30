@@ -6,6 +6,8 @@ import * as React from 'react';
 import { GoToRefHandler, RowRenderer } from '../types';
 import { SchemaRow } from './SchemaRow';
 
+import {SchemaTree as SchemaTreeInterface} from '../tree/tree';
+
 export interface ISchemaTree {
   treeStore: TreeStore;
   schema: JSONSchema4;
@@ -40,7 +42,12 @@ export const SchemaTree = observer<ISchemaTree>(props => {
         return customRowRenderer(node, rowOptions, treeStore);
       }
 
-      return <SchemaRow node={node} rowOptions={rowOptions} onGoToRef={onGoToRef} schemaTree={treeStore.tree as any} />;
+      return <SchemaRow 
+        node={node} 
+        rowOptions={rowOptions} 
+        onGoToRef={onGoToRef} 
+        schemaTree={treeStore.tree as SchemaTreeInterface} 
+      />;
     },
     [onGoToRef, customRowRenderer, treeStore],
   );
