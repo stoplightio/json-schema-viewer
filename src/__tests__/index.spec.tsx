@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as React from 'react';
 
 import { JsonSchemaViewer } from '../components';
+import { ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
 
 describe('HTML Output', () => {
@@ -111,7 +112,7 @@ describe('HTML Output', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} />)).toMatchSnapshot();
   });
 
-  it.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
+  it.each<ViewMode>(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
     const schema: JSONSchema4 = {
       type: ['string', 'object'],
       properties: {
@@ -126,7 +127,7 @@ describe('HTML Output', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf viewMode={mode} />)).toMatchSnapshot();
   });
 
   it('given multiple object and string type, should process properties', () => {

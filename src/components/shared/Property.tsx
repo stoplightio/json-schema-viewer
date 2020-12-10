@@ -93,6 +93,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
     }
 
     return null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [node]);
 
   const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {

@@ -1034,19 +1034,6 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
           <div>id</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
         </div>
-        <span class=\\"text-darken-7 dark:text-lighten-6\\">read-only</span>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>description</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <span class=\\"text-darken-7 dark:text-lighten-6\\">write-only</span>
         <div></div>
       </div>
     </div>
@@ -1178,22 +1165,9 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
     <div>
       <div style=\\"margin-left: 20px\\">
         <div>
-          <div>id</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <span class=\\"text-darken-7 dark:text-lighten-6\\">read-only</span>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
           <div>description</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
         </div>
-        <span class=\\"text-darken-7 dark:text-lighten-6\\">write-only</span>
         <div></div>
       </div>
     </div>
