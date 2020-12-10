@@ -3,6 +3,7 @@ import { Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject, size as _size } from 'lodash';
 import * as React from 'react';
+
 import { getSchemaNodeMetadata } from '../../tree/metadata';
 import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { getPrimaryType } from '../../utils/getPrimaryType';
@@ -69,7 +70,7 @@ function getTitle(node: SchemaNode): Optional<string> {
     return node.items.title;
   }
 
-  return node.title || retrieve$ref(node);
+  return node.title ?? retrieve$ref(node);
 }
 
 export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {

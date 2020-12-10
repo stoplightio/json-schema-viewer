@@ -1,9 +1,10 @@
 import { JSONSchema4 } from 'json-schema';
+
 import { mergeAllOf } from '../mergeAllOf';
 
 describe('mergeAllOf util', () => {
   describe('example merging', () => {
-    test('given incompatible, should leave empty', () => {
+    it('given incompatible, should leave empty', () => {
       const schema: JSONSchema4 = {
         allOf: [
           {
@@ -38,7 +39,7 @@ describe('mergeAllOf util', () => {
       });
     });
 
-    test('given compatible, should merge normally', () => {
+    it('given compatible, should merge normally', () => {
       const schema: JSONSchema4 = {
         allOf: [
           {
@@ -75,7 +76,7 @@ describe('mergeAllOf util', () => {
   });
 
   describe('enums merging', () => {
-    test('given incompatible, should leave empty', () => {
+    it('given incompatible, should leave empty', () => {
       const schema: JSONSchema4 = {
         allOf: [
           {
@@ -110,7 +111,7 @@ describe('mergeAllOf util', () => {
       });
     });
 
-    test('given compatible, should merge normally', () => {
+    it('given compatible, should merge normally', () => {
       const schema: JSONSchema4 = {
         allOf: [
           {

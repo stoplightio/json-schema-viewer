@@ -4,7 +4,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">anyOf</span></div>
         <div></div>
       </div>
@@ -12,8 +12,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div><span class=\\"text-orange-5\\">allOf</span></div>
@@ -23,8 +23,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -37,7 +37,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -55,7 +55,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -71,13 +71,13 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Admin</span>
@@ -89,7 +89,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>root</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -100,7 +100,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>group</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -111,7 +111,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>expirationDate</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -122,13 +122,13 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and/or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div><span class=\\"text-orange-5\\">allOf</span></div>
         <div></div>
@@ -137,8 +137,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -151,7 +151,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -169,7 +169,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -185,13 +185,13 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
@@ -203,7 +203,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>supervisor</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -214,7 +214,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>key</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -225,7 +225,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">allOf</span></div>
         <div></div>
       </div>
@@ -233,8 +233,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -247,7 +247,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -265,7 +265,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -287,7 +287,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">anyOf</span></div>
         <div></div>
       </div>
@@ -295,8 +295,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -309,7 +309,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -327,7 +327,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -343,7 +343,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>root</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -354,7 +354,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>group</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -365,7 +365,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>expirationDate</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -376,13 +376,13 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and/or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
@@ -394,7 +394,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -412,7 +412,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -428,7 +428,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>supervisor</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -439,7 +439,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>key</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -456,7 +456,7 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">oneOf</span></div>
         <div></div>
       </div>
@@ -464,7 +464,7 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div><span class=\\"text-green-6 dark:text-green-4\\">array[string]</span></div>
         <div></div>
       </div>
@@ -472,10 +472,10 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <div style=\\"top: -9px; height: 1px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div><span class=\\"text-green-6 dark:text-green-4\\">array[number]</span></div>
         <div></div>
@@ -490,7 +490,7 @@ exports[`HTML Output given complex type that includes array and complex array su
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
@@ -501,7 +501,7 @@ exports[`HTML Output given complex type that includes array and complex array su
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>items</div>
           <div>
@@ -530,7 +530,7 @@ exports[`HTML Output given multiple object and string type, should process prope
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <div>
             <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -545,7 +545,7 @@ exports[`HTML Output given multiple object and string type, should process prope
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>ids</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[integer]</span>
@@ -562,7 +562,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">oneOf</span></div>
         <div></div>
       </div>
@@ -570,8 +570,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div><span class=\\"text-orange-5\\">allOf</span></div>
@@ -581,8 +581,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -595,7 +595,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -613,7 +613,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -629,13 +629,13 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Admin</span>
@@ -647,7 +647,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>root</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -658,7 +658,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>group</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -669,7 +669,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>expirationDate</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -680,13 +680,13 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div><span class=\\"text-orange-5\\">allOf</span></div>
         <div></div>
@@ -695,8 +695,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -709,7 +709,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -727,7 +727,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -743,13 +743,13 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
@@ -761,7 +761,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>supervisor</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -772,7 +772,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>key</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -783,7 +783,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">allOf</span></div>
         <div></div>
       </div>
@@ -791,8 +791,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -805,7 +805,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -823,7 +823,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -845,7 +845,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">oneOf</span></div>
         <div></div>
       </div>
@@ -853,8 +853,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -867,7 +867,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -885,7 +885,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -901,7 +901,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>root</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -912,7 +912,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>group</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -923,7 +923,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>expirationDate</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -934,13 +934,13 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Editor</span>
@@ -952,7 +952,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>type</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -970,7 +970,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>enabled</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -986,7 +986,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>supervisor</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -997,7 +997,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>key</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1014,7 +1014,7 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <div>
             <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1029,7 +1029,7 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>id</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1041,7 +1041,7 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>description</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1059,7 +1059,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <div>
             <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1074,7 +1074,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>id</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1086,7 +1086,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>description</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1104,7 +1104,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
@@ -1115,8 +1115,8 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1129,8 +1129,8 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1144,7 +1144,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>name</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1161,7 +1161,7 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <div>
             <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1176,7 +1176,7 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>id</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1188,7 +1188,7 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>description</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1206,7 +1206,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-orange-5\\">oneOf</span>
           <span class=\\"bp3-popover-wrapper\\">
@@ -1221,8 +1221,8 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1240,7 +1240,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>actionType</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1258,7 +1258,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>id</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1274,7 +1274,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>externalId</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1285,7 +1285,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>calculateCosts</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -1296,7 +1296,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>calculateDates</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -1307,7 +1307,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>items</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
@@ -1318,13 +1318,13 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">BugExample</span>
@@ -1341,7 +1341,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>actionType</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1359,7 +1359,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>id</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1375,7 +1375,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>externalId</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1386,7 +1386,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>calculateCosts</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -1397,7 +1397,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>calculateDates</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -1408,7 +1408,7 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>items</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
@@ -1425,7 +1425,7 @@ exports[`HTML Output should match array-of-allofs.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Test</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
@@ -1436,8 +1436,8 @@ exports[`HTML Output should match array-of-allofs.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1450,7 +1450,7 @@ exports[`HTML Output should match array-of-allofs.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>foo</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1461,7 +1461,7 @@ exports[`HTML Output should match array-of-allofs.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>bar</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1478,7 +1478,7 @@ exports[`HTML Output should match array-of-objects.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
@@ -1493,8 +1493,8 @@ exports[`HTML Output should match array-of-objects.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1508,7 +1508,7 @@ exports[`HTML Output should match array-of-objects.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>ArrayObjectProperty</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1525,8 +1525,8 @@ exports[`HTML Output should match array-of-refs.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative;\\">
+      <div style=\\"margin-left: 0px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div><span class=\\"text-green-6 dark:text-green-4\\">$ref(./models/todo-full.json)[]</span></div>
@@ -1542,7 +1542,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">Todo Full</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{5}</div>
@@ -1553,7 +1553,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>test</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1564,7 +1564,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>id</div>
           <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
@@ -1582,7 +1582,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>completed_at</div>
           <div>
@@ -1598,7 +1598,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>created_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1610,7 +1610,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>updated_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1628,7 +1628,7 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
@@ -1639,8 +1639,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1654,8 +1654,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1668,8 +1668,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 60px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1682,8 +1682,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 80px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 80px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1698,8 +1698,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 80px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 80px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1713,8 +1713,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1727,8 +1727,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1743,8 +1743,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1759,8 +1759,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1774,8 +1774,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1789,8 +1789,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 60px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1803,8 +1803,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 80px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 80px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1817,8 +1817,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1833,8 +1833,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -1848,8 +1848,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 120px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 120px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1862,8 +1862,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 120px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 120px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1878,8 +1878,8 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 120px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 120px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -1900,7 +1900,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">User</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{8}</div>
@@ -1911,7 +1911,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>name</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1930,7 +1930,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>age</div>
           <span class=\\"text-red-7 dark:text-red-6\\">number</span>
@@ -1949,7 +1949,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>completed_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -1962,7 +1962,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>items</div>
           <div>
@@ -1985,7 +1985,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>email</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2002,8 +2002,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2016,8 +2016,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2034,7 +2034,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>foo</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2045,7 +2045,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>bar</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2056,10 +2056,10 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <div style=\\"top: -9px; height: 1px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">and/or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div><span class=\\"text-green-6 dark:text-green-4\\">array[integer]</span></div>
         <div></div>
@@ -2068,8 +2068,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2087,7 +2087,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>ids</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[integer]</span>
@@ -2098,8 +2098,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -2112,7 +2112,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>^id_</div>
           <span class=\\"text-red-7 dark:text-red-6\\">number</span>
@@ -2124,7 +2124,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>foo</div>
           <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
@@ -2136,7 +2136,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>_name$</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2154,7 +2154,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">model-with-formats</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{5}</div>
@@ -2165,7 +2165,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>date-of-birth</div>
           <div>
@@ -2183,7 +2183,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>name</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2194,7 +2194,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>id</div>
           <span class=\\"text-red-7 dark:text-red-6\\">number</span>
@@ -2206,7 +2206,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div><div>notype</div></div>
         <div></div>
       </div>
@@ -2214,8 +2214,8 @@ exports[`HTML Output should match formats-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2234,7 +2234,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>ids</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[integer]</span>
@@ -2251,8 +2251,8 @@ exports[`HTML Output should match nullish-ref.schema.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative;\\">
+      <div style=\\"margin-left: 0px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div><span class=\\"text-purple-6 dark:text-purple-4\\">$ref</span></div>
@@ -2268,7 +2268,7 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-orange-5\\">oneOf</span></div>
         <div></div>
       </div>
@@ -2276,8 +2276,8 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2290,7 +2290,7 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>foo</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2305,7 +2305,7 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>baz</div>
           <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
@@ -2316,13 +2316,13 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div style=\\"top: -9px; height: 1px;\\">
+        <div style=\\"top: -9px; height: 1px\\">
           <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px;\\"></div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
         <div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
@@ -2334,7 +2334,7 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>foo</div>
           <span class=\\"text-red-7 dark:text-red-6\\">number</span>
@@ -2345,7 +2345,7 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>baz</div>
           <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
@@ -2356,7 +2356,7 @@ exports[`HTML Output should match oneof-with-array-type.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>bar</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2373,7 +2373,7 @@ exports[`HTML Output should match ref/original.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
@@ -2384,8 +2384,8 @@ exports[`HTML Output should match ref/original.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -2398,8 +2398,8 @@ exports[`HTML Output should match ref/original.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -2418,7 +2418,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div>
           <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
@@ -2436,8 +2436,8 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -2457,7 +2457,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>commonTicketingOptions</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
@@ -2473,8 +2473,8 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2493,7 +2493,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>state</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2518,8 +2518,8 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2540,7 +2540,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
+      <div style=\\"margin-left: 60px\\">
         <div>
           <div>orderItemId</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2552,8 +2552,8 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 60px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 60px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2572,7 +2572,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 80px;\\">
+      <div style=\\"margin-left: 80px\\">
         <div>
           <div>title</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2593,7 +2593,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 80px;\\">
+      <div style=\\"margin-left: 80px\\">
         <div>
           <div>selected</div>
           <span class=\\"text-red-4\\">boolean</span>
@@ -2615,7 +2615,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 80px;\\">
+      <div style=\\"margin-left: 80px\\">
         <div>
           <div>additionalRequiredInfo</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2633,8 +2633,8 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 80px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 80px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2653,7 +2653,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
+      <div style=\\"margin-left: 100px\\">
         <div>
           <div>availableDeliveryTypes</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
@@ -2664,7 +2664,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
+      <div style=\\"margin-left: 100px\\">
         <div>
           <div>ticketRecipients</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
@@ -2675,7 +2675,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
+      <div style=\\"margin-left: 100px\\">
         <div>
           <div>ccEmail</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2687,8 +2687,8 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-right\\"></span>
         </span>
         <div>
@@ -2701,7 +2701,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px;\\">
+      <div style=\\"margin-left: 100px\\">
         <div>
           <div>pickUpAtStation</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2725,7 +2725,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
 "<div>
   <div>
     <div>
-      <div style=\\"margin-left: 0px;\\">
+      <div style=\\"margin-left: 0px\\">
         <div><span class=\\"text-green-6 dark:text-green-4\\">array</span></div>
         <div></div>
       </div>
@@ -2733,7 +2733,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>name</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2744,7 +2744,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>completed</div>
           <div>
@@ -2759,7 +2759,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>id</div>
           <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
@@ -2774,7 +2774,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>completed_at</div>
           <div>
@@ -2790,7 +2790,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>created_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2802,7 +2802,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
+      <div style=\\"margin-left: 20px\\">
         <div>
           <div>updated_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2814,8 +2814,8 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px;\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px;\\">
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
@@ -2829,7 +2829,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>name</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
@@ -2845,7 +2845,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 40px;\\">
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>age</div>
           <span class=\\"text-red-7 dark:text-red-6\\">number</span>

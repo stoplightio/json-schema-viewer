@@ -1,5 +1,6 @@
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
+
 import { mergeAllOf } from './mergeAllOf';
 import { WalkingOptions } from './populateTree';
 

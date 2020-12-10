@@ -94,7 +94,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
         if ('type' in node) {
           node.properties[i] = {
             ...property,
-            type: property.type || node.type,
+            type: property.type ?? node.type,
           };
         }
 
@@ -282,8 +282,8 @@ function prepareSchema(
 
     (node as TreeListParentNode).children.push(treeNode);
     metadataStore.set(treeNode, {
-      schemaNode: processNode(schema || {}).next().value,
-      schema: schema || {},
+      schemaNode: processNode(schema ?? {}).next().value,
+      schema: schema ?? {},
       path,
     });
 

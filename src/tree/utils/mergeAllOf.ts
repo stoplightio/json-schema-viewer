@@ -1,6 +1,7 @@
 import { pathToPointer, safeStringify } from '@stoplight/json';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
+
 import { ResolvingError } from '../../errors';
 import { WalkingOptions } from './populateTree';
 

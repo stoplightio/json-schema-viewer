@@ -1,4 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
+
 import { SchemaKind, SchemaNode } from '../types';
 import { inferType } from './inferType';
 

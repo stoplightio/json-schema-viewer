@@ -1,4 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
+
 import { JSONSchema4CombinerName } from '../types';
 
 export const getCombiners = (node: JSONSchema4): JSONSchema4CombinerName[] | void => {

@@ -1,5 +1,6 @@
 import { Optional } from '@stoplight/types';
 import { JSONSchema4TypeName } from 'json-schema';
+
 import { isValidType } from './isValidType';
 
 function getTypeFromObject(obj: object): Optional<JSONSchema4TypeName> {

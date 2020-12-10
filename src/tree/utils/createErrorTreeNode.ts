@@ -1,4 +1,5 @@
 import { TreeListParentNode } from '@stoplight/tree-list';
+
 import { SchemaTreeListNode } from '../../types';
 import { generateId } from '../../utils/generateId';
 import { getSchemaNodeMetadata, metadataStore } from '../metadata';

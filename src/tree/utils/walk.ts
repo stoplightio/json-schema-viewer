@@ -1,6 +1,7 @@
 import { Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
+
 import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
 import { flattenTypes } from '../../utils/flattenTypes';
 import { generateId } from '../../utils/generateId';
@@ -31,7 +32,7 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
 
 export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
   const combiners = getCombiners(node);
-  const type = node.type || inferType(node);
+  const type = node.type ?? inferType(node);
   const title = typeof node.title === 'string' ? { title: node.title } : null;
 
   if (combiners !== void 0) {

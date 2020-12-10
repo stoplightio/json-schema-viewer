@@ -1,4 +1,5 @@
 import { get as _get, isEmpty as _isEmpty } from 'lodash';
+
 import { isCombiner } from './isCombiner';
 
 export const isSchemaViewerEmpty = (schema: unknown) => {

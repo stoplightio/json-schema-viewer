@@ -3,6 +3,7 @@ import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
+
 import { ResolvingError } from '../errors';
 import { ViewMode } from '../types';
 import { hasRefItems, isRefNode } from '../utils/guards';

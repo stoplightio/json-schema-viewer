@@ -1,4 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
+
 import { SchemaKind } from '../../types';
 import { getCombiners } from '../../utils/getCombiners';
 import { getPrimaryType } from '../../utils/getPrimaryType';

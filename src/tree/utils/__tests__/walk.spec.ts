@@ -1,10 +1,11 @@
 import { JSONSchema4 } from 'json-schema';
+
 import { JSONSchema4CombinerName, SchemaKind } from '../../../types';
 import { walk } from '../walk';
 
 describe('Schema Walker', () => {
   describe('when type equals array', () => {
-    test.each(['[circular]', 2, null])('given invalid items, should normalize them %s', items => {
+    it.each(['[circular]', 2, null])('given invalid items, should normalize them %s', items => {
       const schema = {
         type: SchemaKind.Array,
         items,
@@ -25,33 +26,30 @@ describe('Schema Walker', () => {
       });
     });
 
-    test.each([{ type: 'string' }, [{ type: 'number' }]])(
-      'given valid items, should leave them untouched %s',
-      items => {
-        const schema = {
-          type: SchemaKind.Array,
-          items,
-        };
-        const { value: node } = walk(schema as any).next();
+    it.each([{ type: 'string' }, [{ type: 'number' }]])('given valid items, should leave them untouched %s', items => {
+      const schema = {
+        type: SchemaKind.Array,
+        items,
+      };
+      const { value: node } = walk(schema as any).next();
 
-        expect(node).toStrictEqual({
-          fragment: schema,
-          node: {
-            id: expect.any(String),
-            type: SchemaKind.Array,
-            annotations: {},
-            enum: void 0,
-            validations: {},
-            additionalItems: void 0,
-            items,
-          },
-        });
-      },
-    );
+      expect(node).toStrictEqual({
+        fragment: schema,
+        node: {
+          id: expect.any(String),
+          type: SchemaKind.Array,
+          annotations: {},
+          enum: void 0,
+          validations: {},
+          additionalItems: void 0,
+          items,
+        },
+      });
+    });
   });
 
   describe('when type equals object', () => {
-    test.each(['[circular]', 2, null, [{}]])('given invalid properties, should normalize them %s', properties => {
+    it.each(['[circular]', 2, null, [{}]])('given invalid properties, should normalize them %s', properties => {
       const schema = {
         type: SchemaKind.Object,
         properties,
@@ -73,35 +71,32 @@ describe('Schema Walker', () => {
       });
     });
 
-    test.each([{}, { foo: { type: 'string' } }])(
-      'given valid properties, should leave them untouched %s',
-      properties => {
-        const schema = {
-          type: SchemaKind.Object,
-          properties,
-        };
-        const { value: node } = walk(schema as any).next();
+    it.each([{}, { foo: { type: 'string' } }])('given valid properties, should leave them untouched %s', properties => {
+      const schema = {
+        type: SchemaKind.Object,
+        properties,
+      };
+      const { value: node } = walk(schema as any).next();
 
-        expect(node).toStrictEqual({
-          fragment: schema,
-          node: {
-            id: expect.any(String),
-            type: SchemaKind.Object,
-            annotations: {},
-            enum: void 0,
-            validations: {},
-            additionalProperties: void 0,
-            patternProperties: void 0,
-            properties,
-          },
-        });
-      },
-    );
+      expect(node).toStrictEqual({
+        fragment: schema,
+        node: {
+          id: expect.any(String),
+          type: SchemaKind.Object,
+          annotations: {},
+          enum: void 0,
+          validations: {},
+          additionalProperties: void 0,
+          patternProperties: void 0,
+          properties,
+        },
+      });
+    });
   });
 
   describe('title', () => {
     describe.each<JSONSchema4CombinerName>(['allOf', 'oneOf', 'anyOf'])('when combiner equals %s', combiner => {
-      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+      it.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
         const schema = {
           [combiner]: [],
           title,
@@ -111,7 +106,7 @@ describe('Schema Walker', () => {
         expect(node).not.toHaveProperty('node.title');
       });
 
-      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+      it.each(['', 'test', '[]'])('should include %s valid title', title => {
         const schema: JSONSchema4 = {
           [combiner]: [],
           title,
@@ -123,7 +118,7 @@ describe('Schema Walker', () => {
     });
 
     describe.each(Object.values(SchemaKind))('when type equals %s', type => {
-      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+      it.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
         const schema = {
           type,
           title,
@@ -133,7 +128,7 @@ describe('Schema Walker', () => {
         expect(node).not.toHaveProperty('node.title');
       });
 
-      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+      it.each(['', 'test', '[]'])('should include %s valid title', title => {
         const schema: JSONSchema4 = {
           type,
           title,
@@ -145,7 +140,7 @@ describe('Schema Walker', () => {
     });
 
     describe('given node with $ref', () => {
-      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+      it.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
         const schema = {
           $ref: '#/foo',
           title,
@@ -155,7 +150,7 @@ describe('Schema Walker', () => {
         expect(node).not.toHaveProperty('node.title');
       });
 
-      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+      it.each(['', 'test', '[]'])('should include %s valid title', title => {
         const schema: JSONSchema4 = {
           $ref: '#/foo',
           title,
@@ -167,7 +162,7 @@ describe('Schema Walker', () => {
     });
 
     describe('given node with enum', () => {
-      test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
+      it.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
         const schema = {
           enum: [],
           title,
@@ -177,7 +172,7 @@ describe('Schema Walker', () => {
         expect(node).not.toHaveProperty('node.title');
       });
 
-      test.each(['', 'test', '[]'])('should include %s valid title', title => {
+      it.each(['', 'test', '[]'])('should include %s valid title', title => {
         const schema: JSONSchema4 = {
           enum: [],
           title,
@@ -189,7 +184,7 @@ describe('Schema Walker', () => {
     });
   });
 
-  test('should pick all combiners', () => {
+  it('should pick all combiners', () => {
     const schema: JSONSchema4 = {
       type: 'object',
       allOf: [],

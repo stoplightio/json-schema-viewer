@@ -1,5 +1,6 @@
 import { JSONSchema4 } from 'json-schema';
 import { isObjectLike as _isObjectLike } from 'lodash';
+
 import { IArrayNode, ICombinerNode, IRefNode, SchemaKind, SchemaNode } from '../types';
 
 export const isArrayNodeWithItems = (

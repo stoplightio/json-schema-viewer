@@ -3,6 +3,7 @@ import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+
 import { ViewModeContext } from '../JsonSchemaViewer';
 import { PropertyTypeColors } from './Types';
 

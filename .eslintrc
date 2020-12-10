@@ -1,0 +1,24 @@
+{
+  "extends": "@stoplight",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-param-reassign": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "error",
+    "@typescript-eslint/prefer-for-of": "error",
+    "@typescript-eslint/no-throw-literal": "error",
+    "@typescript-eslint/prefer-optional-chain": "error",
+    "@typescript-eslint/no-floating-promises": ["error", { "ignoreVoid": true }],
+    "no-console": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["*.spec.{ts,tsx}"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}
