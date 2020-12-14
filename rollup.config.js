@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import * as path from 'path';
+import { terser } from 'rollup-plugin-terser';
 
 const BASE_PATH = process.cwd();
 
@@ -9,6 +10,7 @@ const plugins = [
     tsconfig: path.resolve(BASE_PATH, 'tsconfig.build.json'),
     include: ['src/**/*.{ts,tsx}'],
   }),
+  terser(),
   commonjs(),
 ];
 
