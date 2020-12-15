@@ -1,6 +1,8 @@
-import { shallow } from 'enzyme';
 import 'jest-enzyme';
+
+import { shallow } from 'enzyme';
 import * as React from 'react';
+
 import { SchemaKind } from '../../types';
 import { IType, PropertyTypeColors, Type } from '../shared/Types';
 

@@ -1,7 +1,7 @@
 import { pathToPointer } from '@stoplight/json';
+import { TreeListNode } from '@stoplight/tree-list';
 import * as treeify from 'treeify';
 
-import { TreeListNode } from '@stoplight/tree-list';
 import { JSONSchema4CombinerName } from '../../../types';
 import { hasRefItems, isArrayNodeWithItems } from '../../../utils/guards';
 import { inferType } from '../../../utils/inferType';

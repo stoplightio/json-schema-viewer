@@ -1,7 +1,7 @@
-import * as path from 'path';
-import typescript from '@rollup/plugin-typescript';
-import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+import * as path from 'path';
+import { terser } from 'rollup-plugin-terser';
 
 const BASE_PATH = process.cwd();
 

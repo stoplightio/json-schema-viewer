@@ -2,11 +2,13 @@ import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
 import * as path from 'path';
 import * as React from 'react';
+
 import { JsonSchemaViewer } from '../components';
+import { ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
 
 describe('HTML Output', () => {
-  test.each([
+  it.each([
     'ref/original.json',
     'allof-with-type.json',
     'array-of-allofs.json',
@@ -81,16 +83,16 @@ describe('HTML Output', () => {
       };
     });
 
-    test('given allOf merging disabled, should still merge', () => {
+    it('given allOf merging disabled, should still merge', () => {
       expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf={false} />)).toMatchSnapshot();
     });
 
-    test('given allOf merging enabled, should merge contents of allOf combiners', () => {
+    it('given allOf merging enabled, should merge contents of allOf combiners', () => {
       expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
     });
   });
 
-  test('given array with oneOf containing items, should merge it correctly', () => {
+  it('given array with oneOf containing items, should merge it correctly', () => {
     const schema: JSONSchema4 = {
       oneOf: [
         {
@@ -110,7 +112,7 @@ describe('HTML Output', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} />)).toMatchSnapshot();
   });
 
-  test.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
+  it.each<ViewMode>(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
     const schema: JSONSchema4 = {
       type: ['string', 'object'],
       properties: {
@@ -125,10 +127,10 @@ describe('HTML Output', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf viewMode={mode} />)).toMatchSnapshot();
   });
 
-  test('given multiple object and string type, should process properties', () => {
+  it('given multiple object and string type, should process properties', () => {
     const schema: JSONSchema4 = {
       type: ['string', 'object'],
       properties: {
@@ -144,7 +146,7 @@ describe('HTML Output', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
   });
 
-  test('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
+  it('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
     const schema: JSONSchema4 = {
       type: 'object',
       properties: {
@@ -162,7 +164,7 @@ describe('HTML Output', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
   });
 
-  test('given visible $ref node, should try to inject the title immediately', () => {
+  it('given visible $ref node, should try to inject the title immediately', () => {
     const schema: JSONSchema4 = {
       type: 'object',
       properties: {

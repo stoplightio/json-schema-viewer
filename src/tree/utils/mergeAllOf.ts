@@ -1,6 +1,7 @@
-import { pathToPointer, safeStringify } from '@stoplight/json';
+import { pathToPointer, stringify } from '@stoplight/json';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
+
 import { ResolvingError } from '../../errors';
 import { WalkingOptions } from './populateTree';
 
@@ -28,7 +29,7 @@ function _mergeAllOf(schema: JSONSchema4, path: JsonPath, opts: WalkingOptions) 
         schemaRefs = [$ref];
         allRefs.set(schema, schemaRefs);
       } else if (schemaRefs.includes($ref)) {
-        const safelyResolved = JSON.parse(safeStringify(opts.resolveRef(null, $ref)));
+        const safelyResolved = JSON.parse(stringify(opts.resolveRef(null, $ref)));
         return 'allOf' in safelyResolved ? _mergeAllOf(safelyResolved, path, opts) : safelyResolved;
       } else {
         schemaRefs.push($ref);

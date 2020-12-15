@@ -2,6 +2,7 @@ import { TreeListParentNode } from '@stoplight/tree-list';
 import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
 import * as path from 'path';
+
 import { ResolvingError } from '../../errors';
 import { ViewMode } from '../../types';
 import { getNodeMetadata } from '../metadata';
@@ -49,7 +50,7 @@ describe('SchemaTree', () => {
           tree.populate();
         });
 
-        test('upon expanded $ref, should insert only oneOf combiner', () => {
+        it('upon expanded $ref, should insert only oneOf combiner', () => {
           expect(tree.count).toEqual(3);
 
           tree.unwrap(tree.itemAt(1) as TreeListParentNode);
@@ -73,7 +74,7 @@ describe('SchemaTree', () => {
           );
         });
 
-        test('upon expanded $ref and expanded oneOf combiner, should insert object', () => {
+        it('upon expanded $ref and expanded oneOf combiner, should insert object', () => {
           expect(tree.count).toEqual(3);
 
           tree.unwrap(tree.itemAt(1) as TreeListParentNode);
@@ -94,7 +95,7 @@ describe('SchemaTree', () => {
           );
         });
 
-        test('upon expanded id property, should insert object', () => {
+        it('upon expanded id property, should insert object', () => {
           expect(tree.count).toEqual(3);
 
           tree.unwrap(tree.itemAt(2) as TreeListParentNode);
@@ -152,7 +153,7 @@ describe('SchemaTree', () => {
           tree.populate();
         });
 
-        test('upon expanded array, should insert object', () => {
+        it('upon expanded array, should insert object', () => {
           expect(tree.count).toEqual(3);
 
           tree.unwrap(tree.itemAt(1) as TreeListParentNode);
@@ -173,7 +174,7 @@ describe('SchemaTree', () => {
         });
       });
 
-      test('should try to inject the title', () => {
+      it('should try to inject the title', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -232,7 +233,7 @@ describe('SchemaTree', () => {
         };
       });
 
-      test('given no custom resolver, should generate an error', () => {
+      it('given no custom resolver, should generate an error', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: 0,
           mergeAllOf: false,
@@ -247,7 +248,7 @@ describe('SchemaTree', () => {
         expect(getNodeMetadata(tree.itemAt(2) as TreeListParentNode)).toHaveProperty('error', 'The pointer is empty');
       });
 
-      test('given a custom resolver, should attempt to resolve the reference', () => {
+      it('given a custom resolver, should attempt to resolve the reference', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: 0,
           mergeAllOf: false,
@@ -288,7 +289,7 @@ describe('SchemaTree', () => {
         };
       });
 
-      test('given no custom resolver, should generate an error', () => {
+      it('given no custom resolver, should generate an error', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: 0,
           mergeAllOf: false,
@@ -312,7 +313,7 @@ describe('SchemaTree', () => {
         );
       });
 
-      test('given a custom resolver, should attempt to resolve the reference', () => {
+      it('given a custom resolver, should attempt to resolve the reference', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: 0,
           mergeAllOf: false,
@@ -344,7 +345,7 @@ describe('SchemaTree', () => {
     });
 
     describe('$refs in allOf', () => {
-      test('given $ref in allOf', () => {
+      it('given $ref in allOf', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -417,7 +418,7 @@ describe('SchemaTree', () => {
         `);
       });
 
-      test('given $ref in allOf pointing at another allOf, should keep merging', () => {
+      it('given $ref in allOf pointing at another allOf, should keep merging', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -503,7 +504,7 @@ describe('SchemaTree', () => {
         `);
       });
 
-      test('given direct circular reference pointing at allOf, should bail out and display unmerged allOf', () => {
+      it('given direct circular reference pointing at allOf, should bail out and display unmerged allOf', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -573,7 +574,7 @@ describe('SchemaTree', () => {
         `);
       });
 
-      test('given indirect circular reference pointing at allOf, should bail out and display unmerged allOf', () => {
+      it('given indirect circular reference pointing at allOf, should bail out and display unmerged allOf', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -659,7 +660,7 @@ describe('SchemaTree', () => {
         `);
       });
 
-      test('given circular reference inside of resolved allOf member, should bail out and display unmerged allOf', () => {
+      it('given circular reference inside of resolved allOf member, should bail out and display unmerged allOf', () => {
         const schema: JSONSchema4 = {
           components: {
             schemas: {
@@ -773,7 +774,7 @@ describe('SchemaTree', () => {
         `);
       });
 
-      test('given very complex model with circular references, should bail out and display unmerged allOf', () => {
+      it('given very complex model with circular references, should bail out and display unmerged allOf', () => {
         const schema = require('../../__fixtures__/complex-allOf-model.json');
 
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
@@ -788,7 +789,7 @@ describe('SchemaTree', () => {
         expect(printTree(tree)).toMatchSnapshot();
       });
 
-      test('given circular reference pointing at allOf that are not at top-level, should merge top-level allOf normally', () => {
+      it('given circular reference pointing at allOf that are not at top-level, should merge top-level allOf normally', () => {
         const schema: JSONSchema4 = {
           type: 'object',
           properties: {
@@ -927,7 +928,7 @@ describe('SchemaTree', () => {
   });
 
   describe('allOf failures', () => {
-    test('given incompatible values, should bail out and display unmerged allOf', () => {
+    it('given incompatible values, should bail out and display unmerged allOf', () => {
       const schema: JSONSchema4 = {
         allOf: [
           {
@@ -1015,31 +1016,31 @@ describe('SchemaTree', () => {
       });
     });
 
-    test('for root', () => {
+    it('for root', () => {
       tree.populate();
 
       expect(getNodeMetadata(tree.itemAt(0)!)).toHaveProperty('path', []);
     });
 
-    test('for plain object member', () => {
+    it('for plain object member', () => {
       tree.populate();
 
       expect(getNodeMetadata(tree.itemAt(1)!)).toHaveProperty('path', ['properties', 'user']);
     });
 
-    test('for deep object member', () => {
+    it('for deep object member', () => {
       tree.populate();
 
       expect(getNodeMetadata(tree.itemAt(2)!)).toHaveProperty('path', ['properties', 'user', 'properties', 'name']);
     });
 
-    test('for array items', () => {
+    it('for array items', () => {
       tree.populate();
 
       expect(getNodeMetadata(tree.itemAt(tree.count - 1)!)).toHaveProperty('path', ['properties', 'permissions']);
     });
 
-    test('for $reffed array items', () => {
+    it('for $reffed array items', () => {
       tree.populate();
       tree.unwrap(tree.itemAt(tree.count - 1) as TreeListParentNode);
 
@@ -1068,7 +1069,7 @@ describe('SchemaTree', () => {
   });
 
   describe('eager $ref resolving', () => {
-    test('given a plain object with properties, should resolve', () => {
+    it('given a plain object with properties, should resolve', () => {
       const schema: JSONSchema4 = {
         type: 'object',
         properties: {
@@ -1104,7 +1105,7 @@ describe('SchemaTree', () => {
       `);
     });
 
-    test('given an array with $reffed items, should resolve', () => {
+    it('given an array with $reffed items, should resolve', () => {
       const schema: JSONSchema4 = {
         type: 'object',
         properties: {
@@ -1144,7 +1145,7 @@ describe('SchemaTree', () => {
       `);
     });
 
-    test('should leave broken $refs', () => {
+    it('should leave broken $refs', () => {
       const schema: JSONSchema4 = {
         type: 'object',
         properties: {
@@ -1186,7 +1187,7 @@ describe('SchemaTree', () => {
         `);
     });
 
-    test('should handle circular references', () => {
+    it('should handle circular references', () => {
       const schema: JSONSchema4 = {
         type: 'object',
         properties: {
@@ -1249,7 +1250,7 @@ describe('SchemaTree', () => {
       `);
     });
 
-    test('should handle resolving errors', () => {
+    it('should handle resolving errors', () => {
       const schema: JSONSchema4 = {
         type: 'object',
         properties: {
@@ -1299,7 +1300,7 @@ describe('SchemaTree', () => {
       };
     });
 
-    test('should be called when tree is computed for a first time', () => {
+    it('should be called when tree is computed for a first time', () => {
       const onPopulate = jest.fn();
 
       const tree = new SchemaTree(schema, new SchemaTreeState(), {
@@ -1318,7 +1319,7 @@ describe('SchemaTree', () => {
       expect(onPopulate).toBeCalledWith(tree, tree.root);
     });
 
-    test('given $ref resolution, should be called', () => {
+    it('given $ref resolution, should be called', () => {
       const onPopulate = jest.fn();
 
       const tree = new SchemaTree(schema, new SchemaTreeState(), {
@@ -1340,7 +1341,7 @@ describe('SchemaTree', () => {
       expect(onPopulate).nthCalledWith(2, tree, tree.itemAt(1));
     });
 
-    test('given expanding, should be called', () => {
+    it('given expanding, should be called', () => {
       const onPopulate = jest.fn();
 
       const tree = new SchemaTree(schema, new SchemaTreeState(), {
@@ -1365,7 +1366,7 @@ describe('SchemaTree', () => {
 
   describe('tree correctness', () => {
     // you can put tests verifying whether we generate expected tree
-    test('given multiple object and string type, should process properties', () => {
+    it('given multiple object and string type, should process properties', () => {
       const schema: JSONSchema4 = {
         type: ['string', 'object'],
         properties: {
@@ -1401,7 +1402,7 @@ describe('SchemaTree', () => {
       `);
     });
 
-    test('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
+    it('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
       const schema: JSONSchema4 = {
         type: 'object',
         properties: {
@@ -1496,7 +1497,7 @@ describe('SchemaTree', () => {
         };
       });
 
-      test('given allOf merging disabled, should still merge', () => {
+      it('given allOf merging disabled, should still merge', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
           mergeAllOf: false,
@@ -1509,7 +1510,7 @@ describe('SchemaTree', () => {
         expect(printTree(tree)).toMatchSnapshot();
       });
 
-      test('given allOf merging enabled, should merge contents of allOf combiners', () => {
+      it('given allOf merging enabled, should merge contents of allOf combiners', () => {
         const tree = new SchemaTree(schema, new SchemaTreeState(), {
           expandedDepth: Infinity,
           mergeAllOf: true,
@@ -1523,7 +1524,7 @@ describe('SchemaTree', () => {
       });
     });
 
-    test('given array with oneOf containing items, should merge it correctly', () => {
+    it('given array with oneOf containing items, should merge it correctly', () => {
       const schema: JSONSchema4 = {
         oneOf: [
           {
@@ -1566,7 +1567,7 @@ describe('SchemaTree', () => {
       `);
     });
 
-    test.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
+    it.each(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
       const schema: JSONSchema4 = {
         type: ['string', 'object'],
         properties: {
@@ -1594,7 +1595,7 @@ describe('SchemaTree', () => {
       expect(tree.count).toEqual(mode === 'standalone' ? 3 : 2);
     });
 
-    test.each(['array-of-allofs.json'])('should match %s', filename => {
+    it.each(['array-of-allofs.json'])('should match %s', filename => {
       const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../__fixtures__', filename), 'utf8'));
       const tree = new SchemaTree(schema, new SchemaTreeState(), {
         expandedDepth: Infinity,
@@ -1609,7 +1610,7 @@ describe('SchemaTree', () => {
     });
   });
 
-  test('given visible $ref node, should try to inject the title immediately', () => {
+  it('given visible $ref node, should try to inject the title immediately', () => {
     const schema: JSONSchema4 = {
       type: 'object',
       properties: {

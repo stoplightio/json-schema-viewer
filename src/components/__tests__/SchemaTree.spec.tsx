@@ -1,8 +1,10 @@
+import 'jest-enzyme';
+
 import { Tree, TreeList, TreeState, TreeStore } from '@stoplight/tree-list';
 import { shallow } from 'enzyme';
-import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+
 import { useMetadata } from '../../hooks/useMetadata';
 import { SchemaTree } from '../index';
 
@@ -50,7 +52,7 @@ describe('SchemaTree component', () => {
   });
 
   describe('tree-list', () => {
-    test('should be rendered', () => {
+    it('should be rendered', () => {
       const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} />);
 
       expect(wrapper.find(TreeList)).toExist();
@@ -59,7 +61,7 @@ describe('SchemaTree component', () => {
       });
     });
 
-    test('should be not draggable', () => {
+    it('should be not draggable', () => {
       const treeList = shallow(<SchemaTree schema={schema} treeStore={store} />).find(TreeList);
 
       expect(treeList.prop('canDrag')).toHaveLength(0);

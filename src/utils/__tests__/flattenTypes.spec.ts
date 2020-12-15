@@ -10,13 +10,6 @@ describe('flattenTypes util', () => {
     expect(flattenTypes(void 0)).toBeUndefined();
     expect(flattenTypes('foo')).toBeUndefined();
     expect(flattenTypes(['test', 'foo'])).toBeUndefined();
-  });
-
-  it('returns undefined when no valid type is found', () => {
-    expect(flattenTypes(2)).toBeUndefined();
-    expect(flattenTypes(void 0)).toBeUndefined();
-    expect(flattenTypes('foo')).toBeUndefined();
-    expect(flattenTypes(['test', 'foo'])).toBeUndefined();
     expect(flattenTypes({ type: 'bar' })).toBeUndefined();
   });
 

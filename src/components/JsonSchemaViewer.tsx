@@ -1,10 +1,10 @@
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
 import { Tree, TreeState, TreeStore } from '@stoplight/tree-list';
 import cn from 'classnames';
+import { JSONSchema4 } from 'json-schema';
 import { action } from 'mobx';
 import * as React from 'react';
 
-import { JSONSchema4 } from 'json-schema';
 import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
 import { GoToRefHandler, RowRenderer, ViewMode } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';

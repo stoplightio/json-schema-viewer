@@ -1,4 +1,5 @@
 import { JSONSchema4TypeName } from 'json-schema';
+
 import { SchemaKind } from '../types';
 
 export const isValidType = (maybeType: unknown): maybeType is JSONSchema4TypeName =>

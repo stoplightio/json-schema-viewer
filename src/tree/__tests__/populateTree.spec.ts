@@ -1,5 +1,6 @@
 import { Tree, TreeListParentNode } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
+
 import { getNodeMetadata } from '../metadata';
 import { populateTree } from '../utils/populateTree';
 

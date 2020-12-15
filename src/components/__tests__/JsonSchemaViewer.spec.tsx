@@ -1,8 +1,9 @@
-import { shallow } from 'enzyme';
 import 'jest-enzyme';
+
+import { shallow } from 'enzyme';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema4 } from 'json-schema';
 import { JsonSchemaViewer, SchemaTree } from '../../components';
 import { isSchemaViewerEmpty } from '../../utils/isSchemaViewerEmpty';
 
@@ -35,7 +36,7 @@ describe('JSON Schema Viewer component', () => {
     (isSchemaViewerEmpty as jest.Mock).mockReturnValue(false);
   });
 
-  test('should render empty message if schema is empty', () => {
+  it('should render empty message if schema is empty', () => {
     (isSchemaViewerEmpty as jest.Mock).mockReturnValue(true);
     const wrapper = shallow(<JsonSchemaViewer schema={{}} onError={jest.fn()} />)
       .dive()
@@ -44,7 +45,7 @@ describe('JSON Schema Viewer component', () => {
     expect(wrapper.find(SchemaTree)).not.toExist();
   });
 
-  test('should render SchemaView if schema is provided', () => {
+  it('should render SchemaView if schema is provided', () => {
     const wrapper = shallow(<JsonSchemaViewer schema={schema as JSONSchema4} onError={jest.fn()} />)
       .dive()
       .dive();

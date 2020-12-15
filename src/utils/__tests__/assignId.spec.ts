@@ -11,7 +11,7 @@ describe('generateId util', () => {
     mathRandomSpy.mockRestore();
   });
 
-  test('should generate random id', () => {
+  it('should generate random id', () => {
     mathRandomSpy.mockReturnValueOnce(0.54444).mockReturnValueOnce(0.321);
 
     expect(generateId()).toEqual('0.jlle4v0fcep');

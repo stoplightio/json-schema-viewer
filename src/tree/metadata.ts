@@ -1,6 +1,7 @@
 import { TreeListNode } from '@stoplight/tree-list';
 import { JsonPath } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
+
 import { SchemaNode, SchemaTreeListNode } from '../types';
 
 export interface ITreeNodeMetaSchema {

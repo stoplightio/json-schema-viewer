@@ -1,5 +1,6 @@
 import { Dictionary } from '@stoplight/types';
 import * as React from 'react';
+
 import { JSONSchema4CombinerName } from '../../types';
 
 const DIVIDERS: Dictionary<string, JSONSchema4CombinerName> = {

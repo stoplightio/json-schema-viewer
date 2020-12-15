@@ -1,8 +1,10 @@
+import 'jest-enzyme';
+
 import { TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { shallow } from 'enzyme';
-import 'jest-enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+
 import { SchemaTree } from '../../tree';
 import { metadataStore } from '../../tree/metadata';
 import { walk } from '../../tree/utils/walk';
@@ -80,7 +82,7 @@ describe('Property component', () => {
   });
 
   describe('properties counter', () => {
-    test('given an object among other types, should still display the counter', () => {
+    it('given an object among other types, should still display the counter', () => {
       const treeNode: SchemaTreeListNode = {
         id: 'foo',
         name: '',
@@ -176,7 +178,7 @@ describe('Property component', () => {
   });
 
   describe('properties names', () => {
-    test('given an object, should display names its properties', () => {
+    it('given an object, should display names its properties', () => {
       const schema: JSONSchema4 = {
         properties: {
           foo: {
@@ -199,7 +201,7 @@ describe('Property component', () => {
       expect(wrapper.find('div').first()).toHaveText('foo');
     });
 
-    test('given an object among other types, should still display its properties', () => {
+    it('given an object among other types, should still display its properties', () => {
       const schema: JSONSchema4 = {
         type: ['string', 'object'],
         properties: {
@@ -226,7 +228,7 @@ describe('Property component', () => {
       expect(wrapper.find('div').first()).toHaveText('foo');
     });
 
-    test('given an array of objects, should display names of those properties', () => {
+    it('given an array of objects, should display names of those properties', () => {
       const schema: JSONSchema4 = {
         type: 'array',
         items: {
@@ -252,7 +254,7 @@ describe('Property component', () => {
       expect(wrapper.find('div').first()).toHaveText('foo');
     });
 
-    test('given an array with a combiner inside, should just render the type of combiner', () => {
+    it('given an array with a combiner inside, should just render the type of combiner', () => {
       const schema: JSONSchema4 = {
         type: 'array',
         items: {
@@ -279,7 +281,7 @@ describe('Property component', () => {
       expect(wrapper).toHaveHTML('<span class="text-orange-5 truncate">oneOf</span>');
     });
 
-    test('given an array with an allOf inside and enabled allOf merging, should display the name of properties', () => {
+    it('given an array with an allOf inside and enabled allOf merging, should display the name of properties', () => {
       const schema: JSONSchema4 = {
         type: 'object',
         properties: {
@@ -326,7 +328,7 @@ describe('Property component', () => {
       );
     });
 
-    test('given a ref pointing at primitive type, should not display property name', () => {
+    it('given a ref pointing at primitive type, should not display property name', () => {
       const schema: JSONSchema4 = {
         properties: {
           foo: {
@@ -353,7 +355,7 @@ describe('Property component', () => {
       expect(wrapper.find('div').first()).not.toExist();
     });
 
-    test('given a ref pointing at complex type, should not display property name', () => {
+    it('given a ref pointing at complex type, should not display property name', () => {
       const schema: JSONSchema4 = {
         properties: {
           foo: {
@@ -491,7 +493,7 @@ describe('Property component', () => {
     });
   });
 
-  test("no title for combiner's children", () => {
+  it("no title for combiner's children", () => {
     const schema: JSONSchema4 = {
       type: 'object',
       title: 'Account',

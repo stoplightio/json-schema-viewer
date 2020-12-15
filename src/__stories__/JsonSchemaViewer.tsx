@@ -1,16 +1,16 @@
-import * as React from 'react';
-
 import { Button, Checkbox, Icon } from '@stoplight/ui-kit';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
+import * as React from 'react';
+
 import { JsonSchemaViewer, RowRenderer, SchemaRow } from '../';
+import { Wrapper } from './utils/Wrapper';
 
 const allOfSchemaResolved = require('../__fixtures__/allOf/allOf-resolved.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
-import { Wrapper } from './utils/Wrapper';
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)

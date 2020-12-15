@@ -1,5 +1,5 @@
 // https://github.com/airbnb/enzyme/issues/1875#issuecomment-451177239
-const r = require.requireActual('react');
+const r = jest.requireActual('react');
 
 module.exports = {
   ...r,
