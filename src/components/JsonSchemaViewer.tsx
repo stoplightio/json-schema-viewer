@@ -12,13 +12,10 @@ import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
 export interface IJsonSchemaViewer {
   schema: JSONSchema4;
-  style?: object;
   emptyText?: string;
   defaultExpandedDepth?: number;
   expanded?: boolean;
   className?: string;
-  name?: string;
-  hideTopBar?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   mergeAllOf?: boolean;
@@ -113,7 +110,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
 
   public render() {
     const {
-      props: { emptyText = 'No schema defined', name, schema, expanded, defaultExpandedDepth, className, ...props },
+      props: { emptyText = 'No schema defined', schema, expanded, defaultExpandedDepth, className, ...props },
     } = this;
 
     // an empty array or object is still a valid response, schema is ONLY really empty when a combiner type has no information
@@ -124,7 +121,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
         <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
-          <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+          <SchemaTreeComponent expanded={expanded} schema={schema} treeStore={this.treeStore} {...props} />
         </ViewModeContext.Provider>
       </div>
     );

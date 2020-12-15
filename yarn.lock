@@ -10966,7 +10966,7 @@ mkdirp@1.x, mkdirp@^1.0.4:
   dependencies:
     minimist "0.0.8"
 
-mobx-react-lite@^1.4.1, mobx-react-lite@^1.5.2:
+mobx-react-lite@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.5.2.tgz#c4395b0568b9cb16f07669d8869cc4efa1b8656d"
   integrity sha512-PyZmARqqWtpuQaAoHF5pKX7h6TKNLwq6vtovm4zZvG6sEbMRHHSqioGXSeQbpRmG8Kw8uln3q/W1yMO5IfL5Sg==
