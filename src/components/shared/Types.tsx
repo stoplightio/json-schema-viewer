@@ -20,7 +20,7 @@ function shouldRenderTitle(type: string): boolean {
 }
 
 function getPrintableArrayType(subtype: IType['subtype'], title: IType['title']): string {
-  if (!subtype) return SchemaKind.Array;
+  if (!subtype) return title ? title : SchemaKind.Array;
 
   if (Array.isArray(subtype)) {
     return `${SchemaKind.Array}[${subtype.join(',')}]`;

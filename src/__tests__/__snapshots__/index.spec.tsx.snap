@@ -2700,7 +2700,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   <div>
     <div>
       <div style=\\"margin-left: 0px\\">
-        <div><span class=\\"text-green-6 dark:text-green-4\\">array</span></div>
+        <div><span class=\\"text-green-6 dark:text-green-4\\">Todo Full</span></div>
         <div></div>
       </div>
     </div>

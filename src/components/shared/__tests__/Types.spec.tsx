@@ -3,10 +3,10 @@ import 'jest-enzyme';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 
-import { SchemaKind } from '../../types';
-import { IType, PropertyTypeColors, Type } from '../shared/Types';
+import { SchemaKind } from '../../../types';
+import { IType, PropertyTypeColors, Type } from '../../shared/Types';
 
-describe('Type component', () => {
+describe('Types component', () => {
   it.each(Object.keys(PropertyTypeColors))('should handle $s type', type => {
     const wrapper = shallow(<Type type={type as IType['type']} subtype={void 0} title={void 0} />);
 

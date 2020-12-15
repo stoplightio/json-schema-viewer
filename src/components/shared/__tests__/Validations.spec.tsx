@@ -5,8 +5,8 @@ import { Popover } from '@stoplight/ui-kit';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 
-import { getValidations } from '../../utils/getValidations';
-import { Validations } from '../shared/Validations';
+import { getValidations } from '../../../utils/getValidations';
+import { Validations } from '../../shared/Validations';
 
 describe('Validations component', () => {
   describe('when property is deprecated', () => {
