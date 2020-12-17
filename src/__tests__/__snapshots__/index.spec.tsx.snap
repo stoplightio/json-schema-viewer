@@ -1564,7 +1564,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
             <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
             <span class=\\"text-orange-5\\">null</span>
           </div>
-          <div>&lt;date-time&gt;</div>
+          <span>&lt;date-time&gt;</span>
         </div>
         <div></div>
       </div>
@@ -1576,7 +1576,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
         <div>
           <div>created_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
         </div>
         <div></div>
       </div>
@@ -1588,7 +1588,7 @@ exports[`HTML Output should match combiner-schema.json 1`] = `
         <div>
           <div>updated_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
         </div>
         <div></div>
       </div>
@@ -1927,7 +1927,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
         <div>
           <div>completed_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
         </div>
         <span class=\\"text-darken-7 dark:text-lighten-6\\">write-only</span>
         <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
@@ -1963,7 +1963,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
         <div>
           <div>email</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;email&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;email&gt;</span>
         </div>
         <span class=\\"text-orange-7 dark:text-orange-6\\">deprecated</span>
         <span class=\\"bp3-popover-wrapper\\">
@@ -2149,7 +2149,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
             <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
             <span class=\\"text-green-6 dark:text-green-4\\">array</span>
           </div>
-          <div>&lt;date-time&gt;</div>
+          <span>&lt;date-time&gt;</span>
         </div>
         <div></div>
       </div>
@@ -2172,7 +2172,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
         <div>
           <div>id</div>
           <span class=\\"text-red-7 dark:text-red-6\\">number</span>
-          <div class=\\"text-red-7 dark:text-red-6\\">&lt;float&gt;</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">&lt;float&gt;</span>
         </div>
         <div></div>
       </div>
@@ -2200,7 +2200,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
             <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
           </div>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
-          <div>&lt;password&gt;</div>
+          <span>&lt;password&gt;</span>
         </div>
         <div></div>
       </div>
@@ -2518,7 +2518,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
         <div>
           <div>orderItemId</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;uuid&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;uuid&gt;</span>
         </div>
         <div></div>
       </div>
@@ -2653,7 +2653,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
         <div>
           <div>ccEmail</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;email&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;email&gt;</span>
         </div>
         <div></div>
       </div>
@@ -2700,7 +2700,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
   <div>
     <div>
       <div style=\\"margin-left: 0px\\">
-        <div><span class=\\"text-green-6 dark:text-green-4\\">array</span></div>
+        <div><span class=\\"text-green-6 dark:text-green-4\\">Todo Full</span></div>
         <div></div>
       </div>
     </div>
@@ -2756,7 +2756,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
             <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
             <span class=\\"text-orange-5\\">null</span>
           </div>
-          <div>&lt;date-time&gt;</div>
+          <span>&lt;date-time&gt;</span>
         </div>
         <div></div>
       </div>
@@ -2768,7 +2768,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
         <div>
           <div>created_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
         </div>
         <div></div>
       </div>
@@ -2780,7 +2780,7 @@ exports[`HTML Output should match todo-allof.schema.json 1`] = `
         <div>
           <div>updated_at</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <div class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
         </div>
         <div></div>
       </div>
