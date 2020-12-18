@@ -1176,7 +1176,1018 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 "
 `;
 
-exports[`HTML Output should match allof-with-type.json 1`] = `
+exports[`HTML Output should match arrays/of-allofs.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">Test</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>array-all-objects</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>foo</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>bar</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match arrays/of-arrays.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>bar</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>foo</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match arrays/of-objects.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>propertyIsArrayOfObjects</div>
+          <div><span class=\\"text-green-6 dark:text-green-4\\">array[object]</span></div>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>ArrayObjectProperty</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match arrays/of-refs.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div><span class=\\"text-green-6 dark:text-green-4\\">$ref(./models/todo-full.json)[]</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match arrays/with-multiple-arrayish-items.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div><span class=\\"text-green-6 dark:text-green-4\\">array</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>0</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>1</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>code</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>msg</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>ref</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match arrays/with-ordered-items.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div><span class=\\"text-green-6 dark:text-green-4\\">array</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>0</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>1</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match arrays/with-single-arrayish-items.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div><span class=\\"text-green-6 dark:text-green-4\\">array</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>0</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>code</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>msg</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>ref</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{5}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>AllOfMergeObjects</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>Object1Property</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>Object2Property</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>AllOfMergeValidations</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>AllOfMergeTakeMoreLogicalValidation</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>AllOfMergeObjectPropertyValidations</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>Property</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>AllOfMergeRefs</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{4}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>street_address</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>city</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>state</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>zipCode</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>foo</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>user</div>
+          <span class=\\"text-orange-5\\">allOf</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 80px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>names</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">
+            $ref(#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name)[]
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 80px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>users</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>creation</div>
+          <span class=\\"text-purple-6 dark:text-purple-4\\">#/allOf/0/allOf/0/properties/foo</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>foo</div>
+          <span class=\\"text-purple-6 dark:text-purple-4\\">
+            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>products</div>
+          <span class=\\"text-purple-6 dark:text-purple-4\\">
+            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>bar</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>foo</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 60px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>user</div>
+          <span class=\\"text-orange-5\\">allOf</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 80px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>names</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">
+            $ref(#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name)[]
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 100px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>users</div>
+          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 120px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>creation</div>
+          <span class=\\"text-purple-6 dark:text-purple-4\\">#/allOf/0/allOf/0/properties/foo</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 120px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>foo</div>
+          <span class=\\"text-purple-6 dark:text-purple-4\\">
+            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 120px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div>
+          <div>products</div>
+          <span class=\\"text-purple-6 dark:text-purple-4\\">
+            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
+          </span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div><span class=\\"text-green-6 dark:text-green-4\\">Todo Full</span></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>name</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>completed</div>
+          <div>
+            <span class=\\"text-red-4\\">boolean</span>
+            <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
+            <span class=\\"text-orange-5\\">null</span>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>id</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span></div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>completed_at</div>
+          <div>
+            <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+            <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
+            <span class=\\"text-orange-5\\">null</span>
+          </div>
+          <span>&lt;date-time&gt;</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>created_at</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>updated_at</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+          <span icon=\\"caret-down\\"></span>
+        </span>
+        <div>
+          <div>user</div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">User</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>name</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+          <span class=\\"bp3-popover-wrapper\\">
+            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
+              <div class=\\"text-darken-7 dark:text-lighten-7\\">The user's full name.</div>
+            </span>
+          </span>
+        </div>
+        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 40px\\">
+        <div>
+          <div>age</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <div>
+          <span class=\\"text-blue-6 dark:text-blue-4\\">Todo Full</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{5}</div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>test</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>id</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+        </div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div>
+              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
+              <span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>completed_at</div>
+          <div>
+            <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+            <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
+            <span class=\\"text-orange-5\\">null</span>
+          </div>
+          <span>&lt;date-time&gt;</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>created_at</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 20px\\">
+        <div>
+          <div>updated_at</div>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
 "<div>
   <div>
     <div>
@@ -1395,15 +2406,12 @@ exports[`HTML Output should match allof-with-type.json 1`] = `
 "
 `;
 
-exports[`HTML Output should match array-of-allofs.json 1`] = `
+exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
 "<div>
   <div>
     <div>
       <div style=\\"margin-left: 0px\\">
-        <div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">Test</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
-        </div>
+        <div><span class=\\"text-orange-5\\">oneOf</span></div>
         <div></div>
       </div>
     </div>
@@ -1415,8 +2423,8 @@ exports[`HTML Output should match array-of-allofs.json 1`] = `
           <span icon=\\"caret-down\\"></span>
         </span>
         <div>
-          <div>array-all-objects</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
         </div>
         <div></div>
       </div>
@@ -1428,34 +2436,6 @@ exports[`HTML Output should match array-of-allofs.json 1`] = `
         <div>
           <div>foo</div>
           <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>bar</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match array-of-objects.json 1`] = `
-"<div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 0px\\">
-        <div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
         </div>
         <span class=\\"bp3-popover-wrapper\\">
           <span class=\\"bp3-popover-target\\">
@@ -1467,146 +2447,11 @@ exports[`HTML Output should match array-of-objects.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <div>propertyIsArrayOfObjects</div>
-          <div><span class=\\"text-green-6 dark:text-green-4\\">array[object]</span></div>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
       <div style=\\"margin-left: 40px\\">
         <div>
-          <div>ArrayObjectProperty</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match array-of-refs.json 1`] = `
-"<div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 0px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div><span class=\\"text-green-6 dark:text-green-4\\">$ref(./models/todo-full.json)[]</span></div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match combiner-schema.json 1`] = `
-"<div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 0px\\">
-        <div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">Todo Full</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{5}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>test</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>id</div>
+          <div>baz</div>
           <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
         </div>
-        <span class=\\"bp3-popover-wrapper\\">
-          <span class=\\"bp3-popover-target\\">
-            <div>
-              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
-              <span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span>
-            </div>
-          </span>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>completed_at</div>
-          <div>
-            <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-            <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
-            <span class=\\"text-orange-5\\">null</span>
-          </div>
-          <span>&lt;date-time&gt;</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>created_at</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>updated_at</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match complex-allOf-model.json 1`] = `
-"<div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 0px\\">
-        <div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
-        </div>
         <div></div>
       </div>
     </div>
@@ -1617,67 +2462,11 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
         <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
           <span icon=\\"caret-down\\"></span>
         </span>
-        <div>
-          <div>foo</div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+        <div style=\\"top: -9px; height: 1px\\">
+          <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
+          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
         </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
         <div>
-          <div>user</div>
-          <span class=\\"text-orange-5\\">allOf</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 60px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 80px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div>
-          <div>names</div>
-          <span class=\\"text-green-6 dark:text-green-4\\">
-            $ref(#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name)[]
-          </span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 80px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <div>users</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
           <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
         </div>
@@ -1687,29 +2476,10 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div>
-          <div>creation</div>
-          <span class=\\"text-purple-6 dark:text-purple-4\\">#/allOf/0/allOf/0/properties/foo</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 100px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>foo</div>
-          <span class=\\"text-purple-6 dark:text-purple-4\\">
-            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
-          </span>
+          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
         </div>
         <div></div>
       </div>
@@ -1717,15 +2487,10 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 100px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
+      <div style=\\"margin-left: 40px\\">
         <div>
-          <div>products</div>
-          <span class=\\"text-purple-6 dark:text-purple-4\\">
-            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
-          </span>
+          <div>baz</div>
+          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
         </div>
         <div></div>
       </div>
@@ -1733,134 +2498,10 @@ exports[`HTML Output should match complex-allOf-model.json 1`] = `
   </div>
   <div>
     <div>
-      <div style=\\"margin-left: 20px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
+      <div style=\\"margin-left: 40px\\">
         <div>
           <div>bar</div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <div>foo</div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 60px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <div>user</div>
-          <span class=\\"text-orange-5\\">allOf</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 80px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 100px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div>
-          <div>names</div>
-          <span class=\\"text-green-6 dark:text-green-4\\">
-            $ref(#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name)[]
-          </span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 100px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <div>users</div>
-          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 120px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div>
-          <div>creation</div>
-          <span class=\\"text-purple-6 dark:text-purple-4\\">#/allOf/0/allOf/0/properties/foo</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 120px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div>
-          <div>foo</div>
-          <span class=\\"text-purple-6 dark:text-purple-4\\">
-            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
-          </span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 120px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div>
-          <div>products</div>
-          <span class=\\"text-purple-6 dark:text-purple-4\\">
-            #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
-          </span>
+          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
         </div>
         <div></div>
       </div>
@@ -2221,129 +2862,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
 "
 `;
 
-exports[`HTML Output should match nullish-ref.schema.json 1`] = `
-"<div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 0px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
-          <span icon=\\"caret-right\\"></span>
-        </span>
-        <div><span class=\\"text-purple-6 dark:text-purple-4\\">$ref</span></div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match oneof-with-array-type.json 1`] = `
-"<div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 0px\\">
-        <div><span class=\\"text-orange-5\\">oneOf</span></div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>foo</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <span class=\\"bp3-popover-wrapper\\">
-          <span class=\\"bp3-popover-target\\">
-            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
-          </span>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>baz</div>
-          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div style=\\"top: -9px; height: 1px\\">
-          <div class=\\"text-darken-7 dark:text-lighten-8\\">or</div>
-          <div class=\\"bg-darken-5 dark:bg-lighten-5\\" style=\\"height: 1px\\"></div>
-        </div>
-        <div>
-          <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{3}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>foo</div>
-          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>baz</div>
-          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>bar</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match ref/original.json 1`] = `
+exports[`HTML Output should match references/base.json 1`] = `
 "<div>
   <div>
     <div>
@@ -2380,6 +2899,23 @@ exports[`HTML Output should match ref/original.json 1`] = `
           <div>shipping_address</div>
           <span class=\\"text-purple-6 dark:text-purple-4\\">#/definitions/address</span>
         </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match references/nullish.json 1`] = `
+"<div>
+  <div>
+    <div>
+      <div style=\\"margin-left: 0px\\">
+        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
+          <span icon=\\"caret-right\\"></span>
+        </span>
+        <div><span class=\\"text-purple-6 dark:text-purple-4\\">$ref</span></div>
         <div></div>
       </div>
     </div>
@@ -2688,150 +3224,6 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
           </span>
         </div>
         <div></div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match todo-allof.schema.json 1`] = `
-"<div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 0px\\">
-        <div><span class=\\"text-green-6 dark:text-green-4\\">Todo Full</span></div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>name</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>completed</div>
-          <div>
-            <span class=\\"text-red-4\\">boolean</span>
-            <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
-            <span class=\\"text-orange-5\\">null</span>
-          </div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>id</div>
-          <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
-        </div>
-        <span class=\\"bp3-popover-wrapper\\">
-          <span class=\\"bp3-popover-target\\">
-            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span></div>
-          </span>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>completed_at</div>
-          <div>
-            <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-            <span class=\\"text-darken-7 dark:text-lighten-6\\">or</span>
-            <span class=\\"text-orange-5\\">null</span>
-          </div>
-          <span>&lt;date-time&gt;</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>created_at</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div>updated_at</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <span class=\\"text-green-7 dark:text-green-5\\">&lt;date-time&gt;</span>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-          <span icon=\\"caret-down\\"></span>
-        </span>
-        <div>
-          <div>user</div>
-          <span class=\\"text-blue-6 dark:text-blue-4\\">User</span>
-          <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>name</div>
-          <span class=\\"text-green-7 dark:text-green-5\\">string</span>
-          <span class=\\"bp3-popover-wrapper\\">
-            <span class=\\"bp3-popover-target text-darken-7 dark:text-lighten-6\\">
-              <div class=\\"text-darken-7 dark:text-lighten-7\\">The user's full name.</div>
-            </span>
-          </span>
-        </div>
-        <div><span class=\\"text-orange-7 dark:text-orange-6\\">required</span></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>age</div>
-          <span class=\\"text-red-7 dark:text-red-6\\">number</span>
-        </div>
-        <span class=\\"bp3-popover-wrapper\\">
-          <span class=\\"bp3-popover-target\\">
-            <div>
-              <span class=\\"text-orange-7 dark:text-orange-6\\">required</span>
-              <span class=\\"text-darken-7 dark:text-lighten-6\\">+2</span>
-            </div>
-          </span>
-        </span>
       </div>
     </div>
   </div>

@@ -1,3 +1,6 @@
+import 'jest-enzyme';
+
+import * as fastGlob from 'fast-glob';
 import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
 import * as path from 'path';
@@ -8,21 +11,12 @@ import { ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
 
 describe('HTML Output', () => {
-  it.each([
-    'ref/original.json',
-    'allof-with-type.json',
-    'array-of-allofs.json',
-    'array-of-objects.json',
-    'array-of-refs.json',
-    'combiner-schema.json',
-    'complex-allOf-model.json',
-    'default-schema.json',
-    'formats-schema.json',
-    'nullish-ref.schema.json',
-    'oneof-with-array-type.json',
-    'todo-allof.schema.json',
-    'tickets.schema.json',
-  ])('should match %s', filename => {
+  it.each(
+    fastGlob.sync('**/*.json', {
+      cwd: path.join(__dirname, '../__fixtures__'),
+      ignore: ['stress-schema.json'],
+    }),
+  )('should match %s', filename => {
     const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../__fixtures__/', filename), 'utf8'));
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf />)).toMatchSnapshot();
@@ -184,5 +178,61 @@ describe('HTML Output', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchSnapshot();
+  });
+});
+
+describe('$ref resolving', () => {
+  it('should render caret for schema with top-level $ref pointing at complex type', () => {
+    const schema: JSONSchema4 = {
+      $ref: '#/definitions/foo',
+      definitions: {
+        foo: {
+          type: 'string',
+        },
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
+      "<div>
+        <div>
+          <div>
+            <div style=\\"margin-left: 0px\\">
+              <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
+                <span icon=\\"caret-right\\"></span>
+              </span>
+              <div><span class=\\"text-purple-6 dark:text-purple-4\\">#/definitions/foo</span></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should render caret for top-level array with $ref items', () => {
+    const schema: JSONSchema4 = {
+      type: 'array',
+      items: {
+        $ref: '#/foo',
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
+      "<div>
+        <div>
+          <div>
+            <div style=\\"margin-left: 0px\\">
+              <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
+                <span icon=\\"caret-right\\"></span>
+              </span>
+              <div><span class=\\"text-green-6 dark:text-green-4\\">$ref(#/foo)[]</span></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
   });
 });

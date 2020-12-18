@@ -1,0 +1,17 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "bar": {
+        "type": "integer"
+      },
+      "foo": {
+        "type": "array",
+        "items": {
+          "type": "array"
+        }
+      }
+    }
+  }
+}
