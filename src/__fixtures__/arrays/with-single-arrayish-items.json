@@ -1,0 +1,23 @@
+{
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "msg"
+      ]
+    }
+  ]
+}

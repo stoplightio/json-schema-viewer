@@ -369,7 +369,7 @@ exports[`SchemaTree tree correctness given oneOf combiner placed next to allOf g
 "
 `;
 
-exports[`SchemaTree tree correctness should match array-of-allofs.json 1`] = `
+exports[`SchemaTree tree correctness should match arrays/of-allofs.json 1`] = `
 "└─ #
    ├─ type: object
    └─ children

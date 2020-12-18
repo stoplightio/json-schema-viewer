@@ -1,0 +1,11 @@
+{
+  "type": "array",
+  "items": [
+    {
+      "type": "number"
+    },
+    {
+      "type": "string"
+    }
+  ]
+}
