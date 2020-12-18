@@ -8,9 +8,6 @@ import * as React from 'react';
 import { useMetadata } from '../../hooks/useMetadata';
 import { SchemaTree } from '../index';
 
-jest.mock('mobx-react-lite', () => ({
-  observer: (children: any) => children,
-}));
 jest.mock('../../hooks/useMetadata');
 
 const schema: JSONSchema4 = {
@@ -64,8 +61,7 @@ describe('SchemaTree component', () => {
     it('should be not draggable', () => {
       const treeList = shallow(<SchemaTree schema={schema} treeStore={store} />).find(TreeList);
 
-      expect(treeList.prop('canDrag')).toHaveLength(0);
-      expect(treeList.prop('canDrag')!({} as any)).toBe(false);
+      expect(treeList.prop('draggable')).toBe(false);
     });
   });
 });

@@ -1,6 +1,5 @@
-import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { isParentNode, TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
-import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 import { GoToRefHandler, RowRenderer } from '../types';
@@ -9,22 +8,18 @@ import { SchemaRow } from './SchemaRow';
 export interface ISchemaTree {
   treeStore: TreeStore;
   schema: JSONSchema4;
-  name?: string;
-  hideTopBar?: boolean;
   expanded?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   rowRenderer?: RowRenderer;
 }
 
-const canDrag = () => false;
-
-export const SchemaTree = observer<ISchemaTree>(props => {
-  const { hideTopBar, name, treeStore, maxRows, onGoToRef, rowRenderer: customRowRenderer } = props;
+export const SchemaTree: React.FC<ISchemaTree> = props => {
+  const { treeStore, maxRows, onGoToRef, rowRenderer: customRowRenderer } = props;
 
   React.useEffect(() => {
     treeStore.events.on(TreeListEvents.NodeClick, (e, node) => {
-      if ('children' in node) {
+      if (isParentNode(node)) {
         treeStore.toggleExpand(node);
       }
     });
@@ -46,21 +41,13 @@ export const SchemaTree = observer<ISchemaTree>(props => {
   );
 
   return (
-    <>
-      {name && !hideTopBar && (
-        <div className="flex items-center text-sm px-2 font-semibold" style={{ height: 30 }}>
-          {name}
-        </div>
-      )}
-
-      <TreeList
-        striped
-        maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
-        store={treeStore}
-        rowRenderer={rowRenderer}
-        canDrag={canDrag}
-      />
-    </>
+    <TreeList
+      draggable={false}
+      striped
+      maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
+      store={treeStore}
+      rowRenderer={rowRenderer}
+    />
   );
-});
+};
 SchemaTree.displayName = 'JsonSchemaViewer.SchemaTree';
