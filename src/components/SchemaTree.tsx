@@ -31,11 +31,11 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
 
   const rowRenderer = React.useCallback(
     (node, rowOptions) => {
-      if (customRowRenderer !== undefined) {
+      if (customRowRenderer !== void 0) {
         return customRowRenderer(node, rowOptions, treeStore);
       }
 
-      return <SchemaRow node={node} rowOptions={rowOptions} onGoToRef={onGoToRef} />;
+      return <SchemaRow treeListNode={node} rowOptions={rowOptions} onGoToRef={onGoToRef} />;
     },
     [onGoToRef, customRowRenderer, treeStore],
   );
@@ -44,7 +44,7 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
     <TreeList
       draggable={false}
       striped
-      maxRows={maxRows !== undefined ? maxRows + 0.5 : maxRows}
+      maxRows={maxRows !== void 0 ? maxRows + 0.5 : maxRows}
       store={treeStore}
       rowRenderer={rowRenderer}
     />

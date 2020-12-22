@@ -1,135 +1,127 @@
+import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
+import { Optional } from '@stoplight/types';
+import { Icon, Tooltip } from '@stoplight/ui-kit';
 import cn from 'classnames';
-import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
-import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
-import { getPrimaryType } from '../utils/getPrimaryType';
-import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
-import { Caret, Description, Divider, Format, Property, Validations } from './shared';
+import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';
+import { SchemaNodeContext, TreeListNodeContext } from '../contexts';
+import { isCombiner } from '../guards/isCombiner';
+import { useSchemaNode, useSchemaTree, useTreeListNode } from '../hooks';
+import { GoToRefHandler, SchemaTreeListNode } from '../types';
+import { isPropertyRequired } from '../utils/isPropertyRequired';
+import { Caret, Description, Divider, Property, Validations } from './shared';
+import { Format } from './shared/Format';
 
 export interface ISchemaRow {
   className?: string;
-  node: SchemaTreeListNode;
+  treeListNode: SchemaTreeListNode;
   rowOptions: IRowRendererOptions;
   onGoToRef?: GoToRefHandler;
 }
 
-const ICON_SIZE = 12;
-const ICON_DIMENSION = 20;
-const ROW_OFFSET = 7;
+export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOptions' | 'onGoToRef'>> = ({
+  onGoToRef,
+  rowOptions,
+}) => {
+  const schemaNode = useSchemaNode();
+  const treeListNode = useTreeListNode();
+  const tree = useSchemaTree();
+  const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
 
-function getRelevantSchemaForRequireCheck(treeNode: SchemaTreeListNode): JSONSchema4 | JSONSchema4[] | null {
-  const metadata = getNodeMetadata(treeNode);
-  if (!('schemaNode' in metadata)) return null;
-  if (isArrayNodeWithItems(metadata.schemaNode)) {
-    return metadata.schemaNode.items;
-  }
-
-  return metadata.schema;
-}
-
-function isRequired(treeNode: SchemaTreeListNode) {
-  if (treeNode.parent === null) return false;
-  try {
-    const { path } = getSchemaNodeMetadata(treeNode);
-    if (path.length === 0) {
-      return false;
+  const refNode = React.useMemo<ReferenceNode | null>(() => {
+    if (isReferenceNode(schemaNode)) {
+      return schemaNode;
     }
 
-    const schema = getRelevantSchemaForRequireCheck(treeNode.parent);
+    if (
+      isRegularNode(schemaNode) &&
+      (tree.isFlattenedNode(schemaNode) ||
+        (schemaNode.primaryType === SchemaNodeKind.Array && schemaNode.children?.length === 1))
+    ) {
+      return (schemaNode.children?.find(isReferenceNode) as Optional<ReferenceNode>) ?? null;
+    }
 
-    return (
-      schema !== null &&
-      !Array.isArray(schema) &&
-      getPrimaryType(schema) === SchemaKind.Object &&
-      Array.isArray(schema.required) &&
-      schema.required.includes(String(path[path.length - 1]))
-    );
-  } catch {
-    return false;
-  }
-}
+    return null;
+  }, [schemaNode, tree]);
 
-export const SchemaPropertyRow: typeof SchemaRow = ({ node, onGoToRef, rowOptions }) => {
-  const metadata = getSchemaNodeMetadata(node);
-  const { schemaNode } = metadata;
-
-  const parentSchemaNode =
-    (node.parent !== null && Tree.getLevel(node.parent) >= 0 && getSchemaNodeMetadata(node.parent)?.schemaNode) || null;
-  const description = 'annotations' in schemaNode ? schemaNode.annotations.description : null;
-
-  const has$Ref = isRefNode(schemaNode) || (getPrimaryType(schemaNode) === SchemaKind.Array && hasRefItems(schemaNode));
+  const isBrokenRef = typeof refNode?.error === 'string';
 
   return (
     <>
-      {has$Ref || (isParentNode(node) && Tree.getLevel(node) > 0) ? (
+      {!isBrokenRef && isParentNode(treeListNode) && Tree.getLevel(treeListNode) > 0 ? (
         <Caret
           isExpanded={!!rowOptions.isExpanded}
           style={{
-            width: ICON_DIMENSION,
-            height: ICON_DIMENSION,
-            ...(has$Ref && Tree.getLevel(node) === 0
+            width: CARET_ICON_BOX_DIMENSION,
+            height: CARET_ICON_BOX_DIMENSION,
+            ...(!isBrokenRef && Tree.getLevel(treeListNode) === 0
               ? {
                   position: 'relative',
                 }
               : {
-                  left: ICON_DIMENSION * -1 + ROW_OFFSET / -2,
+                  left: CARET_ICON_BOX_DIMENSION * -1 + SCHEMA_ROW_OFFSET / -2,
                 }),
           }}
-          size={ICON_SIZE}
+          size={CARET_ICON_SIZE}
         />
       ) : null}
 
-      {node.parent !== null &&
-        node.parent.children.length > 0 &&
-        parentSchemaNode !== null &&
-        'combiner' in parentSchemaNode &&
-        node.parent.children[0] !== node && <Divider kind={parentSchemaNode.combiner} />}
+      {schemaNode.subpath.length > 0 &&
+        isCombiner(schemaNode.subpath[0]) &&
+        schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && <Divider kind={schemaNode.subpath[0]} />}
 
       <div className="flex-1 flex truncate">
-        <Property node={node} onGoToRef={onGoToRef} />
-        {metadata.schema.type && typeof metadata.schema.format === 'string' && <Format schema={metadata.schema} />}
-        {description && <Description value={description} />}
+        <Property onGoToRef={onGoToRef} />
+        <Format />
+        {typeof description === 'string' && description.length > 0 && <Description value={description} />}
       </div>
 
       <Validations
-        required={isRequired(node)}
-        validations={{
-          ...('annotations' in schemaNode &&
-            schemaNode.annotations.default && { default: schemaNode.annotations.default }),
-          ...('validations' in schemaNode && schemaNode.validations),
-        }}
+        required={isPropertyRequired(schemaNode)}
+        deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
+        validations={
+          isRegularNode(schemaNode)
+            ? {
+                ...(schemaNode.enum !== null ? { enum: schemaNode.enum } : null),
+                ...('annotations' in schemaNode && schemaNode.annotations.default
+                  ? { default: schemaNode.annotations.default }
+                  : null),
+                ...schemaNode.validations,
+              }
+            : {}
+        }
       />
+
+      {isBrokenRef && (
+        <Tooltip content={refNode!.error!}>
+          <Icon className="text-red-5 dark:text-red-4" icon="warning-sign" iconSize={12} />
+        </Tooltip>
+      )}
     </>
   );
 };
 SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
 
-export const SchemaErrorRow: React.FunctionComponent<{ message: string }> = ({ message }) => (
-  <span className="text-red-5 dark:text-red-4">{message}</span>
-);
-SchemaErrorRow.displayName = 'JsonSchemaViewer.SchemaErrorRow';
-
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, node, rowOptions, onGoToRef }) => {
-  const metadata = getNodeMetadata(node);
+export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, treeListNode, rowOptions, onGoToRef }) => {
+  const schemaNode = treeListNode.metadata as SchemaNode;
 
   return (
-    <div className={cn('px-2 flex-1 w-full max-w-full', className)}>
-      <div
-        className="flex items-center text-sm relative"
-        style={{
-          marginLeft: ICON_DIMENSION * Tree.getLevel(node), // offset for spacing
-        }}
-      >
-        {'schema' in metadata ? (
-          <SchemaPropertyRow node={node} onGoToRef={onGoToRef} rowOptions={rowOptions} />
-        ) : (
-          <SchemaErrorRow message={metadata.error} />
-        )}
-      </div>
-    </div>
+    <SchemaNodeContext.Provider value={schemaNode}>
+      <TreeListNodeContext.Provider value={treeListNode}>
+        <div className={cn('px-2 flex-1 w-full max-w-full', className)}>
+          <div
+            className="flex items-center text-sm relative"
+            style={{
+              marginLeft: CARET_ICON_BOX_DIMENSION * Tree.getLevel(treeListNode), // offset for spacing
+            }}
+          >
+            <SchemaPropertyRow onGoToRef={onGoToRef} rowOptions={rowOptions} />
+          </div>
+        </div>
+      </TreeListNodeContext.Provider>
+    </SchemaNodeContext.Provider>
   );
 };
 SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';

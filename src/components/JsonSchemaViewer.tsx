@@ -1,13 +1,15 @@
+import type { SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
+import { isRegularNode } from '@stoplight/json-schema-tree';
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
 import { Tree, TreeState, TreeStore } from '@stoplight/tree-list';
 import cn from 'classnames';
-import { JSONSchema4 } from 'json-schema';
+import type { JSONSchema4 } from 'json-schema';
 import { action } from 'mobx';
 import * as React from 'react';
 
-import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
-import { GoToRefHandler, RowRenderer, ViewMode } from '../types';
-import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
+import { SchemaTreeContext, ViewModeContext } from '../contexts';
+import { SchemaTreeListTree, SchemaTreeOptions } from '../tree';
+import type { GoToRefHandler, RowRenderer, ViewMode } from '../types';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
 export interface IJsonSchemaViewer {
@@ -21,25 +23,27 @@ export interface IJsonSchemaViewer {
   mergeAllOf?: boolean;
   FallbackComponent?: typeof FallbackComponent;
   rowRenderer?: RowRenderer;
-  onTreePopulate?: SchemaTreePopulateHandler;
   resolveRef?: SchemaTreeRefDereferenceFn;
-  shouldResolveEagerly?: boolean;
   viewMode?: ViewMode;
 }
 
-export const ViewModeContext = React.createContext<ViewMode>('standalone');
-ViewModeContext.displayName = 'ViewModeContext';
-
-export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
+export class JsonSchemaViewerComponent extends React.PureComponent<
+  IJsonSchemaViewer & ErrorBoundaryForwardedProps,
+  { isEmpty: boolean }
+> {
   protected readonly treeStore: TreeStore;
-  protected readonly tree: SchemaTree;
+  protected readonly tree: SchemaTreeListTree;
   protected readonly treeState: TreeState;
+
+  public readonly state = {
+    isEmpty: true,
+  };
 
   constructor(props: IJsonSchemaViewer & ErrorBoundaryForwardedProps) {
     super(props);
 
     this.treeState = new TreeState();
-    this.tree = new SchemaTree(props.schema, this.treeState, this.treeOptions);
+    this.tree = new SchemaTreeListTree(props.schema, this.treeState, this.treeOptions);
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
@@ -50,8 +54,6 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       expandedDepth: this.expandedDepth,
       mergeAllOf: this.mergeAllOf,
       resolveRef: this.props.resolveRef,
-      shouldResolveEagerly: !!this.props.shouldResolveEagerly,
-      onPopulate: this.props.onTreePopulate,
       viewMode: this.props.viewMode,
     };
   }
@@ -65,7 +67,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       return Infinity; // tree-list kind of equivalent of expanded: all
     }
 
-    if (this.props.defaultExpandedDepth !== undefined) {
+    if (this.props.defaultExpandedDepth !== void 0) {
       return this.props.defaultExpandedDepth;
     }
 
@@ -78,6 +80,9 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     }
 
     this.tree.populate();
+    this.setState({
+      isEmpty: this.tree.jsonSchemaTree.root.children.every(node => !isRegularNode(node) || node.unknown),
+    });
   }
 
   public componentDidMount() {
@@ -90,15 +95,10 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       this.tree.treeOptions.resolveRef = this.props.resolveRef;
     }
 
-    if (prevProps.onTreePopulate !== this.props.onTreePopulate) {
-      this.tree.treeOptions.onPopulate = this.props.onTreePopulate;
-    }
-
     if (
       this.treeStore.defaultExpandedDepth !== this.expandedDepth ||
       prevProps.schema !== this.props.schema ||
       prevProps.mergeAllOf !== this.props.mergeAllOf ||
-      prevProps.shouldResolveEagerly !== this.props.shouldResolveEagerly ||
       prevProps.viewMode !== this.props.viewMode
     ) {
       this.treeStore.defaultExpandedDepth = this.expandedDepth;
@@ -113,16 +113,17 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
       props: { emptyText = 'No schema defined', schema, expanded, defaultExpandedDepth, className, ...props },
     } = this;
 
-    // an empty array or object is still a valid response, schema is ONLY really empty when a combiner type has no information
-    if (isSchemaViewerEmpty(schema)) {
+    if (this.state.isEmpty) {
       return <div>{emptyText}</div>;
     }
 
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
-        <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
-          <SchemaTreeComponent expanded={expanded} schema={schema} treeStore={this.treeStore} {...props} />
-        </ViewModeContext.Provider>
+        <SchemaTreeContext.Provider value={this.tree}>
+          <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
+            <SchemaTreeComponent expanded={expanded} schema={schema} treeStore={this.treeStore} {...props} />
+          </ViewModeContext.Provider>
+        </SchemaTreeContext.Provider>
       </div>
     );
   }
@@ -132,7 +133,7 @@ const JsonSchemaFallbackComponent: typeof FallbackComponent = ({ error }) => {
   return (
     <div className="p-4">
       <b className="text-danger">Error</b>
-      {error && `: ${error.message}`}
+      {error !== null ? `: ${error.message}` : null}
     </div>
   );
 };
