@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import { ReactElement } from 'react';
 
-const prettier = require('prettier');
+import { prettifyHtml } from './prettifyHtml';
 
 const TAILWIND_CLASSES = [
   /-?p[xytblr]?-(?:\d+|auto)/,
@@ -68,9 +68,5 @@ export function dumpDom(element: ReactElement) {
   const html = root.html();
   wrapper.unmount();
 
-  return prettier.format(html, {
-    printWidth: 120,
-    parser: 'html',
-    htmlWhitespaceSensitivity: 'ignore',
-  });
+  return prettifyHtml(html);
 }

@@ -1,16 +1,22 @@
-import { JSONSchema4 } from 'json-schema';
+import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
+import cn from 'classnames';
 import * as React from 'react';
 
-import { PropertyTypeColors } from './Types';
+import { PROPERTY_TYPE_COLORS } from '../../consts';
+import { useSchemaNode } from '../../hooks/useSchemaNode';
 
-export const Format: React.FunctionComponent<{ schema: JSONSchema4 }> = ({ schema }) => {
-  return (
-    <span
-      {...(typeof schema.type === 'string' && schema.type in PropertyTypeColors
-        ? { className: `ml-2 ${PropertyTypeColors[schema.type as string]}` }
-        : { className: 'ml-2' })}
-    >
-      {`<${schema.format}>`}
-    </span>
-  );
+function matchPropertyColor(node: RegularNode): string | null {
+  if (node.types === null || node.types.length !== 1) return null;
+
+  return PROPERTY_TYPE_COLORS[node.types[0]];
+}
+
+export const Format: React.FunctionComponent = () => {
+  const schemaNode = useSchemaNode();
+
+  if (!isRegularNode(schemaNode) || schemaNode.format === null) {
+    return null;
+  }
+
+  return <span className={cn('ml-2', matchPropertyColor(schemaNode))}>{`<${schemaNode.format}>`}</span>;
 };

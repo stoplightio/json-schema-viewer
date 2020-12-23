@@ -5,10 +5,7 @@ import { shallow } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { useMetadata } from '../../hooks/useMetadata';
 import { SchemaTree } from '../index';
-
-jest.mock('../../hooks/useMetadata');
 
 const schema: JSONSchema4 = {
   type: 'object',
@@ -38,12 +35,10 @@ describe('SchemaTree component', () => {
     setStateActionSpy = jest.fn();
     useStateSpy = jest.spyOn(React, 'useState').mockImplementation(() => [{}, setStateActionSpy]);
     useCallbackSpy = jest.spyOn(React, 'useCallback');
-    (useMetadata as jest.Mock).mockReturnValue({});
     store = new TreeStore(new Tree(), new TreeState());
   });
 
   afterEach(() => {
-    (useMetadata as jest.Mock).mockReset();
     useStateSpy.mockRestore();
     useCallbackSpy.mockRestore();
   });

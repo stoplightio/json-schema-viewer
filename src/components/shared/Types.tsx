@@ -1,113 +1,63 @@
-import { Dictionary, Optional } from '@stoplight/types';
+import {
+  isReferenceNode,
+  isRegularNode,
+  RegularNode,
+  SchemaCombinerName,
+  SchemaNodeKind,
+} from '@stoplight/json-schema-tree';
 import cn from 'classnames';
-import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema4CombinerName, SchemaKind } from '../../types';
+import { PROPERTY_TYPE_COLORS } from '../../consts';
+import { useSchemaNode } from '../../hooks';
+import { Name } from './Name';
 
-/**
- * TYPE
- */
-export interface IType {
-  type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> | '$ref';
-  className?: string;
-  title: Optional<string>;
+function shouldRenderName(type: keyof typeof PROPERTY_TYPE_COLORS): boolean {
+  return type === SchemaNodeKind.Array || type === SchemaNodeKind.Object || type === '$ref';
 }
 
-function shouldRenderTitle(type: string): boolean {
-  return type === SchemaKind.Array || type === SchemaKind.Object || type === '$ref';
-}
+function getTypes(schemaNode: RegularNode): Array<SchemaNodeKind | SchemaCombinerName> {
+  return [schemaNode.types, schemaNode.combiners].reduce<Array<SchemaNodeKind | SchemaCombinerName>>(
+    (values, value) => {
+      if (value === null) {
+        return values;
+      }
 
-function getPrintableArrayType(subtype: IType['subtype'], title: IType['title']): string {
-  if (!subtype) return title ? title : SchemaKind.Array;
-
-  if (Array.isArray(subtype)) {
-    return `${SchemaKind.Array}[${subtype.join(',')}]`;
-  }
-
-  if (title && shouldRenderTitle(subtype)) {
-    return `${title}[]`;
-  }
-
-  if (subtype !== SchemaKind.Array && subtype !== '$ref') {
-    return `${SchemaKind.Array}[${subtype}]`;
-  }
-
-  return SchemaKind.Array;
-}
-
-function getPrintableType(type: IType['type'], subtype: IType['subtype'], title: IType['title']): string {
-  if (type === SchemaKind.Array) {
-    return getPrintableArrayType(subtype, title);
-  } else if (title && shouldRenderTitle(type)) {
-    return title;
-  } else {
-    return type;
-  }
-}
-
-export const Type: React.FunctionComponent<IType> = ({ className, title, type, subtype }) => {
-  return (
-    <span className={cn(className, PropertyTypeColors[type], 'truncate')}>
-      {getPrintableType(type, subtype, title)}
-    </span>
+      values.push(...value);
+      return values;
+    },
+    [],
   );
-};
-Type.displayName = 'JsonSchemaViewer.Type';
-
-/**
- * TYPES
- */
-interface ITypes {
-  className?: string;
-  type: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref'>;
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | '$ref'>;
-  title: Optional<string>;
 }
 
-export const Types: React.FunctionComponent<ITypes> = ({ className, title, type, subtype }) => {
-  if (type === void 0) return null;
+export const Types: React.FunctionComponent<{}> = () => {
+  const schemaNode = useSchemaNode();
 
-  if (!Array.isArray(type)) {
-    return <Type className={className} type={type} subtype={subtype} title={title} />;
+  if (isReferenceNode(schemaNode)) {
+    return <span className={cn(PROPERTY_TYPE_COLORS.$ref, 'truncate')}>{schemaNode.value ?? '$ref'}</span>;
   }
 
-  return (
-    <div className={cn(className, 'truncate')}>
-      <>
-        {type.map((name, i, { length }) => (
-          <React.Fragment key={i}>
-            <Type key={i} type={name} subtype={subtype} title={title} />
+  if (!isRegularNode(schemaNode)) {
+    return null;
+  }
 
-            {i < length - 1 && (
-              <span key={`${i}-sep`} className="text-darken-7 dark:text-lighten-6">
-                {' or '}
-              </span>
-            )}
-          </React.Fragment>
-        ))}
-      </>
-    </div>
-  );
+  const types = getTypes(schemaNode);
+
+  if (types.length === 0) return null;
+
+  const rendered = types.map((type, i, { length }) => (
+    <React.Fragment key={type}>
+      <span className={cn(PROPERTY_TYPE_COLORS[type], 'truncate')}>
+        {shouldRenderName(type) ? <Name type={type} /> : type}
+      </span>
+      {i < length - 1 && (
+        <span key={`${i}-sep`} className="text-darken-7 dark:text-lighten-6">
+          {' or '}
+        </span>
+      )}
+    </React.Fragment>
+  ));
+
+  return rendered.length > 1 ? <div className="truncate">{rendered}</div> : <>{rendered}</>;
 };
 Types.displayName = 'JsonSchemaViewer.Types';
-
-/**
- * HELPERS
- */
-export const PropertyTypeColors: Dictionary<string, IType['type']> = {
-  object: 'text-blue-6 dark:text-blue-4',
-  any: 'text-blue-5',
-  array: 'text-green-6 dark:text-green-4',
-  allOf: 'text-orange-5',
-  anyOf: 'text-orange-5',
-  oneOf: 'text-orange-5',
-  null: 'text-orange-5',
-  integer: 'text-red-7 dark:text-red-6',
-  number: 'text-red-7 dark:text-red-6',
-  boolean: 'text-red-4',
-  binary: 'text-green-4',
-  string: 'text-green-7 dark:text-green-5',
-  $ref: 'text-purple-6 dark:text-purple-4',
-};

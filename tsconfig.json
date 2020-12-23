@@ -2,7 +2,7 @@
   "extends": "@stoplight/scripts/tsconfig.json",
   // target all ts files
   "include": ["."],
-  "exclude": ["**/__mocks__/**", "dist/"],
+  "exclude": ["dist/"],
   "compilerOptions": {
     "lib": ["dom", "webworker", "es2017", "dom.iterable"],
     "target": "es2017"

@@ -1,2 +1,2 @@
-export { getNodeMetadata } from './metadata';
-export { SchemaTree, SchemaTreeState, SchemaTreeRefDereferenceFn } from './tree';
+export { SchemaTreeListTree, SchemaTreeState } from './tree';
+export { SchemaTreeOptions } from './types';

@@ -8,7 +8,7 @@ import * as React from 'react';
 import { JsonSchemaViewer, RowRenderer, SchemaRow } from '../';
 import { Wrapper } from './utils/Wrapper';
 
-const allOfSchemaResolved = require('../__fixtures__/allOf/allOf-resolved.json');
+const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
 
@@ -20,7 +20,6 @@ storiesOf('JsonSchemaViewer', module)
       schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
       expanded={boolean('expanded', true)}
-      shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
       onGoToRef={action('onGoToRef')}
       viewMode={select(
         'viewMode',
@@ -36,18 +35,18 @@ storiesOf('JsonSchemaViewer', module)
   .add('custom schema', () => (
     <JsonSchemaViewer
       schema={object('schema', {})}
-      expanded={boolean('expanded', true)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 0)}
+      expanded={boolean('expanded', false)}
       onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 5)}
       mergeAllOf={boolean('mergeAllOf', true)}
-      shouldResolveEagerly={boolean('shouldResolveEagerly', false)}
     />
   ))
   .add('custom row renderer', () => {
     const customRowRenderer: RowRenderer = (node, rowOptions) => {
       return (
         <>
-          <SchemaRow node={node} rowOptions={rowOptions} />
+          <SchemaRow treeListNode={node} rowOptions={rowOptions} />
           <div className="flex h-full items-center">
             <Button className="pl-1 mr-1" small minimal icon={<Icon color="grey" iconSize={12} icon="issue" />} />
             <Checkbox className="mb-0" />
@@ -93,7 +92,7 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('allOf-schema', () => (
     <JsonSchemaViewer
-      schema={allOfSchemaResolved as JSONSchema4}
+      schema={allOfSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       expanded={boolean('expanded', false)}
       mergeAllOf={boolean('mergeAllOf', true)}

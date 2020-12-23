@@ -1,122 +1,61 @@
-import { isLocalRef } from '@stoplight/json';
-import { Optional } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
-import { isObject as _isObject, size as _size } from 'lodash';
+import { isReferenceNode, isRegularNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import { isParentNode } from '@stoplight/tree-list';
 import * as React from 'react';
 
-import { getSchemaNodeMetadata } from '../../tree/metadata';
-import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
-import { getPrimaryType } from '../../utils/getPrimaryType';
-import { hasRefItems, isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
-import { inferType } from '../../utils/inferType';
+import { isNonNullable } from '../../guards/isNonNullable';
+import { useSchemaTree, useTreeListNode } from '../../hooks';
+import { useSchemaNode } from '../../hooks/useSchemaNode';
+import { GoToRefHandler } from '../../types';
 import { Types } from './Types';
 
 export interface IProperty {
-  node: SchemaTreeListNode;
   onGoToRef?: GoToRefHandler;
 }
 
-function count(obj: Optional<JSONSchema4 | null>): number | null {
-  if (_isObject(obj)) {
-    return _size(obj);
-  }
-
-  return null;
+function shouldShowPropertyName(schemaNode: SchemaNode) {
+  return (
+    schemaNode.subpath.length === 2 &&
+    (schemaNode.subpath[0] === 'properties' || schemaNode.subpath[0] === 'patternProperties')
+  );
 }
 
-function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
-  if (treeNode.parent === null) return false;
-  try {
-    const { schemaNode } = getSchemaNodeMetadata(treeNode.parent);
-    if (!('type' in schemaNode) || 'combiner' in schemaNode) {
-      return false;
-    }
-
-    const type = getPrimaryType(schemaNode);
-
-    if (type === SchemaKind.Array && (schemaNode as IArrayNode).items) {
-      const { schemaNode: itemsSchemaNode } = getSchemaNodeMetadata(treeNode);
-      return !('combiner' in itemsSchemaNode);
-    }
-
-    return type === SchemaKind.Object;
-  } catch {
-    return false;
-  }
-}
-
-function isExternalRefSchemaNode(schemaNode: SchemaNode) {
-  return isRefNode(schemaNode) && schemaNode.$ref !== null && !isLocalRef(schemaNode.$ref);
-}
-
-function retrieve$ref(node: SchemaNode): Optional<string> {
-  if (isRefNode(node) && node.$ref !== null) {
-    return node.$ref;
-  }
-
-  if (hasRefItems(node) && node.items.$ref !== null) {
-    return `$ref(${node.items.$ref})`;
-  }
-
-  return;
-}
-
-function getTitle(node: SchemaNode): Optional<string> {
-  if (isArrayNodeWithItems(node)) {
-    if (Array.isArray(node.items) || !node.items.title) {
-      return retrieve$ref(node);
-    }
-
-    return node.items.title;
-  }
-
-  return node.title ?? retrieve$ref(node);
-}
-
-export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, onGoToRef }) => {
-  const { path, schemaNode: node } = getSchemaNodeMetadata(treeNode);
-  const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
-  const subtype = isArrayNodeWithItems(node) ? (hasRefItems(node) ? '$ref' : inferType(node.items)) : void 0;
-  const title = getTitle(node);
-
-  const childrenCount = React.useMemo<number | null>(() => {
-    if (type === SchemaKind.Object || (Array.isArray(type) && type.includes(SchemaKind.Object))) {
-      return count((node as IObjectNode).properties);
-    }
-
-    if (subtype === SchemaKind.Object) {
-      return count(((node as IArrayNode).items as IObjectNode).properties);
-    }
-
-    if (subtype === SchemaKind.Array) {
-      return count((node as IArrayNode).items as IArrayNode);
-    }
-
-    return null;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [node]);
+export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
+  const schemaNode = useSchemaNode();
+  const treeListNode = useTreeListNode();
+  const schemaTree = useSchemaTree();
+  const { subpath } = schemaNode;
 
   const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
-    if (onGoToRef && isRefNode(node) && node.$ref !== null) {
-      onGoToRef(node.$ref, node);
+    if (onGoToRef && isReferenceNode(schemaNode)) {
+      onGoToRef(schemaNode);
     }
-  }, [onGoToRef, node]);
+  }, [onGoToRef, schemaNode]);
 
   return (
     <>
-      {path.length > 0 && shouldShowPropertyName(treeNode) && <div className="mr-2">{path[path.length - 1]}</div>}
+      {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
+        <div className="mr-2">{subpath[subpath.length - 1]}</div>
+      )}
 
-      <Types type={type} subtype={subtype} title={title} />
+      <Types />
 
-      {onGoToRef && isExternalRefSchemaNode(node) ? (
+      {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
         <a role="button" className="text-blue-4 ml-2" onClick={handleGoToRef}>
           (go to ref)
         </a>
       ) : null}
 
-      {childrenCount !== null && <div className="ml-2 text-darken-7 dark:text-lighten-7">{`{${childrenCount}}`}</div>}
+      {isRegularNode(schemaNode) &&
+        (schemaNode.primaryType === SchemaNodeKind.Array || schemaNode.primaryType === SchemaNodeKind.Object) &&
+        isParentNode(treeListNode) &&
+        isNonNullable(schemaNode.children) &&
+        (schemaNode.children.length !== 1 || !isReferenceNode(schemaNode.children[0])) && (
+          <div className="ml-2 text-darken-7 dark:text-lighten-7">{`{${
+            (schemaTree.isFlattenedNode(schemaNode) ? treeListNode.children : schemaNode.children).length
+          }}`}</div>
+        )}
 
-      {path.length > 1 && path[path.length - 2] === 'patternProperties' ? (
+      {subpath.length > 1 && subpath[0] === 'patternProperties' ? (
         <div className="ml-2 text-darken-7 dark:text-lighten-7 truncate">(pattern property)</div>
       ) : null}
     </>

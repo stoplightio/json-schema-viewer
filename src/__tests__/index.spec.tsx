@@ -1,5 +1,6 @@
 import 'jest-enzyme';
 
+import { mount, ReactWrapper } from 'enzyme';
 import * as fastGlob from 'fast-glob';
 import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
@@ -9,6 +10,7 @@ import * as React from 'react';
 import { JsonSchemaViewer } from '../components';
 import { ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
+import { prettifyHtml } from './utils/prettifyHtml';
 
 describe('HTML Output', () => {
   it.each(
@@ -77,7 +79,7 @@ describe('HTML Output', () => {
       };
     });
 
-    it('given allOf merging disabled, should still merge', () => {
+    it('given allOf merging disabled, should preserve both combiners', () => {
       expect(dumpDom(<JsonSchemaViewer schema={schema} expanded={true} mergeAllOf={false} />)).toMatchSnapshot();
     });
 
@@ -181,6 +183,620 @@ describe('HTML Output', () => {
   });
 });
 
+describe.each([{}, { unknown: '' }, { $ref: null }])('given empty schema, should render empty text', schema => {
+  const wrapper = mount(<JsonSchemaViewer schema={schema as any} />);
+  expect(wrapper).toHaveHTML('<div>No schema defined</div>');
+  wrapper.unmount();
+});
+
+describe('Expanded depth', () => {
+  function stripDropZoneIds(input: string) {
+    return input.replace(/\sdata-root-drop-zone="\d+"/, '').replace(/\sdata-drop-zone-id="[a-z0-9-]+"/g, '');
+  }
+
+  const toUnmount: ReactWrapper[] = [];
+
+  function mountWithAutoUnmount(node: React.ReactElement) {
+    const wrapper = mount(node);
+    toUnmount.push(wrapper);
+    return wrapper;
+  }
+
+  afterEach(() => {
+    while (toUnmount.length > 0) {
+      toUnmount.pop()?.unmount();
+    }
+  });
+
+  describe('merged array with object', () => {
+    let schema: JSONSchema4;
+
+    beforeEach(() => {
+      schema = {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            foo: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  bar: {
+                    type: 'object',
+                    properties: {
+                      baz: {
+                        type: 'integer',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      };
+    });
+
+    describe('static', () => {
+      it('given initial level set to -1, should render only top-level property', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
+          "<div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 0px\\">
+                  <div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          "
+        `);
+      });
+
+      it('given initial level set to 0, should render top 2 levels', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
+          "<div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 0px\\">
+                  <div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 20px\\">
+                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+                    <span icon=\\"caret-right\\"></span>
+                  </span>
+                  <div>
+                    <div>foo</div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          "
+        `);
+      });
+
+      it('given initial level set to 1, should render top 3 levels', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
+          "<div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 0px\\">
+                  <div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 20px\\">
+                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+                    <span icon=\\"caret-down\\"></span>
+                  </span>
+                  <div>
+                    <div>foo</div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 40px\\">
+                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+                    <span icon=\\"caret-right\\"></span>
+                  </span>
+                  <div>
+                    <div>bar</div>
+                    <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          "
+        `);
+      });
+    });
+
+    describe('actual expanding', () => {
+      it('starting from level -1, should expand successfully', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+
+        wrapper.find('.TreeListItem--0').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
+            ),
+          ),
+        );
+
+        wrapper.find('.TreeListItem--1').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
+            ),
+          ),
+        );
+
+        wrapper.find('.TreeListItem--2').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
+            ),
+          ),
+        );
+      });
+
+      it('starting from level 0, should expand successfully', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+
+        wrapper.find('.TreeListItem--1').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
+            ),
+          ),
+        );
+
+        wrapper.find('.TreeListItem--2').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
+            ),
+          ),
+        );
+      });
+
+      it('starting from level 1, should expand successfully', () => {
+        const wrapper = mount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
+
+        wrapper.find('.TreeListItem--2').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
+            ),
+          ),
+        );
+      });
+    });
+  });
+
+  describe('merged array with object #2', () => {
+    let schema: JSONSchema4;
+
+    beforeEach(() => {
+      schema = {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            bar: {
+              type: 'integer',
+            },
+            foo: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  bar: {
+                    type: 'string',
+                  },
+                  foo: {
+                    type: 'number',
+                  },
+                },
+              },
+            },
+          },
+        },
+      };
+    });
+
+    describe('static', () => {
+      it('given initial level set to -1, should render only top-level property', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
+          "<div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 0px\\">
+                  <div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          "
+        `);
+      });
+
+      it('given initial level set to 0, should render top 2 levels', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
+          "<div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 0px\\">
+                  <div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 20px\\">
+                  <div>
+                    <div>bar</div>
+                    <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 20px\\">
+                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+                    <span icon=\\"caret-right\\"></span>
+                  </span>
+                  <div>
+                    <div>foo</div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          "
+        `);
+      });
+
+      it('given initial level set to 1, should render top 3 levels', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
+          "<div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 0px\\">
+                  <div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 20px\\">
+                  <div>
+                    <div>bar</div>
+                    <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 20px\\">
+                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
+                    <span icon=\\"caret-down\\"></span>
+                  </span>
+                  <div>
+                    <div>foo</div>
+                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 40px\\">
+                  <div>
+                    <div>bar</div>
+                    <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 40px\\">
+                  <div>
+                    <div>foo</div>
+                    <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          "
+        `);
+      });
+    });
+
+    describe('actual expanding', () => {
+      it('starting from level -1, should expand successfully', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+
+        wrapper.find('.TreeListItem--0').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
+            ),
+          ),
+        );
+
+        wrapper.find('.TreeListItem--1').last().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
+            ),
+          ),
+        );
+      });
+
+      it('starting from level 0, should expand successfully', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+
+        wrapper.find('.TreeListItem--1').last().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
+            ),
+          ),
+        );
+      });
+    });
+  });
+
+  describe('nested object', () => {
+    let schema: JSONSchema4;
+
+    beforeEach(() => {
+      schema = {
+        type: 'object',
+        properties: {
+          bar: {
+            type: 'object',
+            properties: {
+              barFoo: {
+                type: 'object',
+                properties: {
+                  barFooBar: {
+                    type: 'object',
+                  },
+                },
+              },
+              barBar: {
+                type: 'string',
+              },
+              barBaz: {
+                type: 'boolean',
+              },
+            },
+          },
+          foo: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                fooBar: {
+                  type: 'string',
+                },
+                fooFoo: {
+                  type: 'number',
+                },
+              },
+            },
+          },
+        },
+      };
+    });
+
+    describe('static', () => {
+      it('given initial level set to -1, should render only top-level property', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
+          "<div>
+            <div>
+              <div>
+                <div style=\\"margin-left: 0px\\">
+                  <div>
+                    <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
+                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          "
+        `);
+      });
+
+      it('given initial level set to 0, should render top 2 levels', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchSnapshot();
+      });
+
+      it('given initial level set to 1, should render top 3 levels', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchSnapshot();
+      });
+
+      it('given initial level set to 2, should render top 4 levels', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />);
+
+        expect(dumpDom(wrapper.getElement())).toMatchSnapshot();
+      });
+    });
+
+    describe('actual expanding', () => {
+      it('starting from level -1, should expand successfully', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+
+        wrapper.find('.TreeListItem--0').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
+            ),
+          ),
+        );
+
+        wrapper.find('.TreeListItem--1').first().simulate('click');
+        wrapper.find('.TreeListItem--1').last().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
+            ),
+          ),
+        );
+
+        wrapper.find('.TreeListItem--2').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
+            ),
+          ),
+        );
+      });
+
+      it('starting from level 0, should expand successfully', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+
+        wrapper.find('.TreeListItem--1').first().simulate('click');
+        wrapper.find('.TreeListItem--1').last().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
+            ),
+          ),
+        );
+
+        wrapper.find('.TreeListItem--2').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
+            ),
+          ),
+        );
+      });
+
+      it('starting from level 1, should expand successfully', () => {
+        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
+
+        wrapper.find('.TreeListItem--2').first().simulate('click');
+
+        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
+          prettifyHtml(
+            stripDropZoneIds(
+              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
+            ),
+          ),
+        );
+      });
+    });
+  });
+});
+
 describe('$ref resolving', () => {
   it('should render caret for schema with top-level $ref pointing at complex type', () => {
     const schema: JSONSchema4 = {
@@ -197,10 +813,7 @@ describe('$ref resolving', () => {
         <div>
           <div>
             <div style=\\"margin-left: 0px\\">
-              <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
-                <span icon=\\"caret-right\\"></span>
-              </span>
-              <div><span class=\\"text-purple-6 dark:text-purple-4\\">#/definitions/foo</span></div>
+              <div><span class=\\"text-green-7 dark:text-green-5\\">string</span></div>
               <div></div>
             </div>
           </div>
@@ -223,11 +836,11 @@ describe('$ref resolving', () => {
         <div>
           <div>
             <div style=\\"margin-left: 0px\\">
-              <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; position: relative\\">
-                <span icon=\\"caret-right\\"></span>
-              </span>
               <div><span class=\\"text-green-6 dark:text-green-4\\">$ref(#/foo)[]</span></div>
               <div></div>
+              <span class=\\"bp3-popover-wrapper\\">
+                <span class=\\"bp3-popover-target\\"><span icon=\\"warning-sign\\"></span></span>
+              </span>
             </div>
           </div>
         </div>
