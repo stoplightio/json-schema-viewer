@@ -10,7 +10,6 @@ import { validationCount } from './shared/Validations';
 export interface ISchemaTree {
   treeStore: TreeStore;
   schema: JSONSchema4;
-  expanded?: boolean;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
   rowRenderer?: RowRenderer;
