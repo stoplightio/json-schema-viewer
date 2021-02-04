@@ -1,7 +1,8 @@
 import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import { Optional } from '@stoplight/types';
-import { Icon, Tooltip } from '@stoplight/ui-kit';
+import { Tooltip } from '@stoplight/ui-kit';
+import { Box, Flex, Icon } from '@stoplight/mosaic'
 import cn from 'classnames';
 import * as React from 'react';
 
@@ -11,8 +12,9 @@ import { isCombiner } from '../guards/isCombiner';
 import { useSchemaNode, useSchemaTree, useTreeListNode } from '../hooks';
 import { GoToRefHandler, SchemaTreeListNode } from '../types';
 import { isPropertyRequired } from '../utils/isPropertyRequired';
-import { Caret, Description, Divider, Property, Validations } from './shared';
+import { Caret, Description, Divider, getValidationsFromSchema, Property, Validations } from './shared';
 import { Format } from './shared/Format';
+import { Properties } from './shared/Properties';
 
 export interface ISchemaRow {
   className?: string;
@@ -50,49 +52,55 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
 
   return (
     <>
-      {!isBrokenRef && isParentNode(treeListNode) && Tree.getLevel(treeListNode) > 0 ? (
-        <Caret
-          isExpanded={!!rowOptions.isExpanded}
-          style={{
-            width: CARET_ICON_BOX_DIMENSION,
-            height: CARET_ICON_BOX_DIMENSION,
-            ...(!isBrokenRef && Tree.getLevel(treeListNode) === 0
-              ? {
-                  position: 'relative',
-                }
-              : {
-                  left: CARET_ICON_BOX_DIMENSION * -1 + SCHEMA_ROW_OFFSET / -2,
-                }),
-          }}
-          size={CARET_ICON_SIZE}
+      <Flex my={2}>
+        {!isBrokenRef && isParentNode(treeListNode) && Tree.getLevel(treeListNode) > 0 ? (
+          <Caret
+            isExpanded={!!rowOptions.isExpanded}
+            style={{
+              width: CARET_ICON_BOX_DIMENSION,
+              height: CARET_ICON_BOX_DIMENSION,
+              ...(!isBrokenRef && Tree.getLevel(treeListNode) === 0
+                ? {
+                    position: 'relative',
+                  }
+                : {
+                    left: CARET_ICON_BOX_DIMENSION * -1 + SCHEMA_ROW_OFFSET / -2,
+                  }),
+            }}
+            size={CARET_ICON_SIZE}
+          />
+        ) : null}
+
+        {schemaNode.subpath.length > 0 &&
+          isCombiner(schemaNode.subpath[0]) &&
+          schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && <Divider kind={schemaNode.subpath[0]} />}
+
+        <Flex flex={1} className="truncate">
+          <Property onGoToRef={onGoToRef} />
+          <Format />
+        </Flex>
+        <Properties
+          required={isPropertyRequired(schemaNode)}
+          deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
+          validations={
+            isRegularNode(schemaNode)
+              ? schemaNode.validations
+              : {}
+          }
         />
-      ) : null}
+      </Flex>
 
-      {schemaNode.subpath.length > 0 &&
-        isCombiner(schemaNode.subpath[0]) &&
-        schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && <Divider kind={schemaNode.subpath[0]} />}
+      {typeof description === 'string' && description.length > 0 && (
+        <Flex flex={1} my={2} className="truncate">
+          <Description value={description} />
+        </Flex>
+      )}
 
-      <div className="flex-1 flex truncate">
-        <Property onGoToRef={onGoToRef} />
-        <Format />
-        {typeof description === 'string' && description.length > 0 && <Description value={description} />}
-      </div>
-
-      <Validations
-        required={isPropertyRequired(schemaNode)}
-        deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
-        validations={
+      <Validations validations={
           isRegularNode(schemaNode)
-            ? {
-                ...(schemaNode.enum !== null ? { enum: schemaNode.enum } : null),
-                ...('annotations' in schemaNode && schemaNode.annotations.default
-                  ? { default: schemaNode.annotations.default }
-                  : null),
-                ...schemaNode.validations,
-              }
+            ? getValidationsFromSchema(schemaNode)
             : {}
-        }
-      />
+        } />
 
       {isBrokenRef && (
         <Tooltip content={refNode!.error!}>
@@ -107,21 +115,27 @@ SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, treeListNode, rowOptions, onGoToRef }) => {
   const schemaNode = treeListNode.metadata as SchemaNode;
 
+  const offsetStyle = {
+    marginLeft: CARET_ICON_BOX_DIMENSION * Tree.getLevel(treeListNode), // offset for spacing
+  };
+
   return (
     <SchemaNodeContext.Provider value={schemaNode}>
       <TreeListNodeContext.Provider value={treeListNode}>
-        <div className={cn('px-2 flex-1 w-full max-w-full', className)}>
-          <div
-            className="flex items-center text-sm relative"
-            style={{
-              marginLeft: CARET_ICON_BOX_DIMENSION * Tree.getLevel(treeListNode), // offset for spacing
-            }}
+        <Box flex={1} px={2} className={cn('w-full max-w-full', className)}>
+          <Box
+            className="items-center text-sm relative"
+            style={offsetStyle}
           >
             <SchemaPropertyRow onGoToRef={onGoToRef} rowOptions={rowOptions} />
-          </div>
-        </div>
+          </Box>
+          {!rowOptions.isExpanded && <Divider
+            style={offsetStyle}
+          />}
+        </Box>
       </TreeListNodeContext.Provider>
     </SchemaNodeContext.Provider>
   );
 };
 SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';
+

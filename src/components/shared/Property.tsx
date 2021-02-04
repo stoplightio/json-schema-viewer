@@ -1,4 +1,5 @@
 import { isReferenceNode, isRegularNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import { Box } from '@stoplight/mosaic';
 import { isParentNode } from '@stoplight/tree-list';
 import * as React from 'react';
 
@@ -34,7 +35,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
   return (
     <>
       {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-        <div className="mr-2">{subpath[subpath.length - 1]}</div>
+        <Box mr={2} className="font-mono">{subpath[subpath.length - 1]}</Box>
       )}
 
       <Types />
@@ -50,13 +51,13 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
         isParentNode(treeListNode) &&
         isNonNullable(schemaNode.children) &&
         (schemaNode.children.length !== 1 || !isReferenceNode(schemaNode.children[0])) && (
-          <div className="ml-2 text-darken-7 dark:text-lighten-7">{`{${
+          <Box ml={2} className="text-darken-7 dark:text-lighten-7">{`{${
             (schemaTree.isFlattenedNode(schemaNode) ? treeListNode.children : schemaNode.children).length
-          }}`}</div>
+          }}`}</Box>
         )}
 
       {subpath.length > 1 && subpath[0] === 'patternProperties' ? (
-        <div className="ml-2 text-darken-7 dark:text-lighten-7 truncate">(pattern property)</div>
+        <Box ml={2} className="text-darken-7 dark:text-lighten-7 truncate">(pattern property)</Box>
       ) : null}
     </>
   );

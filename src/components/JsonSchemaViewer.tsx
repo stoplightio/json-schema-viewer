@@ -1,5 +1,6 @@
 import type { SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
 import { isRegularNode } from '@stoplight/json-schema-tree';
+import { Box, Flex } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
 import { Tree, TreeState, TreeStore } from '@stoplight/tree-list';
 import cn from 'classnames';
@@ -118,23 +119,23 @@ export class JsonSchemaViewerComponent extends React.PureComponent<
     }
 
     return (
-      <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
+      <Flex className={cn(className, 'JsonSchemaViewer relative h-full')}>
         <SchemaTreeContext.Provider value={this.tree}>
           <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
             <SchemaTreeComponent expanded={expanded} schema={schema} treeStore={this.treeStore} {...props} />
           </ViewModeContext.Provider>
         </SchemaTreeContext.Provider>
-      </div>
+      </Flex>
     );
   }
 }
 
 const JsonSchemaFallbackComponent: typeof FallbackComponent = ({ error }) => {
   return (
-    <div className="p-4">
+    <Box p={4}>
       <b className="text-danger">Error</b>
       {error !== null ? `: ${error.message}` : null}
-    </div>
+    </Box>
   );
 };
 

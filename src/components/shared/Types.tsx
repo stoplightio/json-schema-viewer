@@ -47,7 +47,7 @@ export const Types: React.FunctionComponent<{}> = () => {
 
   const rendered = types.map((type, i, { length }) => (
     <React.Fragment key={type}>
-      <span className={cn(PROPERTY_TYPE_COLORS[type], 'truncate')}>
+      <span className={cn('text-gray-5 dark:text-gray-3', 'truncate')}>
         {shouldRenderName(type) ? <Name type={type} /> : type}
       </span>
       {i < length - 1 && (
