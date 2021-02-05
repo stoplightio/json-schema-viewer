@@ -1,7 +1,6 @@
 import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import { Optional } from '@stoplight/types';
-import { Tooltip } from '@stoplight/ui-kit';
 import { Box, Flex, Icon } from '@stoplight/mosaic'
 import cn from 'classnames';
 import * as React from 'react';
@@ -75,7 +74,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
           isCombiner(schemaNode.subpath[0]) &&
           schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && <Divider kind={schemaNode.subpath[0]} />}
 
-        <Flex flex={1} className="truncate">
+        <Flex flex={1} textOverflow="truncate" fontSize="base">
           <Property onGoToRef={onGoToRef} />
           <Format />
         </Flex>
@@ -91,7 +90,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
       </Flex>
 
       {typeof description === 'string' && description.length > 0 && (
-        <Flex flex={1} my={2} className="truncate">
+        <Flex flex={1} my={2} py="px" textOverflow="truncate">
           <Description value={description} />
         </Flex>
       )}
@@ -103,9 +102,8 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
         } />
 
       {isBrokenRef && (
-        <Tooltip content={refNode!.error!}>
-          <Icon className="text-red-5 dark:text-red-4" icon="warning-sign" iconSize={12} />
-        </Tooltip>
+        // TODO (JJ): Add mosaic tooltip showing ref error
+        <Icon color="danger" icon="warning-sign" iconSize={12} />
       )}
     </>
   );
@@ -122,9 +120,11 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, tree
   return (
     <SchemaNodeContext.Provider value={schemaNode}>
       <TreeListNodeContext.Provider value={treeListNode}>
-        <Box flex={1} px={2} className={cn('w-full max-w-full', className)}>
+        <Box flex={1} px={2} w="full" maxW="full" className={className}>
           <Box
-            className="items-center text-sm relative"
+            alignItems="center"
+            pos="relative"
+            fontSize="sm"
             style={offsetStyle}
           >
             <SchemaPropertyRow onGoToRef={onGoToRef} rowOptions={rowOptions} />

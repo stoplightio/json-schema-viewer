@@ -119,7 +119,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<
     }
 
     return (
-      <Flex className={cn(className, 'JsonSchemaViewer relative h-full')}>
+      <Flex pos="relative" h="full" className={cn(className, 'JsonSchemaViewer')}>
         <SchemaTreeContext.Provider value={this.tree}>
           <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
             <SchemaTreeComponent expanded={expanded} schema={schema} treeStore={this.treeStore} {...props} />

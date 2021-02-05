@@ -1,5 +1,5 @@
 import { isRegularNode } from '@stoplight/json-schema-tree';
-import cn from 'classnames';
+import { Text } from '@stoplight/mosaic';
 import * as React from 'react';
 import { useSchemaNode } from '../../hooks/useSchemaNode';
 
@@ -10,5 +10,5 @@ export const Format: React.FunctionComponent = () => {
     return null;
   }
 
-  return <span className={cn('ml-2', 'text-gray-5 dark:text-gray-3')}>{`<${schemaNode.format}>`}</span>;
+  return <Text ml={2} color="muted">{`<${schemaNode.format}>`}</Text>;
 };

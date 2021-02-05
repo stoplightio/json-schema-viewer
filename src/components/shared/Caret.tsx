@@ -1,4 +1,4 @@
-import { Icon, IIconProps } from '@stoplight/mosaic';
+import { Flex, Icon, IIconProps } from '@stoplight/mosaic';
 import * as React from 'react';
 
 export interface ICaret {
@@ -8,15 +8,18 @@ export interface ICaret {
 }
 
 export const Caret: React.FunctionComponent<ICaret> = ({ style, size, isExpanded }) => (
-  <span
-    className="absolute flex justify-center cursor-pointer p-1"
+  <Flex
+    pos="absolute"
+    justify="center"
+    p={1}
+    cursor="pointer"
     role="button"
     style={style}
+    color="muted"
   >
     <Icon
       iconSize={size}
-      icon={['fas', isExpanded ? 'chevron-down' : 'chevron-right']}
-      className="text-darken-9 dark:text-lighten-7"
+      icon={isExpanded ? 'chevron-down' : 'chevron-right'}
     />
-  </span>
+  </Flex>
 );

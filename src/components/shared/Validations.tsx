@@ -1,9 +1,7 @@
 import { Dictionary, Primitive } from '@stoplight/types';
-import { Box, Flex } from '@stoplight/mosaic';
-import { Tag } from '@stoplight/ui-kit';
+import { Box, Flex, Text } from '@stoplight/mosaic';
 import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
 import * as React from 'react';
-import cn from 'classnames';
 import { RegularNode } from '@stoplight/json-schema-tree';
 
 export interface IValidations {
@@ -53,8 +51,8 @@ const NumberValidations = ({ validations, className }: { validations: Dictionary
     return null;
   }
   return (
-    <Flex my={2} className="text-gray-5 dark:text-gray-3">
-      Allowed values:
+    <Flex my={2} color="muted">
+      <Text fontWeight="light">Allowed values:</Text>
       {values.map(key => {
         let suffix;
         if (key.includes('Length')) {
@@ -72,9 +70,9 @@ const NumberValidations = ({ validations, className }: { validations: Dictionary
         const sign = `${key.includes('min') ? '>' : '<'}${exclusive ? '' : '='}`;
 
         return (
-          <Box ml={2} key={key} className={cn('text-sm bp3-running-text break-all', className)}>
-            <code>{`${sign} ${validations[key]}${suffix}`}</code>
-          </Box>
+          <Text key={key} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
+            {`${sign} ${validations[key]}${suffix}`}
+          </Text>
         );
       })}
     </Flex>
@@ -111,8 +109,8 @@ const KeyValueValidation = ({
   }
   const validation = Array.isArray(value) ? value : [value];
   return (
-    <Flex flexWrap className={cn('text-sm text-gray-5 dark:text-gray-3 my-2 bp3-running-text break-all', className)}>
-      {capitalize(name)}:
+    <Flex flexWrap color="muted" my={2} className={className}>
+      <Text fontWeight="light">{capitalize(name)}:</Text>
       {validation
         .filter(
           (v): v is Exclude<Primitive, null> | { value: string } =>
@@ -121,9 +119,9 @@ const KeyValueValidation = ({
         .map(v => {
           const value = typeof v === 'object' ? v.value : String(v);
           return (
-            <code className="ml-1 truncate" key={value}>
+            <Text key={value} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
               {value}
-            </code>
+            </Text>
           );
         })}
     </Flex>
@@ -136,9 +134,11 @@ const NameValidations = ({ validations, className }: { validations: Dictionary<u
       .filter(key => validations[key])
       .map(key => {
         return (
-          <Tag key={key} className={cn('mt-2 mr-2 capitalize', className)} minimal>
-            {key}
-          </Tag>
+          <Flex flex={1} my={2}>
+            <Text key={key} px={1} color="muted" fontFamily="mono" border rounded="lg" fontSize="sm" textTransform="capitalize" className={className}>
+              {key}
+            </Text>
+          </Flex>
         );
       })}
   </>

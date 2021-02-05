@@ -1,5 +1,4 @@
-import { Checkbox } from '@stoplight/ui-kit';
-import { Button } from '@stoplight/mosaic';
+import { Flex, Button } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
@@ -48,10 +47,10 @@ storiesOf('JsonSchemaViewer', module)
       return (
         <>
           <SchemaRow treeListNode={node} rowOptions={rowOptions} />
-          <div className="flex h-full items-center">
-            <Button className="pl-1 mr-1" size="sm" appearance="minimal" icon="issue" />
-            <Checkbox className="mb-0" />
-          </div>
+          <Flex h="full" alignItems="center">
+            <Button pl={1} mr={1} size="sm" appearance="minimal" icon="issue" />
+            <input type="checkbox" />
+          </Flex>
         </>
       );
     };

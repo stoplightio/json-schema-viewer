@@ -51,7 +51,7 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
       store={treeStore}
       rowHeight={(node: TreeListNode<SchemaNode>) => {
         const padding = 8;
-        const lineHeight = 16;
+        const lineHeight = 18;
         let numberOfLines = 1;
         const schemaNode = node.metadata;
 

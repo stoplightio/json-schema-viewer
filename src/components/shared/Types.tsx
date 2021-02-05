@@ -5,6 +5,7 @@ import {
   SchemaCombinerName,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
+import { Box, Text } from '@stoplight/mosaic';
 import cn from 'classnames';
 import * as React from 'react';
 
@@ -34,7 +35,7 @@ export const Types: React.FunctionComponent<{}> = () => {
   const schemaNode = useSchemaNode();
 
   if (isReferenceNode(schemaNode)) {
-    return <span className={cn(PROPERTY_TYPE_COLORS.$ref, 'truncate')}>{schemaNode.value ?? '$ref'}</span>;
+    return <Text textOverflow="truncate">{schemaNode.value ?? '$ref'}</Text>;
   }
 
   if (!isRegularNode(schemaNode)) {
@@ -47,17 +48,17 @@ export const Types: React.FunctionComponent<{}> = () => {
 
   const rendered = types.map((type, i, { length }) => (
     <React.Fragment key={type}>
-      <span className={cn('text-gray-5 dark:text-gray-3', 'truncate')}>
+      <Text textOverflow="truncate" color="muted">
         {shouldRenderName(type) ? <Name type={type} /> : type}
-      </span>
+      </Text>
       {i < length - 1 && (
-        <span key={`${i}-sep`} className="text-darken-7 dark:text-lighten-6">
+        <Text key={`${i}-sep`} color="muted">
           {' or '}
-        </span>
+        </Text>
       )}
     </React.Fragment>
   ));
 
-  return rendered.length > 1 ? <div className="truncate">{rendered}</div> : <>{rendered}</>;
+  return rendered.length > 1 ? <Box textOverflow="truncate">{rendered}</Box> : <>{rendered}</>;
 };
 Types.displayName = 'JsonSchemaViewer.Types';
