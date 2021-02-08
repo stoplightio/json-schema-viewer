@@ -105,6 +105,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
         // TODO (JJ): Add mosaic tooltip showing ref error
         <Icon title={refNode!.error!} color="danger" icon="warning-sign" iconSize={12} />
       )}
+      {!rowOptions.isExpanded && <Divider />}
     </>
   );
 };
@@ -112,10 +113,6 @@ SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, treeListNode, rowOptions, onGoToRef }) => {
   const schemaNode = treeListNode.metadata as SchemaNode;
-
-  const offsetStyle = {
-    marginLeft: CARET_ICON_BOX_DIMENSION * Tree.getLevel(treeListNode), // offset for spacing
-  };
 
   return (
     <SchemaNodeContext.Provider value={schemaNode}>
@@ -125,13 +122,12 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, tree
             alignItems="center"
             pos="relative"
             fontSize="sm"
-            style={offsetStyle}
+            style={{
+              marginLeft: CARET_ICON_BOX_DIMENSION * Tree.getLevel(treeListNode), // offset for spacing
+            }}
           >
             <SchemaPropertyRow onGoToRef={onGoToRef} rowOptions={rowOptions} />
           </Box>
-          {!rowOptions.isExpanded && <Divider
-            style={offsetStyle}
-          />}
         </Box>
       </TreeListNodeContext.Provider>
     </SchemaNodeContext.Provider>
