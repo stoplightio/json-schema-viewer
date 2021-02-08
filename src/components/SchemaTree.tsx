@@ -44,7 +44,7 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
 
   return (
     <TreeList
-      className="flex-1"
+      className="sl-flex-1"
       draggable={false}
       interactive={false}
       maxRows={maxRows !== void 0 ? maxRows + 0.5 : maxRows}

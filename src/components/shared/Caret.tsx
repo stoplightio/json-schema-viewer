@@ -1,3 +1,4 @@
+import {faChevronDown, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { Flex, Icon, IIconProps } from '@stoplight/mosaic';
 import * as React from 'react';
 
@@ -19,7 +20,7 @@ export const Caret: React.FunctionComponent<ICaret> = ({ style, size, isExpanded
   >
     <Icon
       iconSize={size}
-      icon={isExpanded ? 'chevron-down' : 'chevron-right'}
+      icon={isExpanded ? faChevronDown : faChevronRight}
     />
   </Flex>
 );

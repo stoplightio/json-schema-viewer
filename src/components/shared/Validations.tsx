@@ -26,6 +26,18 @@ const excludedValidations = [
   'writeOnly'
 ];
 
+// this typing requires `numberValidationNames` to be defined `as const`.
+const numberValidationFormatters: Record<typeof numberValidationNames[number], (value: unknown) => string> = {
+  minimum: (value) => `>= ${value}`,
+  exclusiveMinimum: (value) => `> ${value}`,
+  minItems:(value) => `>= ${value} items`,
+  minLength:(value) => `>= ${value} characters`,
+  maximum: (value) => `<= ${value}`,
+  exclusiveMaximum: (value) => `< ${value}`,
+  maxItems: (value) => `< ${value} items`,
+  maxLength: (value) => `< ${value} characters`,
+};
+
 export const Validations: React.FunctionComponent<IValidations> = ({
   validations,
 }) => {
@@ -45,36 +57,16 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   );
 };
 
-const NumberValidations = ({ validations, className }: { validations: Dictionary<unknown>; className?: string }) => {
-  const values = keys(omit(validations, excludedValidations));
-  if (!values.length) {
+const NumberValidations = ({ validations, className }: { validations: Partial<Record<typeof numberValidationNames[number], unknown>>; className?: string }) => {
+  const entries = Object.entries(validations);
+  if (!entries.length) {
     return null;
   }
   return (
     <Flex my={2} color="muted">
       <Text fontWeight="light">Allowed values:</Text>
-      {values.map(key => {
-        let suffix;
-        if (key.includes('Length')) {
-          suffix = ' characters';
-        } else if (key.includes('Items')) {
-          suffix = ' items';
-        } else {
-          suffix = '';
-        }
-
-        const exclusive =
-          (key === 'minimum' && validations.exclusiveMinimum) || (key === 'maximum' && validations.exclusiveMaximum)
-            ? true
-            : false;
-        const sign = `${key.includes('min') ? '>' : '<'}${exclusive ? '' : '='}`;
-
-        return (
-          <Text key={key} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
-            {`${sign} ${validations[key]}${suffix}`}
-          </Text>
-        );
-      })}
+      {entries.map(([key, value]) => numberValidationFormatters[key](value))
+        .map((value, i) => (<Text key={i} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>{value}</Text>))}
     </Flex>
   )
 };

@@ -103,7 +103,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
 
       {isBrokenRef && (
         // TODO (JJ): Add mosaic tooltip showing ref error
-        <Icon color="danger" icon="warning-sign" iconSize={12} />
+        <Icon title={refNode!.error!} color="danger" icon="warning-sign" iconSize={12} />
       )}
     </>
   );

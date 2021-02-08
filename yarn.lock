@@ -1864,10 +1864,10 @@
     unist-util-select "^3.0.1"
     unist-util-visit "^2.0.2"
 
-"@stoplight/mosaic@1.0.0-beta.22":
-  version "1.0.0-beta.22"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.0.0-beta.22.tgz#f06f94c3ef00eccf4564b30f926041d8d61cef61"
-  integrity sha512-HMABhZjQbk6QoZVyfk5JQYShKm+V4Kz7xOBzuGCbSu3KPVTRzW/A7voR0kjq0JZ2qjCypUBpWU6KZU/fOYmiNQ==
+"@stoplight/mosaic@^1.0.0-beta.22":
+  version "1.0.0-beta.23"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.0.0-beta.23.tgz#b08260ca6aac632007961b8dc3a924f8defa4ce6"
+  integrity sha512-poU8g1dn4D4QykcMyEBsepVKWLNii+8GToeGWMEhiAldI0SQ/wadUATR2QmshvHJ3l7MIHhx12K03GIW5ESbeg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.34"
     "@fortawesome/free-solid-svg-icons" "^5.15.2"
