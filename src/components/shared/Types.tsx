@@ -6,7 +6,6 @@ import {
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
 import { Box, Text } from '@stoplight/mosaic';
-import cn from 'classnames';
 import * as React from 'react';
 
 import { PROPERTY_TYPE_COLORS } from '../../consts';

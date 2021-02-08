@@ -1,42 +1,16 @@
 import 'jest-enzyme';
 
 import { TreeState } from '@stoplight/tree-list';
-import { Popover, Tooltip } from '@stoplight/ui-kit';
-import { mount, shallow } from 'enzyme';
+import { Icon } from '@stoplight/mosaic';
+import { mount } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { SchemaTreeListTree } from '../../tree';
-import { SchemaPropertyRow, SchemaRow } from '../SchemaRow';
-import { Validations } from '../shared/Validations';
+import { SchemaRow } from '../SchemaRow';
+import { Properties } from '../shared/Properties';
 
 describe('SchemaRow component', () => {
-  it('should render falsy validations', () => {
-    const tree = new SchemaTreeListTree(
-      {
-        enum: [null, 0, false, ''],
-      },
-      new TreeState(),
-      {
-        expandedDepth: Infinity,
-        mergeAllOf: false,
-        resolveRef: void 0,
-      },
-    );
-
-    tree.populate();
-
-    const wrapper = shallow(
-      mount(<SchemaRow treeListNode={tree.itemAt(0)!} rowOptions={{}} />)
-        .find(SchemaPropertyRow)
-        .find(Validations)
-        .find(Popover)
-        .prop('content') as React.ReactElement,
-    );
-
-    expect(wrapper).toHaveText('enum:null,0,false,');
-  });
-
   describe('resolving error', () => {
     let tree: SchemaTreeListTree;
     let schema: JSONSchema4;
@@ -62,7 +36,7 @@ describe('SchemaRow component', () => {
 
     it('given no custom resolver, should render a generic error message', () => {
       const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(1)!} rowOptions={{}} />);
-      expect(wrapper.find(Tooltip)).toHaveProp('content', `Could not resolve '#/properties/foo'`);
+      expect(wrapper.find(Icon)).toHaveProp('title', `Could not resolve '#/properties/foo'`);
       wrapper.unmount();
     });
 
@@ -80,7 +54,7 @@ describe('SchemaRow component', () => {
       tree.populate();
 
       const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(1)!} rowOptions={{}} />);
-      expect(wrapper.find(Tooltip)).toHaveProp('content', message);
+      expect(wrapper.find(Icon)).toHaveProp('title', message);
       wrapper.unmount();
     });
   });
@@ -98,7 +72,7 @@ describe('SchemaRow component', () => {
       tree.populate();
 
       const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(pos)!} rowOptions={{}} />);
-      expect(wrapper.find(Validations)).toHaveProp('required', value);
+      expect(wrapper.find(Properties)).toHaveProp('required', value);
       wrapper.unmount();
     }
 

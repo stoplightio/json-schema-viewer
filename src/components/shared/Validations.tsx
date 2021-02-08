@@ -1,5 +1,5 @@
 import { Dictionary, Primitive } from '@stoplight/types';
-import { Box, Flex, Text } from '@stoplight/mosaic';
+import { Flex, Text } from '@stoplight/mosaic';
 import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
 import * as React from 'react';
 import { RegularNode } from '@stoplight/json-schema-tree';

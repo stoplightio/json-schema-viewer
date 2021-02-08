@@ -24,21 +24,21 @@ describe('Format component', () => {
     tree.populate();
   });
 
-  it('should render next to a single type with and inherit its color', () => {
+  it('should render next to a single type', () => {
     const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(3)!} rowOptions={{}} />);
-    expect(wrapper.find(Format)).toHaveHTML('<span class="ml-2 text-red-7 dark:text-red-6">&lt;float&gt;</span>');
+    expect(wrapper.find(Format)).toHaveHTML('<span class="sl-ml-2 sl-text-muted">&lt;float&gt;</span>');
     wrapper.unmount();
   });
 
-  it('should render next to an array of types in default (black) color', () => {
+  it('should render next to an array of types', () => {
     const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(1)!} rowOptions={{}} />);
-    expect(wrapper.find(Format)).toHaveHTML('<span class="ml-2">&lt;date-time&gt;</span>');
+    expect(wrapper.find(Format)).toHaveHTML('<span class="sl-ml-2 sl-text-muted">&lt;date-time&gt;</span>');
     wrapper.unmount();
   });
 
   it('should render even when the type(s) is/are missing', () => {
     const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(4)!} rowOptions={{}} />);
-    expect(wrapper.find(Format)).toHaveHTML('<span class="ml-2">&lt;date-time&gt;</span>');
+    expect(wrapper.find(Format)).toHaveHTML('<span class="sl-ml-2 sl-text-muted">&lt;date-time&gt;</span>');
     wrapper.unmount();
   });
 });

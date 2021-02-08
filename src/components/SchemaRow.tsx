@@ -2,7 +2,6 @@ import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKi
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import { Optional } from '@stoplight/types';
 import { Box, Flex, Icon } from '@stoplight/mosaic'
-import cn from 'classnames';
 import * as React from 'react';
 
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';

@@ -19,7 +19,7 @@ export const Caret: React.FunctionComponent<ICaret> = ({ style, size, isExpanded
     color="muted"
   >
     <Icon
-      iconSize={size}
+      size={size}
       icon={isExpanded ? faChevronDown : faChevronRight}
     />
   </Flex>
