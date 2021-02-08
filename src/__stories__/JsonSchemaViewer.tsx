@@ -1,4 +1,4 @@
-import { Flex, Button } from '@stoplight/mosaic';
+import { Flex, Button, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
@@ -11,6 +11,8 @@ import { Wrapper } from './utils/Wrapper';
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
+
+subscribeTheme({ mode: 'light' });
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -149,14 +151,18 @@ storiesOf('JsonSchemaViewer', module)
       mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
-  .add('dark', () => (
-    <div style={{ height: '100vh' }} className="bp3-dark bg-gray-8">
-      <JsonSchemaViewer
-        schema={schema as JSONSchema4}
-        defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-        expanded={boolean('expanded', false)}
-        onGoToRef={action('onGoToRef')}
-        mergeAllOf={boolean('mergeAllOf', true)}
-      />
-    </div>
-  ));
+  .add('dark', () => {
+    return (
+      <InvertTheme>
+        <div style={{ height: '100vh' }}>
+          <JsonSchemaViewer
+            schema={schema as JSONSchema4}
+            defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+            expanded={boolean('expanded', false)}
+            onGoToRef={action('onGoToRef')}
+            mergeAllOf={boolean('mergeAllOf', true)}
+          />
+        </div>
+      </InvertTheme>
+    );
+  });
