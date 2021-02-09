@@ -1,3 +1,4 @@
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import { Optional } from '@stoplight/types';
@@ -102,7 +103,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
 
       {isBrokenRef && (
         // TODO (JJ): Add mosaic tooltip showing ref error
-        <Icon title={refNode!.error!} color="danger" icon="warning-sign" iconSize={12} />
+        <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
       )}
       {!rowOptions.isExpanded && <Divider />}
     </>
