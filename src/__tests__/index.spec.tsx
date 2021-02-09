@@ -248,10 +248,12 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 0px\\">
                   <div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                    <div>
+                      <span>array[object]</span>
+                      <div>{1}</div>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -269,25 +271,26 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 0px\\">
                   <div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                    <div>
+                      <span>array[object]</span>
+                      <div>{1}</div>
+                    </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
             <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
-                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-                    <span icon=\\"caret-right\\"></span>
-                  </span>
                   <div>
-                    <div>foo</div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                    <div>
+                      <div>foo</div>
+                      <span>array[object]</span>
+                      <div>{1}</div>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -305,40 +308,40 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 0px\\">
                   <div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                    <div>
+                      <span>array[object]</span>
+                      <div>{1}</div>
+                    </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
             <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
-                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-                    <span icon=\\"caret-down\\"></span>
-                  </span>
                   <div>
-                    <div>foo</div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                    <div>
+                      <div>foo</div>
+                      <span>array[object]</span>
+                      <div>{1}</div>
+                    </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
             <div>
               <div>
                 <div style=\\"margin-left: 40px\\">
-                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-                    <span icon=\\"caret-right\\"></span>
-                  </span>
                   <div>
-                    <div>bar</div>
-                    <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{1}</div>
+                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                    <div>
+                      <div>bar</div>
+                      <span>object</span>
+                      <div>{1}</div>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -464,10 +467,12 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 0px\\">
                   <div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                    <div>
+                      <span>array[object]</span>
+                      <div>{2}</div>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -485,10 +490,11 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 0px\\">
                   <div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                    <div>
+                      <span>array[object]</span>
+                      <div>{2}</div>
+                    </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
@@ -496,25 +502,27 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div>bar</div>
-                    <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+                    <div>
+                      <div>bar</div>
+                      <span>integer</span>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
             <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
-                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-                    <span icon=\\"caret-right\\"></span>
-                  </span>
                   <div>
-                    <div>foo</div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                    <div>
+                      <div>foo</div>
+                      <span>array[object]</span>
+                      <div>{2}</div>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -532,10 +540,11 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 0px\\">
                   <div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                    <div>
+                      <span>array[object]</span>
+                      <div>{2}</div>
+                    </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
@@ -543,25 +552,26 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div>bar</div>
-                    <span class=\\"text-red-7 dark:text-red-6\\">integer</span>
+                    <div>
+                      <div>bar</div>
+                      <span>integer</span>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
             <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
-                  <span class=\\"hover:bg-darken-3\\" role=\\"button\\" style=\\"width: 20px; height: 20px; left: -23.5px\\">
-                    <span icon=\\"caret-down\\"></span>
-                  </span>
                   <div>
-                    <div>foo</div>
-                    <span class=\\"text-green-6 dark:text-green-4\\">array[object]</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                    <div>
+                      <div>foo</div>
+                      <span>array[object]</span>
+                      <div>{2}</div>
+                    </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
@@ -569,10 +579,12 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 40px\\">
                   <div>
-                    <div>bar</div>
-                    <span class=\\"text-green-7 dark:text-green-5\\">string</span>
+                    <div>
+                      <div>bar</div>
+                      <span>string</span>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -580,10 +592,12 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 40px\\">
                   <div>
-                    <div>foo</div>
-                    <span class=\\"text-red-7 dark:text-red-6\\">number</span>
+                    <div>
+                      <div>foo</div>
+                      <span>number</span>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -688,10 +702,12 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 0px\\">
                   <div>
-                    <span class=\\"text-blue-6 dark:text-blue-4\\">object</span>
-                    <div class=\\"text-darken-7 dark:text-lighten-7\\">{2}</div>
+                    <div>
+                      <span>object</span>
+                      <div>{2}</div>
+                    </div>
                   </div>
-                  <div></div>
+                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -813,8 +829,10 @@ describe('$ref resolving', () => {
         <div>
           <div>
             <div style=\\"margin-left: 0px\\">
-              <div><span class=\\"text-green-7 dark:text-green-5\\">string</span></div>
-              <div></div>
+              <div>
+                <div><span>string</span></div>
+              </div>
+              <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
             </div>
           </div>
         </div>
@@ -836,11 +854,10 @@ describe('$ref resolving', () => {
         <div>
           <div>
             <div style=\\"margin-left: 0px\\">
-              <div><span class=\\"text-green-6 dark:text-green-4\\">$ref(#/foo)[]</span></div>
-              <div></div>
-              <span class=\\"bp3-popover-wrapper\\">
-                <span class=\\"bp3-popover-target\\"><span icon=\\"warning-sign\\"></span></span>
-              </span>
+              <div>
+                <div><span>$ref(#/foo)[]</span></div>
+              </div>
+              <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
             </div>
           </div>
         </div>
