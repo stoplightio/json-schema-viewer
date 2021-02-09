@@ -58,7 +58,7 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
         if (schemaNode && isRegularNode(schemaNode)) {
           const hasDescription = schemaNode.annotations.description !== undefined;
           const validations = validationCount(schemaNode);
-          numberOfLines += (validations + (hasDescription ? 1 : 0));
+          numberOfLines += validations + (hasDescription ? 1 : 0);
         }
         return (numberOfLines + 1) * padding + numberOfLines * lineHeight;
       }}

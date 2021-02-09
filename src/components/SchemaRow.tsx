@@ -1,8 +1,8 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import { Box, Flex, Icon } from '@stoplight/mosaic';
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import { Optional } from '@stoplight/types';
-import { Box, Flex, Icon } from '@stoplight/mosaic'
 import * as React from 'react';
 
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';
@@ -81,11 +81,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
         <Properties
           required={isPropertyRequired(schemaNode)}
           deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
-          validations={
-            isRegularNode(schemaNode)
-              ? schemaNode.validations
-              : {}
-          }
+          validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
         />
       </Flex>
 
@@ -95,11 +91,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
         </Flex>
       )}
 
-      <Validations validations={
-          isRegularNode(schemaNode)
-            ? getValidationsFromSchema(schemaNode)
-            : {}
-        } />
+      <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
 
       {isBrokenRef && (
         // TODO (JJ): Add mosaic tooltip showing ref error
@@ -134,4 +126,3 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, tree
   );
 };
 SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';
-

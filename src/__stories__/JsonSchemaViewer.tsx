@@ -1,4 +1,4 @@
-import { Flex, Button, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
+import { Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';

@@ -35,13 +35,15 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
   return (
     <>
       {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-        <Box mr={2} fontFamily="mono" fontWeight="bold">{subpath[subpath.length - 1]}</Box>
+        <Box mr={2} fontFamily="mono" fontWeight="bold">
+          {subpath[subpath.length - 1]}
+        </Box>
       )}
 
       <Types />
 
       {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
-        <Link ml={2}  color="primary-light" cursor="pointer" onClick={handleGoToRef}>
+        <Link ml={2} color="primary-light" cursor="pointer" onClick={handleGoToRef}>
           (go to ref)
         </Link>
       ) : null}
@@ -57,7 +59,9 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
         )}
 
       {subpath.length > 1 && subpath[0] === 'patternProperties' ? (
-        <Box ml={2} textOverflow="truncate" color="muted">(pattern property)</Box>
+        <Box ml={2} textOverflow="truncate" color="muted">
+          (pattern property)
+        </Box>
       ) : null}
     </>
   );

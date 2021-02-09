@@ -63,9 +63,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML(
-      '<span class="sl-truncate sl-text-muted">array[string]</span>',
-    );
+    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array[string]</span>');
   });
 
   it('should handle nullish items', () => {

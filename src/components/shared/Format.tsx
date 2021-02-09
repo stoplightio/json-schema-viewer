@@ -1,6 +1,7 @@
 import { isRegularNode } from '@stoplight/json-schema-tree';
 import { Text } from '@stoplight/mosaic';
 import * as React from 'react';
+
 import { useSchemaNode } from '../../hooks/useSchemaNode';
 
 export const Format: React.FunctionComponent = () => {
