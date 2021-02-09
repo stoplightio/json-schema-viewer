@@ -21,8 +21,7 @@ const numberValidationNames = [
 
 const excludedValidations = ['exclusiveMinimum', 'exclusiveMaximum', 'readOnly', 'writeOnly'];
 
-// this typing requires `numberValidationNames` to be defined `as const`.
-const numberValidationFormatters: Record<typeof numberValidationNames[number], (value: unknown) => string> = {
+const numberValidationFormatters: Record<string, (value: unknown) => string> = {
   minimum: value => `>= ${value}`,
   exclusiveMinimum: value => `> ${value}`,
   minItems: value => `>= ${value} items`,

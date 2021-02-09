@@ -34,7 +34,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
 
   return (
     <>
-      {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
+      {subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
         <Box mr={2} fontFamily="mono" fontWeight="bold">
           {subpath[subpath.length - 1]}
         </Box>

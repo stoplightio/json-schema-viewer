@@ -8,11 +8,10 @@ import {
 import { Box, Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
-import { PROPERTY_TYPE_COLORS } from '../../consts';
 import { useSchemaNode } from '../../hooks';
 import { Name } from './Name';
 
-function shouldRenderName(type: keyof typeof PROPERTY_TYPE_COLORS): boolean {
+function shouldRenderName(type: SchemaNodeKind | SchemaCombinerName | '$ref'): boolean {
   return type === SchemaNodeKind.Array || type === SchemaNodeKind.Object || type === '$ref';
 }
 
