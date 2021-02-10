@@ -63,9 +63,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML(
-      '<span class="text-green-6 dark:text-green-4 truncate">array[string]</span>',
-    );
+    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array[string]</span>');
   });
 
   it('should handle nullish items', () => {
@@ -75,7 +73,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="text-green-6 dark:text-green-4 truncate">array</span>');
+    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
   });
 
   it('should handle nullish $ref', () => {
@@ -84,7 +82,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="text-purple-6 dark:text-purple-4 truncate">$ref</span>');
+    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate">$ref</span>');
   });
 
   describe('properties counter', () => {
@@ -199,7 +197,7 @@ describe('Property component', () => {
 
       const wrapper = render(schema, 0);
       expect(wrapper).toHaveHTML(
-        '<span class="text-green-6 dark:text-green-4 truncate">array[oneOf]</span><div class="ml-2 text-darken-7 dark:text-lighten-7">{2}</div>',
+        '<span class="sl-truncate sl-text-muted">array[oneOf]</span><div class="sl-ml-2 sl-text-muted">{2}</div>',
       );
     });
 
@@ -222,7 +220,7 @@ describe('Property component', () => {
 
       const wrapper = render(schema, 0);
       expect(wrapper).toHaveHTML(
-        '<span class="text-green-6 dark:text-green-4 truncate">array[object]</span><div class="ml-2 text-darken-7 dark:text-lighten-7">{3}</div>',
+        '<span class="sl-truncate sl-text-muted">array[object]</span><div class="sl-ml-2 sl-text-muted">{3}</div>',
       );
     });
 
@@ -257,12 +255,12 @@ describe('Property component', () => {
 
       let wrapper = render(schema, 3);
       expect(wrapper).toHaveHTML(
-        '<div class="mr-2">foo</div><span class="text-green-7 dark:text-green-5 truncate">string</span>',
+        '<div class="sl-font-mono sl-font-bold sl-mr-2">foo</div><span class="sl-truncate sl-text-muted">string</span>',
       );
 
       wrapper = render(schema, 5);
       expect(wrapper).toHaveHTML(
-        '<div class="mr-2">bar</div><span class="text-green-7 dark:text-green-5 truncate">string</span>',
+        '<div class="sl-font-mono sl-font-bold sl-mr-2">bar</div><span class="sl-truncate sl-text-muted">string</span>',
       );
     });
 
@@ -297,7 +295,7 @@ describe('Property component', () => {
           </SchemaNodeContext.Provider>
         </SchemaTreeContext.Provider>,
       );
-      expect(wrapper.find('div')).toHaveHTML('<div class="mr-2">foo</div>');
+      expect(wrapper.find('div')).toHaveHTML('<div class="sl-font-mono sl-font-bold sl-mr-2">foo</div>');
       wrapper.unmount();
     });
   });
@@ -315,7 +313,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="text-blue-6 dark:text-blue-4 truncate">User</span>');
+      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
     });
 
     it('given array type with non-array items, should render title', () => {
@@ -333,7 +331,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="text-green-6 dark:text-green-4 truncate">User[]</span>');
+      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User[]</span>');
     });
 
     it('given array with no items, should render title', () => {
@@ -343,7 +341,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="text-green-6 dark:text-green-4 truncate">User</span>');
+      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
     });
 
     it('given array with defined items, should not render title', () => {
@@ -362,7 +360,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="text-green-6 dark:text-green-4 truncate">array</span>');
+      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
     });
   });
 

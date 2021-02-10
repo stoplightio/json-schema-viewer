@@ -1,4 +1,4 @@
-import { Button, Checkbox, Icon } from '@stoplight/ui-kit';
+import { Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
@@ -11,6 +11,8 @@ import { Wrapper } from './utils/Wrapper';
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
+
+subscribeTheme({ mode: 'light' });
 
 storiesOf('JsonSchemaViewer', module)
   .addDecorator(withKnobs)
@@ -47,10 +49,10 @@ storiesOf('JsonSchemaViewer', module)
       return (
         <>
           <SchemaRow treeListNode={node} rowOptions={rowOptions} />
-          <div className="flex h-full items-center">
-            <Button className="pl-1 mr-1" small minimal icon={<Icon color="grey" iconSize={12} icon="issue" />} />
-            <Checkbox className="mb-0" />
-          </div>
+          <Flex h="full" alignItems="center">
+            <Button pl={1} mr={1} size="sm" appearance="minimal" icon="issue" />
+            <input type="checkbox" />
+          </Flex>
         </>
       );
     };
@@ -149,14 +151,18 @@ storiesOf('JsonSchemaViewer', module)
       mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
-  .add('dark', () => (
-    <div style={{ height: '100vh' }} className="bp3-dark bg-gray-8">
-      <JsonSchemaViewer
-        schema={schema as JSONSchema4}
-        defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-        expanded={boolean('expanded', false)}
-        onGoToRef={action('onGoToRef')}
-        mergeAllOf={boolean('mergeAllOf', true)}
-      />
-    </div>
-  ));
+  .add('dark', () => {
+    return (
+      <InvertTheme>
+        <div style={{ height: '100vh' }}>
+          <JsonSchemaViewer
+            schema={schema as JSONSchema4}
+            defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+            expanded={boolean('expanded', false)}
+            onGoToRef={action('onGoToRef')}
+            mergeAllOf={boolean('mergeAllOf', true)}
+          />
+        </div>
+      </InvertTheme>
+    );
+  });

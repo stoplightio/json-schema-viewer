@@ -3,25 +3,12 @@ import { ReactElement } from 'react';
 
 import { prettifyHtml } from './prettifyHtml';
 
-const TAILWIND_CLASSES = [
-  /-?p[xytblr]?-(?:\d+|auto)/,
-  /-?m[xytblr]?-(?:\d+|auto)/,
-  /((max|min)-)?[wh]-(full|screen)/,
-  /flex-1|flex/,
-  /items-(baseline|center)/,
-  /justify-center/,
-  /cursor-pointer/,
-  /relative|absolute/,
-  /truncate/,
-  /uppercase/,
-  /rounded/,
-  /text-(xs|sm|md|lg)/,
-].map(pattern => new RegExp(`^${pattern.source}$`));
+const MOSAIC_CLASSES_EXP = /^sl-.*$/;
 
 function stripTailwindClasses(node: HTMLElement) {
   for (const child of node.children) {
     for (const _class of [...child.classList]) {
-      if (TAILWIND_CLASSES.some(tailwindClass => tailwindClass.test(_class))) {
+      if (MOSAIC_CLASSES_EXP.test(_class)) {
         child.classList.remove(_class);
       }
     }
