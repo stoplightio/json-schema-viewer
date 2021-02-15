@@ -180,7 +180,12 @@ export function getValidationsFromSchema(schemaNode: RegularNode) {
           ...(schemaNode.annotations.examples ? { examples: schemaNode.annotations.examples } : null),
         }
       : null),
-    ...('fragment' in schemaNode && 'const' in schemaNode.fragment ? { const: schemaNode.fragment.const } : null),
+    ...('fragment' in schemaNode
+      ? {
+          ...('const' in schemaNode.fragment ? { const: schemaNode.fragment.const } : null),
+          ...('x-example' in schemaNode.fragment ? { ['x-example']: schemaNode.fragment['x-example'] } : null),
+        }
+      : null),
     ...schemaNode.validations,
   };
 }
