@@ -38,7 +38,7 @@ const numberValidationFormatters: Record<string, (value: unknown) => string> = {
 };
 
 const createStringFormatter = (nowrap: boolean | undefined) => (value: unknown) => {
-  return nowrap || typeof value !== 'string' ? String(value) : `"${value}"`;
+  return nowrap && typeof value === 'string' ? value : JSON.stringify(value);
 };
 
 const createValidationsFormatter = (name: string, options?: { exact?: boolean; nowrap?: boolean }) => (
