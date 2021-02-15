@@ -4,34 +4,40 @@
   "properties": {
     "name": {
       "type": "string",
+      "const": "Constant name",
+      "examples": ["Example name", "Different name"],
       "description": "The user's full name. This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!"
     },
     "age": {
       "type": "number",
-      "minimum": 0,
-      "maximum": 150,
+      "minimum": 10,
+      "maximum": 40,
       "multipleOf": 10,
-      "exclusiveMinimum": true,
-      "exclusiveMaximum": true,
+      "default": 20,
+      "enum": [10, 20, 30, 40],
       "readOnly": true
     },
     "completed_at": {
       "type": "string",
       "format": "date-time",
-      "writeOnly": true
+      "writeOnly": true,
+      "pattern": "MM/dd/yyyy H:mm"
     },
     "items": {
       "type": ["null", "array"],
       "items": {
         "type": ["string", "number"]
       },
+      "minItems": 1,
+      "maxItems": 4,
       "description": "This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!"
     },
     "email": {
       "type": "string",
       "format": "email",
-      "example": "email@email.com",
+      "example": ["one@email.com", "two@email.com"],
       "deprecated": true,
+      "default": "default@email.com",
       "minLength": 2
     },
     "plan": {

@@ -331,9 +331,9 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -441,9 +441,9 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -542,9 +542,9 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -628,9 +628,9 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -839,9 +839,9 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -949,9 +949,9 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -1050,9 +1050,9 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -1136,9 +1136,9 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>admin</span>
-          <span>editor</span>
+          <span>Allowed values:</span>
+          <span>\\"admin\\"</span>
+          <span>\\"editor\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -1494,10 +1494,6 @@ exports[`HTML Output should match arrays/of-objects.json 1`] = `
             <div>{1}</div>
           </div>
         </div>
-        <div>
-          <span>Xml.name:</span>
-          <span>Pet</span>
-        </div>
       </div>
     </div>
   </div>
@@ -1764,10 +1760,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
             <span>string</span>
           </div>
         </div>
-        <div>
-          <span>Allowed values:</span>
-          <span>&gt;= 1 characters</span>
-        </div>
+        <div><span>&gt;= 1 characters</span></div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
     </div>
@@ -1781,10 +1774,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
             <span>number</span>
           </div>
         </div>
-        <div>
-          <span>Allowed values:</span>
-          <span>&lt;= 2</span>
-        </div>
+        <div><span>&lt;= 2</span></div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
     </div>
@@ -1799,9 +1789,8 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
           </div>
         </div>
         <div>
-          <span>Allowed values:</span>
           <span>&gt;= 1 characters</span>
-          <span>&lt; 2 characters</span>
+          <span>&lt;= 2 characters</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -1816,10 +1805,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
             <span>number</span>
           </div>
         </div>
-        <div>
-          <span>Allowed values:</span>
-          <span>&lt;= 1</span>
-        </div>
+        <div><span>&lt;= 1</span></div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
     </div>
@@ -1848,9 +1834,8 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
           </div>
         </div>
         <div>
-          <span>Allowed values:</span>
           <span>&gt;= 1 characters</span>
-          <span>&lt; 2 characters</span>
+          <span>&lt;= 2 characters</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -2258,7 +2243,6 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
           <span>required</span>
         </div>
         <div>
-          <span>Allowed values:</span>
           <span>&gt;= 0</span>
           <span>&lt;= 1000000</span>
         </div>
@@ -2353,7 +2337,6 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
           <span>required</span>
         </div>
         <div>
-          <span>Allowed values:</span>
           <span>&gt;= 0</span>
           <span>&lt;= 150</span>
         </div>
@@ -2403,7 +2386,6 @@ exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
           <span>required</span>
         </div>
         <div>
-          <span>Allowed values:</span>
           <span>&gt;= 0</span>
           <span>&lt;= 1000000</span>
         </div>
@@ -2497,10 +2479,10 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>Cancel</span>
-          <span>Confirm</span>
-          <span>Update</span>
+          <span>Allowed values:</span>
+          <span>\\"Cancel\\"</span>
+          <span>\\"Confirm\\"</span>
+          <span>\\"Update\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -2602,8 +2584,8 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
           <span>required</span>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>Create</span>
+          <span>Allowed value:</span>
+          <span>\\"Create\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -2716,8 +2698,8 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
           </div>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>test</span>
+          <span>Allowed value:</span>
+          <span>\\"test\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -2825,6 +2807,15 @@ exports[`HTML Output should match default-schema.json 1`] = `
             If it's not truncating then theres and issue that needs to be fixed. Help!
           </div>
         </div>
+        <div>
+          <span>Example values:</span>
+          <span>\\"Example name\\"</span>
+          <span>\\"Different name\\"</span>
+        </div>
+        <div>
+          <span>Allowed value:</span>
+          <span>\\"Constant name\\"</span>
+        </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
     </div>
@@ -2841,14 +2832,22 @@ exports[`HTML Output should match default-schema.json 1`] = `
           <span>required</span>
         </div>
         <div>
-          <span>Allowed values:</span>
-          <span>&gt;= 0</span>
-          <span>&lt;= 150</span>
-          <span>&gt; true</span>
-          <span>&lt; true</span>
+          <span>&gt;= 10</span>
+          <span>&lt;= 40</span>
         </div>
         <div>
-          <span>Multipleof:</span>
+          <span>Allowed values:</span>
+          <span>10</span>
+          <span>20</span>
+          <span>30</span>
+          <span>40</span>
+        </div>
+        <div>
+          <span>Default value:</span>
+          <span>20</span>
+        </div>
+        <div>
+          <span>Multiple of value:</span>
           <span>10</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
@@ -2866,6 +2865,10 @@ exports[`HTML Output should match default-schema.json 1`] = `
           </div>
           <span>write-only</span>
           <span>required</span>
+        </div>
+        <div>
+          <span>Match pattern value:</span>
+          <span>\\"MM/dd/yyyy H:mm\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -2892,6 +2895,10 @@ exports[`HTML Output should match default-schema.json 1`] = `
             then theres and issue that needs to be fixed. Help!
           </div>
         </div>
+        <div>
+          <span>&gt;= 1 items</span>
+          <span>&lt;= 4 items</span>
+        </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
     </div>
@@ -2907,13 +2914,15 @@ exports[`HTML Output should match default-schema.json 1`] = `
           </div>
           <span>deprecated</span>
         </div>
+        <div><span>&gt;= 2 characters</span></div>
         <div>
-          <span>Allowed values:</span>
-          <span>&gt;= 2 characters</span>
+          <span>Default value:</span>
+          <span>\\"default@email.com\\"</span>
         </div>
         <div>
-          <span>Example:</span>
-          <span>email@email.com</span>
+          <span>Example values:</span>
+          <span>\\"one@email.com\\"</span>
+          <span>\\"two@email.com\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -2943,8 +2952,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
           </div>
         </div>
         <div>
-          <span>Example:</span>
-          <span>hi</span>
+          <span>Example value:</span>
+          <span>\\"hi\\"</span>
         </div>
       </div>
     </div>
@@ -2972,79 +2981,6 @@ exports[`HTML Output should match default-schema.json 1`] = `
             <span>string</span>
           </div>
           <span>required</span>
-        </div>
-        <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div style=\\"top: -9px; height: 1px\\"><div>and/or</div></div>
-          <div><span>array[integer]</span></div>
-        </div>
-        <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-          <div>
-            <div>permissions</div>
-            <div>
-              <span>string</span>
-              <span>or</span>
-              <span>object</span>
-            </div>
-            <div>{1}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>
-            <div>ids</div>
-            <span>array[integer]</span>
-          </div>
-        </div>
-        <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 20px\\">
-        <div>
-          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-          <div>
-            <div>ref</div>
-            <div>
-              <span>string</span>
-              <span>or</span>
-              <span>object</span>
-            </div>
-            <div>{1}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div style=\\"margin-left: 40px\\">
-        <div>
-          <div>
-            <div>ids</div>
-            <span>array[integer]</span>
-          </div>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -3408,13 +3344,13 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
           </div>
         </div>
         <div>
-          <span>Enum:</span>
-          <span>COMPLETED</span>
-          <span>ACTIVE</span>
+          <span>Allowed values:</span>
+          <span>\\"COMPLETED\\"</span>
+          <span>\\"ACTIVE\\"</span>
         </div>
         <div>
-          <span>Default:</span>
-          <span>ACTIVE</span>
+          <span>Default value:</span>
+          <span>\\"ACTIVE\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
@@ -3484,11 +3420,11 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
         </div>
         <div><div title=\\"Ticketing option short-description.\\">Ticketing option short-description.</div></div>
         <div>
-          <span>Enum:</span>
-          <span>HOMEPRINT</span>
-          <span>TICKETLESS</span>
-          <span>PRINT_AT_KIOSK</span>
-          <span>SECURE_PAPER</span>
+          <span>Allowed values:</span>
+          <span>\\"HOMEPRINT\\"</span>
+          <span>\\"TICKETLESS\\"</span>
+          <span>\\"PRINT_AT_KIOSK\\"</span>
+          <span>\\"SECURE_PAPER\\"</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>
