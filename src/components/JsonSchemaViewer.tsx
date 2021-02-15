@@ -17,7 +17,6 @@ export interface IJsonSchemaViewer {
   schema: JSONSchema4;
   emptyText?: string;
   defaultExpandedDepth?: number;
-  expanded?: boolean;
   className?: string;
   maxRows?: number;
   onGoToRef?: GoToRefHandler;
@@ -64,15 +63,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<
   }
 
   protected get expandedDepth(): number {
-    if (this.props.expanded) {
-      return Infinity; // tree-list kind of equivalent of expanded: all
-    }
-
-    if (this.props.defaultExpandedDepth !== void 0) {
-      return this.props.defaultExpandedDepth;
-    }
-
-    return 1;
+    return this.props.defaultExpandedDepth ?? 1;
   }
 
   protected renderSchema() {
@@ -111,7 +102,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<
 
   public render() {
     const {
-      props: { emptyText = 'No schema defined', schema, expanded, defaultExpandedDepth, className, ...props },
+      props: { emptyText = 'No schema defined', schema, defaultExpandedDepth, className, ...props },
     } = this;
 
     if (this.state.isEmpty) {
@@ -122,7 +113,7 @@ export class JsonSchemaViewerComponent extends React.PureComponent<
       <Flex pos="relative" h="full" className={cn(className, 'JsonSchemaViewer')}>
         <SchemaTreeContext.Provider value={this.tree}>
           <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
-            <SchemaTreeComponent expanded={expanded} schema={schema} treeStore={this.treeStore} {...props} />
+            <SchemaTreeComponent schema={schema} treeStore={this.treeStore} {...props} />
           </ViewModeContext.Provider>
         </SchemaTreeContext.Provider>
       </Flex>
