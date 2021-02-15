@@ -2868,7 +2868,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
         </div>
         <div>
           <span>Match pattern:</span>
-          <span>MM/dd/yyyy H:mm</span>
+          <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>

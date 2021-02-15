@@ -21,7 +21,7 @@
       "type": "string",
       "format": "date-time",
       "writeOnly": true,
-      "pattern": "MM/dd/yyyy H:mm"
+      "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
     },
     "items": {
       "type": ["null", "array"],
@@ -35,7 +35,7 @@
     "email": {
       "type": "string",
       "format": "email",
-      "example": ["one@email.com", "two@email.com"],
+      "examples": ["one@email.com", "two@email.com"],
       "deprecated": true,
       "default": "default@email.com",
       "minLength": 2
