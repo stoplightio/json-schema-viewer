@@ -21,7 +21,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
-      expanded={boolean('expanded', true)}
       onGoToRef={action('onGoToRef')}
       viewMode={select(
         'viewMode',
@@ -38,7 +37,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       schema={object('schema', {})}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
-      expanded={boolean('expanded', false)}
       onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 5)}
       mergeAllOf={boolean('mergeAllOf', true)}
@@ -60,7 +58,6 @@ storiesOf('JsonSchemaViewer', module)
     return (
       <JsonSchemaViewer
         schema={object('schema', schema as JSONSchema4)}
-        expanded={boolean('expanded', true)}
         onGoToRef={action('onGoToRef')}
         maxRows={number('maxRows', 5)}
         mergeAllOf={boolean('mergeAllOf', true)}
@@ -74,7 +71,6 @@ storiesOf('JsonSchemaViewer', module)
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          expanded={boolean('expanded', false)}
           onGoToRef={action('onGoToRef')}
           maxRows={number('maxRows', 10)}
           mergeAllOf={boolean('mergeAllOf', true)}
@@ -84,7 +80,6 @@ storiesOf('JsonSchemaViewer', module)
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          expanded={boolean('expanded', false)}
           onGoToRef={action('onGoToRef')}
           maxRows={number('maxRows', 10)}
           mergeAllOf={boolean('mergeAllOf', true)}
@@ -96,7 +91,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       schema={allOfSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      expanded={boolean('expanded', false)}
       mergeAllOf={boolean('mergeAllOf', true)}
       onGoToRef={action('onGoToRef')}
     />
@@ -112,7 +106,6 @@ storiesOf('JsonSchemaViewer', module)
         },
         null,
       )}
-      expanded={boolean('expanded', false)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
       mergeAllOf={boolean('mergeAllOf', true)}
@@ -145,7 +138,6 @@ storiesOf('JsonSchemaViewer', module)
           },
         },
       }}
-      expanded={boolean('expanded', false)}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
       mergeAllOf={boolean('mergeAllOf', true)}
@@ -158,7 +150,6 @@ storiesOf('JsonSchemaViewer', module)
           <JsonSchemaViewer
             schema={schema as JSONSchema4}
             defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-            expanded={boolean('expanded', false)}
             onGoToRef={action('onGoToRef')}
             mergeAllOf={boolean('mergeAllOf', true)}
           />
