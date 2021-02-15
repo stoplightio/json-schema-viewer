@@ -180,6 +180,7 @@ export function getValidationsFromSchema(schemaNode: RegularNode) {
           ...(schemaNode.annotations.examples ? { examples: schemaNode.annotations.examples } : null),
         }
       : null),
+    // TODO: replace `fragment` once JST supports `const` and `x-example`
     ...('fragment' in schemaNode
       ? {
           ...('const' in schemaNode.fragment ? { const: schemaNode.fragment.const } : null),
