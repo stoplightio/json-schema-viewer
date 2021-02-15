@@ -2847,7 +2847,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
           <span>20</span>
         </div>
         <div>
-          <span>Multiple of value:</span>
+          <span>Multiple of:</span>
           <span>10</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
@@ -2867,8 +2867,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
           <span>required</span>
         </div>
         <div>
-          <span>Match pattern value:</span>
-          <span>\\"MM/dd/yyyy H:mm\\"</span>
+          <span>Match pattern:</span>
+          <span>MM/dd/yyyy H:mm</span>
         </div>
         <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
       </div>

@@ -37,26 +37,32 @@ const numberValidationFormatters: Record<string, (value: unknown) => string> = {
   maxLength: value => `<= ${value} characters`,
 };
 
-const validationsFormatter = (name: string) => (value: unknown[] | unknown): ValidationFormat | null => {
+const createStringFormatter = (nowrap: boolean | undefined) => (value: unknown) => {
+  return nowrap || typeof value !== 'string' ? String(value) : `"${value}"`;
+};
+
+const createValidationsFormatter = (name: string, options?: { exact?: boolean; nowrap?: boolean }) => (
+  value: unknown[] | unknown,
+): ValidationFormat | null => {
   const values = Array.isArray(value) ? value : [value];
   if (values.length) {
     return {
-      name: values.length > 1 ? `${name} values` : `${name} value`,
-      values: values.map(stringifyValue),
+      name: options?.exact ? name : values.length > 1 ? `${name} values` : `${name} value`,
+      values: values.map(createStringFormatter(options?.nowrap)),
     };
   }
   return null;
 };
 
 const validationFormatters: Record<string, (value: unknown) => ValidationFormat | null> = {
-  ['const']: validationsFormatter('Allowed'),
-  enum: validationsFormatter('Allowed'),
-  examples: validationsFormatter('Example'),
-  example: validationsFormatter('Example'),
-  ['x-example']: validationsFormatter('Example'),
-  multipleOf: validationsFormatter('Multiple of'),
-  pattern: validationsFormatter('Match pattern'),
-  default: validationsFormatter('Default'),
+  ['const']: createValidationsFormatter('Allowed'),
+  enum: createValidationsFormatter('Allowed'),
+  examples: createValidationsFormatter('Example'),
+  example: createValidationsFormatter('Example'),
+  ['x-example']: createValidationsFormatter('Example'),
+  multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
+  pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
+  default: createValidationsFormatter('Default'),
 };
 
 export const Validations: React.FunctionComponent<IValidations> = ({ validations }) => {
@@ -125,7 +131,7 @@ const KeyValueValidation = ({ className, name, values }: { className?: string; n
   return (
     <Flex flexWrap color="muted" my={2} className={className}>
       <Text fontWeight="light">{capitalize(name)}:</Text>
-      {values.map(value => (
+      {uniq(values).map(value => (
         <Text key={value} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
           {value}
         </Text>
@@ -177,8 +183,4 @@ export function getValidationsFromSchema(schemaNode: RegularNode) {
     ...('fragment' in schemaNode && 'const' in schemaNode.fragment ? { const: schemaNode.fragment.const } : null),
     ...schemaNode.validations,
   };
-}
-
-function stringifyValue(value: unknown) {
-  return typeof value === 'string' ? `"${value}"` : String(value);
 }

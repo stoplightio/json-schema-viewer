@@ -25,7 +25,7 @@ describe('Validations component', () => {
     expect(wrapper).toIncludeText('>= 10<= 40');
     expect(wrapper).toIncludeText('Allowed values:10203040');
     expect(wrapper).toIncludeText('Default value:20');
-    expect(wrapper).toIncludeText('Multiple of value:10');
+    expect(wrapper).toIncludeText('Multiple of:10');
     expect(wrapper).toIncludeText('Example value:20');
   });
 
