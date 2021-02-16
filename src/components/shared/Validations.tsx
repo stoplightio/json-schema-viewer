@@ -1,6 +1,6 @@
 import { RegularNode } from '@stoplight/json-schema-tree';
 import { Flex, Text } from '@stoplight/mosaic';
-import { Dictionary, Primitive } from '@stoplight/types';
+import { Dictionary } from '@stoplight/types';
 import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
 import * as React from 'react';
 
@@ -8,7 +8,12 @@ export interface IValidations {
   validations: Dictionary<unknown>;
 }
 
-const numberValidationNames = [
+type ValidationFormat = {
+  name: string;
+  values: string[];
+};
+
+export const numberValidationNames = [
   'minimum',
   'maximum',
   'minLength',
@@ -28,8 +33,36 @@ const numberValidationFormatters: Record<string, (value: unknown) => string> = {
   minLength: value => `>= ${value} characters`,
   maximum: value => `<= ${value}`,
   exclusiveMaximum: value => `< ${value}`,
-  maxItems: value => `< ${value} items`,
-  maxLength: value => `< ${value} characters`,
+  maxItems: value => `<= ${value} items`,
+  maxLength: value => `<= ${value} characters`,
+};
+
+const createStringFormatter = (nowrap: boolean | undefined) => (value: unknown) => {
+  return nowrap && typeof value === 'string' ? value : JSON.stringify(value);
+};
+
+const createValidationsFormatter = (name: string, options?: { exact?: boolean; nowrap?: boolean }) => (
+  value: unknown[] | unknown,
+): ValidationFormat | null => {
+  const values = Array.isArray(value) ? value : [value];
+  if (values.length) {
+    return {
+      name: options?.exact ? name : values.length > 1 ? `${name} values` : `${name} value`,
+      values: values.map(createStringFormatter(options?.nowrap)),
+    };
+  }
+  return null;
+};
+
+const validationFormatters: Record<string, (value: unknown) => ValidationFormat | null> = {
+  ['const']: createValidationsFormatter('Allowed'),
+  enum: createValidationsFormatter('Allowed'),
+  examples: createValidationsFormatter('Example'),
+  example: createValidationsFormatter('Example'),
+  ['x-example']: createValidationsFormatter('Example'),
+  multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
+  pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
+  default: createValidationsFormatter('Default'),
 };
 
 export const Validations: React.FunctionComponent<IValidations> = ({ validations }) => {
@@ -66,11 +99,10 @@ const NumberValidations = ({
   }
   return (
     <Flex my={2} color="muted">
-      <Text fontWeight="light">Allowed values:</Text>
       {entries
         .map(([key, value]) => numberValidationFormatters[key](value))
         .map((value, i) => (
-          <Text key={i} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
+          <Text key={i} mr={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
             {value}
           </Text>
         ))}
@@ -81,48 +113,29 @@ const NumberValidations = ({
 const KeyValueValidations = ({ validations, className }: { validations: Dictionary<unknown>; className?: string }) => (
   <>
     {keys(validations)
-      .filter(validation => validation !== 'format')
+      .filter(key => Object.keys(validationFormatters).includes(key))
       .map(key => {
-        return <KeyValueValidation key={key} name={key} value={validations[key]} className={className} />;
+        const validation = validationFormatters[key](validations[key]);
+        if (validation) {
+          return (
+            <KeyValueValidation key={key} name={validation.name} values={validation.values} className={className} />
+          );
+        } else {
+          return null;
+        }
       })}
   </>
 );
 
-const KeyValueValidation = ({
-  className,
-  name,
-  value,
-}: {
-  className?: string;
-  name: string;
-  value: Dictionary<unknown> | unknown[] | unknown;
-}) => {
-  if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
-    return (
-      <>
-        {keys(value).map(key => (
-          <KeyValueValidation key={key} className={className} name={`${name}.${key}`} value={value[key]} />
-        ))}
-      </>
-    );
-  }
-  const validation = Array.isArray(value) ? value : [value];
+const KeyValueValidation = ({ className, name, values }: { className?: string; name: string; values: string[] }) => {
   return (
     <Flex flexWrap color="muted" my={2} className={className}>
       <Text fontWeight="light">{capitalize(name)}:</Text>
-      {validation
-        .filter(
-          (v): v is Exclude<Primitive, null> | { value: string } =>
-            typeof v !== 'object' || (typeof v === 'object' && v !== null && 'value' in v),
-        )
-        .map(v => {
-          const value = typeof v === 'object' ? v.value : String(v);
-          return (
-            <Text key={value} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
-              {value}
-            </Text>
-          );
-        })}
+      {uniq(values).map(value => (
+        <Text key={value} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
+          {value}
+        </Text>
+      ))}
     </Flex>
   );
 };
@@ -161,8 +174,13 @@ export function validationCount(schemaNode: RegularNode) {
 export function getValidationsFromSchema(schemaNode: RegularNode) {
   return {
     ...(schemaNode.enum !== null ? { enum: schemaNode.enum } : null),
-    ...('annotations' in schemaNode && schemaNode.annotations.default
-      ? { default: schemaNode.annotations.default }
+    ...('annotations' in schemaNode
+      ? {
+          ...(schemaNode.annotations.default ? { default: schemaNode.annotations.default } : null),
+          ...(schemaNode.annotations.examples ? { examples: schemaNode.annotations.examples } : null),
+          ...(schemaNode.annotations.const ? { const: schemaNode.annotations.const } : null),
+          ...(schemaNode.annotations['x-example'] ? { ['x-example']: schemaNode.annotations['x-example'] } : null),
+        }
       : null),
     ...schemaNode.validations,
   };
