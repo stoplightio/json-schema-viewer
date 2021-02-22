@@ -47,11 +47,11 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
       draggable={false}
       maxRows={maxRows !== void 0 ? maxRows + 0.5 : maxRows}
       store={treeStore}
-      rowHeight={(node: TreeListNode<SchemaNode>) => {
+      rowHeight={(node: TreeListNode<{schemaNode: SchemaNode}>) => {
         const padding = 8;
         const lineHeight = 18;
         let numberOfLines = 1;
-        const schemaNode = node.metadata;
+        const schemaNode = node.metadata!.schemaNode;
 
         if (schemaNode && isRegularNode(schemaNode)) {
           const hasDescription = schemaNode.annotations.description !== undefined;

@@ -104,7 +104,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
 SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, treeListNode, rowOptions, onGoToRef }) => {
-  const schemaNode = treeListNode.metadata as SchemaNode;
+  const schemaNode = (treeListNode as any).metadata.schemaNode as SchemaNode;
 
   return (
     <SchemaNodeContext.Provider value={schemaNode}>

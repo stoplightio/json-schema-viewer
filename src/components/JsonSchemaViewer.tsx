@@ -47,6 +47,8 @@ export class JsonSchemaViewerComponent extends React.PureComponent<
     this.treeStore = new TreeStore(this.tree, this.treeState, {
       defaultExpandedDepth: this.expandedDepth,
     });
+    console.log(this.tree);
+    console.log(this.treeStore);
   }
 
   protected get treeOptions(): SchemaTreeOptions {

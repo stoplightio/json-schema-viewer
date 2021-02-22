@@ -25,8 +25,11 @@ import type { JSONSchema4 } from 'json-schema';
 import { isNonNullable } from '../guards/isNonNullable';
 import type { SchemaTreeListNode } from '../types';
 import { FlattenableNode, SchemaTreeOptions } from './types';
+import { action } from 'mobx';
 
 export { TreeState as SchemaTreeState };
+
+type TreeListNodeWithMetadata = TreeListNode<{schemaNode: SchemaNode, typeOptions?: ReadonlyArray<SchemaNode> }>;
 
 export class SchemaTreeListTree extends TreeListTree {
   public treeOptions: SchemaTreeOptions;
@@ -35,6 +38,14 @@ export class SchemaTreeListTree extends TreeListTree {
   private _schemaToTreeMap!: WeakMap<SchemaNode, SchemaTreeListNode>;
   private _treeToSchemaMap!: WeakMap<SchemaTreeListNode, SchemaNode>;
   private _flattenedSchemaNodes!: WeakSet<RegularNode>;
+
+  private _selectedIndex: number = 0;
+
+  @action
+  public updateSelectedTypeIndex = (treeListNode: TreeListNode, newIndex: number) => {
+    this._selectedIndex = newIndex;
+    this.replaceNode(treeListNode, this.buildTreeFragment((treeListNode.metadata as any).schemaNode))
+  }
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
     super({
@@ -90,6 +101,7 @@ export class SchemaTreeListTree extends TreeListTree {
     return super.unwrap(node);
   }
 
+  @action
   public populate() {
     this.newSchemaTree();
 
@@ -118,17 +130,17 @@ export class SchemaTreeListTree extends TreeListTree {
     this.invalidate();
   }
 
-  protected createTreeNode(schemaNode: SchemaNode): TreeListNode {
+  protected createTreeNode(schemaNode: SchemaNode): TreeListNodeWithMetadata {
     const parentTreeNode = schemaNode.parent === null ? null : this.getFromSchemaToTreeMap(schemaNode.parent);
     if (parentTreeNode !== null) {
       assertParentTreeNode(parentTreeNode);
     }
 
-    const treeNode: TreeListNode = {
+    const treeNode: TreeListNodeWithMetadata = {
       id: schemaNode.id,
       parent: parentTreeNode,
       name: '',
-      metadata: schemaNode,
+      metadata: { schemaNode },
       ...('children' in schemaNode && isNonNullable(schemaNode.children) && { children: [] }),
     };
 
@@ -142,8 +154,8 @@ export class SchemaTreeListTree extends TreeListTree {
     return treeNode;
   }
 
-  public buildTreeFragment(schemaNode: SchemaNode) {
-    const treeNode = this.createTreeNode(schemaNode);
+  public buildTreeFragment(schemaNode: SchemaNode): TreeListNodeWithMetadata {
+    let treeNode : TreeListNodeWithMetadata = this.createTreeNode(schemaNode);
 
     if (canBeFlattened(schemaNode)) {
       this._flattenedSchemaNodes.add(schemaNode);
@@ -186,8 +198,15 @@ export class SchemaTreeListTree extends TreeListTree {
       }
     } else if ((schemaNode instanceof RootNode || isRegularNode(schemaNode)) && isNonNullable(schemaNode.children)) {
       assertParentTreeNode(treeNode);
-      for (const child of schemaNode.children) {
-        treeNode.children.push(this.buildTreeFragment(child));
+
+      if(isRegularNode(schemaNode) && ['anyOf', 'oneOf'].includes(schemaNode.combiners?.[0] ?? '')){
+        treeNode.children.push(this.buildTreeFragment(schemaNode.children[this._selectedIndex]));
+         treeNode.metadata!.typeOptions = schemaNode.children;
+       }
+       else{
+        for (const child of schemaNode.children) {
+          treeNode.children.push(this.buildTreeFragment(child));
+        }
       }
     }
 

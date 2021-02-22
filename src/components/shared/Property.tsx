@@ -40,6 +40,13 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
         </Box>
       )}
 
+      {(treeListNode.metadata as any).typeOptions && (
+        <select onChange={(e) => {schemaTree.updateSelectedTypeIndex(treeListNode, Number(e.currentTarget.value)); e.stopPropagation();}}
+        onClick={e => e.stopPropagation()}>
+        {(treeListNode.metadata as any).typeOptions.map((option: SchemaNode, index: number) =>
+          (<option value={index}>{isRegularNode(option) ? `#${index} ${option.primaryType} / ${option.title}` : index}</option>))
+        }
+      </select>)}
       <Types />
 
       {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
