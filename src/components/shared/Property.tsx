@@ -19,7 +19,7 @@ function shouldShowPropertyName(schemaNode: SchemaNode) {
     (schemaNode.subpath[0] === 'properties' || schemaNode.subpath[0] === 'patternProperties')
   );
 }
-
+ 
 export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
   const schemaNode = useSchemaNode();
   const treeListNode = useTreeListNode();

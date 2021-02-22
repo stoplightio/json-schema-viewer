@@ -44,7 +44,7 @@ export class SchemaTreeListTree extends TreeListTree {
   @action
   public updateSelectedTypeIndex = (treeListNode: TreeListNode, newIndex: number) => {
     this._selectedIndex = newIndex;
-    this.replaceNode(treeListNode, this.buildTreeFragment((treeListNode.metadata as any).schemaNode))
+    this.replaceNode(treeListNode, this.buildTreeFragment((treeListNode.metadata as any).schemaNode.parent));
   }
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
@@ -136,7 +136,7 @@ export class SchemaTreeListTree extends TreeListTree {
       assertParentTreeNode(parentTreeNode);
     }
 
-    const treeNode: TreeListNodeWithMetadata = {
+    const treeNode: any = {
       id: schemaNode.id,
       parent: parentTreeNode,
       name: '',
@@ -144,18 +144,34 @@ export class SchemaTreeListTree extends TreeListTree {
       ...('children' in schemaNode && isNonNullable(schemaNode.children) && { children: [] }),
     };
 
+    if(isRegularNode(schemaNode) && ['anyOf', 'oneOf'].includes(schemaNode.combiners?.[0] ?? '') && schemaNode.children){
+      const child = schemaNode.children[this._selectedIndex];
+      treeNode.metadata = {
+        schemaNode: child,
+        typeOptions: schemaNode.children
+      };
+      treeNode.children = 'children' in child && isNonNullable(child.children) && [];
+      this._schemaToTreeMap.set(child, treeNode);
+      this._treeToSchemaMap.set(treeNode, child);
+    }
+    else{
+      this._schemaToTreeMap.set(schemaNode, treeNode);
+      this._treeToSchemaMap.set(treeNode, schemaNode);
+    }
+
     if (isParentTreeNode(treeNode.parent)) {
       this.visited.add(treeNode.parent);
     }
 
-    this._schemaToTreeMap.set(schemaNode, treeNode);
-    this._treeToSchemaMap.set(treeNode, schemaNode);
 
     return treeNode;
   }
 
-  public buildTreeFragment(schemaNode: SchemaNode): TreeListNodeWithMetadata {
-    let treeNode : TreeListNodeWithMetadata = this.createTreeNode(schemaNode);
+  public buildTreeFragment(rawSchemaNode: SchemaNode): TreeListNodeWithMetadata {
+    let treeNode : TreeListNodeWithMetadata = this.createTreeNode(rawSchemaNode);
+    const schemaNode = isRegularNode(rawSchemaNode) && ['anyOf', 'oneOf'].includes(rawSchemaNode.combiners?.[0] ?? '')
+      ? rawSchemaNode.children![this._selectedIndex]
+      : rawSchemaNode;
 
     if (canBeFlattened(schemaNode)) {
       this._flattenedSchemaNodes.add(schemaNode);
@@ -199,14 +215,8 @@ export class SchemaTreeListTree extends TreeListTree {
     } else if ((schemaNode instanceof RootNode || isRegularNode(schemaNode)) && isNonNullable(schemaNode.children)) {
       assertParentTreeNode(treeNode);
 
-      if(isRegularNode(schemaNode) && ['anyOf', 'oneOf'].includes(schemaNode.combiners?.[0] ?? '')){
-        treeNode.children.push(this.buildTreeFragment(schemaNode.children[this._selectedIndex]));
-         treeNode.metadata!.typeOptions = schemaNode.children;
-       }
-       else{
-        for (const child of schemaNode.children) {
-          treeNode.children.push(this.buildTreeFragment(child));
-        }
+      for (const child of schemaNode.children) {
+        treeNode.children.push(this.buildTreeFragment(child));
       }
     }
 
