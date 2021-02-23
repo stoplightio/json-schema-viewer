@@ -1,5 +1,5 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon } from '@stoplight/mosaic';
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import { Optional } from '@stoplight/types';
@@ -10,7 +10,7 @@ import { SchemaNodeContext, TreeListNodeContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
 import { useSchemaNode, useSchemaTree, useTreeListNode } from '../hooks';
 import { GoToRefHandler, SchemaTreeListNode } from '../types';
-import { isPropertyRequired } from '../utils/isPropertyRequired';
+import { isPropertyRequired } from '../utils';
 import { Caret, Description, Divider, getValidationsFromSchema, Property, Validations } from './shared';
 import { Format } from './shared/Format';
 import { Properties } from './shared/Properties';
@@ -104,7 +104,7 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
 SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, treeListNode, rowOptions, onGoToRef }) => {
-  const schemaNode = (treeListNode as any).metadata.schemaNode as SchemaNode;
+  const schemaNode = treeListNode.metadata!.schemaNode;
 
   return (
     <SchemaNodeContext.Provider value={schemaNode}>

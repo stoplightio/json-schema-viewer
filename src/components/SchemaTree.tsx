@@ -1,11 +1,12 @@
-import { isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
-import { isParentNode, TreeList, TreeListEvents, TreeListNode, TreeStore } from '@stoplight/tree-list';
+import { isRegularNode } from '@stoplight/json-schema-tree';
+import { isParentNode, TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { GoToRefHandler, RowRenderer } from '../types';
+import { GoToRefHandler, RowRenderer, SchemaTreeListNode } from '../types';
 import { SchemaRow } from './SchemaRow';
 import { validationCount } from './shared/Validations';
+import { IRowRendererOptions } from '@stoplight/tree-list/types';
 
 export interface ISchemaTree {
   treeStore: TreeStore;
@@ -31,7 +32,7 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
   }, [treeStore]);
 
   const rowRenderer = React.useCallback(
-    (node, rowOptions) => {
+    (node: SchemaTreeListNode, rowOptions: IRowRendererOptions) => {
       if (customRowRenderer !== void 0) {
         return customRowRenderer(node, rowOptions, treeStore);
       }
@@ -47,11 +48,11 @@ export const SchemaTree: React.FC<ISchemaTree> = props => {
       draggable={false}
       maxRows={maxRows !== void 0 ? maxRows + 0.5 : maxRows}
       store={treeStore}
-      rowHeight={(node: TreeListNode<{schemaNode: SchemaNode}>) => {
+      rowHeight={(node: SchemaTreeListNode) => {
         const padding = 8;
         const lineHeight = 18;
         let numberOfLines = 1;
-        const schemaNode = node.metadata!.schemaNode;
+        const schemaNode = node.metadata?.schemaNode;
 
         if (schemaNode && isRegularNode(schemaNode)) {
           const hasDescription = schemaNode.annotations.description !== undefined;

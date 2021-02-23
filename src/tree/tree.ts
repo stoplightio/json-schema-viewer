@@ -29,14 +29,13 @@ import { action } from 'mobx';
 
 export { TreeState as SchemaTreeState };
 
-type TreeListNodeWithMetadata = TreeListNode<{schemaNode: SchemaNode, typeOptions?: ReadonlyArray<SchemaNode> }>;
 
 export class SchemaTreeListTree extends TreeListTree {
   public treeOptions: SchemaTreeOptions;
 
   public jsonSchemaTree!: JsonSchemaTree;
-  private _schemaToTreeMap!: WeakMap<SchemaNode, SchemaTreeListNode>;
-  private _treeToSchemaMap!: WeakMap<SchemaTreeListNode, SchemaNode>;
+  private _schemaToTreeMap!: WeakMap<SchemaNode, TreeListNode>;
+  private _treeToSchemaMap!: WeakMap<TreeListNode, SchemaNode>;
   private _flattenedSchemaNodes!: WeakSet<RegularNode>;
 
   private _selectedIndex: number = 0;
@@ -45,6 +44,15 @@ export class SchemaTreeListTree extends TreeListTree {
   public updateSelectedTypeIndex = (treeListNode: TreeListNode, newIndex: number) => {
     this._selectedIndex = newIndex;
     this.replaceNode(treeListNode, this.buildTreeFragment((treeListNode.metadata as any).schemaNode.parent));
+  }
+
+  public static createArtificialRoot(): SchemaTreeListNode & TreeListParentNode {
+    return {
+      id: Math.random().toString(36).slice(2),
+      name: '',
+      parent: null,
+      children: [],
+    };
   }
 
   constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
@@ -130,7 +138,7 @@ export class SchemaTreeListTree extends TreeListTree {
     this.invalidate();
   }
 
-  protected createTreeNode(schemaNode: SchemaNode): TreeListNodeWithMetadata {
+  protected createTreeNode(schemaNode: SchemaNode): SchemaTreeListNode {
     const parentTreeNode = schemaNode.parent === null ? null : this.getFromSchemaToTreeMap(schemaNode.parent);
     if (parentTreeNode !== null) {
       assertParentTreeNode(parentTreeNode);
@@ -167,8 +175,8 @@ export class SchemaTreeListTree extends TreeListTree {
     return treeNode;
   }
 
-  public buildTreeFragment(rawSchemaNode: SchemaNode): TreeListNodeWithMetadata {
-    let treeNode : TreeListNodeWithMetadata = this.createTreeNode(rawSchemaNode);
+  public buildTreeFragment(rawSchemaNode: SchemaNode): SchemaTreeListNode {
+    let treeNode : SchemaTreeListNode = this.createTreeNode(rawSchemaNode);
     const schemaNode = isRegularNode(rawSchemaNode) && ['anyOf', 'oneOf'].includes(rawSchemaNode.combiners?.[0] ?? '')
       ? rawSchemaNode.children![this._selectedIndex]
       : rawSchemaNode;
@@ -318,13 +326,13 @@ export class SchemaTreeListTree extends TreeListTree {
     return this._flattenedSchemaNodes.has(node);
   }
 
-  public getFromSchemaToTreeMap(schemaNode: RegularNode | RootNode | MirroredSchemaNode): SchemaTreeListNode {
+  public getFromSchemaToTreeMap(schemaNode: RegularNode | RootNode | MirroredSchemaNode): TreeListNode {
     const treeNode = this._schemaToTreeMap.get(schemaNode);
     assertTreeNode(treeNode);
     return treeNode;
   }
 
-  public getFromTreeToSchemaMap(treeNode: SchemaTreeListNode): RegularNode | RootNode {
+  public getFromTreeToSchemaMap(treeNode: TreeListNode): RegularNode | RootNode {
     const schemaNode = this._treeToSchemaMap.get(treeNode);
 
     if (schemaNode === void 0) {

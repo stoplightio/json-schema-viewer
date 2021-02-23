@@ -1,6 +1,6 @@
-import { Tree } from '@stoplight/tree-list';
 import * as React from 'react';
 
 import { SchemaTreeListNode } from '../types';
+import { SchemaTreeListTree } from '../tree';
 
-export const TreeListNodeContext = React.createContext<SchemaTreeListNode>(Tree.createArtificialRoot());
+export const TreeListNodeContext = React.createContext<SchemaTreeListNode>(SchemaTreeListTree.createArtificialRoot());
