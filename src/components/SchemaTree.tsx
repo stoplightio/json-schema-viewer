@@ -1,12 +1,12 @@
 import { isRegularNode } from '@stoplight/json-schema-tree';
 import { isParentNode, TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
+import { IRowRendererOptions } from '@stoplight/tree-list/types';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { GoToRefHandler, RowRenderer, SchemaTreeListNode } from '../types';
 import { SchemaRow } from './SchemaRow';
 import { validationCount } from './shared/Validations';
-import { IRowRendererOptions } from '@stoplight/tree-list/types';
 
 export interface ISchemaTree {
   treeStore: TreeStore;

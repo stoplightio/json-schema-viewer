@@ -21,14 +21,13 @@ import {
   TreeStore,
 } from '@stoplight/tree-list';
 import type { JSONSchema4 } from 'json-schema';
+import { action } from 'mobx';
 
 import { isNonNullable } from '../guards/isNonNullable';
 import type { SchemaTreeListNode } from '../types';
 import { FlattenableNode, SchemaTreeOptions } from './types';
-import { action } from 'mobx';
 
 export { TreeState as SchemaTreeState };
-
 
 export class SchemaTreeListTree extends TreeListTree {
   public treeOptions: SchemaTreeOptions;
@@ -44,7 +43,7 @@ export class SchemaTreeListTree extends TreeListTree {
   public updateSelectedTypeIndex = (treeListNode: TreeListNode, newIndex: number) => {
     this._selectedIndex = newIndex;
     this.replaceNode(treeListNode, this.buildTreeFragment((treeListNode.metadata as any).schemaNode.parent));
-  }
+  };
 
   public static createArtificialRoot(): SchemaTreeListNode & TreeListParentNode {
     return {
@@ -152,17 +151,20 @@ export class SchemaTreeListTree extends TreeListTree {
       ...('children' in schemaNode && isNonNullable(schemaNode.children) && { children: [] }),
     };
 
-    if(isRegularNode(schemaNode) && ['anyOf', 'oneOf'].includes(schemaNode.combiners?.[0] ?? '') && schemaNode.children){
+    if (
+      isRegularNode(schemaNode) &&
+      ['anyOf', 'oneOf'].includes(schemaNode.combiners?.[0] ?? '') &&
+      schemaNode.children
+    ) {
       const child = schemaNode.children[this._selectedIndex];
       treeNode.metadata = {
         schemaNode: child,
-        typeOptions: schemaNode.children
+        typeOptions: schemaNode.children,
       };
       treeNode.children = 'children' in child && isNonNullable(child.children) && [];
       this._schemaToTreeMap.set(child, treeNode);
       this._treeToSchemaMap.set(treeNode, child);
-    }
-    else{
+    } else {
       this._schemaToTreeMap.set(schemaNode, treeNode);
       this._treeToSchemaMap.set(treeNode, schemaNode);
     }
@@ -171,15 +173,15 @@ export class SchemaTreeListTree extends TreeListTree {
       this.visited.add(treeNode.parent);
     }
 
-
     return treeNode;
   }
 
   public buildTreeFragment(rawSchemaNode: SchemaNode): SchemaTreeListNode {
-    let treeNode : SchemaTreeListNode = this.createTreeNode(rawSchemaNode);
-    const schemaNode = isRegularNode(rawSchemaNode) && ['anyOf', 'oneOf'].includes(rawSchemaNode.combiners?.[0] ?? '')
-      ? rawSchemaNode.children![this._selectedIndex]
-      : rawSchemaNode;
+    let treeNode: SchemaTreeListNode = this.createTreeNode(rawSchemaNode);
+    const schemaNode =
+      isRegularNode(rawSchemaNode) && ['anyOf', 'oneOf'].includes(rawSchemaNode.combiners?.[0] ?? '')
+        ? rawSchemaNode.children![this._selectedIndex]
+        : rawSchemaNode;
 
     if (canBeFlattened(schemaNode)) {
       this._flattenedSchemaNodes.add(schemaNode);

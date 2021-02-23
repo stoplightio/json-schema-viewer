@@ -32,34 +32,51 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
     }
   }, [onGoToRef, schemaNode]);
 
-  return <>
-    {subpath.length > 0 && shouldShowPropertyName(schemaNode) && <Box mr={2} fontFamily="mono" fontWeight="bold">
-        {subpath[subpath.length - 1]}
-      </Box>}
-
-    {treeListNode.metadata?.typeOptions &&
-    <select onChange={(e) => {schemaTree.updateSelectedTypeIndex(treeListNode, Number(e.currentTarget.value));}}
-      onClick={e => e.stopPropagation()}>
-      {treeListNode.metadata.typeOptions.map((option: SchemaNode, index: number) =>
-        (<option value={index}>{isRegularNode(option) ? `#${index} ${option.primaryType} / ${option.title}` : index}</option>)
+  return (
+    <>
+      {subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
+        <Box mr={2} fontFamily="mono" fontWeight="bold">
+          {subpath[subpath.length - 1]}
+        </Box>
       )}
-    </select>}
-    <Types />
 
-    {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? <Link ml={2} color="primary-light" cursor="pointer" onClick={handleGoToRef}>
-        (go to ref)
-      </Link> : null}
+      {treeListNode.metadata?.typeOptions && (
+        <select
+          onChange={e => {
+            schemaTree.updateSelectedTypeIndex(treeListNode, Number(e.currentTarget.value));
+          }}
+          onClick={e => e.stopPropagation()}
+        >
+          {treeListNode.metadata.typeOptions.map((option: SchemaNode, index: number) => (
+            <option key={index} value={index}>
+              {isRegularNode(option) ? `#${index} ${option.primaryType} / ${option.title}` : index}
+            </option>
+          ))}
+        </select>
+      )}
+      <Types />
 
-    {isRegularNode(schemaNode) &&
-      (schemaNode.primaryType === SchemaNodeKind.Array || schemaNode.primaryType === SchemaNodeKind.Object) &&
-      isParentNode(treeListNode) &&
-      isNonNullable(schemaNode.children) &&
-      (schemaNode.children.length !== 1 || !isReferenceNode(schemaNode.children[0])) && <Box ml={2} color="muted">{`{${
-          (schemaTree.isFlattenedNode(schemaNode) ? treeListNode.children : schemaNode.children).length
-        }}`}</Box>}
+      {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
+        <Link ml={2} color="primary-light" cursor="pointer" onClick={handleGoToRef}>
+          (go to ref)
+        </Link>
+      ) : null}
 
-    {subpath.length > 1 && subpath[0] === 'patternProperties' ? <Box ml={2} textOverflow="truncate" color="muted">
-        (pattern property)
-      </Box> : null}
-  </>;
+      {isRegularNode(schemaNode) &&
+        (schemaNode.primaryType === SchemaNodeKind.Array || schemaNode.primaryType === SchemaNodeKind.Object) &&
+        isParentNode(treeListNode) &&
+        isNonNullable(schemaNode.children) &&
+        (schemaNode.children.length !== 1 || !isReferenceNode(schemaNode.children[0])) && (
+          <Box ml={2} color="muted">{`{${
+            (schemaTree.isFlattenedNode(schemaNode) ? treeListNode.children : schemaNode.children).length
+          }}`}</Box>
+        )}
+
+      {subpath.length > 1 && subpath[0] === 'patternProperties' ? (
+        <Box ml={2} textOverflow="truncate" color="muted">
+          (pattern property)
+        </Box>
+      ) : null}
+    </>
+  );
 };
