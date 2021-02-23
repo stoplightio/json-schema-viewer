@@ -24,7 +24,7 @@ import type { JSONSchema4 } from 'json-schema';
 import { action } from 'mobx';
 
 import { isNonNullable } from '../guards/isNonNullable';
-import type { SchemaTreeListNode } from '../types';
+import type { SchemaTreeListNode, SchemaTreeListNodeWithChildren } from '../types';
 import { FlattenableNode, SchemaTreeOptions } from './types';
 
 export { TreeState as SchemaTreeState };
@@ -143,7 +143,7 @@ export class SchemaTreeListTree extends TreeListTree {
       assertParentTreeNode(parentTreeNode);
     }
 
-    const treeNode: any = {
+    const treeNode: SchemaTreeListNode = {
       id: schemaNode.id,
       parent: parentTreeNode,
       name: '',
@@ -161,7 +161,9 @@ export class SchemaTreeListTree extends TreeListTree {
         schemaNode: child,
         typeOptions: schemaNode.children,
       };
-      treeNode.children = 'children' in child && isNonNullable(child.children) && [];
+      if('children' in child && isNonNullable(child.children)){
+        (treeNode as SchemaTreeListNodeWithChildren).children = [];
+      }
       this._schemaToTreeMap.set(child, treeNode);
       this._treeToSchemaMap.set(treeNode, child);
     } else {
