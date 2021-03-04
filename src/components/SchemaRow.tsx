@@ -119,20 +119,16 @@ const SchemaPropertyRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) 
 SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
 
 export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) => {
-  const currentLevel = useCurrentNestingLevel();
-
   return (
-    <Box flex={1} px={2} w="full" maxW="full">
-      <Box
-        alignItems="center"
-        pos="relative"
-        fontSize="sm"
-        style={{
-          marginLeft: CARET_ICON_BOX_DIMENSION * currentLevel, // offset for spacing
-        }}
-      >
-        <SchemaPropertyRow schemaNode={schemaNode} />
-      </Box>
+    <Box
+      px={2}
+      w="full"
+      alignItems="center"
+      pos="relative"
+      fontSize="sm"
+      style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}
+    >
+      <SchemaPropertyRow schemaNode={schemaNode} />
     </Box>
   );
 };
