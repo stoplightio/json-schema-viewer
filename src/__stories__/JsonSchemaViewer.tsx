@@ -83,6 +83,13 @@ storiesOf('JsonSchemaViewer', module)
       onGoToRef={action('onGoToRef')}
     />
   ))
+  .add('anyOf-array-schema', () => (
+    <JsonSchemaViewer
+      schema={oneOfWithArraySchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
   .add('error boundary', () => (
     <JsonSchemaViewer
       // @ts-ignore
