@@ -64,7 +64,7 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
       <ViewModeContext.Provider value={viewMode ?? 'standalone'}>
         <VStack divider className={cn(className, 'JsonSchemaViewer')}>
           {jsonSchemaTreeRoot.children.map(childJsonSchemaNode => (
-            <SchemaRow key={childJsonSchemaNode.id} schemaNode={childJsonSchemaNode} />
+            <SchemaRow key={childJsonSchemaNode.id} schemaNode={childJsonSchemaNode} nestingLevel={0} />
           ))}
         </VStack>
       </ViewModeContext.Provider>

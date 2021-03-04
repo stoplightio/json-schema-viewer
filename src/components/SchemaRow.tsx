@@ -11,7 +11,7 @@ import { Box, Flex, Icon, VStack } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';
-import { IncreaseNestingLevel, useCurrentNestingLevel, useJSVOptionsContext } from '../contexts';
+import { useJSVOptionsContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../tree';
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
@@ -19,16 +19,16 @@ import { Properties } from './shared/Properties';
 
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
+  nestingLevel: number;
 }
 
-export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode }) => {
+export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
   const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
 
-  const currentNestingLevel = useCurrentNestingLevel();
   const { defaultExpandedDepth } = useJSVOptionsContext();
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
-    !isMirroredNode(schemaNode) && currentNestingLevel <= defaultExpandedDepth,
+    !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
   );
 
   const refNode = React.useMemo<ReferenceNode | null>(() => {
@@ -64,7 +64,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode 
               style={{
                 width: CARET_ICON_BOX_DIMENSION,
                 height: CARET_ICON_BOX_DIMENSION,
-                ...(!isBrokenRef && currentNestingLevel === 0
+                ...(!isBrokenRef && nestingLevel === 0
                   ? {
                       position: 'relative',
                     }
@@ -105,13 +105,11 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode 
         <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
       )}
       {childNodes.length > 0 && isExpanded ? (
-        <IncreaseNestingLevel>
-          <VStack divider>
-            {childNodes.map((childNode: SchemaNode) => (
-              <SchemaRow key={childNode.id} schemaNode={childNode} />
-            ))}
-          </VStack>
-        </IncreaseNestingLevel>
+        <VStack divider>
+          {childNodes.map((childNode: SchemaNode) => (
+            <SchemaRow key={childNode.id} schemaNode={childNode} nestingLevel={nestingLevel + 1} />
+          ))}
+        </VStack>
       ) : null}
     </Box>
   );
