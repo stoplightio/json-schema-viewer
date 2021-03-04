@@ -17,11 +17,11 @@ import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
 import { Properties } from './shared/Properties';
 
-export interface ISchemaRow {
+export interface SchemaRowProps {
   schemaNode: SchemaNode;
 }
 
-const SchemaPropertyRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) => {
+export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode }) => {
   const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
 
   const currentNestingLevel = useCurrentNestingLevel();
@@ -52,7 +52,7 @@ const SchemaPropertyRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) 
   const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
   return (
-    <>
+    <Box px={2} fontSize="sm" pos="relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
       <Box
         onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
         cursor={childNodes.length > 0 ? 'pointer' : 'default'}
@@ -113,23 +113,6 @@ const SchemaPropertyRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) 
           </VStack>
         </IncreaseNestingLevel>
       ) : null}
-    </>
-  );
-};
-SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
-
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) => {
-  return (
-    <Box
-      px={2}
-      w="full"
-      alignItems="center"
-      pos="relative"
-      fontSize="sm"
-      style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}
-    >
-      <SchemaPropertyRow schemaNode={schemaNode} />
     </Box>
   );
 };
-SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';
