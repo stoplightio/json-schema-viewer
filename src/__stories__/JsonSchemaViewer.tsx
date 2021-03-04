@@ -23,7 +23,7 @@ storiesOf('JsonSchemaViewer', module)
   .add('default', () => (
     <JsonSchemaViewer
       schema={schema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 0)}
       viewMode={select(
         'viewMode',
         {

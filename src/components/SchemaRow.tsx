@@ -28,7 +28,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode 
   const { defaultExpandedDepth } = useJSVOptionsContext();
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
-    !isMirroredNode(schemaNode) && currentNestingLevel < defaultExpandedDepth,
+    !isMirroredNode(schemaNode) && currentNestingLevel <= defaultExpandedDepth,
   );
 
   const refNode = React.useMemo<ReferenceNode | null>(() => {
