@@ -1,11 +1,11 @@
-import { Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
+import { InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JsonSchemaViewer, RowRenderer, SchemaRow } from '../';
+import { JsonSchemaViewer } from '../';
 import { Wrapper } from './utils/Wrapper';
 
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
@@ -20,8 +20,7 @@ storiesOf('JsonSchemaViewer', module)
   .add('default', () => (
     <JsonSchemaViewer
       schema={schema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 0)}
-      onGoToRef={action('onGoToRef')}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       viewMode={select(
         'viewMode',
         {
@@ -37,41 +36,16 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       schema={object('schema', {})}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
-      onGoToRef={action('onGoToRef')}
       maxRows={number('maxRows', 5)}
       mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
-  .add('custom row renderer', () => {
-    const customRowRenderer: RowRenderer = (node, rowOptions) => {
-      return (
-        <>
-          <SchemaRow treeListNode={node} rowOptions={rowOptions} />
-          <Flex h="full" alignItems="center">
-            <Button pl={1} mr={1} size="sm" appearance="minimal" icon="issue" />
-            <input type="checkbox" />
-          </Flex>
-        </>
-      );
-    };
-
-    return (
-      <JsonSchemaViewer
-        schema={object('schema', schema as JSONSchema4)}
-        onGoToRef={action('onGoToRef')}
-        maxRows={number('maxRows', 5)}
-        mergeAllOf={boolean('mergeAllOf', true)}
-        rowRenderer={customRowRenderer}
-      />
-    );
-  })
   .add('stress-test schema', () => (
     <>
       <div style={{ height: 345 }}>
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          onGoToRef={action('onGoToRef')}
           maxRows={number('maxRows', 10)}
           mergeAllOf={boolean('mergeAllOf', true)}
         />
@@ -80,7 +54,6 @@ storiesOf('JsonSchemaViewer', module)
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          onGoToRef={action('onGoToRef')}
           maxRows={number('maxRows', 10)}
           mergeAllOf={boolean('mergeAllOf', true)}
         />
@@ -107,7 +80,6 @@ storiesOf('JsonSchemaViewer', module)
         null,
       )}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      onGoToRef={action('onGoToRef')}
       mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
@@ -150,7 +122,6 @@ storiesOf('JsonSchemaViewer', module)
           <JsonSchemaViewer
             schema={schema as JSONSchema4}
             defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-            onGoToRef={action('onGoToRef')}
             mergeAllOf={boolean('mergeAllOf', true)}
           />
         </div>

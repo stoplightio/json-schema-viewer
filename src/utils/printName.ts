@@ -1,15 +1,9 @@
 import { isReferenceNode, isRegularNode, RegularNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
-import { isParentNode } from '@stoplight/tree-list';
 
 import { isNonNullable } from '../guards/isNonNullable';
-import type { SchemaTreeListTree } from '../tree';
-import type { SchemaTreeListNode } from '../types';
+import { isParentNode } from './index';
 
-export function printName(
-  tree: SchemaTreeListTree,
-  treeNode: SchemaTreeListNode,
-  schemaNode: RegularNode,
-): string | null {
+export function printName(schemaNode: RegularNode): string | null {
   if (
     schemaNode.primaryType !== SchemaNodeKind.Array ||
     !isNonNullable(schemaNode.children) ||
@@ -18,14 +12,10 @@ export function printName(
     return schemaNode.title;
   }
 
-  return printArrayName(tree, schemaNode, treeNode);
+  return printArrayName(schemaNode);
 }
 
-function printArrayName(
-  tree: SchemaTreeListTree,
-  schemaNode: RegularNode,
-  treeNode: SchemaTreeListNode,
-): string | null {
+function printArrayName(schemaNode: RegularNode): string | null {
   if (!isNonNullable(schemaNode.children) || schemaNode.children.length === 0) {
     return schemaNode.title;
   }
@@ -34,7 +24,7 @@ function printArrayName(
     return `$ref(${schemaNode.children[0].value})[]`;
   }
 
-  if (!isParentNode(treeNode)) {
+  if (!isParentNode(schemaNode)) {
     const val =
       schemaNode.children?.reduce<SchemaNodeKind[] | null>((mergedTypes, child) => {
         if (mergedTypes === null) return null;
@@ -54,12 +44,12 @@ function printArrayName(
     return val !== null && val.length > 0 ? `${SchemaNodeKind.Array}[${val.join(',')}]` : null;
   }
 
-  if (tree.isFlattenedNode(schemaNode) && isRegularNode(schemaNode.children[0])) {
-    const firstChild = schemaNode.children[0];
-    return firstChild.title !== null
-      ? `${firstChild.title}[]`
-      : `${SchemaNodeKind.Array}[${firstChild.primaryType ?? firstChild.combiners?.join(',')}]`;
-  }
+  // if (tree.isFlattenedNode(schemaNode) && isRegularNode(schemaNode.children[0])) {
+  //   const firstChild = schemaNode.children[0];
+  //   return firstChild.title !== null
+  //     ? `${firstChild.title}[]`
+  //     : `${SchemaNodeKind.Array}[${firstChild.primaryType ?? firstChild.combiners?.join(',')}]`;
+  // }
 
   return null;
 }

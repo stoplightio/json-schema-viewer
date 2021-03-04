@@ -1,17 +1,13 @@
 import { isReferenceNode, isRegularNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
-import { Box, Link } from '@stoplight/mosaic';
-import { isParentNode } from '@stoplight/tree-list';
+import { Box } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { isNonNullable } from '../../guards/isNonNullable';
-import { useSchemaTree, useTreeListNode } from '../../hooks';
-import { useSchemaNode } from '../../hooks/useSchemaNode';
-import { GoToRefHandler } from '../../types';
+import { useSchemaNode } from '../../hooks';
+import { isParentNode } from '../../utils';
 import { Types } from './Types';
 
-export interface IProperty {
-  onGoToRef?: GoToRefHandler;
-}
+export interface IProperty {}
 
 function shouldShowPropertyName(schemaNode: SchemaNode) {
   return (
@@ -20,17 +16,9 @@ function shouldShowPropertyName(schemaNode: SchemaNode) {
   );
 }
 
-export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
+export const Property: React.FunctionComponent<IProperty> = () => {
   const schemaNode = useSchemaNode();
-  const treeListNode = useTreeListNode();
-  const schemaTree = useSchemaTree();
   const { subpath } = schemaNode;
-
-  const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
-    if (onGoToRef && isReferenceNode(schemaNode)) {
-      onGoToRef(schemaNode);
-    }
-  }, [onGoToRef, schemaNode]);
 
   return (
     <>
@@ -42,20 +30,12 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
 
       <Types />
 
-      {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
-        <Link ml={2} color="primary-light" cursor="pointer" onClick={handleGoToRef}>
-          (go to ref)
-        </Link>
-      ) : null}
-
       {isRegularNode(schemaNode) &&
         (schemaNode.primaryType === SchemaNodeKind.Array || schemaNode.primaryType === SchemaNodeKind.Object) &&
-        isParentNode(treeListNode) &&
+        isParentNode(schemaNode) &&
         isNonNullable(schemaNode.children) &&
         (schemaNode.children.length !== 1 || !isReferenceNode(schemaNode.children[0])) && (
-          <Box ml={2} color="muted">{`{${
-            (schemaTree.isFlattenedNode(schemaNode) ? treeListNode.children : schemaNode.children).length
-          }}`}</Box>
+          <Box ml={2} color="muted">{`{${schemaNode.children.length}}`}</Box>
         )}
 
       {subpath.length > 1 && subpath[0] === 'patternProperties' ? (

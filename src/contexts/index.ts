@@ -1,4 +1,4 @@
 export * from './SchemaNode';
-export * from './SchemaTree';
-export * from './TreeListNode';
 export * from './ViewModeProvider';
+export * from './jsvOptions';
+export * from './nestingLevel';

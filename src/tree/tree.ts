@@ -68,7 +68,7 @@ export class SchemaTreeListTree extends TreeListTree {
     return node;
   }
 
-  public unwrap(node: TreeListParentNode) {
+  public unwrap(node: TreeListParentNode<SchemaTreeListNode> & SchemaTreeListNode) {
     if (this.visited.has(node)) {
       for (const child of node.children) {
         if (this.visited.has(child)) continue;
@@ -114,7 +114,7 @@ export class SchemaTreeListTree extends TreeListTree {
 
     this._schemaToTreeMap.set(this.jsonSchemaTree.root, this.root);
 
-    this.populateTreeFragment(this.root);
+    this.populateTreeFragment(this.root as any);
     this.invalidate();
   }
 
@@ -241,7 +241,7 @@ export class SchemaTreeListTree extends TreeListTree {
     }
   }
 
-  public populateTreeFragment(parent: TreeListParentNode) {
+  public populateTreeFragment(parent: SchemaTreeListNode & TreeListParentNode) {
     let schemaNode = this.getFromTreeToSchemaMap(parent);
     let fragment: TreeFragment = [];
 
@@ -296,7 +296,7 @@ export class SchemaTreeListTree extends TreeListTree {
   }
 
   public getFromTreeToSchemaMap(treeNode: SchemaTreeListNode): RegularNode | RootNode {
-    const schemaNode = this._treeToSchemaMap.get(treeNode);
+    const schemaNode = treeNode?.metadata?.schemaNode;
 
     if (schemaNode === void 0) {
       throw new ReferenceError('Could not find any schemaNode for given treeNode');

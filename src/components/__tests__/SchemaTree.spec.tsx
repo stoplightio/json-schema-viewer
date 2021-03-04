@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { SchemaTree } from '../index';
+import { SchemaTreeComponent } from '../index';
 
 const schema: JSONSchema4 = {
   type: 'object',
@@ -45,7 +45,7 @@ describe('SchemaTree component', () => {
 
   describe('tree-list', () => {
     it('should be rendered', () => {
-      const wrapper = shallow(<SchemaTree schema={schema} treeStore={store} />);
+      const wrapper = shallow(<SchemaTreeComponent schema={schema} treeStore={store} />);
 
       expect(wrapper.find(TreeList)).toExist();
       expect(wrapper.find(TreeList)).toHaveProp({
@@ -54,7 +54,7 @@ describe('SchemaTree component', () => {
     });
 
     it('should be not draggable', () => {
-      const treeList = shallow(<SchemaTree schema={schema} treeStore={store} />).find(TreeList);
+      const treeList = shallow(<SchemaTreeComponent schema={schema} treeStore={store} />).find(TreeList);
 
       expect(treeList.prop('draggable')).toBe(false);
     });

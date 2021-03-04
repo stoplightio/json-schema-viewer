@@ -1,2 +1,2 @@
-export { JsonSchemaViewer, SchemaRow, SchemaTree as SchemaTreeComponent } from './components';
+export { JsonSchemaViewer, SchemaRow } from './components';
 export * from './types';
