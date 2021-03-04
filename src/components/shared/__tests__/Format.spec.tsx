@@ -1,6 +1,5 @@
 import 'jest-enzyme';
 
-import { TreeState } from '@stoplight/tree-list';
 import { mount } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
