@@ -1,5 +1,5 @@
 import { isRegularNode, SchemaTree as JsonSchemaTree, SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
-import { Box, Flex, VStack } from '@stoplight/mosaic';
+import { Box, VStack } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
 import type { JSONSchema4 } from 'json-schema';
@@ -56,21 +56,19 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
   const options = React.useMemo(() => ({ defaultExpandedDepth, maxRows }), [defaultExpandedDepth, maxRows]);
 
   if (isEmpty) {
-    return <div>{emptyText}</div>;
+    return <Box className={cn(className, 'JsonSchemaViewer')}>{emptyText}</Box>;
   }
 
   return (
-    <Flex pos="relative" h="full" className={cn(className, 'JsonSchemaViewer')} overflowY={'scroll'}>
-      <JSVOptionsContextProvider value={options}>
-        <ViewModeContext.Provider value={viewMode ?? 'standalone'}>
-          <VStack divider>
-            {jsonSchemaTreeRoot.children.map(childJsonSchemaNode => (
-              <SchemaRow key={childJsonSchemaNode.id} schemaNode={childJsonSchemaNode} />
-            ))}
-          </VStack>
-        </ViewModeContext.Provider>
-      </JSVOptionsContextProvider>
-    </Flex>
+    <JSVOptionsContextProvider value={options}>
+      <ViewModeContext.Provider value={viewMode ?? 'standalone'}>
+        <VStack divider className={cn(className, 'JsonSchemaViewer')}>
+          {jsonSchemaTreeRoot.children.map(childJsonSchemaNode => (
+            <SchemaRow key={childJsonSchemaNode.id} schemaNode={childJsonSchemaNode} />
+          ))}
+        </VStack>
+      </ViewModeContext.Provider>
+    </JSVOptionsContextProvider>
   );
 };
 
