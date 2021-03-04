@@ -11,9 +11,8 @@ import { Box, Flex, Icon, VStack } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';
-import { IncreaseNestingLevel, SchemaNodeContext, useCurrentNestingLevel, useJSVOptionsContext } from '../contexts';
+import { IncreaseNestingLevel, useCurrentNestingLevel, useJSVOptionsContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
-import { useSchemaNode } from '../hooks';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../tree';
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
 import { Properties } from './shared/Properties';
@@ -22,8 +21,7 @@ export interface ISchemaRow {
   schemaNode: SchemaNode;
 }
 
-export const SchemaPropertyRow: React.FunctionComponent = () => {
-  const schemaNode = useSchemaNode();
+const SchemaPropertyRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) => {
   const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
 
   const currentNestingLevel = useCurrentNestingLevel();
@@ -84,7 +82,7 @@ export const SchemaPropertyRow: React.FunctionComponent = () => {
 
           <Flex flex={1} textOverflow="truncate" fontSize="base">
             <Property schemaNode={schemaNode} />
-            <Format />
+            <Format schemaNode={schemaNode} />
           </Flex>
           <Properties
             required={isPropertyRequired(schemaNode)}
@@ -124,20 +122,18 @@ export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ schemaNode }) =
   const currentLevel = useCurrentNestingLevel();
 
   return (
-    <SchemaNodeContext.Provider value={schemaNode}>
-      <Box flex={1} px={2} w="full" maxW="full">
-        <Box
-          alignItems="center"
-          pos="relative"
-          fontSize="sm"
-          style={{
-            marginLeft: CARET_ICON_BOX_DIMENSION * currentLevel, // offset for spacing
-          }}
-        >
-          <SchemaPropertyRow />
-        </Box>
+    <Box flex={1} px={2} w="full" maxW="full">
+      <Box
+        alignItems="center"
+        pos="relative"
+        fontSize="sm"
+        style={{
+          marginLeft: CARET_ICON_BOX_DIMENSION * currentLevel, // offset for spacing
+        }}
+      >
+        <SchemaPropertyRow schemaNode={schemaNode} />
       </Box>
-    </SchemaNodeContext.Provider>
+    </Box>
   );
 };
 SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';

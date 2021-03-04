@@ -45,7 +45,7 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('stress-test schema', () => (
     <>
-      <div style={{ height: 345 }}>
+      <div style={{ height: 345, overflowY: 'scroll' }}>
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
@@ -53,7 +53,7 @@ storiesOf('JsonSchemaViewer', module)
           mergeAllOf={boolean('mergeAllOf', true)}
         />
       </div>
-      <div style={{ height: 345 }}>
+      <div style={{ height: 345, overflowY: 'scroll' }}>
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}

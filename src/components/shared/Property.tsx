@@ -27,7 +27,7 @@ export const Property: React.FunctionComponent<IProperty> = ({ schemaNode, schem
         </Box>
       )}
 
-      <Types />
+      <Types schemaNode={schemaNode} />
 
       {childNodes.length > 0 && <Box ml={2} color="muted">{`{${childNodes.length}}`}</Box>}
 
