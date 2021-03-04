@@ -11,6 +11,9 @@ import { Wrapper } from './utils/Wrapper';
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
+const refSchema = require('../__fixtures__/references/base.json');
+const nullRefSchema = require('../__fixtures__/references/nullish.json');
+const brokenRefArraySchema = require('../__fixtures__/arrays/of-refs.json');
 
 subscribeTheme({ mode: 'light' });
 
@@ -127,4 +130,16 @@ storiesOf('JsonSchemaViewer', module)
         </div>
       </InvertTheme>
     );
-  });
+  })
+  .add('refs/normal', () => (
+    <JsonSchemaViewer schema={refSchema as JSONSchema4} defaultExpandedDepth={number('defaultExpandedDepth', 2)} />
+  ))
+  .add('refs/nullish', () => (
+    <JsonSchemaViewer schema={nullRefSchema as JSONSchema4} defaultExpandedDepth={number('defaultExpandedDepth', 2)} />
+  ))
+  .add('refs/broken', () => (
+    <JsonSchemaViewer
+      schema={brokenRefArraySchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+    />
+  ));

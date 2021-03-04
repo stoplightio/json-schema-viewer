@@ -1,5 +1,12 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { isMirroredNode, isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
+import {
+  isMirroredNode,
+  isReferenceNode,
+  isRegularNode,
+  ReferenceNode,
+  SchemaNode,
+  SchemaNodeKind,
+} from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon, VStack } from '@stoplight/mosaic';
 import * as React from 'react';
 
@@ -7,7 +14,7 @@ import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '..
 import { IncreaseNestingLevel, SchemaNodeContext, useCurrentNestingLevel, useJSVOptionsContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
 import { useSchemaNode } from '../hooks';
-import { calculateChildrenToShow, isPropertyRequired } from '../tree';
+import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../tree';
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
 import { Properties } from './shared/Properties';
 
@@ -26,24 +33,23 @@ export const SchemaPropertyRow: React.FunctionComponent = () => {
     !isMirroredNode(schemaNode) && currentNestingLevel < defaultExpandedDepth,
   );
 
-  // const refNode = React.useMemo<ReferenceNode | null>(() => {
-  //   if (isReferenceNode(schemaNode)) {
-  //     return schemaNode;
-  //   }
-  //
-  //   if (
-  //     isRegularNode(schemaNode) &&
-  //     (tree.isFlattenedNode(schemaNode) ||
-  //       (schemaNode.primaryType === SchemaNodeKind.Array && schemaNode.children?.length === 1))
-  //   ) {
-  //     return (schemaNode.children?.find(isReferenceNode) as Optional<ReferenceNode>) ?? null;
-  //   }
-  //
-  //   return null;
-  // }, [schemaNode, tree]);
-  //
-  // const isBrokenRef = typeof refNode?.error === 'string';
-  const isBrokenRef = false;
+  const refNode = React.useMemo<ReferenceNode | null>(() => {
+    if (isReferenceNode(schemaNode)) {
+      return schemaNode;
+    }
+
+    if (
+      isRegularNode(schemaNode) &&
+      (isFlattenableNode(schemaNode) ||
+        (schemaNode.primaryType === SchemaNodeKind.Array && schemaNode.children?.length === 1))
+    ) {
+      return (schemaNode.children?.find(isReferenceNode) as ReferenceNode | undefined) ?? null;
+    }
+
+    return null;
+  }, [schemaNode]);
+
+  const isBrokenRef = typeof refNode?.error === 'string';
 
   const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
@@ -97,8 +103,8 @@ export const SchemaPropertyRow: React.FunctionComponent = () => {
       <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
 
       {isBrokenRef && (
-        // TODO (JJ): Add mosaic tooltip showing ref error /*refNode!.error!*/
-        <Icon title={'Reference error'} color="danger" icon={faExclamationTriangle} size="sm" />
+        // TODO (JJ): Add mosaic tooltip showing ref error
+        <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
       )}
       {childNodes.length > 0 && isExpanded ? (
         <IncreaseNestingLevel>
