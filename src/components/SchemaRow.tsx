@@ -52,7 +52,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
   return (
-    <Box px={2} fontSize="sm" pos="relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
+    <Box fontSize="sm" pos="relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
       <Box
         onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
         cursor={childNodes.length > 0 ? 'pointer' : 'default'}
