@@ -1,5 +1,5 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
+import { isMirroredNode, isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon, VStack } from '@stoplight/mosaic';
 import * as React from 'react';
 
@@ -22,7 +22,9 @@ export const SchemaPropertyRow: React.FunctionComponent = () => {
   const currentNestingLevel = useCurrentNestingLevel();
   const { defaultExpandedDepth } = useJSVOptionsContext();
 
-  const [isExpanded, setExpanded] = React.useState<boolean>(currentNestingLevel < defaultExpandedDepth);
+  const [isExpanded, setExpanded] = React.useState<boolean>(
+    !isMirroredNode(schemaNode) && currentNestingLevel < defaultExpandedDepth,
+  );
 
   // const refNode = React.useMemo<ReferenceNode | null>(() => {
   //   if (isReferenceNode(schemaNode)) {
