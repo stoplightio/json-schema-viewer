@@ -14,6 +14,7 @@ const stressSchema = require('../__fixtures__/stress-schema.json');
 const refSchema = require('../__fixtures__/references/base.json');
 const nullRefSchema = require('../__fixtures__/references/nullish.json');
 const brokenRefArraySchema = require('../__fixtures__/arrays/of-refs.json');
+const oneOfWithArraySchema = require('../__fixtures__/combiners/oneof-with-array-type.json');
 
 subscribeTheme({ mode: 'light' });
 
@@ -68,6 +69,13 @@ storiesOf('JsonSchemaViewer', module)
       schema={allOfSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       mergeAllOf={boolean('mergeAllOf', true)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('anyOf-array-schema', () => (
+    <JsonSchemaViewer
+      schema={oneOfWithArraySchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
   ))
