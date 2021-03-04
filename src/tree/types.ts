@@ -20,10 +20,20 @@ export type SchemaTreeOptions = {
   viewMode?: ViewMode;
 };
 
-export type FlattenableNode = RegularNode & {
+export type ArrayNode = RegularNode & {
   primaryType: SchemaNodeKind.Array;
-  children:
-    | ((RegularNode & { simple: true })[] & { 0: RegularNode & { simple: true } })
-    | [RegularNode & { simple: false }]
-    | [ReferenceNode & { error: string }];
 };
+
+export type PrimitiveArrayNode = ArrayNode & {
+  children: [RegularNode & { simple: true }];
+};
+
+export type ComplexArrayNode = ArrayNode & {
+  children: [RegularNode & { simple: false }];
+};
+
+export type BrokenRefArrayNode = ArrayNode & {
+  children: [ReferenceNode & { error: string }];
+};
+
+export type FlattenableNode = PrimitiveArrayNode | ComplexArrayNode | BrokenRefArrayNode;

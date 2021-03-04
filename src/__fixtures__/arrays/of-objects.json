@@ -8,6 +8,7 @@
       "type": ["array"],
       "items": {
         "type": "object",
+        "title": "SomeObj",
         "properties": {
           "ArrayObjectProperty": {
             "type": "string"

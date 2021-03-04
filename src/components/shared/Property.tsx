@@ -4,10 +4,12 @@ import * as React from 'react';
 
 import { isNonNullable } from '../../guards/isNonNullable';
 import { useSchemaNode } from '../../hooks';
-import { isParentNode } from '../../utils';
+import { calculateChildrenToShow, isParentNode } from '../../utils';
 import { Types } from './Types';
 
-export interface IProperty {}
+export interface IProperty {
+  schemaNode: SchemaNode;
+}
 
 function shouldShowPropertyName(schemaNode: SchemaNode) {
   return (
@@ -16,9 +18,8 @@ function shouldShowPropertyName(schemaNode: SchemaNode) {
   );
 }
 
-export const Property: React.FunctionComponent<IProperty> = () => {
-  const schemaNode = useSchemaNode();
-  const { subpath } = schemaNode;
+export const Property: React.FunctionComponent<IProperty> = ({ schemaNode, schemaNode: { subpath } }) => {
+  const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
   return (
     <>
@@ -30,13 +31,7 @@ export const Property: React.FunctionComponent<IProperty> = () => {
 
       <Types />
 
-      {isRegularNode(schemaNode) &&
-        (schemaNode.primaryType === SchemaNodeKind.Array || schemaNode.primaryType === SchemaNodeKind.Object) &&
-        isParentNode(schemaNode) &&
-        isNonNullable(schemaNode.children) &&
-        (schemaNode.children.length !== 1 || !isReferenceNode(schemaNode.children[0])) && (
-          <Box ml={2} color="muted">{`{${schemaNode.children.length}}`}</Box>
-        )}
+      {childNodes.length > 0 && <Box ml={2} color="muted">{`{${childNodes.length}}`}</Box>}
 
       {subpath.length > 1 && subpath[0] === 'patternProperties' ? (
         <Box ml={2} textOverflow="truncate" color="muted">

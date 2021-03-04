@@ -7,7 +7,7 @@ import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '..
 import { IncreaseNestingLevel, SchemaNodeContext, useCurrentNestingLevel, useJSVOptionsContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
 import { useSchemaNode } from '../hooks';
-import { isParentNode, isPropertyRequired } from '../utils';
+import { calculateChildrenToShow, isComplexArray, isParentNode, isPrimitiveArray, isPropertyRequired } from '../utils';
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
 import { Properties } from './shared/Properties';
 
@@ -45,11 +45,16 @@ export const SchemaPropertyRow: React.FunctionComponent = () => {
   // const isBrokenRef = typeof refNode?.error === 'string';
   const isBrokenRef = false;
 
+  const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
+
   return (
     <>
-      <Box onClick={() => setExpanded(!isExpanded)} cursor="pointer">
+      <Box
+        onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
+        cursor={childNodes.length > 0 ? 'pointer' : 'default'}
+      >
         <Flex my={2}>
-          {!isBrokenRef && isParentNode(schemaNode) ? (
+          {childNodes.length > 0 ? (
             <Caret
               isExpanded={isExpanded}
               style={{
@@ -72,7 +77,7 @@ export const SchemaPropertyRow: React.FunctionComponent = () => {
             schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && <Divider kind={schemaNode.subpath[0]} />}
 
           <Flex flex={1} textOverflow="truncate" fontSize="base">
-            <Property />
+            <Property schemaNode={schemaNode} />
             <Format />
           </Flex>
           <Properties
@@ -95,10 +100,10 @@ export const SchemaPropertyRow: React.FunctionComponent = () => {
         // TODO (JJ): Add mosaic tooltip showing ref error /*refNode!.error!*/
         <Icon title={'Reference error'} color="danger" icon={faExclamationTriangle} size="sm" />
       )}
-      {isRegularNode(schemaNode) && schemaNode.children?.length && isExpanded ? (
+      {childNodes.length > 0 && isExpanded ? (
         <IncreaseNestingLevel>
           <VStack divider>
-            {(schemaNode.children as SchemaNode[]).map((childNode: SchemaNode) => (
+            {childNodes.map((childNode: SchemaNode) => (
               <SchemaRow key={childNode.id} schemaNode={childNode} />
             ))}
           </VStack>

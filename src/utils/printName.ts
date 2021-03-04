@@ -1,7 +1,7 @@
 import { isReferenceNode, isRegularNode, RegularNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 
 import { isNonNullable } from '../guards/isNonNullable';
-import { isParentNode } from './index';
+import { isComplexArray, isPrimitiveArray } from './index';
 
 export function printName(schemaNode: RegularNode): string | null {
   if (
@@ -24,7 +24,7 @@ function printArrayName(schemaNode: RegularNode): string | null {
     return `$ref(${schemaNode.children[0].value})[]`;
   }
 
-  if (!isParentNode(schemaNode)) {
+  if (isPrimitiveArray(schemaNode)) {
     const val =
       schemaNode.children?.reduce<SchemaNodeKind[] | null>((mergedTypes, child) => {
         if (mergedTypes === null) return null;
@@ -44,12 +44,12 @@ function printArrayName(schemaNode: RegularNode): string | null {
     return val !== null && val.length > 0 ? `${SchemaNodeKind.Array}[${val.join(',')}]` : null;
   }
 
-  // if (tree.isFlattenedNode(schemaNode) && isRegularNode(schemaNode.children[0])) {
-  //   const firstChild = schemaNode.children[0];
-  //   return firstChild.title !== null
-  //     ? `${firstChild.title}[]`
-  //     : `${SchemaNodeKind.Array}[${firstChild.primaryType ?? firstChild.combiners?.join(',')}]`;
-  // }
+  if (isComplexArray(schemaNode)) {
+    const firstChild = schemaNode.children[0];
+    return firstChild.title !== null
+      ? `${firstChild.title}[]`
+      : `${SchemaNodeKind.Array}[${firstChild.primaryType ?? firstChild.combiners?.join(',')}]`;
+  }
 
   return null;
 }
