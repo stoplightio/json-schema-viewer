@@ -11,13 +11,14 @@ import { Icon } from '@stoplight/mosaic';
 import cn from 'classnames';
 import * as React from 'react';
 
-import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';
-import { useJSVOptionsContext } from '../contexts';
-import { isCombiner } from '../guards/isCombiner';
-import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../tree';
-import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
-import { ChildStack } from './shared/ChildStack';
-import { Properties } from './shared/Properties';
+import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../../consts';
+import { useJSVOptionsContext } from '../../contexts';
+import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
+import { printName } from '../../utils';
+import { Caret, Description, Format, getValidationsFromSchema, Property, Validations } from '../shared';
+import { ChildStack } from '../shared/ChildStack';
+import { Properties } from '../shared/Properties';
+import { useChildSelector } from './useChildSelector';
 
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
@@ -32,6 +33,8 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const [isExpanded, setExpanded] = React.useState<boolean>(
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
   );
+
+  const { selectedChild, setSelectedChild, childOptions } = useChildSelector(schemaNode);
 
   const refNode = React.useMemo<ReferenceNode | null>(() => {
     if (isReferenceNode(schemaNode)) {
@@ -89,6 +92,19 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
               <div className="sl-flex sl-text-base sl-flex-1 sl-truncate">
                 <Property schemaNode={schemaNode} />
                 <Format schemaNode={schemaNode} />
+                {childOptions.length > 0 && (
+                  <select
+                    className="sl-mx-2 sl-p-1 sl-border"
+                    onClick={e => e.stopPropagation()}
+                    onChange={e => setSelectedChild(childOptions[e.currentTarget.value])}
+                  >
+                    {childOptions.map((option, index) => (
+                      <option key={option.id} onClick={() => setSelectedChild(option)} value={index}>
+                        {(isRegularNode(option) && printName(option)) || `#${index}`}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
               <Properties
                 required={isPropertyRequired(schemaNode)}
@@ -113,7 +129,10 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
         </div>
         <div>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</div>
       </div>
-      {childNodes.length > 0 && isExpanded ? (
+      {selectedChild !== undefined && isExpanded && (
+        <SchemaRow schemaNode={selectedChild} nestingLevel={nestingLevel + 1} />
+      )}
+      {selectedChild === undefined && childNodes.length > 0 && isExpanded ? (
         <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
       ) : null}
     </div>
