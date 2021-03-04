@@ -1,10 +1,8 @@
-import { isReferenceNode, isRegularNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import { SchemaNode } from '@stoplight/json-schema-tree';
 import { Box } from '@stoplight/mosaic';
 import * as React from 'react';
 
-import { isNonNullable } from '../../guards/isNonNullable';
-import { useSchemaNode } from '../../hooks';
-import { calculateChildrenToShow, isParentNode } from '../../utils';
+import { calculateChildrenToShow } from '../../tree';
 import { Types } from './Types';
 
 export interface IProperty {

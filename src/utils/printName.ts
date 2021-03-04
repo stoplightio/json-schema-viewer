@@ -1,7 +1,7 @@
 import { isReferenceNode, isRegularNode, RegularNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 
 import { isNonNullable } from '../guards/isNonNullable';
-import { isComplexArray, isPrimitiveArray } from './index';
+import { isComplexArray, isPrimitiveArray } from '../tree';
 
 export function printName(schemaNode: RegularNode): string | null {
   if (

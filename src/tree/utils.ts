@@ -1,7 +1,7 @@
 import { isReferenceNode, isRegularNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 
 import { isNonNullable } from '../guards/isNonNullable';
-import { ComplexArrayNode, FlattenableNode, PrimitiveArrayNode } from '../tree/types';
+import { ComplexArrayNode, FlattenableNode, PrimitiveArrayNode } from './types';
 
 export const isParentNode = (node: SchemaNode) => isRegularNode(node) && !!node.children && node.children.length > 0;
 
@@ -39,4 +39,13 @@ export function calculateChildrenToShow(node: SchemaNode): SchemaNode[] {
     return node.children[0].children ?? [];
   }
   return node.children ?? [];
+}
+
+export function isPropertyRequired(schemaNode: SchemaNode): boolean {
+  const { parent } = schemaNode;
+  if (parent === null || !isRegularNode(parent) || schemaNode.subpath.length === 0) {
+    return false;
+  }
+
+  return !!parent.required?.includes(schemaNode.subpath[schemaNode.subpath.length - 1]);
 }

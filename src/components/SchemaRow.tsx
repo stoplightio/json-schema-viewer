@@ -7,7 +7,7 @@ import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '..
 import { IncreaseNestingLevel, SchemaNodeContext, useCurrentNestingLevel, useJSVOptionsContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
 import { useSchemaNode } from '../hooks';
-import { calculateChildrenToShow, isComplexArray, isParentNode, isPrimitiveArray, isPropertyRequired } from '../utils';
+import { calculateChildrenToShow, isPropertyRequired } from '../tree';
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
 import { Properties } from './shared/Properties';
 

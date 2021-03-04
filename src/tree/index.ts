@@ -1,1 +1,2 @@
-export { SchemaTreeOptions } from './types';
+export * from './types';
+export * from './utils';
