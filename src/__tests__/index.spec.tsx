@@ -1,5 +1,6 @@
 import 'jest-enzyme';
 
+import { render } from '@testing-library/react';
 import { mount, ReactWrapper } from 'enzyme';
 import * as fastGlob from 'fast-glob';
 import * as fs from 'fs';
@@ -80,9 +81,7 @@ describe('HTML Output', () => {
     });
 
     it('given allOf merging enabled, should merge contents of allOf combiners', () => {
-      expect(
-        dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />),
-      ).toMatchSnapshot();
+      expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
     });
   });
 
@@ -102,6 +101,8 @@ describe('HTML Output', () => {
       ],
       type: 'array',
     };
+
+    render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />);
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
   });
