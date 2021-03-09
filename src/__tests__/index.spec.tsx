@@ -1,6 +1,7 @@
 import 'jest-enzyme';
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { mount, ReactWrapper } from 'enzyme';
 import * as fastGlob from 'fast-glob';
 import * as fs from 'fs';
@@ -261,190 +262,64 @@ describe('Expanded depth', () => {
     });
 
     describe('static', () => {
-      it('given initial level set to -1, should render only top-level property', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+      it('given initial level set to -1, should render only top-level object', () => {
+        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
-        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 0px\\">
-                  <div>
-                    <div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          "
-        `);
+        expect(screen.queryByText('array[object]')).toBeInTheDocument();
+        expect(screen.queryByText('foo')).not.toBeInTheDocument();
       });
 
       it('given initial level set to 0, should render top 2 levels', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
-        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 0px\\">
-                  <div>
-                    <div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          "
-        `);
+        expect(screen.queryByText('foo')).toBeInTheDocument();
       });
 
       it('given initial level set to 1, should render top 3 levels', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
+        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
-        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 0px\\">
-                  <div>
-                    <div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 40px\\">
-                  <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                      <div>{1}</div>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          "
-        `);
+        expect(screen.queryByText('bar')).toBeInTheDocument();
       });
     });
 
     describe('actual expanding', () => {
       it('starting from level -1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
-        wrapper.find('.TreeListItem--0').first().simulate('click');
+        userEvent.click(screen.getByText('array[object]'));
 
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
+        expandStartingFromFoo();
       });
 
       it('starting from level 0, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
+        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
+        expandStartingFromFoo();
       });
 
       it('starting from level 1, should expand successfully', () => {
-        const wrapper = mount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
+        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
+        expandStartingFromBar();
       });
+
+      function expandStartingFromFoo() {
+        const fooElement = screen.queryByText('foo');
+        expect(fooElement).toBeInTheDocument();
+
+        userEvent.click(fooElement!);
+
+        expandStartingFromBar();
+      }
+
+      function expandStartingFromBar() {
+        const barElement = screen.queryByText('bar');
+        expect(barElement).toBeInTheDocument();
+
+        userEvent.click(barElement!);
+
+        expect(screen.queryByText('baz')).toBeInTheDocument();
+      }
     });
   });
 
