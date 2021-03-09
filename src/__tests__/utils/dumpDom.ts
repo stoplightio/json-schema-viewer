@@ -2,6 +2,7 @@ import { mount } from 'enzyme';
 import { ReactElement } from 'react';
 
 import { prettifyHtml } from './prettifyHtml';
+import { JsonSchemaViewer } from '../../components';
 
 const MOSAIC_CLASSES_EXP = /^sl-.*$/;
 
@@ -25,8 +26,7 @@ function stripTailwindClasses(node: HTMLElement) {
 
 export function dumpDom(element: ReactElement) {
   const wrapper = mount(element);
-
-  const root = wrapper.find('.ScrollbarsCustom-Content > div');
+  const root = wrapper.find(JsonSchemaViewer);
   root.getDOMNode().removeAttribute('style');
 
   stripTailwindClasses(root.getDOMNode());
