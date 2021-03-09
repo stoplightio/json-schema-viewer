@@ -81,7 +81,12 @@ describe('HTML Output', () => {
     });
 
     it('given allOf merging enabled, should merge contents of allOf combiners', () => {
-      expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
+      render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />);
+
+      // the property from the first child of allOf should be spread into both sides of the oneOf/anyOf
+      expect(screen.getAllByText('enabled')).toHaveLength(2);
+      // this only occurs on one side
+      expect(screen.getAllByText('supervisor')).toHaveLength(1);
     });
   });
 
