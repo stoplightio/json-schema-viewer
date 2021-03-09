@@ -1,6 +1,6 @@
 import 'jest-enzyme';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { mount, ReactWrapper } from 'enzyme';
 import * as fastGlob from 'fast-glob';
 import * as fs from 'fs';
@@ -110,7 +110,8 @@ describe('HTML Output', () => {
 
     render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />);
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
+    expect(screen.queryByText('array[string]')).toBeInTheDocument();
+    expect(screen.queryByText('array[number]')).toBeInTheDocument();
   });
 
   it.each<ViewMode>(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
@@ -128,9 +129,16 @@ describe('HTML Output', () => {
       },
     };
 
-    expect(
-      dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf viewMode={mode} />),
-    ).toMatchSnapshot();
+    render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf viewMode={mode} />);
+
+    const idElement = screen.queryByText('id');
+    const descriptionElement = screen.queryByText('description');
+    if (mode !== 'read') {
+      expect(descriptionElement).toBeInTheDocument();
+    }
+    if (mode !== 'write') {
+      expect(idElement).toBeInTheDocument();
+    }
   });
 
   it('given multiple object and string type, should process properties', () => {
@@ -146,10 +154,14 @@ describe('HTML Output', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />)).toMatchSnapshot();
+    render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />);
+
+    expect(screen.queryByText('ids')).toBeInTheDocument();
   });
 
   it('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
+    const description =
+      "This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!";
     const schema: JSONSchema4 = {
       type: 'object',
       properties: {
@@ -158,13 +170,15 @@ describe('HTML Output', () => {
           items: {
             type: ['string', 'number'],
           },
-          description:
-            "This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!",
+          description: description,
         },
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />)).toMatchSnapshot();
+    render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />);
+
+    expect(screen.queryByText('array[string,number]')).toBeInTheDocument();
+    expect(screen.queryByText(description)).toBeInTheDocument();
   });
 
   it('given visible $ref node, should try to inject the title immediately', () => {
@@ -186,14 +200,15 @@ describe('HTML Output', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchSnapshot();
+    render(<JsonSchemaViewer schema={schema} />);
+
+    expect(screen.queryAllByText('User')).toHaveLength(2); // one for user, one for foo
   });
 });
 
 describe.each([{}, { unknown: '' }, { $ref: null }])('given empty schema, should render empty text', schema => {
-  const wrapper = mount(<JsonSchemaViewer schema={schema as any} />);
-  expect(wrapper).toHaveHTML('<div>No schema defined</div>');
-  wrapper.unmount();
+  const { container } = render(<JsonSchemaViewer schema={schema as any} />);
+  expect(container).toHaveTextContent('No schema defined');
 });
 
 describe('Expanded depth', () => {
