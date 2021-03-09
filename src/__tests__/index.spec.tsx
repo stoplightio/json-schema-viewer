@@ -356,7 +356,7 @@ describe('Expanded depth', () => {
 });
 
 describe('$ref resolving', () => {
-  it('should render caret for schema with top-level $ref pointing at complex type', () => {
+  it('should render type for schema with top-level $ref pointing at primitive type', () => {
     const schema: JSONSchema4 = {
       $ref: '#/definitions/foo',
       definitions: {
@@ -366,21 +366,9 @@ describe('$ref resolving', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div>
-        <div>
-          <div>
-            <div style=\\"margin-left: 0px\\">
-              <div>
-                <div><span>string</span></div>
-              </div>
-              <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      "
-    `);
+    render(<JsonSchemaViewer schema={schema} />);
+
+    expect(screen.getByText('string')).toBeInTheDocument();
   });
 
   it('should render caret for top-level array with $ref items', () => {
@@ -391,20 +379,8 @@ describe('$ref resolving', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div>
-        <div>
-          <div>
-            <div style=\\"margin-left: 0px\\">
-              <div>
-                <div><span>$ref(#/foo)[]</span></div>
-              </div>
-              <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      "
-    `);
+    render(<JsonSchemaViewer schema={schema} />);
+
+    expect(screen.getByText('$ref(#/foo)[]')).toBeInTheDocument();
   });
 });
