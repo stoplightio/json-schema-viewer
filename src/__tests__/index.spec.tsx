@@ -2,17 +2,16 @@ import 'jest-enzyme';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { mount, ReactWrapper } from 'enzyme';
 import * as fastGlob from 'fast-glob';
 import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
+import { curry } from 'lodash';
 import * as path from 'path';
 import * as React from 'react';
 
 import { JsonSchemaViewer } from '../components';
 import { ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
-import { prettifyHtml } from './utils/prettifyHtml';
 
 describe('HTML Output', () => {
   it.each(
@@ -207,498 +206,150 @@ describe.each([{}, { unknown: '' }, { $ref: null }])('given empty schema, should
 });
 
 describe('Expanded depth', () => {
-  function stripDropZoneIds(input: string) {
-    return input.replace(/\sdata-root-drop-zone="\d+"/, '').replace(/\sdata-drop-zone-id="[a-z0-9-]+"/g, '');
-  }
-
-  const toUnmount: ReactWrapper[] = [];
-
-  function mountWithAutoUnmount(node: React.ReactElement) {
-    const wrapper = mount(node);
-    toUnmount.push(wrapper);
-    return wrapper;
-  }
-
-  afterEach(() => {
-    while (toUnmount.length > 0) {
-      toUnmount.pop()?.unmount();
+  /**
+   * Makes sure that exactly the first `desiredVisibleElementCount` elements from `hierarchy` are visible on the screen.
+   */
+  const assertTreeFragmentVisible = curry((hierarchy: readonly string[], desiredVisibleElementCount: number) => {
+    for (const hierarchyElement of hierarchy.slice(0, desiredVisibleElementCount)) {
+      expect(screen.getByText(hierarchyElement)).toBeInTheDocument();
+    }
+    if (hierarchy.length > desiredVisibleElementCount) {
+      expect(screen.queryByText(hierarchy[desiredVisibleElementCount])).not.toBeInTheDocument();
     }
   });
 
-  describe('merged array with object', () => {
-    let schema: JSONSchema4;
+  /**
+   * Expands the tree, starting with the `expandRangeStart` element (first one clicked)
+   * and stopping at the `expandRangeEnd` (not clicked).
+   *
+   * Finally ensures that the desired portion of the tree is visible.
+   */
+  const expandAndAssertTreeFragmentVisible = curry(
+    (hierarchy: readonly string[], expandRangeStart: number, expandRangeEnd: number) => {
+      for (const hierarchyElement of hierarchy.slice(expandRangeStart, expandRangeEnd)) {
+        const element = screen.getByText(hierarchyElement);
 
-    beforeEach(() => {
-      schema = {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            foo: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  bar: {
-                    type: 'object',
-                    properties: {
-                      baz: {
-                        type: 'integer',
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      };
-    });
-
-    describe('static', () => {
-      it('given initial level set to -1, should render only top-level object', () => {
-        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
-
-        expect(screen.queryByText('array[object]')).toBeInTheDocument();
-        expect(screen.queryByText('foo')).not.toBeInTheDocument();
-      });
-
-      it('given initial level set to 0, should render top 2 levels', () => {
-        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        expect(screen.queryByText('foo')).toBeInTheDocument();
-      });
-
-      it('given initial level set to 1, should render top 3 levels', () => {
-        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
-
-        expect(screen.queryByText('bar')).toBeInTheDocument();
-      });
-    });
-
-    describe('actual expanding', () => {
-      it('starting from level -1, should expand successfully', () => {
-        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
-
-        userEvent.click(screen.getByText('array[object]'));
-
-        expandStartingFromFoo();
-      });
-
-      it('starting from level 0, should expand successfully', () => {
-        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        expandStartingFromFoo();
-      });
-
-      it('starting from level 1, should expand successfully', () => {
-        render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
-
-        expandStartingFromBar();
-      });
-
-      function expandStartingFromFoo() {
-        const fooElement = screen.queryByText('foo');
-        expect(fooElement).toBeInTheDocument();
-
-        userEvent.click(fooElement!);
-
-        expandStartingFromBar();
+        userEvent.click(element!);
       }
 
-      function expandStartingFromBar() {
-        const barElement = screen.queryByText('bar');
-        expect(barElement).toBeInTheDocument();
+      assertTreeFragmentVisible(hierarchy, expandRangeEnd + 1);
+    },
+  );
 
-        userEvent.click(barElement!);
-
-        expect(screen.queryByText('baz')).toBeInTheDocument();
-      }
-    });
-  });
-
-  describe('merged array with object #2', () => {
-    let schema: JSONSchema4;
-
-    beforeEach(() => {
-      schema = {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            bar: {
-              type: 'integer',
-            },
-            foo: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  bar: {
-                    type: 'string',
-                  },
-                  foo: {
-                    type: 'number',
-                  },
-                },
-              },
-            },
-          },
-        },
-      };
-    });
-
-    describe('static', () => {
-      it('given initial level set to -1, should render only top-level property', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
-
-        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 0px\\">
-                  <div>
-                    <div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          "
-        `);
-      });
-
-      it('given initial level set to 0, should render top 2 levels', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 0px\\">
-                  <div>
-                    <div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
-                    <div>
-                      <div>bar</div>
-                      <span>integer</span>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          "
-        `);
-      });
-
-      it('given initial level set to 1, should render top 3 levels', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
-
-        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 0px\\">
-                  <div>
-                    <div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
-                    <div>
-                      <div>bar</div>
-                      <span>integer</span>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 40px\\">
-                  <div>
-                    <div>
-                      <div>bar</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 40px\\">
-                  <div>
-                    <div>
-                      <div>foo</div>
-                      <span>number</span>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          "
-        `);
-      });
-    });
-
-    describe('actual expanding', () => {
-      it('starting from level -1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
-
-        wrapper.find('.TreeListItem--0').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 0, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-      });
-    });
-  });
-
-  describe('nested object', () => {
-    let schema: JSONSchema4;
-
-    beforeEach(() => {
-      schema = {
-        type: 'object',
-        properties: {
-          bar: {
+  const mergedArrayWithObjectSchema = {
+    type: 'array',
+    items: {
+      type: 'object',
+      title: 'outer',
+      properties: {
+        foo: {
+          type: 'array',
+          items: {
             type: 'object',
             properties: {
-              barFoo: {
+              bar: {
                 type: 'object',
                 properties: {
-                  barFooBar: {
-                    type: 'object',
+                  baz: {
+                    type: 'integer',
                   },
-                },
-              },
-              barBar: {
-                type: 'string',
-              },
-              barBaz: {
-                type: 'boolean',
-              },
-            },
-          },
-          foo: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                fooBar: {
-                  type: 'string',
-                },
-                fooFoo: {
-                  type: 'number',
                 },
               },
             },
           },
         },
-      };
-    });
+      },
+    },
+  };
+
+  const mergedArrayWithObjectNo2Schema = {
+    type: 'array',
+    items: {
+      type: 'object',
+      title: 'outer',
+      properties: {
+        bar: {
+          type: 'integer',
+        },
+        foo: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              bar2: {
+                type: 'string',
+              },
+              foo2: {
+                type: 'number',
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
+  const nestedObjectSchema = {
+    type: 'object',
+    title: 'root',
+    properties: {
+      bar: {
+        type: 'object',
+        properties: {
+          barFoo: {
+            type: 'object',
+            properties: {
+              barFooBar: {
+                type: 'object',
+              },
+            },
+          },
+          barBar: {
+            type: 'string',
+          },
+          barBaz: {
+            type: 'boolean',
+          },
+        },
+      },
+      foo: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            fooBar: {
+              type: 'string',
+            },
+            fooFoo: {
+              type: 'number',
+            },
+          },
+        },
+      },
+    },
+  };
+
+  describe.each([
+    ['merged array with object', mergedArrayWithObjectSchema, ['outer[]', 'foo', 'bar', 'baz']],
+    ['merged array with object #2', mergedArrayWithObjectNo2Schema, ['outer[]', 'foo', 'bar2']],
+    ['nested object', nestedObjectSchema, ['root', 'bar', 'barFoo', 'barFooBar']],
+  ])('%s', (title, schema, hierarchy) => {
+    const assertVisibleCount = assertTreeFragmentVisible(hierarchy);
+    const tryExpandAndAssert = expandAndAssertTreeFragmentVisible(hierarchy);
 
     describe('static', () => {
-      it('given initial level set to -1, should render only top-level property', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+      it.each([-1, 0, 1])('defaultExpandedDepth={%i}', level => {
+        render(<JsonSchemaViewer schema={schema as JSONSchema4} defaultExpandedDepth={level} />);
 
-        expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 0px\\">
-                  <div>
-                    <div>
-                      <span>object</span>
-                      <div>{2}</div>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          "
-        `);
-      });
-
-      it('given initial level set to 0, should render top 2 levels', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        expect(dumpDom(wrapper.getElement())).toMatchSnapshot();
-      });
-
-      it('given initial level set to 1, should render top 3 levels', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
-
-        expect(dumpDom(wrapper.getElement())).toMatchSnapshot();
-      });
-
-      it('given initial level set to 2, should render top 4 levels', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />);
-
-        expect(dumpDom(wrapper.getElement())).toMatchSnapshot();
+        assertVisibleCount(level + 2);
       });
     });
 
     describe('actual expanding', () => {
-      it('starting from level -1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
+      it.each([-1, 0, 1])('starting from defaultExpandedDepth={%i}, should expand successfully', level => {
+        render(<JsonSchemaViewer schema={schema as JSONSchema4} defaultExpandedDepth={level} />);
 
-        wrapper.find('.TreeListItem--0').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 0, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
+        tryExpandAndAssert(level + 1, hierarchy.length - 1);
       });
     });
   });
