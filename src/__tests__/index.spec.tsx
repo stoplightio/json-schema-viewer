@@ -110,8 +110,8 @@ describe('HTML Output', () => {
 
     render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />);
 
-    expect(screen.queryByText('array[string]')).toBeInTheDocument();
-    expect(screen.queryByText('array[number]')).toBeInTheDocument();
+    expect(screen.getByText('array[string]')).toBeInTheDocument();
+    expect(screen.getByText('array[number]')).toBeInTheDocument();
   });
 
   it.each<ViewMode>(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
@@ -133,10 +133,14 @@ describe('HTML Output', () => {
 
     const idElement = screen.queryByText('id');
     const descriptionElement = screen.queryByText('description');
-    if (mode !== 'read') {
+    if (mode === 'read') {
+      expect(descriptionElement).not.toBeInTheDocument();
+    } else {
       expect(descriptionElement).toBeInTheDocument();
     }
-    if (mode !== 'write') {
+    if (mode === 'write') {
+      expect(idElement).not.toBeInTheDocument();
+    } else {
       expect(idElement).toBeInTheDocument();
     }
   });
