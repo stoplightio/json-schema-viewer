@@ -11,7 +11,6 @@ import * as React from 'react';
 
 import { JsonSchemaViewer } from '../components';
 import { ViewMode } from '../types';
-import { dumpDom } from './utils/dumpDom';
 
 describe('HTML Output', () => {
   it.each(
@@ -22,7 +21,8 @@ describe('HTML Output', () => {
   )('should match %s', filename => {
     const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../__fixtures__/', filename), 'utf8'));
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />)).toMatchSnapshot();
+    const { container } = render(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />);
+    expect(container.textContent).toMatchSnapshot();
   });
 
   describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {
