@@ -1,6 +1,6 @@
 import { InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
-import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
+import { number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
@@ -41,7 +41,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       schema={object('schema', {})}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
-      mergeAllOf={boolean('mergeAllOf', true)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -51,7 +50,6 @@ storiesOf('JsonSchemaViewer', module)
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          mergeAllOf={boolean('mergeAllOf', true)}
           onGoToRef={action('onGoToRef')}
         />
       </div>
@@ -59,7 +57,6 @@ storiesOf('JsonSchemaViewer', module)
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          mergeAllOf={boolean('mergeAllOf', true)}
           onGoToRef={action('onGoToRef')}
         />
       </div>
@@ -69,7 +66,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       schema={allOfSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-      mergeAllOf={boolean('mergeAllOf', true)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -93,7 +89,6 @@ storiesOf('JsonSchemaViewer', module)
       )}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
-      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
   .add('invalid types property pretty error message', () => (
@@ -125,7 +120,6 @@ storiesOf('JsonSchemaViewer', module)
       }}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
-      mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
   .add('dark', () => {
@@ -136,7 +130,6 @@ storiesOf('JsonSchemaViewer', module)
             schema={schema as JSONSchema4}
             defaultExpandedDepth={number('defaultExpandedDepth', 2)}
             onGoToRef={action('onGoToRef')}
-            mergeAllOf={boolean('mergeAllOf', true)}
           />
         </div>
       </InvertTheme>
