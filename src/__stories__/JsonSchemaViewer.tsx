@@ -1,11 +1,11 @@
-import { InvertTheme, subscribeTheme } from '@stoplight/mosaic';
+import { Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JsonSchemaViewer } from '../';
+import { JsonSchemaViewer, RowAddonRenderer } from '../';
 import { Wrapper } from './utils/Wrapper';
 
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
@@ -44,6 +44,24 @@ storiesOf('JsonSchemaViewer', module)
       onGoToRef={action('onGoToRef')}
     />
   ))
+  .add('custom row addon', () => {
+    const customRowAddonRenderer: RowAddonRenderer = () => {
+      return (
+        <Flex h="full" alignItems="center">
+          <Button pl={1} mr={1} size="sm" appearance="minimal" icon="issue" />
+          <input type="checkbox" />
+        </Flex>
+      );
+    };
+
+    return (
+      <JsonSchemaViewer
+        schema={object('schema', schema as JSONSchema4)}
+        onGoToRef={action('onGoToRef')}
+        renderRowAddon={customRowAddonRenderer}
+      />
+    );
+  })
   .add('stress-test schema', () => (
     <>
       <div style={{ height: 345, overflowY: 'scroll' }}>
