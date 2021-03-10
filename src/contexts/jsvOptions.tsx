@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-import { ViewMode } from '../types';
+import { GoToRefHandler, ViewMode } from '../types';
 
-type JSVOptions = {
+export type JSVOptions = {
   defaultExpandedDepth: number;
   viewMode: ViewMode;
+  onGoToRef?: GoToRefHandler;
 };
 
 const JSVOptionsContext = React.createContext<JSVOptions>({ defaultExpandedDepth: 0, viewMode: 'standalone' });

@@ -34,6 +34,7 @@ storiesOf('JsonSchemaViewer', module)
         },
         'standalone',
       )}
+      onGoToRef={action('onGoToRef')}
     />
   ))
   .add('custom schema', () => (
@@ -41,6 +42,7 @@ storiesOf('JsonSchemaViewer', module)
       schema={object('schema', {})}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
       mergeAllOf={boolean('mergeAllOf', true)}
+      onGoToRef={action('onGoToRef')}
     />
   ))
   .add('stress-test schema', () => (
@@ -50,6 +52,7 @@ storiesOf('JsonSchemaViewer', module)
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
           mergeAllOf={boolean('mergeAllOf', true)}
+          onGoToRef={action('onGoToRef')}
         />
       </div>
       <div style={{ height: 345, overflowY: 'scroll' }}>
@@ -57,6 +60,7 @@ storiesOf('JsonSchemaViewer', module)
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
           mergeAllOf={boolean('mergeAllOf', true)}
+          onGoToRef={action('onGoToRef')}
         />
       </div>
     </>
@@ -88,6 +92,7 @@ storiesOf('JsonSchemaViewer', module)
         null,
       )}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
       mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
@@ -130,6 +135,7 @@ storiesOf('JsonSchemaViewer', module)
           <JsonSchemaViewer
             schema={schema as JSONSchema4}
             defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+            onGoToRef={action('onGoToRef')}
             mergeAllOf={boolean('mergeAllOf', true)}
           />
         </div>
@@ -137,14 +143,23 @@ storiesOf('JsonSchemaViewer', module)
     );
   })
   .add('refs/normal', () => (
-    <JsonSchemaViewer schema={refSchema as JSONSchema4} defaultExpandedDepth={number('defaultExpandedDepth', 2)} />
+    <JsonSchemaViewer
+      schema={refSchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
+    />
   ))
   .add('refs/nullish', () => (
-    <JsonSchemaViewer schema={nullRefSchema as JSONSchema4} defaultExpandedDepth={number('defaultExpandedDepth', 2)} />
+    <JsonSchemaViewer
+      schema={nullRefSchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
+    />
   ))
   .add('refs/broken', () => (
     <JsonSchemaViewer
       schema={brokenRefArraySchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
     />
   ));

@@ -5,26 +5,24 @@ import cn from 'classnames';
 import type { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JSVOptionsContextProvider } from '../contexts';
-import type { ViewMode } from '../types';
+import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
 import { SchemaRow } from './SchemaRow';
 
-export interface IJsonSchemaViewer {
+export type JsonSchemaProps = JSVOptions & {
   schema: JSONSchema4;
   emptyText?: string;
-  defaultExpandedDepth?: number;
   className?: string;
   resolveRef?: SchemaTreeRefDereferenceFn;
-  viewMode?: ViewMode;
-}
+};
 
-const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwardedProps> = ({
+const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForwardedProps> = ({
   schema,
   viewMode = 'standalone',
   className,
   resolveRef,
   emptyText = 'No schema defined',
   defaultExpandedDepth = 2,
+  onGoToRef,
 }) => {
   const jsonSchemaTreeRoot = React.useMemo(() => {
     const jsonSchemaTree = new JsonSchemaTree(schema, {
@@ -50,7 +48,11 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
     jsonSchemaTreeRoot,
   ]);
 
-  const options = React.useMemo(() => ({ defaultExpandedDepth, viewMode }), [defaultExpandedDepth, viewMode]);
+  const options = React.useMemo(() => ({ defaultExpandedDepth, viewMode, onGoToRef }), [
+    defaultExpandedDepth,
+    viewMode,
+    onGoToRef,
+  ]);
 
   if (isEmpty) {
     return <Box className={cn(className, 'JsonSchemaViewer')}>{emptyText}</Box>;
@@ -76,7 +78,7 @@ const JsonSchemaFallbackComponent: React.FC<FallbackProps> = ({ error }) => {
   );
 };
 
-export const JsonSchemaViewer = withErrorBoundary<IJsonSchemaViewer>(JsonSchemaViewerComponent, {
+export const JsonSchemaViewer = withErrorBoundary<JsonSchemaProps>(JsonSchemaViewerComponent, {
   FallbackComponent: JsonSchemaFallbackComponent,
   recoverableProps: ['schema'],
   reportErrors: false,

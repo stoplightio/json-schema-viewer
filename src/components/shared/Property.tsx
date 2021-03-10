@@ -1,7 +1,8 @@
-import { SchemaNode } from '@stoplight/json-schema-tree';
-import { Box } from '@stoplight/mosaic';
+import { isReferenceNode, SchemaNode } from '@stoplight/json-schema-tree';
+import { Box, Link } from '@stoplight/mosaic';
 import * as React from 'react';
 
+import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow } from '../../tree';
 import { Types } from './Types';
 
@@ -19,6 +20,8 @@ function shouldShowPropertyName(schemaNode: SchemaNode) {
 export const Property: React.FunctionComponent<IProperty> = ({ schemaNode, schemaNode: { subpath } }) => {
   const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
+  const { onGoToRef } = useJSVOptionsContext();
+
   return (
     <>
       {subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
@@ -28,6 +31,21 @@ export const Property: React.FunctionComponent<IProperty> = ({ schemaNode, schem
       )}
 
       <Types schemaNode={schemaNode} />
+
+      {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external && onGoToRef ? (
+        <Link
+          ml={2}
+          color="primary-light"
+          cursor="pointer"
+          onClick={(e: React.MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onGoToRef(schemaNode);
+          }}
+        >
+          (go to ref)
+        </Link>
+      ) : null}
 
       {childNodes.length > 0 && <Box ml={2} color="muted">{`{${childNodes.length}}`}</Box>}
 
