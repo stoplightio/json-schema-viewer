@@ -8,7 +8,7 @@ import * as React from 'react';
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
 import { SchemaRow } from './SchemaRow';
 
-export type JsonSchemaProps = JSVOptions & {
+export type JsonSchemaProps = Partial<JSVOptions> & {
   schema: JSONSchema4;
   emptyText?: string;
   className?: string;
