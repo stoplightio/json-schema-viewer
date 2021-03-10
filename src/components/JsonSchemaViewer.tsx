@@ -5,7 +5,7 @@ import cn from 'classnames';
 import type { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JSVOptionsContextProvider, ViewModeContext } from '../contexts';
+import { JSVOptionsContextProvider } from '../contexts';
 import type { ViewMode } from '../types';
 import { SchemaRow } from './SchemaRow';
 
@@ -20,7 +20,7 @@ export interface IJsonSchemaViewer {
 
 const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwardedProps> = ({
   schema,
-  viewMode,
+  viewMode = 'standalone',
   className,
   resolveRef,
   emptyText = 'No schema defined',
@@ -50,7 +50,7 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
     jsonSchemaTreeRoot,
   ]);
 
-  const options = React.useMemo(() => ({ defaultExpandedDepth }), [defaultExpandedDepth]);
+  const options = React.useMemo(() => ({ defaultExpandedDepth, viewMode }), [defaultExpandedDepth, viewMode]);
 
   if (isEmpty) {
     return <Box className={cn(className, 'JsonSchemaViewer')}>{emptyText}</Box>;
@@ -58,13 +58,11 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
 
   return (
     <JSVOptionsContextProvider value={options}>
-      <ViewModeContext.Provider value={viewMode ?? 'standalone'}>
-        <VStack divider className={cn(className, 'JsonSchemaViewer')}>
-          {jsonSchemaTreeRoot.children.map(childJsonSchemaNode => (
-            <SchemaRow key={childJsonSchemaNode.id} schemaNode={childJsonSchemaNode} nestingLevel={0} />
-          ))}
-        </VStack>
-      </ViewModeContext.Provider>
+      <VStack divider className={cn(className, 'JsonSchemaViewer')}>
+        {jsonSchemaTreeRoot.children.map(childJsonSchemaNode => (
+          <SchemaRow key={childJsonSchemaNode.id} schemaNode={childJsonSchemaNode} nestingLevel={0} />
+        ))}
+      </VStack>
     </JSVOptionsContextProvider>
   );
 };

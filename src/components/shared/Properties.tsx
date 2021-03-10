@@ -2,7 +2,7 @@ import { Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import * as React from 'react';
 
-import { ViewModeContext } from '../../contexts';
+import { useJSVOptionsContext } from '../../contexts';
 
 export interface IProperties {
   required: boolean;
@@ -15,7 +15,7 @@ export const Properties: React.FunctionComponent<IProperties> = ({
   deprecated,
   validations: { readOnly, writeOnly },
 }) => {
-  const viewMode = React.useContext(ViewModeContext);
+  const { viewMode } = useJSVOptionsContext();
 
   // Show readOnly writeOnly validations only in standalone mode and only if just one of them is present
   const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
