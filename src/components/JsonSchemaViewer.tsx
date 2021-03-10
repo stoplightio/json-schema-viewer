@@ -1,6 +1,6 @@
 import { isRegularNode, SchemaTree as JsonSchemaTree, SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
 import { Box, VStack } from '@stoplight/mosaic';
-import { ErrorBoundaryForwardedProps, FallbackComponent, withErrorBoundary } from '@stoplight/react-error-boundary';
+import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
 import type { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
@@ -14,7 +14,6 @@ export interface IJsonSchemaViewer {
   emptyText?: string;
   defaultExpandedDepth?: number;
   className?: string;
-  FallbackComponent?: typeof FallbackComponent;
   resolveRef?: SchemaTreeRefDereferenceFn;
   viewMode?: ViewMode;
 }
@@ -70,7 +69,7 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
   );
 };
 
-const JsonSchemaFallbackComponent: typeof FallbackComponent = ({ error }) => {
+const JsonSchemaFallbackComponent: React.FC<FallbackProps> = ({ error }) => {
   return (
     <Box p={4}>
       <b className="text-danger">Error</b>
