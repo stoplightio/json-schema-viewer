@@ -40,7 +40,6 @@ storiesOf('JsonSchemaViewer', module)
     <JsonSchemaViewer
       schema={object('schema', {})}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
-      maxRows={number('maxRows', 5)}
       mergeAllOf={boolean('mergeAllOf', true)}
     />
   ))
@@ -50,7 +49,6 @@ storiesOf('JsonSchemaViewer', module)
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          maxRows={number('maxRows', 10)}
           mergeAllOf={boolean('mergeAllOf', true)}
         />
       </div>
@@ -58,7 +56,6 @@ storiesOf('JsonSchemaViewer', module)
         <JsonSchemaViewer
           schema={stressSchema as JSONSchema4}
           defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          maxRows={number('maxRows', 10)}
           mergeAllOf={boolean('mergeAllOf', true)}
         />
       </div>

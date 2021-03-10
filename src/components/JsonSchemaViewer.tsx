@@ -14,7 +14,6 @@ export interface IJsonSchemaViewer {
   emptyText?: string;
   defaultExpandedDepth?: number;
   className?: string;
-  maxRows?: number;
   FallbackComponent?: typeof FallbackComponent;
   resolveRef?: SchemaTreeRefDereferenceFn;
   viewMode?: ViewMode;
@@ -26,7 +25,6 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
   className,
   resolveRef,
   emptyText = 'No schema defined',
-  maxRows = Infinity,
   defaultExpandedDepth = 2,
 }) => {
   const jsonSchemaTreeRoot = React.useMemo(() => {
@@ -53,7 +51,7 @@ const JsonSchemaViewerComponent: React.FC<IJsonSchemaViewer & ErrorBoundaryForwa
     jsonSchemaTreeRoot,
   ]);
 
-  const options = React.useMemo(() => ({ defaultExpandedDepth, maxRows }), [defaultExpandedDepth, maxRows]);
+  const options = React.useMemo(() => ({ defaultExpandedDepth }), [defaultExpandedDepth]);
 
   if (isEmpty) {
     return <Box className={cn(className, 'JsonSchemaViewer')}>{emptyText}</Box>;

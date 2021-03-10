@@ -2,10 +2,9 @@ import * as React from 'react';
 
 type JSVOptions = {
   defaultExpandedDepth: number;
-  maxRows: number;
 };
 
-const JSVOptionsContext = React.createContext<JSVOptions>({ defaultExpandedDepth: 2, maxRows: Infinity });
+const JSVOptionsContext = React.createContext<JSVOptions>({ defaultExpandedDepth: 2 });
 
 export const useJSVOptionsContext = () => React.useContext(JSVOptionsContext);
 
