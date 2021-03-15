@@ -21,7 +21,7 @@ describe('HTML Output', () => {
   )('should match %s', filename => {
     const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../__fixtures__/', filename), 'utf8'));
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
   });
 
   describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {
@@ -79,16 +79,8 @@ describe('HTML Output', () => {
       };
     });
 
-    it('given allOf merging disabled, should preserve both combiners', () => {
-      expect(
-        dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf={false} />),
-      ).toMatchSnapshot();
-    });
-
     it('given allOf merging enabled, should merge contents of allOf combiners', () => {
-      expect(
-        dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />),
-      ).toMatchSnapshot();
+      expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
     });
   });
 
@@ -128,7 +120,7 @@ describe('HTML Output', () => {
     };
 
     expect(
-      dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf viewMode={mode} />),
+      dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} viewMode={mode} />),
     ).toMatchSnapshot();
   });
 
@@ -145,7 +137,7 @@ describe('HTML Output', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
   });
 
   it('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
@@ -163,7 +155,7 @@ describe('HTML Output', () => {
       },
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} mergeAllOf />)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
   });
 
   it('given visible $ref node, should try to inject the title immediately', () => {
@@ -249,18 +241,21 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
+          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+            <div style=\\"margin-left: 20px\\">
               <div>
-                <div style=\\"margin-left: 0px\\">
+                <div class=\\"min-w-0\\">
                   <div>
                     <div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
+                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                      <div>
+                        <span>array[object]</span>
+                        <div>{1}</div>
+                      </div>
                     </div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
+                <div></div>
               </div>
             </div>
           </div>
@@ -272,31 +267,39 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
+          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+            <div style=\\"margin-left: 20px\\">
               <div>
-                <div style=\\"margin-left: 0px\\">
+                <div class=\\"min-w-0\\">
                   <div>
                     <div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
+                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                      <div>
+                        <span>array[object]</span>
+                        <div>{1}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div></div>
               </div>
-            </div>
-            <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
+                    <div class=\\"min-w-0\\">
+                      <div>
+                        <div>
+                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                          <div>
+                            <div>foo</div>
+                            <span>array[object]</span>
+                            <div>{1}</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <div></div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -309,45 +312,58 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
+          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+            <div style=\\"margin-left: 20px\\">
               <div>
-                <div style=\\"margin-left: 0px\\">
+                <div class=\\"min-w-0\\">
                   <div>
                     <div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
+                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                      <div>
+                        <span>array[object]</span>
+                        <div>{1}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div></div>
               </div>
-            </div>
-            <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{1}</div>
+                    <div class=\\"min-w-0\\">
+                      <div>
+                        <div>
+                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                          <div>
+                            <div>foo</div>
+                            <span>array[object]</span>
+                            <div>{1}</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <div></div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 40px\\">
                   <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                      <div>{1}</div>
+                    <div style=\\"margin-left: 20px\\">
+                      <div>
+                        <div class=\\"min-w-0\\">
+                          <div>
+                            <div>
+                              <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>bar</div>
+                                <span>object</span>
+                                <div>{1}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div></div>
+                      </div>
                     </div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -468,18 +484,21 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
+          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+            <div style=\\"margin-left: 20px\\">
               <div>
-                <div style=\\"margin-left: 0px\\">
+                <div class=\\"min-w-0\\">
                   <div>
                     <div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
+                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                      <div>
+                        <span>array[object]</span>
+                        <div>{2}</div>
+                      </div>
                     </div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
+                <div></div>
               </div>
             </div>
           </div>
@@ -491,44 +510,55 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
+          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+            <div style=\\"margin-left: 20px\\">
               <div>
-                <div style=\\"margin-left: 0px\\">
+                <div class=\\"min-w-0\\">
                   <div>
                     <div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
+                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                      <div>
+                        <span>array[object]</span>
+                        <div>{2}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div></div>
               </div>
-            </div>
-            <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div>
-                      <div>bar</div>
-                      <span>integer</span>
+                    <div class=\\"min-w-0\\">
+                      <div>
+                        <div>
+                          <div>
+                            <div>bar</div>
+                            <span>integer</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <div></div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
-              </div>
-            </div>
-            <div>
-              <div>
+                <div></div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
+                    <div class=\\"min-w-0\\">
+                      <div>
+                        <div>
+                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                          <div>
+                            <div>foo</div>
+                            <span>array[object]</span>
+                            <div>{2}</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <div></div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -541,69 +571,88 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
+          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+            <div style=\\"margin-left: 20px\\">
               <div>
-                <div style=\\"margin-left: 0px\\">
+                <div class=\\"min-w-0\\">
                   <div>
                     <div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
+                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                      <div>
+                        <span>array[object]</span>
+                        <div>{2}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div></div>
               </div>
-            </div>
-            <div>
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div>
-                      <div>bar</div>
-                      <span>integer</span>
+                    <div class=\\"min-w-0\\">
+                      <div>
+                        <div>
+                          <div>
+                            <div>bar</div>
+                            <span>integer</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <div></div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
-              </div>
-            </div>
-            <div>
-              <div>
+                <div></div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                      <div>{2}</div>
+                    <div class=\\"min-w-0\\">
+                      <div>
+                        <div>
+                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                          <div>
+                            <div>foo</div>
+                            <span>array[object]</span>
+                            <div>{2}</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <div></div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 40px\\">
                   <div>
-                    <div>
-                      <div>bar</div>
-                      <span>string</span>
+                    <div style=\\"margin-left: 20px\\">
+                      <div>
+                        <div class=\\"min-w-0\\">
+                          <div>
+                            <div>
+                              <div>
+                                <div>bar</div>
+                                <span>string</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div></div>
+                      </div>
+                    </div>
+                    <div></div>
+                    <div style=\\"margin-left: 20px\\">
+                      <div>
+                        <div class=\\"min-w-0\\">
+                          <div>
+                            <div>
+                              <div>
+                                <div>foo</div>
+                                <span>number</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div></div>
+                      </div>
                     </div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <div style=\\"margin-left: 40px\\">
-                  <div>
-                    <div>
-                      <div>foo</div>
-                      <span>number</span>
-                    </div>
-                  </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
               </div>
             </div>
@@ -703,18 +752,21 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div>
-            <div>
+          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+            <div style=\\"margin-left: 20px\\">
               <div>
-                <div style=\\"margin-left: 0px\\">
+                <div class=\\"min-w-0\\">
                   <div>
                     <div>
-                      <span>object</span>
-                      <div>{2}</div>
+                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                      <div>
+                        <span>object</span>
+                        <div>{2}</div>
+                      </div>
                     </div>
                   </div>
-                  <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
                 </div>
+                <div></div>
               </div>
             </div>
           </div>
@@ -831,15 +883,17 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div>
-        <div>
+      "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+        <div style=\\"margin-left: 20px\\">
           <div>
-            <div style=\\"margin-left: 0px\\">
+            <div class=\\"min-w-0\\">
               <div>
-                <div><span>string</span></div>
+                <div>
+                  <div><span>string</span></div>
+                </div>
               </div>
-              <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
             </div>
+            <div></div>
           </div>
         </div>
       </div>
@@ -856,14 +910,34 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div>
-        <div>
+      "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+        <div style=\\"margin-left: 20px\\">
           <div>
-            <div style=\\"margin-left: 0px\\">
+            <div>
               <div>
-                <div><span>$ref(#/foo)[]</span></div>
+                <div>
+                  <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                  <div>
+                    <span>$ref(#/foo)[]</span>
+                    <div>{1}</div>
+                  </div>
+                </div>
               </div>
-              <div style=\\"height: 1px\\"><div style=\\"height: 1px; background-color: lightgray\\"></div></div>
+            </div>
+            <div></div>
+          </div>
+          <div>
+            <div style=\\"margin-left: 20px\\">
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div><span>#/foo</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div></div>
+              </div>
             </div>
           </div>
         </div>
