@@ -183,7 +183,7 @@ describe('HTML Output', () => {
 
 describe.each([{}, { unknown: '' }, { $ref: null }])('given empty schema, should render empty text', schema => {
   const wrapper = mount(<JsonSchemaViewer schema={schema as any} />);
-  expect(wrapper).toHaveHTML('<div>No schema defined</div>');
+  expect(wrapper).toHaveText('No schema defined');
   wrapper.unmount();
 });
 

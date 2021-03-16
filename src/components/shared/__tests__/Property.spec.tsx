@@ -1,25 +1,11 @@
 import 'jest-enzyme';
 
-import { SchemaNode } from '@stoplight/json-schema-tree';
 import { mount, ReactWrapper } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { SchemaNodeContext, SchemaTreeContext, TreeListNodeContext } from '../../../contexts';
-import { SchemaTreeListTree } from '../../../tree';
 import { Property, Types } from '../../shared';
-
-function buildTree(schema: JSONSchema4) {
-  const tree = new SchemaTreeListTree(schema, new TreeState(), {
-    expandedDepth: Infinity,
-    mergeAllOf: false,
-    resolveRef: void 0,
-  });
-
-  tree.populate();
-
-  return tree;
-}
+import { buildTree } from './utils';
 
 function findCounter(wrapper: ReactWrapper) {
   return wrapper.findWhere(el => /^{\d\}$/.test(el.text()));
@@ -30,17 +16,8 @@ describe('Property component', () => {
 
   function render(schema: JSONSchema4, pos = 0) {
     const tree = buildTree(schema);
-    const treeNode = tree.itemAt(pos)!;
 
-    const wrapper = mount(
-      <SchemaTreeContext.Provider value={tree}>
-        <SchemaNodeContext.Provider value={treeNode.metadata as SchemaNode}>
-          <TreeListNodeContext.Provider value={treeNode}>
-            <Property />
-          </TreeListNodeContext.Provider>
-        </SchemaNodeContext.Provider>
-      </SchemaTreeContext.Provider>,
-    );
+    const wrapper = mount(<Property schemaNode={tree.children[pos]} />);
 
     toUnmount.push(wrapper);
 
@@ -62,6 +39,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
+    console.log(wrapper.debug());
     expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array[string]</span>');
   });
 
@@ -159,7 +137,7 @@ describe('Property component', () => {
         },
       };
 
-      const wrapper = render(schema, 1);
+      const wrapper = render(schema);
       expect(wrapper.find('div').first()).toHaveText('foo');
     });
 
@@ -275,25 +253,9 @@ describe('Property component', () => {
         },
       };
 
-      const tree = new SchemaTreeListTree(schema, new TreeState(), {
-        expandedDepth: Infinity,
-        mergeAllOf: false,
-        resolveRef: void 0,
-      });
+      const tree = buildTree(schema);
 
-      tree.populate();
-
-      const treeNode = tree.itemAt(1)!;
-
-      const wrapper = mount(
-        <SchemaTreeContext.Provider value={tree}>
-          <SchemaNodeContext.Provider value={treeNode.metadata as SchemaNode}>
-            <TreeListNodeContext.Provider value={treeNode}>
-              <Property />
-            </TreeListNodeContext.Provider>
-          </SchemaNodeContext.Provider>
-        </SchemaTreeContext.Provider>,
-      );
+      const wrapper = mount(<Property schemaNode={tree} />);
       expect(wrapper.find('div')).toHaveHTML('<div class="sl-font-mono sl-font-bold sl-mr-2">foo</div>');
       wrapper.unmount();
     });
