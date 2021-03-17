@@ -1825,7 +1825,7 @@
     lodash "^4.17.15"
     safe-stable-stringify "^1.1"
 
-"@stoplight/lifecycle@^2.2.1", "@stoplight/lifecycle@^2.3.2":
+"@stoplight/lifecycle@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@stoplight/lifecycle/-/lifecycle-2.3.2.tgz#d61dff9ba20648241432e2daaef547214dc8976e"
   integrity sha512-v0u8p27FA/eg04b4z6QXw4s0NeeFcRzyvseBW0+k/q4jtpg7EhVCqy42EbbbU43NTNDpIeQ81OcvkFz+6CYshw==
@@ -1953,17 +1953,6 @@
     style-loader "^1.1.3"
     ts-loader "^6.2.1"
     webpack "^4.41.5"
-
-"@stoplight/tree-list@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@stoplight/tree-list/-/tree-list-5.0.3.tgz#dfbc2175cb359a26da1ceb6af2bea91ca9d828b3"
-  integrity sha512-TI/ffQbVDZsS0lM1z0Fp5aWkrbqzmyk7oP+YZle0oTauS7lK/2TXKbuenCwNuzjbe7jU4G7hMnrLBItN+IlYuA==
-  dependencies:
-    "@stoplight/lifecycle" "^2.2.1"
-    "@stoplight/react-error-boundary" "^1.0.0"
-    classnames "^2.2.6"
-    mobx-react-lite "^1.5.2"
-    strict-event-emitter-types "^2.0.0"
 
 "@stoplight/types@^11.1.0", "@stoplight/types@^11.9.0":
   version "11.9.0"
@@ -11028,16 +11017,6 @@ mkdirp@1.x, mkdirp@^1.0.4:
   dependencies:
     minimist "0.0.8"
 
-mobx-react-lite@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.5.2.tgz#c4395b0568b9cb16f07669d8869cc4efa1b8656d"
-  integrity sha512-PyZmARqqWtpuQaAoHF5pKX7h6TKNLwq6vtovm4zZvG6sEbMRHHSqioGXSeQbpRmG8Kw8uln3q/W1yMO5IfL5Sg==
-
-mobx@^5.13.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/mobx/-/mobx-5.13.0.tgz#0fd68f10aa5ff2d146a4ed9e145b53337cfbca59"
-  integrity sha512-eSAntMSMNj0PFL705rgv+aB/z1RjNqDnFEpBe18yQVreXTWiVgIrmBUXzjnJfuba+eo4eAk6zi+/gXQkSUea8A==
-
 modify-values@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
@@ -15000,11 +14979,6 @@ stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
   integrity sha1-1cdSgl5TZ+eG944Y5EXqIjoVWVI=
-
-strict-event-emitter-types@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/strict-event-emitter-types/-/strict-event-emitter-types-2.0.0.tgz#05e15549cb4da1694478a53543e4e2f4abcf277f"
-  integrity sha512-Nk/brWYpD85WlOgzw5h173aci0Teyv8YdIAEtV+N88nDB0dLlazZyJMIsN6eo1/AR61l+p6CJTG1JIyFaoNEEA==
 
 strict-uri-encode@^1.0.0:
   version "1.1.0"

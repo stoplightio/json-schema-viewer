@@ -1,35 +1,35 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
-import { Box, Flex, Icon } from '@stoplight/mosaic';
-import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
-import { Optional } from '@stoplight/types';
+import {
+  isMirroredNode,
+  isReferenceNode,
+  isRegularNode,
+  ReferenceNode,
+  SchemaNode,
+  SchemaNodeKind,
+} from '@stoplight/json-schema-tree';
+import { Box, Flex, Icon, VStack } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';
-import { SchemaNodeContext, TreeListNodeContext } from '../contexts';
+import { useJSVOptionsContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
-import { useSchemaNode, useSchemaTree, useTreeListNode } from '../hooks';
-import { GoToRefHandler, SchemaTreeListNode } from '../types';
-import { isPropertyRequired } from '../utils/isPropertyRequired';
-import { Caret, Description, Divider, getValidationsFromSchema, Property, Validations } from './shared';
-import { Format } from './shared/Format';
+import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../tree';
+import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
 import { Properties } from './shared/Properties';
 
-export interface ISchemaRow {
-  className?: string;
-  treeListNode: SchemaTreeListNode;
-  rowOptions: IRowRendererOptions;
-  onGoToRef?: GoToRefHandler;
+export interface SchemaRowProps {
+  schemaNode: SchemaNode;
+  nestingLevel: number;
 }
 
-export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOptions' | 'onGoToRef'>> = ({
-  onGoToRef,
-  rowOptions,
-}) => {
-  const schemaNode = useSchemaNode();
-  const treeListNode = useTreeListNode();
-  const tree = useSchemaTree();
+export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
   const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
+
+  const { defaultExpandedDepth, renderRowAddon } = useJSVOptionsContext();
+
+  const [isExpanded, setExpanded] = React.useState<boolean>(
+    !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
+  );
 
   const refNode = React.useMemo<ReferenceNode | null>(() => {
     if (isReferenceNode(schemaNode)) {
@@ -38,91 +38,86 @@ export const SchemaPropertyRow: React.FunctionComponent<Pick<ISchemaRow, 'rowOpt
 
     if (
       isRegularNode(schemaNode) &&
-      (tree.isFlattenedNode(schemaNode) ||
+      (isFlattenableNode(schemaNode) ||
         (schemaNode.primaryType === SchemaNodeKind.Array && schemaNode.children?.length === 1))
     ) {
-      return (schemaNode.children?.find(isReferenceNode) as Optional<ReferenceNode>) ?? null;
+      return (schemaNode.children?.find(isReferenceNode) as ReferenceNode | undefined) ?? null;
     }
 
     return null;
-  }, [schemaNode, tree]);
+  }, [schemaNode]);
 
   const isBrokenRef = typeof refNode?.error === 'string';
 
-  return (
-    <>
-      <Flex my={2}>
-        {!isBrokenRef && isParentNode(treeListNode) && Tree.getLevel(treeListNode) > 0 ? (
-          <Caret
-            isExpanded={!!rowOptions.isExpanded}
-            style={{
-              width: CARET_ICON_BOX_DIMENSION,
-              height: CARET_ICON_BOX_DIMENSION,
-              ...(!isBrokenRef && Tree.getLevel(treeListNode) === 0
-                ? {
-                    position: 'relative',
-                  }
-                : {
-                    left: CARET_ICON_BOX_DIMENSION * -1 + SCHEMA_ROW_OFFSET / -2,
-                  }),
-            }}
-            size={CARET_ICON_SIZE}
-          />
-        ) : null}
-
-        {schemaNode.subpath.length > 0 &&
-          isCombiner(schemaNode.subpath[0]) &&
-          schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && <Divider kind={schemaNode.subpath[0]} />}
-
-        <Flex flex={1} textOverflow="truncate" fontSize="base">
-          <Property onGoToRef={onGoToRef} />
-          <Format />
-        </Flex>
-        <Properties
-          required={isPropertyRequired(schemaNode)}
-          deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
-          validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
-        />
-      </Flex>
-
-      {typeof description === 'string' && description.length > 0 && (
-        <Flex flex={1} my={2} py="px" textOverflow="truncate">
-          <Description value={description} />
-        </Flex>
-      )}
-
-      <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
-
-      {isBrokenRef && (
-        // TODO (JJ): Add mosaic tooltip showing ref error
-        <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
-      )}
-      {!rowOptions.isExpanded && <Divider />}
-    </>
-  );
-};
-SchemaPropertyRow.displayName = 'JsonSchemaViewer.SchemaPropertyRow';
-
-export const SchemaRow: React.FunctionComponent<ISchemaRow> = ({ className, treeListNode, rowOptions, onGoToRef }) => {
-  const schemaNode = treeListNode.metadata as SchemaNode;
+  const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
   return (
-    <SchemaNodeContext.Provider value={schemaNode}>
-      <TreeListNodeContext.Provider value={treeListNode}>
-        <Box flex={1} px={2} w="full" maxW="full" className={className}>
+    <Box fontSize="sm" pos="relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
+      <Flex>
+        <Box flexGrow className="min-w-0">
           <Box
-            alignItems="center"
-            pos="relative"
-            fontSize="sm"
-            style={{
-              marginLeft: CARET_ICON_BOX_DIMENSION * Tree.getLevel(treeListNode), // offset for spacing
-            }}
+            onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
+            cursor={childNodes.length > 0 ? 'pointer' : 'default'}
           >
-            <SchemaPropertyRow onGoToRef={onGoToRef} rowOptions={rowOptions} />
+            <Flex my={2}>
+              {childNodes.length > 0 ? (
+                <Caret
+                  isExpanded={isExpanded}
+                  style={{
+                    width: CARET_ICON_BOX_DIMENSION,
+                    height: CARET_ICON_BOX_DIMENSION,
+                    ...(!isBrokenRef && nestingLevel === 0
+                      ? {
+                          position: 'relative',
+                        }
+                      : {
+                          left: CARET_ICON_BOX_DIMENSION * -1 + SCHEMA_ROW_OFFSET / -2,
+                        }),
+                  }}
+                  size={CARET_ICON_SIZE}
+                />
+              ) : null}
+
+              {schemaNode.subpath.length > 0 &&
+                isCombiner(schemaNode.subpath[0]) &&
+                schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && (
+                  <Divider kind={schemaNode.subpath[0]} />
+                )}
+
+              <Flex flex={1} textOverflow="truncate" fontSize="base">
+                <Property schemaNode={schemaNode} />
+                <Format schemaNode={schemaNode} />
+              </Flex>
+              <Properties
+                required={isPropertyRequired(schemaNode)}
+                deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
+                validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
+              />
+            </Flex>
+
+            {typeof description === 'string' && description.length > 0 && (
+              <Flex flex={1} my={2} py="px" textOverflow="truncate">
+                <Description value={description} />
+              </Flex>
+            )}
           </Box>
+
+          <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
+
+          {isBrokenRef && (
+            // TODO (JJ): Add mosaic tooltip showing ref error
+            <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
+          )}
         </Box>
-      </TreeListNodeContext.Provider>
-    </SchemaNodeContext.Provider>
+        <Box>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</Box>
+      </Flex>
+      {childNodes.length > 0 && isExpanded ? (
+        <VStack divider>
+          {childNodes.map((childNode: SchemaNode) => (
+            <SchemaRow key={childNode.id} schemaNode={childNode} nestingLevel={nestingLevel + 1} />
+          ))}
+        </VStack>
+      ) : null}
+    </Box>
   );
 };
-SchemaRow.displayName = 'JsonSchemaViewer.SchemaRow';

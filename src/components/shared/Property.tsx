@@ -1,16 +1,13 @@
-import { isReferenceNode, isRegularNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import { isReferenceNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { Box, Link } from '@stoplight/mosaic';
-import { isParentNode } from '@stoplight/tree-list';
 import * as React from 'react';
 
-import { isNonNullable } from '../../guards/isNonNullable';
-import { useSchemaTree, useTreeListNode } from '../../hooks';
-import { useSchemaNode } from '../../hooks/useSchemaNode';
-import { GoToRefHandler } from '../../types';
+import { useJSVOptionsContext } from '../../contexts';
+import { calculateChildrenToShow } from '../../tree';
 import { Types } from './Types';
 
 export interface IProperty {
-  onGoToRef?: GoToRefHandler;
+  schemaNode: SchemaNode;
 }
 
 function shouldShowPropertyName(schemaNode: SchemaNode) {
@@ -20,17 +17,10 @@ function shouldShowPropertyName(schemaNode: SchemaNode) {
   );
 }
 
-export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
-  const schemaNode = useSchemaNode();
-  const treeListNode = useTreeListNode();
-  const schemaTree = useSchemaTree();
-  const { subpath } = schemaNode;
+export const Property: React.FunctionComponent<IProperty> = ({ schemaNode, schemaNode: { subpath } }) => {
+  const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
-  const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
-    if (onGoToRef && isReferenceNode(schemaNode)) {
-      onGoToRef(schemaNode);
-    }
-  }, [onGoToRef, schemaNode]);
+  const { onGoToRef } = useJSVOptionsContext();
 
   return (
     <>
@@ -40,23 +30,24 @@ export const Property: React.FunctionComponent<IProperty> = ({ onGoToRef }) => {
         </Box>
       )}
 
-      <Types />
+      <Types schemaNode={schemaNode} />
 
-      {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
-        <Link ml={2} color="primary-light" cursor="pointer" onClick={handleGoToRef}>
+      {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external && onGoToRef ? (
+        <Link
+          ml={2}
+          color="primary-light"
+          cursor="pointer"
+          onClick={(e: React.MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onGoToRef(schemaNode);
+          }}
+        >
           (go to ref)
         </Link>
       ) : null}
 
-      {isRegularNode(schemaNode) &&
-        (schemaNode.primaryType === SchemaNodeKind.Array || schemaNode.primaryType === SchemaNodeKind.Object) &&
-        isParentNode(treeListNode) &&
-        isNonNullable(schemaNode.children) &&
-        (schemaNode.children.length !== 1 || !isReferenceNode(schemaNode.children[0])) && (
-          <Box ml={2} color="muted">{`{${
-            (schemaTree.isFlattenedNode(schemaNode) ? treeListNode.children : schemaNode.children).length
-          }}`}</Box>
-        )}
+      {childNodes.length > 0 && <Box ml={2} color="muted">{`{${childNodes.length}}`}</Box>}
 
       {subpath.length > 1 && subpath[0] === 'patternProperties' ? (
         <Box ml={2} textOverflow="truncate" color="muted">

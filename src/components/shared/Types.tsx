@@ -3,13 +3,13 @@ import {
   isRegularNode,
   RegularNode,
   SchemaCombinerName,
+  SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
 import { Box, Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
-import { useSchemaNode } from '../../hooks';
-import { Name } from './Name';
+import { printName } from '../../utils';
 
 function shouldRenderName(type: SchemaNodeKind | SchemaCombinerName | '$ref'): boolean {
   return type === SchemaNodeKind.Array || type === SchemaNodeKind.Object || type === '$ref';
@@ -29,9 +29,7 @@ function getTypes(schemaNode: RegularNode): Array<SchemaNodeKind | SchemaCombine
   );
 }
 
-export const Types: React.FunctionComponent<{}> = () => {
-  const schemaNode = useSchemaNode();
-
+export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
   if (isReferenceNode(schemaNode)) {
     return <Text textOverflow="truncate">{schemaNode.value ?? '$ref'}</Text>;
   }
@@ -47,7 +45,7 @@ export const Types: React.FunctionComponent<{}> = () => {
   const rendered = types.map((type, i, { length }) => (
     <React.Fragment key={type}>
       <Text textOverflow="truncate" color="muted">
-        {shouldRenderName(type) ? <Name type={type} /> : type}
+        {shouldRenderName(type) ? printName(schemaNode) ?? type : type}
       </Text>
       {i < length - 1 && (
         <Text key={`${i}-sep`} color="muted">

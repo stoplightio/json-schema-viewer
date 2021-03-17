@@ -37,7 +37,6 @@
   "peerDependencies": {
     "@stoplight/markdown-viewer": "^4",
     "@stoplight/ui-kit": "^3",
-    "mobx": "^5",
     "react": ">=16.8",
     "react-dom": ">=16.8"
   },
@@ -47,7 +46,6 @@
     "@stoplight/json-schema-tree": "^1.1.0",
     "@stoplight/mosaic": "^1.0.0-beta.22",
     "@stoplight/react-error-boundary": "^1.0.0",
-    "@stoplight/tree-list": "^5.0.3",
     "classnames": "^2.2.6",
     "lodash": "^4.17.19"
   },
@@ -87,7 +85,6 @@
     "fast-glob": "^3.2.4",
     "jest": "^26.6.2",
     "jest-enzyme": "^7.1.2",
-    "mobx": "^5.13.0",
     "prettier": "^2.2.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

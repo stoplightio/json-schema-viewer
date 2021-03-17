@@ -1,44 +1,36 @@
 import 'jest-enzyme';
 
-import { TreeState } from '@stoplight/tree-list';
 import { mount } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { SchemaTreeListTree } from '../../../tree';
 import { SchemaRow } from '../../SchemaRow';
 import { Format } from '../Format';
+import { buildTree, findNodeWithPath } from './utils';
 
 describe('Format component', () => {
-  let tree: SchemaTreeListTree;
-
-  beforeEach(() => {
-    const schema: JSONSchema4 = require('../../../__fixtures__/formats-schema.json');
-
-    tree = new SchemaTreeListTree(schema, new TreeState(), {
-      expandedDepth: Infinity,
-      mergeAllOf: false,
-      resolveRef: void 0,
-    });
-
-    tree.populate();
-  });
+  const schema: JSONSchema4 = require('../../../__fixtures__/formats-schema.json');
+  let tree = buildTree(schema);
 
   it('should render next to a single type', () => {
-    const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(3)!} rowOptions={{}} />);
-    expect(wrapper.find(Format)).toHaveHTML('<span class="sl-ml-2 sl-text-muted">&lt;float&gt;</span>');
+    const wrapper = mount(<SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'id'])!} nestingLevel={0} />);
+    expect(wrapper.find(Format)).toHaveText('<float>');
     wrapper.unmount();
   });
 
   it('should render next to an array of types', () => {
-    const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(1)!} rowOptions={{}} />);
-    expect(wrapper.find(Format)).toHaveHTML('<span class="sl-ml-2 sl-text-muted">&lt;date-time&gt;</span>');
+    const wrapper = mount(
+      <SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'date-of-birth'])!} nestingLevel={0} />,
+    );
+    expect(wrapper.find(Format)).toHaveText('<date-time>');
     wrapper.unmount();
   });
 
   it('should render even when the type(s) is/are missing', () => {
-    const wrapper = mount(<SchemaRow treeListNode={tree.itemAt(4)!} rowOptions={{}} />);
-    expect(wrapper.find(Format)).toHaveHTML('<span class="sl-ml-2 sl-text-muted">&lt;date-time&gt;</span>');
+    const wrapper = mount(
+      <SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'notype'])!} nestingLevel={0} />,
+    );
+    expect(wrapper.find(Format)).toHaveText('<date-time>');
     wrapper.unmount();
   });
 });

@@ -1,12 +1,12 @@
-import { isRegularNode } from '@stoplight/json-schema-tree';
+import { isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
-import { useSchemaNode } from '../../hooks/useSchemaNode';
+type FormatProps = {
+  schemaNode: SchemaNode;
+};
 
-export const Format: React.FunctionComponent = () => {
-  const schemaNode = useSchemaNode();
-
+export const Format: React.FunctionComponent<FormatProps> = ({ schemaNode }) => {
   if (!isRegularNode(schemaNode) || schemaNode.format === null) {
     return null;
   }
