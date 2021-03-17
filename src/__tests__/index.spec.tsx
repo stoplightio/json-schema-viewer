@@ -10,7 +10,6 @@ import * as React from 'react';
 import { JsonSchemaViewer } from '../components';
 import { ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
-import { prettifyHtml } from './utils/prettifyHtml';
 
 describe('HTML Output', () => {
   it.each(
@@ -188,10 +187,6 @@ describe.each([{}, { unknown: '' }, { $ref: null }])('given empty schema, should
 });
 
 describe('Expanded depth', () => {
-  function stripDropZoneIds(input: string) {
-    return input.replace(/\sdata-root-drop-zone="\d+"/, '').replace(/\sdata-drop-zone-id="[a-z0-9-]+"/g, '');
-  }
-
   const toUnmount: ReactWrapper[] = [];
 
   function mountWithAutoUnmount(node: React.ReactElement) {
@@ -370,80 +365,6 @@ describe('Expanded depth', () => {
           </div>
           "
         `);
-      });
-    });
-
-    describe('actual expanding', () => {
-      it('starting from level -1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
-
-        wrapper.find('.TreeListItem--0').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 0, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 1, should expand successfully', () => {
-        const wrapper = mount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
       });
     });
   });
@@ -661,46 +582,6 @@ describe('Expanded depth', () => {
         `);
       });
     });
-
-    describe('actual expanding', () => {
-      it('starting from level -1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
-
-        wrapper.find('.TreeListItem--0').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 0, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-      });
-    });
   });
 
   describe('nested object', () => {
@@ -790,82 +671,6 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchSnapshot();
-      });
-    });
-
-    describe('actual expanding', () => {
-      it('starting from level -1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
-
-        wrapper.find('.TreeListItem--0').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 0, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
-
-        wrapper.find('.TreeListItem--1').first().simulate('click');
-        wrapper.find('.TreeListItem--1').last().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />).html(),
-            ),
-          ),
-        );
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
-      });
-
-      it('starting from level 1, should expand successfully', () => {
-        const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
-
-        wrapper.find('.TreeListItem--2').first().simulate('click');
-
-        expect(prettifyHtml(stripDropZoneIds(wrapper.html()))).toEqual(
-          prettifyHtml(
-            stripDropZoneIds(
-              mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={2} />).html(),
-            ),
-          ),
-        );
       });
     });
   });
