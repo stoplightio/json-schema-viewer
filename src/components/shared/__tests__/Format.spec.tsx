@@ -19,14 +19,18 @@ describe('Format component', () => {
   });
 
   it('should render next to an array of types', () => {
-    const wrapper = mount(<SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'date-of-birth'])!} nestingLevel={0} />);
-    expect(wrapper.find(Format)).toHaveHTML('<date-time>');
+    const wrapper = mount(
+      <SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'date-of-birth'])!} nestingLevel={0} />,
+    );
+    expect(wrapper.find(Format)).toHaveText('<date-time>');
     wrapper.unmount();
   });
 
   it('should render even when the type(s) is/are missing', () => {
-    const wrapper = mount(<SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'notype'])!} nestingLevel={0} />);
-    expect(wrapper.find(Format)).toHaveHTML('<date-time>');
+    const wrapper = mount(
+      <SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'notype'])!} nestingLevel={0} />,
+    );
+    expect(wrapper.find(Format)).toHaveText('<date-time>');
     wrapper.unmount();
   });
 });
