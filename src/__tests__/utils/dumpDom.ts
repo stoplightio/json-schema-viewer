@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import { ReactElement } from 'react';
 
-import { prettifyHtml } from './prettifyHtml';
 import { JsonSchemaViewer } from '../../components';
+import { prettifyHtml } from './prettifyHtml';
 
 const MOSAIC_CLASSES_EXP = /^sl-.*$/;
 
