@@ -1,16 +1,14 @@
 import 'jest-enzyme';
 
+import { RootNode } from '@stoplight/json-schema-tree';
 import { Icon } from '@stoplight/mosaic';
 import { mount } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { SchemaRow } from '../SchemaRow';
-import { Properties } from '../shared/Properties';
-import { RootNode } from '@stoplight/json-schema-tree';
-import { JSVOptionsContextProvider } from '../../contexts';
 import { buildTree, findNodeWithPath } from '../shared/__tests__/utils';
-
+import { Properties } from '../shared/Properties';
 
 describe('SchemaRow component', () => {
   describe('resolving error', () => {
@@ -32,23 +30,21 @@ describe('SchemaRow component', () => {
 
     it('given no custom resolver, should render a generic error message', () => {
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon)).toHaveProp('title', `Could not resolve '#/properties/foo'`);
+      expect(wrapper.find(Icon).at(1)).toHaveProp('title', `Could not resolve '#/properties/foo'`);
       wrapper.unmount();
     });
 
     it('given a custom resolver, should render a message thrown by it', () => {
       const message = "I don't know how to resolve it. Sorry";
 
-      const options = {
-        resolveRef() {
+      tree = buildTree(schema, {
+        refResolver: () => {
           throw new ReferenceError(message);
         },
-        defaultExpandedDepth: Infinity,
-        viewMode: 'standalone' as const,
-      }
+      });
 
-      const wrapper = mount(<JSVOptionsContextProvider value={options}><SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} /></JSVOptionsContextProvider> );
-      expect(wrapper.find(Icon)).toHaveProp('title', message);
+      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(wrapper.find(Icon).at(1)).toHaveProp('title', message);
       wrapper.unmount();
     });
   });
@@ -60,8 +56,8 @@ describe('SchemaRow component', () => {
       const tree = buildTree(schema);
 
       const schemaNode = findNodeWithPath(tree, nodePath);
-      if(!schemaNode){
-        throw Error("Node not found, invalid configuration");
+      if (!schemaNode) {
+        throw Error('Node not found, invalid configuration');
       }
       const wrapper = mount(<SchemaRow schemaNode={schemaNode} nestingLevel={0} />);
       expect(wrapper.find(Properties)).toHaveProp('required', value);
@@ -132,11 +128,11 @@ describe('SchemaRow component', () => {
         };
       });
 
-      it('should preserve the required validation for code item', pos => {
+      it('should preserve the required validation for code item', () => {
         isRequired(schema, ['items', 'properties', 'code'], true);
       });
 
-      it('should preserve the required validation for msg item', pos => {
+      it('should preserve the required validation for msg item', () => {
         isRequired(schema, ['items', 'properties', 'msg'], true);
       });
 
@@ -170,11 +166,11 @@ describe('SchemaRow component', () => {
         };
       });
 
-      it('should preserve the required validation for code item', pos => {
+      it('should preserve the required validation for code item', () => {
         isRequired(schema, ['items', '0', 'properties', 'code'], true);
       });
 
-      it('should preserve the required validation for msg item', pos => {
+      it('should preserve the required validation for msg item', () => {
         isRequired(schema, ['items', '0', 'properties', 'msg'], true);
       });
 
