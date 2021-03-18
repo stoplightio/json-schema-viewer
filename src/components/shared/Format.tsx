@@ -1,5 +1,4 @@
 import { isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
-import { Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
 type FormatProps = {
@@ -11,5 +10,5 @@ export const Format: React.FunctionComponent<FormatProps> = ({ schemaNode }) => 
     return null;
   }
 
-  return <Text ml={2} color="muted">{`<${schemaNode.format}>`}</Text>;
+  return <span className="sl-ml-2 sl-text-muted">{`<${schemaNode.format}>`}</span>;
 };

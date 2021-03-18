@@ -1,5 +1,5 @@
 import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { Flex, Icon, IIconProps } from '@stoplight/mosaic';
+import { Icon, IIconProps } from '@stoplight/mosaic';
 import * as React from 'react';
 
 export interface ICaret {
@@ -9,7 +9,11 @@ export interface ICaret {
 }
 
 export const Caret: React.FunctionComponent<ICaret> = ({ style, size, isExpanded }) => (
-  <Flex pos="absolute" justify="center" p={1} cursor="pointer" role="button" style={style} color="muted">
+  <div
+    className="sl-flex sl-absolute sl-justify-center sl-p-1 sl-cursor-pointer sl-text-muted"
+    role="button"
+    style={style}
+  >
     <Icon size={size} icon={isExpanded ? faChevronDown : faChevronRight} />
-  </Flex>
+  </div>
 );

@@ -1,4 +1,3 @@
-import { Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import * as React from 'react';
 
@@ -21,28 +20,28 @@ export const Properties: React.FunctionComponent<IProperties> = ({
   const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
   const visibility = showVisibilityValidations ? (
     readOnly ? (
-      <Text ml={2} color="muted">
+      <span className="sl-ml-2 sl-text-muted">
         read-only
-      </Text>
+      </span>
     ) : (
-      <Text ml={2} color="muted">
+      <span className="sl-ml-2 sl-text-muted">
         write-only
-      </Text>
+      </span>
     )
   ) : null;
 
   return (
     <>
       {deprecated ? (
-        <Text ml={2} color="warning">
+        <span className="sl-ml-2 sl-text-warning">
           deprecated
-        </Text>
+        </span>
       ) : null}
       {visibility}
       {required && (
-        <Text ml={2} color="warning">
+        <span className="sl-ml-2 sl-text-warning">
           required
-        </Text>
+        </span>
       )}
     </>
   );

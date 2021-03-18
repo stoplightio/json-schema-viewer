@@ -7,7 +7,8 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { Box, Flex, Icon, VStack } from '@stoplight/mosaic';
+import { Icon } from '@stoplight/mosaic';
+import cn from 'classnames';
 import * as React from 'react';
 
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../consts';
@@ -52,14 +53,14 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
 
   return (
-    <Box fontSize="sm" pos="relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
-      <Flex>
-        <Box flexGrow className="min-w-0">
-          <Box
+    <div className="sl-text-sm sl-relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
+      <div className="sl-flex">
+        <div className="sl-min-w-0 sl-flex-grow">
+          <div
             onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
-            cursor={childNodes.length > 0 ? 'pointer' : 'default'}
+            className={cn({'sl-cursor-pointer': childNodes.length > 0})}
           >
-            <Flex my={2}>
+            <div className="sl-flex sl-my-2">
               {childNodes.length > 0 ? (
                 <Caret
                   isExpanded={isExpanded}
@@ -84,23 +85,23 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                   <Divider kind={schemaNode.subpath[0]} />
                 )}
 
-              <Flex flex={1} textOverflow="truncate" fontSize="base">
+              <div className="sl-flex sl-text-base sl-flex-1 sl-truncate">
                 <Property schemaNode={schemaNode} />
                 <Format schemaNode={schemaNode} />
-              </Flex>
+              </div>
               <Properties
                 required={isPropertyRequired(schemaNode)}
                 deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
                 validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
               />
-            </Flex>
+            </div>
 
             {typeof description === 'string' && description.length > 0 && (
-              <Flex flex={1} my={2} py="px" textOverflow="truncate">
+              <div className="sl-flex sl-flex-1 sl-my-2 sl-py-px sl-truncate">
                 <Description value={description} />
-              </Flex>
+              </div>
             )}
-          </Box>
+          </div>
 
           <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
 
@@ -108,16 +109,20 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             // TODO (JJ): Add mosaic tooltip showing ref error
             <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
           )}
-        </Box>
-        <Box>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</Box>
-      </Flex>
+        </div>
+        <div>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</div>
+      </div>
       {childNodes.length > 0 && isExpanded ? (
-        <VStack divider>
-          {childNodes.map((childNode: SchemaNode) => (
-            <SchemaRow key={childNode.id} schemaNode={childNode} nestingLevel={nestingLevel + 1} />
+        <div className="sl-divide-y">
+          {childNodes.map((childNode: SchemaNode, index) => (
+            <React.Fragment key={childNode.id}>
+              {index > 0 && <div className="sl-border-t sl-self-stretch" />}
+              <SchemaRow schemaNode={childNode} nestingLevel={nestingLevel + 1} />
+            </React.Fragment>
+
           ))}
-        </VStack>
+        </div>
       ) : null}
-    </Box>
+    </div>
   );
 };

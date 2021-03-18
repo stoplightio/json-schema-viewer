@@ -6,7 +6,6 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { Box, Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { printName } from '../../utils';
@@ -31,7 +30,7 @@ function getTypes(schemaNode: RegularNode): Array<SchemaNodeKind | SchemaCombine
 
 export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
   if (isReferenceNode(schemaNode)) {
-    return <Text textOverflow="truncate">{schemaNode.value ?? '$ref'}</Text>;
+    return <span className="truncate">{schemaNode.value ?? '$ref'}</span>;
   }
 
   if (!isRegularNode(schemaNode)) {
@@ -44,17 +43,17 @@ export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ sch
 
   const rendered = types.map((type, i, { length }) => (
     <React.Fragment key={type}>
-      <Text textOverflow="truncate" color="muted">
+      <span className="sl-truncate sl-text-muted">
         {shouldRenderName(type) ? printName(schemaNode) ?? type : type}
-      </Text>
+      </span>
       {i < length - 1 && (
-        <Text key={`${i}-sep`} color="muted">
+        <span key={`${i}-sep`} className="sl-text-muted">
           {' or '}
-        </Text>
+        </span>
       )}
     </React.Fragment>
   ));
 
-  return rendered.length > 1 ? <Box textOverflow="truncate">{rendered}</Box> : <>{rendered}</>;
+  return rendered.length > 1 ? <div className="sl-truncate">{rendered}</div> : <>{rendered}</>;
 };
 Types.displayName = 'JsonSchemaViewer.Types';

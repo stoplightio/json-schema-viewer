@@ -1,5 +1,4 @@
 import { isReferenceNode, SchemaNode } from '@stoplight/json-schema-tree';
-import { Box, Link } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { useJSVOptionsContext } from '../../contexts';
@@ -25,18 +24,14 @@ export const Property: React.FunctionComponent<IProperty> = ({ schemaNode, schem
   return (
     <>
       {subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-        <Box mr={2} fontFamily="mono" fontWeight="bold">
-          {subpath[subpath.length - 1]}
-        </Box>
+        <div className="sl-mr-2 sl-font-mono sl-font-bold">{subpath[subpath.length - 1]}</div>
       )}
 
       <Types schemaNode={schemaNode} />
 
       {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external && onGoToRef ? (
-        <Link
-          ml={2}
-          color="primary-light"
-          cursor="pointer"
+        <a
+          className="sl-ml-2 sl-cursor-pointer sl-text-primary-light"
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
@@ -44,15 +39,13 @@ export const Property: React.FunctionComponent<IProperty> = ({ schemaNode, schem
           }}
         >
           (go to ref)
-        </Link>
+        </a>
       ) : null}
 
-      {childNodes.length > 0 && <Box ml={2} color="muted">{`{${childNodes.length}}`}</Box>}
+      {childNodes.length > 0 && <div className="sl-ml-2 sl-text-muted">{`{${childNodes.length}}`}</div>}
 
       {subpath.length > 1 && subpath[0] === 'patternProperties' ? (
-        <Box ml={2} textOverflow="truncate" color="muted">
-          (pattern property)
-        </Box>
+        <div className="sl-ml-2 sl-truncate sl-text-muted">(pattern property)</div>
       ) : null}
     </>
   );
