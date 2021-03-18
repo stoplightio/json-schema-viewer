@@ -30,7 +30,7 @@ function getTypes(schemaNode: RegularNode): Array<SchemaNodeKind | SchemaCombine
 
 export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
   if (isReferenceNode(schemaNode)) {
-    return <span className="truncate">{schemaNode.value ?? '$ref'}</span>;
+    return <span className="sl-truncate">{schemaNode.value ?? '$ref'}</span>;
   }
 
   if (!isRegularNode(schemaNode)) {

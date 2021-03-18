@@ -236,10 +236,10 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+          "<div class=\\"JsonSchemaViewer\\">
             <div style=\\"margin-left: 20px\\">
               <div>
-                <div class=\\"min-w-0\\">
+                <div>
                   <div>
                     <div>
                       <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
@@ -262,10 +262,10 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+          "<div class=\\"JsonSchemaViewer\\">
             <div style=\\"margin-left: 20px\\">
               <div>
-                <div class=\\"min-w-0\\">
+                <div>
                   <div>
                     <div>
                       <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
@@ -281,7 +281,7 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div class=\\"min-w-0\\">
+                    <div>
                       <div>
                         <div>
                           <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
@@ -307,10 +307,10 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+          "<div class=\\"JsonSchemaViewer\\">
             <div style=\\"margin-left: 20px\\">
               <div>
-                <div class=\\"min-w-0\\">
+                <div>
                   <div>
                     <div>
                       <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
@@ -326,7 +326,7 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div class=\\"min-w-0\\">
+                    <div>
                       <div>
                         <div>
                           <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
@@ -343,7 +343,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div style=\\"margin-left: 20px\\">
                       <div>
-                        <div class=\\"min-w-0\\">
+                        <div>
                           <div>
                             <div>
                               <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
@@ -405,10 +405,10 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+          "<div class=\\"JsonSchemaViewer\\">
             <div style=\\"margin-left: 20px\\">
               <div>
-                <div class=\\"min-w-0\\">
+                <div>
                   <div>
                     <div>
                       <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
@@ -431,10 +431,10 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+          "<div class=\\"JsonSchemaViewer\\">
             <div style=\\"margin-left: 20px\\">
               <div>
-                <div class=\\"min-w-0\\">
+                <div>
                   <div>
                     <div>
                       <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
@@ -450,7 +450,7 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div class=\\"min-w-0\\">
+                    <div>
                       <div>
                         <div>
                           <div>
@@ -466,7 +466,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div class=\\"min-w-0\\">
+                    <div>
                       <div>
                         <div>
                           <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
@@ -492,10 +492,10 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+          "<div class=\\"JsonSchemaViewer\\">
             <div style=\\"margin-left: 20px\\">
               <div>
-                <div class=\\"min-w-0\\">
+                <div>
                   <div>
                     <div>
                       <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
@@ -511,7 +511,7 @@ describe('Expanded depth', () => {
               <div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div class=\\"min-w-0\\">
+                    <div>
                       <div>
                         <div>
                           <div>
@@ -527,7 +527,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div style=\\"margin-left: 20px\\">
                   <div>
-                    <div class=\\"min-w-0\\">
+                    <div>
                       <div>
                         <div>
                           <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
@@ -544,7 +544,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div style=\\"margin-left: 20px\\">
                       <div>
-                        <div class=\\"min-w-0\\">
+                        <div>
                           <div>
                             <div>
                               <div>
@@ -560,7 +560,7 @@ describe('Expanded depth', () => {
                     <div></div>
                     <div style=\\"margin-left: 20px\\">
                       <div>
-                        <div class=\\"min-w-0\\">
+                        <div>
                           <div>
                             <div>
                               <div>
@@ -633,10 +633,10 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+          "<div class=\\"JsonSchemaViewer\\">
             <div style=\\"margin-left: 20px\\">
               <div>
-                <div class=\\"min-w-0\\">
+                <div>
                   <div>
                     <div>
                       <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
@@ -688,10 +688,10 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+      "<div class=\\"JsonSchemaViewer\\">
         <div style=\\"margin-left: 20px\\">
           <div>
-            <div class=\\"min-w-0\\">
+            <div>
               <div>
                 <div>
                   <div><span>string</span></div>
@@ -715,7 +715,7 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div class=\\"sl-stack JsonSchemaViewer sl-flex sl-flex-col sl-items-stretch\\">
+      "<div class=\\"JsonSchemaViewer\\">
         <div style=\\"margin-left: 20px\\">
           <div>
             <div>

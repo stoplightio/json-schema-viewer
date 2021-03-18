@@ -11,8 +11,8 @@ export interface ICaret {
 export const Caret: React.FunctionComponent<ICaret> = ({ style, size, isExpanded }) => (
   <div
     className="sl-flex sl-absolute sl-justify-center sl-p-1 sl-cursor-pointer sl-text-muted"
-    role="button"
     style={style}
+    role="button"
   >
     <Icon size={size} icon={isExpanded ? faChevronDown : faChevronRight} />
   </div>
