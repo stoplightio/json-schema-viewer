@@ -16,8 +16,8 @@ import { useJSVOptionsContext } from '../contexts';
 import { isCombiner } from '../guards/isCombiner';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../tree';
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
-import { Properties } from './shared/Properties';
 import { ChildStack } from './shared/ChildStack';
+import { Properties } from './shared/Properties';
 
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
@@ -59,7 +59,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
         <div className="sl-min-w-0 sl-flex-grow">
           <div
             onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
-            className={cn({'sl-cursor-pointer': childNodes.length > 0})}
+            className={cn({ 'sl-cursor-pointer': childNodes.length > 0 })}
           >
             <div className="sl-flex sl-my-2">
               {childNodes.length > 0 ? (

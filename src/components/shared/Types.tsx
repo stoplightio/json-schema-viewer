@@ -43,9 +43,7 @@ export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ sch
 
   const rendered = types.map((type, i, { length }) => (
     <React.Fragment key={type}>
-      <span className="sl-truncate sl-text-muted">
-        {shouldRenderName(type) ? printName(schemaNode) ?? type : type}
-      </span>
+      <span className="sl-truncate sl-text-muted">{shouldRenderName(type) ? printName(schemaNode) ?? type : type}</span>
       {i < length - 1 && (
         <span key={`${i}-sep`} className="sl-text-muted">
           {' or '}

@@ -20,29 +20,17 @@ export const Properties: React.FunctionComponent<IProperties> = ({
   const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
   const visibility = showVisibilityValidations ? (
     readOnly ? (
-      <span className="sl-ml-2 sl-text-muted">
-        read-only
-      </span>
+      <span className="sl-ml-2 sl-text-muted">read-only</span>
     ) : (
-      <span className="sl-ml-2 sl-text-muted">
-        write-only
-      </span>
+      <span className="sl-ml-2 sl-text-muted">write-only</span>
     )
   ) : null;
 
   return (
     <>
-      {deprecated ? (
-        <span className="sl-ml-2 sl-text-warning">
-          deprecated
-        </span>
-      ) : null}
+      {deprecated ? <span className="sl-ml-2 sl-text-warning">deprecated</span> : null}
       {visibility}
-      {required && (
-        <span className="sl-ml-2 sl-text-warning">
-          required
-        </span>
-      )}
+      {required && <span className="sl-ml-2 sl-text-warning">required</span>}
     </>
   );
 };

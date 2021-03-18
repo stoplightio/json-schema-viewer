@@ -1,5 +1,6 @@
-import * as React from 'react';
 import { SchemaNode } from '@stoplight/json-schema-tree';
+import * as React from 'react';
+
 import { SchemaRow } from '../SchemaRow';
 
 type ChildStackProps = {
