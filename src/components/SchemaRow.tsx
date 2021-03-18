@@ -17,6 +17,7 @@ import { isCombiner } from '../guards/isCombiner';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../tree';
 import { Caret, Description, Divider, Format, getValidationsFromSchema, Property, Validations } from './shared';
 import { Properties } from './shared/Properties';
+import { ChildStack } from './shared/ChildStack';
 
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
@@ -113,15 +114,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
         <div>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</div>
       </div>
       {childNodes.length > 0 && isExpanded ? (
-        <div className="sl-divide-y">
-          {childNodes.map((childNode: SchemaNode, index) => (
-            <React.Fragment key={childNode.id}>
-              {index > 0 && <div className="sl-border-t sl-self-stretch" />}
-              <SchemaRow schemaNode={childNode} nestingLevel={nestingLevel + 1} />
-            </React.Fragment>
-
-          ))}
-        </div>
+        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
       ) : null}
     </div>
   );
