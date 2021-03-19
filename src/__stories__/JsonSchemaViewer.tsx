@@ -63,22 +63,11 @@ storiesOf('JsonSchemaViewer', module)
     );
   })
   .add('stress-test schema', () => (
-    <>
-      <div style={{ height: 345, overflowY: 'scroll' }}>
-        <JsonSchemaViewer
-          schema={stressSchema as JSONSchema4}
-          defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          onGoToRef={action('onGoToRef')}
-        />
-      </div>
-      <div style={{ height: 345, overflowY: 'scroll' }}>
-        <JsonSchemaViewer
-          schema={stressSchema as JSONSchema4}
-          defaultExpandedDepth={number('defaultExpandedDepth', 2)}
-          onGoToRef={action('onGoToRef')}
-        />
-      </div>
-    </>
+    <JsonSchemaViewer
+      schema={stressSchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
+    />
   ))
   .add('allOf-schema', () => (
     <JsonSchemaViewer

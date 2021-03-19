@@ -1,12 +1,12 @@
 import { isRegularNode, SchemaTree as JsonSchemaTree, SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
-import { Box, VStack } from '@stoplight/mosaic';
+import { Box } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
 import type { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
-import { SchemaRow } from './SchemaRow';
+import { ChildStack } from './shared/ChildStack';
 
 export type JsonSchemaProps = Partial<JSVOptions> & {
   schema: JSONSchema4;
@@ -62,11 +62,11 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
 
   return (
     <JSVOptionsContextProvider value={options}>
-      <VStack divider className={cn(className, 'JsonSchemaViewer')}>
-        {jsonSchemaTreeRoot.children.map(childJsonSchemaNode => (
-          <SchemaRow key={childJsonSchemaNode.id} schemaNode={childJsonSchemaNode} nestingLevel={0} />
-        ))}
-      </VStack>
+      <ChildStack
+        childNodes={jsonSchemaTreeRoot.children}
+        currentNestingLevel={-1}
+        className={cn(className, 'JsonSchemaViewer')}
+      />
     </JSVOptionsContextProvider>
   );
 };

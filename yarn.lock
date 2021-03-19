@@ -1796,11 +1796,12 @@
     eslint-config-prettier "^6.14.0"
 
 "@stoplight/json-schema-merge-allof@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-merge-allof/-/json-schema-merge-allof-0.7.2.tgz#a9f4d95b4a95e943afa567c695a1d4a2add9b74a"
-  integrity sha512-fVS5GqYBlxZfX1fA9+ULiny8VaCR3O62p3BHYd7+30rf378pVW6UPPydeB5AXs5U621LJKYdrGyndpOdTJ5dFA==
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-merge-allof/-/json-schema-merge-allof-0.7.3.tgz#65ae18f38593a8a4a1232c051f7c0a63fce129cc"
+  integrity sha512-+4Lz+fHn+t49OeYZetyBa0Qz4kPsNRMEYVLVHMuq9HWyu2E29Iv7bafPfb9d0cGHJK92SE7ha5xgsLCBEQCRKQ==
   dependencies:
     compute-lcm "^1.1.0"
+    fast-copy "^2.1.1"
     json-schema-compare "^0.2.2"
     lodash "^4.17.4"
 
@@ -6997,6 +6998,11 @@ fake-tag@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/fake-tag/-/fake-tag-1.0.1.tgz#1d59da482240a02bd83500ca98976530ed154b0d"
   integrity sha512-qmewZoBpa71mM+y6oxXYW/d1xOYQmeIvnEXAt1oCmdP0sqcogWYLepR87QL1jQVLSVMVYDq2cjY6ec/Wu8/4pg==
+
+fast-copy@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/fast-copy/-/fast-copy-2.1.1.tgz#f5cbcf2df64215e59b8e43f0b2caabc19848083a"
+  integrity sha512-Qod3DdRgFZ8GUIM6ygeoZYpQ0QLW9cf/FS9KhhjlYggcSZXWAemAw8BOCO5LuYCrR3Uj3qXDVTUzOUwG8C7beQ==
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"

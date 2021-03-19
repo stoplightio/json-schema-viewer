@@ -1,5 +1,4 @@
 import { RegularNode } from '@stoplight/json-schema-tree';
-import { Flex, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
 import * as React from 'react';
@@ -88,38 +87,34 @@ export const Validations: React.FunctionComponent<IValidations> = ({ validations
 
 const NumberValidations = ({
   validations,
-  className,
 }: {
   validations: Partial<Record<typeof numberValidationNames[number], unknown>>;
-  className?: string;
 }) => {
   const entries = Object.entries(validations);
   if (!entries.length) {
     return null;
   }
   return (
-    <Flex my={2} color="muted">
+    <div className="sl-flex sl-my-2 sl-text-muted">
       {entries
         .map(([key, value]) => numberValidationFormatters[key](value))
         .map((value, i) => (
-          <Text key={i} mr={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
+          <span key={i} className="sl-mr-2 sl-px-1 sl-font-mono sl-border sl-rounded-lg">
             {value}
-          </Text>
+          </span>
         ))}
-    </Flex>
+    </div>
   );
 };
 
-const KeyValueValidations = ({ validations, className }: { validations: Dictionary<unknown>; className?: string }) => (
+const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
     {keys(validations)
       .filter(key => Object.keys(validationFormatters).includes(key))
       .map(key => {
         const validation = validationFormatters[key](validations[key]);
         if (validation) {
-          return (
-            <KeyValueValidation key={key} name={validation.name} values={validation.values} className={className} />
-          );
+          return <KeyValueValidation key={key} name={validation.name} values={validation.values} />;
         } else {
           return null;
         }
@@ -127,39 +122,30 @@ const KeyValueValidations = ({ validations, className }: { validations: Dictiona
   </>
 );
 
-const KeyValueValidation = ({ className, name, values }: { className?: string; name: string; values: string[] }) => {
+const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
-    <Flex flexWrap color="muted" my={2} className={className}>
-      <Text fontWeight="light">{capitalize(name)}:</Text>
+    <div className="sl-flex sl-flex-wrap sl-text-muted sl-my-2">
+      <span className="sl-text-light">{capitalize(name)}:</span>
       {uniq(values).map(value => (
-        <Text key={value} ml={2} px={1} fontFamily="mono" border rounded="lg" className={className}>
+        <span key={value} className="sl-ml-2 sl-px-1 sl-font-mono sl-border sl-rounded-lg">
           {value}
-        </Text>
+        </span>
       ))}
-    </Flex>
+    </div>
   );
 };
 
-const NameValidations = ({ validations, className }: { validations: Dictionary<unknown>; className?: string }) => (
+const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
     {keys(validations)
       .filter(key => validations[key])
       .map(key => {
         return (
-          <Flex key={key} flex={1} my={2}>
-            <Text
-              px={1}
-              color="muted"
-              fontFamily="mono"
-              border
-              rounded="lg"
-              fontSize="sm"
-              textTransform="capitalize"
-              className={className}
-            >
+          <div className="sl-flex sl-flex-1 sl-my-2" key={key}>
+            <span className="sl-px-1 sl-text-muted sl-font-mono sl-border sl-rounded-lg sl-text-sm sl-capitalize">
               {key}
-            </Text>
-          </Flex>
+            </span>
+          </div>
         );
       })}
   </>

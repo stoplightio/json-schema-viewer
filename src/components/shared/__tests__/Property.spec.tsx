@@ -236,12 +236,12 @@ describe('Property component', () => {
 
       let wrapper = render(schema, ['properties', 'array-all-objects', 'items', 'properties', 'foo']);
       expect(wrapper).toHaveHTML(
-        '<div class="sl-font-mono sl-font-bold sl-mr-2">foo</div><span class="sl-truncate sl-text-muted">string</span>',
+        '<div class="sl-mr-2 sl-font-mono sl-font-bold">foo</div><span class="sl-truncate sl-text-muted">string</span>',
       );
 
       wrapper = render(schema, ['properties', 'array-all-objects', 'items', 'properties', 'bar']);
       expect(wrapper).toHaveHTML(
-        '<div class="sl-font-mono sl-font-bold sl-mr-2">bar</div><span class="sl-truncate sl-text-muted">string</span>',
+        '<div class="sl-mr-2 sl-font-mono sl-font-bold">bar</div><span class="sl-truncate sl-text-muted">string</span>',
       );
     });
 
@@ -260,7 +260,7 @@ describe('Property component', () => {
       const tree = buildTree(schema);
 
       const wrapper = mount(<Property schemaNode={findNodeWithPath(tree, ['properties', 'foo'])!} />);
-      expect(wrapper.find('div')).toHaveHTML('<div class="sl-font-mono sl-font-bold sl-mr-2">foo</div>');
+      expect(wrapper.find('div')).toHaveHTML('<div class="sl-mr-2 sl-font-mono sl-font-bold">foo</div>');
       wrapper.unmount();
     });
   });
