@@ -83,12 +83,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 />
               ) : null}
 
-              {schemaNode.subpath.length > 0 &&
-                isCombiner(schemaNode.subpath[0]) &&
-                schemaNode.parent?.children?.indexOf(schemaNode as any) !== 0 && (
-                  <Divider kind={schemaNode.subpath[0]} />
-                )}
-
               <div className="sl-flex sl-text-base sl-flex-1 sl-truncate">
                 <Property schemaNode={schemaNode} />
                 <Format schemaNode={schemaNode} />
