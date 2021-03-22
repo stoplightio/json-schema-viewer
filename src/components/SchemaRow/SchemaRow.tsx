@@ -9,12 +9,13 @@ import {
 } from '@stoplight/json-schema-tree';
 import { Icon, Select } from '@stoplight/mosaic';
 import cn from 'classnames';
+import { last } from 'lodash';
 import * as React from 'react';
 
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
-import { Caret, Description, Format, getValidationsFromSchema, Property, Validations } from '../shared';
+import { Caret, Description, Format, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Properties } from '../shared/Properties';
 import { useChoices } from './useChoices';
@@ -27,13 +28,14 @@ export interface SchemaRowProps {
 export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
   const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
 
-  const { defaultExpandedDepth, renderRowAddon } = useJSVOptionsContext();
+  const { defaultExpandedDepth, renderRowAddon, onGoToRef } = useJSVOptionsContext();
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
   );
 
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
+  const typeToShow = selectedChoice.type;
 
   const refNode = React.useMemo<ReferenceNode | null>(() => {
     if (isReferenceNode(schemaNode)) {
@@ -53,7 +55,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
   const isBrokenRef = typeof refNode?.error === 'string';
 
-  const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice]);
+  const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
 
   return (
     <div className="sl-text-sm sl-relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
@@ -63,7 +65,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
             className={cn({ 'sl-cursor-pointer': childNodes.length > 0 })}
           >
-            <div className="sl-flex sl-my-2">
+            <div className="sl-flex sl-items-center sl-my-2">
               {childNodes.length > 0 ? (
                 <Caret
                   isExpanded={isExpanded}
@@ -83,8 +85,33 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
               ) : null}
 
               <div className="sl-flex sl-text-base sl-flex-1 sl-truncate">
-                <Property schemaNode={schemaNode} />
-                <Format schemaNode={schemaNode} />
+                {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
+                  <div className="sl-mr-2 sl-font-mono sl-font-bold">{last(schemaNode.subpath)}</div>
+                )}
+
+                {choices.length === 1 && (
+                  <>
+                    <Types schemaNode={typeToShow} />
+                    <Format schemaNode={typeToShow} />
+                  </>
+                )}
+
+                {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
+                  <a
+                    className="sl-ml-2 sl-cursor-pointer sl-text-primary-light"
+                    onClick={(e: React.MouseEvent) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onGoToRef(schemaNode);
+                    }}
+                  >
+                    (go to ref)
+                  </a>
+                ) : null}
+
+                {schemaNode.subpath.length > 1 && schemaNode.subpath[0] === 'patternProperties' ? (
+                  <div className="sl-ml-2 sl-truncate sl-text-muted">(pattern property)</div>
+                ) : null}
                 {choices.length > 1 && (
                   <Select
                     options={choices.map((choice, index) => ({
@@ -129,3 +156,10 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
     </div>
   );
 };
+
+function shouldShowPropertyName(schemaNode: SchemaNode) {
+  return (
+    schemaNode.subpath.length === 2 &&
+    (schemaNode.subpath[0] === 'properties' || schemaNode.subpath[0] === 'patternProperties')
+  );
+}
