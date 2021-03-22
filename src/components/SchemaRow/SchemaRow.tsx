@@ -84,7 +84,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 />
               ) : null}
 
-              <div className="sl-flex sl-text-base sl-flex-1 sl-truncate">
+              <div className="sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                   <div className="sl-mr-2 sl-font-mono sl-font-bold">{last(schemaNode.subpath)}</div>
                 )}
@@ -114,6 +114,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 ) : null}
                 {choices.length > 1 && (
                   <Select
+                    size="sm"
                     options={choices.map((choice, index) => ({
                       value: index,
                       label: choice.title,
