@@ -7,7 +7,7 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { Icon } from '@stoplight/mosaic';
+import { Icon, Select } from '@stoplight/mosaic';
 import cn from 'classnames';
 import * as React from 'react';
 
@@ -87,17 +87,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 <Property schemaNode={schemaNode} />
                 <Format schemaNode={schemaNode} />
                 {childOptions.length > 0 && (
-                  <select
-                    className="sl-mx-2 sl-p-1 sl-border"
-                    onClick={e => e.stopPropagation()}
-                    onChange={e => setSelectedChild(childOptions[e.currentTarget.value])}
-                  >
-                    {childOptions.map((option, index) => (
-                      <option key={option.id} onClick={() => setSelectedChild(option)} value={index}>
-                        {(isRegularNode(option) && printName(option)) || `#${index}`}
-                      </option>
-                    ))}
-                  </select>
+                  <Select
+                    options={childOptions.map((option, index) => ({
+                      value: index,
+                      label: (isRegularNode(option) && printName(option)) || `#${index}`,
+                    }))}
+                    onChange={selectedIndex => setSelectedChild(childOptions[selectedIndex as number])}
+                  />
                 )}
               </div>
               <Properties

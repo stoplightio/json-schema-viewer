@@ -1,5 +1,5 @@
 import { isRegularNode, SchemaTree as JsonSchemaTree, SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
-import { Box } from '@stoplight/mosaic';
+import { Box, Provider as MosaicProvider } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
 import type { JSONSchema4 } from 'json-schema';
@@ -61,13 +61,15 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   }
 
   return (
-    <JSVOptionsContextProvider value={options}>
-      <ChildStack
-        childNodes={jsonSchemaTreeRoot.children}
-        currentNestingLevel={-1}
-        className={cn(className, 'JsonSchemaViewer')}
-      />
-    </JSVOptionsContextProvider>
+    <MosaicProvider>
+      <JSVOptionsContextProvider value={options}>
+        <ChildStack
+          childNodes={jsonSchemaTreeRoot.children}
+          currentNestingLevel={-1}
+          className={cn(className, 'JsonSchemaViewer')}
+        />
+      </JSVOptionsContextProvider>
+    </MosaicProvider>
   );
 };
 
