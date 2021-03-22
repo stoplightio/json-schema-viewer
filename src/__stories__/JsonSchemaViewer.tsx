@@ -15,6 +15,7 @@ const refSchema = require('../__fixtures__/references/base.json');
 const nullRefSchema = require('../__fixtures__/references/nullish.json');
 const brokenRefArraySchema = require('../__fixtures__/arrays/of-refs.json');
 const oneOfWithArraySchema = require('../__fixtures__/combiners/oneof-with-array-type.json');
+const oneOfWithArraySchema2 = require('../__fixtures__/combiners/oneof-within-array-item.json');
 
 subscribeTheme({ mode: 'light' });
 
@@ -83,9 +84,9 @@ storiesOf('JsonSchemaViewer', module)
       onGoToRef={action('onGoToRef')}
     />
   ))
-  .add('anyOf-array-schema', () => (
+  .add('anyOf-array-schema2', () => (
     <JsonSchemaViewer
-      schema={oneOfWithArraySchema as JSONSchema4}
+      schema={oneOfWithArraySchema2 as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
