@@ -14,11 +14,10 @@ import * as React from 'react';
 import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
-import { printName } from '../../utils';
 import { Caret, Description, Format, getValidationsFromSchema, Property, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Properties } from '../shared/Properties';
-import { useChildSelector } from './useChildSelector';
+import { useChoices } from './useChoices';
 
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
@@ -34,7 +33,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
   );
 
-  const { selectedChild, setSelectedChild, childOptions } = useChildSelector(schemaNode);
+  const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
 
   const refNode = React.useMemo<ReferenceNode | null>(() => {
     if (isReferenceNode(schemaNode)) {
@@ -54,7 +53,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
   const isBrokenRef = typeof refNode?.error === 'string';
 
-  const childNodes = React.useMemo(() => calculateChildrenToShow(schemaNode), [schemaNode]);
+  const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice]);
 
   return (
     <div className="sl-text-sm sl-relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
@@ -86,13 +85,18 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
               <div className="sl-flex sl-text-base sl-flex-1 sl-truncate">
                 <Property schemaNode={schemaNode} />
                 <Format schemaNode={schemaNode} />
-                {childOptions.length > 0 && (
+                {choices.length > 1 && (
                   <Select
-                    options={childOptions.map((option, index) => ({
+                    options={choices.map((choice, index) => ({
                       value: index,
-                      label: (isRegularNode(option) && printName(option)) || `#${index}`,
+                      label: choice.title,
                     }))}
-                    onChange={selectedIndex => setSelectedChild(childOptions[selectedIndex as number])}
+                    value={
+                      choices
+                        .indexOf(selectedChoice)
+                        .toString() /* toString to work around https://github.com/stoplightio/mosaic/issues/162 */
+                    }
+                    onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
                   />
                 )}
               </div>
@@ -119,10 +123,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
         </div>
         <div>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</div>
       </div>
-      {selectedChild !== undefined && isExpanded && (
-        <SchemaRow schemaNode={selectedChild} nestingLevel={nestingLevel + 1} />
-      )}
-      {selectedChild === undefined && childNodes.length > 0 && isExpanded ? (
+      {childNodes.length > 0 && isExpanded ? (
         <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
       ) : null}
     </div>
