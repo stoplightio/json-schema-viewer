@@ -2,7 +2,7 @@ import { isReferenceNode, isRegularNode, SchemaNode } from '@stoplight/json-sche
 import { last } from 'lodash';
 import * as React from 'react';
 
-import { isParentNode } from '../../tree';
+import { isComplexArray, isParentNode } from '../../tree';
 import { printName } from '../../utils';
 
 type Choice = {
@@ -31,6 +31,13 @@ function makeChoice(node: SchemaNode, index?: number): Choice {
   };
 }
 
+function makeArrayChoice(node: SchemaNode, index?: number): Choice {
+  return {
+    type: node,
+    title: `array of ${calculateChoiceTitle(node, index)}`,
+  };
+}
+
 /**
  * Calculates type choices for a given node.
  *
@@ -38,13 +45,23 @@ function makeChoice(node: SchemaNode, index?: number): Choice {
  * If a node is an oneOf or anyOf combiner, the possible types are the sub-types of the combiner.
  */
 export const useChoices = (schemaNode: SchemaNode) => {
-  const choices: Choice[] = React.useMemo(
-    () =>
-      isParentNode(schemaNode) && shouldShowChildSelector(schemaNode)
-        ? schemaNode.children.map(makeChoice)
-        : [makeChoice(schemaNode)],
-    [schemaNode],
-  );
+  const choices: Choice[] = React.useMemo(() => {
+    // handle flattening of arrays that contain oneOfs, same logic as below
+    if (
+      isComplexArray(schemaNode) &&
+      isParentNode(schemaNode.children[0]) &&
+      shouldShowChildSelector(schemaNode.children[0])
+    ) {
+      return schemaNode.children[0].children.map(makeArrayChoice);
+    }
+
+    // if current node is a combiner, offer its children
+    if (isParentNode(schemaNode) && shouldShowChildSelector(schemaNode)) {
+      return schemaNode.children.map(makeChoice);
+    }
+    // regular node, single choice - itself
+    return [makeChoice(schemaNode)];
+  }, [schemaNode]);
 
   const defaultChoice = choices[0];
 
