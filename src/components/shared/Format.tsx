@@ -10,5 +10,5 @@ export const Format: React.FunctionComponent<FormatProps> = ({ schemaNode }) => 
     return null;
   }
 
-  return <span className="sl-ml-2 sl-text-muted">{`<${schemaNode.format}>`}</span>;
+  return <span className="sl-text-muted">{`<${schemaNode.format}>`}</span>;
 };
