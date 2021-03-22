@@ -10,31 +10,38 @@ type Choice = {
   type: SchemaNode;
 };
 
-function calculateChoiceTitle(node: SchemaNode, index?: number): string {
+function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
+  const complexObjectSuffix = isPlural ? '-s' : '';
+  const primitiveSuffix = isPlural ? 's' : '';
   if (isRegularNode(node)) {
-    const fallback = index ? `${node.primaryType} (${index})` : node.primaryType ?? 'object';
-    return printName(node) || fallback;
+    const realName = printName(node);
+    if (realName) {
+      return realName + complexObjectSuffix;
+    }
+    return (node.primaryType ?? 'object') + primitiveSuffix;
   }
   if (isReferenceNode(node)) {
-    const fallback = index ? `(${index})` : '$ref';
     const lastPiece = last(node.value?.split('/') ?? []);
-    return lastPiece ? lastPiece.split('.')[0] : fallback;
+    if (lastPiece) {
+      return lastPiece.split('.')[0] + complexObjectSuffix;
+    }
+    return '$ref' + primitiveSuffix;
   }
 
-  return index ? `(${index})` : 'object';
+  return 'object' + primitiveSuffix;
 }
 
-function makeChoice(node: SchemaNode, index?: number): Choice {
+function makeChoice(node: SchemaNode): Choice {
   return {
     type: node,
-    title: calculateChoiceTitle(node, index),
+    title: calculateChoiceTitle(node, false),
   };
 }
 
-function makeArrayChoice(node: SchemaNode, index?: number): Choice {
+function makeArrayChoice(node: SchemaNode): Choice {
   return {
     type: node,
-    title: `array of ${calculateChoiceTitle(node, index)}`,
+    title: `array of ${calculateChoiceTitle(node, true)}`,
   };
 }
 
