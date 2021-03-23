@@ -41,14 +41,19 @@ function printArrayName(schemaNode: RegularNode): string | null {
         return mergedTypes;
       }, []) ?? null;
 
-    return val !== null && val.length > 0 ? `array of ${val.join('s/')}s` : null;
+    return val !== null && val.length > 0 ? `array of ${val.join('s/')}s` : 'array';
   }
 
   if (isComplexArray(schemaNode)) {
     const firstChild = schemaNode.children[0];
-    return firstChild.title
-      ? `array of ${firstChild.title}-s`
-      : `array of ${firstChild.primaryType ?? firstChild.combiners?.join('/') ?? 'item'}s`;
+    if (firstChild.title) {
+      return `array of ${firstChild.title}-s`;
+    } else if (firstChild.primaryType) {
+      return `array of ${firstChild.primaryType}s`;
+    } else if (firstChild.combiners?.length) {
+      return `array of ${firstChild.combiners.join('/')}`;
+    }
+    return 'array';
   }
 
   return null;

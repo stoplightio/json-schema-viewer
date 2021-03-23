@@ -116,13 +116,12 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                   <Select
                     size="sm"
                     options={choices.map((choice, index) => ({
-                      value: index,
+                      value: String(index),
                       label: choice.title,
                     }))}
                     value={
-                      choices
-                        .indexOf(selectedChoice)
-                        .toString() /* toString to work around https://github.com/stoplightio/mosaic/issues/162 */
+                      String(choices.indexOf(selectedChoice))
+                      /* String to work around https://github.com/stoplightio/mosaic/issues/162 */
                     }
                     onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
                   />

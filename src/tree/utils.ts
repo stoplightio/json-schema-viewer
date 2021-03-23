@@ -13,7 +13,7 @@ import { ComplexArrayNode, FlattenableNode, PrimitiveArrayNode } from './types';
 
 export type ChildNode = RegularNode | ReferenceNode | MirroredSchemaNode;
 
-export const isParentNode = (
+export const isNonEmptyParentNode = (
   node: SchemaNode,
 ): node is RegularNode & {
   children: ChildNode[] & { 0: ChildNode };
