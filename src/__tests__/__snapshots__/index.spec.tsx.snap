@@ -388,8 +388,9 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
                     <button
                       aria-haspopup=\\"listbox\\"
                       aria-expanded=\\"false\\"
+                      aria-label=\\"Pick a type\\"
                       id=\\"react-aria-0-3\\"
-                      aria-labelledby=\\"react-aria-0-5\\"
+                      aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
@@ -534,8 +535,9 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
                     <button
                       aria-haspopup=\\"listbox\\"
                       aria-expanded=\\"false\\"
+                      aria-label=\\"Pick a type\\"
                       id=\\"react-aria-0-3\\"
-                      aria-labelledby=\\"react-aria-0-5\\"
+                      aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
@@ -687,8 +689,9 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
                     <button
                       aria-haspopup=\\"listbox\\"
                       aria-expanded=\\"false\\"
+                      aria-label=\\"Pick a type\\"
                       id=\\"react-aria-0-3\\"
-                      aria-labelledby=\\"react-aria-0-5\\"
+                      aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
@@ -2611,8 +2614,9 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
                     <button
                       aria-haspopup=\\"listbox\\"
                       aria-expanded=\\"false\\"
+                      aria-label=\\"Pick a type\\"
                       id=\\"react-aria-0-3\\"
-                      aria-labelledby=\\"react-aria-0-5\\"
+                      aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
@@ -2781,8 +2785,9 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
                     <button
                       aria-haspopup=\\"listbox\\"
                       aria-expanded=\\"false\\"
+                      aria-label=\\"Pick a type\\"
                       id=\\"react-aria-0-3\\"
-                      aria-labelledby=\\"react-aria-0-5\\"
+                      aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
@@ -2877,8 +2882,9 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
                     <button
                       aria-haspopup=\\"listbox\\"
                       aria-expanded=\\"false\\"
+                      aria-label=\\"Pick a type\\"
                       id=\\"react-aria-0-3\\"
-                      aria-labelledby=\\"react-aria-0-5\\"
+                      aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
@@ -3125,8 +3131,9 @@ exports[`HTML Output should match default-schema.json 1`] = `
                         <button
                           aria-haspopup=\\"listbox\\"
                           aria-expanded=\\"false\\"
+                          aria-label=\\"Pick a type\\"
                           id=\\"react-aria-0-3\\"
-                          aria-labelledby=\\"react-aria-0-5\\"
+                          aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                           type=\\"button\\"
                           class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                         >

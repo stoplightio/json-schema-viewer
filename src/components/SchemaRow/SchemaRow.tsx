@@ -114,6 +114,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 ) : null}
                 {choices.length > 1 && (
                   <Select
+                    aria-label="Pick a type"
                     size="sm"
                     options={choices.map((choice, index) => ({
                       value: String(index),
