@@ -22,7 +22,8 @@ function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
     return node.primaryType !== null ? node.primaryType + primitiveSuffix : 'any';
   }
   if (isReferenceNode(node)) {
-    const lastPiece = last(pointerToPath(node.value ?? ''));
+    const value = extractPointerFromRef(node.value);
+    const lastPiece = !node.error && value ? last(pointerToPath(value)) : null;
     if (typeof lastPiece === 'string') {
       return lastPiece.split('.')[0] + complexObjectSuffix;
     }
