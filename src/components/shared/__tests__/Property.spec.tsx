@@ -1,15 +1,12 @@
 import 'jest-enzyme';
 
+import { Provider as MosaicProvider } from '@stoplight/mosaic';
 import { mount, ReactWrapper } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { Property, Types } from '../../shared';
+import { SchemaRow, Types } from '../..';
 import { buildTree, findNodeWithPath } from './utils';
-
-function findCounter(wrapper: ReactWrapper) {
-  return wrapper.findWhere(el => /^{\d\}$/.test(el.text()));
-}
 
 describe('Property component', () => {
   const toUnmount: ReactWrapper[] = [];
@@ -22,7 +19,11 @@ describe('Property component', () => {
     if (node === undefined) {
       throw new Error('Schema node not found in tree');
     }
-    const wrapper = mount(<Property schemaNode={node} />);
+    const wrapper = mount(
+      <MosaicProvider>
+        <SchemaRow schemaNode={node} nestingLevel={0} />
+      </MosaicProvider>,
+    );
 
     toUnmount.push(wrapper);
 
@@ -44,7 +45,9 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array[string]</span>');
+    expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+      `"<span class=\\"sl-truncate sl-text-muted\\">array of strings</span>"`,
+    );
   });
 
   it('should handle nullish items', () => {
@@ -54,7 +57,9 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
+    expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+      `"<span class=\\"sl-truncate sl-text-muted\\">array</span>"`,
+    );
   });
 
   it('should handle nullish $ref', () => {
@@ -63,59 +68,11 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate">$ref</span>');
-  });
-
-  describe('properties counter', () => {
-    it('given an object among other types, should still display the counter', () => {
-      const schema: JSONSchema4 = {
-        type: ['string', 'object'],
-        properties: {
-          foo: {
-            type: 'array',
-            items: {
-              type: 'integer',
-            },
-          },
-        },
-      };
-
-      const wrapper = render(schema);
-      expect(findCounter(wrapper).first()).toHaveText('{1}');
-    });
-
-    it('given missing properties property, should not display the counter', () => {
-      const schema: JSONSchema4 = {
-        type: 'object',
-      };
-
-      const wrapper = render(schema);
-      expect(findCounter(wrapper)).not.toExist();
-    });
-
-    it('given nullish properties property, should not display the counter', () => {
-      const schema: JSONSchema4 = {
-        type: 'object',
-        properties: null as any,
-      };
-
-      const wrapper = render(schema);
-      expect(findCounter(wrapper)).not.toExist();
-    });
-
-    it('given object property with no properties inside, should not display the counter', () => {
-      const schema: JSONSchema4 = {
-        type: 'object',
-        properties: {},
-      };
-
-      const wrapper = render(schema);
-      expect(findCounter(wrapper)).not.toExist();
-    });
+    expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(`"<span class=\\"sl-truncate\\">$ref</span>"`);
   });
 
   describe('properties names', () => {
-    it('given an object, should display names its properties', () => {
+    it('given an object, should display the names of its properties', () => {
       const schema: JSONSchema4 = {
         properties: {
           foo: {
@@ -125,7 +82,9 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema, ['properties', 'foo']);
-      expect(wrapper.find('div').first()).toHaveText('foo');
+      expect(wrapper.find(SchemaRow).html()).toMatchInlineSnapshot(
+        `"<div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">foo</div><span class=\\"sl-truncate sl-text-muted\\">string</span></div></div></div></div><div></div></div></div>"`,
+      );
     });
 
     it('given an object among other types, should still display its properties', () => {
@@ -142,7 +101,9 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema, ['properties', 'foo']);
-      expect(wrapper.find('div').first()).toHaveText('foo');
+      expect(wrapper.find(SchemaRow).html()).toMatchInlineSnapshot(
+        `"<div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">foo</div><span class=\\"sl-truncate sl-text-muted\\">array of integers</span></div></div></div></div><div></div></div></div>"`,
+      );
     });
 
     it('given an array of objects, should display names of those properties', () => {
@@ -158,7 +119,9 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema, ['items', 'properties', 'foo']);
-      expect(wrapper.find('div').first()).toHaveText('foo');
+      expect(wrapper.html()).toMatchInlineSnapshot(
+        `"<div class=\\"\\"><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">foo</div><span class=\\"sl-truncate sl-text-muted\\">string</span></div></div></div></div><div></div></div></div></div>"`,
+      );
     });
 
     it('given an array with a combiner inside, should merge it', () => {
@@ -177,8 +140,8 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper).toHaveHTML(
-        '<span class="sl-truncate sl-text-muted">array[oneOf]</span><div class="sl-ml-2 sl-text-muted">{2}</div>',
+      expect(wrapper.html()).toMatchInlineSnapshot(
+        `"<div class=\\"\\"><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-select sl-relative\\"><div style=\\"border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;\\" aria-hidden=\\"true\\"><input type=\\"text\\" tabindex=\\"-1\\" style=\\"font-size: 16px;\\"><label><select size=\\"2\\" tabindex=\\"-1\\"><option value=\\"0\\">array of strings</option><option value=\\"1\\">array of numbers</option></select></label></div><div class=\\"sl-relative\\"><button aria-haspopup=\\"listbox\\" aria-expanded=\\"false\\" aria-label=\\"Pick a type\\" id=\\"react-aria-0-3\\" aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\" type=\\"button\\" class=\\"sl-button sl-w-full sl-h-sm sl-text-base sl-font-normal sl-px-1.5 sl-bg-transparent sl-text-body sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"><div class=\\"sl-flex sl-flex-grow sl-justify-items-start sl-items-center\\"><div class=\\"sl-pr-1\\">array of strings</div></div><div class=\\"sl--mr-0.5 sl-ml-0.5\\"><svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"chevron-down\\" class=\\"svg-inline--fa fa-chevron-down fa-w-14 fa-xs sl-icon\\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 448 512\\"><path fill=\\"currentColor\\" d=\\"M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z\\"></path></svg></div></button></div></div></div></div></div></div><div></div></div></div></div>"`,
       );
     });
 
@@ -200,8 +163,8 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper).toHaveHTML(
-        '<span class="sl-truncate sl-text-muted">array[object]</span><div class="sl-ml-2 sl-text-muted">{3}</div>',
+      expect(wrapper.html()).toMatchInlineSnapshot(
+        `"<div class=\\"\\"><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"sl-cursor-pointer\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-absolute sl-justify-center sl-p-1 sl-cursor-pointer sl-text-muted\\" style=\\"width: 20px; height: 20px; position: relative;\\" role=\\"button\\"><svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"chevron-down\\" class=\\"svg-inline--fa fa-chevron-down fa-w-14 fa-xs sl-icon\\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 448 512\\"><path fill=\\"currentColor\\" d=\\"M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z\\"></path></svg></div><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><span class=\\"sl-truncate sl-text-muted\\">array of objects</span></div></div></div></div><div></div></div><div><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">foo</div></div></div></div></div><div></div></div></div><div class=\\"sl-border-t sl-self-stretch\\"></div><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">bar</div></div></div></div></div><div></div></div></div><div class=\\"sl-border-t sl-self-stretch\\"></div><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">baz</div></div></div></div></div><div></div></div></div></div></div></div>"`,
       );
     });
 
@@ -235,13 +198,13 @@ describe('Property component', () => {
       };
 
       let wrapper = render(schema, ['properties', 'array-all-objects', 'items', 'properties', 'foo']);
-      expect(wrapper).toHaveHTML(
-        '<div class="sl-mr-2 sl-font-mono sl-font-bold">foo</div><span class="sl-truncate sl-text-muted">string</span>',
+      expect(wrapper.html()).toMatchInlineSnapshot(
+        `"<div class=\\"\\"><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">foo</div><span class=\\"sl-truncate sl-text-muted\\">string</span></div></div></div></div><div></div></div></div></div>"`,
       );
 
       wrapper = render(schema, ['properties', 'array-all-objects', 'items', 'properties', 'bar']);
-      expect(wrapper).toHaveHTML(
-        '<div class="sl-mr-2 sl-font-mono sl-font-bold">bar</div><span class="sl-truncate sl-text-muted">string</span>',
+      expect(wrapper.html()).toMatchInlineSnapshot(
+        `"<div class=\\"\\"><div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">bar</div><span class=\\"sl-truncate sl-text-muted\\">string</span></div></div></div></div><div></div></div></div></div>"`,
       );
     });
 
@@ -259,8 +222,10 @@ describe('Property component', () => {
 
       const tree = buildTree(schema);
 
-      const wrapper = mount(<Property schemaNode={findNodeWithPath(tree, ['properties', 'foo'])!} />);
-      expect(wrapper.find('div')).toHaveHTML('<div class="sl-mr-2 sl-font-mono sl-font-bold">foo</div>');
+      const wrapper = mount(<SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'foo'])!} nestingLevel={0} />);
+      expect(wrapper.html()).toMatchInlineSnapshot(
+        `"<div class=\\"sl-text-sm sl-relative\\" style=\\"margin-left: 20px;\\"><div class=\\"sl-flex\\"><div class=\\"sl-min-w-0 sl-flex-grow\\"><div class=\\"\\"><div class=\\"sl-flex sl-items-center sl-my-2\\"><div class=\\"sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate\\"><div class=\\"sl-mr-2 sl-font-mono sl-font-bold\\">foo</div><span class=\\"sl-truncate sl-text-muted\\">object</span></div></div></div></div><div></div></div></div>"`,
+      );
       wrapper.unmount();
     });
   });
@@ -278,7 +243,9 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
+      expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+        `"<span class=\\"sl-truncate sl-text-muted\\">User</span>"`,
+      );
     });
 
     it('given array type with non-array items, should render title', () => {
@@ -296,7 +263,9 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User[]</span>');
+      expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+        `"<span class=\\"sl-truncate sl-text-muted\\">array of User-s</span>"`,
+      );
     });
 
     it('given array with no items, should render title', () => {
@@ -306,7 +275,9 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
+      expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+        `"<span class=\\"sl-truncate sl-text-muted\\">User</span>"`,
+      );
     });
 
     it('given array with defined items, should not render title', () => {
@@ -325,62 +296,9 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
+      expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+        `"<span class=\\"sl-truncate sl-text-muted\\">array</span>"`,
+      );
     });
-  });
-
-  it("no title for combiner's children", () => {
-    const schema: JSONSchema4 = {
-      type: 'object',
-      title: 'Account',
-      allOf: [
-        {
-          type: 'object',
-          properties: {
-            type: {
-              type: 'string',
-              enum: ['admin', 'editor'],
-            },
-            enabled: {
-              type: 'boolean',
-              description: 'Is this account enabled',
-            },
-          },
-          required: ['type'],
-        },
-      ],
-      oneOf: [
-        {
-          type: 'object',
-          title: 'Admin',
-          properties: {
-            root: {
-              type: 'boolean',
-            },
-            group: {
-              type: 'string',
-            },
-            expirationDate: {
-              type: 'string',
-            },
-          },
-        },
-        {
-          type: 'object',
-          title: 'Editor',
-          properties: {
-            supervisor: {
-              type: 'string',
-            },
-            key: {
-              type: 'string',
-            },
-          },
-        },
-      ],
-    };
-
-    const wrapper = render(schema);
-    expect(wrapper.children().first()).toEqual(wrapper.find(Types));
   });
 });

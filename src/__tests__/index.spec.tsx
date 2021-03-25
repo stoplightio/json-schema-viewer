@@ -236,21 +236,20 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"JsonSchemaViewer\\">
-            <div style=\\"margin-left: 20px\\">
-              <div>
+          "<div class=\\"\\">
+            <div class=\\"JsonSchemaViewer\\">
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
                       <div>
-                        <span>array[object]</span>
-                        <div>{1}</div>
+                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div><span>array of objects</span></div>
                       </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
               </div>
             </div>
           </div>
@@ -262,38 +261,36 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"JsonSchemaViewer\\">
-            <div style=\\"margin-left: 20px\\">
-              <div>
+          "<div class=\\"\\">
+            <div class=\\"JsonSchemaViewer\\">
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
                       <div>
-                        <span>array[object]</span>
-                        <div>{1}</div>
+                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div><span>array of objects</span></div>
                       </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
-              </div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
+                <div>
+                  <div style=\\"margin-left: 20px\\">
                     <div>
                       <div>
                         <div>
-                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
                           <div>
-                            <div>foo</div>
-                            <span>array[object]</span>
-                            <div>{1}</div>
+                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                            <div>
+                              <div>foo</div>
+                              <span>array of objects</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div></div>
                     </div>
-                    <div></div>
                   </div>
                 </div>
               </div>
@@ -307,55 +304,52 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"JsonSchemaViewer\\">
-            <div style=\\"margin-left: 20px\\">
-              <div>
+          "<div class=\\"\\">
+            <div class=\\"JsonSchemaViewer\\">
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
                       <div>
-                        <span>array[object]</span>
-                        <div>{1}</div>
+                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div><span>array of objects</span></div>
                       </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
-              </div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
+                <div>
+                  <div style=\\"margin-left: 20px\\">
                     <div>
                       <div>
                         <div>
-                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
                           <div>
-                            <div>foo</div>
-                            <span>array[object]</span>
-                            <div>{1}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
-                  <div>
-                    <div style=\\"margin-left: 20px\\">
-                      <div>
-                        <div>
-                          <div>
+                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
                             <div>
-                              <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
-                              <div>
-                                <div>bar</div>
-                                <span>object</span>
-                                <div>{1}</div>
-                              </div>
+                              <div>foo</div>
+                              <span>array of objects</span>
                             </div>
                           </div>
                         </div>
-                        <div></div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div>
+                      <div style=\\"margin-left: 20px\\">
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                                <div>
+                                  <div>bar</div>
+                                  <span>object</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -405,21 +399,20 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"JsonSchemaViewer\\">
-            <div style=\\"margin-left: 20px\\">
-              <div>
+          "<div class=\\"\\">
+            <div class=\\"JsonSchemaViewer\\">
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
                       <div>
-                        <span>array[object]</span>
-                        <div>{2}</div>
+                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div><span>array of objects</span></div>
                       </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
               </div>
             </div>
           </div>
@@ -431,54 +424,52 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"JsonSchemaViewer\\">
-            <div style=\\"margin-left: 20px\\">
-              <div>
+          "<div class=\\"\\">
+            <div class=\\"JsonSchemaViewer\\">
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
                       <div>
-                        <span>array[object]</span>
-                        <div>{2}</div>
+                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div><span>array of objects</span></div>
                       </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
-              </div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
+                <div>
+                  <div style=\\"margin-left: 20px\\">
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div>bar</div>
-                            <span>integer</span>
+                            <div>
+                              <div>bar</div>
+                              <span>integer</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div></div>
                     </div>
-                    <div></div>
                   </div>
-                </div>
-                <div></div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
+                  <div></div>
+                  <div style=\\"margin-left: 20px\\">
                     <div>
                       <div>
                         <div>
-                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
                           <div>
-                            <div>foo</div>
-                            <span>array[object]</span>
-                            <div>{2}</div>
+                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                            <div>
+                              <div>foo</div>
+                              <span>array of objects</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div></div>
                     </div>
-                    <div></div>
                   </div>
                 </div>
               </div>
@@ -492,85 +483,83 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"JsonSchemaViewer\\">
-            <div style=\\"margin-left: 20px\\">
-              <div>
+          "<div class=\\"\\">
+            <div class=\\"JsonSchemaViewer\\">
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
                       <div>
-                        <span>array[object]</span>
-                        <div>{2}</div>
+                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div><span>array of objects</span></div>
                       </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
-              </div>
-              <div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
+                <div>
+                  <div style=\\"margin-left: 20px\\">
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div>bar</div>
-                            <span>integer</span>
+                            <div>
+                              <div>bar</div>
+                              <span>integer</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div></div>
                     </div>
-                    <div></div>
                   </div>
-                </div>
-                <div></div>
-                <div style=\\"margin-left: 20px\\">
-                  <div>
+                  <div></div>
+                  <div style=\\"margin-left: 20px\\">
                     <div>
                       <div>
                         <div>
-                          <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
                           <div>
-                            <div>foo</div>
-                            <span>array[object]</span>
-                            <div>{2}</div>
+                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                            <div>
+                              <div>foo</div>
+                              <span>array of objects</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div></div>
                     </div>
-                    <div></div>
-                  </div>
-                  <div>
-                    <div style=\\"margin-left: 20px\\">
-                      <div>
+                    <div>
+                      <div style=\\"margin-left: 20px\\">
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div>bar</div>
-                                <span>string</span>
+                                <div>
+                                  <div>bar</div>
+                                  <span>string</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
-                    </div>
-                    <div></div>
-                    <div style=\\"margin-left: 20px\\">
-                      <div>
+                      <div></div>
+                      <div style=\\"margin-left: 20px\\">
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div>foo</div>
-                                <span>number</span>
+                                <div>
+                                  <div>foo</div>
+                                  <span>number</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
                     </div>
                   </div>
@@ -633,21 +622,20 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"JsonSchemaViewer\\">
-            <div style=\\"margin-left: 20px\\">
-              <div>
+          "<div class=\\"\\">
+            <div class=\\"JsonSchemaViewer\\">
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
                       <div>
-                        <span>object</span>
-                        <div>{2}</div>
+                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div><span>object</span></div>
                       </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
               </div>
             </div>
           </div>
@@ -688,17 +676,19 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div class=\\"JsonSchemaViewer\\">
-        <div style=\\"margin-left: 20px\\">
-          <div>
+      "<div class=\\"\\">
+        <div class=\\"JsonSchemaViewer\\">
+          <div style=\\"margin-left: 20px\\">
             <div>
               <div>
                 <div>
-                  <div><span>string</span></div>
+                  <div>
+                    <div><span>string</span></div>
+                  </div>
                 </div>
               </div>
+              <div></div>
             </div>
-            <div></div>
           </div>
         </div>
       </div>
@@ -715,33 +705,32 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div class=\\"JsonSchemaViewer\\">
-        <div style=\\"margin-left: 20px\\">
-          <div>
+      "<div class=\\"\\">
+        <div class=\\"JsonSchemaViewer\\">
+          <div style=\\"margin-left: 20px\\">
             <div>
               <div>
                 <div>
-                  <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
                   <div>
-                    <span>$ref(#/foo)[]</span>
-                    <div>{1}</div>
+                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                    <div><span>$ref(#/foo)[]</span></div>
                   </div>
                 </div>
               </div>
+              <div></div>
             </div>
-            <div></div>
-          </div>
-          <div>
-            <div style=\\"margin-left: 20px\\">
-              <div>
+            <div>
+              <div style=\\"margin-left: 20px\\">
                 <div>
                   <div>
                     <div>
-                      <div><span>#/foo</span></div>
+                      <div>
+                        <div><span>#/foo</span></div>
+                      </div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
-                <div></div>
               </div>
             </div>
           </div>
