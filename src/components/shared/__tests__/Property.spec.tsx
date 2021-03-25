@@ -4,7 +4,7 @@ import { mount, ReactWrapper } from 'enzyme';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { Property, Types } from '../../shared';
+import { SchemaRow, Types } from '../..';
 import { buildTree, findNodeWithPath } from './utils';
 
 function findCounter(wrapper: ReactWrapper) {
@@ -22,7 +22,7 @@ describe('Property component', () => {
     if (node === undefined) {
       throw new Error('Schema node not found in tree');
     }
-    const wrapper = mount(<Property schemaNode={node} />);
+    const wrapper = mount(<SchemaRow schemaNode={node} nestingLevel={0} />);
 
     toUnmount.push(wrapper);
 
@@ -44,7 +44,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array[string]</span>');
+    expect(wrapper.find(Types).first()).toHaveHTML('<span class="sl-truncate sl-text-muted">array[string]</span>');
   });
 
   it('should handle nullish items', () => {
@@ -54,7 +54,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
+    expect(wrapper.find(Types).first()).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
   });
 
   it('should handle nullish $ref', () => {
@@ -63,7 +63,7 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate">$ref</span>');
+    expect(wrapper.find(Types).first()).toHaveHTML('<span class="sl-truncate">$ref</span>');
   });
 
   describe('properties counter', () => {
@@ -259,8 +259,10 @@ describe('Property component', () => {
 
       const tree = buildTree(schema);
 
-      const wrapper = mount(<Property schemaNode={findNodeWithPath(tree, ['properties', 'foo'])!} />);
-      expect(wrapper.find('div')).toHaveHTML('<div class="sl-mr-2 sl-font-mono sl-font-bold">foo</div>');
+      const wrapper = mount(<SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'foo'])!} nestingLevel={0} />);
+      expect(wrapper.find(Types).first().find('div')).toHaveHTML(
+        '<div class="sl-mr-2 sl-font-mono sl-font-bold">foo</div>',
+      );
       wrapper.unmount();
     });
   });
@@ -278,7 +280,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
+      expect(wrapper.find(Types).first()).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
     });
 
     it('given array type with non-array items, should render title', () => {
@@ -296,7 +298,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User[]</span>');
+      expect(wrapper.find(Types).first()).toHaveHTML('<span class="sl-truncate sl-text-muted">User[]</span>');
     });
 
     it('given array with no items, should render title', () => {
@@ -306,7 +308,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
+      expect(wrapper.find(Types).first()).toHaveHTML('<span class="sl-truncate sl-text-muted">User</span>');
     });
 
     it('given array with defined items, should not render title', () => {
@@ -325,7 +327,7 @@ describe('Property component', () => {
       };
 
       const wrapper = render(schema);
-      expect(wrapper.find(Types)).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
+      expect(wrapper.find(Types).first()).toHaveHTML('<span class="sl-truncate sl-text-muted">array</span>');
     });
   });
 
@@ -381,6 +383,6 @@ describe('Property component', () => {
     };
 
     const wrapper = render(schema);
-    expect(wrapper.children().first()).toEqual(wrapper.find(Types));
+    expect(wrapper.children().first()).toEqual(wrapper.find(Types).first());
   });
 });

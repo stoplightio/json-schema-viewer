@@ -1,4 +1,4 @@
-import { pointerToPath } from '@stoplight/json';
+import { extractPointerFromRef, pointerToPath } from '@stoplight/json';
 import { isReferenceNode, isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { last } from 'lodash';
 import * as React from 'react';
@@ -22,10 +22,12 @@ function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
     return node.primaryType !== null ? node.primaryType + primitiveSuffix : 'any';
   }
   if (isReferenceNode(node)) {
-    const value = extractPointerFromRef(node.value);
-    const lastPiece = !node.error && value ? last(pointerToPath(value)) : null;
-    if (typeof lastPiece === 'string') {
-      return lastPiece.split('.')[0] + complexObjectSuffix;
+    if (node.value) {
+      const value = extractPointerFromRef(node.value);
+      const lastPiece = !node.error && value ? last(pointerToPath(value)) : null;
+      if (typeof lastPiece === 'string') {
+        return lastPiece.split('.')[0] + complexObjectSuffix;
+      }
     }
     return '$ref' + primitiveSuffix;
   }
