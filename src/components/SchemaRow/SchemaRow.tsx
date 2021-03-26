@@ -75,9 +75,10 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                     ...(!isBrokenRef && nestingLevel === 0
                       ? {
                           position: 'relative',
+                          left: -1 * SCHEMA_ROW_OFFSET,
                         }
                       : {
-                          left: CARET_ICON_BOX_DIMENSION * -1 + SCHEMA_ROW_OFFSET / -2,
+                          left: CARET_ICON_BOX_DIMENSION * -1 - SCHEMA_ROW_OFFSET,
                         }),
                   }}
                   size={CARET_ICON_SIZE}
