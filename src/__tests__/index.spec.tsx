@@ -243,7 +243,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
                         <div><span>array of objects</span></div>
                       </div>
                     </div>
@@ -268,7 +268,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
                         <div><span>array of objects</span></div>
                       </div>
                     </div>
@@ -281,7 +281,7 @@ describe('Expanded depth', () => {
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
                               <div>foo</div>
                               <span>array of objects</span>
@@ -311,7 +311,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
                         <div><span>array of objects</span></div>
                       </div>
                     </div>
@@ -324,7 +324,7 @@ describe('Expanded depth', () => {
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
                               <div>foo</div>
                               <span>array of objects</span>
@@ -340,7 +340,7 @@ describe('Expanded depth', () => {
                           <div>
                             <div>
                               <div>
-                                <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                                <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>bar</div>
                                   <span>object</span>
@@ -406,7 +406,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
                         <div><span>array of objects</span></div>
                       </div>
                     </div>
@@ -431,7 +431,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
                         <div><span>array of objects</span></div>
                       </div>
                     </div>
@@ -460,7 +460,7 @@ describe('Expanded depth', () => {
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
                               <div>foo</div>
                               <span>array of objects</span>
@@ -490,7 +490,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
                         <div><span>array of objects</span></div>
                       </div>
                     </div>
@@ -519,7 +519,7 @@ describe('Expanded depth', () => {
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
                               <div>foo</div>
                               <span>array of objects</span>
@@ -629,7 +629,7 @@ describe('Expanded depth', () => {
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative\\" role=\\"button\\"></div>
+                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
                         <div><span>object</span></div>
                       </div>
                     </div>
@@ -712,7 +712,7 @@ describe('$ref resolving', () => {
               <div>
                 <div>
                   <div>
-                    <div style=\\"width: 20px; height: 20px; left: -23.5px\\" role=\\"button\\"></div>
+                    <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                     <div><span>$ref(#/foo)[]</span></div>
                   </div>
                 </div>
