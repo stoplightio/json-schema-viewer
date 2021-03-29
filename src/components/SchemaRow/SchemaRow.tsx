@@ -75,16 +75,17 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                     ...(!isBrokenRef && nestingLevel === 0
                       ? {
                           position: 'relative',
+                          left: -1 * SCHEMA_ROW_OFFSET,
                         }
                       : {
-                          left: CARET_ICON_BOX_DIMENSION * -1 + SCHEMA_ROW_OFFSET / -2,
+                          left: CARET_ICON_BOX_DIMENSION * -1 - SCHEMA_ROW_OFFSET,
                         }),
                   }}
                   size={CARET_ICON_SIZE}
                 />
               ) : null}
 
-              <div className="sl-flex sl-items-center sl-text-base sl-flex-1 sl-truncate">
+              <div className="sl-flex sl-items-center sl-text-base sl-flex-1">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                   <div className="sl-mr-2 sl-font-mono sl-font-bold">{last(schemaNode.subpath)}</div>
                 )}
@@ -110,7 +111,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 ) : null}
 
                 {schemaNode.subpath.length > 1 && schemaNode.subpath[0] === 'patternProperties' ? (
-                  <div className="sl-ml-2 sl-truncate sl-text-muted">(pattern property)</div>
+                  <div className="sl-ml-2 sl-text-muted">(pattern property)</div>
                 ) : null}
                 {choices.length > 1 && (
                   <Select
@@ -136,7 +137,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             </div>
 
             {typeof description === 'string' && description.length > 0 && (
-              <div className="sl-flex sl-flex-1 sl-my-2 sl-py-px sl-truncate">
+              <div className="sl-flex sl-flex-1 sl-my-2 sl-py-px">
                 <Description value={description} />
               </div>
             )}
