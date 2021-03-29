@@ -379,8 +379,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
                     <input type=\\"text\\" style=\\"font-size: 16px\\" />
                     <label>
                       <select size=\\"2\\">
-                        <option value=\\"0\\">Admin</option>
-                        <option value=\\"1\\">Editor</option>
+                        <option value=\\"0\\">1. Admin</option>
+                        <option value=\\"1\\">2. Editor</option>
                       </select>
                     </label>
                   </div>
@@ -394,7 +394,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
-                      <div><div>Admin</div></div>
+                      <div><div>1. Admin</div></div>
                       <div></div>
                     </button>
                   </div>
@@ -526,8 +526,8 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
                     <input type=\\"text\\" style=\\"font-size: 16px\\" />
                     <label>
                       <select size=\\"2\\">
-                        <option value=\\"0\\">array of strings</option>
-                        <option value=\\"1\\">array of numbers</option>
+                        <option value=\\"0\\">1. array of strings</option>
+                        <option value=\\"1\\">2. array of numbers</option>
                       </select>
                     </label>
                   </div>
@@ -541,7 +541,7 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
-                      <div><div>array of strings</div></div>
+                      <div><div>1. array of strings</div></div>
                       <div></div>
                     </button>
                   </div>
@@ -680,8 +680,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
                     <input type=\\"text\\" style=\\"font-size: 16px\\" />
                     <label>
                       <select size=\\"2\\">
-                        <option value=\\"0\\">Admin</option>
-                        <option value=\\"1\\">Editor</option>
+                        <option value=\\"0\\">1. Admin</option>
+                        <option value=\\"1\\">2. Editor</option>
                       </select>
                     </label>
                   </div>
@@ -695,7 +695,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
-                      <div><div>Admin</div></div>
+                      <div><div>1. Admin</div></div>
                       <div></div>
                     </button>
                   </div>
@@ -2605,8 +2605,8 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
                     <input type=\\"text\\" style=\\"font-size: 16px\\" />
                     <label>
                       <select size=\\"2\\">
-                        <option value=\\"0\\">BugExample</option>
-                        <option value=\\"1\\">BugExample</option>
+                        <option value=\\"0\\">1. BugExample</option>
+                        <option value=\\"1\\">2. BugExample</option>
                       </select>
                     </label>
                   </div>
@@ -2620,7 +2620,7 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
-                      <div><div>BugExample</div></div>
+                      <div><div>1. BugExample</div></div>
                       <div></div>
                     </button>
                   </div>
@@ -2776,8 +2776,8 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
                     <input type=\\"text\\" style=\\"font-size: 16px\\" />
                     <label>
                       <select size=\\"2\\">
-                        <option value=\\"0\\">array of objects</option>
-                        <option value=\\"1\\">array of objects</option>
+                        <option value=\\"0\\">1. array of objects</option>
+                        <option value=\\"1\\">2. array of objects</option>
                       </select>
                     </label>
                   </div>
@@ -2791,7 +2791,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
-                      <div><div>array of objects</div></div>
+                      <div><div>1. array of objects</div></div>
                       <div></div>
                     </button>
                   </div>
@@ -2873,8 +2873,8 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
                     <input type=\\"text\\" style=\\"font-size: 16px\\" />
                     <label>
                       <select size=\\"2\\">
-                        <option value=\\"0\\">array of A-s</option>
-                        <option value=\\"1\\">array of B-s</option>
+                        <option value=\\"0\\">1. array of A-s</option>
+                        <option value=\\"1\\">2. array of B-s</option>
                       </select>
                     </label>
                   </div>
@@ -2888,7 +2888,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                     >
-                      <div><div>array of A-s</div></div>
+                      <div><div>1. array of A-s</div></div>
                       <div></div>
                     </button>
                   </div>
@@ -3122,8 +3122,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
                         <input type=\\"text\\" style=\\"font-size: 16px\\" />
                         <label>
                           <select size=\\"2\\">
-                            <option value=\\"0\\">object</option>
-                            <option value=\\"1\\">array of integers</option>
+                            <option value=\\"0\\">1. object</option>
+                            <option value=\\"1\\">2. array of integers</option>
                           </select>
                         </label>
                       </div>
@@ -3137,7 +3137,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                           type=\\"button\\"
                           class=\\"hover:sl-border-input focus:sl-border-primary disabled:sl-opacity-50\\"
                         >
-                          <div><div>object</div></div>
+                          <div><div>1. object</div></div>
                           <div></div>
                         </button>
                       </div>
