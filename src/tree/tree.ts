@@ -4,8 +4,9 @@ import { JsonPath, Optional } from '@stoplight/types';
 import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
 import { ResolvingError } from '../errors';
-import { ViewMode } from '../types';
-import { hasRefItems, isRefNode } from '../utils/guards';
+import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, ViewMode } from '../types';
+import { hasRefItems, isArrayNodeWithItems, isCombinerNode, isRefNode } from '../utils/guards';
+import { inferType } from '../utils/inferType';
 import { getSchemaNodeMetadata } from './metadata';
 import { canStepIn } from './utils/canStepIn';
 import { createErrorTreeNode } from './utils/createErrorTreeNode';
@@ -50,16 +51,45 @@ export class SchemaTree extends Tree {
 
   protected readonly visited = new WeakSet();
 
+  protected isViewModeRespected = (fragment: JSONSchema4) => {
+    return !(
+      !!fragment.writeOnly !== !!fragment.readOnly &&
+      ((this.treeOptions.viewMode === 'read' && fragment.writeOnly) ||
+        (this.treeOptions.viewMode === 'write' && fragment.readOnly))
+    );
+  };
+
+  public getChildrenCount(node: SchemaNode) {
+    const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
+    const subtype = isArrayNodeWithItems(node) ? (hasRefItems(node) ? '$ref' : inferType(node.items)) : void 0;
+
+    let children;
+
+    if (type === SchemaKind.Object || (Array.isArray(type) && type.includes(SchemaKind.Object))) {
+      children = (node as IObjectNode).properties;
+    }
+
+    if (subtype === SchemaKind.Object) {
+      children = ((node as IArrayNode).items as IObjectNode).properties;
+    }
+
+    if (subtype === SchemaKind.Array) {
+      children = (node as IArrayNode).items as IArrayNode;
+    }
+
+    if (typeof children === 'object' && children !== null) {
+      return Object.values(children).filter(this.isViewModeRespected).length;
+    }
+
+    return null;
+  }
+
   public populate() {
     const expanded = {};
     populateTree(this.schema, this.root, 0, [], {
       mergeAllOf: this.treeOptions.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level): boolean => {
-        if (
-          !!fragment.writeOnly !== !!fragment.readOnly &&
-          ((this.treeOptions.viewMode === 'read' && fragment.writeOnly) ||
-            (this.treeOptions.viewMode === 'write' && fragment.readOnly))
-        ) {
+        if (!this.isViewModeRespected(fragment)) {
           return false;
         }
         if (
@@ -88,6 +118,9 @@ export class SchemaTree extends Tree {
     populateTree(schema, artificialRoot, initialLevel, path, {
       mergeAllOf: this.treeOptions.mergeAllOf,
       onNode: (fragment, node, parentTreeNode, level) => {
+        if (!this.isViewModeRespected(fragment)) {
+          return false;
+        }
         if (level <= this.treeOptions.expandedDepth || level <= initialLevel) return true;
         return stepIn && level <= initialLevel + 1 && canStepIn(getSchemaNodeMetadata(parentTreeNode).schema);
       },

@@ -33,8 +33,22 @@ export interface IJsonSchemaViewer {
 export const ViewModeContext = React.createContext<ViewMode>('standalone');
 ViewModeContext.displayName = 'ViewModeContext';
 
+export const SchemaTreeStoreContext = React.createContext<TreeStore<SchemaTree>>(
+  new TreeStore(
+    new SchemaTree({}, new TreeState(), {
+      mergeAllOf: true,
+      expandedDepth: -1,
+      resolveRef: void 0,
+      shouldResolveEagerly: false,
+      onPopulate: void 0,
+    }),
+    new TreeState(),
+  ),
+);
+SchemaTreeStoreContext.displayName = 'SchemaTreeStoreContext';
+
 export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaViewer & ErrorBoundaryForwardedProps> {
-  protected readonly treeStore: TreeStore;
+  protected readonly treeStore: TreeStore<SchemaTree>;
   protected readonly tree: SchemaTree;
   protected readonly treeState: TreeState;
 
@@ -124,7 +138,15 @@ export class JsonSchemaViewerComponent extends React.PureComponent<IJsonSchemaVi
     return (
       <div className={cn(className, 'JsonSchemaViewer flex flex-col relative')}>
         <ViewModeContext.Provider value={this.props.viewMode ?? 'standalone'}>
-          <SchemaTreeComponent expanded={expanded} name={name} schema={schema} treeStore={this.treeStore} {...props} />
+          <SchemaTreeStoreContext.Provider value={this.treeStore}>
+            <SchemaTreeComponent
+              expanded={expanded}
+              name={name}
+              schema={schema}
+              treeStore={this.treeStore}
+              {...props}
+            />
+          </SchemaTreeStoreContext.Provider>
         </ViewModeContext.Provider>
       </div>
     );

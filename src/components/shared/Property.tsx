@@ -1,26 +1,17 @@
 import { isLocalRef } from '@stoplight/json';
 import { Optional } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
-import { isObject as _isObject, size as _size } from 'lodash';
 import * as React from 'react';
 import { getSchemaNodeMetadata } from '../../tree/metadata';
-import { GoToRefHandler, IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
+import { GoToRefHandler, IArrayNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isCombinerNode, isRefNode } from '../../utils/guards';
 import { inferType } from '../../utils/inferType';
+import { SchemaTreeStoreContext } from '../JsonSchemaViewer';
 import { Types } from './Types';
 
 export interface IProperty {
   node: SchemaTreeListNode;
   onGoToRef?: GoToRefHandler;
-}
-
-function count(obj: Optional<JSONSchema4 | null>): number | null {
-  if (_isObject(obj)) {
-    return _size(obj);
-  }
-
-  return null;
 }
 
 function shouldShowPropertyName(treeNode: SchemaTreeListNode) {
@@ -77,22 +68,9 @@ export const Property: React.FunctionComponent<IProperty> = ({ node: treeNode, o
   const type = isRefNode(node) ? '$ref' : isCombinerNode(node) ? node.combiner : node.type;
   const subtype = isArrayNodeWithItems(node) ? (hasRefItems(node) ? '$ref' : inferType(node.items)) : void 0;
   const title = getTitle(node);
+  const treeStore = React.useContext(SchemaTreeStoreContext);
 
-  const childrenCount = React.useMemo<number | null>(() => {
-    if (type === SchemaKind.Object || (Array.isArray(type) && type.includes(SchemaKind.Object))) {
-      return count((node as IObjectNode).properties);
-    }
-
-    if (subtype === SchemaKind.Object) {
-      return count(((node as IArrayNode).items as IObjectNode).properties);
-    }
-
-    if (subtype === SchemaKind.Array) {
-      return count((node as IArrayNode).items as IArrayNode);
-    }
-
-    return null;
-  }, [node]);
+  const childrenCount = React.useMemo<number | null>(() => treeStore.tree.getChildrenCount(node), [node, treeStore]);
 
   const handleGoToRef = React.useCallback<React.MouseEventHandler>(() => {
     if (onGoToRef && isRefNode(node) && node.$ref !== null) {
