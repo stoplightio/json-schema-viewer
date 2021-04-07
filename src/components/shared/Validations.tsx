@@ -1,5 +1,6 @@
 import { RegularNode } from '@stoplight/json-schema-tree';
 import { Dictionary } from '@stoplight/types';
+import cn from 'classnames';
 import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
 import * as React from 'react';
 
@@ -99,9 +100,7 @@ const NumberValidations = ({
       {entries
         .map(([key, value]) => numberValidationFormatters[key](value))
         .map((value, i) => (
-          <span key={i} className="sl-mr-2 sl-px-1 sl-font-mono sl-border sl-rounded-lg">
-            {value}
-          </span>
+          <Value key={i} name={value} className="sl-mr-2" />
         ))}
     </div>
   );
@@ -127,9 +126,7 @@ const KeyValueValidation = ({ name, values }: { name: string; values: string[] }
     <div className="sl-flex sl-flex-wrap sl-text-muted sl-my-2">
       <span className="sl-text-light">{capitalize(name)}:</span>
       {uniq(values).map(value => (
-        <span key={value} className="sl-ml-2 sl-px-1 sl-font-mono sl-border sl-rounded-lg">
-          {value}
-        </span>
+        <Value key={value} name={value} className="sl-ml-2" />
       ))}
     </div>
   );
@@ -137,18 +134,25 @@ const KeyValueValidation = ({ name, values }: { name: string; values: string[] }
 
 const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
-    {keys(validations)
-      .filter(key => validations[key])
-      .map(key => {
-        return (
-          <div className="sl-flex sl-flex-1 sl-my-2" key={key}>
-            <span className="sl-px-1 sl-text-muted sl-font-mono sl-border sl-rounded-lg sl-text-sm sl-capitalize">
-              {key}
-            </span>
-          </div>
-        );
-      })}
+    {keys(validations).length ? (
+      <div className="sl-flex sl-flex-wrap sl-my-2">
+        {keys(validations)
+          .filter(key => validations[key])
+          .map(key => (
+            <Value key={key} name={key} className="sl-mr-2 sl-text-muted sl-capitalize" />
+          ))}
+      </div>
+    ) : null}
   </>
+);
+
+const Value = ({ name, className }: { name: string; className?: string }) => (
+  <span
+    className={cn('sl-px-1 sl-font-mono sl-border sl-rounded-lg', className)}
+    style={{ backgroundColor: '#EDF2F7' }}
+  >
+    {name}
+  </span>
 );
 
 export function validationCount(schemaNode: RegularNode) {

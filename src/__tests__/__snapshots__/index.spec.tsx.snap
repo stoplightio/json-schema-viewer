@@ -3,7 +3,7 @@
 exports[`Expanded depth nested object static given initial level set to 0, should render top 2 levels 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -59,7 +59,7 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
 exports[`Expanded depth nested object static given initial level set to 1, should render top 3 levels 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -198,7 +198,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
 exports[`Expanded depth nested object static given initial level set to 2, should render top 4 levels 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -354,7 +354,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
 exports[`HTML Output given anyOf combiner placed next to allOf given allOf merging enabled, should merge contents of allOf combiners 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -420,8 +420,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
               </div>
               <div>
                 <span>Allowed values:</span>
-                <span>\\"admin\\"</span>
-                <span>\\"editor\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"admin\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"editor\\"</span>
               </div>
             </div>
             <div></div>
@@ -502,7 +502,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
 exports[`HTML Output given array with oneOf containing items, should merge it correctly 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -561,7 +561,7 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
 exports[`HTML Output given complex type that includes array and complex array subtype, should not ignore subtype 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -611,7 +611,7 @@ exports[`HTML Output given complex type that includes array and complex array su
 exports[`HTML Output given multiple object and string type, should process properties 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -655,7 +655,7 @@ exports[`HTML Output given multiple object and string type, should process prope
 exports[`HTML Output given oneOf combiner placed next to allOf given allOf merging enabled, should merge contents of allOf combiners 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -721,8 +721,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
               </div>
               <div>
                 <span>Allowed values:</span>
-                <span>\\"admin\\"</span>
-                <span>\\"editor\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"admin\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"editor\\"</span>
               </div>
             </div>
             <div></div>
@@ -803,7 +803,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
 exports[`HTML Output given read mode, should populate proper nodes 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -847,7 +847,7 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
 exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -909,7 +909,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
 exports[`HTML Output given visible $ref node, should try to inject the title immediately 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -982,7 +982,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
 exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1026,7 +1026,7 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 exports[`HTML Output should match arrays/of-allofs.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1098,7 +1098,7 @@ exports[`HTML Output should match arrays/of-allofs.json 1`] = `
 exports[`HTML Output should match arrays/of-arrays.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1152,7 +1152,7 @@ exports[`HTML Output should match arrays/of-arrays.json 1`] = `
 exports[`HTML Output should match arrays/of-objects.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1208,7 +1208,7 @@ exports[`HTML Output should match arrays/of-objects.json 1`] = `
 exports[`HTML Output should match arrays/of-refs.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1243,7 +1243,7 @@ exports[`HTML Output should match arrays/of-refs.json 1`] = `
 exports[`HTML Output should match arrays/with-multiple-arrayish-items.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1343,7 +1343,7 @@ exports[`HTML Output should match arrays/with-multiple-arrayish-items.json 1`] =
 exports[`HTML Output should match arrays/with-ordered-items.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1391,7 +1391,7 @@ exports[`HTML Output should match arrays/with-ordered-items.json 1`] = `
 exports[`HTML Output should match arrays/with-single-arrayish-items.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1463,7 +1463,7 @@ exports[`HTML Output should match arrays/with-single-arrayish-items.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1503,7 +1503,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
                       </div>
                     </div>
                   </div>
-                  <div><span>&gt;= 1 characters</span></div>
+                  <div><span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 1 characters</span></div>
                 </div>
                 <div></div>
               </div>
@@ -1520,7 +1520,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
                       </div>
                     </div>
                   </div>
-                  <div><span>&lt;= 2</span></div>
+                  <div><span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 2</span></div>
                 </div>
                 <div></div>
               </div>
@@ -1540,8 +1540,8 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
                 </div>
               </div>
               <div>
-                <span>&gt;= 1 characters</span>
-                <span>&lt;= 2 characters</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 1 characters</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 2 characters</span>
               </div>
             </div>
             <div></div>
@@ -1559,7 +1559,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
                   </div>
                 </div>
               </div>
-              <div><span>&lt;= 1</span></div>
+              <div><span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 1</span></div>
             </div>
             <div></div>
           </div>
@@ -1593,8 +1593,8 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
                     </div>
                   </div>
                   <div>
-                    <span>&gt;= 1 characters</span>
-                    <span>&lt;= 2 characters</span>
+                    <span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 1 characters</span>
+                    <span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 2 characters</span>
                   </div>
                 </div>
                 <div></div>
@@ -1697,7 +1697,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -1979,7 +1979,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -2043,8 +2043,8 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
                 </div>
               </div>
               <div>
-                <span>&gt;= 0</span>
-                <span>&lt;= 1000000</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 0</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 1000000</span>
               </div>
             </div>
             <div></div>
@@ -2154,8 +2154,8 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
                     </div>
                   </div>
                   <div>
-                    <span>&gt;= 0</span>
-                    <span>&lt;= 150</span>
+                    <span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 0</span>
+                    <span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 150</span>
                   </div>
                 </div>
                 <div></div>
@@ -2173,7 +2173,7 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -2215,8 +2215,8 @@ exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
                 </div>
               </div>
               <div>
-                <span>&gt;= 0</span>
-                <span>&lt;= 1000000</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 0</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 1000000</span>
               </div>
             </div>
             <div></div>
@@ -2287,7 +2287,7 @@ exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -2353,9 +2353,9 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
               </div>
               <div>
                 <span>Allowed values:</span>
-                <span>\\"Cancel\\"</span>
-                <span>\\"Confirm\\"</span>
-                <span>\\"Update\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Cancel\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Confirm\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Update\\"</span>
               </div>
             </div>
             <div></div>
@@ -2458,7 +2458,7 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
 exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -2523,7 +2523,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
               </div>
               <div>
                 <span>Allowed value:</span>
-                <span>\\"test\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"test\\"</span>
               </div>
             </div>
             <div></div>
@@ -2555,7 +2555,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
 exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -2620,7 +2620,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
               </div>
               <div>
                 <span>Allowed value:</span>
-                <span>\\"test\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"test\\"</span>
               </div>
             </div>
             <div></div>
@@ -2636,7 +2636,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
 exports[`HTML Output should match default-schema.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -2671,12 +2671,12 @@ exports[`HTML Output should match default-schema.json 1`] = `
               </div>
               <div>
                 <span>Example values:</span>
-                <span>\\"Example name\\"</span>
-                <span>\\"Different name\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Example name\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Different name\\"</span>
               </div>
               <div>
                 <span>Allowed value:</span>
-                <span>\\"Constant name\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Constant name\\"</span>
               </div>
             </div>
             <div></div>
@@ -2697,23 +2697,23 @@ exports[`HTML Output should match default-schema.json 1`] = `
                 </div>
               </div>
               <div>
-                <span>&gt;= 10</span>
-                <span>&lt;= 40</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 10</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 40</span>
               </div>
               <div>
                 <span>Allowed values:</span>
-                <span>10</span>
-                <span>20</span>
-                <span>30</span>
-                <span>40</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">10</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">20</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">30</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">40</span>
               </div>
               <div>
                 <span>Default value:</span>
-                <span>20</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">20</span>
               </div>
               <div>
                 <span>Multiple of:</span>
-                <span>10</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">10</span>
               </div>
             </div>
             <div></div>
@@ -2736,7 +2736,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
               </div>
               <div>
                 <span>Match pattern:</span>
-                <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
               </div>
             </div>
             <div></div>
@@ -2767,8 +2767,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
                 </div>
               </div>
               <div>
-                <span>&gt;= 1 items</span>
-                <span>&lt;= 4 items</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 1 items</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">&lt;= 4 items</span>
               </div>
             </div>
             <div></div>
@@ -2788,15 +2788,15 @@ exports[`HTML Output should match default-schema.json 1`] = `
                   <span>deprecated</span>
                 </div>
               </div>
-              <div><span>&gt;= 2 characters</span></div>
+              <div><span style=\\"background-color: rgb(237, 242, 247)\\">&gt;= 2 characters</span></div>
               <div>
                 <span>Default value:</span>
-                <span>\\"default@email.com\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"default@email.com\\"</span>
               </div>
               <div>
                 <span>Example values:</span>
-                <span>\\"one@email.com\\"</span>
-                <span>\\"two@email.com\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"one@email.com\\"</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"two@email.com\\"</span>
               </div>
             </div>
             <div></div>
@@ -3011,7 +3011,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
 exports[`HTML Output should match formats-schema.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -3144,7 +3144,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
 exports[`HTML Output should match references/base.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -3252,7 +3252,7 @@ exports[`HTML Output should match references/base.json 1`] = `
 exports[`HTML Output should match references/nested.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -3311,7 +3311,7 @@ exports[`HTML Output should match references/nested.json 1`] = `
 exports[`HTML Output should match references/nullish.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -3349,7 +3349,7 @@ exports[`HTML Output should match references/nullish.json 1`] = `
 exports[`HTML Output should match tickets.schema.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
@@ -3466,12 +3466,12 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                   </div>
                   <div>
                     <span>Allowed values:</span>
-                    <span>\\"COMPLETED\\"</span>
-                    <span>\\"ACTIVE\\"</span>
+                    <span style=\\"background-color: rgb(237, 242, 247)\\">\\"COMPLETED\\"</span>
+                    <span style=\\"background-color: rgb(237, 242, 247)\\">\\"ACTIVE\\"</span>
                   </div>
                   <div>
                     <span>Default value:</span>
-                    <span>\\"ACTIVE\\"</span>
+                    <span style=\\"background-color: rgb(237, 242, 247)\\">\\"ACTIVE\\"</span>
                   </div>
                 </div>
                 <div></div>
@@ -3554,10 +3554,10 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                           </div>
                           <div>
                             <span>Allowed values:</span>
-                            <span>\\"HOMEPRINT\\"</span>
-                            <span>\\"TICKETLESS\\"</span>
-                            <span>\\"PRINT_AT_KIOSK\\"</span>
-                            <span>\\"SECURE_PAPER\\"</span>
+                            <span style=\\"background-color: rgb(237, 242, 247)\\">\\"HOMEPRINT\\"</span>
+                            <span style=\\"background-color: rgb(237, 242, 247)\\">\\"TICKETLESS\\"</span>
+                            <span style=\\"background-color: rgb(237, 242, 247)\\">\\"PRINT_AT_KIOSK\\"</span>
+                            <span style=\\"background-color: rgb(237, 242, 247)\\">\\"SECURE_PAPER\\"</span>
                           </div>
                         </div>
                         <div></div>
@@ -3583,7 +3583,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                               </div>
                             </div>
                           </div>
-                          <div><span>example</span></div>
+                          <div><span style=\\"background-color: rgb(237, 242, 247)\\">example</span></div>
                         </div>
                         <div></div>
                       </div>

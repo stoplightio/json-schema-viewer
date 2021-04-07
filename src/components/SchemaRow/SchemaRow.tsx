@@ -3,6 +3,7 @@ import {
   isMirroredNode,
   isReferenceNode,
   isRegularNode,
+  isRootNode,
   ReferenceNode,
   SchemaNode,
   SchemaNodeKind,
@@ -56,9 +57,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const isBrokenRef = typeof refNode?.error === 'string';
 
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
-
   return (
-    <div className="sl-text-sm sl-relative" style={{ marginLeft: CARET_ICON_BOX_DIMENSION }}>
+    <div
+      className="sl-text-sm sl-relative"
+      style={{
+        ...(schemaNode.parent && !isRootNode(schemaNode.parent) ? { marginLeft: CARET_ICON_BOX_DIMENSION } : null),
+      }}
+    >
       <div className="sl-flex">
         <div className="sl-min-w-0 sl-flex-grow">
           <div
@@ -85,7 +90,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 />
               ) : null}
 
-              <div className="sl-flex sl-items-center sl-text-base sl-flex-1">
+              <div className="sl-flex sl-items-baseline sl-text-base sl-flex-1">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                   <div className="sl-mr-2 sl-font-mono sl-font-bold">{last(schemaNode.subpath)}</div>
                 )}
@@ -137,7 +142,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             </div>
 
             {typeof description === 'string' && description.length > 0 && (
-              <div className="sl-flex sl-flex-1 sl-my-2 sl-py-px">
+              <div className="sl-flex sl-flex-1 sl-my-2 sl-text-base">
                 <Description value={description} />
               </div>
             )}

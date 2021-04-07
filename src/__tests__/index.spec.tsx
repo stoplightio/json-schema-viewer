@@ -238,7 +238,7 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
             <div class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: 20px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -263,7 +263,7 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
             <div class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: 20px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -306,7 +306,7 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
             <div class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: 20px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -401,7 +401,7 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
             <div class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: 20px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -426,7 +426,7 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
             <div class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: 20px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -485,7 +485,7 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
             <div class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: 20px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -624,7 +624,7 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
             <div class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: 20px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -678,7 +678,7 @@ describe('$ref resolving', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\">
         <div class=\\"JsonSchemaViewer\\">
-          <div style=\\"margin-left: 20px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -707,7 +707,7 @@ describe('$ref resolving', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\">
         <div class=\\"JsonSchemaViewer\\">
-          <div style=\\"margin-left: 20px\\">
+          <div>
             <div>
               <div>
                 <div>
