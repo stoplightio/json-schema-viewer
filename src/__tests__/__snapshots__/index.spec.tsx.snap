@@ -3252,7 +3252,7 @@ exports[`HTML Output should match references/base.json 1`] = `
 exports[`HTML Output should match references/nested.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
-    <div style=\\"margin-left: 20px\\">
+    <div>
       <div>
         <div>
           <div>
