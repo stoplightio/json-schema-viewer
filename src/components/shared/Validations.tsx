@@ -137,18 +137,22 @@ const KeyValueValidation = ({ name, values }: { name: string; values: string[] }
 
 const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
-    {keys(validations)
-      .filter(key => validations[key])
-      .map(key => {
-        return (
-          <div className="sl-flex sl-flex-1 sl-my-2" key={key}>
-            <span className="sl-px-1 sl-text-muted sl-font-mono sl-border sl-rounded-lg sl-text-sm sl-capitalize">
-              {key}
-            </span>
-          </div>
-        );
-      })}
+    {keys(validations).length ? (
+      <div className="sl-flex sl-flex-wrap sl-my-2">
+        {keys(validations)
+          .filter(key => validations[key])
+          .map(key => (
+            <NameValidation key={key} name={key} />
+          ))}
+      </div>
+    ) : null}
   </>
+);
+
+const NameValidation = ({ name }: { name: string }) => (
+  <span className="sl-mr-2 sl-px-1 sl-text-muted sl-font-mono sl-border sl-rounded-lg sl-text-sm sl-capitalize">
+    {name}
+  </span>
 );
 
 export function validationCount(schemaNode: RegularNode) {
