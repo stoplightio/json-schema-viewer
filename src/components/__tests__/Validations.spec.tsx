@@ -32,6 +32,8 @@ describe('Validations component', () => {
       expect(wrapper).toHaveText('deprecated');
     });
   });
+
+  test.todo('when oas format is specified');
 });
 
 describe('Format', () => {
