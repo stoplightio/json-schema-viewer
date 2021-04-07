@@ -66,7 +66,7 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
         <ChildStack
           childNodes={jsonSchemaTreeRoot.children}
           currentNestingLevel={-1}
-          className={cn(className, 'JsonSchemaViewer', 'sl-mr-5')}
+          className={cn(className, 'JsonSchemaViewer')}
         />
       </JSVOptionsContextProvider>
     </MosaicProvider>
