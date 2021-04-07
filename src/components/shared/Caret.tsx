@@ -10,7 +10,7 @@ export interface ICaret {
 
 export const Caret: React.FunctionComponent<ICaret> = ({ style, size, isExpanded }) => (
   <div
-    className="sl-flex sl-absolute sl-justify-center sl-p-1 sl-cursor-pointer sl-text-muted"
+    className="sl-flex sl-absolute sl-justify-center sl-items-center sl-p-1 sl-cursor-pointer sl-text-muted"
     style={style}
     role="button"
   >

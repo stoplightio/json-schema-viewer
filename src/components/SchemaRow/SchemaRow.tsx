@@ -90,7 +90,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 />
               ) : null}
 
-              <div className="sl-flex sl-items-center sl-text-base sl-flex-1">
+              <div className="sl-flex sl-items-baseline sl-text-base sl-flex-1">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                   <div className="sl-mr-2 sl-font-mono sl-font-bold">{last(schemaNode.subpath)}</div>
                 )}
@@ -142,7 +142,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             </div>
 
             {typeof description === 'string' && description.length > 0 && (
-              <div className="sl-flex sl-flex-1 sl-my-2">
+              <div className="sl-flex sl-flex-1 sl-my-2 sl-text-base">
                 <Description value={description} />
               </div>
             )}
