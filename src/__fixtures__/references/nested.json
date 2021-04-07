@@ -1,0 +1,21 @@
+{
+  "$ref": "#/__bundled__/repo",
+  "__bundled__": {
+    "repo": {
+      "properties": {
+        "parent": {
+          "allOf": [
+            {
+              "$ref": "#/__bundled__/repo"
+            },
+            {
+              "description": "something"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}
+  

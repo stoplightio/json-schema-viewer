@@ -3249,6 +3249,65 @@ exports[`HTML Output should match references/base.json 1`] = `
 "
 `;
 
+exports[`HTML Output should match references/nested.json 1`] = `
+"<div class=\\"\\">
+  <div class=\\"JsonSchemaViewer\\">
+    <div style=\\"margin-left: 20px\\">
+      <div>
+        <div>
+          <div>
+            <div>
+              <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
+              <div><span>object</span></div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+      <div>
+        <div style=\\"margin-left: 20px\\">
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
+                  <div>
+                    <div>parent</div>
+                    <span>object</span>
+                  </div>
+                </div>
+                <div><div title=\\"something\\">something</div></div>
+              </div>
+            </div>
+            <div></div>
+          </div>
+          <div>
+            <div style=\\"margin-left: 20px\\">
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
+                      <div>
+                        <div>parent</div>
+                        <span>object</span>
+                      </div>
+                    </div>
+                    <div><div title=\\"something\\">something</div></div>
+                  </div>
+                </div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
 exports[`HTML Output should match references/nullish.json 1`] = `
 "<div class=\\"\\">
   <div class=\\"JsonSchemaViewer\\">
