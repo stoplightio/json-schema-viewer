@@ -65,6 +65,42 @@ const validationFormatters: Record<string, (value: unknown) => ValidationFormat 
   default: createValidationsFormatter('Default'),
 };
 
+const oasFormats = {
+  int32: {
+    minimum: 0 - 2 ** 31,
+    maximum: 2 ** 31 - 1,
+  },
+  int64: {
+    minimum: 0 - 2 ** 63,
+    maximum: 2 ** 63 - 1,
+  },
+  float: {
+    minimum: 0 - 2 ** 128,
+    maximum: 2 ** 128 - 1,
+  },
+  double: {
+    minimum: 0 - Number.MAX_VALUE,
+    maximum: Number.MAX_VALUE,
+  },
+  byte: {
+    pattern: '^[\\w\\d+\\/=]*$',
+  },
+};
+
+function filterOutOasFormatValidations(format: string, values: Dictionary<unknown>) {
+  if (!(format in oasFormats)) return values;
+
+  const newValues = { ...values };
+
+  for (const [key, value] of Object.entries(oasFormats[format])) {
+    if (value === newValues[key]) {
+      delete newValues[key];
+    }
+  }
+
+  return newValues;
+}
+
 export const Validations: React.FunctionComponent<IValidations> = ({ validations }) => {
   const numberValidations = pick(validations, numberValidationNames);
   const booleanValidations = omit(
@@ -172,6 +208,14 @@ export function getValidationsFromSchema(schemaNode: RegularNode) {
           ...(schemaNode.annotations['x-example'] ? { ['x-example']: schemaNode.annotations['x-example'] } : null),
         }
       : null),
-    ...schemaNode.validations,
+    ...getFilteredValidations(schemaNode),
   };
+}
+
+function getFilteredValidations(schemaNode: RegularNode) {
+  if (schemaNode.format !== null) {
+    return filterOutOasFormatValidations(schemaNode.format, schemaNode.validations);
+  }
+
+  return schemaNode.validations;
 }
