@@ -18,6 +18,40 @@ describe('getValidations util', () => {
     });
   });
 
+  describe('when oas format is specified', () => {
+    test('given default range, should not ignore both minimum and maximum values', () => {
+      expect(
+        getValidations({
+          type: 'integer',
+          format: 'int64',
+          minimum: 0 - Math.pow(2, 63),
+          maximum: Math.pow(2, 63) - 1,
+        }),
+      ).toStrictEqual({ format: 'int64' });
+    });
+
+    test('given customized range, should include changed values', () => {
+      expect(
+        getValidations({ type: 'integer', format: 'int32', minimum: 20, maximum: Math.pow(2, 31) - 1 }),
+      ).toStrictEqual({
+        format: 'int32',
+        minimum: 20,
+      });
+
+      expect(
+        getValidations({
+          type: 'number',
+          format: 'float',
+          minimum: 0 - Math.pow(2, 128),
+          maximum: Math.pow(2, 16) - 1,
+        }),
+      ).toStrictEqual({
+        format: 'float',
+        maximum: Math.pow(2, 16) - 1,
+      });
+    });
+  });
+
   test('should support integer type', () => {
     expect(
       getValidations({

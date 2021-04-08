@@ -25,6 +25,44 @@ const VALIDATION_TYPES = {
   array: ['additionalItems', 'minItems', 'maxItems', 'uniqueItems'],
 };
 
+const OAS_FORMATS = {
+  int32: {
+    minimum: 0 - Math.pow(2, 31),
+    maximum: Math.pow(2, 31) - 1,
+  },
+  int64: {
+    minimum: 0 - Math.pow(2, 63),
+    maximum: Math.pow(2, 63) - 1,
+  },
+  float: {
+    minimum: 0 - Math.pow(2, 128),
+    maximum: Math.pow(2, 128) - 1,
+  },
+  double: {
+    minimum: 0 - Number.MAX_VALUE,
+    maximum: Number.MAX_VALUE,
+  },
+  byte: {
+    pattern: '^[\\w\\d+\\/=]*$',
+  },
+};
+
+function filterOutFormatValidations(values: Dictionary<unknown>) {
+  const { format } = values;
+
+  if (typeof format !== 'string' || !(format in OAS_FORMATS)) return values;
+
+  const newValues = { ...values };
+
+  for (const [key, value] of Object.entries(OAS_FORMATS[format])) {
+    if (value === newValues[key]) {
+      delete newValues[key];
+    }
+  }
+
+  return newValues;
+}
+
 function getDeprecatedValue(node: JSONSchema4): Optional<boolean> {
   if ('x-deprecated' in node) {
     return !!node['x-deprecated'];
@@ -48,9 +86,9 @@ function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): 
 export const getValidations = (node: JSONSchema4): Dictionary<unknown> => {
   const extraValidations = node.type && getTypeValidations(node.type);
   const deprecated = getDeprecatedValue(node);
-  return {
+  return filterOutFormatValidations({
     ..._pick(node, COMMON_VALIDATION_TYPES),
     ...(extraValidations && _pick(node, extraValidations)),
     ...(deprecated !== void 0 && { deprecated }),
-  };
+  });
 };
