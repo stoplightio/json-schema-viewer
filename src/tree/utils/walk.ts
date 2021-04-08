@@ -50,7 +50,7 @@ export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
     }
   } else if (type) {
     const primaryType = getPrimaryType(node);
-    let validationNOde: JSONSchema4 = node;
+    let validationNode: JSONSchema4 = node;
     if (
       primaryType === SchemaKind.Array &&
       _isObject(node.items) &&
@@ -59,14 +59,14 @@ export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
     ) {
       const validationNodePrimaryType = getPrimaryType(node.items);
       if (validationNodePrimaryType !== SchemaKind.Array && validationNodePrimaryType !== SchemaKind.Object) {
-        validationNOde = node.items;
+        validationNode = node.items;
       }
     }
 
     const base: IBaseNode = {
       id: generateId(),
       type: flattenTypes(type),
-      validations: getValidations(validationNOde),
+      validations: getValidations(validationNode),
       annotations: getAnnotations(node),
       ...('required' in node && { required: normalizeRequired(node.required) }),
       enum: node.enum,
