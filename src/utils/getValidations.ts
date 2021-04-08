@@ -47,7 +47,7 @@ const OAS_FORMATS = {
   },
 };
 
-function filterOutMaxAndMin(values: Dictionary<unknown>) {
+function filterOutFormatValidations(values: Dictionary<unknown>) {
   const { format } = values;
 
   if (typeof format !== 'string' || !(format in OAS_FORMATS)) return values;
@@ -86,7 +86,7 @@ function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): 
 export const getValidations = (node: JSONSchema4): Dictionary<unknown> => {
   const extraValidations = node.type && getTypeValidations(node.type);
   const deprecated = getDeprecatedValue(node);
-  return filterOutMaxAndMin({
+  return filterOutFormatValidations({
     ..._pick(node, COMMON_VALIDATION_TYPES),
     ...(extraValidations && _pick(node, extraValidations)),
     ...(deprecated !== void 0 && { deprecated }),
