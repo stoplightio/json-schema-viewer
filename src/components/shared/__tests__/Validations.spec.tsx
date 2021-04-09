@@ -47,4 +47,34 @@ describe('Validations component', () => {
     expect(wrapper).toIncludeText('Example values:"Example 1""Example 2"');
     expect(wrapper).toIncludeText('Allowed value:"bar"');
   });
+
+  describe('OAS formats', () => {
+    it('given default range, should not render any validation', () => {
+      const node = new RegularNode({
+        type: 'integer',
+        format: 'int32',
+        minimum: 0 - Math.pow(2, 31),
+        maximum: Math.pow(2, 31) - 1,
+      });
+
+      const validations = getValidationsFromSchema(node);
+      const wrapper = mount(<Validations validations={validations} />);
+
+      expect(wrapper).toBeEmptyRender();
+    });
+
+    it('should render non-standard values', () => {
+      const node = new RegularNode({
+        type: 'integer',
+        format: 'int64',
+        minimum: 0,
+        maximum: Math.pow(2, 63) - 1,
+      });
+
+      const validations = getValidationsFromSchema(node);
+      const wrapper = mount(<Validations validations={validations} />);
+
+      expect(wrapper).toIncludeText('>= 0');
+    });
+  });
 });
