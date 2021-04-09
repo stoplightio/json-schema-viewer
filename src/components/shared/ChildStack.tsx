@@ -12,7 +12,7 @@ export const ChildStack = ({ childNodes, currentNestingLevel, className }: Child
   <div className={className}>
     {childNodes.map((childNode: SchemaNode, index) => (
       <React.Fragment key={childNode.id}>
-        {index > 0 && <div className="sl-border-t sl-self-stretch" />}
+        {index > 0 && <div className="sl-border-t sl-border-light sl-self-stretch" />}
         <SchemaRow schemaNode={childNode} nestingLevel={currentNestingLevel + 1} />
       </React.Fragment>
     ))}
