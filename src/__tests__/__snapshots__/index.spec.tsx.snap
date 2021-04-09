@@ -2658,7 +2658,11 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
           <div>availableDeliveryTypes</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
         </div>
-        <div></div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
+          </span>
+        </span>
       </div>
     </div>
   </div>
@@ -2669,7 +2673,11 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
           <div>ticketRecipients</div>
           <span class=\\"text-green-6 dark:text-green-4\\">array[string]</span>
         </div>
-        <div></div>
+        <span class=\\"bp3-popover-wrapper\\">
+          <span class=\\"bp3-popover-target\\">
+            <div><span class=\\"text-darken-7 dark:text-lighten-6\\">+1</span></div>
+          </span>
+        </span>
       </div>
     </div>
   </div>
