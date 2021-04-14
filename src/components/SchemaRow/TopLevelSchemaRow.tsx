@@ -21,7 +21,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
   if (isComplexArray(schemaNode) && isPureObjectNode(schemaNode.children[0])) {
     return (
       <DecreaseIndentation>
-        <div className="sl-text-sm sl-relative">
+        <div className="sl-relative">
           <div className="sl-mr-2 sl-font-mono sl-font-bold">array of:</div>
           {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
         </div>

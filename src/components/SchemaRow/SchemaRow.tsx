@@ -56,7 +56,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
   return (
-    <div className="sl-text-sm sl-relative">
+    <div className="sl-relative">
       <div className="sl-flex">
         <div className="sl-min-w-0 sl-flex-grow">
           <div
