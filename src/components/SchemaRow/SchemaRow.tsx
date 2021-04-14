@@ -29,7 +29,7 @@ export interface SchemaRowProps {
 export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
   const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
 
-  const { defaultExpandedDepth, renderRowAddon, onGoToRef } = useJSVOptionsContext();
+  const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples } = useJSVOptionsContext();
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
@@ -148,7 +148,10 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             )}
           </div>
 
-          <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
+          <Validations
+            validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}}
+            hideExamples={hideExamples}
+          />
 
           {isBrokenRef && (
             // TODO (JJ): Add mosaic tooltip showing ref error

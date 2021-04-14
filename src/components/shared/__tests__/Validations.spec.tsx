@@ -48,6 +48,20 @@ describe('Validations component', () => {
     expect(wrapper).toIncludeText('Allowed value:"bar"');
   });
 
+  it('should not render hidden example validations', () => {
+    const node = new RegularNode({
+      type: 'number',
+      example: 42,
+      examples: [4, 2],
+    });
+
+    const validations = getValidationsFromSchema(node);
+    const wrapper = mount(<Validations validations={validations} hideExamples />);
+
+    expect(wrapper).not.toIncludeText('Example value:42');
+    expect(wrapper).not.toIncludeText('Example values:42');
+  });
+
   describe('OAS formats', () => {
     it('given default range, should not render any validation', () => {
       const node = new RegularNode({

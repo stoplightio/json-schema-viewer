@@ -24,6 +24,7 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   defaultExpandedDepth = 2,
   onGoToRef,
   renderRowAddon,
+  hideExamples,
 }) => {
   const jsonSchemaTreeRoot = React.useMemo(() => {
     const jsonSchemaTree = new JsonSchemaTree(schema, {
@@ -49,11 +50,12 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
     jsonSchemaTreeRoot,
   ]);
 
-  const options = React.useMemo(() => ({ defaultExpandedDepth, viewMode, onGoToRef, renderRowAddon }), [
+  const options = React.useMemo(() => ({ defaultExpandedDepth, viewMode, onGoToRef, renderRowAddon, hideExamples }), [
     defaultExpandedDepth,
     viewMode,
     onGoToRef,
     renderRowAddon,
+    hideExamples,
   ]);
 
   if (isEmpty) {
