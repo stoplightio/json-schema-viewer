@@ -3,7 +3,6 @@ import {
   isMirroredNode,
   isReferenceNode,
   isRegularNode,
-  isRootNode,
   ReferenceNode,
   SchemaNode,
   SchemaNodeKind,
@@ -13,7 +12,6 @@ import cn from 'classnames';
 import { last } from 'lodash';
 import * as React from 'react';
 
-import { CARET_ICON_BOX_DIMENSION, CARET_ICON_SIZE, SCHEMA_ROW_OFFSET } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
 import { Caret, Description, Format, getValidationsFromSchema, Types, Validations } from '../shared';
@@ -58,12 +56,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
   return (
-    <div
-      className="sl-text-sm sl-relative"
-      style={{
-        ...(schemaNode.parent && !isRootNode(schemaNode.parent) ? { marginLeft: CARET_ICON_BOX_DIMENSION } : null),
-      }}
-    >
+    <div className="sl-text-sm sl-relative">
       <div className="sl-flex">
         <div className="sl-min-w-0 sl-flex-grow">
           <div
@@ -71,24 +64,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             className={cn({ 'sl-cursor-pointer': childNodes.length > 0 })}
           >
             <div className="sl-flex sl-items-center sl-my-2">
-              {childNodes.length > 0 ? (
-                <Caret
-                  isExpanded={isExpanded}
-                  style={{
-                    width: CARET_ICON_BOX_DIMENSION,
-                    height: CARET_ICON_BOX_DIMENSION,
-                    ...(!isBrokenRef && nestingLevel === 0
-                      ? {
-                          position: 'relative',
-                          left: -1 * SCHEMA_ROW_OFFSET,
-                        }
-                      : {
-                          left: CARET_ICON_BOX_DIMENSION * -1 - SCHEMA_ROW_OFFSET,
-                        }),
-                  }}
-                  size={CARET_ICON_SIZE}
-                />
-              ) : null}
+              {childNodes.length > 0 ? <Caret isExpanded={isExpanded} /> : null}
 
               <div className="sl-flex sl-items-baseline sl-text-base sl-flex-1">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
