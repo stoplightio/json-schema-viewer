@@ -6,6 +6,7 @@ import type { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
+import { TopLevelSchemaRow } from './SchemaRow';
 import { ChildStack } from './shared/ChildStack';
 
 export type JsonSchemaProps = Partial<JSVOptions> & {
@@ -67,6 +68,7 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
           childNodes={jsonSchemaTreeRoot.children}
           currentNestingLevel={-1}
           className={cn(className, 'JsonSchemaViewer')}
+          RowComponent={TopLevelSchemaRow}
         />
       </JSVOptionsContextProvider>
     </MosaicProvider>
