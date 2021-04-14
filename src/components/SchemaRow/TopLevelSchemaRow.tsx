@@ -43,7 +43,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
                 <div className="sl-mr-2 sl-font-mono sl-font-bold sl-flex sl-cursor-pointer sl-py-2">
                   {selectedChoice.title}
                   <div className="sl-ml-1">
-                    <Icon size={20} icon={faCaretDown} />
+                    <Icon icon={faCaretDown} />
                   </div>
                 </div>
               </Pressable>
