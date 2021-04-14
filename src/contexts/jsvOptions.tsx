@@ -7,9 +7,14 @@ export type JSVOptions = {
   viewMode: ViewMode;
   onGoToRef?: GoToRefHandler;
   renderRowAddon?: RowAddonRenderer;
+  hideExamples?: boolean;
 };
 
-const JSVOptionsContext = React.createContext<JSVOptions>({ defaultExpandedDepth: 0, viewMode: 'standalone' });
+const JSVOptionsContext = React.createContext<JSVOptions>({
+  defaultExpandedDepth: 0,
+  viewMode: 'standalone',
+  hideExamples: false,
+});
 
 export const useJSVOptionsContext = () => React.useContext(JSVOptionsContext);
 

@@ -6,6 +6,7 @@ import * as React from 'react';
 
 export interface IValidations {
   validations: Dictionary<unknown>;
+  hideExamples?: boolean;
 }
 
 type ValidationFormat = {
@@ -23,6 +24,8 @@ export const numberValidationNames = [
   'exclusiveMinimum',
   'exclusiveMaximum',
 ];
+
+const exampleValidationNames = ['examples', 'example', 'x-example'];
 
 const excludedValidations = ['exclusiveMinimum', 'exclusiveMaximum', 'readOnly', 'writeOnly'];
 
@@ -101,7 +104,7 @@ function filterOutOasFormatValidations(format: string, values: Dictionary<unknow
   return newValues;
 }
 
-export const Validations: React.FunctionComponent<IValidations> = ({ validations }) => {
+export const Validations: React.FunctionComponent<IValidations> = ({ validations, hideExamples }) => {
   const numberValidations = pick(validations, numberValidationNames);
   const booleanValidations = omit(
     pickBy(validations, v => ['true', 'false'].includes(String(v))),
@@ -111,6 +114,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({ validations
     ...keys(numberValidations),
     ...keys(booleanValidations),
     ...excludedValidations,
+    ...(hideExamples ? exampleValidationNames : []),
   ]);
 
   return (
