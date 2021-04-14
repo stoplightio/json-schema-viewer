@@ -10,6 +10,7 @@ export interface ICaret {
 
 const caretStyle = {
   height: CARET_ICON_BOX_DIMENSION,
+  marginTop: 2,
   left: -CARET_OFFSET,
 };
 
