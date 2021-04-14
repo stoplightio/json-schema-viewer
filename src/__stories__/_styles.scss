@@ -3,4 +3,10 @@
 
 .JsonSchemaViewer {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif,
-  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';}
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  border: 1px dotted #bbb; // to visualize component boundaries
+}
+
+#root > div > div > div {
+  background-color: #f8f8fb; // to visualize component boundaries
+}
