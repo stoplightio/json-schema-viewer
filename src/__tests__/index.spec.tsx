@@ -237,18 +237,28 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\">
-              <div>
+            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+              <div style=\\"margin-left: -25px\\">
                 <div>
-                  <div>
+                  <div>array of:</div>
+                  <div style=\\"padding-left: 25px\\">
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
-                        <div><span>array of objects</span></div>
+                        <div>
+                          <div>
+                            <div>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>foo</div>
+                                <span>array of objects</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div></div>
                       </div>
                     </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
@@ -262,34 +272,26 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\">
-              <div>
+            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+              <div style=\\"margin-left: -25px\\">
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
-                        <div><span>array of objects</span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-                <div>
-                  <div style=\\"margin-left: 20px\\">
+                  <div>array of:</div>
+                  <div style=\\"padding-left: 25px\\">
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
-                              <div>foo</div>
-                              <span>array of objects</span>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>foo</div>
+                                <span>array of objects</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
                     </div>
                   </div>
                 </div>
@@ -305,50 +307,42 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\">
-              <div>
+            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+              <div style=\\"margin-left: -25px\\">
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
-                        <div><span>array of objects</span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-                <div>
-                  <div style=\\"margin-left: 20px\\">
+                  <div>array of:</div>
+                  <div style=\\"padding-left: 25px\\">
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
-                              <div>foo</div>
-                              <span>array of objects</span>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>foo</div>
+                                <span>array of objects</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
-                    </div>
-                    <div>
-                      <div style=\\"margin-left: 20px\\">
+                      <div style=\\"padding-left: 25px\\">
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                                 <div>
-                                  <div>bar</div>
-                                  <span>object</span>
+                                  <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                  <div>
+                                    <div>bar</div>
+                                    <span>object</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+                            <div></div>
                           </div>
-                          <div></div>
                         </div>
                       </div>
                     </div>
@@ -400,18 +394,44 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\">
-              <div>
+            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+              <div style=\\"margin-left: -25px\\">
                 <div>
-                  <div>
+                  <div>array of:</div>
+                  <div style=\\"padding-left: 25px\\">
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
-                        <div><span>array of objects</span></div>
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <div>bar</div>
+                                <span>integer</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div></div>
+                      </div>
+                    </div>
+                    <div></div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>foo</div>
+                                <span>array of objects</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div></div>
                       </div>
                     </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
@@ -425,50 +445,42 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\">
-              <div>
+            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+              <div style=\\"margin-left: -25px\\">
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
-                        <div><span>array of objects</span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-                <div>
-                  <div style=\\"margin-left: 20px\\">
+                  <div>array of:</div>
+                  <div style=\\"padding-left: 25px\\">
                     <div>
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div>bar</div>
-                              <span>integer</span>
+                              <div>
+                                <div>bar</div>
+                                <span>integer</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
                     </div>
-                  </div>
-                  <div></div>
-                  <div style=\\"margin-left: 20px\\">
+                    <div></div>
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
-                              <div>foo</div>
-                              <span>array of objects</span>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>foo</div>
+                                <span>array of objects</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
                     </div>
                   </div>
                 </div>
@@ -484,81 +496,73 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\">
-              <div>
+            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+              <div style=\\"margin-left: -25px\\">
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
-                        <div><span>array of objects</span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-                <div>
-                  <div style=\\"margin-left: 20px\\">
+                  <div>array of:</div>
+                  <div style=\\"padding-left: 25px\\">
                     <div>
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div>bar</div>
-                              <span>integer</span>
+                              <div>
+                                <div>bar</div>
+                                <span>integer</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
                     </div>
-                  </div>
-                  <div></div>
-                  <div style=\\"margin-left: 20px\\">
+                    <div></div>
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
                             <div>
-                              <div>foo</div>
-                              <span>array of objects</span>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>foo</div>
+                                <span>array of objects</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
-                    </div>
-                    <div>
-                      <div style=\\"margin-left: 20px\\">
+                      <div style=\\"padding-left: 25px\\">
                         <div>
                           <div>
                             <div>
                               <div>
                                 <div>
-                                  <div>bar</div>
-                                  <span>string</span>
+                                  <div>
+                                    <div>bar</div>
+                                    <span>string</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+                            <div></div>
                           </div>
-                          <div></div>
                         </div>
-                      </div>
-                      <div></div>
-                      <div style=\\"margin-left: 20px\\">
+                        <div></div>
                         <div>
                           <div>
                             <div>
                               <div>
                                 <div>
-                                  <div>foo</div>
-                                  <span>number</span>
+                                  <div>
+                                    <div>foo</div>
+                                    <span>number</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+                            <div></div>
                           </div>
-                          <div></div>
                         </div>
                       </div>
                     </div>
@@ -623,18 +627,42 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\">
-              <div>
-                <div>
+            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+              <div style=\\"margin-left: -25px\\">
+                <div style=\\"padding-left: 25px\\">
                   <div>
                     <div>
                       <div>
-                        <div style=\\"width: 20px; height: 20px; position: relative; left: -7px\\" role=\\"button\\"></div>
-                        <div><span>object</span></div>
+                        <div>
+                          <div>
+                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                            <div>
+                              <div>bar</div>
+                              <span>object</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                      <div></div>
                     </div>
                   </div>
                   <div></div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                            <div>
+                              <div>foo</div>
+                              <span>array of objects</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -677,7 +705,7 @@ describe('$ref resolving', () => {
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\">
-        <div class=\\"JsonSchemaViewer\\">
+        <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
           <div>
             <div>
               <div>
@@ -706,21 +734,21 @@ describe('$ref resolving', () => {
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\">
-        <div class=\\"JsonSchemaViewer\\">
+        <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"width: 20px; height: 20px; left: -27px\\" role=\\"button\\"></div>
+                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                     <div><span>$ref(#/foo)[]</span></div>
                   </div>
                 </div>
               </div>
               <div></div>
             </div>
-            <div>
-              <div style=\\"margin-left: 20px\\">
+            <div style=\\"padding-left: 25px\\">
+              <div>
                 <div>
                   <div>
                     <div>
