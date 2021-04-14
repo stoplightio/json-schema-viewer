@@ -9,5 +9,5 @@ export const COMBINER_PRETTY_NAMES: Readonly<Dictionary<string, SchemaCombinerNa
 
 export const CARET_ICON_SIZE = 'xs';
 export const CARET_ICON_BOX_DIMENSION = 12;
-export const NESTING_OFFSET = 20;
+export const NESTING_OFFSET = 25;
 export const CARET_OFFSET = NESTING_OFFSET;
