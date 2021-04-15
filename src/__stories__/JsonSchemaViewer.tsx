@@ -1,6 +1,6 @@
 import { Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
-import { number, object, select, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
@@ -36,6 +36,7 @@ storiesOf('JsonSchemaViewer', module)
         },
         'standalone',
       )}
+      hideExamples={boolean('hideExamples', false)}
       onGoToRef={action('onGoToRef')}
     />
   ))
