@@ -68,7 +68,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
               <div className="sl-flex sl-items-baseline sl-text-base sl-flex-1">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-                  <div className="sl-mr-2 sl-font-mono sl-font-bold">{last(schemaNode.subpath)}</div>
+                  <div className="sl-mr-2 sl-font-mono sl-font-semibold">{last(schemaNode.subpath)}</div>
                 )}
 
                 {choices.length === 1 && (

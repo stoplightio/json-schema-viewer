@@ -40,7 +40,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
             onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
             renderTrigger={props => (
               <Pressable {...props}>
-                <div className="sl-mr-2 sl-font-mono sl-font-bold sl-flex sl-cursor-pointer sl-py-2">
+                <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-flex sl-cursor-pointer sl-py-2">
                   {selectedChoice.title}
                   <div className="sl-ml-1">
                     <Icon icon={faCaretDown} />
@@ -60,7 +60,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
     return (
       <DecreaseIndentation>
         <div className="sl-relative">
-          <div className="sl-mr-2 sl-font-mono sl-font-bold sl-py-2">array of:</div>
+          <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-py-2">array of:</div>
           {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
         </div>
       </DecreaseIndentation>
