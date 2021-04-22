@@ -6,6 +6,7 @@ import type { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
+import { TopLevelSchemaRow } from './SchemaRow';
 import { ChildStack } from './shared/ChildStack';
 
 export type JsonSchemaProps = Partial<JSVOptions> & {
@@ -59,7 +60,7 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   ]);
 
   if (isEmpty) {
-    return <Box className={cn(className, 'JsonSchemaViewer')}>{emptyText}</Box>;
+    return <Box className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}>{emptyText}</Box>;
   }
 
   return (
@@ -68,7 +69,8 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
         <ChildStack
           childNodes={jsonSchemaTreeRoot.children}
           currentNestingLevel={-1}
-          className={cn(className, 'JsonSchemaViewer')}
+          className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}
+          RowComponent={TopLevelSchemaRow}
         />
       </JSVOptionsContextProvider>
     </MosaicProvider>
