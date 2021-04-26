@@ -1,7 +1,6 @@
 import { Optional } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
-import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, SchemaKind, SchemaNode } from '../../types';
+import { IArrayNode, IBaseNode, ICombinerNode, IObjectNode, JSONSchema, SchemaKind, SchemaNode } from '../../types';
 import { flattenTypes } from '../../utils/flattenTypes';
 import { generateId } from '../../utils/generateId';
 import { getAnnotations } from '../../utils/getAnnotations';
@@ -11,7 +10,7 @@ import { getValidations } from '../../utils/getValidations';
 import { inferType } from '../../utils/inferType';
 import { normalizeRequired } from '../../utils/normalizeRequired';
 
-function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
+function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema) {
   switch (getPrimaryType(node)) {
     case SchemaKind.Array:
       (base as IArrayNode).items = unwrapItemsOrUndefined(node.items);
@@ -29,7 +28,7 @@ function assignNodeSpecificFields(base: IBaseNode, node: JSONSchema4) {
   }
 }
 
-export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
+export function* processNode(node: JSONSchema): IterableIterator<SchemaNode> {
   const combiners = getCombiners(node);
   const type = node.type || inferType(node);
   const title = typeof node.title === 'string' ? { title: node.title } : null;
@@ -40,7 +39,7 @@ export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
       const combinerNode: ICombinerNode = {
         id: generateId(),
         combiner,
-        properties: Array.isArray(properties) ? properties.slice() : properties,
+        properties: (Array.isArray(properties) ? properties.slice() : properties) as ICombinerNode['properties'],
         annotations: getAnnotations(node),
         ...(type !== void 0 && { type: flattenTypes(type) }),
         ...title,
@@ -50,7 +49,7 @@ export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
     }
   } else if (type) {
     const primaryType = getPrimaryType(node);
-    let validationNode: JSONSchema4 = node;
+    let validationNode: JSONSchema = node;
     if (
       primaryType === SchemaKind.Array &&
       _isObject(node.items) &&
@@ -103,10 +102,10 @@ export function* processNode(node: JSONSchema4): IterableIterator<SchemaNode> {
 
 export type WalkerValue = {
   node: SchemaNode;
-  fragment: JSONSchema4;
+  fragment: JSONSchema;
 };
 
-export function* walk(schema: JSONSchema4[] | JSONSchema4): IterableIterator<WalkerValue> {
+export function* walk(schema: JSONSchema[] | JSONSchema): IterableIterator<WalkerValue> {
   if (Array.isArray(schema)) {
     for (const segment of schema) {
       yield* walk(segment);

@@ -1,10 +1,9 @@
 import { IRowRendererOptions, isParentNode, Tree } from '@stoplight/tree-list';
 import cn from 'classnames';
-import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { getNodeMetadata, getSchemaNodeMetadata } from '../tree/metadata';
-import { GoToRefHandler, SchemaKind, SchemaTreeListNode } from '../types';
+import { GoToRefHandler, JSONSchema, SchemaKind, SchemaTreeListNode } from '../types';
 import { getPrimaryType } from '../utils/getPrimaryType';
 import { hasRefItems, isArrayNodeWithItems, isRefNode } from '../utils/guards';
 import { Caret, Description, Divider, Format, Property, Validations } from './shared';
@@ -20,7 +19,7 @@ const ICON_SIZE = 12;
 const ICON_DIMENSION = 20;
 const ROW_OFFSET = 7;
 
-function getRelevantSchemaForRequireCheck(treeNode: SchemaTreeListNode): JSONSchema4 | JSONSchema4[] | null {
+function getRelevantSchemaForRequireCheck(treeNode: SchemaTreeListNode): JSONSchema | JSONSchema[] | null {
   const metadata = getNodeMetadata(treeNode);
   if (!('schemaNode' in metadata)) return null;
   if (isArrayNodeWithItems(metadata.schemaNode)) {

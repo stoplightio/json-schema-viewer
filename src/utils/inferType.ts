@@ -1,8 +1,7 @@
 import { Optional } from '@stoplight/types';
-import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
-import { SchemaKind, SchemaNode } from '../types';
+import { JSONSchema, SchemaKind, SchemaNode } from '../types';
 
-export function inferType(node: SchemaNode | JSONSchema4): Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> {
+export function inferType(node: SchemaNode | JSONSchema): Optional<JSONSchema['type']> {
   if ('type' in node) {
     return node.type;
   }

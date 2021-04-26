@@ -4,14 +4,13 @@ import cn from 'classnames';
 import { action } from 'mobx';
 import * as React from 'react';
 
-import { JSONSchema4 } from 'json-schema';
 import { SchemaTree, SchemaTreeOptions, SchemaTreePopulateHandler, SchemaTreeRefDereferenceFn } from '../tree/tree';
-import { GoToRefHandler, RowRenderer, ViewMode } from '../types';
+import { GoToRefHandler, JSONSchema, RowRenderer, ViewMode } from '../types';
 import { isSchemaViewerEmpty } from '../utils/isSchemaViewerEmpty';
 import { SchemaTree as SchemaTreeComponent } from './SchemaTree';
 
 export interface IJsonSchemaViewer {
-  schema: JSONSchema4;
+  schema: JSONSchema;
   style?: object;
   emptyText?: string;
   defaultExpandedDepth?: number;

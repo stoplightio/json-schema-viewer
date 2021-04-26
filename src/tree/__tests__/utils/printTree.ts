@@ -2,7 +2,7 @@ import { pathToPointer } from '@stoplight/json';
 import * as treeify from 'treeify';
 
 import { TreeListNode } from '@stoplight/tree-list';
-import { JSONSchema4CombinerName } from '../../../types';
+import { JSONSchemaCombinerName } from '../../../types';
 import { hasRefItems, isArrayNodeWithItems } from '../../../utils/guards';
 import { inferType } from '../../../utils/inferType';
 import { getNodeMetadata } from '../../metadata';
@@ -18,7 +18,7 @@ export function printTree(tree: SchemaTree) {
 type PrintableNode = {
   [key in string]: {
     type?: unknown;
-    combiner?: JSONSchema4CombinerName;
+    combiner?: JSONSchemaCombinerName;
     enum?: unknown;
     required?: unknown;
     subtype?: unknown;

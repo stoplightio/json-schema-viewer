@@ -1,10 +1,9 @@
 import { extractPointerFromRef, extractSourceFromRef, pointerToPath } from '@stoplight/json';
 import { Tree, TreeListParentNode, TreeState } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
 import { get as _get, isEqual as _isEqual, isObject as _isObject } from 'lodash';
 import { ResolvingError } from '../errors';
-import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, ViewMode } from '../types';
+import { IArrayNode, IObjectNode, JSONSchema, SchemaKind, SchemaNode, ViewMode } from '../types';
 import { hasRefItems, isArrayNodeWithItems, isCombinerNode, isRefNode } from '../utils/guards';
 import { inferType } from '../utils/inferType';
 import { getSchemaNodeMetadata } from './metadata';
@@ -20,8 +19,8 @@ export type SchemaTreeRefInfo = {
 export type SchemaTreeRefDereferenceFn = (
   ref: SchemaTreeRefInfo,
   propertyPath: JsonPath | null,
-  schema: JSONSchema4,
-) => Optional<JSONSchema4>;
+  schema: JSONSchema,
+) => Optional<JSONSchema>;
 
 export type SchemaTreePopulateHandler = (tree: SchemaTree, node: TreeListParentNode) => void;
 
@@ -39,7 +38,7 @@ export { TreeState as SchemaTreeState };
 export class SchemaTree extends Tree {
   public treeOptions: SchemaTreeOptions;
 
-  constructor(public schema: JSONSchema4, public state: TreeState, opts: SchemaTreeOptions) {
+  constructor(public schema: JSONSchema, public state: TreeState, opts: SchemaTreeOptions) {
     super({
       expanded: node =>
         (!(node.id in state.expanded) && SchemaTree.getLevel(node) <= opts.expandedDepth) ||
@@ -51,7 +50,11 @@ export class SchemaTree extends Tree {
 
   protected readonly visited = new WeakSet();
 
-  protected isViewModeRespected = (fragment: JSONSchema4) => {
+  protected isViewModeRespected = (fragment: JSONSchema) => {
+    if (!('writeOnly' in fragment) && !('readOnly' in fragment)) {
+      return true;
+    }
+
     return !(
       !!fragment.writeOnly !== !!fragment.readOnly &&
       ((this.treeOptions.viewMode === 'read' && fragment.writeOnly) ||
@@ -112,7 +115,7 @@ export class SchemaTree extends Tree {
     this.treeOptions.onPopulate?.(this, this.root);
   }
 
-  public populateTreeFragment(parent: TreeListParentNode, schema: JSONSchema4, path: JsonPath, stepIn: boolean) {
+  public populateTreeFragment(parent: TreeListParentNode, schema: JSONSchema, path: JsonPath, stepIn: boolean) {
     const initialLevel = Tree.getLevel(parent);
     const artificialRoot = Tree.createArtificialRoot();
     populateTree(schema, artificialRoot, initialLevel, path, {

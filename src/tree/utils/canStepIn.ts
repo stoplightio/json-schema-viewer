@@ -1,9 +1,8 @@
-import { JSONSchema4 } from 'json-schema';
-import { SchemaKind } from '../../types';
+import { JSONSchema, SchemaKind } from '../../types';
 import { getCombiners } from '../../utils/getCombiners';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 
-export const canStepIn = (fragment: JSONSchema4) => {
+export const canStepIn = (fragment: JSONSchema) => {
   if (getCombiners(fragment) !== void 0) {
     return true;
   }

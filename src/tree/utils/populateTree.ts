@@ -1,9 +1,8 @@
 import { TreeListNode, TreeListParentNode } from '@stoplight/tree-list';
 import { JsonPath, Optional } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
 import { isObject as _isObject } from 'lodash';
 
-import { IArrayNode, IObjectNode, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
+import { IArrayNode, IObjectNode, JSONSchema, SchemaKind, SchemaNode, SchemaTreeListNode } from '../../types';
 import { generateId } from '../../utils/generateId';
 import { getPrimaryType } from '../../utils/getPrimaryType';
 import { isCombinerNode, isRefNode } from '../../utils/guards';
@@ -13,18 +12,18 @@ import { mergeAllOf } from './mergeAllOf';
 import { mergeOneOrAnyOf } from './mergeOneOrAnyOf';
 import { processNode, walk } from './walk';
 
-export type WalkerRefResolver = (path: JsonPath | null, $ref: string) => JSONSchema4;
+export type WalkerRefResolver = (path: JsonPath | null, $ref: string) => JSONSchema;
 
 export type WalkingOptions = {
   mergeAllOf: boolean;
-  onNode?(fragment: JSONSchema4, node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
+  onNode?(fragment: JSONSchema, node: SchemaNode, parentTreeNode: TreeListNode, level: number): boolean | void;
   stepIn?: boolean;
   resolveRef: WalkerRefResolver;
   shouldResolveEagerly: boolean;
 };
 
 export type Walker = (
-  schema: Optional<JSONSchema4 | null>,
+  schema: Optional<JSONSchema | null>,
   parent: TreeListParentNode,
   level: number,
   path: JsonPath,
@@ -53,7 +52,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
     });
 
     if (isRefNode(node) && node.$ref !== null) {
-      processRef(treeNode, node as JSONSchema4, level, path, options);
+      processRef(treeNode, node as JSONSchema, level, path, options);
     } else if (!isCombinerNode(node)) {
       switch (getPrimaryType(node)) {
         case SchemaKind.Array:
@@ -95,7 +94,7 @@ export const populateTree: Walker = (schema, parent, level, path, options): unde
           node.properties[i] = {
             ...property,
             type: property.type || node.type,
-          };
+          } as JSONSchema;
         }
 
         populateTree(
@@ -119,6 +118,10 @@ function processArray(
   path: JsonPath,
   options: WalkingOptions,
 ): SchemaTreeListNode {
+  if (typeof schema.items === 'boolean') {
+    return node;
+  }
+
   const items = prepareSchema(schema.items, node, path, options);
 
   if (!_isObject(items)) return node;
@@ -222,7 +225,7 @@ function processObject(
 
 function processRef(
   node: TreeListNode,
-  schema: JSONSchema4,
+  schema: JSONSchema,
   level: number,
   path: JsonPath,
   options: WalkingOptions | null,
@@ -241,19 +244,21 @@ function processRef(
 
 function bailAllOf(
   node: TreeListParentNode,
-  schema: JSONSchema4,
+  schema: JSONSchema,
   level: number,
   path: JsonPath,
   options: WalkingOptions,
 ) {
   if (Array.isArray(schema.allOf)) {
     for (const [i, item] of schema.allOf.entries()) {
-      populateTree(item, node, level, [...path, i], options);
+      if (typeof item !== 'boolean') {
+        populateTree(item, node, level, [...path, i], options);
+      }
     }
   }
 }
 
-function resolveSchema(schema: Optional<JSONSchema4 | null>, path: JsonPath, options: WalkingOptions | null) {
+function resolveSchema(schema: Optional<JSONSchema | null>, path: JsonPath, options: WalkingOptions | null) {
   if (!_isObject(schema) || options === null || !('$ref' in schema) || typeof schema.$ref !== 'string') {
     return schema;
   }
@@ -263,11 +268,11 @@ function resolveSchema(schema: Optional<JSONSchema4 | null>, path: JsonPath, opt
 }
 
 function prepareSchema(
-  schema: Optional<JSONSchema4 | null>,
+  schema: Optional<JSONSchema | null>,
   node: TreeListNode,
   path: JsonPath,
   options: WalkingOptions | null,
-): Optional<JSONSchema4 | null> {
+): Optional<JSONSchema | null> {
   if (options === null || !options.shouldResolveEagerly) return schema;
 
   try {
