@@ -341,6 +341,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             <input type=\\"text\\" style=\\"font-size: 16px\\" />
             <label>
               <select size=\\"2\\">
+                <option></option>
                 <option value=\\"0\\">1. Admin</option>
                 <option value=\\"1\\">2. Editor</option>
               </select>
@@ -476,6 +477,7 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
             <input type=\\"text\\" style=\\"font-size: 16px\\" />
             <label>
               <select size=\\"2\\">
+                <option></option>
                 <option value=\\"0\\">1. array of strings</option>
                 <option value=\\"1\\">2. array of numbers</option>
               </select>
@@ -606,6 +608,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             <input type=\\"text\\" style=\\"font-size: 16px\\" />
             <label>
               <select size=\\"2\\">
+                <option></option>
                 <option value=\\"0\\">1. Admin</option>
                 <option value=\\"1\\">2. Editor</option>
               </select>
@@ -1224,6 +1227,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                           <input type=\\"text\\" style=\\"font-size: 16px\\" />
                           <label>
                             <select size=\\"2\\">
+                              <option></option>
                               <option value=\\"0\\">1. object</option>
                               <option value=\\"1\\">2. array of integers</option>
                             </select>
@@ -1231,9 +1235,9 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                         </div>
                         <div>
                           <button
+                            aria-label=\\"Pick a type\\"
                             aria-haspopup=\\"listbox\\"
                             aria-expanded=\\"false\\"
-                            aria-label=\\"Pick a type\\"
                             id=\\"react-aria-0-3\\"
                             aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                             type=\\"button\\"
@@ -2497,6 +2501,7 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
             <input type=\\"text\\" style=\\"font-size: 16px\\" />
             <label>
               <select size=\\"2\\">
+                <option></option>
                 <option value=\\"0\\">1. BugExample</option>
                 <option value=\\"1\\">2. BugExample</option>
               </select>
@@ -2655,6 +2660,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
             <input type=\\"text\\" style=\\"font-size: 16px\\" />
             <label>
               <select size=\\"2\\">
+                <option></option>
                 <option value=\\"0\\">1. array of objects</option>
                 <option value=\\"1\\">2. array of objects</option>
               </select>
@@ -2739,6 +2745,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
             <input type=\\"text\\" style=\\"font-size: 16px\\" />
             <label>
               <select size=\\"2\\">
+                <option></option>
                 <option value=\\"0\\">1. array of A-s</option>
                 <option value=\\"1\\">2. array of B-s</option>
               </select>
@@ -2969,6 +2976,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                         <input type=\\"text\\" style=\\"font-size: 16px\\" />
                         <label>
                           <select size=\\"2\\">
+                            <option></option>
                             <option value=\\"0\\">1. object</option>
                             <option value=\\"1\\">2. array of integers</option>
                           </select>
@@ -2976,9 +2984,9 @@ exports[`HTML Output should match default-schema.json 1`] = `
                       </div>
                       <div>
                         <button
+                          aria-label=\\"Pick a type\\"
                           aria-haspopup=\\"listbox\\"
                           aria-expanded=\\"false\\"
-                          aria-label=\\"Pick a type\\"
                           id=\\"react-aria-0-3\\"
                           aria-labelledby=\\"react-aria-0-3 react-aria-0-5\\"
                           type=\\"button\\"
