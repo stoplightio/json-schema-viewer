@@ -1,8 +1,7 @@
-import { JSONSchema4 } from 'json-schema';
-import { JSONSchema4CombinerName } from '../types';
+import { JSONSchema, JSONSchemaCombinerName } from '../types';
 
-export const getCombiners = (node: JSONSchema4): JSONSchema4CombinerName[] | void => {
-  let combiners: JSONSchema4CombinerName[] | void;
+export const getCombiners = (node: JSONSchema): JSONSchemaCombinerName[] | void => {
+  let combiners: JSONSchemaCombinerName[] | void;
 
   if ('anyOf' in node) {
     // tslint:disable-next-line:prettier

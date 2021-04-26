@@ -1,14 +1,13 @@
 import { TreeList, TreeListEvents, TreeStore } from '@stoplight/tree-list';
-import { JSONSchema4 } from 'json-schema';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
-import { GoToRefHandler, RowRenderer } from '../types';
+import { GoToRefHandler, JSONSchema, RowRenderer } from '../types';
 import { SchemaRow } from './SchemaRow';
 
 export interface ISchemaTree {
   treeStore: TreeStore;
-  schema: JSONSchema4;
+  schema: JSONSchema;
   name?: string;
   hideTopBar?: boolean;
   expanded?: boolean;

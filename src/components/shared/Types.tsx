@@ -1,16 +1,15 @@
 import { Dictionary, Optional } from '@stoplight/types';
 import cn from 'classnames';
-import { JSONSchema4TypeName } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema4CombinerName, SchemaKind } from '../../types';
+import { JSONSchema, JSONSchemaCombinerName, JSONSchemaTypeName, SchemaKind } from '../../types';
 
 /**
  * TYPE
  */
 export interface IType {
-  type: JSONSchema4TypeName | JSONSchema4CombinerName | 'binary' | '$ref';
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> | '$ref';
+  type: JSONSchemaTypeName | JSONSchemaCombinerName | 'binary' | '$ref';
+  subtype: JSONSchema['type'] | '$ref';
   className?: string;
   title: Optional<string>;
 }
@@ -61,8 +60,8 @@ Type.displayName = 'JsonSchemaViewer.Type';
  */
 interface ITypes {
   className?: string;
-  type: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | JSONSchema4CombinerName | '$ref'>;
-  subtype: Optional<JSONSchema4TypeName | JSONSchema4TypeName[] | '$ref'>;
+  type: Optional<JSONSchemaTypeName | JSONSchemaTypeName[] | JSONSchemaCombinerName | '$ref'>;
+  subtype: Optional<JSONSchema['type'] | '$ref'>;
   title: Optional<string>;
 }
 

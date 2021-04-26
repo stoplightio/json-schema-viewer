@@ -1,10 +1,9 @@
-import { JSONSchema4 } from 'json-schema';
 import { isObjectLike as _isObjectLike } from 'lodash';
-import { IArrayNode, ICombinerNode, IRefNode, SchemaKind, SchemaNode } from '../types';
+import { IArrayNode, ICombinerNode, IRefNode, JSONSchema, SchemaKind, SchemaNode } from '../types';
 
 export const isArrayNodeWithItems = (
   node: SchemaNode,
-): node is Omit<IArrayNode, 'items'> & { items: JSONSchema4 | JSONSchema4[] } =>
+): node is Omit<IArrayNode, 'items'> & { items: JSONSchema | JSONSchema[] } =>
   'type' in node &&
   'items' in node &&
   (node.type === SchemaKind.Array || (Array.isArray(node.type) && node.type.includes(SchemaKind.Array))) &&

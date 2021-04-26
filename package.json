@@ -42,12 +42,14 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
+    "@types/json-schema": "^7.0.7",
     "@stoplight/json": "^3.5.1",
     "@stoplight/json-schema-merge-allof": "^0.7.2",
     "@stoplight/react-error-boundary": "^1.0.0",
     "@stoplight/tree-list": "^5.0.3",
+    "@stoplight/types": "^12.0.0",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mobx-react-lite": "^1.4.1",
     "pluralize": "^8.0.0"
   },
@@ -60,12 +62,10 @@
     "@stoplight/markdown-viewer": "^3.5.5",
     "@stoplight/scripts": "^8.2.0",
     "@stoplight/storybook-config": "^2.0.5",
-    "@stoplight/types": "11.0.0",
     "@stoplight/ui-kit": "3.0.0-beta.2",
     "@types/classnames": "^2.2.9",
     "@types/enzyme": "3.10.3",
     "@types/jest": "^24.0.18",
-    "@types/json-schema": "^7.0.3",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.7.2",
     "@types/pluralize": "^0.0.29",

@@ -1,5 +1,5 @@
 import { JSONSchema4 } from 'json-schema';
-import { JSONSchema4CombinerName, SchemaKind } from '../../../types';
+import { JSONSchemaCombinerName, SchemaKind } from '../../../types';
 import { walk } from '../walk';
 
 describe('Schema Walker', () => {
@@ -100,7 +100,7 @@ describe('Schema Walker', () => {
   });
 
   describe('title', () => {
-    describe.each<JSONSchema4CombinerName>(['allOf', 'oneOf', 'anyOf'])('when combiner equals %s', combiner => {
+    describe.each<JSONSchemaCombinerName>(['allOf', 'oneOf', 'anyOf'])('when combiner equals %s', combiner => {
       test.each([null, 2, void 0, false, true, 0, {}, []])('should ignore %s invalid title', title => {
         const schema = {
           [combiner]: [],

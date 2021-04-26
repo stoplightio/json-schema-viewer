@@ -1,8 +1,7 @@
-import { JSONSchema4 } from 'json-schema';
-import { SchemaKind, SchemaNode } from '../types';
+import { JSONSchema, SchemaKind, SchemaNode } from '../types';
 import { inferType } from './inferType';
 
-export function getPrimaryType(node: JSONSchema4 | SchemaNode) {
+export function getPrimaryType(node: JSONSchema | SchemaNode) {
   if ('type' in node && node.type !== undefined) {
     if (Array.isArray(node.type)) {
       if (node.type.includes(SchemaKind.Object)) {

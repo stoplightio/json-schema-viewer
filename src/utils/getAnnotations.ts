@@ -1,9 +1,8 @@
-import { JSONSchema4 } from 'json-schema';
 import { pick as _pick } from 'lodash';
-import { JSONSchema4Annotations } from '../types';
+import { JSONSchema, JSONSchemaAnnotations } from '../types';
 
-const ANNOTATIONS: JSONSchema4Annotations[] = ['description', 'default', 'examples'];
+const ANNOTATIONS: JSONSchemaAnnotations[] = ['description', 'default', 'examples'];
 
-export function getAnnotations(node: JSONSchema4) {
+export function getAnnotations(node: JSONSchema) {
   return _pick(node, ANNOTATIONS);
 }

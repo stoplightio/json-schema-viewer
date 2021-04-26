@@ -1,6 +1,6 @@
 import { Dictionary, Optional } from '@stoplight/types';
-import { JSONSchema4, JSONSchema4TypeName } from 'json-schema';
 import { flatMap as _flatMap, pick as _pick } from 'lodash';
+import { JSONSchema } from '../types';
 
 export const COMMON_VALIDATION_TYPES = [
   'enum', // https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1
@@ -63,7 +63,7 @@ function filterOutFormatValidations(values: Dictionary<unknown>) {
   return newValues;
 }
 
-function getDeprecatedValue(node: JSONSchema4): Optional<boolean> {
+function getDeprecatedValue(node: JSONSchema): Optional<boolean> {
   if ('x-deprecated' in node) {
     return !!node['x-deprecated'];
   }
@@ -75,7 +75,7 @@ function getDeprecatedValue(node: JSONSchema4): Optional<boolean> {
   return;
 }
 
-function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): string[] {
+function getTypeValidations(type: NonNullable<JSONSchema['type']>): string[] {
   if (Array.isArray(type)) {
     return _flatMap(type, getTypeValidations);
   }
@@ -83,7 +83,7 @@ function getTypeValidations(type: JSONSchema4TypeName | JSONSchema4TypeName[]): 
   return VALIDATION_TYPES[type] || [];
 }
 
-export const getValidations = (node: JSONSchema4): Dictionary<unknown> => {
+export const getValidations = (node: JSONSchema): Dictionary<unknown> => {
   const extraValidations = node.type && getTypeValidations(node.type);
   const deprecated = getDeprecatedValue(node);
   return filterOutFormatValidations({

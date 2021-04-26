@@ -1,8 +1,8 @@
 import { Optional } from '@stoplight/types';
-import { JSONSchema4TypeName } from 'json-schema';
+import { JSONSchema, JSONSchemaTypeName } from '../types';
 import { isValidType } from './isValidType';
 
-function getTypeFromObject(obj: object): Optional<JSONSchema4TypeName> {
+function getTypeFromObject(obj: object): Optional<JSONSchemaTypeName> {
   const size = Object.keys(obj).length;
 
   if (size > 1 || !('type' in obj)) {
@@ -12,7 +12,7 @@ function getTypeFromObject(obj: object): Optional<JSONSchema4TypeName> {
   }
 
   if ('type' in obj && isValidType((obj as { type: string }).type)) {
-    return (obj as { type: JSONSchema4TypeName }).type;
+    return (obj as { type: JSONSchemaTypeName }).type;
   }
 
   return;
@@ -30,7 +30,7 @@ function flattenType(type: unknown) {
   return getTypeFromObject(type);
 }
 
-export const flattenTypes = (types: unknown): Optional<JSONSchema4TypeName | JSONSchema4TypeName[]> => {
+export const flattenTypes = (types: unknown): Optional<JSONSchema['type']> => {
   if (typeof types === 'string' && isValidType(types)) {
     return types;
   }
@@ -40,7 +40,7 @@ export const flattenTypes = (types: unknown): Optional<JSONSchema4TypeName | JSO
   }
 
   if (Array.isArray(types)) {
-    const flattenedTypes: JSONSchema4TypeName[] = [];
+    const flattenedTypes: JSONSchemaTypeName[] = [];
     for (const type of types) {
       const flattened = flattenType(type);
       if (!isValidType(flattened) || flattenedTypes.includes(flattened)) continue;

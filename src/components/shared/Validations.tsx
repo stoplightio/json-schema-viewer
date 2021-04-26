@@ -1,8 +1,8 @@
 import { safeStringify } from '@stoplight/json';
 import { Dictionary } from '@stoplight/types';
 import { Popover } from '@stoplight/ui-kit';
-import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+import { JSONSchema } from '../../types';
 import { ViewModeContext } from '../JsonSchemaViewer';
 import { PropertyTypeColors } from './Types';
 
@@ -93,7 +93,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({
   );
 };
 
-export const Format: React.FunctionComponent<{ schema: JSONSchema4 }> = ({ schema }) => {
+export const Format: React.FunctionComponent<{ schema: JSONSchema }> = ({ schema }) => {
   return (
     <div
       {...(typeof schema.type === 'string' && schema.type in PropertyTypeColors

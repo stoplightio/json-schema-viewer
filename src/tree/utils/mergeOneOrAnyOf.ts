@@ -1,24 +1,25 @@
 import { JsonPath } from '@stoplight/types';
-import { JSONSchema4 } from 'json-schema';
+import { isObject } from 'lodash';
+import { JSONSchema } from '../../types';
 import { mergeAllOf } from './mergeAllOf';
 import { WalkingOptions } from './populateTree';
 
 export function mergeOneOrAnyOf(
-  schema: JSONSchema4,
+  schema: JSONSchema,
   combiner: 'oneOf' | 'anyOf',
   path: JsonPath,
   options: WalkingOptions,
-): JSONSchema4[] {
+): JSONSchema[] {
   const items = schema[combiner];
 
   if (!Array.isArray(items)) return []; // just in case
 
-  const merged: JSONSchema4[] = [];
+  const merged: JSONSchema[] = [];
 
   if (Array.isArray(schema.allOf) && Array.isArray(items)) {
     for (const item of items) {
       merged.push({
-        allOf: [...schema.allOf, item],
+        allOf: [...schema.allOf, item].filter<object>(isObject),
       });
     }
 
@@ -31,7 +32,7 @@ export function mergeOneOrAnyOf(
       merged.push(
         mergeAllOf(
           {
-            allOf: [prunedSchema, item],
+            allOf: [prunedSchema, item].filter<object>(isObject),
           },
           path,
           options,
