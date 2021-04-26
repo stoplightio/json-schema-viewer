@@ -2,15 +2,15 @@ import { isRegularNode, SchemaTree as JsonSchemaTree, SchemaTreeRefDereferenceFn
 import { Box, Provider as MosaicProvider } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
-import type { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
+import type { JSONSchema } from '../types';
 import { TopLevelSchemaRow } from './SchemaRow';
 import { ChildStack } from './shared/ChildStack';
 
 export type JsonSchemaProps = Partial<JSVOptions> & {
-  schema: JSONSchema4;
+  schema: JSONSchema;
   emptyText?: string;
   className?: string;
   resolveRef?: SchemaTreeRefDereferenceFn;

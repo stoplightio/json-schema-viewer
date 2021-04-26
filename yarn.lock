@@ -2365,20 +2365,32 @@
     json-schema-compare "^0.2.2"
     lodash "^4.17.4"
 
-"@stoplight/json-schema-tree@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-tree/-/json-schema-tree-1.1.3.tgz#c2aafa1b10c506e7ebec7a4904ff3bd325f7102f"
-  integrity sha512-n/mmhLEu4qrZO/UxQBYyPNid2v4Zq6fuzUK9pBMpNxQtxXmmge62lFWDnc3Q8nzXwRio0OPuMmZS9RO0Q0hmOg==
+"@stoplight/json-schema-tree@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-tree/-/json-schema-tree-2.0.0.tgz#00d54cb6aa2a791c34be91fc30cc92e6d448258c"
+  integrity sha512-vnzcb0TC07xh89lAVGjBTJ2CWvCqmDJDIs3u+gvgvjDPY86CQ0Wl4D2Cmb0iuqd986aiDPc8vDQf1N0dSq5+9A==
   dependencies:
-    "@stoplight/json" "^3.10.0"
+    "@stoplight/json" "^3.12.0"
     "@stoplight/json-schema-merge-allof" "^0.7.5"
     "@stoplight/lifecycle" "^2.3.2"
+    "@types/json-schema" "^7.0.7"
     magic-error "^0.0.0"
 
 "@stoplight/json@^3.10.0", "@stoplight/json@^3.6":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@stoplight/json/-/json-3.10.0.tgz#bd1af55081e1a47e0d01552d2a7e756931f46a4b"
   integrity sha512-Xb1kVQ0t5eqRDF24Y0a2A1o/CEaHjLeVehkBmphqEBkUo6X9L4z5oOUYBMzlAoR/ejhjVgWLzrDBxNOuzBFVDA==
+  dependencies:
+    "@stoplight/ordered-object-literal" "^1.0.1"
+    "@stoplight/types" "^11.9.0"
+    jsonc-parser "~2.2.1"
+    lodash "^4.17.15"
+    safe-stable-stringify "^1.1"
+
+"@stoplight/json@^3.12.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/json/-/json-3.12.0.tgz#26c8d32da78eac6a760ba2c9cca6ae717dc417b4"
+  integrity sha512-c0bvFOGICk8QWIat72Td2GG6Bdvq/6O2jQcDZ8rEjh56YOdC/YPn1S8ihKu3AntJCtvqC9eTfadWBqkNK9HAjw==
   dependencies:
     "@stoplight/ordered-object-literal" "^1.0.1"
     "@stoplight/types" "^11.9.0"
@@ -3200,10 +3212,15 @@
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
 
-"@types/json-schema@^7.0.3", "@types/json-schema@^7.0.4", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.6":
+"@types/json-schema@^7.0.3", "@types/json-schema@^7.0.4", "@types/json-schema@^7.0.5":
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
   integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
+
+"@types/json-schema@^7.0.7":
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
+  integrity sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
 
 "@types/json5@^0.0.29":
   version "0.0.29"

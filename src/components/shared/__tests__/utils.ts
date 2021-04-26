@@ -5,10 +5,11 @@ import {
   SchemaTree as JsonSchemaTree,
   SchemaTreeOptions,
 } from '@stoplight/json-schema-tree';
-import { JSONSchema4 } from 'json-schema';
 import { isEqual } from 'lodash/fp';
 
-export function buildTree(schema: JSONSchema4, options: Partial<SchemaTreeOptions> = {}) {
+import { JSONSchema } from '../../../types';
+
+export function buildTree(schema: JSONSchema, options: Partial<SchemaTreeOptions> = {}) {
   const jsonSchemaTree = new JsonSchemaTree(schema, {
     mergeAllOf: true,
     ...options,

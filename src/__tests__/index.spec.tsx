@@ -3,12 +3,11 @@ import 'jest-enzyme';
 import { mount, ReactWrapper } from 'enzyme';
 import * as fastGlob from 'fast-glob';
 import * as fs from 'fs';
-import { JSONSchema4 } from 'json-schema';
 import * as path from 'path';
 import * as React from 'react';
 
 import { JsonSchemaViewer } from '../components';
-import { ViewMode } from '../types';
+import { JSONSchema, ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
 
 describe('HTML Output', () => {
@@ -24,7 +23,7 @@ describe('HTML Output', () => {
   });
 
   describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {
-    let schema: JSONSchema4;
+    let schema: JSONSchema;
 
     beforeEach(() => {
       schema = {
@@ -84,7 +83,7 @@ describe('HTML Output', () => {
   });
 
   it('given array with oneOf containing items, should merge it correctly', () => {
-    const schema: JSONSchema4 = {
+    const schema: JSONSchema = {
       oneOf: [
         {
           items: {
@@ -104,7 +103,7 @@ describe('HTML Output', () => {
   });
 
   it.each<ViewMode>(['standalone', 'read', 'write'])('given %s mode, should populate proper nodes', mode => {
-    const schema: JSONSchema4 = {
+    const schema: JSONSchema = {
       type: ['string', 'object'],
       properties: {
         id: {
@@ -124,7 +123,7 @@ describe('HTML Output', () => {
   });
 
   it('given multiple object and string type, should process properties', () => {
-    const schema: JSONSchema4 = {
+    const schema: JSONSchema = {
       type: ['string', 'object'],
       properties: {
         ids: {
@@ -140,7 +139,7 @@ describe('HTML Output', () => {
   });
 
   it('given complex type that includes array and complex array subtype, should not ignore subtype', () => {
-    const schema: JSONSchema4 = {
+    const schema: JSONSchema = {
       type: 'object',
       properties: {
         items: {
@@ -158,7 +157,7 @@ describe('HTML Output', () => {
   });
 
   it('given visible $ref node, should try to inject the title immediately', () => {
-    const schema: JSONSchema4 = {
+    const schema: JSONSchema = {
       type: 'object',
       properties: {
         foo: {
@@ -202,7 +201,7 @@ describe('Expanded depth', () => {
   });
 
   describe('merged array with object', () => {
-    let schema: JSONSchema4;
+    let schema: JSONSchema;
 
     beforeEach(() => {
       schema = {
@@ -358,7 +357,7 @@ describe('Expanded depth', () => {
   });
 
   describe('merged array with object #2', () => {
-    let schema: JSONSchema4;
+    let schema: JSONSchema;
 
     beforeEach(() => {
       schema = {
@@ -578,7 +577,7 @@ describe('Expanded depth', () => {
   });
 
   describe('nested object', () => {
-    let schema: JSONSchema4;
+    let schema: JSONSchema;
 
     beforeEach(() => {
       schema = {
@@ -694,7 +693,7 @@ describe('Expanded depth', () => {
 
 describe('$ref resolving', () => {
   it('should render caret for schema with top-level $ref pointing at complex type', () => {
-    const schema: JSONSchema4 = {
+    const schema: JSONSchema = {
       $ref: '#/definitions/foo',
       definitions: {
         foo: {
@@ -725,7 +724,7 @@ describe('$ref resolving', () => {
   });
 
   it('should render caret for top-level array with $ref items', () => {
-    const schema: JSONSchema4 = {
+    const schema: JSONSchema = {
       type: 'array',
       items: {
         $ref: '#/foo',

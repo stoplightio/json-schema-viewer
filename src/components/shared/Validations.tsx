@@ -25,7 +25,7 @@ export const numberValidationNames = [
   'exclusiveMaximum',
 ];
 
-const exampleValidationNames = ['examples', 'example', 'x-example'];
+const exampleValidationNames = ['examples'];
 
 const excludedValidations = ['exclusiveMinimum', 'exclusiveMaximum', 'readOnly', 'writeOnly'];
 
@@ -58,11 +58,8 @@ const createValidationsFormatter = (name: string, options?: { exact?: boolean; n
 };
 
 const validationFormatters: Record<string, (value: unknown) => ValidationFormat | null> = {
-  ['const']: createValidationsFormatter('Allowed'),
   enum: createValidationsFormatter('Allowed'),
   examples: createValidationsFormatter('Example'),
-  example: createValidationsFormatter('Example'),
-  ['x-example']: createValidationsFormatter('Example'),
   multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
   pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
   default: createValidationsFormatter('Default'),
@@ -208,8 +205,6 @@ export function getValidationsFromSchema(schemaNode: RegularNode) {
       ? {
           ...(schemaNode.annotations.default ? { default: schemaNode.annotations.default } : null),
           ...(schemaNode.annotations.examples ? { examples: schemaNode.annotations.examples } : null),
-          ...(schemaNode.annotations.const ? { const: schemaNode.annotations.const } : null),
-          ...(schemaNode.annotations['x-example'] ? { ['x-example']: schemaNode.annotations['x-example'] } : null),
         }
       : null),
     ...getFilteredValidations(schemaNode),
