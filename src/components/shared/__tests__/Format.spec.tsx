@@ -1,15 +1,15 @@
 import 'jest-enzyme';
 
 import { mount } from 'enzyme';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema } from '../../../types';
 import { SchemaRow } from '../../SchemaRow';
 import { Format } from '../Format';
 import { buildTree, findNodeWithPath } from './utils';
 
 describe('Format component', () => {
-  const schema: JSONSchema = require('../../../__fixtures__/formats-schema.json');
+  const schema: JSONSchema4 = require('../../../__fixtures__/formats-schema.json');
   let tree = buildTree(schema);
 
   it('should render next to a single type', () => {

@@ -1,4 +1,4 @@
-import type { SchemaNode } from '@stoplight/json-schema-tree';
+import { SchemaNode } from '@stoplight/json-schema-tree';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';

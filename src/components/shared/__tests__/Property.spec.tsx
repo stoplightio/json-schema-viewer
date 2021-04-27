@@ -2,16 +2,16 @@ import 'jest-enzyme';
 
 import { Provider as MosaicProvider } from '@stoplight/mosaic';
 import { mount, ReactWrapper } from 'enzyme';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { SchemaRow, Types } from '../..';
-import { JSONSchema } from '../../../types';
 import { buildTree, findNodeWithPath } from './utils';
 
 describe('Property component', () => {
   const toUnmount: ReactWrapper[] = [];
 
-  function render(schema: JSONSchema, nodePath?: readonly string[]) {
+  function render(schema: JSONSchema4, nodePath?: readonly string[]) {
     const tree = buildTree(schema);
 
     const node = nodePath ? findNodeWithPath(tree, nodePath) : tree.children[0];
@@ -37,7 +37,7 @@ describe('Property component', () => {
   });
 
   it('should render Types with proper type and subtype', () => {
-    const schema: JSONSchema = {
+    const schema: JSONSchema4 = {
       type: 'array',
       items: {
         type: 'string',
@@ -51,7 +51,7 @@ describe('Property component', () => {
   });
 
   it('should handle nullish items', () => {
-    const schema: JSONSchema = {
+    const schema: JSONSchema4 = {
       type: 'array',
       items: null as any,
     };
@@ -63,7 +63,7 @@ describe('Property component', () => {
   });
 
   it('should handle nullish $ref', () => {
-    const schema: JSONSchema = {
+    const schema: JSONSchema4 = {
       $ref: null as any,
     };
 
@@ -73,7 +73,7 @@ describe('Property component', () => {
 
   describe('properties names', () => {
     it('given an object, should display the names of its properties', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         properties: {
           foo: {
             type: 'string',
@@ -88,7 +88,7 @@ describe('Property component', () => {
     });
 
     it('given an object among other types, should still display its properties', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: ['string', 'object'],
         properties: {
           foo: {
@@ -107,7 +107,7 @@ describe('Property component', () => {
     });
 
     it('given an array of objects, should display names of those properties', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: 'array',
         items: {
           properties: {
@@ -125,7 +125,7 @@ describe('Property component', () => {
     });
 
     it('given an array with a combiner inside, should merge it', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: 'array',
         items: {
           oneOf: [
@@ -146,7 +146,7 @@ describe('Property component', () => {
     });
 
     it('given an array with a mergeable combiner inside, should merge it', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: 'array',
         items: {
           oneOf: [
@@ -169,7 +169,7 @@ describe('Property component', () => {
     });
 
     it('given an array with an allOf inside and enabled allOf merging, should display the name of properties', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: 'object',
         properties: {
           'array-all-objects': {
@@ -209,7 +209,7 @@ describe('Property component', () => {
     });
 
     it('given a ref pointing at complex type, should display property name', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         properties: {
           foo: {
             $ref: '#/properties/bar',
@@ -232,7 +232,7 @@ describe('Property component', () => {
 
   describe('properties titles', () => {
     it('given object type, should render title', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         title: 'User',
         type: 'object',
         properties: {
@@ -249,7 +249,7 @@ describe('Property component', () => {
     });
 
     it('given array type with non-array items, should render title', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: 'array',
         items: {
           title: 'User',
@@ -269,7 +269,7 @@ describe('Property component', () => {
     });
 
     it('given array with no items, should render title', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: 'array',
         title: 'User',
       };
@@ -281,7 +281,7 @@ describe('Property component', () => {
     });
 
     it('given array with defined items, should not render title', () => {
-      const schema: JSONSchema = {
+      const schema: JSONSchema4 = {
         type: 'array',
         items: [
           {

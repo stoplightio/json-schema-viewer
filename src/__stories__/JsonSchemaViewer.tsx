@@ -2,9 +2,10 @@ import { Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema, JsonSchemaViewer, RowAddonRenderer } from '../';
+import { JsonSchemaViewer, RowAddonRenderer } from '../';
 import { Wrapper } from './utils/Wrapper';
 
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
@@ -24,7 +25,7 @@ storiesOf('JsonSchemaViewer', module)
   .addDecorator(storyFn => <Wrapper>{storyFn()}</Wrapper>)
   .add('default', () => (
     <JsonSchemaViewer
-      schema={schema as JSONSchema}
+      schema={schema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 0)}
       viewMode={select(
         'viewMode',
@@ -58,7 +59,7 @@ storiesOf('JsonSchemaViewer', module)
 
     return (
       <JsonSchemaViewer
-        schema={object('schema', schema as JSONSchema)}
+        schema={object('schema', schema as JSONSchema4)}
         onGoToRef={action('onGoToRef')}
         renderRowAddon={customRowAddonRenderer}
       />
@@ -73,28 +74,28 @@ storiesOf('JsonSchemaViewer', module)
   ))
   .add('stress-test schema', () => (
     <JsonSchemaViewer
-      schema={stressSchema as JSONSchema}
+      schema={stressSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('allOf-schema', () => (
     <JsonSchemaViewer
-      schema={allOfSchema as JSONSchema}
+      schema={allOfSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('anyOf-array-schema', () => (
     <JsonSchemaViewer
-      schema={oneOfWithArraySchema as JSONSchema}
+      schema={oneOfWithArraySchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('anyOf-array-schema2', () => (
     <JsonSchemaViewer
-      schema={oneOfWithArraySchema2 as JSONSchema}
+      schema={oneOfWithArraySchema2 as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
@@ -150,7 +151,7 @@ storiesOf('JsonSchemaViewer', module)
       <InvertTheme>
         <div style={{ height: '100vh' }}>
           <JsonSchemaViewer
-            schema={schema as JSONSchema}
+            schema={schema as JSONSchema4}
             defaultExpandedDepth={number('defaultExpandedDepth', 2)}
             onGoToRef={action('onGoToRef')}
           />
@@ -160,21 +161,21 @@ storiesOf('JsonSchemaViewer', module)
   })
   .add('refs/normal', () => (
     <JsonSchemaViewer
-      schema={refSchema as JSONSchema}
+      schema={refSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('refs/nullish', () => (
     <JsonSchemaViewer
-      schema={nullRefSchema as JSONSchema}
+      schema={nullRefSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('refs/broken', () => (
     <JsonSchemaViewer
-      schema={brokenRefArraySchema as JSONSchema}
+      schema={brokenRefArraySchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />

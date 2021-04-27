@@ -3,9 +3,9 @@ import 'jest-enzyme';
 import { RootNode } from '@stoplight/json-schema-tree';
 import { Icon } from '@stoplight/mosaic';
 import { mount } from 'enzyme';
+import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
-import { JSONSchema } from '../../types';
 import { SchemaRow } from '../SchemaRow';
 import { buildTree, findNodeWithPath } from '../shared/__tests__/utils';
 import { Properties } from '../shared/Properties';
@@ -13,7 +13,7 @@ import { Properties } from '../shared/Properties';
 describe('SchemaRow component', () => {
   describe('resolving error', () => {
     let tree: RootNode;
-    let schema: JSONSchema;
+    let schema: JSONSchema4;
 
     beforeEach(() => {
       schema = {
@@ -50,9 +50,9 @@ describe('SchemaRow component', () => {
   });
 
   describe('required property', () => {
-    let schema: JSONSchema;
+    let schema: JSONSchema4;
 
-    function isRequired(schema: JSONSchema, nodePath: readonly string[], value: boolean) {
+    function isRequired(schema: JSONSchema4, nodePath: readonly string[], value: boolean) {
       const tree = buildTree(schema);
 
       const schemaNode = findNodeWithPath(tree, nodePath);
