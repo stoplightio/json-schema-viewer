@@ -1068,13 +1068,13 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                   </div>
                 </div>
                 <div>
+                  <span>Allowed value:</span>
+                  <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Constant name\\"</span>
+                </div>
+                <div>
                   <span>Example values:</span>
                   <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Example name\\"</span>
                   <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Different name\\"</span>
-                </div>
-                <div>
-                  <span>Allowed value:</span>
-                  <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Constant name\\"</span>
                 </div>
               </div>
               <div></div>
@@ -2817,13 +2817,13 @@ exports[`HTML Output should match default-schema.json 1`] = `
                 </div>
               </div>
               <div>
+                <span>Allowed value:</span>
+                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Constant name\\"</span>
+              </div>
+              <div>
                 <span>Example values:</span>
                 <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Example name\\"</span>
                 <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Different name\\"</span>
-              </div>
-              <div>
-                <span>Allowed value:</span>
-                <span style=\\"background-color: rgb(237, 242, 247)\\">\\"Constant name\\"</span>
               </div>
             </div>
             <div></div>
@@ -3671,7 +3671,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                               </div>
                             </div>
                           </div>
-                          <div><span style=\\"background-color: rgb(237, 242, 247)\\">example</span></div>
+                          <div><span style=\\"background-color: rgb(237, 242, 247)\\">examples</span></div>
                         </div>
                         <div></div>
                       </div>
