@@ -10,9 +10,10 @@ import {
 import { Icon, Select } from '@stoplight/mosaic';
 import cn from 'classnames';
 import { last } from 'lodash';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
-import { useJSVOptionsContext } from '../../contexts';
+import { useActiveNodeContext, useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
 import { Caret, Description, Format, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
@@ -22,11 +23,13 @@ import { useChoices } from './useChoices';
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
   nestingLevel: number;
+  onNodeClick(node: SchemaNode): void;
 }
 
-export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
+export const SchemaRow = observer<SchemaRowProps>(({ schemaNode, nestingLevel, onNodeClick }) => {
   const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
 
+  const activeNode = useActiveNodeContext();
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples } = useJSVOptionsContext();
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
@@ -57,7 +60,14 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
   return (
     <div className="sl-relative">
-      <div className="sl-flex">
+      <div
+        className={cn('sl-flex sl-cursor-pointer hover:sl-bg-body-light', {
+          'sl-bg-body-light':
+            activeNode?.id === schemaNode.id ||
+            (isMirroredNode(schemaNode) && schemaNode.mirroredNode.id === activeNode?.id),
+        })}
+        onClick={() => onNodeClick(schemaNode)}
+      >
         <div className="sl-min-w-0 sl-flex-grow">
           <div
             onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
@@ -112,7 +122,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
               </div>
               <Properties
                 required={isPropertyRequired(schemaNode)}
-                deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
+                deprecated={!!(isRegularNode(schemaNode) && schemaNode.annotations.deprecated)}
                 validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
               />
             </div>
@@ -137,11 +147,11 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
         <div>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</div>
       </div>
       {childNodes.length > 0 && isExpanded ? (
-        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} onNodeClick={onNodeClick} />
       ) : null}
     </div>
   );
-};
+});
 
 function shouldShowPropertyName(schemaNode: SchemaNode) {
   return (

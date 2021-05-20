@@ -1,11 +1,19 @@
-import { isRegularNode, SchemaTree as JsonSchemaTree, SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
+import {
+  isMirroredNode,
+  isRegularNode,
+  RegularNode,
+  SchemaTree as JsonSchemaTree,
+  SchemaTreeRefDereferenceFn,
+} from '@stoplight/json-schema-tree';
 import { Box, Provider as MosaicProvider } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
-import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
+import { ActiveNodeContextProvider, JSVOptions, JSVOptionsContextProvider } from '../contexts';
 import type { JSONSchema } from '../types';
+import { Editor } from './Editor';
 import { TopLevelSchemaRow } from './SchemaRow';
 import { ChildStack } from './shared/ChildStack';
 
@@ -16,66 +24,81 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   resolveRef?: SchemaTreeRefDereferenceFn;
 };
 
-const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForwardedProps> = ({
-  schema,
-  viewMode = 'standalone',
-  className,
-  resolveRef,
-  emptyText = 'No schema defined',
-  defaultExpandedDepth = 2,
-  onGoToRef,
-  renderRowAddon,
-  hideExamples,
-}) => {
-  const jsonSchemaTreeRoot = React.useMemo(() => {
-    const jsonSchemaTree = new JsonSchemaTree(schema, {
-      mergeAllOf: true,
-      refResolver: resolveRef,
-    });
-    jsonSchemaTree.walker.hookInto('filter', node => {
-      if (!isRegularNode(node)) return true;
-
-      const { validations } = node;
-
-      if (!!validations.writeOnly === !!validations.readOnly) {
-        return true;
-      }
-
-      return !((viewMode === 'read' && !!validations.writeOnly) || (viewMode === 'write' && !!validations.readOnly));
-    });
-    jsonSchemaTree.populate();
-    return jsonSchemaTree.root;
-  }, [schema, resolveRef, viewMode]);
-
-  const isEmpty = React.useMemo(() => jsonSchemaTreeRoot.children.every(node => !isRegularNode(node) || node.unknown), [
-    jsonSchemaTreeRoot,
-  ]);
-
-  const options = React.useMemo(() => ({ defaultExpandedDepth, viewMode, onGoToRef, renderRowAddon, hideExamples }), [
-    defaultExpandedDepth,
-    viewMode,
+const JsonSchemaViewerComponent = observer<JsonSchemaProps & ErrorBoundaryForwardedProps>(
+  ({
+    schema,
+    viewMode = 'standalone',
+    className,
+    resolveRef,
+    emptyText = 'No schema defined',
+    defaultExpandedDepth = 2,
     onGoToRef,
     renderRowAddon,
     hideExamples,
-  ]);
+  }) => {
+    const jsonSchemaTreeRoot = React.useMemo(() => {
+      const jsonSchemaTree = new JsonSchemaTree(schema, {
+        mergeAllOf: true,
+        refResolver: resolveRef,
+      });
+      jsonSchemaTree.walker.hookInto('filter', node => {
+        if (!isRegularNode(node)) return true;
 
-  if (isEmpty) {
-    return <Box className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}>{emptyText}</Box>;
-  }
+        const { validations } = node;
 
-  return (
-    <MosaicProvider>
-      <JSVOptionsContextProvider value={options}>
-        <ChildStack
-          childNodes={jsonSchemaTreeRoot.children}
-          currentNestingLevel={-1}
-          className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}
-          RowComponent={TopLevelSchemaRow}
-        />
-      </JSVOptionsContextProvider>
-    </MosaicProvider>
-  );
-};
+        if (!!validations.writeOnly === !!validations.readOnly) {
+          return true;
+        }
+
+        return !((viewMode === 'read' && !!validations.writeOnly) || (viewMode === 'write' && !!validations.readOnly));
+      });
+      jsonSchemaTree.populate();
+      return jsonSchemaTree.root;
+    }, [schema, resolveRef, viewMode]);
+
+    const isEmpty = React.useMemo(
+      () => jsonSchemaTreeRoot.children.every(node => !isRegularNode(node) || node.unknown),
+      [jsonSchemaTreeRoot],
+    );
+
+    const options = React.useMemo(() => ({ defaultExpandedDepth, viewMode, onGoToRef, renderRowAddon, hideExamples }), [
+      defaultExpandedDepth,
+      viewMode,
+      onGoToRef,
+      renderRowAddon,
+      hideExamples,
+    ]);
+    const [activeNode, setActiveNode] = React.useState<RegularNode | null>(null);
+
+    if (isEmpty) {
+      return <Box className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}>{emptyText}</Box>;
+    }
+
+    return (
+      <MosaicProvider>
+        <ActiveNodeContextProvider value={activeNode}>
+          <div className="sl-flex">
+            <JSVOptionsContextProvider value={options}>
+              <ChildStack
+                childNodes={jsonSchemaTreeRoot.children}
+                currentNestingLevel={-1}
+                className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}
+                RowComponent={TopLevelSchemaRow}
+                onNodeClick={node => {
+                  if (isRegularNode(node)) {
+                    setActiveNode(isMirroredNode(node) ? node.mirroredNode : node);
+                  }
+                }}
+              />
+            </JSVOptionsContextProvider>
+
+            <Editor />
+          </div>
+        </ActiveNodeContextProvider>
+      </MosaicProvider>
+    );
+  },
+);
 
 const JsonSchemaFallbackComponent: React.FC<FallbackProps> = ({ error }) => {
   return (

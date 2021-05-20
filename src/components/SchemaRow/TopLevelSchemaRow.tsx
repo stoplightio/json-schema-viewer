@@ -1,6 +1,7 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Icon, Pressable, Select } from '@stoplight/mosaic';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';
@@ -9,7 +10,7 @@ import { ChildStack } from '../shared/ChildStack';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
 import { useChoices } from './useChoices';
 
-export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
+export const TopLevelSchemaRow = observer<SchemaRowProps>(({ schemaNode, nestingLevel, onNodeClick }) => {
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice.type]);
 
@@ -17,7 +18,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
   if (isRegularNode(schemaNode) && isPureObjectNode(schemaNode)) {
     return (
       <DecreaseIndentation>
-        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} onNodeClick={onNodeClick} />
       </DecreaseIndentation>
     );
   }
@@ -50,7 +51,9 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
             )}
           />
 
-          {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
+          {childNodes.length > 0 ? (
+            <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} onNodeClick={onNodeClick} />
+          ) : null}
         </div>
       </DecreaseIndentation>
     );
@@ -61,17 +64,19 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
       <DecreaseIndentation>
         <div className="sl-relative">
           <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-py-2">array of:</div>
-          {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
+          {childNodes.length > 0 ? (
+            <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} onNodeClick={onNodeClick} />
+          ) : null}
         </div>
       </DecreaseIndentation>
     );
   }
 
-  return <SchemaRow schemaNode={schemaNode} nestingLevel={nestingLevel} />;
-};
+  return <SchemaRow schemaNode={schemaNode} nestingLevel={nestingLevel} onNodeClick={onNodeClick} />;
+});
 
 function isPureObjectNode(schemaNode: RegularNode) {
-  return schemaNode.primaryType === 'object' && schemaNode.types?.length === 1;
+  return schemaNode.primaryType === 'object' && schemaNode.types?.size === 1;
 }
 
 const DecreaseIndentation: React.FC = ({ children }) => <div style={{ marginLeft: -NESTING_OFFSET }}>{children}</div>;

@@ -61,5 +61,7 @@ export function isPropertyRequired(schemaNode: SchemaNode): boolean {
     return false;
   }
 
-  return !!parent.required?.includes(schemaNode.subpath[schemaNode.subpath.length - 1]);
+  const required = parent.validations?.required;
+
+  return Array.isArray(required) && required.includes(schemaNode.subpath[schemaNode.subpath.length - 1]);
 }

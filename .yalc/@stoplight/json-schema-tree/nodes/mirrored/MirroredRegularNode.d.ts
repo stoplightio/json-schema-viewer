@@ -1,0 +1,30 @@
+import type { SchemaDialect } from '../../dialects/SchemaDialect';
+import type { SchemaFragment } from '../../types';
+import { BaseNode } from '../BaseNode';
+import type { RegularNode } from '../RegularNode';
+import type { SchemaCombinerName, SchemaNodeKind } from '../types';
+import { MirroredReferenceNode } from './MirroredReferenceNode';
+export declare class MirroredRegularNode extends BaseNode implements RegularNode {
+    readonly mirroredNode: RegularNode;
+    readonly dialect: SchemaDialect;
+    readonly $id: string;
+    readonly types: Set<SchemaNodeKind>;
+    readonly primaryType: SchemaNodeKind | null;
+    readonly combiners: Set<SchemaCombinerName>;
+    readonly required: string[] | null;
+    readonly enum: Set<unknown>;
+    readonly format: string | null;
+    readonly title: string | null;
+    readonly deprecated: boolean;
+    readonly annotations: Record<string, unknown>;
+    readonly validations: Record<string, unknown>;
+    readonly simple: boolean;
+    readonly unknown: boolean;
+    private readonly cache;
+    constructor(mirroredNode: RegularNode);
+    toJSON(): SchemaFragment;
+    private readonly _this;
+    private _children?;
+    private _reaction;
+    get children(): (MirroredRegularNode | MirroredReferenceNode)[] | null | undefined;
+}

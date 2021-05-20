@@ -31,7 +31,7 @@ function printArrayName(schemaNode: RegularNode): string | null {
 
         if (!isRegularNode(child)) return null;
 
-        if (child.types !== null && child.types.length > 0) {
+        if (child.types.size > 0) {
           for (const type of child.types) {
             if (mergedTypes.includes(type)) continue;
             mergedTypes.push(type);
@@ -50,8 +50,8 @@ function printArrayName(schemaNode: RegularNode): string | null {
       return `array of ${firstChild.title}-s`;
     } else if (firstChild.primaryType) {
       return `array of ${firstChild.primaryType}s`;
-    } else if (firstChild.combiners?.length) {
-      return `array of ${firstChild.combiners.join('/')}`;
+    } else if (firstChild.combiners?.size) {
+      return `array of ${Array.from(firstChild.combiners).join('/')}`;
     }
     return 'array';
   }

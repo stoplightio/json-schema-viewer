@@ -2,6 +2,7 @@ import { RegularNode } from '@stoplight/json-schema-tree';
 import { Dictionary } from '@stoplight/types';
 import cn from 'classnames';
 import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 export interface IValidations {
@@ -101,7 +102,7 @@ function filterOutOasFormatValidations(format: string, values: Dictionary<unknow
   return newValues;
 }
 
-export const Validations: React.FunctionComponent<IValidations> = ({ validations, hideExamples }) => {
+export const Validations = observer<IValidations>(({ validations, hideExamples }) => {
   const numberValidations = pick(validations, numberValidationNames);
   const booleanValidations = omit(
     pickBy(validations, v => ['true', 'false'].includes(String(v))),
@@ -121,7 +122,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({ validations
       <NameValidations validations={booleanValidations} />
     </>
   );
-};
+});
 
 const NumberValidations = ({
   validations,

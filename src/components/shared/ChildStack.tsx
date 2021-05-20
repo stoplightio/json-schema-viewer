@@ -1,4 +1,5 @@
 import { SchemaNode } from '@stoplight/json-schema-tree';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';
@@ -11,19 +12,17 @@ type ChildStackProps = {
   currentNestingLevel: number;
   className?: string;
   RowComponent?: React.FC<SchemaRowProps>;
+  onNodeClick(node: SchemaNode): void;
 };
-export const ChildStack = ({
-  childNodes,
-  currentNestingLevel,
-  className,
-  RowComponent = SchemaRow,
-}: ChildStackProps) => (
-  <div className={className} style={childStackStyle}>
-    {childNodes.map((childNode: SchemaNode, index) => (
-      <React.Fragment key={childNode.id}>
-        {index > 0 && <div className="sl-border-t sl-border-light sl-self-stretch" />}
-        <RowComponent schemaNode={childNode} nestingLevel={currentNestingLevel + 1} />
-      </React.Fragment>
-    ))}
-  </div>
+export const ChildStack = observer<ChildStackProps>(
+  ({ childNodes, currentNestingLevel, className, RowComponent = SchemaRow, onNodeClick }) => (
+    <div className={className} style={childStackStyle}>
+      {childNodes.map((childNode: SchemaNode, index) => (
+        <React.Fragment key={childNode.id}>
+          {index > 0 && <div className="sl-border-t sl-border-light sl-self-stretch" />}
+          <RowComponent schemaNode={childNode} nestingLevel={currentNestingLevel + 1} onNodeClick={onNodeClick} />
+        </React.Fragment>
+      ))}
+    </div>
+  ),
 );

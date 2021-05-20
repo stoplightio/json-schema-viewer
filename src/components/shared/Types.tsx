@@ -6,6 +6,7 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 import { printName } from '../../utils';
@@ -28,7 +29,7 @@ function getTypes(schemaNode: RegularNode): Array<SchemaNodeKind | SchemaCombine
   );
 }
 
-export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
+export const Types = observer<{ schemaNode: SchemaNode }>(({ schemaNode }) => {
   if (isReferenceNode(schemaNode)) {
     return <span className="sl-truncate">{schemaNode.value ?? '$ref'}</span>;
   }
@@ -53,5 +54,5 @@ export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ sch
   ));
 
   return rendered.length > 1 ? <div className="sl-truncate">{rendered}</div> : <>{rendered}</>;
-};
+});
 Types.displayName = 'JsonSchemaViewer.Types';

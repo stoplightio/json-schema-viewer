@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "User",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "const": "Constant name",
+      "examples": ["Example name", "Different name"],
+      "description": "The user's full name. This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!"
+    },
+    "age": {
+      "type": "number",
+      "minimum": 10,
+      "maximum": 40,
+      "multipleOf": 10,
+      "default": 20,
+      "enum": [10, 20, 30, 40],
+      "readOnly": true
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "examples": ["one@email.com", "two@email.com"],
+      "deprecated": true,
+      "default": "default@email.com",
+      "minLength": 2
+    },
+    "plan": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "foo": {
+              "type": "string"
+            },
+            "bar": {
+              "type": "string"
+            }
+          },
+          "deprecated": false,
+          "example": "hi",
+          "required": ["foo", "bar"]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "$ref": "#"
+      }
+    }
+  },
+  "required": ["name", "age", "completed_at"]
+}

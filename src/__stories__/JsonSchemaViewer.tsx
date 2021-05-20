@@ -40,6 +40,7 @@ storiesOf('JsonSchemaViewer', module)
       onGoToRef={action('onGoToRef')}
     />
   ))
+  .add('demo', () => <JsonSchemaViewer schema={require('../__fixtures__/demo-schema.json') as JSONSchema4} />)
   .add('custom schema', () => (
     <JsonSchemaViewer
       schema={object('schema', {})}
