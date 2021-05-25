@@ -392,7 +392,11 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
                       <span>boolean</span>
                     </div>
                   </div>
-                  <div><div title=\\"Is this account enabled\\">Is this account enabled</div></div>
+                  <div>
+                    <div title=\\"Is this account enabled\\">
+                      <div class=\\"MarkdownViewer\\"><p>Is this account enabled</p></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div></div>
@@ -525,8 +529,12 @@ exports[`HTML Output given complex type that includes array and complex array su
                   <div
                     title=\\"This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!\\"
                   >
-                    This description can be long and should truncate once it reaches the end of the row. If it's not
-                    truncating then theres and issue that needs to be fixed. Help!
+                    <div class=\\"MarkdownViewer\\">
+                      <p>
+                        This description can be long and should truncate once it reaches the end of the row. If it's not
+                        truncating then theres and issue that needs to be fixed. Help!
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -659,7 +667,11 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
                       <span>boolean</span>
                     </div>
                   </div>
-                  <div><div title=\\"Is this account enabled\\">Is this account enabled</div></div>
+                  <div>
+                    <div title=\\"Is this account enabled\\">
+                      <div class=\\"MarkdownViewer\\"><p>Is this account enabled</p></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div></div>
@@ -1062,8 +1074,12 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                     <div
                       title=\\"The user's full name. This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!\\"
                     >
-                      The user's full name. This description can be long and should truncate once it reaches the end of
-                      the row. If it's not truncating then theres and issue that needs to be fixed. Help!
+                      <div class=\\"MarkdownViewer\\">
+                        <p>
+                          The user's full name. This description can be long and should truncate once it reaches the end
+                          of the row. If it's not truncating then theres and issue that needs to be fixed. Help!
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1159,8 +1175,12 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                     <div
                       title=\\"This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!\\"
                     >
-                      This description can be long and should truncate once it reaches the end of the row. If it's not
-                      truncating then theres and issue that needs to be fixed. Help!
+                      <div class=\\"MarkdownViewer\\">
+                        <p>
+                          This description can be long and should truncate once it reaches the end of the row. If it's
+                          not truncating then theres and issue that needs to be fixed. Help!
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2338,7 +2358,11 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
                         </div>
                         <span>required</span>
                       </div>
-                      <div><div title=\\"The user's full name.\\">The user's full name.</div></div>
+                      <div>
+                        <div title=\\"The user's full name.\\">
+                          <div class=\\"MarkdownViewer\\"><p>The user's full name.</p></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div></div>
@@ -2556,7 +2580,7 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
                   </div>
                   <div>
                     <div title=\\"The identifier of the existing reservation.\\">
-                      The identifier of the existing reservation.
+                      <div class=\\"MarkdownViewer\\"><p>The identifier of the existing reservation.</p></div>
                     </div>
                   </div>
                 </div>
@@ -2811,8 +2835,12 @@ exports[`HTML Output should match default-schema.json 1`] = `
                   <div
                     title=\\"The user's full name. This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!\\"
                   >
-                    The user's full name. This description can be long and should truncate once it reaches the end of
-                    the row. If it's not truncating then theres and issue that needs to be fixed. Help!
+                    <div class=\\"MarkdownViewer\\">
+                      <p>
+                        The user's full name. This description can be long and should truncate once it reaches the end
+                        of the row. If it's not truncating then theres and issue that needs to be fixed. Help!
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2908,8 +2936,12 @@ exports[`HTML Output should match default-schema.json 1`] = `
                   <div
                     title=\\"This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!\\"
                   >
-                    This description can be long and should truncate once it reaches the end of the row. If it's not
-                    truncating then theres and issue that needs to be fixed. Help!
+                    <div class=\\"MarkdownViewer\\">
+                      <p>
+                        This description can be long and should truncate once it reaches the end of the row. If it's not
+                        truncating then theres and issue that needs to be fixed. Help!
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -3391,7 +3423,11 @@ exports[`HTML Output should match references/nested.json 1`] = `
                     <span>object</span>
                   </div>
                 </div>
-                <div><div title=\\"something\\">something</div></div>
+                <div>
+                  <div title=\\"something\\">
+                    <div class=\\"MarkdownViewer\\"><p>something</p></div>
+                  </div>
+                </div>
               </div>
             </div>
             <div></div>
@@ -3408,7 +3444,11 @@ exports[`HTML Output should match references/nested.json 1`] = `
                         <span>object</span>
                       </div>
                     </div>
-                    <div><div title=\\"something\\">something</div></div>
+                    <div>
+                      <div title=\\"something\\">
+                        <div class=\\"MarkdownViewer\\"><p>something</p></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div></div>
@@ -3467,7 +3507,9 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                   </div>
                 </div>
                 <div>
-                  <div title=\\"List of ticketing options of the order.\\">List of ticketing options of the order.</div>
+                  <div title=\\"List of ticketing options of the order.\\">
+                    <div class=\\"MarkdownViewer\\"><p>List of ticketing options of the order.</p></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3501,7 +3543,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                 </div>
                 <div>
                   <div title=\\"Common ticketing options to all order items.\\">
-                    Common ticketing options to all order items.
+                    <div class=\\"MarkdownViewer\\"><p>Common ticketing options to all order items.</p></div>
                   </div>
                 </div>
               </div>
@@ -3523,7 +3565,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                 </div>
                 <div>
                   <div title=\\"Ticketing option selection per order item.\\">
-                    Ticketing option selection per order item.
+                    <div class=\\"MarkdownViewer\\"><p>Ticketing option selection per order item.</p></div>
                   </div>
                 </div>
               </div>
@@ -3545,10 +3587,14 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                       <div
                         title=\\"The status that addresses if a specific ticket option is active or not. The status active is used before ticketing or before exchange confirmation. After ticketing, the status changes in completed. This allows to store ticketing options already used at ticketing time and to clean up all non selected options after ticketing or exchanged confirmation.\\"
                       >
-                        The status that addresses if a specific ticket option is active or not. The status active is
-                        used before ticketing or before exchange confirmation. After ticketing, the status changes in
-                        completed. This allows to store ticketing options already used at ticketing time and to clean up
-                        all non selected options after ticketing or exchanged confirmation.
+                        <div class=\\"MarkdownViewer\\">
+                          <p>
+                            The status that addresses if a specific ticket option is active or not. The status active is
+                            used before ticketing or before exchange confirmation. After ticketing, the status changes
+                            in completed. This allows to store ticketing options already used at ticketing time and to
+                            clean up all non selected options after ticketing or exchanged confirmation.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3579,7 +3625,9 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                     </div>
                     <div>
                       <div title=\\"Structure that contains ticketing options per order item.\\">
-                        Structure that contains ticketing options per order item.
+                        <div class=\\"MarkdownViewer\\">
+                          <p>Structure that contains ticketing options per order item.</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3617,7 +3665,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                         </div>
                         <div>
                           <div title=\\"Available ticketing options for a given order item.\\">
-                            Available ticketing options for a given order item.
+                            <div class=\\"MarkdownViewer\\"><p>Available ticketing options for a given order item.</p></div>
                           </div>
                         </div>
                       </div>
@@ -3637,7 +3685,9 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                               <span>read-only</span>
                             </div>
                             <div>
-                              <div title=\\"Ticketing option short-description.\\">Ticketing option short-description.</div>
+                              <div title=\\"Ticketing option short-description.\\">
+                                <div class=\\"MarkdownViewer\\"><p>Ticketing option short-description.</p></div>
+                              </div>
                             </div>
                           </div>
                           <div>
@@ -3666,8 +3716,12 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                               <div
                                 title=\\"Flag to specify which ticketing option is selected. Only one option is allowed to be selected.\\"
                               >
-                                Flag to specify which ticketing option is selected. Only one option is allowed to be
-                                selected.
+                                <div class=\\"MarkdownViewer\\">
+                                  <p>
+                                    Flag to specify which ticketing option is selected. Only one option is allowed to be
+                                    selected.
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -3689,7 +3743,9 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                             </div>
                             <div>
                               <div title=\\"Additional passenger required info specific to the given ticketing option.\\">
-                                Additional passenger required info specific to the given ticketing option.
+                                <div class=\\"MarkdownViewer\\">
+                                  <p>Additional passenger required info specific to the given ticketing option.</p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -3709,7 +3765,11 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                                 <span>object</span>
                               </div>
                             </div>
-                            <div><div title=\\"Data for ticket delivery.\\">Data for ticket delivery.</div></div>
+                            <div>
+                              <div title=\\"Data for ticket delivery.\\">
+                                <div class=\\"MarkdownViewer\\"><p>Data for ticket delivery.</p></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div></div>
@@ -3794,7 +3854,11 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                                   <div
                                     title=\\"The name of the Station in case you select pick up at station as a delivery type\\"
                                   >
-                                    The name of the Station in case you select pick up at station as a delivery type
+                                    <div class=\\"MarkdownViewer\\">
+                                      <p>
+                                        The name of the Station in case you select pick up at station as a delivery type
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
