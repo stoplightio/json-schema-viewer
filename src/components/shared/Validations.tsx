@@ -1,6 +1,6 @@
 import { RegularNode } from '@stoplight/json-schema-tree';
+import { Flex, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
-import cn from 'classnames';
 import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
 import * as React from 'react';
 
@@ -133,13 +133,13 @@ const NumberValidations = ({
     return null;
   }
   return (
-    <div className="sl-flex sl-my-2 sl-text-muted">
+    <Flex my={2} color="muted">
       {entries
         .map(([key, value]) => numberValidationFormatters[key](value))
         .map((value, i) => (
           <Value key={i} name={value} className="sl-mr-2" />
         ))}
-    </div>
+    </Flex>
   );
 };
 
@@ -160,36 +160,33 @@ const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown>
 
 const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
-    <div className="sl-flex sl-flex-wrap sl-text-muted sl-my-2">
-      <span className="sl-text-light">{capitalize(name)}:</span>
+    <Flex flexWrap color="muted" my={2}>
+      <Text color="light">{capitalize(name)}:</Text>
       {uniq(values).map(value => (
         <Value key={value} name={value} className="sl-ml-2" />
       ))}
-    </div>
+    </Flex>
   );
 };
 
 const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
     {keys(validations).length ? (
-      <div className="sl-flex sl-flex-wrap sl-my-2">
+      <Flex flexWrap my={2}>
         {keys(validations)
           .filter(key => validations[key])
           .map(key => (
             <Value key={key} name={key} className="sl-mr-2 sl-text-muted sl-capitalize" />
           ))}
-      </div>
+      </Flex>
     ) : null}
   </>
 );
 
 const Value = ({ name, className }: { name: string; className?: string }) => (
-  <span
-    className={cn('sl-px-1 sl-font-mono sl-border sl-rounded-lg', className)}
-    style={{ backgroundColor: '#EDF2F7' }}
-  >
+  <Text px={1} fontFamily="mono" bg="canvas-100" border rounded="lg" className={className}>
     {name}
-  </span>
+  </Text>
 );
 
 export function validationCount(schemaNode: RegularNode) {
