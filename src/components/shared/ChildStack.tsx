@@ -1,4 +1,5 @@
 import { SchemaNode } from '@stoplight/json-schema-tree';
+import { Box } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';
@@ -18,12 +19,12 @@ export const ChildStack = ({
   className,
   RowComponent = SchemaRow,
 }: ChildStackProps) => (
-  <div className={className} style={childStackStyle}>
+  <Box bg="canvas" className={className} style={childStackStyle}>
     {childNodes.map((childNode: SchemaNode, index) => (
       <React.Fragment key={childNode.id}>
-        {index > 0 && <div className="sl-border-t sl-border-light sl-self-stretch" />}
+        {index > 0 && <Box borderT borderColor="light" alignSelf="stretch" />}
         <RowComponent schemaNode={childNode} nestingLevel={currentNestingLevel + 1} />
       </React.Fragment>
     ))}
-  </div>
+  </Box>
 );
