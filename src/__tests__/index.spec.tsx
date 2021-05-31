@@ -237,7 +237,7 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
                   <div>array of:</div>
@@ -272,7 +272,7 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
                   <div>array of:</div>
@@ -307,7 +307,7 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
                   <div>array of:</div>
@@ -394,7 +394,7 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
                   <div>array of:</div>
@@ -445,7 +445,7 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
                   <div>array of:</div>
@@ -496,7 +496,7 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
                   <div>array of:</div>
@@ -627,7 +627,7 @@ describe('Expanded depth', () => {
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\">
-            <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div style=\\"padding-left: 25px\\">
                   <div>
@@ -705,7 +705,7 @@ describe('$ref resolving', () => {
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\">
-        <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+        <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
           <div>
             <div>
               <div>
@@ -734,7 +734,7 @@ describe('$ref resolving', () => {
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\">
-        <div class=\\"JsonSchemaViewer\\" style=\\"padding-left: 25px\\">
+        <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
           <div>
             <div>
               <div>
