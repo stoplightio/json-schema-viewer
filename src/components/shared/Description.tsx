@@ -7,7 +7,7 @@ export const Description: React.FunctionComponent<{ value: string }> = ({ value 
     as={MarkdownViewer}
     markdown={value}
     style={{
-      'font-size': 12,
+      fontSize: 12,
     }}
   />
 );
