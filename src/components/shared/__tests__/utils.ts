@@ -6,7 +6,7 @@ import {
   SchemaTreeOptions,
 } from '@stoplight/json-schema-tree';
 import { JSONSchema4 } from 'json-schema';
-import { isEqual } from 'lodash/fp';
+import { isEqual } from 'lodash';
 
 export function buildTree(schema: JSONSchema4, options: Partial<SchemaTreeOptions> = {}) {
   const jsonSchemaTree = new JsonSchemaTree(schema, {

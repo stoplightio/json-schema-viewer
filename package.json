@@ -35,8 +35,8 @@
     "test.watch": "yarn test --watch"
   },
   "peerDependencies": {
-    "@stoplight/markdown-viewer": "^4",
-    "@stoplight/ui-kit": "^3",
+    "@stoplight/markdown-viewer": "^5.0.0-beta.4",
+    "@stoplight/mosaic": "^1.0.0-beta.59",
     "react": ">=16.8",
     "react-dom": ">=16.8"
   },
@@ -44,7 +44,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@stoplight/json": "^3.10.0",
     "@stoplight/json-schema-tree": "^2.0.1",
-    "@stoplight/mosaic": "1.0.0-beta.46",
     "@stoplight/react-error-boundary": "^1.0.0",
     "@types/json-schema": "^7.0.7",
     "classnames": "^2.2.6",
@@ -54,11 +53,12 @@
     "@rollup/plugin-typescript": "^3.1.1",
     "@sambego/storybook-state": "^1.3.6",
     "@stoplight/eslint-config": "^1.2.0",
-    "@stoplight/markdown-viewer": "^4.3.4",
+    "@stoplight/markdown-viewer": "^5.0.0-beta.4",
+    "@stoplight/mosaic": "^1.0.0-beta.59",
+    "@stoplight/mosaic-code-viewer": "^1.0.0-beta.59",
     "@stoplight/scripts": "^8.2.0",
     "@stoplight/storybook-config": "^2.0.6",
     "@stoplight/types": "^11.9.0",
-    "@stoplight/ui-kit": "3.0.0-beta.39",
     "@types/classnames": "^2.2.11",
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^26.0.18",
