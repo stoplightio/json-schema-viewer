@@ -236,7 +236,7 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"\\">
+          "<div data-overlay-container=\\"true\\" class=\\"\\">
             <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
@@ -271,7 +271,7 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"\\">
+          "<div data-overlay-container=\\"true\\" class=\\"\\">
             <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
@@ -306,7 +306,7 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"\\">
+          "<div data-overlay-container=\\"true\\" class=\\"\\">
             <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
@@ -393,7 +393,7 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"\\">
+          "<div data-overlay-container=\\"true\\" class=\\"\\">
             <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
@@ -444,7 +444,7 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"\\">
+          "<div data-overlay-container=\\"true\\" class=\\"\\">
             <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
@@ -495,7 +495,7 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"\\">
+          "<div data-overlay-container=\\"true\\" class=\\"\\">
             <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div>
@@ -626,7 +626,7 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div class=\\"\\">
+          "<div data-overlay-container=\\"true\\" class=\\"\\">
             <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
               <div style=\\"margin-left: -25px\\">
                 <div style=\\"padding-left: 25px\\">
@@ -704,7 +704,7 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div class=\\"\\">
+      "<div data-overlay-container=\\"true\\" class=\\"\\">
         <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
           <div>
             <div>
@@ -733,7 +733,7 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div class=\\"\\">
+      "<div data-overlay-container=\\"true\\" class=\\"\\">
         <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
           <div>
             <div>
