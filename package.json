@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "sl-scripts bundle --sourcemap",
+    "postbuild": "yarn test.packaging",
     "build.docs": "build-storybook -c .storybook -o docs-auto",
     "commit": "git-cz",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
@@ -32,7 +33,8 @@
     "test": "jest",
     "test.prod": "yarn lint && yarn test --coverage --maxWorkers=2",
     "test.update": "yarn test --updateSnapshot",
-    "test.watch": "yarn test --watch"
+    "test.watch": "yarn test --watch",
+    "test.packaging": "node -e \"require('./dist/index.js')\" && node --input-type=module -e \"import './dist/index.mjs'\""
   },
   "peerDependencies": {
     "@stoplight/markdown-viewer": "^5",

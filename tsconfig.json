@@ -5,6 +5,7 @@
   "exclude": ["dist/"],
   "compilerOptions": {
     "lib": ["dom", "webworker", "es2017", "dom.iterable"],
-    "target": "es2017"
+    "target": "es2017",
+    "esModuleInterop": true
   }
 }
