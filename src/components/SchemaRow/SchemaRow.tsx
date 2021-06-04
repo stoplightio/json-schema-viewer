@@ -9,7 +9,7 @@ import {
 } from '@stoplight/json-schema-tree';
 import { Icon, Select } from '@stoplight/mosaic';
 import cn from 'classnames';
-import { last } from 'lodash';
+import last from 'lodash/last.js';
 import * as React from 'react';
 
 import { useJSVOptionsContext } from '../../contexts';

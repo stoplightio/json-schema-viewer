@@ -1,7 +1,12 @@
 import { RegularNode } from '@stoplight/json-schema-tree';
 import { Flex, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
-import { capitalize, keys, omit, pick, pickBy, uniq } from 'lodash';
+import capitalize from 'lodash/capitalize.js';
+import keys from 'lodash/keys.js';
+import omit from 'lodash/omit.js';
+import pick from 'lodash/pick.js';
+import pickBy from 'lodash/pickBy.js';
+import uniq from 'lodash/uniq.js';
 import * as React from 'react';
 
 export interface IValidations {
