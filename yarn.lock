@@ -2397,12 +2397,12 @@
   dependencies:
     wolfy87-eventemitter "~5.2.8"
 
-"@stoplight/markdown-viewer@^5.0.0-beta.4":
-  version "5.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@stoplight/markdown-viewer/-/markdown-viewer-5.0.0-beta.4.tgz#1be6f1553272b182d22ba701eb1efa3e021938ec"
-  integrity sha512-1Vqf6096U+w+WVKiHqstTfXzJwaAkofZWMscRDaz3MbLXEGITjF+ucyD0UNOBxSiaZNAzRSb9Z158aROJcikTQ==
+"@stoplight/markdown-viewer@^5.0.0-beta.5":
+  version "5.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@stoplight/markdown-viewer/-/markdown-viewer-5.0.0-beta.5.tgz#f5ac8bfffb9fd664ad87bb9fecd6618fa6baf100"
+  integrity sha512-bI8/FVTRTS6wmaXNXUeoq3tUuhVdIlDI0vk3nuUVsU2+H0xf+rDy8ALznSbVN1y559s7nwgxS8cl8/NC2roKXQ==
   dependencies:
-    "@stoplight/markdown" "^3.0.0-beta.4"
+    "@stoplight/markdown" "^3.0.0-beta.5"
     "@stoplight/react-error-boundary" "^1.1.0"
     "@stoplight/types" "^12.3.0"
     clsx "^1.1.1"
@@ -2413,10 +2413,10 @@
     remark-parse "^9.0.0"
     remark-rehype "^8.1.0"
 
-"@stoplight/markdown@^3.0.0-beta.4":
-  version "3.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@stoplight/markdown/-/markdown-3.0.0-beta.4.tgz#bd3c2cde4b473e46968edcb44a26c1e87cb9c75a"
-  integrity sha512-QQhXKs5wKMg7s5WhtTKapjhe4kCv+1TjtoNRjGW6/JT/TnNnN1dR5C91NpOt787XtG6m1tN54pAZq2nUWcpkdA==
+"@stoplight/markdown@^3.0.0-beta.5":
+  version "3.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@stoplight/markdown/-/markdown-3.0.0-beta.5.tgz#08f84f3a2c27e88647a2e4e4f64bcb39a99add39"
+  integrity sha512-x7uX121NBqKzrfDDljR/2i+Egwk+iGsLe2BlT0SIujlxS0aaCS7QMWzJekOAUT9xK1vxM1becWTQ47HF/6U22g==
   dependencies:
     "@stoplight/types" "^12.3.0"
     "@stoplight/yaml" "^4.2.2"
@@ -2539,10 +2539,10 @@
   dependencies:
     "@stoplight/types" "^11.9.0"
 
-"@stoplight/scripts@9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@stoplight/scripts/-/scripts-9.0.1.tgz#4064d4a41e48e1e54cf716456c23535397d07bc2"
-  integrity sha512-EEJQPe3srOTYFvU5KUpC/IIG22JHzLJ47/vEVOMlumjQJP/8gafMPV4HUi5QGSvxCkYmEwKumWVrOHbd7jOvqA==
+"@stoplight/scripts@9.0.2":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@stoplight/scripts/-/scripts-9.0.2.tgz#38f545ab21b9c3e0cfdd4f14c2bcb051b235c285"
+  integrity sha512-eUJUmm2q0IPKE9JslAJwG6crLHF/hQTxcOKky2lyXhdT7INihcIPKbxLKwL8zf9iS5A+UE+jmKTWbqb9BgR1sw==
   dependencies:
     "@commitlint/cli" "8.3.5"
     "@commitlint/config-conventional" "8.3.4"
