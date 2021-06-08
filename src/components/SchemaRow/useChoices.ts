@@ -1,6 +1,6 @@
 import { extractPointerFromRef, pointerToPath } from '@stoplight/json';
 import { isReferenceNode, isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
-import { last } from 'lodash';
+import last from 'lodash/last.js';
 import * as React from 'react';
 
 import { isComplexArray, isNonEmptyParentNode } from '../../tree';
