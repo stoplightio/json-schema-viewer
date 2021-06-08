@@ -1,4 +1,4 @@
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Icon, Pressable, Select } from '@stoplight/mosaic';
 import * as React from 'react';
