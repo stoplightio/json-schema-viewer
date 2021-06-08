@@ -1,5 +1,5 @@
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown.js';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight.js';
 import { Icon } from '@stoplight/mosaic';
 import * as React from 'react';
 

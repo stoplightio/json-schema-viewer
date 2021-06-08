@@ -34,7 +34,8 @@
     "test.prod": "yarn lint && yarn test --coverage --maxWorkers=2",
     "test.update": "yarn test --updateSnapshot",
     "test.watch": "yarn test --watch",
-    "test.packaging": "node -e \"require('./dist/index.js')\" && node --input-type=module -e \"import './dist/index.mjs'\""
+    "test.packaging": "node -e \"require('./dist/index.js')\" && node --input-type=module -e \"import './dist/index.mjs'\"",
+    "size-limit": "size-limit"
   },
   "peerDependencies": {
     "@stoplight/markdown-viewer": "^5.0.0-beta.5",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@sambego/storybook-state": "^1.3.6",
+    "@size-limit/preset-big-lib": "^4.11.0",
     "@stoplight/eslint-config": "^1.2.0",
     "@stoplight/markdown-viewer": "^5.0.0-beta.5",
     "@stoplight/mosaic": "^1.0.0-beta.59",
@@ -90,6 +92,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rollup-plugin-terser": "^5.3.0",
+    "size-limit": "^4.11.0",
     "treeify": "^1.1.0",
     "ts-jest": "^26.4.4",
     "typescript": "^4.0.5"
@@ -118,5 +121,13 @@
   "release": {
     "extends": "@stoplight/scripts/release"
   },
-  "typings": "src/index.d.ts"
+  "typings": "src/index.d.ts",
+  "size-limit": [
+    {
+      "path": "dist/index.esm.js",
+      "limit": "150 KB",
+      "brotli": true,
+      "running": false
+    }
+  ]
 }
