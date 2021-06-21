@@ -15,17 +15,21 @@
         }
       },
       {
-        "type": "object",
-        "title": "B",
-        "properties": {
-          "foo": {
-            "type": "number"
-          },
-          "bar": {
-            "type": "string"
-          }
-        }
+        "$ref": "#/__bundled__/someBundledObj"
       }
     ]
+  },
+  "__bundled__": {
+    "someBundledObj": {
+      "type": "object",
+      "properties": {
+        "foo": {
+          "type": "number"
+        },
+        "bar": {
+          "type": "string"
+        }
+      }
+    }
   }
 }
