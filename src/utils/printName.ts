@@ -1,6 +1,6 @@
 import { getLastPathSegment } from '@stoplight/json';
 import { isReferenceNode, isRegularNode, RegularNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
-import capitalize from 'lodash/capitalize.js';
+import upperFirst from 'lodash/upperFirst.js';
 
 import { isNonNullable } from '../guards/isNonNullable';
 import { isComplexArray, isPrimitiveArray } from '../tree';
@@ -75,7 +75,7 @@ function printArrayName(
 
 function getNodeNameFromOriginalRef(node: RegularNode) {
   if (typeof node.originalFragment.$ref === 'string') {
-    return capitalize(getLastPathSegment(node.originalFragment.$ref));
+    return upperFirst(getLastPathSegment(node.originalFragment.$ref));
   }
   return undefined;
 }

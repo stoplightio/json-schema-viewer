@@ -2753,7 +2753,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
               <select size=\\"2\\">
                 <option></option>
                 <option value=\\"0\\">1. array of A-s</option>
-                <option value=\\"1\\">2. array of Somebundledobj-s</option>
+                <option value=\\"1\\">2. array of SomeBundledObj-s</option>
               </select>
             </label>
           </div>
