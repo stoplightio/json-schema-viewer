@@ -29,7 +29,7 @@ function printArrayName(
   { shouldUseRefNameFallback = false }: PrintNameOptions,
 ): string | undefined {
   if (!isNonNullable(schemaNode.children) || schemaNode.children.length === 0) {
-    return schemaNode.title ?? getNodeNameFromOriginalRef(schemaNode);
+    return schemaNode.title ?? (shouldUseRefNameFallback ? getNodeNameFromOriginalRef(schemaNode) : undefined);
   }
 
   if (schemaNode.children.length === 1 && isReferenceNode(schemaNode.children[0])) {
