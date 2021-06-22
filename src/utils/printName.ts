@@ -5,19 +5,29 @@ import capitalize from 'lodash/capitalize.js';
 import { isNonNullable } from '../guards/isNonNullable';
 import { isComplexArray, isPrimitiveArray } from '../tree';
 
-export function printName(schemaNode: RegularNode): string | undefined {
+type PrintNameOptions = {
+  shouldUseRefNameFallback?: boolean;
+};
+
+export function printName(
+  schemaNode: RegularNode,
+  { shouldUseRefNameFallback = false }: PrintNameOptions = {},
+): string | undefined {
   if (
     schemaNode.primaryType !== SchemaNodeKind.Array ||
     !isNonNullable(schemaNode.children) ||
     schemaNode.children.length === 0
   ) {
-    return schemaNode.title ?? getNodeNameFromOriginalRef(schemaNode);
+    return schemaNode.title ?? (shouldUseRefNameFallback ? getNodeNameFromOriginalRef(schemaNode) : undefined);
   }
 
-  return printArrayName(schemaNode);
+  return printArrayName(schemaNode, { shouldUseRefNameFallback });
 }
 
-function printArrayName(schemaNode: RegularNode): string | undefined {
+function printArrayName(
+  schemaNode: RegularNode,
+  { shouldUseRefNameFallback = false }: PrintNameOptions,
+): string | undefined {
   if (!isNonNullable(schemaNode.children) || schemaNode.children.length === 0) {
     return schemaNode.title ?? getNodeNameFromOriginalRef(schemaNode);
   }
@@ -50,12 +60,12 @@ function printArrayName(schemaNode: RegularNode): string | undefined {
     const firstChild = schemaNode.children[0];
     if (firstChild.title) {
       return `array of ${firstChild.title}-s`;
+    } else if (shouldUseRefNameFallback && getNodeNameFromOriginalRef(schemaNode)) {
+      return `array of ${getNodeNameFromOriginalRef(schemaNode)}-s`;
     } else if (firstChild.primaryType) {
       return `array of ${firstChild.primaryType}s`;
     } else if (firstChild.combiners?.length) {
       return `array of ${firstChild.combiners.join('/')}`;
-    } else if (getNodeNameFromOriginalRef(schemaNode)) {
-      return `array of ${getNodeNameFromOriginalRef(schemaNode)}-s`;
     }
     return 'array';
   }
