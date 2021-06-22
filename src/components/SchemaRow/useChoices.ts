@@ -15,7 +15,7 @@ function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
   const complexObjectSuffix = isPlural ? '-s' : '';
   const primitiveSuffix = isPlural ? 's' : '';
   if (isRegularNode(node)) {
-    const realName = printName(node);
+    const realName = printName(node, { shouldUseRefNameFallback: true });
     if (realName) {
       return realName + complexObjectSuffix;
     }

@@ -1,23 +1,35 @@
+import { getLastPathSegment } from '@stoplight/json';
 import { isReferenceNode, isRegularNode, RegularNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import upperFirst from 'lodash/upperFirst.js';
 
 import { isNonNullable } from '../guards/isNonNullable';
 import { isComplexArray, isPrimitiveArray } from '../tree';
 
-export function printName(schemaNode: RegularNode): string | null {
+type PrintNameOptions = {
+  shouldUseRefNameFallback?: boolean;
+};
+
+export function printName(
+  schemaNode: RegularNode,
+  { shouldUseRefNameFallback = false }: PrintNameOptions = {},
+): string | undefined {
   if (
     schemaNode.primaryType !== SchemaNodeKind.Array ||
     !isNonNullable(schemaNode.children) ||
     schemaNode.children.length === 0
   ) {
-    return schemaNode.title;
+    return schemaNode.title ?? (shouldUseRefNameFallback ? getNodeNameFromOriginalRef(schemaNode) : undefined);
   }
 
-  return printArrayName(schemaNode);
+  return printArrayName(schemaNode, { shouldUseRefNameFallback });
 }
 
-function printArrayName(schemaNode: RegularNode): string | null {
+function printArrayName(
+  schemaNode: RegularNode,
+  { shouldUseRefNameFallback = false }: PrintNameOptions,
+): string | undefined {
   if (!isNonNullable(schemaNode.children) || schemaNode.children.length === 0) {
-    return schemaNode.title;
+    return schemaNode.title ?? (shouldUseRefNameFallback ? getNodeNameFromOriginalRef(schemaNode) : undefined);
   }
 
   if (schemaNode.children.length === 1 && isReferenceNode(schemaNode.children[0])) {
@@ -48,6 +60,8 @@ function printArrayName(schemaNode: RegularNode): string | null {
     const firstChild = schemaNode.children[0];
     if (firstChild.title) {
       return `array of ${firstChild.title}-s`;
+    } else if (shouldUseRefNameFallback && getNodeNameFromOriginalRef(schemaNode)) {
+      return `array of ${getNodeNameFromOriginalRef(schemaNode)}-s`;
     } else if (firstChild.primaryType) {
       return `array of ${firstChild.primaryType}s`;
     } else if (firstChild.combiners?.length) {
@@ -56,5 +70,12 @@ function printArrayName(schemaNode: RegularNode): string | null {
     return 'array';
   }
 
-  return null;
+  return undefined;
+}
+
+function getNodeNameFromOriginalRef(node: RegularNode) {
+  if (typeof node.originalFragment.$ref === 'string') {
+    return upperFirst(getLastPathSegment(node.originalFragment.$ref));
+  }
+  return undefined;
 }
