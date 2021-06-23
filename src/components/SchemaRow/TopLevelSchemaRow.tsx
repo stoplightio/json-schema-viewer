@@ -1,6 +1,6 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown.js';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
-import { Icon, Pressable, Select } from '@stoplight/mosaic';
+import { Icon, Menu, Pressable } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';
@@ -26,18 +26,15 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
     return (
       <DecreaseIndentation>
         <div className="sl-relative">
-          <Select
+          <Menu
             aria-label="Pick a type"
-            size="sm"
-            options={choices.map((choice, index) => ({
-              value: String(index),
-              label: choice.title,
+            closeOnPress
+            matchTriggerWidth
+            items={choices.map((choice, index) => ({
+              id: index,
+              title: choice.title,
+              onPress: () => setSelectedChoice(choice),
             }))}
-            value={
-              String(choices.indexOf(selectedChoice))
-              /* String to work around https://github.com/stoplightio/mosaic/issues/162 */
-            }
-            onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
             renderTrigger={props => (
               <Pressable {...props}>
                 <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-flex sl-cursor-pointer sl-py-2">
