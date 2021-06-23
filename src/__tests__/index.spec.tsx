@@ -236,26 +236,28 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div data-overlay-container=\\"true\\" class=\\"\\">
-            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: -25px\\">
-                <div>
-                  <div>array of:</div>
-                  <div style=\\"padding-left: 25px\\">
-                    <div>
+          "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+            <div data-overlay-container=\\"true\\">
+              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+                <div style=\\"margin-left: -25px\\">
+                  <div>
+                    <div>array of:</div>
+                    <div style=\\"padding-left: 25px\\">
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                               <div>
-                                <div>foo</div>
-                                <span>array of objects</span>
+                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div>
+                                  <div>foo</div>
+                                  <span>array of objects</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
                     </div>
                   </div>
@@ -271,26 +273,28 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div data-overlay-container=\\"true\\" class=\\"\\">
-            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: -25px\\">
-                <div>
-                  <div>array of:</div>
-                  <div style=\\"padding-left: 25px\\">
-                    <div>
+          "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+            <div data-overlay-container=\\"true\\">
+              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+                <div style=\\"margin-left: -25px\\">
+                  <div>
+                    <div>array of:</div>
+                    <div style=\\"padding-left: 25px\\">
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                               <div>
-                                <div>foo</div>
-                                <span>array of objects</span>
+                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div>
+                                  <div>foo</div>
+                                  <span>array of objects</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
                     </div>
                   </div>
@@ -306,42 +310,44 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div data-overlay-container=\\"true\\" class=\\"\\">
-            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: -25px\\">
-                <div>
-                  <div>array of:</div>
-                  <div style=\\"padding-left: 25px\\">
-                    <div>
+          "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+            <div data-overlay-container=\\"true\\">
+              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+                <div style=\\"margin-left: -25px\\">
+                  <div>
+                    <div>array of:</div>
+                    <div style=\\"padding-left: 25px\\">
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                               <div>
-                                <div>foo</div>
-                                <span>array of objects</span>
+                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div>
+                                  <div>foo</div>
+                                  <span>array of objects</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
-                      </div>
-                      <div style=\\"padding-left: 25px\\">
-                        <div>
+                        <div style=\\"padding-left: 25px\\">
                           <div>
                             <div>
                               <div>
                                 <div>
-                                  <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                   <div>
-                                    <div>bar</div>
-                                    <span>object</span>
+                                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                    <div>
+                                      <div>bar</div>
+                                      <span>object</span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
+                              <div></div>
                             </div>
-                            <div></div>
                           </div>
                         </div>
                       </div>
@@ -393,42 +399,44 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div data-overlay-container=\\"true\\" class=\\"\\">
-            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: -25px\\">
-                <div>
-                  <div>array of:</div>
-                  <div style=\\"padding-left: 25px\\">
-                    <div>
+          "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+            <div data-overlay-container=\\"true\\">
+              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+                <div style=\\"margin-left: -25px\\">
+                  <div>
+                    <div>array of:</div>
+                    <div style=\\"padding-left: 25px\\">
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div>bar</div>
-                                <span>integer</span>
+                                <div>
+                                  <div>bar</div>
+                                  <span>integer</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
-                    </div>
-                    <div></div>
-                    <div>
+                      <div></div>
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                               <div>
-                                <div>foo</div>
-                                <span>array of objects</span>
+                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div>
+                                  <div>foo</div>
+                                  <span>array of objects</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
                     </div>
                   </div>
@@ -444,42 +452,44 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={0} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div data-overlay-container=\\"true\\" class=\\"\\">
-            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: -25px\\">
-                <div>
-                  <div>array of:</div>
-                  <div style=\\"padding-left: 25px\\">
-                    <div>
+          "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+            <div data-overlay-container=\\"true\\">
+              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+                <div style=\\"margin-left: -25px\\">
+                  <div>
+                    <div>array of:</div>
+                    <div style=\\"padding-left: 25px\\">
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div>bar</div>
-                                <span>integer</span>
+                                <div>
+                                  <div>bar</div>
+                                  <span>integer</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
-                    </div>
-                    <div></div>
-                    <div>
+                      <div></div>
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                               <div>
-                                <div>foo</div>
-                                <span>array of objects</span>
+                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div>
+                                  <div>foo</div>
+                                  <span>array of objects</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
                     </div>
                   </div>
@@ -495,73 +505,75 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div data-overlay-container=\\"true\\" class=\\"\\">
-            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: -25px\\">
-                <div>
-                  <div>array of:</div>
-                  <div style=\\"padding-left: 25px\\">
-                    <div>
+          "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+            <div data-overlay-container=\\"true\\">
+              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+                <div style=\\"margin-left: -25px\\">
+                  <div>
+                    <div>array of:</div>
+                    <div style=\\"padding-left: 25px\\">
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div>bar</div>
-                                <span>integer</span>
+                                <div>
+                                  <div>bar</div>
+                                  <span>integer</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
                       </div>
-                    </div>
-                    <div></div>
-                    <div>
+                      <div></div>
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                               <div>
-                                <div>foo</div>
-                                <span>array of objects</span>
+                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div>
+                                  <div>foo</div>
+                                  <span>array of objects</span>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div></div>
                         </div>
-                        <div></div>
-                      </div>
-                      <div style=\\"padding-left: 25px\\">
-                        <div>
+                        <div style=\\"padding-left: 25px\\">
                           <div>
                             <div>
                               <div>
                                 <div>
                                   <div>
-                                    <div>bar</div>
-                                    <span>string</span>
+                                    <div>
+                                      <div>bar</div>
+                                      <span>string</span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
+                              <div></div>
                             </div>
-                            <div></div>
                           </div>
-                        </div>
-                        <div></div>
-                        <div>
+                          <div></div>
                           <div>
                             <div>
                               <div>
                                 <div>
                                   <div>
-                                    <div>foo</div>
-                                    <span>number</span>
+                                    <div>
+                                      <div>foo</div>
+                                      <span>number</span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
+                              <div></div>
                             </div>
-                            <div></div>
                           </div>
                         </div>
                       </div>
@@ -626,41 +638,43 @@ describe('Expanded depth', () => {
         const wrapper = mountWithAutoUnmount(<JsonSchemaViewer schema={schema} defaultExpandedDepth={-1} />);
 
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
-          "<div data-overlay-container=\\"true\\" class=\\"\\">
-            <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-              <div style=\\"margin-left: -25px\\">
-                <div style=\\"padding-left: 25px\\">
-                  <div>
+          "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+            <div data-overlay-container=\\"true\\">
+              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+                <div style=\\"margin-left: -25px\\">
+                  <div style=\\"padding-left: 25px\\">
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                             <div>
-                              <div>bar</div>
-                              <span>object</span>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>bar</div>
+                                <span>object</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
                     </div>
-                  </div>
-                  <div></div>
-                  <div>
+                    <div></div>
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                             <div>
-                              <div>foo</div>
-                              <span>array of objects</span>
+                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div>
+                                <div>foo</div>
+                                <span>array of objects</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div></div>
                       </div>
-                      <div></div>
                     </div>
                   </div>
                 </div>
@@ -704,18 +718,20 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div data-overlay-container=\\"true\\" class=\\"\\">
-        <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-          <div>
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
             <div>
               <div>
                 <div>
                   <div>
-                    <div><span>string</span></div>
+                    <div>
+                      <div><span>string</span></div>
+                    </div>
                   </div>
                 </div>
+                <div></div>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -733,31 +749,33 @@ describe('$ref resolving', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
-      "<div data-overlay-container=\\"true\\" class=\\"\\">
-        <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-          <div>
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
-                    <div><span>$ref(#/foo)[]</span></div>
+                    <div>
+                      <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                      <div><span>$ref(#/foo)[]</span></div>
+                    </div>
                   </div>
                 </div>
+                <div></div>
               </div>
-              <div></div>
-            </div>
-            <div style=\\"padding-left: 25px\\">
-              <div>
+              <div style=\\"padding-left: 25px\\">
                 <div>
                   <div>
                     <div>
                       <div>
-                        <div><span>#/foo</span></div>
+                        <div>
+                          <div><span>#/foo</span></div>
+                        </div>
                       </div>
                     </div>
+                    <div></div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
