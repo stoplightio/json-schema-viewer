@@ -331,7 +331,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            1. Admin
+            Admin
             <div></div>
           </div>
           <div style=\\"padding-left: 25px\\">
@@ -439,7 +439,7 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            1. array of strings
+            array of strings
             <div></div>
           </div>
         </div>
@@ -544,7 +544,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            1. Admin
+            Admin
             <div></div>
           </div>
           <div style=\\"padding-left: 25px\\">
@@ -1165,8 +1165,8 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                             <label>
                               <select size=\\"2\\">
                                 <option></option>
-                                <option value=\\"0\\">1. object</option>
-                                <option value=\\"1\\">2. array of integers</option>
+                                <option value=\\"0\\">object</option>
+                                <option value=\\"1\\">array of integers</option>
                               </select>
                             </label>
                           </div>
@@ -1180,7 +1180,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                               type=\\"button\\"
                               class=\\"active:sl-bg-canvas-100 hover:sl-border-input focus:sl-border-input active:sl-border-button disabled:sl-opacity-50\\"
                             >
-                              <div><div>1. object</div></div>
+                              <div><div>object</div></div>
                               <div><div></div></div>
                             </button>
                           </div>
@@ -2443,7 +2443,7 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            1. BugExample
+            BugExample
             <div></div>
           </div>
           <div style=\\"padding-left: 25px\\">
@@ -2572,7 +2572,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            1. array of objects
+            array of objects
             <div></div>
           </div>
           <div style=\\"padding-left: 25px\\">
@@ -2627,7 +2627,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            1. array of A-s
+            array of A
             <div></div>
           </div>
           <div style=\\"padding-left: 25px\\">
@@ -2846,8 +2846,8 @@ exports[`HTML Output should match default-schema.json 1`] = `
                           <label>
                             <select size=\\"2\\">
                               <option></option>
-                              <option value=\\"0\\">1. object</option>
-                              <option value=\\"1\\">2. array of integers</option>
+                              <option value=\\"0\\">object</option>
+                              <option value=\\"1\\">array of integers</option>
                             </select>
                           </label>
                         </div>
@@ -2861,7 +2861,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                             type=\\"button\\"
                             class=\\"active:sl-bg-canvas-100 hover:sl-border-input focus:sl-border-input active:sl-border-button disabled:sl-opacity-50\\"
                           >
-                            <div><div>1. object</div></div>
+                            <div><div>object</div></div>
                             <div><div></div></div>
                           </button>
                         </div>
