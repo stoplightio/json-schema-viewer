@@ -34,19 +34,19 @@ function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
   return 'any';
 }
 
-function makeChoice(node: SchemaNode, index: number): Choice {
+function makeChoice(node: SchemaNode): Choice {
   return {
     type: node,
-    title: `${index + 1}. ${calculateChoiceTitle(node, false)}`,
+    title: calculateChoiceTitle(node, false),
   };
 }
 
-function makeArrayChoice(node: SchemaNode, index: number): Choice {
+function makeArrayChoice(node: SchemaNode): Choice {
   const itemTitle = calculateChoiceTitle(node, true);
   const title = itemTitle !== 'any' ? `array of ${itemTitle}` : 'array';
   return {
     type: node,
-    title: `${index + 1}. ${title}`,
+    title,
   };
 }
 
@@ -72,7 +72,7 @@ export const useChoices = (schemaNode: SchemaNode) => {
       return schemaNode.children.map(makeChoice);
     }
     // regular node, single choice - itself
-    return [makeChoice(schemaNode, 0)];
+    return [makeChoice(schemaNode)];
   }, [schemaNode]);
 
   const defaultChoice = choices[0];
