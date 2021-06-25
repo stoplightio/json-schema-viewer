@@ -12,12 +12,11 @@ type Choice = {
 };
 
 function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
-  const complexObjectSuffix = isPlural ? '-s' : '';
   const primitiveSuffix = isPlural ? 's' : '';
   if (isRegularNode(node)) {
     const realName = printName(node, { shouldUseRefNameFallback: true });
     if (realName) {
-      return realName + complexObjectSuffix;
+      return realName;
     }
     return node.primaryType !== null ? node.primaryType + primitiveSuffix : 'any';
   }
@@ -26,7 +25,7 @@ function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
       const value = extractPointerFromRef(node.value);
       const lastPiece = !node.error && value ? last(pointerToPath(value)) : null;
       if (typeof lastPiece === 'string') {
-        return lastPiece.split('.')[0] + complexObjectSuffix;
+        return lastPiece.split('.')[0];
       }
     }
     return '$ref' + primitiveSuffix;
@@ -35,19 +34,19 @@ function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
   return 'any';
 }
 
-function makeChoice(node: SchemaNode, index: number): Choice {
+function makeChoice(node: SchemaNode): Choice {
   return {
     type: node,
-    title: `${index + 1}. ${calculateChoiceTitle(node, false)}`,
+    title: calculateChoiceTitle(node, false),
   };
 }
 
-function makeArrayChoice(node: SchemaNode, index: number): Choice {
+function makeArrayChoice(node: SchemaNode): Choice {
   const itemTitle = calculateChoiceTitle(node, true);
   const title = itemTitle !== 'any' ? `array of ${itemTitle}` : 'array';
   return {
     type: node,
-    title: `${index + 1}. ${title}`,
+    title,
   };
 }
 
@@ -73,7 +72,7 @@ export const useChoices = (schemaNode: SchemaNode) => {
       return schemaNode.children.map(makeChoice);
     }
     // regular node, single choice - itself
-    return [makeChoice(schemaNode, 0)];
+    return [makeChoice(schemaNode)];
   }, [schemaNode]);
 
   const defaultChoice = choices[0];

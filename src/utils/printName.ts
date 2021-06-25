@@ -59,9 +59,9 @@ function printArrayName(
   if (isComplexArray(schemaNode)) {
     const firstChild = schemaNode.children[0];
     if (firstChild.title) {
-      return `array of ${firstChild.title}-s`;
+      return `array of ${firstChild.title}`;
     } else if (shouldUseRefNameFallback && getNodeNameFromOriginalRef(schemaNode)) {
-      return `array of ${getNodeNameFromOriginalRef(schemaNode)}-s`;
+      return `array of ${getNodeNameFromOriginalRef(schemaNode)}`;
     } else if (firstChild.primaryType) {
       return `array of ${firstChild.primaryType}s`;
     } else if (firstChild.combiners?.length) {
