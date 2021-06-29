@@ -19,7 +19,7 @@ export const ChildStack = ({
   className,
   RowComponent = SchemaRow,
 }: ChildStackProps) => (
-  <Box bg="canvas" className={className} style={childStackStyle}>
+  <Box className={className} style={childStackStyle}>
     {childNodes.map((childNode: SchemaNode, index) => (
       <React.Fragment key={childNode.id}>
         {index > 0 && <Box borderT borderColor="light" alignSelf="stretch" />}
