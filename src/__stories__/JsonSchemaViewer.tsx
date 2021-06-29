@@ -154,6 +154,7 @@ storiesOf('JsonSchemaViewer', module)
             schema={schema as JSONSchema4}
             defaultExpandedDepth={number('defaultExpandedDepth', 2)}
             onGoToRef={action('onGoToRef')}
+            className="sl-bg-canvas"
           />
         </div>
       </InvertTheme>
