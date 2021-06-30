@@ -2514,16 +2514,16 @@
     json-schema-compare "^0.2.2"
     lodash "^4.17.4"
 
-"@stoplight/json-schema-tree@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-tree/-/json-schema-tree-2.1.0.tgz#a921d6682971f5734a163ca11817ebd9f0266fbf"
-  integrity sha512-i4OXbL3A7aslphG+ezxL+ld6dsDtQhw+Iy2jxQYSIjuapvPeP7uY6MxAnbJkOvnRtefYYgCG0pl26xfjrt6n0Q==
+"@stoplight/json-schema-tree@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/json-schema-tree/-/json-schema-tree-2.1.1.tgz#d4f157a32081f579fddfd2d3d598c79a591e94b7"
+  integrity sha512-NAO3vHHnEzNy4oShzHS6RVuyks4FBhleRVsz9r3o1aGRYqZxkjVo4ICihldB3zr2Q/8L4i1NucT60JlBYU09RQ==
   dependencies:
     "@stoplight/json" "^3.12.0"
     "@stoplight/json-schema-merge-allof" "^0.7.5"
     "@stoplight/lifecycle" "^2.3.2"
     "@types/json-schema" "^7.0.7"
-    magic-error "^0.0.0"
+    magic-error "0.0.1"
 
 "@stoplight/json@^3.10.0":
   version "3.10.0"
@@ -12029,10 +12029,10 @@ macos-release@^2.2.0:
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.3.0.tgz#eb1930b036c0800adebccd5f17bc4c12de8bb71f"
   integrity sha512-OHhSbtcviqMPt7yfw5ef5aghS2jzFVKEFyCJndQt2YpSQ9qRVSEv2axSJI1paVThEu+FFGs584h/1YhxjVqajA==
 
-magic-error@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/magic-error/-/magic-error-0.0.0.tgz#f8630c98c55764b4851601901fdcb63428758b7d"
-  integrity sha512-ZMU3ylGOb/YQEpJo0XtAXbPGmKJtwzc3cuOHPrKgosV8AAc6db8dlQYLe0cp64P3BxkYZGoUvkvdNR5JM78beA==
+magic-error@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/magic-error/-/magic-error-0.0.1.tgz#95ebe658ca4a86f1aebda390cab6ea50d41bfa2a"
+  integrity sha512-1+N1ET8cbC5bfLQZcRojClzgK2gbUt9keTMr9OJeuXnQKWsfwRRRICuMA3HKaCIXFEgKzxivuMGCNKD7cdU5pg==
 
 magic-string@^0.25.7:
   version "0.25.7"
