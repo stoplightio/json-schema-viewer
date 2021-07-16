@@ -20,7 +20,7 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   emptyText?: string;
   className?: string;
   resolveRef?: SchemaTreeRefDereferenceFn;
-  onTreePopulated?: (rootNode: RootNode, nodeCount: number) => void;
+  onTreePopulated?: (props: { rootNode: RootNode; nodeCount: number }) => void;
 };
 
 const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForwardedProps> = ({
@@ -82,7 +82,10 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   ]);
 
   React.useEffect(() => {
-    onTreePopulated?.(jsonSchemaTreeRoot, nodeCount);
+    onTreePopulated?.({
+      rootNode: jsonSchemaTreeRoot,
+      nodeCount: nodeCount,
+    });
   }, [jsonSchemaTreeRoot, onTreePopulated, nodeCount]);
 
   if (isEmpty) {
