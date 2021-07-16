@@ -1,5 +1,10 @@
-import { isRegularNode, SchemaTree as JsonSchemaTree, SchemaTreeRefDereferenceFn } from '@stoplight/json-schema-tree';
-import type { WalkerEmitter, WalkerNodeEventHandler } from '@stoplight/json-schema-tree/walker';
+import {
+  isRegularNode,
+  RootNode,
+  SchemaNode,
+  SchemaTree as JsonSchemaTree,
+  SchemaTreeRefDereferenceFn,
+} from '@stoplight/json-schema-tree';
 import { Box, Provider as MosaicProvider } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
@@ -15,11 +20,7 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   emptyText?: string;
   className?: string;
   resolveRef?: SchemaTreeRefDereferenceFn;
-  treeWalkerEventEmitter?: {
-    event: keyof WalkerEmitter;
-    handler: WalkerNodeEventHandler;
-  };
-  onTreePopulated?: (tree: JsonSchemaTree) => void;
+  onTreePopulated?: (rootNode: RootNode, nodeCount: number) => void;
 };
 
 const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForwardedProps> = ({
@@ -32,20 +33,16 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   onGoToRef,
   renderRowAddon,
   hideExamples,
-  treeWalkerEventEmitter,
   onTreePopulated,
 }) => {
-  const jsonSchemaTreeRoot = React.useMemo(() => {
+  const { jsonSchemaTreeRoot, nodeCount } = React.useMemo(() => {
     const jsonSchemaTree = new JsonSchemaTree(schema, {
       mergeAllOf: true,
       refResolver: resolveRef,
     });
 
-    if (treeWalkerEventEmitter) {
-      jsonSchemaTree.walker.on(treeWalkerEventEmitter.event, treeWalkerEventEmitter.handler);
-    }
-
-    jsonSchemaTree.walker.hookInto('filter', node => {
+    let nodeCount = 0;
+    const shouldNodeBeIncluded = (node: SchemaNode) => {
       if (!isRegularNode(node)) return true;
 
       const { validations } = node;
@@ -55,11 +52,22 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
       }
 
       return !((viewMode === 'read' && !!validations.writeOnly) || (viewMode === 'write' && !!validations.readOnly));
+    };
+
+    jsonSchemaTree.walker.hookInto('filter', node => {
+      if (shouldNodeBeIncluded(node)) {
+        nodeCount++;
+        return true;
+      }
+      return false;
     });
     jsonSchemaTree.populate();
-    onTreePopulated?.(jsonSchemaTree);
-    return jsonSchemaTree.root;
-  }, [schema, resolveRef, viewMode, treeWalkerEventEmitter, onTreePopulated]);
+
+    return {
+      jsonSchemaTreeRoot: jsonSchemaTree.root,
+      nodeCount,
+    };
+  }, [schema, resolveRef, viewMode]);
 
   const isEmpty = React.useMemo(() => jsonSchemaTreeRoot.children.every(node => !isRegularNode(node) || node.unknown), [
     jsonSchemaTreeRoot,
@@ -72,6 +80,10 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
     renderRowAddon,
     hideExamples,
   ]);
+
+  React.useEffect(() => {
+    onTreePopulated?.(jsonSchemaTreeRoot, nodeCount);
+  }, [jsonSchemaTreeRoot, onTreePopulated, nodeCount]);
 
   if (isEmpty) {
     return <Box className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}>{emptyText}</Box>;
