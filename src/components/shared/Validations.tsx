@@ -1,4 +1,4 @@
-import { RegularNode } from '@stoplight/json-schema-tree';
+import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Flex, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import capitalize from 'lodash/capitalize.js';
@@ -202,7 +202,15 @@ export function validationCount(schemaNode: RegularNode) {
 
 export function getValidationsFromSchema(schemaNode: RegularNode) {
   return {
-    ...(schemaNode.enum !== null ? { enum: schemaNode.enum } : null),
+    ...(schemaNode.enum !== null
+      ? { enum: schemaNode.enum }
+      : // in case schemaNode is type: "array", check if its child have defined enum
+      schemaNode.primaryType === 'array' &&
+        schemaNode.children?.length === 1 &&
+        isRegularNode(schemaNode.children[0]) &&
+        schemaNode.children[0].enum !== null
+      ? { enum: schemaNode.children[0].enum }
+      : null),
     ...('annotations' in schemaNode
       ? {
           ...(schemaNode.annotations.default ? { default: schemaNode.annotations.default } : null),
