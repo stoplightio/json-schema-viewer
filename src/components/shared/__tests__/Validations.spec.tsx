@@ -43,9 +43,9 @@ describe('Validations component', () => {
     const wrapper = mount(<Validations validations={validations} />);
 
     expect(wrapper).toIncludeText('>= 2 characters<= 4 characters');
-    expect(wrapper).toIncludeText('Default value:"foo"');
-    expect(wrapper).toIncludeText('Example values:"Example 1""Example 2"');
-    expect(wrapper).toIncludeText('Allowed value:"bar"');
+    expect(wrapper).toIncludeText('Default value:foo');
+    expect(wrapper).toIncludeText('Example values:Example 1Example 2');
+    expect(wrapper).toIncludeText('Allowed value:bar');
   });
 
   it('should not render hidden example validations', () => {
