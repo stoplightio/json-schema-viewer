@@ -3619,10 +3619,10 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                                 </div>
                                 <div>
                                   <span>Allowed values:</span>
-                                  <span>\\"POSTAL\\"</span>
-                                  <span>\\"PICK_UP_STATION\\"</span>
-                                  <span>\\"E-MAIL\\"</span>
-                                  <span>\\"LOYALTY_CARD\\"</span>
+                                  <span>POSTAL</span>
+                                  <span>PICK_UP_STATION</span>
+                                  <span>E-MAIL</span>
+                                  <span>LOYALTY_CARD</span>
                                 </div>
                               </div>
                               <div></div>
@@ -3642,10 +3642,10 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                                 </div>
                                 <div>
                                   <span>Allowed values:</span>
-                                  <span>\\"BOOKER\\"</span>
-                                  <span>\\"CUSTOMER\\"</span>
-                                  <span>\\"PASSENGER\\"</span>
-                                  <span>\\"THIRD_PARTY\\"</span>
+                                  <span>BOOKER</span>
+                                  <span>CUSTOMER</span>
+                                  <span>PASSENGER</span>
+                                  <span>THIRD_PARTY</span>
                                 </div>
                               </div>
                               <div></div>

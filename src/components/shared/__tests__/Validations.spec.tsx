@@ -63,7 +63,7 @@ describe('Validations component', () => {
     const validations = getValidationsFromSchema(node);
     const wrapper = mount(<Validations validations={validations} />);
 
-    expect(wrapper).toIncludeText('Allowed values:"p1""p2""p3"');
+    expect(wrapper).toIncludeText('Allowed values:p1p2p3');
   });
 
   it('should not render hidden example validations', () => {
