@@ -63,11 +63,11 @@ const createValidationsFormatter = (name: string, options?: { exact?: boolean; n
 };
 
 const validationFormatters: Record<string, (value: unknown) => ValidationFormat | null> = {
-  enum: createValidationsFormatter('Allowed'),
-  examples: createValidationsFormatter('Example'),
+  enum: createValidationsFormatter('Allowed', { nowrap: true }),
+  examples: createValidationsFormatter('Example', { nowrap: true }),
   multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
   pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
-  default: createValidationsFormatter('Default'),
+  default: createValidationsFormatter('Default', { nowrap: true }),
 };
 
 const oasFormats = {

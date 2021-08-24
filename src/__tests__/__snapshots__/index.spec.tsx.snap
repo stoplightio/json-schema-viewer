@@ -349,8 +349,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
                   </div>
                   <div>
                     <span>Allowed values:</span>
-                    <span>\\"admin\\"</span>
-                    <span>\\"editor\\"</span>
+                    <span>admin</span>
+                    <span>editor</span>
                   </div>
                 </div>
                 <div></div>
@@ -562,8 +562,8 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
                   </div>
                   <div>
                     <span>Allowed values:</span>
-                    <span>\\"admin\\"</span>
-                    <span>\\"editor\\"</span>
+                    <span>admin</span>
+                    <span>editor</span>
                   </div>
                 </div>
                 <div></div>
@@ -1006,12 +1006,12 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                   </div>
                   <div>
                     <span>Allowed value:</span>
-                    <span>\\"Constant name\\"</span>
+                    <span>Constant name</span>
                   </div>
                   <div>
                     <span>Example values:</span>
-                    <span>\\"Example name\\"</span>
-                    <span>\\"Different name\\"</span>
+                    <span>Example name</span>
+                    <span>Different name</span>
                   </div>
                 </div>
                 <div></div>
@@ -1126,12 +1126,12 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                   <div><span>&gt;= 2 characters</span></div>
                   <div>
                     <span>Default value:</span>
-                    <span>\\"default@email.com\\"</span>
+                    <span>default@email.com</span>
                   </div>
                   <div>
                     <span>Example values:</span>
-                    <span>\\"one@email.com\\"</span>
-                    <span>\\"two@email.com\\"</span>
+                    <span>one@email.com</span>
+                    <span>two@email.com</span>
                   </div>
                 </div>
                 <div></div>
@@ -2461,9 +2461,9 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
                   </div>
                   <div>
                     <span>Allowed values:</span>
-                    <span>\\"Cancel\\"</span>
-                    <span>\\"Confirm\\"</span>
-                    <span>\\"Update\\"</span>
+                    <span>Cancel</span>
+                    <span>Confirm</span>
+                    <span>Update</span>
                   </div>
                 </div>
                 <div></div>
@@ -2589,7 +2589,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
                   </div>
                   <div>
                     <span>Allowed value:</span>
-                    <span>\\"test\\"</span>
+                    <span>test</span>
                   </div>
                 </div>
                 <div></div>
@@ -2644,7 +2644,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
                   </div>
                   <div>
                     <span>Allowed value:</span>
-                    <span>\\"test\\"</span>
+                    <span>test</span>
                   </div>
                 </div>
                 <div></div>
@@ -2687,12 +2687,12 @@ exports[`HTML Output should match default-schema.json 1`] = `
                 </div>
                 <div>
                   <span>Allowed value:</span>
-                  <span>\\"Constant name\\"</span>
+                  <span>Constant name</span>
                 </div>
                 <div>
                   <span>Example values:</span>
-                  <span>\\"Example name\\"</span>
-                  <span>\\"Different name\\"</span>
+                  <span>Example name</span>
+                  <span>Different name</span>
                 </div>
               </div>
               <div></div>
@@ -2807,12 +2807,12 @@ exports[`HTML Output should match default-schema.json 1`] = `
                 <div><span>&gt;= 2 characters</span></div>
                 <div>
                   <span>Default value:</span>
-                  <span>\\"default@email.com\\"</span>
+                  <span>default@email.com</span>
                 </div>
                 <div>
                   <span>Example values:</span>
-                  <span>\\"one@email.com\\"</span>
-                  <span>\\"two@email.com\\"</span>
+                  <span>one@email.com</span>
+                  <span>two@email.com</span>
                 </div>
               </div>
               <div></div>
@@ -3439,12 +3439,12 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                     </div>
                     <div>
                       <span>Allowed values:</span>
-                      <span>\\"COMPLETED\\"</span>
-                      <span>\\"ACTIVE\\"</span>
+                      <span>COMPLETED</span>
+                      <span>ACTIVE</span>
                     </div>
                     <div>
                       <span>Default value:</span>
-                      <span>\\"ACTIVE\\"</span>
+                      <span>ACTIVE</span>
                     </div>
                   </div>
                   <div></div>
@@ -3529,10 +3529,10 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                             </div>
                             <div>
                               <span>Allowed values:</span>
-                              <span>\\"HOMEPRINT\\"</span>
-                              <span>\\"TICKETLESS\\"</span>
-                              <span>\\"PRINT_AT_KIOSK\\"</span>
-                              <span>\\"SECURE_PAPER\\"</span>
+                              <span>HOMEPRINT</span>
+                              <span>TICKETLESS</span>
+                              <span>PRINT_AT_KIOSK</span>
+                              <span>SECURE_PAPER</span>
                             </div>
                           </div>
                           <div></div>
