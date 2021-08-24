@@ -1,11 +1,12 @@
 import 'jest-enzyme';
 
-import { RegularNode } from '@stoplight/json-schema-tree';
+import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { mount } from 'enzyme';
 import * as React from 'react';
 
 import { Validations } from '../../shared';
 import { getValidationsFromSchema } from '../Validations';
+import { buildTree } from './utils';
 
 describe('Validations component', () => {
   it('should render number type validations', () => {
@@ -46,6 +47,23 @@ describe('Validations component', () => {
     expect(wrapper).toIncludeText('Default value:foo');
     expect(wrapper).toIncludeText('Example values:Example 1Example 2');
     expect(wrapper).toIncludeText('Allowed value:bar');
+  });
+
+  it('should check for array child enum', () => {
+    const tree = buildTree({
+      type: 'array',
+      items: {
+        enum: ['p1', 'p2', 'p3'],
+      },
+    });
+
+    const node = tree.children[0] as RegularNode;
+
+    expect(isRegularNode(node)).toBe(true);
+    const validations = getValidationsFromSchema(node);
+    const wrapper = mount(<Validations validations={validations} />);
+
+    expect(wrapper).toIncludeText('Allowed values:p1p2p3');
   });
 
   it('should not render hidden example validations', () => {
