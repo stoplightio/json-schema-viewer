@@ -31,7 +31,7 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
                     <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
-                      <span>array of objects</span>
+                      <span>array[object]</span>
                     </div>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
                     <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
-                      <span>array of objects</span>
+                      <span>array[object]</span>
                     </div>
                   </div>
                 </div>
@@ -275,7 +275,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
                     <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
-                      <span>array of objects</span>
+                      <span>array[object]</span>
                     </div>
                   </div>
                 </div>
@@ -439,7 +439,7 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            array of strings
+            array[string]
             <div></div>
           </div>
         </div>
@@ -466,7 +466,7 @@ exports[`HTML Output given complex type that includes array and complex array su
                       <div>
                         <span>null</span>
                         <span>or</span>
-                        <span>array of strings/numbers</span>
+                        <span>array[string or number]</span>
                       </div>
                     </div>
                   </div>
@@ -521,7 +521,7 @@ exports[`HTML Output given multiple object and string type, should process prope
                   <div>
                     <div>
                       <div>ids</div>
-                      <span>array of integers</span>
+                      <span>array[integer]</span>
                     </div>
                   </div>
                 </div>
@@ -879,7 +879,7 @@ exports[`HTML Output should match arrays/of-allofs.json 1`] = `
                     <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                     <div>
                       <div>array-all-objects</div>
-                      <span>array of objects</span>
+                      <span>array[object]</span>
                     </div>
                   </div>
                 </div>
@@ -959,7 +959,7 @@ exports[`HTML Output should match arrays/of-arrays.json 1`] = `
                     <div>
                       <div>
                         <div>foo</div>
-                        <span>array of arrays</span>
+                        <span>array[array]</span>
                       </div>
                     </div>
                   </div>
@@ -1088,7 +1088,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                         <div>
                           <span>null</span>
                           <span>or</span>
-                          <span>array of strings/numbers</span>
+                          <span>array[string or number]</span>
                         </div>
                       </div>
                     </div>
@@ -1166,7 +1166,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                               <select size=\\"2\\">
                                 <option></option>
                                 <option value=\\"0\\">object</option>
-                                <option value=\\"1\\">array of integers</option>
+                                <option value=\\"1\\">array[integer]</option>
                               </select>
                             </label>
                           </div>
@@ -1255,7 +1255,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                         <div>
                           <div>
                             <div>ids</div>
-                            <span>array of integers</span>
+                            <span>array[integer]</span>
                           </div>
                         </div>
                       </div>
@@ -1355,7 +1355,7 @@ exports[`HTML Output should match arrays/of-objects.json 1`] = `
                     <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                     <div>
                       <div>propertyIsArrayOfObjects</div>
-                      <span>array of objects</span>
+                      <span>array[object]</span>
                     </div>
                   </div>
                 </div>
@@ -1964,7 +1964,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                                 <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>users</div>
-                                  <span>array of objects</span>
+                                  <span>array[object]</span>
                                 </div>
                               </div>
                             </div>
@@ -2547,7 +2547,7 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
                     <div>
                       <div>
                         <div>items</div>
-                        <span>array of strings</span>
+                        <span>array[string]</span>
                       </div>
                       <span>required</span>
                     </div>
@@ -2572,7 +2572,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            array of objects
+            array[object]
             <div></div>
           </div>
           <div style=\\"padding-left: 25px\\">
@@ -2627,7 +2627,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            array of A
+            array[A]
             <div></div>
           </div>
           <div style=\\"padding-left: 25px\\">
@@ -2769,7 +2769,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                       <div>
                         <span>null</span>
                         <span>or</span>
-                        <span>array of strings/numbers</span>
+                        <span>array[string or number]</span>
                       </div>
                     </div>
                   </div>
@@ -2847,7 +2847,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                             <select size=\\"2\\">
                               <option></option>
                               <option value=\\"0\\">object</option>
-                              <option value=\\"1\\">array of integers</option>
+                              <option value=\\"1\\">array[integer]</option>
                             </select>
                           </label>
                         </div>
@@ -2936,7 +2936,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                       <div>
                         <div>
                           <div>ids</div>
-                          <span>array of integers</span>
+                          <span>array[integer]</span>
                         </div>
                       </div>
                     </div>
@@ -3132,7 +3132,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
                       <div>
                         <div>
                           <div>ids</div>
-                          <span>array of integers</span>
+                          <span>array[integer]</span>
                         </div>
                       </div>
                     </div>
@@ -3381,7 +3381,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                   <div>
                     <div>
                       <div>commonTicketingOptions</div>
-                      <span>array of strings</span>
+                      <span>array[string]</span>
                     </div>
                   </div>
                   <div>
@@ -3403,7 +3403,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                     <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                     <div>
                       <div>ticketingOptionChoice</div>
-                      <span>array of objects</span>
+                      <span>array[object]</span>
                     </div>
                   </div>
                   <div>
@@ -3459,7 +3459,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                         <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                         <div>
                           <div>orderItemBreakdown</div>
-                          <span>array of objects</span>
+                          <span>array[object]</span>
                         </div>
                       </div>
                       <div>
@@ -3497,7 +3497,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                             <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                             <div>
                               <div>options</div>
-                              <span>array of objects</span>
+                              <span>array[object]</span>
                             </div>
                           </div>
                           <div>
@@ -3613,7 +3613,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                                   <div>
                                     <div>
                                       <div>availableDeliveryTypes</div>
-                                      <span>array of strings</span>
+                                      <span>array[string]</span>
                                     </div>
                                   </div>
                                 </div>
@@ -3636,7 +3636,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                                   <div>
                                     <div>
                                       <div>ticketRecipients</div>
-                                      <span>array of strings</span>
+                                      <span>array[string]</span>
                                     </div>
                                   </div>
                                 </div>

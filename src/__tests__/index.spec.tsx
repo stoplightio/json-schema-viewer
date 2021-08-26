@@ -251,7 +251,7 @@ describe('Expanded depth', () => {
                                 <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
-                                  <span>array of objects</span>
+                                  <span>array[object]</span>
                                 </div>
                               </div>
                             </div>
@@ -288,7 +288,7 @@ describe('Expanded depth', () => {
                                 <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
-                                  <span>array of objects</span>
+                                  <span>array[object]</span>
                                 </div>
                               </div>
                             </div>
@@ -325,7 +325,7 @@ describe('Expanded depth', () => {
                                 <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
-                                  <span>array of objects</span>
+                                  <span>array[object]</span>
                                 </div>
                               </div>
                             </div>
@@ -430,7 +430,7 @@ describe('Expanded depth', () => {
                                 <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
-                                  <span>array of objects</span>
+                                  <span>array[object]</span>
                                 </div>
                               </div>
                             </div>
@@ -483,7 +483,7 @@ describe('Expanded depth', () => {
                                 <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
-                                  <span>array of objects</span>
+                                  <span>array[object]</span>
                                 </div>
                               </div>
                             </div>
@@ -536,7 +536,7 @@ describe('Expanded depth', () => {
                                 <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
-                                  <span>array of objects</span>
+                                  <span>array[object]</span>
                                 </div>
                               </div>
                             </div>
@@ -668,7 +668,7 @@ describe('Expanded depth', () => {
                               <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
                               <div>
                                 <div>foo</div>
-                                <span>array of objects</span>
+                                <span>array[object]</span>
                               </div>
                             </div>
                           </div>
