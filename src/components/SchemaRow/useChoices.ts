@@ -43,7 +43,7 @@ function makeChoice(node: SchemaNode): Choice {
 
 function makeArrayChoice(node: SchemaNode): Choice {
   const itemTitle = calculateChoiceTitle(node, true);
-  const title = itemTitle !== 'any' ? `array of ${itemTitle}` : 'array';
+  const title = itemTitle !== 'any' ? `array[${itemTitle}]` : 'array';
   return {
     type: node,
     title,

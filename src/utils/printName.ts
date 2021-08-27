@@ -53,19 +53,19 @@ function printArrayName(
         return mergedTypes;
       }, []) ?? null;
 
-    return val !== null && val.length > 0 ? `array of ${val.join('s/')}s` : 'array';
+    return val !== null && val.length > 0 ? `array[${val.join(' or ')}]` : 'array';
   }
 
   if (isComplexArray(schemaNode)) {
     const firstChild = schemaNode.children[0];
     if (firstChild.title) {
-      return `array of ${firstChild.title}`;
+      return `array[${firstChild.title}]`;
     } else if (shouldUseRefNameFallback && getNodeNameFromOriginalRef(schemaNode)) {
-      return `array of ${getNodeNameFromOriginalRef(schemaNode)}`;
+      return `array[${getNodeNameFromOriginalRef(schemaNode)}]`;
     } else if (firstChild.primaryType) {
-      return `array of ${firstChild.primaryType}s`;
+      return `array[${firstChild.primaryType}]`;
     } else if (firstChild.combiners?.length) {
-      return `array of ${firstChild.combiners.join('/')}`;
+      return `array[${firstChild.combiners.join('/')}]`;
     }
     return 'array';
   }
