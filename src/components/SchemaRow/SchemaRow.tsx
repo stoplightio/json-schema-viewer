@@ -57,13 +57,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
   return (
     <div className="sl-relative">
-      <div className="sl-flex">
-        <div className="sl-min-w-0 sl-flex-grow">
+      <div className="sl-flex sl-max-w-full">
+        <div className="sl-min-w-0 sl-flex-grow sl-max-w-full">
           <div
             onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
             className={cn({ 'sl-cursor-pointer': childNodes.length > 0 })}
           >
-            <div className="sl-flex sl-items-center sl-my-2">
+            <div className="sl-flex sl-items-center sl-my-2 sl-max-w-full">
               {childNodes.length > 0 ? <Caret isExpanded={isExpanded} /> : null}
 
               <div className="sl-flex sl-items-baseline sl-text-base sl-flex-1">

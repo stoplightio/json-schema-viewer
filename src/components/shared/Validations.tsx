@@ -138,11 +138,11 @@ const NumberValidations = ({
     return null;
   }
   return (
-    <Flex my={2} color="muted">
+    <Flex color="muted" maxW="full">
       {entries
         .map(([key, value]) => numberValidationFormatters[key](value))
         .map((value, i) => (
-          <Value key={i} name={value} className="sl-mr-2" />
+          <Value key={i} name={value} />
         ))}
     </Flex>
   );
@@ -165,10 +165,10 @@ const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown>
 
 const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
-    <Flex flexWrap color="muted" my={2}>
-      <Text color="light">{capitalize(name)}:</Text>
+    <Flex flexWrap color="muted">
+      <Text color="light" mr={1} mb={2}>{capitalize(name)}:</Text>
       {uniq(values).map(value => (
-        <Value key={value} name={value} className="sl-ml-2" />
+        <Value key={value} name={value} />
       ))}
     </Flex>
   );
@@ -177,11 +177,11 @@ const KeyValueValidation = ({ name, values }: { name: string; values: string[] }
 const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
     {keys(validations).length ? (
-      <Flex flexWrap my={2}>
+      <Flex flexWrap maxW="full">
         {keys(validations)
           .filter(key => validations[key])
           .map(key => (
-            <Value key={key} name={key} className="sl-mr-2 sl-text-muted sl-capitalize" />
+            <Value key={key} name={key} className="sl-text-muted sl-capitalize" />
           ))}
       </Flex>
     ) : null}
@@ -189,7 +189,7 @@ const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) 
 );
 
 const Value = ({ name, className }: { name: string; className?: string }) => (
-  <Text px={1} fontFamily="mono" bg="canvas-100" border rounded="lg" className={className}>
+  <Text px={1} fontFamily="mono" bg="canvas-100" border rounded="lg" wordBreak="words" maxW="full" mr={2} mb={2} className={className}>
     {name}
   </Text>
 );
