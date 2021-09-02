@@ -166,7 +166,9 @@ const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown>
 const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
     <Flex flexWrap color="muted">
-      <Text color="light" mr={1} mb={2}>{capitalize(name)}:</Text>
+      <Text color="light" mr={1} mb={2}>
+        {capitalize(name)}:
+      </Text>
       {uniq(values).map(value => (
         <Value key={value} name={value} />
       ))}
@@ -189,7 +191,18 @@ const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) 
 );
 
 const Value = ({ name, className }: { name: string; className?: string }) => (
-  <Text px={1} fontFamily="mono" bg="canvas-100" border rounded="lg" wordBreak="words" maxW="full" mr={2} mb={2} className={className}>
+  <Text
+    px={1}
+    fontFamily="mono"
+    bg="canvas-100"
+    border
+    rounded="lg"
+    wordBreak="words"
+    maxW="full"
+    mr={2}
+    mb={2}
+    className={className}
+  >
     {name}
   </Text>
 );
