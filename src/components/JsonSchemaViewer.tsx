@@ -118,5 +118,4 @@ const JsonSchemaFallbackComponent: React.FC<FallbackProps> = ({ error }) => {
 export const JsonSchemaViewer = withErrorBoundary<JsonSchemaProps>(JsonSchemaViewerComponent, {
   FallbackComponent: JsonSchemaFallbackComponent,
   recoverableProps: ['schema'],
-  reportErrors: false,
 });
