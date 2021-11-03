@@ -9,6 +9,7 @@ import {
 } from '@stoplight/json-schema-tree';
 import { Icon, Select } from '@stoplight/mosaic';
 import cn from 'classnames';
+import { first } from 'lodash';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
@@ -55,6 +56,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const isBrokenRef = typeof refNode?.error === 'string';
 
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
+  const combiner = anyOfOrOneOf(schemaNode);
   return (
     <div className="sl-relative">
       <div className="sl-flex sl-max-w-full">
@@ -70,6 +72,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                   <div className="sl-mr-2 sl-font-mono sl-font-semibold">{last(schemaNode.subpath)}</div>
                 )}
+                {schemaNode.subpath.length > 0 && combiner !== undefined && <div className="sl-mr-2">{combiner}</div>}
 
                 {choices.length === 1 && (
                   <>
@@ -148,4 +151,16 @@ function shouldShowPropertyName(schemaNode: SchemaNode) {
     schemaNode.subpath.length === 2 &&
     (schemaNode.subpath[0] === 'properties' || schemaNode.subpath[0] === 'patternProperties')
   );
+}
+
+function anyOfOrOneOf(schemaNode: SchemaNode) {
+  if (schemaNode.fragment.anyOf !== undefined) {
+    return '(Any of)';
+  }
+
+  if (schemaNode.fragment.oneOf !== undefined) {
+    return '(One of)';
+  }
+
+  return undefined;
 }

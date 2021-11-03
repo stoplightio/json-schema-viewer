@@ -23,6 +23,14 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
   }
 
   if (isRegularNode(schemaNode) && choices.length > 1) {
+    let combinerType = '';
+    if (selectedChoice.type.subpath[0] === 'oneOf') {
+      combinerType = ' (One of)';
+    }
+    if (selectedChoice.type.subpath[0] === 'anyOf') {
+      combinerType = ' (Any of)';
+    }
+
     return (
       <DecreaseIndentation>
         <div className="sl-relative">
@@ -37,11 +45,14 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
             }))}
             renderTrigger={props => (
               <Pressable {...props}>
-                <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-flex sl-cursor-pointer sl-py-2">
-                  {selectedChoice.title}
-                  <div className="sl-ml-1">
-                    <Icon icon={faCaretDown} />
+                <div className="sl-flex">
+                  <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-flex sl-cursor-pointer sl-py-2">
+                    {selectedChoice.title}
+                    <div className="sl-ml-1">
+                      <Icon icon={faCaretDown} />
+                    </div>
                   </div>
+                  <div className="sl-flex sl-items-center">{combinerType}</div>
                 </div>
               </Pressable>
             )}
