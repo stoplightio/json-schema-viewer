@@ -55,7 +55,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const isBrokenRef = typeof refNode?.error === 'string';
 
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
-  const combiner = anyOfOrOneOf(schemaNode);
+  const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
   return (
     <div className="sl-relative">
       <div className="sl-flex sl-max-w-full">
@@ -111,9 +111,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                   />
                 )}
 
-                {schemaNode.subpath.length > 0 && combiner !== undefined && (
-                  <div className="sl-ml-1 sl-text-muted">{combiner}</div>
-                )}
+                {combiner !== null ? <div className="sl-ml-1 sl-text-muted">{combiner}</div> : null}
               </div>
               <Properties
                 required={isPropertyRequired(schemaNode)}

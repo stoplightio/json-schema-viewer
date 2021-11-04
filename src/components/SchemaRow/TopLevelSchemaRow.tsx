@@ -23,13 +23,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
   }
 
   if (isRegularNode(schemaNode) && choices.length > 1) {
-    let combinerType = '';
-    if (selectedChoice.type.subpath[0] === 'oneOf') {
-      combinerType = '(One of)';
-    }
-    if (selectedChoice.type.subpath[0] === 'anyOf') {
-      combinerType = '(Any of)';
-    }
+    const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
 
     return (
       <DecreaseIndentation>
@@ -52,7 +46,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
                       <Icon icon={faCaretDown} />
                     </div>
                   </div>
-                  <div className="sl-flex sl-items-center sl-text-muted">{combinerType}</div>
+                  {combiner !== null ? <div className="sl-flex sl-items-center sl-text-muted">{combiner}</div> : null}
                 </div>
               </Pressable>
             )}
