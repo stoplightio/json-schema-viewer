@@ -112,7 +112,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 )}
 
                 {schemaNode.subpath.length > 0 && combiner !== undefined && (
-                  <div className="sl-mr-2 sl-text-muted">{combiner}</div>
+                  <div className="sl-ml-1 sl-text-muted">{combiner}</div>
                 )}
               </div>
               <Properties

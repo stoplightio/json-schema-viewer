@@ -25,10 +25,10 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
   if (isRegularNode(schemaNode) && choices.length > 1) {
     let combinerType = '';
     if (selectedChoice.type.subpath[0] === 'oneOf') {
-      combinerType = ' (One of)';
+      combinerType = '(One of)';
     }
     if (selectedChoice.type.subpath[0] === 'anyOf') {
-      combinerType = ' (Any of)';
+      combinerType = '(Any of)';
     }
 
     return (
