@@ -72,7 +72,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                   <div className="sl-mr-2 sl-font-mono sl-font-semibold">{last(schemaNode.subpath)}</div>
                 )}
-                {schemaNode.subpath.length > 0 && combiner !== undefined && <div className="sl-mr-2">{combiner}</div>}
 
                 {choices.length === 1 && (
                   <>
@@ -111,6 +110,10 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                     }
                     onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
                   />
+                )}
+
+                {schemaNode.subpath.length > 0 && combiner !== undefined && (
+                  <div className="sl-mr-2 sl-text-muted">{combiner}</div>
                 )}
               </div>
               <Properties

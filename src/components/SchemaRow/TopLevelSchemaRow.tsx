@@ -52,7 +52,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
                       <Icon icon={faCaretDown} />
                     </div>
                   </div>
-                  <div className="sl-flex sl-items-center">{combinerType}</div>
+                  <div className="sl-flex sl-items-center sl-text-muted">{combinerType}</div>
                 </div>
               </Pressable>
             )}
