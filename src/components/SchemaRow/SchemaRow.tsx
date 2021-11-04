@@ -152,15 +152,3 @@ function shouldShowPropertyName(schemaNode: SchemaNode) {
     (schemaNode.subpath[0] === 'properties' || schemaNode.subpath[0] === 'patternProperties')
   );
 }
-
-function anyOfOrOneOf(schemaNode: SchemaNode) {
-  if (schemaNode.fragment.anyOf !== undefined) {
-    return '(Any of)';
-  }
-
-  if (schemaNode.fragment.oneOf !== undefined) {
-    return '(One of)';
-  }
-
-  return undefined;
-}
