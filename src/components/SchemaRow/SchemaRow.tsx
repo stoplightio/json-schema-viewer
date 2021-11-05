@@ -55,6 +55,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const isBrokenRef = typeof refNode?.error === 'string';
 
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
+  const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
   return (
     <div className="sl-relative">
       <div className="sl-flex sl-max-w-full">
@@ -109,6 +110,8 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                     onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
                   />
                 )}
+
+                {combiner !== null ? <div className="sl-ml-1 sl-text-muted">{combiner}</div> : null}
               </div>
               <Properties
                 required={isPropertyRequired(schemaNode)}
