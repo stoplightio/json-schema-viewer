@@ -331,8 +331,11 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            Admin
-            <div></div>
+            <div>
+              Admin
+              <div></div>
+            </div>
+            <div>anyOf</div>
           </div>
           <div style=\\"padding-left: 25px\\">
             <div>
@@ -439,8 +442,11 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            array[string]
-            <div></div>
+            <div>
+              array[string]
+              <div></div>
+            </div>
+            <div>oneOf</div>
           </div>
         </div>
       </div>
@@ -544,8 +550,11 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            Admin
-            <div></div>
+            <div>
+              Admin
+              <div></div>
+            </div>
+            <div>oneOf</div>
           </div>
           <div style=\\"padding-left: 25px\\">
             <div>
@@ -1185,6 +1194,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                             </button>
                           </div>
                         </div>
+                        <div>anyOf</div>
                       </div>
                     </div>
                   </div>
@@ -1899,6 +1909,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                         <div>
                           <div>user</div>
                           <span>allOf</span>
+                          <div>allOf</div>
                         </div>
                       </div>
                     </div>
@@ -1997,6 +2008,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                                         <div>
                                           <div>user</div>
                                           <span>allOf</span>
+                                          <div>allOf</div>
                                         </div>
                                       </div>
                                     </div>
@@ -2107,6 +2119,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                             <div>
                               <div>user</div>
                               <span>allOf</span>
+                              <div>allOf</div>
                             </div>
                           </div>
                         </div>
@@ -2443,8 +2456,11 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            BugExample
-            <div></div>
+            <div>
+              BugExample
+              <div></div>
+            </div>
+            <div>oneOf</div>
           </div>
           <div style=\\"padding-left: 25px\\">
             <div>
@@ -2572,8 +2588,11 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            array[object]
-            <div></div>
+            <div>
+              array[object]
+              <div></div>
+            </div>
+            <div>oneOf</div>
           </div>
           <div style=\\"padding-left: 25px\\">
             <div>
@@ -2627,8 +2646,10 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
       <div style=\\"margin-left: -25px\\">
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            array[A]
-            <div></div>
+            <div>
+              array[A]
+              <div></div>
+            </div>
           </div>
           <div style=\\"padding-left: 25px\\">
             <div>
@@ -2869,6 +2890,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                           </button>
                         </div>
                       </div>
+                      <div>anyOf</div>
                     </div>
                   </div>
                 </div>
