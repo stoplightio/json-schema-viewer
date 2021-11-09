@@ -1,7 +1,5 @@
 # @stoplight/json-schema-viewer
 
-<!-- BADGES -->
-
 A JSON Schema viewer React component
 
 - Explore the components: [Storybook](https://stoplightio.github.io/json-schema-viewer)
