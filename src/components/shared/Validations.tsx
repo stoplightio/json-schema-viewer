@@ -1,5 +1,5 @@
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
-import { Flex, Text } from '@stoplight/mosaic';
+import { Box, Flex, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import capitalize from 'lodash/capitalize.js';
 import keys from 'lodash/keys.js';
@@ -183,7 +183,7 @@ const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) 
         {keys(validations)
           .filter(key => validations[key])
           .map(key => (
-            <Value key={key} name={key} className="sl-text-muted sl-capitalize" />
+            <Box as={Value} key={key} name={key} color="muted" textTransform="capitalize" />
           ))}
       </Flex>
     ) : null}

@@ -3,15 +3,15 @@
 exports[`Expanded depth nested object static given initial level set to 0, should render top 2 levels 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>bar</div>
                       <span>object</span>
@@ -28,7 +28,7 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
                       <span>array[object]</span>
@@ -50,15 +50,15 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
 exports[`Expanded depth nested object static given initial level set to 1, should render top 3 levels 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>bar</div>
                       <span>object</span>
@@ -68,13 +68,13 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
                     <div>
                       <div>
-                        <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                        <div role=\\"button\\"></div>
                         <div>
                           <div>barFoo</div>
                           <span>object</span>
@@ -125,7 +125,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
                       <span>array[object]</span>
@@ -135,7 +135,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -180,15 +180,15 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
 exports[`Expanded depth nested object static given initial level set to 2, should render top 4 levels 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>bar</div>
                       <span>object</span>
@@ -198,13 +198,13 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
                     <div>
                       <div>
-                        <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                        <div role=\\"button\\"></div>
                         <div>
                           <div>barFoo</div>
                           <span>object</span>
@@ -214,7 +214,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
                   </div>
                   <div></div>
                 </div>
-                <div style=\\"padding-left: 25px\\">
+                <div>
                   <div>
                     <div>
                       <div>
@@ -272,7 +272,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
                       <span>array[object]</span>
@@ -282,7 +282,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -327,8 +327,8 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
 exports[`HTML Output given anyOf combiner placed next to allOf given allOf merging enabled, should merge contents of allOf combiners 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
             <div>
@@ -337,7 +337,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             </div>
             <div>anyOf</div>
           </div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -438,8 +438,8 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
 exports[`HTML Output given array with oneOf containing items, should merge it correctly 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
             <div>
@@ -459,9 +459,9 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
 exports[`HTML Output given complex type that includes array and complex array subtype, should not ignore subtype 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
@@ -500,13 +500,13 @@ exports[`HTML Output given complex type that includes array and complex array su
 exports[`HTML Output given multiple object and string type, should process properties 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+    <div class=\\"JsonSchemaViewer\\">
       <div>
         <div>
           <div>
             <div>
               <div>
-                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                <div role=\\"button\\"></div>
                 <div>
                   <div>
                     <span>string</span>
@@ -519,7 +519,7 @@ exports[`HTML Output given multiple object and string type, should process prope
           </div>
           <div></div>
         </div>
-        <div style=\\"padding-left: 25px\\">
+        <div>
           <div>
             <div>
               <div>
@@ -546,8 +546,8 @@ exports[`HTML Output given multiple object and string type, should process prope
 exports[`HTML Output given oneOf combiner placed next to allOf given allOf merging enabled, should merge contents of allOf combiners 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
             <div>
@@ -556,7 +556,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             </div>
             <div>oneOf</div>
           </div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -657,13 +657,13 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
 exports[`HTML Output given read mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+    <div class=\\"JsonSchemaViewer\\">
       <div>
         <div>
           <div>
             <div>
               <div>
-                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                <div role=\\"button\\"></div>
                 <div>
                   <div>
                     <span>string</span>
@@ -676,7 +676,7 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
           </div>
           <div></div>
         </div>
-        <div style=\\"padding-left: 25px\\">
+        <div>
           <div>
             <div>
               <div>
@@ -703,13 +703,13 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
 exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+    <div class=\\"JsonSchemaViewer\\">
       <div>
         <div>
           <div>
             <div>
               <div>
-                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                <div role=\\"button\\"></div>
                 <div>
                   <div>
                     <span>string</span>
@@ -722,7 +722,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
           </div>
           <div></div>
         </div>
-        <div style=\\"padding-left: 25px\\">
+        <div>
           <div>
             <div>
               <div>
@@ -767,15 +767,15 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
 exports[`HTML Output given visible $ref node, should try to inject the title immediately 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
                       <span>User</span>
@@ -785,7 +785,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -809,7 +809,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>user</div>
                       <span>User</span>
@@ -831,13 +831,13 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
 exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+    <div class=\\"JsonSchemaViewer\\">
       <div>
         <div>
           <div>
             <div>
               <div>
-                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                <div role=\\"button\\"></div>
                 <div>
                   <div>
                     <span>string</span>
@@ -850,7 +850,7 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
           </div>
           <div></div>
         </div>
-        <div style=\\"padding-left: 25px\\">
+        <div>
           <div>
             <div>
               <div>
@@ -877,15 +877,15 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 exports[`HTML Output should match arrays/of-allofs.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>array-all-objects</div>
                       <span>array[object]</span>
@@ -895,7 +895,7 @@ exports[`HTML Output should match arrays/of-allofs.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -940,11 +940,11 @@ exports[`HTML Output should match arrays/of-allofs.json 1`] = `
 exports[`HTML Output should match arrays/of-arrays.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div>array of:</div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -988,11 +988,11 @@ exports[`HTML Output should match arrays/of-arrays.json 1`] = `
 exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div>array of:</div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -1152,7 +1152,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                 <div>
                   <div>
                     <div>
-                      <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                      <div role=\\"button\\"></div>
                       <div>
                         <div>plan</div>
                         <div>
@@ -1201,7 +1201,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                 </div>
                 <div></div>
               </div>
-              <div style=\\"padding-left: 25px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -1243,7 +1243,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                 <div>
                   <div>
                     <div>
-                      <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                      <div role=\\"button\\"></div>
                       <div>
                         <div>permissions</div>
                         <div>
@@ -1257,7 +1257,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                 </div>
                 <div></div>
               </div>
-              <div style=\\"padding-left: 25px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -1354,15 +1354,15 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
 exports[`HTML Output should match arrays/of-objects.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>propertyIsArrayOfObjects</div>
                       <span>array[object]</span>
@@ -1372,7 +1372,7 @@ exports[`HTML Output should match arrays/of-objects.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -1401,20 +1401,20 @@ exports[`HTML Output should match arrays/of-objects.json 1`] = `
 exports[`HTML Output should match arrays/of-refs.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+    <div class=\\"JsonSchemaViewer\\">
       <div>
         <div>
           <div>
             <div>
               <div>
-                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                <div role=\\"button\\"></div>
                 <div><span>$ref(./models/todo-full.json)[]</span></div>
               </div>
             </div>
           </div>
           <div></div>
         </div>
-        <div style=\\"padding-left: 25px\\">
+        <div>
           <div>
             <div>
               <div>
@@ -1438,20 +1438,20 @@ exports[`HTML Output should match arrays/of-refs.json 1`] = `
 exports[`HTML Output should match arrays/with-multiple-arrayish-items.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+    <div class=\\"JsonSchemaViewer\\">
       <div>
         <div>
           <div>
             <div>
               <div>
-                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                <div role=\\"button\\"></div>
                 <div><span>array</span></div>
               </div>
             </div>
           </div>
           <div></div>
         </div>
-        <div style=\\"padding-left: 25px\\">
+        <div>
           <div>
             <div>
               <div>
@@ -1470,14 +1470,14 @@ exports[`HTML Output should match arrays/with-multiple-arrayish-items.json 1`] =
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div><span>object</span></div>
                   </div>
                 </div>
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -1540,20 +1540,20 @@ exports[`HTML Output should match arrays/with-multiple-arrayish-items.json 1`] =
 exports[`HTML Output should match arrays/with-ordered-items.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+    <div class=\\"JsonSchemaViewer\\">
       <div>
         <div>
           <div>
             <div>
               <div>
-                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                <div role=\\"button\\"></div>
                 <div><span>array</span></div>
               </div>
             </div>
           </div>
           <div></div>
         </div>
-        <div style=\\"padding-left: 25px\\">
+        <div>
           <div>
             <div>
               <div>
@@ -1590,11 +1590,11 @@ exports[`HTML Output should match arrays/with-ordered-items.json 1`] = `
 exports[`HTML Output should match arrays/with-single-arrayish-items.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div>array of:</div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -1656,15 +1656,15 @@ exports[`HTML Output should match arrays/with-single-arrayish-items.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>AllOfMergeObjects</div>
                       <span>object</span>
@@ -1674,7 +1674,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -1753,7 +1753,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>AllOfMergeObjectPropertyValidations</div>
                       <span>object</span>
@@ -1763,7 +1763,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -1791,7 +1791,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>AllOfMergeRefs</div>
                       <span>object</span>
@@ -1801,7 +1801,7 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -1881,15 +1881,15 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>foo</div>
                       <span>object</span>
@@ -1899,13 +1899,13 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
                     <div>
                       <div>
-                        <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                        <div role=\\"button\\"></div>
                         <div>
                           <div>user</div>
                           <span>allOf</span>
@@ -1916,26 +1916,26 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                   </div>
                   <div></div>
                 </div>
-                <div style=\\"padding-left: 25px\\">
+                <div>
                   <div>
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                            <div role=\\"button\\"></div>
                             <div><span>object</span></div>
                           </div>
                         </div>
                       </div>
                       <div></div>
                     </div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>names</div>
                                   <span>
@@ -1947,7 +1947,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                           </div>
                           <div></div>
                         </div>
-                        <div style=\\"padding-left: 25px\\">
+                        <div>
                           <div>
                             <div>
                               <div>
@@ -1972,7 +1972,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>users</div>
                                   <span>array[object]</span>
@@ -1982,13 +1982,13 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                           </div>
                           <div></div>
                         </div>
-                        <div style=\\"padding-left: 25px\\">
+                        <div>
                           <div>
                             <div>
                               <div>
                                 <div>
                                   <div>
-                                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                    <div role=\\"button\\"></div>
                                     <div>
                                       <div>creation</div>
                                       <span>object</span>
@@ -1998,13 +1998,13 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                               </div>
                               <div></div>
                             </div>
-                            <div style=\\"padding-left: 25px\\">
+                            <div>
                               <div>
                                 <div>
                                   <div>
                                     <div>
                                       <div>
-                                        <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                        <div role=\\"button\\"></div>
                                         <div>
                                           <div>user</div>
                                           <span>allOf</span>
@@ -2015,13 +2015,13 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                                   </div>
                                   <div></div>
                                 </div>
-                                <div style=\\"padding-left: 25px\\">
+                                <div>
                                   <div>
                                     <div>
                                       <div>
                                         <div>
                                           <div>
-                                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                            <div role=\\"button\\"></div>
                                             <div><span>object</span></div>
                                           </div>
                                         </div>
@@ -2083,7 +2083,7 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>bar</div>
                       <span>object</span>
@@ -2093,13 +2093,13 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
                     <div>
                       <div>
-                        <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                        <div role=\\"button\\"></div>
                         <div>
                           <div>foo</div>
                           <span>object</span>
@@ -2109,13 +2109,13 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                   </div>
                   <div></div>
                 </div>
-                <div style=\\"padding-left: 25px\\">
+                <div>
                   <div>
                     <div>
                       <div>
                         <div>
                           <div>
-                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                            <div role=\\"button\\"></div>
                             <div>
                               <div>user</div>
                               <span>allOf</span>
@@ -2126,13 +2126,13 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                       </div>
                       <div></div>
                     </div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div><span>object</span></div>
                               </div>
                             </div>
@@ -2157,11 +2157,11 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div>array of:</div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -2281,7 +2281,7 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
                 <div>
                   <div>
                     <div>
-                      <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                      <div role=\\"button\\"></div>
                       <div>
                         <div>user</div>
                         <span>User</span>
@@ -2292,7 +2292,7 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
                 </div>
                 <div></div>
               </div>
-              <div style=\\"padding-left: 25px\\">
+              <div>
                 <div>
                   <div>
                     <div>
@@ -2347,9 +2347,9 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
@@ -2452,8 +2452,8 @@ exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
 exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
             <div>
@@ -2462,7 +2462,7 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
             </div>
             <div>oneOf</div>
           </div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -2584,8 +2584,8 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
 exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
             <div>
@@ -2594,7 +2594,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
             </div>
             <div>oneOf</div>
           </div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -2642,8 +2642,8 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
 exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
         <div>
           <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
             <div>
@@ -2651,7 +2651,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
               <div></div>
             </div>
           </div>
-          <div style=\\"padding-left: 25px\\">
+          <div>
             <div>
               <div>
                 <div>
@@ -2683,9 +2683,9 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
 exports[`HTML Output should match default-schema.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
@@ -2848,7 +2848,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>plan</div>
                       <div>
@@ -2897,7 +2897,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -2939,7 +2939,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>permissions</div>
                       <div>
@@ -2953,7 +2953,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -2977,7 +2977,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>ref</div>
                       <div>
@@ -3054,9 +3054,9 @@ exports[`HTML Output should match default-schema.json 1`] = `
 exports[`HTML Output should match formats-schema.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
@@ -3134,7 +3134,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>permissions</div>
                       <div>
@@ -3149,7 +3149,7 @@ exports[`HTML Output should match formats-schema.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -3178,15 +3178,15 @@ exports[`HTML Output should match formats-schema.json 1`] = `
 exports[`HTML Output should match references/base.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>billing_address</div>
                       <span>object</span>
@@ -3196,7 +3196,7 @@ exports[`HTML Output should match references/base.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -3255,7 +3255,7 @@ exports[`HTML Output should match references/base.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>shipping_address</div>
                       <span>object</span>
@@ -3277,15 +3277,15 @@ exports[`HTML Output should match references/base.json 1`] = `
 exports[`HTML Output should match references/nested.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>parent</div>
                       <span>object</span>
@@ -3298,13 +3298,13 @@ exports[`HTML Output should match references/nested.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
                     <div>
                       <div>
-                        <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                        <div role=\\"button\\"></div>
                         <div>
                           <div>parent</div>
                           <span>object</span>
@@ -3331,9 +3331,9 @@ exports[`HTML Output should match references/nested.json 1`] = `
 exports[`HTML Output should match references/nullish.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
@@ -3360,15 +3360,15 @@ exports[`HTML Output should match references/nullish.json 1`] = `
 exports[`HTML Output should match tickets.schema.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
-    <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-      <div style=\\"margin-left: -25px\\">
-        <div style=\\"padding-left: 25px\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div>
+        <div>
           <div>
             <div>
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>availableTicketingOptions</div>
                       <span>$ref(../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml)[]</span>
@@ -3383,7 +3383,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -3425,7 +3425,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
               <div>
                 <div>
                   <div>
-                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                    <div role=\\"button\\"></div>
                     <div>
                       <div>ticketingOptionChoice</div>
                       <span>array[object]</span>
@@ -3440,7 +3440,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
               </div>
               <div></div>
             </div>
-            <div style=\\"padding-left: 25px\\">
+            <div>
               <div>
                 <div>
                   <div>
@@ -3481,7 +3481,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                   <div>
                     <div>
                       <div>
-                        <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                        <div role=\\"button\\"></div>
                         <div>
                           <div>orderItemBreakdown</div>
                           <span>array[object]</span>
@@ -3496,7 +3496,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                   </div>
                   <div></div>
                 </div>
-                <div style=\\"padding-left: 25px\\">
+                <div>
                   <div>
                     <div>
                       <div>
@@ -3519,7 +3519,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                       <div>
                         <div>
                           <div>
-                            <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                            <div role=\\"button\\"></div>
                             <div>
                               <div>options</div>
                               <span>array[object]</span>
@@ -3534,7 +3534,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                       </div>
                       <div></div>
                     </div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
@@ -3615,7 +3615,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>deliveryInfo</div>
                                   <span>object</span>
@@ -3630,7 +3630,7 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                           </div>
                           <div></div>
                         </div>
-                        <div style=\\"padding-left: 25px\\">
+                        <div>
                           <div>
                             <div>
                               <div>

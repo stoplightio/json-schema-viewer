@@ -89,7 +89,11 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   }, [jsonSchemaTreeRoot, onTreePopulated, nodeCount]);
 
   if (isEmpty) {
-    return <Box className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}>{emptyText}</Box>;
+    return (
+      <Box className={cn(className, 'JsonSchemaViewer')} fontSize="sm">
+        {emptyText}
+      </Box>
+    );
   }
 
   return (
@@ -98,7 +102,7 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
         <ChildStack
           childNodes={jsonSchemaTreeRoot.children}
           currentNestingLevel={-1}
-          className={cn(className, 'JsonSchemaViewer', 'sl-text-sm')}
+          className={cn(className, 'JsonSchemaViewer')}
           RowComponent={TopLevelSchemaRow}
         />
       </JSVOptionsContextProvider>
@@ -109,7 +113,9 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
 const JsonSchemaFallbackComponent: React.FC<FallbackProps> = ({ error }) => {
   return (
     <Box p={4}>
-      <b className="text-danger">Error</b>
+      <Box as="b" color="danger">
+        Error
+      </Box>
       {error !== null ? `: ${error.message}` : null}
     </Box>
   );

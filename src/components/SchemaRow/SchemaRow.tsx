@@ -7,8 +7,7 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { Icon, Select } from '@stoplight/mosaic';
-import cn from 'classnames';
+import { Box, Flex, Icon, Select } from '@stoplight/mosaic';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
@@ -57,19 +56,21 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
   const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
   return (
-    <div className="sl-relative">
-      <div className="sl-flex sl-max-w-full">
-        <div className="sl-min-w-0 sl-flex-grow sl-max-w-full">
-          <div
+    <Box pos="relative">
+      <Flex maxW="full">
+        <Box maxW="full" flexGrow>
+          <Box
             onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
-            className={cn({ 'sl-cursor-pointer': childNodes.length > 0 })}
+            cursor={childNodes.length > 0 ? 'pointer' : undefined}
           >
-            <div className="sl-flex sl-items-center sl-my-2 sl-max-w-full">
+            <Flex alignItems="center" my={2} maxW="full">
               {childNodes.length > 0 ? <Caret isExpanded={isExpanded} /> : null}
 
-              <div className="sl-flex sl-items-baseline sl-text-base sl-flex-1">
+              <Flex alignItems="baseline" fontSize="base" flex={1}>
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-                  <div className="sl-mr-2 sl-font-mono sl-font-semibold">{last(schemaNode.subpath)}</div>
+                  <Box mr={2} fontFamily="mono" fontWeight="semibold">
+                    {last(schemaNode.subpath)}
+                  </Box>
                 )}
 
                 {choices.length === 1 && (
@@ -80,8 +81,11 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 )}
 
                 {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
-                  <a
-                    className="sl-ml-2 sl-cursor-pointer sl-text-primary-light"
+                  <Box
+                    as="a"
+                    ml={2}
+                    cursor="pointer"
+                    color="primary-light"
                     onClick={(e: React.MouseEvent) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -89,11 +93,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                     }}
                   >
                     (go to ref)
-                  </a>
+                  </Box>
                 ) : null}
 
                 {schemaNode.subpath.length > 1 && schemaNode.subpath[0] === 'patternProperties' ? (
-                  <div className="sl-ml-2 sl-text-muted">(pattern property)</div>
+                  <Box ml={2} color="muted">
+                    (pattern property)
+                  </Box>
                 ) : null}
                 {choices.length > 1 && (
                   <Select
@@ -111,21 +117,25 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                   />
                 )}
 
-                {combiner !== null ? <div className="sl-ml-1 sl-text-muted">{combiner}</div> : null}
-              </div>
+                {combiner !== null ? (
+                  <Box ml={1} color="muted">
+                    {combiner}
+                  </Box>
+                ) : null}
+              </Flex>
               <Properties
                 required={isPropertyRequired(schemaNode)}
                 deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
                 validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
               />
-            </div>
+            </Flex>
 
             {typeof description === 'string' && description.length > 0 && (
-              <div className="sl-flex sl-flex-1 sl-my-2 sl-text-base">
+              <Flex flex={1} my={2} fontSize="base">
                 <Description value={description} />
-              </div>
+              </Flex>
             )}
-          </div>
+          </Box>
 
           <Validations
             validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}}
@@ -136,13 +146,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             // TODO (JJ): Add mosaic tooltip showing ref error
             <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
           )}
-        </div>
-        <div>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</div>
-      </div>
+        </Box>
+        <Box>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</Box>
+      </Flex>
       {childNodes.length > 0 && isExpanded ? (
         <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
       ) : null}
-    </div>
+    </Box>
   );
 };
 

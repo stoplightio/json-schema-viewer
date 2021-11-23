@@ -238,17 +238,17 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
-              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-                <div style=\\"margin-left: -25px\\">
+              <div class=\\"JsonSchemaViewer\\">
+                <div>
                   <div>
                     <div>array of:</div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
                                   <span>array[object]</span>
@@ -275,17 +275,17 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
-              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-                <div style=\\"margin-left: -25px\\">
+              <div class=\\"JsonSchemaViewer\\">
+                <div>
                   <div>
                     <div>array of:</div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
                                   <span>array[object]</span>
@@ -312,17 +312,17 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
-              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-                <div style=\\"margin-left: -25px\\">
+              <div class=\\"JsonSchemaViewer\\">
+                <div>
                   <div>
                     <div>array of:</div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
                                   <span>array[object]</span>
@@ -332,13 +332,13 @@ describe('Expanded depth', () => {
                           </div>
                           <div></div>
                         </div>
-                        <div style=\\"padding-left: 25px\\">
+                        <div>
                           <div>
                             <div>
                               <div>
                                 <div>
                                   <div>
-                                    <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                    <div role=\\"button\\"></div>
                                     <div>
                                       <div>bar</div>
                                       <span>object</span>
@@ -401,11 +401,11 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
-              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-                <div style=\\"margin-left: -25px\\">
+              <div class=\\"JsonSchemaViewer\\">
+                <div>
                   <div>
                     <div>array of:</div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
@@ -427,7 +427,7 @@ describe('Expanded depth', () => {
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
                                   <span>array[object]</span>
@@ -454,11 +454,11 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
-              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-                <div style=\\"margin-left: -25px\\">
+              <div class=\\"JsonSchemaViewer\\">
+                <div>
                   <div>
                     <div>array of:</div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
@@ -480,7 +480,7 @@ describe('Expanded depth', () => {
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
                                   <span>array[object]</span>
@@ -507,11 +507,11 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
-              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-                <div style=\\"margin-left: -25px\\">
+              <div class=\\"JsonSchemaViewer\\">
+                <div>
                   <div>
                     <div>array of:</div>
-                    <div style=\\"padding-left: 25px\\">
+                    <div>
                       <div>
                         <div>
                           <div>
@@ -533,7 +533,7 @@ describe('Expanded depth', () => {
                           <div>
                             <div>
                               <div>
-                                <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                                <div role=\\"button\\"></div>
                                 <div>
                                   <div>foo</div>
                                   <span>array[object]</span>
@@ -543,7 +543,7 @@ describe('Expanded depth', () => {
                           </div>
                           <div></div>
                         </div>
-                        <div style=\\"padding-left: 25px\\">
+                        <div>
                           <div>
                             <div>
                               <div>
@@ -640,15 +640,15 @@ describe('Expanded depth', () => {
         expect(dumpDom(wrapper.getElement())).toMatchInlineSnapshot(`
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
-              <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
-                <div style=\\"margin-left: -25px\\">
-                  <div style=\\"padding-left: 25px\\">
+              <div class=\\"JsonSchemaViewer\\">
+                <div>
+                  <div>
                     <div>
                       <div>
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div role=\\"button\\"></div>
                               <div>
                                 <div>bar</div>
                                 <span>object</span>
@@ -665,7 +665,7 @@ describe('Expanded depth', () => {
                         <div>
                           <div>
                             <div>
-                              <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                              <div role=\\"button\\"></div>
                               <div>
                                 <div>foo</div>
                                 <span>array[object]</span>
@@ -720,7 +720,7 @@ describe('$ref resolving', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
         <div data-overlay-container=\\"true\\">
-          <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+          <div class=\\"JsonSchemaViewer\\">
             <div>
               <div>
                 <div>
@@ -751,20 +751,20 @@ describe('$ref resolving', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchInlineSnapshot(`
       "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
         <div data-overlay-container=\\"true\\">
-          <div style=\\"padding-left: 25px\\" class=\\"JsonSchemaViewer\\">
+          <div class=\\"JsonSchemaViewer\\">
             <div>
               <div>
                 <div>
                   <div>
                     <div>
-                      <div style=\\"height: 12px; margin-top: 2px; left: -25px\\" role=\\"button\\"></div>
+                      <div role=\\"button\\"></div>
                       <div><span>$ref(#/foo)[]</span></div>
                     </div>
                   </div>
                 </div>
                 <div></div>
               </div>
-              <div style=\\"padding-left: 25px\\">
+              <div>
                 <div>
                   <div>
                     <div>
