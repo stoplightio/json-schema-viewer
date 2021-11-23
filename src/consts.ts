@@ -1,5 +1,5 @@
 import { SchemaCombinerName } from '@stoplight/json-schema-tree';
-import { SpaceVals, NegativeSpaceVals } from '@stoplight/mosaic';
+import { NegativeSpaceVals, SpaceVals } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 
 export const COMBINER_PRETTY_NAMES: Readonly<Dictionary<string, SchemaCombinerName>> = {
