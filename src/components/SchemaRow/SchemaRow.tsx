@@ -25,8 +25,6 @@ export interface SchemaRowProps {
 }
 
 export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
-  const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
-
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples } = useJSVOptionsContext();
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
@@ -35,6 +33,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const typeToShow = selectedChoice.type;
+  const description = isRegularNode(typeToShow) ? typeToShow.annotations.description : null;
 
   const refNode = React.useMemo<ReferenceNode | null>(() => {
     if (isReferenceNode(schemaNode)) {
@@ -119,7 +118,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
               />
             </div>
-
             {typeof description === 'string' && description.length > 0 && (
               <div className="sl-flex sl-flex-1 sl-my-2 sl-text-base">
                 <Description value={description} />
