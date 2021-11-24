@@ -1,0 +1,132 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "oneOf-single-object-working-description": {
+      "description": "Description for oneOf with a single objects. Working as expected (WAE)",
+      "oneOf": [
+        {
+          "title": "oneOf-one-item",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "type": "object"
+    },
+    "oneOf-two-objects-hidden-description": {
+      "description": "Description for oneOf with two objects. (BUG)",
+      "oneOf": [
+        {
+          "title": "oneOf-two-items-first-item",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "title": "oneOf-two-items-second-item",
+          "properties": {
+            "nameTest2": {
+              "type": "string"
+            },
+            "lastNameTest2": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "type": "object"
+    },
+    "oneOf-one-object-hidden-description-when-empty": {
+      "description": "Description for oneOf. Hidden when object description is empty string. (BUG)",
+      "oneOf": [
+        {
+          "title": "oneOf-two-items-first-item",
+          "description": "",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "type": "object"
+    },
+    "anyOf-single-object-working-description": {
+      "description": "Description for anyOf with one object. Working as expected (WAE)",
+      "anyOf": [
+        {
+          "title": "anyOf-one-item",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "type": "object"
+    },
+    "anyOf-two-objects-hidden-description": {
+      "description": "Description of anyOf with two objects. Description hidden. (BUG)",
+      "anyOf": [
+        {
+          "title": "anyOf-two-items-first-item",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "title": "anyOf-two-items-second-item",
+          "properties": {
+            "nameSecond": {
+              "type": "string"
+            },
+            "lastNameSecond": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "type": "object"
+    },
+    "anyOf-one-object-hidden-description-when-empty": {
+      "description": "Description for anyOf. Hidden when object description is empty string. (BUG)",
+      "anyOf": [
+        {
+          "title": "anyOf-one-item-first-item",
+          "description": "",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "type": "object"
+    }
+  }
+}

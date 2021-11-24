@@ -25,7 +25,7 @@ export interface SchemaRowProps {
 }
 
 export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
-  const description = isRegularNode(schemaNode) ? schemaNode.annotations.description : null;
+  const description = isRegularNode(schemaNode) ? schemaNode.originalFragment.description : null;
 
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples } = useJSVOptionsContext();
 
@@ -119,7 +119,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
               />
             </div>
-
             {typeof description === 'string' && description.length > 0 && (
               <div className="sl-flex sl-flex-1 sl-my-2 sl-text-base">
                 <Description value={description} />
