@@ -11,6 +11,8 @@ import { Wrapper } from './utils/Wrapper';
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
+const boxFileSchema = require('../__fixtures__/real-world/box-file.json');
+const githubIssueSchema = require('../__fixtures__/real-world/github-issue.json');
 const refSchema = require('../__fixtures__/references/base.json');
 const nullRefSchema = require('../__fixtures__/references/nullish.json');
 const brokenRefArraySchema = require('../__fixtures__/arrays/of-refs.json');
@@ -177,6 +179,20 @@ storiesOf('JsonSchemaViewer', module)
   .add('refs/broken', () => (
     <JsonSchemaViewer
       schema={brokenRefArraySchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('Box "File" Schema', () => (
+    <JsonSchemaViewer
+      schema={boxFileSchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('Github "Issue" Schema', () => (
+    <JsonSchemaViewer
+      schema={githubIssueSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 2)}
       onGoToRef={action('onGoToRef')}
     />

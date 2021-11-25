@@ -1,5 +1,5 @@
 import { SchemaNode } from '@stoplight/json-schema-tree';
-import { Box } from '@stoplight/mosaic';
+import { SpaceVals, VStack } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';
@@ -17,14 +17,31 @@ export const ChildStack = ({
   currentNestingLevel,
   className,
   RowComponent = SchemaRow,
-}: ChildStackProps) => (
-  <Box className={className} pl={NESTING_OFFSET} fontSize="sm">
-    {childNodes.map((childNode: SchemaNode, index) => (
-      <React.Fragment key={childNode.id}>
-        {index > 0 && <Box borderT borderColor="light" alignSelf="stretch" />}
+}: ChildStackProps) => {
+  const isRootLevel = currentNestingLevel <= 0;
 
-        <RowComponent schemaNode={childNode} nestingLevel={currentNestingLevel + 1} />
-      </React.Fragment>
-    ))}
-  </Box>
-);
+  let ml: SpaceVals | undefined;
+  if (!isRootLevel) {
+    ml = currentNestingLevel === 1 ? 1 : 5;
+  }
+
+  return (
+    <VStack
+      className={className}
+      pl={isRootLevel ? undefined : NESTING_OFFSET}
+      ml={ml}
+      spacing={4}
+      fontSize="sm"
+      borderL={isRootLevel ? undefined : true}
+      data-level={currentNestingLevel}
+      onMouseEnter={e => {
+        e.stopPropagation();
+        console.log('MOUSE OVER', e, currentNestingLevel);
+      }}
+    >
+      {childNodes.map((childNode: SchemaNode) => (
+        <RowComponent key={childNode.id} schemaNode={childNode} nestingLevel={currentNestingLevel + 1} />
+      ))}
+    </VStack>
+  );
+};

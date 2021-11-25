@@ -21,9 +21,10 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   className?: string;
   resolveRef?: SchemaTreeRefDereferenceFn;
   onTreePopulated?: (props: { rootNode: RootNode; nodeCount: number }) => void;
+  maxHeight?: number;
 };
 
-const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForwardedProps> = ({
+const JsonSchemaViewerComponent = ({
   schema,
   viewMode = 'standalone',
   className,
@@ -34,7 +35,8 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   renderRowAddon,
   hideExamples,
   onTreePopulated,
-}) => {
+  maxHeight,
+}: JsonSchemaProps & ErrorBoundaryForwardedProps) => {
   const { jsonSchemaTreeRoot, nodeCount } = React.useMemo(() => {
     const jsonSchemaTree = new JsonSchemaTree(schema, {
       mergeAllOf: true,
@@ -99,12 +101,23 @@ const JsonSchemaViewerComponent: React.FC<JsonSchemaProps & ErrorBoundaryForward
   return (
     <MosaicProvider>
       <JSVOptionsContextProvider value={options}>
-        <ChildStack
+        <Box
+          className="JsonSchemaViewer"
+          pos={maxHeight ? 'relative' : undefined}
+          overflowY={maxHeight ? 'auto' : undefined}
+        >
+          {/* <Box py={1.5} borderB pos="sticky" top={0} bg="canvas-pure" fontSize="sm">
+            user.address
+          </Box> */}
+
+          <TopLevelSchemaRow schemaNode={jsonSchemaTreeRoot.children[0]} />
+          {/* <ChildStack
           childNodes={jsonSchemaTreeRoot.children}
           currentNestingLevel={-1}
           className={cn(className, 'JsonSchemaViewer')}
           RowComponent={TopLevelSchemaRow}
-        />
+        /> */}
+        </Box>
       </JSVOptionsContextProvider>
     </MosaicProvider>
   );

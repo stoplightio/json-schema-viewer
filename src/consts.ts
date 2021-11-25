@@ -8,10 +8,10 @@ export const COMBINER_PRETTY_NAMES: Readonly<Dictionary<string, SchemaCombinerNa
   [SchemaCombinerName.OneOf]: 'or',
 };
 
-export const NESTING_OFFSET: SpaceVals = 6;
+export const NESTING_OFFSET: SpaceVals = 3;
 // @ts-expect-error: negative offset
 export const NEGATIVE_NESTING_OFFSET: NegativeSpaceVals = -NESTING_OFFSET;
 
 export const CARET_OFFSET = NEGATIVE_NESTING_OFFSET;
-export const CARET_ICON_SIZE = 'xs';
+export const CARET_ICON_SIZE = 'sm';
 export const CARET_ICON_BOX_DIMENSION = 3;
