@@ -3583,7 +3583,10 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                                 </div>
                               </div>
                             </div>
-                            <div><span>examples</span></div>
+                            <div>
+                              <span>Example value:</span>
+                              <span>true</span>
+                            </div>
                           </div>
                           <div></div>
                         </div>
