@@ -3,6 +3,7 @@ import { SpaceVals, VStack } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';
+import { useJSVOptionsContext } from '../../contexts';
 import { SchemaRow, SchemaRowProps } from '../SchemaRow';
 
 type ChildStackProps = {
@@ -18,11 +19,13 @@ export const ChildStack = ({
   className,
   RowComponent = SchemaRow,
 }: ChildStackProps) => {
-  const isRootLevel = currentNestingLevel <= 0;
+  const { renderRootTreeLines } = useJSVOptionsContext();
+  const rootLevel = renderRootTreeLines ? 0 : 1;
+  const isRootLevel = currentNestingLevel < rootLevel;
 
   let ml: SpaceVals | undefined;
   if (!isRootLevel) {
-    ml = currentNestingLevel === 1 ? 1 : 5;
+    ml = currentNestingLevel === rootLevel ? 'px' : 4;
   }
 
   return (
@@ -34,10 +37,6 @@ export const ChildStack = ({
       fontSize="sm"
       borderL={isRootLevel ? undefined : true}
       data-level={currentNestingLevel}
-      onMouseEnter={e => {
-        e.stopPropagation();
-        console.log('MOUSE OVER', e, currentNestingLevel);
-      }}
     >
       {childNodes.map((childNode: SchemaNode) => (
         <RowComponent key={childNode.id} schemaNode={childNode} nestingLevel={currentNestingLevel + 1} />

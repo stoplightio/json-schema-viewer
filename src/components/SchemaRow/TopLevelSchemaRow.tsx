@@ -1,10 +1,12 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown.js';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon, Menu, Pressable } from '@stoplight/mosaic';
+import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
 
-// import { NEGATIVE_NESTING_OFFSET } from '../../consts';
+import { useOnScreen } from '../../hooks/useOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
+import { showPathCrumbsAtom } from '../PathCrumbs';
 import { ChildStack } from '../shared/ChildStack';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
 import { useChoices } from './useChoices';
@@ -16,7 +18,12 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
 
   // regular objects are flattened at the top level
   if (isRegularNode(schemaNode) && isPureObjectNode(schemaNode)) {
-    return <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />;
+    return (
+      <>
+        <ScrollCheck />
+        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
+      </>
+    );
   }
 
   if (isRegularNode(schemaNode) && choices.length > 1) {
@@ -24,6 +31,8 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
 
     return (
       <>
+        <ScrollCheck />
+
         <Menu
           aria-label="Pick a type"
           closeOnPress
@@ -36,7 +45,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
           renderTrigger={props => (
             <Pressable {...props}>
               <Flex>
-                <Flex mr={2} fontFamily="mono" fontWeight="semibold" fontSize="base" cursor="pointer" py={2}>
+                <Flex fontFamily="mono" fontWeight="semibold" fontSize="base" cursor="pointer" pb={4}>
                   {selectedChoice.title}
                   <Box ml={1}>
                     <Icon icon={faCaretDown} />
@@ -61,19 +70,37 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
   if (isComplexArray(schemaNode) && isPureObjectNode(schemaNode.children[0])) {
     return (
       <>
-        <Box mr={2} fontFamily="mono" fontWeight="semibold" fontSize="base" py={2}>
+        <ScrollCheck />
+
+        <Box fontFamily="mono" fontWeight="semibold" fontSize="base" pb={4}>
           array of:
         </Box>
+
         {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
       </>
     );
   }
 
-  return <SchemaRow schemaNode={schemaNode} nestingLevel={nestingLevel} />;
+  return (
+    <>
+      <ScrollCheck />
+      <SchemaRow schemaNode={schemaNode} nestingLevel={nestingLevel} />
+    </>
+  );
 };
+
+function ScrollCheck() {
+  const elementRef = React.useRef<HTMLDivElement>(null);
+
+  const isOnScreen = useOnScreen(elementRef);
+  const setShowPathCrumbs = useUpdateAtom(showPathCrumbsAtom);
+  React.useEffect(() => {
+    setShowPathCrumbs(!isOnScreen);
+  }, [isOnScreen, setShowPathCrumbs]);
+
+  return <div ref={elementRef} />;
+}
 
 function isPureObjectNode(schemaNode: RegularNode) {
   return schemaNode.primaryType === 'object' && schemaNode.types?.length === 1;
 }
-
-// const DecreaseIndentation: React.FC = ({ children }) => <Box ml={NEGATIVE_NESTING_OFFSET}>{children}</Box>;

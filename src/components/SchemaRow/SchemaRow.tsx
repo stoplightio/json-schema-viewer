@@ -1,18 +1,13 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle.js';
-import {
-  isMirroredNode,
-  isReferenceNode,
-  isRegularNode,
-  ReferenceNode,
-  SchemaNode,
-  SchemaNodeKind,
-} from '@stoplight/json-schema-tree';
+import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon, Select, VStack } from '@stoplight/mosaic';
+import { useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
+import { pathCrumbsAtom } from '../PathCrumbs';
 import { Caret, Description, Format, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Properties } from '../shared/Properties';
@@ -24,11 +19,10 @@ export interface SchemaRowProps {
 }
 
 export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
-  const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples } = useJSVOptionsContext();
+  const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines } = useJSVOptionsContext();
 
-  const [isExpanded, setExpanded] = React.useState<boolean>(
-    !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
-  );
+  const setPathCrumbs = useUpdateAtom(pathCrumbsAtom);
+  const [isExpanded, setExpanded] = React.useState<boolean>(nestingLevel <= defaultExpandedDepth);
 
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const typeToShow = selectedChoice.type;
@@ -52,17 +46,24 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
   const isBrokenRef = typeof refNode?.error === 'string';
 
+  const rootLevel = renderRootTreeLines ? 1 : 2;
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
   const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
   const isCollapsible = childNodes.length > 0;
-  const isRootLevel = nestingLevel <= 1;
+  const isRootLevel = nestingLevel < rootLevel;
 
   return (
     <>
-      <Flex maxW="full">
-        {!isRootLevel && !isCollapsible && <Box borderT w={3} ml={-3} mr={3} mt={2} />}
+      <Flex
+        maxW="full"
+        onMouseEnter={(e: any) => {
+          e.stopPropagation();
+          setPathCrumbs(schemaNode.path);
+        }}
+      >
+        {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}
 
-        <VStack spacing={1} maxW="full" flex={1} ml={isCollapsible && !isRootLevel ? 3 : undefined}>
+        <VStack spacing={1} maxW="full" flex={1} ml={isCollapsible && !isRootLevel ? 2 : undefined}>
           <Flex
             alignItems="center"
             maxW="full"

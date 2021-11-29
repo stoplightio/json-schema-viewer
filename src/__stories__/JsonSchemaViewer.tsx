@@ -53,7 +53,7 @@ storiesOf('JsonSchemaViewer', module)
     const customRowAddonRenderer: RowAddonRenderer = () => {
       return (
         <Flex h="full" alignItems="center">
-          <Button pl={1} mr={1} size="sm" appearance="minimal" icon="issue" />
+          <Button pl={1} mr={1} size="sm" appearance="minimal" icon="bullseye" />
           <input type="checkbox" />
         </Flex>
       );
@@ -70,35 +70,35 @@ storiesOf('JsonSchemaViewer', module)
   .add('array of objects', () => (
     <JsonSchemaViewer
       schema={arrayOfComplexObjects as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('stress-test schema', () => (
     <JsonSchemaViewer
       schema={stressSchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 7)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('allOf-schema', () => (
     <JsonSchemaViewer
       schema={allOfSchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('anyOf-array-schema', () => (
     <JsonSchemaViewer
       schema={oneOfWithArraySchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('anyOf-array-schema2', () => (
     <JsonSchemaViewer
       schema={oneOfWithArraySchema2 as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -113,7 +113,7 @@ storiesOf('JsonSchemaViewer', module)
         },
         null,
       )}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -144,7 +144,7 @@ storiesOf('JsonSchemaViewer', module)
           },
         },
       }}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
@@ -154,7 +154,7 @@ storiesOf('JsonSchemaViewer', module)
         <div style={{ height: '100vh' }}>
           <JsonSchemaViewer
             schema={schema as JSONSchema4}
-            defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+            defaultExpandedDepth={number('defaultExpandedDepth', 1)}
             onGoToRef={action('onGoToRef')}
             className="sl-bg-canvas"
           />
@@ -165,35 +165,39 @@ storiesOf('JsonSchemaViewer', module)
   .add('refs/normal', () => (
     <JsonSchemaViewer
       schema={refSchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('refs/nullish', () => (
     <JsonSchemaViewer
       schema={nullRefSchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('refs/broken', () => (
     <JsonSchemaViewer
       schema={brokenRefArraySchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
   .add('Box "File" Schema', () => (
     <JsonSchemaViewer
       schema={boxFileSchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
+      parentCrumbs={['Box', 'File']}
+      renderRootTreeLines={boolean('renderRootTreeLines', true)}
     />
   ))
   .add('Github "Issue" Schema', () => (
     <JsonSchemaViewer
       schema={githubIssueSchema as JSONSchema4}
-      defaultExpandedDepth={number('defaultExpandedDepth', 2)}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
+      parentCrumbs={['Github', 'Issue']}
+      renderRootTreeLines={boolean('renderRootTreeLines', true)}
     />
   ));
