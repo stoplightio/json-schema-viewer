@@ -16,12 +16,12 @@ describe('HTML Output', () => {
     fastGlob.sync('**/*.json', {
       cwd: path.join(__dirname, '../__fixtures__'),
 
-      ignore: ['stress-schema.json', 'real-world', 'combiners/allOfs/complex.json', 'references/nested.json'],
+      ignore: ['stress-schema.json', 'real-world'],
     }),
   )('should match %s', filename => {
     const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../__fixtures__/', filename), 'utf8'));
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={5} />)).toMatchSnapshot();
   });
 
   describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {

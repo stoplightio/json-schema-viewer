@@ -1409,6 +1409,268 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
 "
 `;
 
+exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
+"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+  <div data-overlay-container=\\"true\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div></div>
+      <div data-level=\\"0\\">
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>foo</div>
+                <span>object</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div role=\\"button\\"></div>
+                <div>
+                  <div>user</div>
+                  <span>allOf</span>
+                  <div>allOf</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-level=\\"2\\">
+            <div>
+              <div></div>
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div><span>object</span></div>
+                </div>
+              </div>
+            </div>
+            <div data-level=\\"3\\">
+              <div>
+                <div></div>
+                <div>
+                  <div>
+                    <div role=\\"button\\"></div>
+                    <div>
+                      <div>names</div>
+                      <span>$ref(#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name)[]</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-level=\\"4\\">
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
+                      <div><span>#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div></div>
+                <div>
+                  <div>
+                    <div role=\\"button\\"></div>
+                    <div>
+                      <div>users</div>
+                      <span>array[object]</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-level=\\"4\\">
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
+                      <div role=\\"button\\"></div>
+                      <div>
+                        <div>creation</div>
+                        <span>object</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-level=\\"5\\">
+                  <div>
+                    <div></div>
+                    <div>
+                      <div>
+                        <div role=\\"button\\"></div>
+                        <div>
+                          <div>user</div>
+                          <span>allOf</span>
+                          <div>allOf</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>foo</div>
+                        <span>#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>products</div>
+                        <span>#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>bar</div>
+                <span>object</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div role=\\"button\\"></div>
+                <div>
+                  <div>foo</div>
+                  <span>object</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-level=\\"2\\">
+            <div>
+              <div></div>
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div>
+                    <div>user</div>
+                    <span>allOf</span>
+                    <div>allOf</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div data-level=\\"3\\">
+              <div>
+                <div></div>
+                <div>
+                  <div>
+                    <div role=\\"button\\"></div>
+                    <div><span>object</span></div>
+                  </div>
+                </div>
+              </div>
+              <div data-level=\\"4\\">
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
+                      <div role=\\"button\\"></div>
+                      <div>
+                        <div>names</div>
+                        <span>$ref(#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name)[]</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-level=\\"5\\">
+                  <div>
+                    <div></div>
+                    <div>
+                      <div>
+                        <div>
+                          <span>#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
+                      <div role=\\"button\\"></div>
+                      <div>
+                        <div>users</div>
+                        <span>array[object]</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-level=\\"5\\">
+                  <div>
+                    <div></div>
+                    <div>
+                      <div>
+                        <div role=\\"button\\"></div>
+                        <div>
+                          <div>creation</div>
+                          <span>object</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div></div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>foo</div>
+                          <span>#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div></div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>products</div>
+                          <span>#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
 exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
@@ -2277,6 +2539,106 @@ exports[`HTML Output should match references/base.json 1`] = `
                   <span>string</span>
                 </div>
                 <span>required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output should match references/nested.json 1`] = `
+"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+  <div data-overlay-container=\\"true\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div></div>
+      <div data-level=\\"0\\">
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>parent</div>
+                <span>object</span>
+              </div>
+            </div>
+            <div style=\\"font-size: 12px\\"><p>something</p></div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div role=\\"button\\"></div>
+                <div>
+                  <div>parent</div>
+                  <span>object</span>
+                </div>
+              </div>
+              <div style=\\"font-size: 12px\\"><p>something</p></div>
+            </div>
+          </div>
+          <div data-level=\\"2\\">
+            <div>
+              <div></div>
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div>
+                    <div>parent</div>
+                    <span>object</span>
+                  </div>
+                </div>
+                <div style=\\"font-size: 12px\\"><p>something</p></div>
+              </div>
+            </div>
+            <div data-level=\\"3\\">
+              <div>
+                <div></div>
+                <div>
+                  <div>
+                    <div role=\\"button\\"></div>
+                    <div>
+                      <div>parent</div>
+                      <span>object</span>
+                    </div>
+                  </div>
+                  <div style=\\"font-size: 12px\\"><p>something</p></div>
+                </div>
+              </div>
+              <div data-level=\\"4\\">
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
+                      <div role=\\"button\\"></div>
+                      <div>
+                        <div>parent</div>
+                        <span>object</span>
+                      </div>
+                    </div>
+                    <div style=\\"font-size: 12px\\"><p>something</p></div>
+                  </div>
+                </div>
+                <div data-level=\\"5\\">
+                  <div>
+                    <div></div>
+                    <div>
+                      <div>
+                        <div role=\\"button\\"></div>
+                        <div>
+                          <div>parent</div>
+                          <span>object</span>
+                        </div>
+                      </div>
+                      <div style=\\"font-size: 12px\\"><p>something</p></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

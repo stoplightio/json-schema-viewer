@@ -9,6 +9,7 @@ import { JsonSchemaViewer, RowAddonRenderer } from '../';
 import { Wrapper } from './utils/Wrapper';
 
 const allOfSchema = require('../__fixtures__/combiners/allOfs/base.json');
+const allOfComplexSchema = require('../__fixtures__/combiners/allOfs/complex.json');
 const schema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
 const boxFileSchema = require('../__fixtures__/real-world/box-file.json');
@@ -85,6 +86,13 @@ storiesOf('JsonSchemaViewer', module)
   .add('allOf-schema', () => (
     <JsonSchemaViewer
       schema={allOfSchema as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('allOf-circular-schema', () => (
+    <JsonSchemaViewer
+      schema={allOfComplexSchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
