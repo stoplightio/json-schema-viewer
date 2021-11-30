@@ -1,5 +1,5 @@
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
-import { Box, Flex, Text } from '@stoplight/mosaic';
+import { Flex, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import capitalize from 'lodash/capitalize.js';
 import keys from 'lodash/keys.js';
