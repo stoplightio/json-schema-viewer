@@ -28,7 +28,7 @@ export const useOnScreen = (ref: RefObject<HTMLElement>) => {
   return isOnScreen;
 };
 
-function getScrollParent(node: HTMLElement): HTMLElement | typeof window | null {
+function getScrollParent(node: HTMLElement | null): HTMLElement | typeof window | null {
   if (node == null) {
     return null;
   }
@@ -36,6 +36,6 @@ function getScrollParent(node: HTMLElement): HTMLElement | typeof window | null 
   if (node.scrollHeight > node.clientHeight) {
     return node.tagName === 'HTML' ? window : node;
   } else {
-    return getScrollParent(node.parentNode as HTMLElement);
+    return getScrollParent(node.parentElement);
   }
 }
