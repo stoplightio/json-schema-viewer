@@ -159,7 +159,7 @@ const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown>
 const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
     <HStack color="muted" spacing={2} alignItems="baseline">
-      <Text color="light">{capitalize(name)}:</Text>
+      <Text>{capitalize(name)}:</Text>
 
       <Flex flexWrap flex={1} style={{ gap: 4 }}>
         {uniq(values).map(value => (
@@ -171,7 +171,7 @@ const KeyValueValidation = ({ name, values }: { name: string; values: string[] }
 };
 
 const Value = ({ name }: { name: string }) => (
-  <Text px={1} bg="code" color="on-code" border rounded wordBreak="all" maxW="full">
+  <Text px={1} bg="canvas-tint" color="muted" border rounded wordBreak="all" maxW="full">
     {name}
   </Text>
 );

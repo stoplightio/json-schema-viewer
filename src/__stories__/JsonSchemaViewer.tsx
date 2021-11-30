@@ -1,4 +1,4 @@
-import { Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
+import { Box, Button, Flex, InvertTheme, subscribeTheme } from '@stoplight/mosaic';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
@@ -131,14 +131,13 @@ storiesOf('JsonSchemaViewer', module)
   .add('dark', () => {
     return (
       <InvertTheme>
-        <div style={{ height: '100vh' }}>
+        <Box bg="canvas">
           <JsonSchemaViewer
             schema={schema as JSONSchema4}
             defaultExpandedDepth={number('defaultExpandedDepth', 1)}
             onGoToRef={action('onGoToRef')}
-            className="sl-bg-canvas"
           />
-        </div>
+        </Box>
       </InvertTheme>
     );
   });

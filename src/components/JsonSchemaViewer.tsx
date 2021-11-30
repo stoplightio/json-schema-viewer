@@ -133,7 +133,7 @@ const JsonSchemaViewerInner = ({
 
   return (
     <Box
-      className="JsonSchemaViewer"
+      className={cn('JsonSchemaViewer', className)}
       pos={maxHeight ? 'relative' : undefined}
       overflowY={maxHeight ? 'auto' : undefined}
       onMouseLeave={onMouseLeave}
