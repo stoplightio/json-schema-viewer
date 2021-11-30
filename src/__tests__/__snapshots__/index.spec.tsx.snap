@@ -4,39 +4,27 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>bar</div>
+                <span>object</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -51,120 +39,85 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>bar</div>
+                <span>object</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
+                <div role=\\"button\\"></div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>barFoo</div>
-                          <span>object</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBaz</div>
-                          <span>boolean</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>barFoo</div>
+                  <span>object</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBar</div>
+                  <span>string</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBaz</div>
+                  <span>boolean</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooBar</div>
+                  <span>string</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooFoo</div>
-                          <span>number</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooFoo</div>
+                  <span>number</span>
                 </div>
               </div>
             </div>
@@ -181,137 +134,98 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>bar</div>
+                <span>object</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
+                <div role=\\"button\\"></div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>barFoo</div>
-                          <span>object</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>barFooBar</div>
-                              <span>object</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBaz</div>
-                          <span>boolean</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>barFoo</div>
+                  <span>object</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+          <div data-level=\\"2\\">
+            <div>
+              <div></div>
+              <div>
+                <div>
+                  <div>
+                    <div>barFooBar</div>
+                    <span>object</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBar</div>
+                  <span>string</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBaz</div>
+                  <span>boolean</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooBar</div>
+                  <span>string</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooFoo</div>
-                          <span>number</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooFoo</div>
+                  <span>number</span>
                 </div>
               </div>
             </div>
@@ -328,102 +242,68 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              Admin
-              <div></div>
-            </div>
-            <div>anyOf</div>
-          </div>
+          Admin
+          <div></div>
+        </div>
+        <div>anyOf</div>
+      </div>
+      <div data-level=\\"0\\">
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>type</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed values:</span>
-                    <span>admin</span>
-                    <span>editor</span>
-                  </div>
-                </div>
-                <div></div>
+                <div>type</div>
+                <span>string</span>
               </div>
+              <span>required</span>
             </div>
-            <div></div>
+            <div>
+              <span>Allowed values:</span>
+              <span>admin</span>
+              <span>editor</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>enabled</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                    <div>
-                      <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\"><p>Is this account enabled</p></div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>enabled</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+            <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>root</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>root</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>group</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>group</div>
+                <span>string</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>expirationDate</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>expirationDate</div>
+                <span>string</span>
               </div>
             </div>
           </div>
@@ -439,16 +319,13 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              array[string]
-              <div></div>
-            </div>
-            <div>oneOf</div>
-          </div>
+          array[string]
+          <div></div>
         </div>
+        <div>oneOf</div>
       </div>
     </div>
   </div>
@@ -460,33 +337,25 @@ exports[`HTML Output given complex type that includes array and complex array su
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
+                <div>items</div>
                 <div>
-                  <div>
-                    <div>
-                      <div>items</div>
-                      <div>
-                        <span>null</span>
-                        <span>or</span>
-                        <span>array[string or number]</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                      <p>
-                        This description can be long and should truncate once it reaches the end of the row. If it's not
-                        truncating then theres and issue that needs to be fixed. Help!
-                      </p>
-                    </div>
-                  </div>
+                  <span>null</span>
+                  <span>or</span>
+                  <span>array[string or number]</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+            <div style=\\"font-size: 12px\\">
+              <p>
+                This description can be long and should truncate once it reaches the end of the row. If it's not
+                truncating then theres and issue that needs to be fixed. Help!
+              </p>
             </div>
           </div>
         </div>
@@ -501,38 +370,29 @@ exports[`HTML Output given multiple object and string type, should process prope
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
               </div>
             </div>
           </div>
-          <div></div>
         </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>ids</div>
-                      <span>array[integer]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>ids</div>
+                <span>array[integer]</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -547,102 +407,68 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              Admin
-              <div></div>
-            </div>
-            <div>oneOf</div>
-          </div>
+          Admin
+          <div></div>
+        </div>
+        <div>oneOf</div>
+      </div>
+      <div data-level=\\"0\\">
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>type</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed values:</span>
-                    <span>admin</span>
-                    <span>editor</span>
-                  </div>
-                </div>
-                <div></div>
+                <div>type</div>
+                <span>string</span>
               </div>
+              <span>required</span>
             </div>
-            <div></div>
+            <div>
+              <span>Allowed values:</span>
+              <span>admin</span>
+              <span>editor</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>enabled</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                    <div>
-                      <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\"><p>Is this account enabled</p></div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>enabled</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+            <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>root</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>root</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>group</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>group</div>
+                <span>string</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>expirationDate</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>expirationDate</div>
+                <span>string</span>
               </div>
             </div>
           </div>
@@ -658,38 +484,29 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
               </div>
             </div>
           </div>
-          <div></div>
         </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>id</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                </div>
+                <div>id</div>
+                <span>string</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -704,56 +521,41 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
+        <div>
+          <div>
+            <div role=\\"button\\"></div>
+            <div>
+              <div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <div>id</div>
+                <span>string</span>
               </div>
+              <span>read-only</span>
             </div>
           </div>
-          <div></div>
         </div>
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>id</div>
-                      <span>string</span>
-                    </div>
-                    <span>read-only</span>
-                  </div>
-                </div>
+                <div>description</div>
+                <span>string</span>
               </div>
-              <div></div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>description</div>
-                      <span>string</span>
-                    </div>
-                    <span>write-only</span>
-                  </div>
-                </div>
-              </div>
-              <div></div>
+              <span>write-only</span>
             </div>
           </div>
         </div>
@@ -768,56 +570,53 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>User</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>User</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>name</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>name</div>
+                  <span>string</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>user</div>
+                <span>User</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>user</div>
-                      <span>User</span>
-                    </div>
-                  </div>
+                  <div>name</div>
+                  <span>string</span>
                 </div>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -832,38 +631,29 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
               </div>
             </div>
           </div>
-          <div></div>
         </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>description</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                </div>
+                <div>description</div>
+                <span>string</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -878,53 +668,38 @@ exports[`HTML Output should match arrays/of-allofs.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>array-all-objects</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>array-all-objects</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>foo</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>foo</div>
+                  <span>string</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>bar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>bar</div>
+                  <span>string</span>
                 </div>
               </div>
             </div>
@@ -941,39 +716,25 @@ exports[`HTML Output should match arrays/of-arrays.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div>array of:</div>
+      <div data-level=\\"0\\">
         <div>
-          <div>array of:</div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>bar</div>
-                        <span>integer</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>bar</div>
+                <span>integer</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>foo</div>
-                        <span>array[array]</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>foo</div>
+                <span>array[array]</span>
               </div>
             </div>
           </div>
@@ -989,357 +750,272 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div>array of:</div>
+      <div data-level=\\"0\\">
         <div>
-          <div>array of:</div>
           <div>
             <div>
               <div>
+                <div>name</div>
+                <span>string</span>
+              </div>
+              <span>required</span>
+            </div>
+            <div style=\\"font-size: 12px\\">
+              <p>
+                The user's full name. This description can be long and should truncate once it reaches the end of the
+                row. If it's not truncating then theres and issue that needs to be fixed. Help!
+              </p>
+            </div>
+            <div>
+              <span>Allowed value:</span>
+              <span>Constant name</span>
+            </div>
+            <div>
+              <span>Example values:</span>
+              <span>Example name</span>
+              <span>Different name</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>age</div>
+                <span>number</span>
+              </div>
+              <span>read-only</span>
+              <span>required</span>
+            </div>
+            <div>
+              <span>&gt;= 10</span>
+              <span>&lt;= 40</span>
+            </div>
+            <div>
+              <span>Allowed values:</span>
+              <span>10</span>
+              <span>20</span>
+              <span>30</span>
+              <span>40</span>
+            </div>
+            <div>
+              <span>Default value:</span>
+              <span>20</span>
+            </div>
+            <div>
+              <span>Multiple of:</span>
+              <span>10</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>completed_at</div>
+                <span>string</span>
+                <span>&lt;date-time&gt;</span>
+              </div>
+              <span>write-only</span>
+              <span>required</span>
+            </div>
+            <div>
+              <span>Match pattern:</span>
+              <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>items</div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>name</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                    <div>
-                      <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                        <p>
-                          The user's full name. This description can be long and should truncate once it reaches the end
-                          of the row. If it's not truncating then theres and issue that needs to be fixed. Help!
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed value:</span>
-                    <span>Constant name</span>
-                  </div>
-                  <div>
-                    <span>Example values:</span>
-                    <span>Example name</span>
-                    <span>Different name</span>
-                  </div>
+                  <span>null</span>
+                  <span>or</span>
+                  <span>array[string or number]</span>
                 </div>
-                <div></div>
               </div>
             </div>
+            <div style=\\"font-size: 12px\\">
+              <p>
+                This description can be long and should truncate once it reaches the end of the row. If it's not
+                truncating then theres and issue that needs to be fixed. Help!
+              </p>
+            </div>
+            <div>
+              <span>&gt;= 1 items</span>
+              <span>&lt;= 4 items</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>email</div>
+                <span>string</span>
+                <span>&lt;email&gt;</span>
+              </div>
+              <span>deprecated</span>
+            </div>
+            <div><span>&gt;= 2 characters</span></div>
+            <div>
+              <span>Default value:</span>
+              <span>default@email.com</span>
+            </div>
+            <div>
+              <span>Example values:</span>
+              <span>one@email.com</span>
+              <span>two@email.com</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>plan</div>
+                <div>
+                  <div
+                    style=\\"
+                      border: 0px;
+                      clip-path: inset(50%);
+                      height: 1px;
+                      margin: 0px -1px -1px 0px;
+                      overflow: hidden;
+                      padding: 0px;
+                      position: absolute;
+                      width: 1px;
+                      white-space: nowrap;
+                    \\"
+                    aria-hidden=\\"true\\"
+                  >
+                    <input type=\\"text\\" style=\\"font-size: 16px\\" />
+                    <label>
+                      <select size=\\"2\\">
+                        <option></option>
+                        <option value=\\"0\\">object</option>
+                        <option value=\\"1\\">array[integer]</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div>
+                    <button
+                      aria-label=\\"Pick a type\\"
+                      aria-haspopup=\\"listbox\\"
+                      aria-expanded=\\"false\\"
+                      id=\\"react-aria-0-4\\"
+                      aria-labelledby=\\"react-aria-0-4 react-aria-0-6\\"
+                      type=\\"button\\"
+                      class=\\"hover:sl-border-input focus:sl-border-primary active:sl-border-primary disabled:sl-opacity-60\\"
+                    >
+                      <div><div>object</div></div>
+                      <div><div></div></div>
+                    </button>
+                  </div>
+                </div>
+                <div>anyOf</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>age</div>
-                        <span>number</span>
-                      </div>
-                      <span>read-only</span>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>&gt;= 10</span>
-                    <span>&lt;= 40</span>
-                  </div>
-                  <div>
-                    <span>Allowed values:</span>
-                    <span>10</span>
-                    <span>20</span>
-                    <span>30</span>
-                    <span>40</span>
-                  </div>
-                  <div>
-                    <span>Default value:</span>
-                    <span>20</span>
-                  </div>
-                  <div>
-                    <span>Multiple of:</span>
-                    <span>10</span>
-                  </div>
+                  <div>foo</div>
+                  <span>string</span>
                 </div>
-                <div></div>
+                <span>required</span>
               </div>
             </div>
+          </div>
+          <div>
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>completed_at</div>
-                        <span>string</span>
-                        <span>&lt;date-time&gt;</span>
-                      </div>
-                      <span>write-only</span>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Match pattern:</span>
-                    <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
-                  </div>
+                  <div>bar</div>
+                  <span>string</span>
                 </div>
-                <div></div>
+                <span>required</span>
               </div>
             </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>permissions</div>
+                <div>
+                  <span>string</span>
+                  <span>or</span>
+                  <span>object</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>items</div>
-                        <div>
-                          <span>null</span>
-                          <span>or</span>
-                          <span>array[string or number]</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                        <p>
-                          This description can be long and should truncate once it reaches the end of the row. If it's
-                          not truncating then theres and issue that needs to be fixed. Help!
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span>&gt;= 1 items</span>
-                    <span>&lt;= 4 items</span>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>email</div>
-                        <span>string</span>
-                        <span>&lt;email&gt;</span>
-                      </div>
-                      <span>deprecated</span>
-                    </div>
-                  </div>
-                  <div><span>&gt;= 2 characters</span></div>
-                  <div>
-                    <span>Default value:</span>
-                    <span>default@email.com</span>
-                  </div>
-                  <div>
-                    <span>Example values:</span>
-                    <span>one@email.com</span>
-                    <span>two@email.com</span>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div role=\\"button\\"></div>
-                      <div>
-                        <div>plan</div>
-                        <div>
-                          <div
-                            style=\\"
-                              border: 0px;
-                              clip-path: inset(50%);
-                              height: 1px;
-                              margin: 0px -1px -1px 0px;
-                              overflow: hidden;
-                              padding: 0px;
-                              position: absolute;
-                              width: 1px;
-                              white-space: nowrap;
-                            \\"
-                            aria-hidden=\\"true\\"
-                          >
-                            <input type=\\"text\\" style=\\"font-size: 16px\\" />
-                            <label>
-                              <select size=\\"2\\">
-                                <option></option>
-                                <option value=\\"0\\">object</option>
-                                <option value=\\"1\\">array[integer]</option>
-                              </select>
-                            </label>
-                          </div>
-                          <div>
-                            <button
-                              aria-label=\\"Pick a type\\"
-                              aria-haspopup=\\"listbox\\"
-                              aria-expanded=\\"false\\"
-                              id=\\"react-aria-0-4\\"
-                              aria-labelledby=\\"react-aria-0-4 react-aria-0-6\\"
-                              type=\\"button\\"
-                              class=\\"active:sl-bg-canvas-100 hover:sl-border-input focus:sl-border-input active:sl-border-button disabled:sl-opacity-50\\"
-                            >
-                              <div><div>object</div></div>
-                              <div><div></div></div>
-                            </button>
-                          </div>
-                        </div>
-                        <div>anyOf</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>foo</div>
-                            <span>string</span>
-                          </div>
-                          <span>required</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
-                </div>
-                <div></div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>bar</div>
-                            <span>string</span>
-                          </div>
-                          <span>required</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
+                  <div>ids</div>
+                  <span>array[integer]</span>
                 </div>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div role=\\"button\\"></div>
-                      <div>
-                        <div>permissions</div>
-                        <div>
-                          <span>string</span>
-                          <span>or</span>
-                          <span>object</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>ids</div>
-                            <span>array[integer]</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
-                </div>
+                <div>ref</div>
+                <span>#/properties/permissions</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>ref</div>
-                        <span>#/properties/permissions</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>^id_</div>
+                <span>number</span>
+                <div>(pattern property)</div>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>^id_</div>
-                        <span>number</span>
-                        <div>(pattern property)</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>foo</div>
+                <span>integer</span>
+                <div>(pattern property)</div>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>foo</div>
-                        <span>integer</span>
-                        <div>(pattern property)</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>_name$</div>
-                        <span>string</span>
-                        <div>(pattern property)</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>_name$</div>
+                <span>string</span>
+                <div>(pattern property)</div>
               </div>
             </div>
           </div>
@@ -1355,37 +1031,27 @@ exports[`HTML Output should match arrays/of-objects.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>propertyIsArrayOfObjects</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>propertyIsArrayOfObjects</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>ArrayObjectProperty</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>ArrayObjectProperty</div>
+                  <span>string</span>
                 </div>
               </div>
             </div>
@@ -1402,29 +1068,20 @@ exports[`HTML Output should match arrays/of-refs.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
-            <div>
-              <div>
-                <div role=\\"button\\"></div>
-                <div><span>$ref(./models/todo-full.json)[]</span></div>
-              </div>
-            </div>
+            <div role=\\"button\\"></div>
+            <div><span>$ref(./models/todo-full.json)[]</span></div>
           </div>
-          <div></div>
         </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
-              <div>
-                <div>
-                  <div>
-                    <div><span>./models/todo-full.json</span></div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
+              <div><span>./models/todo-full.json</span></div>
             </div>
           </div>
         </div>
@@ -1439,92 +1096,63 @@ exports[`HTML Output should match arrays/with-multiple-arrayish-items.json 1`] =
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
+            <div><span>array</span></div>
+          </div>
+        </div>
+      </div>
+      <div data-level=\\"0\\">
+        <div>
+          <div>
             <div>
-              <div>
-                <div role=\\"button\\"></div>
-                <div><span>array</span></div>
-              </div>
+              <div><span>number</span></div>
             </div>
           </div>
-          <div></div>
         </div>
         <div>
           <div>
             <div>
-              <div>
-                <div>
-                  <div>
-                    <div><span>number</span></div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
+              <div role=\\"button\\"></div>
+              <div><span>object</span></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div data-level=\\"1\\">
           <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div><span>object</span></div>
-                  </div>
+                  <div>code</div>
+                  <span>number</span>
                 </div>
+                <span>required</span>
               </div>
-              <div></div>
             </div>
+          </div>
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>code</div>
-                          <span>number</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>msg</div>
+                  <span>string</span>
                 </div>
+                <span>required</span>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>msg</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>ref</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>ref</div>
+                  <span>string</span>
                 </div>
               </div>
             </div>
@@ -1541,42 +1169,27 @@ exports[`HTML Output should match arrays/with-ordered-items.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
+            <div><span>array</span></div>
+          </div>
+        </div>
+      </div>
+      <div data-level=\\"0\\">
+        <div>
+          <div>
             <div>
-              <div>
-                <div role=\\"button\\"></div>
-                <div><span>array</span></div>
-              </div>
+              <div><span>number</span></div>
             </div>
           </div>
-          <div></div>
         </div>
         <div>
           <div>
             <div>
-              <div>
-                <div>
-                  <div>
-                    <div><span>number</span></div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div><span>string</span></div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
+              <div><span>string</span></div>
             </div>
           </div>
         </div>
@@ -1591,57 +1204,37 @@ exports[`HTML Output should match arrays/with-single-arrayish-items.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div>array of:</div>
+      <div data-level=\\"0\\">
         <div>
-          <div>array of:</div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>code</div>
-                        <span>number</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>code</div>
+                <span>number</span>
               </div>
+              <span>required</span>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>msg</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>msg</div>
+                <span>string</span>
               </div>
+              <span>required</span>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>ref</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>ref</div>
+                <span>string</span>
               </div>
             </div>
           </div>
@@ -1657,491 +1250,153 @@ exports[`HTML Output should match combiners/allOfs/base.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>AllOfMergeObjects</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-            </div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>Object1Property</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div><span>&gt;= 1 characters</span></div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>Object2Property</div>
-                          <span>number</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div><span>&lt;= 2</span></div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>AllOfMergeValidations</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <span>&gt;= 1 characters</span>
-                  <span>&lt;= 2 characters</span>
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>AllOfMergeTakeMoreLogicalValidation</div>
-                      <span>number</span>
-                    </div>
-                  </div>
-                </div>
-                <div><span>&lt;= 1</span></div>
-              </div>
-              <div></div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>AllOfMergeObjectPropertyValidations</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-            </div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>Property</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <span>&gt;= 1 characters</span>
-                      <span>&lt;= 2 characters</span>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>AllOfMergeRefs</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-            </div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>street_address</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>city</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>state</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>zipCode</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
+                <div>AllOfMergeObjects</div>
+                <span>object</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>Object1Property</div>
+                  <span>string</span>
+                </div>
+              </div>
+              <div><span>&gt;= 1 characters</span></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>Object2Property</div>
+                  <span>number</span>
+                </div>
+              </div>
+              <div><span>&lt;= 2</span></div>
+            </div>
+          </div>
+        </div>
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>AllOfMergeValidations</div>
+                <span>string</span>
               </div>
-              <div></div>
             </div>
             <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>user</div>
-                          <span>allOf</span>
-                          <div>allOf</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div role=\\"button\\"></div>
-                            <div><span>object</span></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div></div>
-                    </div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>names</div>
-                                  <span>
-                                    $ref(#/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name)[]
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
-                        </div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <span>
-                                        #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/name
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div></div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>users</div>
-                                  <span>array[object]</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
-                        </div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div role=\\"button\\"></div>
-                                    <div>
-                                      <div>creation</div>
-                                      <span>object</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>
-                                        <div role=\\"button\\"></div>
-                                        <div>
-                                          <div>user</div>
-                                          <span>allOf</span>
-                                          <div>allOf</div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div></div>
-                                </div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>
-                                        <div>
-                                          <div>
-                                            <div role=\\"button\\"></div>
-                                            <div><span>object</span></div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>foo</div>
-                                      <span>
-                                        #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                          <div></div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>products</div>
-                                      <span>
-                                        #/allOf/0/allOf/0/properties/foo/definitions/event/allOf/0/properties/contacts
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <span>&gt;= 1 characters</span>
+              <span>&lt;= 2 characters</span>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>AllOfMergeTakeMoreLogicalValidation</div>
+                <span>number</span>
               </div>
-              <div></div>
             </div>
+            <div><span>&lt;= 1</span></div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>AllOfMergeObjectPropertyValidations</div>
+                <span>object</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>foo</div>
-                          <span>object</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>Property</div>
+                  <span>string</span>
                 </div>
+              </div>
+              <div>
+                <span>&gt;= 1 characters</span>
+                <span>&lt;= 2 characters</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>AllOfMergeRefs</div>
+                <span>object</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div role=\\"button\\"></div>
-                            <div>
-                              <div>user</div>
-                              <span>allOf</span>
-                              <div>allOf</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div></div>
-                    </div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div><span>object</span></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div>street_address</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>city</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>state</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>zipCode</div>
+                  <span>string</span>
                 </div>
               </div>
             </div>
@@ -2158,181 +1413,126 @@ exports[`HTML Output should match combiners/allOfs/todo-full.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div>array of:</div>
+      <div data-level=\\"0\\">
         <div>
-          <div>array of:</div>
           <div>
             <div>
               <div>
+                <div>name</div>
+                <span>string</span>
+              </div>
+              <span>required</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>completed</div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>name</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
+                  <span>boolean</span>
+                  <span>or</span>
+                  <span>null</span>
                 </div>
-                <div></div>
+              </div>
+              <span>required</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>id</div>
+                <span>integer</span>
+              </div>
+              <span>required</span>
+            </div>
+            <div>
+              <span>&gt;= 0</span>
+              <span>&lt;= 1000000</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>completed_at</div>
+                <div>
+                  <span>string</span>
+                  <span>or</span>
+                  <span>null</span>
+                </div>
+                <span>&lt;date-time&gt;</span>
               </div>
             </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>created_at</div>
+                <span>string</span>
+                <span>&lt;date-time&gt;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>updated_at</div>
+                <span>string</span>
+                <span>&lt;date-time&gt;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>user</div>
+                <span>User</span>
+              </div>
+              <span>required</span>
+            </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>completed</div>
-                        <div>
-                          <span>boolean</span>
-                          <span>or</span>
-                          <span>null</span>
-                        </div>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
+                  <div>name</div>
+                  <span>string</span>
                 </div>
-                <div></div>
+                <span>required</span>
               </div>
+              <div style=\\"font-size: 12px\\"><p>The user's full name.</p></div>
             </div>
+          </div>
+          <div>
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>id</div>
-                        <span>integer</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>&gt;= 0</span>
-                    <span>&lt;= 1000000</span>
-                  </div>
+                  <div>age</div>
+                  <span>number</span>
                 </div>
-                <div></div>
-              </div>
-            </div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>completed_at</div>
-                        <div>
-                          <span>string</span>
-                          <span>or</span>
-                          <span>null</span>
-                        </div>
-                        <span>&lt;date-time&gt;</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>created_at</div>
-                        <span>string</span>
-                        <span>&lt;date-time&gt;</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>updated_at</div>
-                        <span>string</span>
-                        <span>&lt;date-time&gt;</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div role=\\"button\\"></div>
-                      <div>
-                        <div>user</div>
-                        <span>User</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <span>required</span>
               </div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>name</div>
-                            <span>string</span>
-                          </div>
-                          <span>required</span>
-                        </div>
-                        <div>
-                          <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\"><p>The user's full name.</p></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
-                </div>
-                <div></div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>age</div>
-                            <span>number</span>
-                          </div>
-                          <span>required</span>
-                        </div>
-                      </div>
-                      <div>
-                        <span>&gt;= 0</span>
-                        <span>&lt;= 150</span>
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
-                </div>
+                <span>&gt;= 0</span>
+                <span>&lt;= 150</span>
               </div>
             </div>
           </div>
@@ -2348,97 +1548,67 @@ exports[`HTML Output should match combiners/allOfs/todo-full-2.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>test</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                </div>
+                <div>test</div>
+                <span>string</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>id</div>
-                      <span>integer</span>
-                    </div>
-                    <span>required</span>
-                  </div>
-                </div>
-                <div>
-                  <span>&gt;= 0</span>
-                  <span>&lt;= 1000000</span>
-                </div>
+                <div>id</div>
+                <span>integer</span>
               </div>
-              <div></div>
+              <span>required</span>
+            </div>
+            <div>
+              <span>&gt;= 0</span>
+              <span>&lt;= 1000000</span>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
+                <div>completed_at</div>
                 <div>
-                  <div>
-                    <div>
-                      <div>completed_at</div>
-                      <div>
-                        <span>string</span>
-                        <span>or</span>
-                        <span>null</span>
-                      </div>
-                      <span>&lt;date-time&gt;</span>
-                    </div>
-                  </div>
+                  <span>string</span>
+                  <span>or</span>
+                  <span>null</span>
                 </div>
+                <span>&lt;date-time&gt;</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>created_at</div>
-                      <span>string</span>
-                      <span>&lt;date-time&gt;</span>
-                    </div>
-                  </div>
-                </div>
+                <div>created_at</div>
+                <span>string</span>
+                <span>&lt;date-time&gt;</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>updated_at</div>
-                      <span>string</span>
-                      <span>&lt;date-time&gt;</span>
-                    </div>
-                  </div>
-                </div>
+                <div>updated_at</div>
+                <span>string</span>
+                <span>&lt;date-time&gt;</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -2453,124 +1623,82 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              BugExample
-              <div></div>
-            </div>
-            <div>oneOf</div>
-          </div>
+          BugExample
+          <div></div>
+        </div>
+        <div>oneOf</div>
+      </div>
+      <div data-level=\\"0\\">
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>actionType</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed values:</span>
-                    <span>Cancel</span>
-                    <span>Confirm</span>
-                    <span>Update</span>
-                  </div>
-                </div>
-                <div></div>
+                <div>actionType</div>
+                <span>string</span>
               </div>
+              <span>required</span>
             </div>
-            <div></div>
+            <div>
+              <span>Allowed values:</span>
+              <span>Cancel</span>
+              <span>Confirm</span>
+              <span>Update</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>id</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                    <div>
-                      <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                        <p>The identifier of the existing reservation.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>id</div>
+                <span>string</span>
               </div>
+              <span>required</span>
             </div>
-            <div></div>
+            <div style=\\"font-size: 12px\\"><p>The identifier of the existing reservation.</p></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>externalId</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>externalId</div>
+                <span>string</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>calculateCosts</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>calculateCosts</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>calculateDates</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>calculateDates</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>items</div>
-                        <span>array[string]</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>items</div>
+                <span>array[string]</span>
               </div>
+              <span>required</span>
             </div>
           </div>
         </div>
@@ -2585,49 +1713,35 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              array[object]
-              <div></div>
-            </div>
-            <div>oneOf</div>
-          </div>
+          array[object]
+          <div></div>
+        </div>
+        <div>oneOf</div>
+      </div>
+      <div data-level=\\"0\\">
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>foo</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed value:</span>
-                    <span>test</span>
-                  </div>
-                </div>
-                <div></div>
+                <div>foo</div>
+                <span>string</span>
               </div>
             </div>
-            <div></div>
+            <div>
+              <span>Allowed value:</span>
+              <span>test</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>baz</div>
-                        <span>integer</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>baz</div>
+                <span>integer</span>
               </div>
             </div>
           </div>
@@ -2643,33 +1757,25 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              array[A]
-              <div></div>
-            </div>
-          </div>
+          array[A]
+          <div></div>
+        </div>
+      </div>
+      <div data-level=\\"0\\">
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>foo</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed value:</span>
-                    <span>test</span>
-                  </div>
-                </div>
-                <div></div>
+                <div>foo</div>
+                <span>string</span>
               </div>
+            </div>
+            <div>
+              <span>Allowed value:</span>
+              <span>test</span>
             </div>
           </div>
         </div>
@@ -2684,363 +1790,293 @@ exports[`HTML Output should match default-schema.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>name</div>
-                      <span>string</span>
-                    </div>
-                    <span>required</span>
-                  </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                      <p>
-                        The user's full name. This description can be long and should truncate once it reaches the end
-                        of the row. If it's not truncating then theres and issue that needs to be fixed. Help!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <span>Allowed value:</span>
-                  <span>Constant name</span>
-                </div>
-                <div>
-                  <span>Example values:</span>
-                  <span>Example name</span>
-                  <span>Different name</span>
-                  <span>
-                    Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                  </span>
-                </div>
+                <div>name</div>
+                <span>string</span>
               </div>
-              <div></div>
+              <span>required</span>
+            </div>
+            <div style=\\"font-size: 12px\\">
+              <p>
+                The user's full name. This description can be long and should truncate once it reaches the end of the
+                row. If it's not truncating then theres and issue that needs to be fixed. Help!
+              </p>
+            </div>
+            <div>
+              <span>Allowed value:</span>
+              <span>Constant name</span>
+            </div>
+            <div>
+              <span>Example values:</span>
+              <span>Example name</span>
+              <span>Different name</span>
+              <span>
+                Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              </span>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>age</div>
-                      <span>number</span>
-                    </div>
-                    <span>read-only</span>
-                    <span>required</span>
-                  </div>
-                </div>
-                <div>
-                  <span>&gt;= 10</span>
-                  <span>&lt;= 40</span>
-                </div>
-                <div>
-                  <span>Allowed values:</span>
-                  <span>10</span>
-                  <span>20</span>
-                  <span>30</span>
-                  <span>40</span>
-                </div>
-                <div>
-                  <span>Default value:</span>
-                  <span>20</span>
-                </div>
-                <div>
-                  <span>Multiple of:</span>
-                  <span>10</span>
-                </div>
+                <div>age</div>
+                <span>number</span>
               </div>
-              <div></div>
+              <span>read-only</span>
+              <span>required</span>
+            </div>
+            <div>
+              <span>&gt;= 10</span>
+              <span>&lt;= 40</span>
+            </div>
+            <div>
+              <span>Allowed values:</span>
+              <span>10</span>
+              <span>20</span>
+              <span>30</span>
+              <span>40</span>
+            </div>
+            <div>
+              <span>Default value:</span>
+              <span>20</span>
+            </div>
+            <div>
+              <span>Multiple of:</span>
+              <span>10</span>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>completed_at</div>
-                      <span>string</span>
-                      <span>&lt;date-time&gt;</span>
-                    </div>
-                    <span>write-only</span>
-                    <span>required</span>
-                  </div>
-                </div>
-                <div>
-                  <span>Match pattern:</span>
-                  <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
-                </div>
+                <div>completed_at</div>
+                <span>string</span>
+                <span>&lt;date-time&gt;</span>
               </div>
-              <div></div>
+              <span>write-only</span>
+              <span>required</span>
+            </div>
+            <div>
+              <span>Match pattern:</span>
+              <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
+                <div>items</div>
                 <div>
-                  <div>
-                    <div>
-                      <div>items</div>
-                      <div>
-                        <span>null</span>
-                        <span>or</span>
-                        <span>array[string or number]</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                      <p>
-                        This description can be long and should truncate once it reaches the end of the row. If it's not
-                        truncating then theres and issue that needs to be fixed. Help!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <span>&gt;= 1 items</span>
-                  <span>&lt;= 4 items</span>
+                  <span>null</span>
+                  <span>or</span>
+                  <span>array[string or number]</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+            <div style=\\"font-size: 12px\\">
+              <p>
+                This description can be long and should truncate once it reaches the end of the row. If it's not
+                truncating then theres and issue that needs to be fixed. Help!
+              </p>
+            </div>
+            <div>
+              <span>&gt;= 1 items</span>
+              <span>&lt;= 4 items</span>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>email</div>
-                      <span>string</span>
-                      <span>&lt;email&gt;</span>
-                    </div>
-                    <span>deprecated</span>
-                  </div>
-                </div>
-                <div><span>&gt;= 2 characters</span></div>
-                <div>
-                  <span>Default value:</span>
-                  <span>default@email.com</span>
-                </div>
-                <div>
-                  <span>Example values:</span>
-                  <span>one@email.com</span>
-                  <span>two@email.com</span>
-                </div>
+                <div>email</div>
+                <span>string</span>
+                <span>&lt;email&gt;</span>
               </div>
-              <div></div>
+              <span>deprecated</span>
+            </div>
+            <div><span>&gt;= 2 characters</span></div>
+            <div>
+              <span>Default value:</span>
+              <span>default@email.com</span>
+            </div>
+            <div>
+              <span>Example values:</span>
+              <span>one@email.com</span>
+              <span>two@email.com</span>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
+                <div>plan</div>
                 <div>
+                  <div
+                    style=\\"
+                      border: 0px;
+                      clip-path: inset(50%);
+                      height: 1px;
+                      margin: 0px -1px -1px 0px;
+                      overflow: hidden;
+                      padding: 0px;
+                      position: absolute;
+                      width: 1px;
+                      white-space: nowrap;
+                    \\"
+                    aria-hidden=\\"true\\"
+                  >
+                    <input type=\\"text\\" style=\\"font-size: 16px\\" />
+                    <label>
+                      <select size=\\"2\\">
+                        <option></option>
+                        <option value=\\"0\\">object</option>
+                        <option value=\\"1\\">array[integer]</option>
+                      </select>
+                    </label>
+                  </div>
                   <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>plan</div>
-                      <div>
-                        <div
-                          style=\\"
-                            border: 0px;
-                            clip-path: inset(50%);
-                            height: 1px;
-                            margin: 0px -1px -1px 0px;
-                            overflow: hidden;
-                            padding: 0px;
-                            position: absolute;
-                            width: 1px;
-                            white-space: nowrap;
-                          \\"
-                          aria-hidden=\\"true\\"
-                        >
-                          <input type=\\"text\\" style=\\"font-size: 16px\\" />
-                          <label>
-                            <select size=\\"2\\">
-                              <option></option>
-                              <option value=\\"0\\">object</option>
-                              <option value=\\"1\\">array[integer]</option>
-                            </select>
-                          </label>
-                        </div>
-                        <div>
-                          <button
-                            aria-label=\\"Pick a type\\"
-                            aria-haspopup=\\"listbox\\"
-                            aria-expanded=\\"false\\"
-                            id=\\"react-aria-0-4\\"
-                            aria-labelledby=\\"react-aria-0-4 react-aria-0-6\\"
-                            type=\\"button\\"
-                            class=\\"active:sl-bg-canvas-100 hover:sl-border-input focus:sl-border-input active:sl-border-button disabled:sl-opacity-50\\"
-                          >
-                            <div><div>object</div></div>
-                            <div><div></div></div>
-                          </button>
-                        </div>
-                      </div>
-                      <div>anyOf</div>
-                    </div>
+                    <button
+                      aria-label=\\"Pick a type\\"
+                      aria-haspopup=\\"listbox\\"
+                      aria-expanded=\\"false\\"
+                      id=\\"react-aria-0-4\\"
+                      aria-labelledby=\\"react-aria-0-4 react-aria-0-6\\"
+                      type=\\"button\\"
+                      class=\\"hover:sl-border-input focus:sl-border-primary active:sl-border-primary disabled:sl-opacity-60\\"
+                    >
+                      <div><div>object</div></div>
+                      <div><div></div></div>
+                    </button>
                   </div>
                 </div>
+                <div>anyOf</div>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>foo</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>foo</div>
+                  <span>string</span>
                 </div>
+                <span>required</span>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>bar</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>bar</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>permissions</div>
+                <div>
+                  <span>string</span>
+                  <span>or</span>
+                  <span>object</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div data-level=\\"1\\">
           <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>permissions</div>
-                      <div>
-                        <span>string</span>
-                        <span>or</span>
-                        <span>object</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-            </div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>ids</div>
-                          <span>array[integer]</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>ids</div>
+                  <span>array[integer]</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
+                <div>ref</div>
                 <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>ref</div>
-                      <div>
-                        <span>string</span>
-                        <span>or</span>
-                        <span>object</span>
-                      </div>
-                    </div>
-                  </div>
+                  <span>string</span>
+                  <span>or</span>
+                  <span>object</span>
                 </div>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div data-level=\\"1\\">
           <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>^id_</div>
-                      <span>number</span>
-                      <div>(pattern property)</div>
-                    </div>
-                  </div>
+                  <div>ids</div>
+                  <span>array[integer]</span>
                 </div>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>foo</div>
-                      <span>integer</span>
-                      <div>(pattern property)</div>
-                    </div>
-                  </div>
-                </div>
+                <div>^id_</div>
+                <span>number</span>
+                <div>(pattern property)</div>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>_name$</div>
-                      <span>string</span>
-                      <div>(pattern property)</div>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>integer</span>
+                <div>(pattern property)</div>
               </div>
-              <div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>_name$</div>
+                <span>string</span>
+                <div>(pattern property)</div>
+              </div>
             </div>
           </div>
         </div>
@@ -3055,114 +2091,80 @@ exports[`HTML Output should match formats-schema.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
+                <div>date-of-birth</div>
                 <div>
-                  <div>
-                    <div>
-                      <div>date-of-birth</div>
-                      <div>
-                        <span>number</span>
-                        <span>or</span>
-                        <span>string</span>
-                        <span>or</span>
-                        <span>array</span>
-                      </div>
-                      <span>&lt;date-time&gt;</span>
-                    </div>
-                  </div>
+                  <span>number</span>
+                  <span>or</span>
+                  <span>string</span>
+                  <span>or</span>
+                  <span>array</span>
                 </div>
+                <span>&lt;date-time&gt;</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>name</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                </div>
+                <div>name</div>
+                <span>string</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>id</div>
-                      <span>number</span>
-                      <span>&lt;float&gt;</span>
-                    </div>
-                  </div>
-                </div>
+                <div>id</div>
+                <span>number</span>
+                <span>&lt;float&gt;</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>notype</div>
-                      <span>&lt;date-time&gt;</span>
-                    </div>
-                  </div>
-                </div>
+                <div>notype</div>
+                <span>&lt;date-time&gt;</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
+                <div>permissions</div>
                 <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>permissions</div>
-                      <div>
-                        <span>string</span>
-                        <span>or</span>
-                        <span>object</span>
-                      </div>
-                      <span>&lt;password&gt;</span>
-                    </div>
-                  </div>
+                  <span>string</span>
+                  <span>or</span>
+                  <span>object</span>
                 </div>
+                <span>&lt;password&gt;</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>ids</div>
-                          <span>array[integer]</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>ids</div>
+                  <span>array[integer]</span>
                 </div>
               </div>
             </div>
@@ -3179,144 +2181,102 @@ exports[`HTML Output should match references/base.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>billing_address</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>billing_address</div>
+                <span>object</span>
               </div>
-              <div></div>
-            </div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>street_address</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>city</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>state</div>
-                          <span>string</span>
-                        </div>
-                        <span>required</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>shipping_address</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-"
-`;
-
-exports[`HTML Output should match references/nested.json 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>street_address</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>city</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>state</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>parent</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\"><p>something</p></div>
-                  </div>
-                </div>
+                <div>shipping_address</div>
+                <span>object</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>parent</div>
-                          <span>object</span>
-                        </div>
-                      </div>
-                      <div>
-                        <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\"><p>something</p></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>street_address</div>
+                  <span>string</span>
                 </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>city</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>state</div>
+                  <span>string</span>
+                </div>
+                <span>required</span>
               </div>
             </div>
           </div>
@@ -3332,21 +2292,15 @@ exports[`HTML Output should match references/nullish.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>empty-ref</div>
-                      <span>$ref</span>
-                    </div>
-                  </div>
-                </div>
+                <div>empty-ref</div>
+                <span>$ref</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -3361,379 +2315,257 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>availableTicketingOptions</div>
+                <span>$ref(../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml)[]</span>
+              </div>
+            </div>
+            <div style=\\"font-size: 12px\\"><p>List of ticketing options of the order.</p></div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div><span>../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div>
           <div>
             <div>
               <div>
+                <div>commonTicketingOptions</div>
+                <span>array[string]</span>
+              </div>
+            </div>
+            <div style=\\"font-size: 12px\\"><p>Common ticketing options to all order items.</p></div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div role=\\"button\\"></div>
+              <div>
+                <div>ticketingOptionChoice</div>
+                <span>array[object]</span>
+              </div>
+            </div>
+            <div style=\\"font-size: 12px\\"><p>Ticketing option selection per order item.</p></div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>state</div>
+                  <span>string</span>
+                </div>
+              </div>
+              <div style=\\"font-size: 12px\\">
+                <p>
+                  The status that addresses if a specific ticket option is active or not. The status active is used
+                  before ticketing or before exchange confirmation. After ticketing, the status changes in completed.
+                  This allows to store ticketing options already used at ticketing time and to clean up all non selected
+                  options after ticketing or exchanged confirmation.
+                </p>
+              </div>
+              <div>
+                <span>Allowed values:</span>
+                <span>COMPLETED</span>
+                <span>ACTIVE</span>
+              </div>
+              <div>
+                <span>Default value:</span>
+                <span>ACTIVE</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div role=\\"button\\"></div>
+                <div>
+                  <div>orderItemBreakdown</div>
+                  <span>array[object]</span>
+                </div>
+              </div>
+              <div style=\\"font-size: 12px\\"><p>Structure that contains ticketing options per order item.</p></div>
+            </div>
+          </div>
+          <div data-level=\\"2\\">
+            <div>
+              <div></div>
+              <div>
+                <div>
+                  <div>
+                    <div>orderItemId</div>
+                    <span>string</span>
+                    <span>&lt;uuid&gt;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div></div>
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div>
+                    <div>options</div>
+                    <span>array[object]</span>
+                  </div>
+                </div>
+                <div style=\\"font-size: 12px\\"><p>Available ticketing options for a given order item.</p></div>
+              </div>
+            </div>
+            <div data-level=\\"3\\">
+              <div>
+                <div></div>
+                <div>
+                  <div>
+                    <div>
+                      <div>title</div>
+                      <span>string</span>
+                    </div>
+                    <span>read-only</span>
+                  </div>
+                  <div style=\\"font-size: 12px\\"><p>Ticketing option short-description.</p></div>
+                  <div>
+                    <span>Allowed values:</span>
+                    <span>HOMEPRINT</span>
+                    <span>TICKETLESS</span>
+                    <span>PRINT_AT_KIOSK</span>
+                    <span>SECURE_PAPER</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div></div>
+                <div>
+                  <div>
+                    <div>
+                      <div>selected</div>
+                      <span>boolean</span>
+                    </div>
+                  </div>
+                  <div style=\\"font-size: 12px\\">
+                    <p>
+                      Flag to specify which ticketing option is selected. Only one option is allowed to be selected.
+                    </p>
+                  </div>
+                  <div><span>examples</span></div>
+                </div>
+              </div>
+              <div>
+                <div></div>
+                <div>
+                  <div>
+                    <div>
+                      <div>additionalRequiredInfo</div>
+                      <span>string</span>
+                    </div>
+                  </div>
+                  <div style=\\"font-size: 12px\\">
+                    <p>Additional passenger required info specific to the given ticketing option.</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div></div>
                 <div>
                   <div>
                     <div role=\\"button\\"></div>
                     <div>
-                      <div>availableTicketingOptions</div>
-                      <span>$ref(../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml)[]</span>
+                      <div>deliveryInfo</div>
+                      <span>object</span>
                     </div>
                   </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                      <p>List of ticketing options of the order.</p>
-                    </div>
-                  </div>
+                  <div style=\\"font-size: 12px\\"><p>Data for ticket delivery.</p></div>
                 </div>
               </div>
-              <div></div>
-            </div>
-            <div>
-              <div>
+              <div data-level=\\"4\\">
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div><span>../TicketingOptionInfo/TicketingOptionInfo.v1-0.yaml</span></div>
-                      </div>
-                    </div>
-                  </div>
                   <div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>commonTicketingOptions</div>
-                      <span>array[string]</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                      <p>Common ticketing options to all order items.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>ticketingOptionChoice</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                      <p>Ticketing option selection per order item.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-            </div>
-            <div>
-              <div>
-                <div>
                   <div>
                     <div>
                       <div>
-                        <div>
-                          <div>state</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                      <div>
-                        <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                          <p>
-                            The status that addresses if a specific ticket option is active or not. The status active is
-                            used before ticketing or before exchange confirmation. After ticketing, the status changes
-                            in completed. This allows to store ticketing options already used at ticketing time and to
-                            clean up all non selected options after ticketing or exchanged confirmation.
-                          </p>
-                        </div>
+                        <div>availableDeliveryTypes</div>
+                        <span>array[string]</span>
                       </div>
                     </div>
                     <div>
                       <span>Allowed values:</span>
-                      <span>COMPLETED</span>
-                      <span>ACTIVE</span>
-                    </div>
-                    <div>
-                      <span>Default value:</span>
-                      <span>ACTIVE</span>
+                      <span>POSTAL</span>
+                      <span>PICK_UP_STATION</span>
+                      <span>E-MAIL</span>
+                      <span>LOYALTY_CARD</span>
                     </div>
                   </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>orderItemBreakdown</div>
-                          <span>array[object]</span>
-                        </div>
-                      </div>
-                      <div>
-                        <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                          <p>Structure that contains ticketing options per order item.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
                 </div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>orderItemId</div>
-                              <span>string</span>
-                              <span>&lt;uuid&gt;</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
                   <div></div>
                   <div>
                     <div>
                       <div>
-                        <div>
-                          <div>
-                            <div role=\\"button\\"></div>
-                            <div>
-                              <div>options</div>
-                              <span>array[object]</span>
-                            </div>
-                          </div>
-                          <div>
-                            <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                              <p>Available ticketing options for a given order item.</p>
-                            </div>
-                          </div>
-                        </div>
+                        <div>ticketRecipients</div>
+                        <span>array[string]</span>
                       </div>
-                      <div></div>
                     </div>
                     <div>
+                      <span>Allowed values:</span>
+                      <span>BOOKER</span>
+                      <span>CUSTOMER</span>
+                      <span>PASSENGER</span>
+                      <span>THIRD_PARTY</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
                       <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>title</div>
-                                  <span>string</span>
-                                </div>
-                                <span>read-only</span>
-                              </div>
-                              <div>
-                                <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                                  <p>Ticketing option short-description.</p>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
-                              <span>Allowed values:</span>
-                              <span>HOMEPRINT</span>
-                              <span>TICKETLESS</span>
-                              <span>PRINT_AT_KIOSK</span>
-                              <span>SECURE_PAPER</span>
-                            </div>
-                          </div>
-                          <div></div>
-                        </div>
+                        <div>ccEmail</div>
+                        <span>string</span>
+                        <span>&lt;email&gt;</span>
                       </div>
-                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
                       <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>selected</div>
-                                  <span>boolean</span>
-                                </div>
-                              </div>
-                              <div>
-                                <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                                  <p>
-                                    Flag to specify which ticketing option is selected. Only one option is allowed to be
-                                    selected.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <div><span>examples</span></div>
-                          </div>
-                          <div></div>
-                        </div>
+                        <div>postalAddress</div>
+                        <span>../Address/Address.v0-1.yaml</span>
                       </div>
-                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div></div>
+                  <div>
+                    <div>
                       <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>additionalRequiredInfo</div>
-                                  <span>string</span>
-                                </div>
-                              </div>
-                              <div>
-                                <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                                  <p>Additional passenger required info specific to the given ticketing option.</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
-                        </div>
+                        <div>pickUpAtStation</div>
+                        <span>string</span>
                       </div>
-                      <div></div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>deliveryInfo</div>
-                                  <span>object</span>
-                                </div>
-                              </div>
-                              <div>
-                                <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                                  <p>Data for ticket delivery.</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
-                        </div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>availableDeliveryTypes</div>
-                                      <span>array[string]</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span>Allowed values:</span>
-                                  <span>POSTAL</span>
-                                  <span>PICK_UP_STATION</span>
-                                  <span>E-MAIL</span>
-                                  <span>LOYALTY_CARD</span>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                          <div></div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>ticketRecipients</div>
-                                      <span>array[string]</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span>Allowed values:</span>
-                                  <span>BOOKER</span>
-                                  <span>CUSTOMER</span>
-                                  <span>PASSENGER</span>
-                                  <span>THIRD_PARTY</span>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                          <div></div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>ccEmail</div>
-                                      <span>string</span>
-                                      <span>&lt;email&gt;</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                          <div></div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>postalAddress</div>
-                                      <span>../Address/Address.v0-1.yaml</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                          <div></div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>pickUpAtStation</div>
-                                      <span>string</span>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                                      <p>
-                                        The name of the Station in case you select pick up at station as a delivery type
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
+                    <div style=\\"font-size: 12px\\">
+                      <p>The name of the Station in case you select pick up at station as a delivery type</p>
                     </div>
                   </div>
                 </div>

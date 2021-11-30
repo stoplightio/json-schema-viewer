@@ -72,6 +72,7 @@ storiesOf('JsonSchemaViewer', module)
       schema={arrayOfComplexObjects as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
+      renderRootTreeLines={boolean('renderRootTreeLines', true)}
     />
   ))
   .add('stress-test schema', () => (
