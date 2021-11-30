@@ -5,7 +5,6 @@ import capitalize from 'lodash/capitalize.js';
 import keys from 'lodash/keys.js';
 import omit from 'lodash/omit.js';
 import pick from 'lodash/pick.js';
-import pickBy from 'lodash/pickBy.js';
 import uniq from 'lodash/uniq.js';
 import * as React from 'react';
 
@@ -108,13 +107,8 @@ function filterOutOasFormatValidations(format: string, values: Dictionary<unknow
 
 export const Validations: React.FunctionComponent<IValidations> = ({ validations, hideExamples }) => {
   const numberValidations = pick(validations, numberValidationNames);
-  const booleanValidations = omit(
-    pickBy(validations, v => ['true', 'false'].includes(String(v))),
-    excludedValidations,
-  );
   const keyValueValidations = omit(validations, [
     ...keys(numberValidations),
-    ...keys(booleanValidations),
     ...excludedValidations,
     ...(hideExamples ? exampleValidationNames : []),
   ]);
@@ -123,7 +117,6 @@ export const Validations: React.FunctionComponent<IValidations> = ({ validations
     <>
       <NumberValidations validations={numberValidations} />
       <KeyValueValidations validations={keyValueValidations} />
-      <NameValidations validations={booleanValidations} />
     </>
   );
 };
@@ -176,20 +169,6 @@ const KeyValueValidation = ({ name, values }: { name: string; values: string[] }
   );
 };
 
-const NameValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
-  <>
-    {keys(validations).length ? (
-      <Flex flexWrap maxW="full">
-        {keys(validations)
-          .filter(key => validations[key])
-          .map(key => (
-            <Value key={key} name={key} className="sl-text-muted sl-capitalize" />
-          ))}
-      </Flex>
-    ) : null}
-  </>
-);
-
 const Value = ({ name, className }: { name: string; className?: string }) => (
   <Text
     px={1}
@@ -226,7 +205,7 @@ export function getValidationsFromSchema(schemaNode: RegularNode) {
       : null),
     ...('annotations' in schemaNode
       ? {
-          ...(schemaNode.annotations.default ? { default: schemaNode.annotations.default } : null),
+          ...(schemaNode.annotations.default !== void 0 ? { default: schemaNode.annotations.default } : null),
           ...(schemaNode.annotations.examples ? { examples: schemaNode.annotations.examples } : null),
         }
       : null),
