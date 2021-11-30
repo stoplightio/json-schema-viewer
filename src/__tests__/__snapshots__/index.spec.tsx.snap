@@ -1187,7 +1187,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                               id=\\"react-aria-0-4\\"
                               aria-labelledby=\\"react-aria-0-4 react-aria-0-6\\"
                               type=\\"button\\"
-                              class=\\"active:sl-bg-canvas-100 hover:sl-border-input focus:sl-border-input active:sl-border-button disabled:sl-opacity-50\\"
+                              class=\\"hover:sl-border-input focus:sl-border-primary active:sl-border-primary disabled:sl-opacity-60\\"
                             >
                               <div><div>object</div></div>
                               <div><div></div></div>
@@ -2883,7 +2883,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
                             id=\\"react-aria-0-4\\"
                             aria-labelledby=\\"react-aria-0-4 react-aria-0-6\\"
                             type=\\"button\\"
-                            class=\\"active:sl-bg-canvas-100 hover:sl-border-input focus:sl-border-input active:sl-border-button disabled:sl-opacity-50\\"
+                            class=\\"hover:sl-border-input focus:sl-border-primary active:sl-border-primary disabled:sl-opacity-60\\"
                           >
                             <div><div>object</div></div>
                             <div><div></div></div>
