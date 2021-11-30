@@ -5,7 +5,7 @@ import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
 
 import { COMBINER_NAME_MAP } from '../../consts';
-import { useOnScreen } from '../../hooks/useOnScreen';
+import { useIsOnScreen } from '../../hooks/useIsOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs';
 import { ChildStack } from '../shared/ChildStack';
@@ -93,7 +93,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
 function ScrollCheck() {
   const elementRef = React.useRef<HTMLDivElement>(null);
 
-  const isOnScreen = useOnScreen(elementRef);
+  const isOnScreen = useIsOnScreen(elementRef);
   const setShowPathCrumbs = useUpdateAtom(showPathCrumbsAtom);
   React.useEffect(() => {
     setShowPathCrumbs(!isOnScreen);
