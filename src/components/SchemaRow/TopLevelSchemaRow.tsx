@@ -1,9 +1,9 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown.js';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
-import { Icon, Menu, Pressable } from '@stoplight/mosaic';
+import { Box, Flex, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import * as React from 'react';
 
-import { NESTING_OFFSET } from '../../consts';
+import { NEGATIVE_NESTING_OFFSET } from '../../consts';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { ChildStack } from '../shared/ChildStack';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
@@ -27,7 +27,7 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
 
     return (
       <DecreaseIndentation>
-        <div className="sl-relative">
+        <Box pos="relative">
           <Menu
             aria-label="Pick a type"
             closeOnPress
@@ -39,21 +39,25 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
             }))}
             renderTrigger={props => (
               <Pressable {...props}>
-                <div className="sl-flex">
-                  <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-flex sl-cursor-pointer sl-py-2">
+                <Flex>
+                  <Flex mr={2} fontFamily="mono" fontWeight="semibold" fontSize="base" cursor="pointer" py={2}>
                     {selectedChoice.title}
-                    <div className="sl-ml-1">
+                    <Box ml={1}>
                       <Icon icon={faCaretDown} />
-                    </div>
-                  </div>
-                  {combiner !== null ? <div className="sl-flex sl-items-center sl-text-muted">{combiner}</div> : null}
-                </div>
+                    </Box>
+                  </Flex>
+                  {combiner !== null ? (
+                    <Flex alignItems="center" color="muted">
+                      {combiner}
+                    </Flex>
+                  ) : null}
+                </Flex>
               </Pressable>
             )}
           />
 
           {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
-        </div>
+        </Box>
       </DecreaseIndentation>
     );
   }
@@ -61,10 +65,12 @@ export const TopLevelSchemaRow: React.FC<SchemaRowProps> = ({ schemaNode, nestin
   if (isComplexArray(schemaNode) && isPureObjectNode(schemaNode.children[0])) {
     return (
       <DecreaseIndentation>
-        <div className="sl-relative">
-          <div className="sl-mr-2 sl-font-mono sl-font-semibold sl-text-base sl-py-2">array of:</div>
+        <Box pos="relative">
+          <Box mr={2} fontFamily="mono" fontWeight="semibold" fontSize="base" py={2}>
+            array of:
+          </Box>
           {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
-        </div>
+        </Box>
       </DecreaseIndentation>
     );
   }
@@ -76,4 +82,4 @@ function isPureObjectNode(schemaNode: RegularNode) {
   return schemaNode.primaryType === 'object' && schemaNode.types?.length === 1;
 }
 
-const DecreaseIndentation: React.FC = ({ children }) => <div style={{ marginLeft: -NESTING_OFFSET }}>{children}</div>;
+const DecreaseIndentation: React.FC = ({ children }) => <Box ml={NEGATIVE_NESTING_OFFSET}>{children}</Box>;
