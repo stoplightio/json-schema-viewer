@@ -25,9 +25,9 @@ describe('Validations component', () => {
 
     expect(wrapper).toIncludeText('>= 10<= 40');
     expect(wrapper).toIncludeText('Allowed values:10203040');
-    expect(wrapper).toIncludeText('Default value:20');
+    expect(wrapper).toIncludeText('Default:20');
     expect(wrapper).toIncludeText('Multiple of:10');
-    expect(wrapper).toIncludeText('Example value:20');
+    expect(wrapper).toIncludeText('Example:20');
   });
 
   it('should render string type validations', () => {
@@ -44,8 +44,8 @@ describe('Validations component', () => {
     const wrapper = mount(<Validations validations={validations} />);
 
     expect(wrapper).toIncludeText('>= 2 characters<= 4 characters');
-    expect(wrapper).toIncludeText('Default value:foo');
-    expect(wrapper).toIncludeText('Example values:Example 1Example 2');
+    expect(wrapper).toIncludeText('Default:foo');
+    expect(wrapper).toIncludeText('Examples:Example 1Example 2');
     expect(wrapper).toIncludeText('Allowed value:bar');
   });
 

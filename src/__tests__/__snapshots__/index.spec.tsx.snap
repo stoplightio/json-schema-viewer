@@ -262,8 +262,10 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             </div>
             <div>
               <span>Allowed values:</span>
-              <span>admin</span>
-              <span>editor</span>
+              <div style=\\"gap: 4px\\">
+                <span>admin</span>
+                <span>editor</span>
+              </div>
             </div>
           </div>
         </div>
@@ -427,8 +429,10 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             </div>
             <div>
               <span>Allowed values:</span>
-              <span>admin</span>
-              <span>editor</span>
+              <div style=\\"gap: 4px\\">
+                <span>admin</span>
+                <span>editor</span>
+              </div>
             </div>
           </div>
         </div>
@@ -770,12 +774,14 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
             </div>
             <div>
               <span>Allowed value:</span>
-              <span>Constant name</span>
+              <div style=\\"gap: 4px\\"><span>Constant name</span></div>
             </div>
             <div>
-              <span>Example values:</span>
-              <span>Example name</span>
-              <span>Different name</span>
+              <span>Examples:</span>
+              <div style=\\"gap: 4px\\">
+                <span>Example name</span>
+                <span>Different name</span>
+              </div>
             </div>
           </div>
         </div>
@@ -795,18 +801,20 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
             </div>
             <div>
               <span>Allowed values:</span>
-              <span>10</span>
-              <span>20</span>
-              <span>30</span>
-              <span>40</span>
+              <div style=\\"gap: 4px\\">
+                <span>10</span>
+                <span>20</span>
+                <span>30</span>
+                <span>40</span>
+              </div>
             </div>
             <div>
-              <span>Default value:</span>
-              <span>20</span>
+              <span>Default:</span>
+              <div style=\\"gap: 4px\\"><span>20</span></div>
             </div>
             <div>
               <span>Multiple of:</span>
-              <span>10</span>
+              <div style=\\"gap: 4px\\"><span>10</span></div>
             </div>
           </div>
         </div>
@@ -823,7 +831,7 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
             </div>
             <div>
               <span>Match pattern:</span>
-              <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
+              <div style=\\"gap: 4px\\"><span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span></div>
             </div>
           </div>
         </div>
@@ -863,13 +871,15 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
             </div>
             <div><span>&gt;= 2 characters</span></div>
             <div>
-              <span>Default value:</span>
-              <span>default@email.com</span>
+              <span>Default:</span>
+              <div style=\\"gap: 4px\\"><span>default@email.com</span></div>
             </div>
             <div>
-              <span>Example values:</span>
-              <span>one@email.com</span>
-              <span>two@email.com</span>
+              <span>Examples:</span>
+              <div style=\\"gap: 4px\\">
+                <span>one@email.com</span>
+                <span>two@email.com</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1905,9 +1915,11 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
             </div>
             <div>
               <span>Allowed values:</span>
-              <span>Cancel</span>
-              <span>Confirm</span>
-              <span>Update</span>
+              <div style=\\"gap: 4px\\">
+                <span>Cancel</span>
+                <span>Confirm</span>
+                <span>Update</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1994,7 +2006,7 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
             </div>
             <div>
               <span>Allowed value:</span>
-              <span>test</span>
+              <div style=\\"gap: 4px\\"><span>test</span></div>
             </div>
           </div>
         </div>
@@ -2037,7 +2049,7 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
             </div>
             <div>
               <span>Allowed value:</span>
-              <span>test</span>
+              <div style=\\"gap: 4px\\"><span>test</span></div>
             </div>
           </div>
         </div>
@@ -2071,15 +2083,17 @@ exports[`HTML Output should match default-schema.json 1`] = `
             </div>
             <div>
               <span>Allowed value:</span>
-              <span>Constant name</span>
+              <div style=\\"gap: 4px\\"><span>Constant name</span></div>
             </div>
             <div>
-              <span>Example values:</span>
-              <span>Example name</span>
-              <span>Different name</span>
-              <span>
-                Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              </span>
+              <span>Examples:</span>
+              <div style=\\"gap: 4px\\">
+                <span>Example name</span>
+                <span>Different name</span>
+                <span>
+                  Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -2099,18 +2113,20 @@ exports[`HTML Output should match default-schema.json 1`] = `
             </div>
             <div>
               <span>Allowed values:</span>
-              <span>10</span>
-              <span>20</span>
-              <span>30</span>
-              <span>40</span>
+              <div style=\\"gap: 4px\\">
+                <span>10</span>
+                <span>20</span>
+                <span>30</span>
+                <span>40</span>
+              </div>
             </div>
             <div>
-              <span>Default value:</span>
-              <span>20</span>
+              <span>Default:</span>
+              <div style=\\"gap: 4px\\"><span>20</span></div>
             </div>
             <div>
               <span>Multiple of:</span>
-              <span>10</span>
+              <div style=\\"gap: 4px\\"><span>10</span></div>
             </div>
           </div>
         </div>
@@ -2127,7 +2143,7 @@ exports[`HTML Output should match default-schema.json 1`] = `
             </div>
             <div>
               <span>Match pattern:</span>
-              <span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span>
+              <div style=\\"gap: 4px\\"><span>^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$</span></div>
             </div>
           </div>
         </div>
@@ -2167,13 +2183,15 @@ exports[`HTML Output should match default-schema.json 1`] = `
             </div>
             <div><span>&gt;= 2 characters</span></div>
             <div>
-              <span>Default value:</span>
-              <span>default@email.com</span>
+              <span>Default:</span>
+              <div style=\\"gap: 4px\\"><span>default@email.com</span></div>
             </div>
             <div>
-              <span>Example values:</span>
-              <span>one@email.com</span>
-              <span>two@email.com</span>
+              <span>Examples:</span>
+              <div style=\\"gap: 4px\\">
+                <span>one@email.com</span>
+                <span>two@email.com</span>
+              </div>
             </div>
           </div>
         </div>
@@ -2744,12 +2762,14 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
               </div>
               <div>
                 <span>Allowed values:</span>
-                <span>COMPLETED</span>
-                <span>ACTIVE</span>
+                <div style=\\"gap: 4px\\">
+                  <span>COMPLETED</span>
+                  <span>ACTIVE</span>
+                </div>
               </div>
               <div>
-                <span>Default value:</span>
-                <span>ACTIVE</span>
+                <span>Default:</span>
+                <div style=\\"gap: 4px\\"><span>ACTIVE</span></div>
               </div>
             </div>
           </div>
@@ -2806,10 +2826,12 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                   <div style=\\"font-size: 12px\\"><p>Ticketing option short-description.</p></div>
                   <div>
                     <span>Allowed values:</span>
-                    <span>HOMEPRINT</span>
-                    <span>TICKETLESS</span>
-                    <span>PRINT_AT_KIOSK</span>
-                    <span>SECURE_PAPER</span>
+                    <div style=\\"gap: 4px\\">
+                      <span>HOMEPRINT</span>
+                      <span>TICKETLESS</span>
+                      <span>PRINT_AT_KIOSK</span>
+                      <span>SECURE_PAPER</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2869,10 +2891,12 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                     </div>
                     <div>
                       <span>Allowed values:</span>
-                      <span>POSTAL</span>
-                      <span>PICK_UP_STATION</span>
-                      <span>E-MAIL</span>
-                      <span>LOYALTY_CARD</span>
+                      <div style=\\"gap: 4px\\">
+                        <span>POSTAL</span>
+                        <span>PICK_UP_STATION</span>
+                        <span>E-MAIL</span>
+                        <span>LOYALTY_CARD</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2887,10 +2911,12 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                     </div>
                     <div>
                       <span>Allowed values:</span>
-                      <span>BOOKER</span>
-                      <span>CUSTOMER</span>
-                      <span>PASSENGER</span>
-                      <span>THIRD_PARTY</span>
+                      <div style=\\"gap: 4px\\">
+                        <span>BOOKER</span>
+                        <span>CUSTOMER</span>
+                        <span>PASSENGER</span>
+                        <span>THIRD_PARTY</span>
+                      </div>
                     </div>
                   </div>
                 </div>
