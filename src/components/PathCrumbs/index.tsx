@@ -7,7 +7,7 @@ import { useJSVOptionsContext } from '../../contexts';
 
 export const showPathCrumbsAtom = atom<boolean>(false);
 
-export const pathCrumbsAtom = atom<string[], SchemaNode | readonly string[]>([], (_get, set, node) => {
+export const pathCrumbsAtom = atom([], (_get, set, node) => {
   set(pathCrumbsAtom, propertyPathToObjectPath(node as SchemaNode));
 });
 
