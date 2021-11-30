@@ -243,12 +243,12 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-        <div>
+      <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
           Admin
           <div></div>
         </div>
-        <div>anyOf</div>
+        <div>(any of)</div>
       </div>
       <div data-level=\\"0\\">
         <div>
@@ -322,12 +322,12 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-        <div>
+      <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
           array[string]
           <div></div>
         </div>
-        <div>oneOf</div>
+        <div>(one of)</div>
       </div>
     </div>
   </div>
@@ -410,12 +410,12 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-        <div>
+      <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
           Admin
           <div></div>
         </div>
-        <div>oneOf</div>
+        <div>(one of)</div>
       </div>
       <div data-level=\\"0\\">
         <div>
@@ -923,12 +923,11 @@ exports[`HTML Output should match arrays/of-complex-objects.json 1`] = `
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary active:sl-border-primary disabled:sl-opacity-60\\"
                     >
-                      <div><div>object</div></div>
+                      <div><div>any of: object</div></div>
                       <div><div></div></div>
                     </button>
                   </div>
                 </div>
-                <div>anyOf</div>
               </div>
             </div>
           </div>
@@ -1445,7 +1444,6 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                 <div>
                   <div>user</div>
                   <span>allOf</span>
-                  <div>allOf</div>
                 </div>
               </div>
             </div>
@@ -1517,7 +1515,6 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                         <div>
                           <div>user</div>
                           <span>allOf</span>
-                          <div>allOf</div>
                         </div>
                       </div>
                     </div>
@@ -1582,7 +1579,6 @@ exports[`HTML Output should match combiners/allOfs/complex.json 1`] = `
                   <div>
                     <div>user</div>
                     <span>allOf</span>
-                    <div>allOf</div>
                   </div>
                 </div>
               </div>
@@ -1896,12 +1892,12 @@ exports[`HTML Output should match combiners/allOfs/with-type.json 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-        <div>
+      <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
           BugExample
           <div></div>
         </div>
-        <div>oneOf</div>
+        <div>(one of)</div>
       </div>
       <div data-level=\\"0\\">
         <div>
@@ -1988,12 +1984,12 @@ exports[`HTML Output should match combiners/oneof-with-array-type.json 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-        <div>
+      <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
           array[object]
           <div></div>
         </div>
-        <div>oneOf</div>
+        <div>(one of)</div>
       </div>
       <div data-level=\\"0\\">
         <div>
@@ -2032,8 +2028,8 @@ exports[`HTML Output should match combiners/oneof-within-array-item.json 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-        <div>
+      <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
           array[A]
           <div></div>
         </div>
@@ -2235,12 +2231,11 @@ exports[`HTML Output should match default-schema.json 1`] = `
                       type=\\"button\\"
                       class=\\"hover:sl-border-input focus:sl-border-primary active:sl-border-primary disabled:sl-opacity-60\\"
                     >
-                      <div><div>object</div></div>
+                      <div><div>any of: object</div></div>
                       <div><div></div></div>
                     </button>
                   </div>
                 </div>
-                <div>anyOf</div>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
+import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
 import { pathCrumbsAtom } from '../PathCrumbs';
@@ -112,6 +113,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                 <Select
                   aria-label="Pick a type"
                   size="sm"
+                  triggerTextPrefix={combiner ? `${COMBINER_NAME_MAP[combiner]}: ` : undefined}
                   options={choices.map((choice, index) => ({
                     value: String(index),
                     label: choice.title,
@@ -123,12 +125,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
                   onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
                 />
               )}
-
-              {combiner !== null ? (
-                <Box ml={1} color="muted">
-                  {combiner}
-                </Box>
-              ) : null}
             </Flex>
 
             <Properties

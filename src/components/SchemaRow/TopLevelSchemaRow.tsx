@@ -1,9 +1,10 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown.js';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
-import { Box, Flex, Icon, Menu, Pressable } from '@stoplight/mosaic';
+import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
 
+import { COMBINER_NAME_MAP } from '../../consts';
 import { useOnScreen } from '../../hooks/useOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs';
@@ -33,34 +34,34 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
       <>
         <ScrollCheck />
 
-        <Menu
-          aria-label="Pick a type"
-          closeOnPress
-          matchTriggerWidth
-          items={choices.map((choice, index) => ({
-            id: index,
-            title: choice.title,
-            onPress: () => setSelectedChoice(choice),
-          }))}
-          renderTrigger={props => (
-            <Pressable {...props}>
-              <Flex>
-                <Flex fontFamily="mono" fontWeight="semibold" fontSize="base" cursor="pointer" pb={4}>
+        <HStack spacing={3} pb={4}>
+          <Menu
+            aria-label="Pick a type"
+            closeOnPress
+            placement="bottom left"
+            items={choices.map((choice, index) => ({
+              id: index,
+              title: choice.title,
+              onPress: () => setSelectedChoice(choice),
+            }))}
+            renderTrigger={props => (
+              <Pressable {...props}>
+                <Flex fontFamily="mono" fontWeight="semibold" cursor="pointer" fontSize="base">
                   {selectedChoice.title}
                   <Box ml={1}>
                     <Icon icon={faCaretDown} />
                   </Box>
                 </Flex>
+              </Pressable>
+            )}
+          />
 
-                {combiner !== null ? (
-                  <Flex alignItems="center" color="muted">
-                    {combiner}
-                  </Flex>
-                ) : null}
-              </Flex>
-            </Pressable>
-          )}
-        />
+          {combiner !== null ? (
+            <Flex alignItems="center" color="muted" fontSize="base">
+              {`(${COMBINER_NAME_MAP[combiner]})`}
+            </Flex>
+          ) : null}
+        </HStack>
 
         {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
       </>

@@ -11,3 +11,9 @@ export const COMBINER_PRETTY_NAMES: Readonly<Dictionary<string, SchemaCombinerNa
 export const NESTING_OFFSET: SpaceVals = 3;
 
 export const CARET_ICON_SIZE = 'sm';
+
+export const COMBINER_NAME_MAP: Dictionary<string, SchemaCombinerName> = {
+  allOf: 'all of',
+  anyOf: 'any of',
+  oneOf: 'one of',
+};
