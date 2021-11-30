@@ -2849,7 +2849,10 @@ exports[`HTML Output should match tickets.schema.json 1`] = `
                       Flag to specify which ticketing option is selected. Only one option is allowed to be selected.
                     </p>
                   </div>
-                  <div><span>examples</span></div>
+                  <div>
+                    <span>Example:</span>
+                    <div style=\\"gap: 4px\\"><span>true</span></div>
+                  </div>
                 </div>
               </div>
               <div>
