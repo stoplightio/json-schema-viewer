@@ -74,14 +74,19 @@ function propertyPathToObjectPath(node: SchemaNode) {
   let currentNode: SchemaNode | null = node;
   while (currentNode && !isRootNode(currentNode)) {
     if (isRegularNode(currentNode)) {
+      const pathPart = currentNode.subpath[currentNode.subpath.length - 1];
+
       if (currentNode.primaryType === 'array') {
-        const key = `${currentNode.subpath[currentNode.subpath.length - 1]}[]`;
+        const key = `${pathPart || ''}[]`;
         if (objectPath[objectPath.length - 1]) {
           objectPath[objectPath.length - 1] = key;
         } else {
           objectPath.push(key);
         }
-      } else if (currentNode.subpath.length !== 2 || !['allOf', 'oneOf', 'anyOf'].includes(currentNode.subpath[0])) {
+      } else if (
+        pathPart &&
+        (currentNode.subpath.length !== 2 || !['allOf', 'oneOf', 'anyOf'].includes(currentNode.subpath[0]))
+      ) {
         objectPath.push(currentNode.subpath[currentNode.subpath.length - 1]);
       }
     }
