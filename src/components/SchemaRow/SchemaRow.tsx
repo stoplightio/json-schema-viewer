@@ -58,7 +58,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
         maxW="full"
         onMouseEnter={(e: any) => {
           e.stopPropagation();
-          setPathCrumbs(schemaNode.path);
+          setPathCrumbs(selectedChoice.type);
         }}
       >
         {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}

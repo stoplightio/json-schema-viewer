@@ -1,3 +1,4 @@
+import { isRegularNode, isRootNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { Box, HStack } from '@stoplight/mosaic';
 import { atom, useAtom } from 'jotai';
 import * as React from 'react';
@@ -6,8 +7,8 @@ import { useJSVOptionsContext } from '../../contexts';
 
 export const showPathCrumbsAtom = atom<boolean>(false);
 
-export const pathCrumbsAtom = atom<string[], readonly string[]>([], (_get, set, crumbs) => {
-  set(pathCrumbsAtom, propertyPathToObjectPath(crumbs));
+export const pathCrumbsAtom = atom<string[], SchemaNode | readonly string[]>([], (_get, set, node) => {
+  set(pathCrumbsAtom, propertyPathToObjectPath(node as SchemaNode));
 });
 
 export const PathCrumbs = ({ parentCrumbs = [] }: { parentCrumbs?: string[] }) => {
@@ -67,29 +68,26 @@ export const PathCrumbs = ({ parentCrumbs = [] }: { parentCrumbs?: string[] }) =
   );
 };
 
-function propertyPathToObjectPath(propertyPath: readonly string[]) {
+function propertyPathToObjectPath(node: SchemaNode) {
   const objectPath: string[] = [];
 
-  let skipNext = false;
-  for (const part of propertyPath) {
-    if (skipNext) {
-      skipNext = false;
-      continue;
+  let currentNode: SchemaNode | null = node;
+  while (currentNode && !isRootNode(currentNode)) {
+    if (isRegularNode(currentNode)) {
+      if (currentNode.primaryType === 'array') {
+        const key = `${currentNode.subpath[currentNode.subpath.length - 1]}[]`;
+        if (objectPath[objectPath.length - 1]) {
+          objectPath[objectPath.length - 1] = key;
+        } else {
+          objectPath.push(key);
+        }
+      } else if (currentNode.subpath.length !== 2 || !['allOf', 'oneOf', 'anyOf'].includes(currentNode.subpath[0])) {
+        objectPath.push(currentNode.subpath[currentNode.subpath.length - 1]);
+      }
     }
 
-    if (part === 'oneOf' || part === 'anyOf' || part === 'allOf') {
-      skipNext = true;
-    } else if (part === 'items') {
-      if (objectPath[objectPath.length - 1]) {
-        objectPath[objectPath.length - 1] = `${objectPath[objectPath.length - 1]}[]`;
-      } else {
-        objectPath.push('[]');
-      }
-    } else if (part !== 'properties') {
-      objectPath.push(part);
-    } else {
-    }
+    currentNode = currentNode.parent;
   }
 
-  return objectPath;
+  return objectPath.reverse();
 }
