@@ -1,5 +1,12 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle.js';
-import { isReferenceNode, isRegularNode, ReferenceNode, SchemaNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
+import {
+  isMirroredNode,
+  isReferenceNode,
+  isRegularNode,
+  ReferenceNode,
+  SchemaNode,
+  SchemaNodeKind,
+} from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon, Select, VStack } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
@@ -23,7 +30,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines } = useJSVOptionsContext();
 
   const setPathCrumbs = useUpdateAtom(pathCrumbsAtom);
-  const [isExpanded, setExpanded] = React.useState<boolean>(nestingLevel <= defaultExpandedDepth);
+  const [isExpanded, setExpanded] = React.useState<boolean>(
+    !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
+  );
 
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const typeToShow = selectedChoice.type;

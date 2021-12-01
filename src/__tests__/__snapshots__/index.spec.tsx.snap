@@ -611,19 +611,6 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
             </div>
           </div>
         </div>
-        <div data-level=\\"1\\">
-          <div>
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div>name</div>
-                  <span>string</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
