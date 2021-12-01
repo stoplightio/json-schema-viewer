@@ -47,7 +47,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@stoplight/json": "^3.17.1",
-    "@stoplight/json-schema-tree": "^2.1.2",
+    "@stoplight/json-schema-tree": "^2.1.3",
     "@stoplight/react-error-boundary": "^2.0.0",
     "@types/json-schema": "^7.0.7",
     "classnames": "^2.2.6",
@@ -87,7 +87,6 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^5.0.2",
-    "fast-glob": "^3.2.4",
     "jest": "^26.6.2",
     "jest-enzyme": "^7.1.2",
     "prettier": "^2.2.1",
