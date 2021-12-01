@@ -13,7 +13,7 @@ export const useIsOnScreen = (ref: RefObject<HTMLElement>) => {
         },
         {
           root: scrollParent === window ? undefined : (scrollParent as HTMLElement),
-          rootMargin: '100px 0px 0px 0px',
+          rootMargin: '20px 0px 0px 0px',
         },
       );
 
