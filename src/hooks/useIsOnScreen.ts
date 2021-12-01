@@ -1,13 +1,14 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 export const useIsOnScreen = (ref: RefObject<HTMLElement>) => {
-  const observerRef = useRef<IntersectionObserver | null>(null);
   const [isOnScreen, setIsOnScreen] = useState(true);
 
   useEffect(() => {
+    let observer: IntersectionObserver | null = null;
+
     if (ref.current) {
       const scrollParent = getScrollParent(ref.current);
-      observerRef.current = new IntersectionObserver(
+      const observer = new IntersectionObserver(
         ([entry]) => {
           setIsOnScreen(entry.isIntersecting);
         },
@@ -17,11 +18,11 @@ export const useIsOnScreen = (ref: RefObject<HTMLElement>) => {
         },
       );
 
-      observerRef.current.observe(ref.current);
+      observer.observe(ref.current);
     }
 
     return () => {
-      observerRef.current?.disconnect();
+      observer?.disconnect();
     };
   }, [ref]);
 
