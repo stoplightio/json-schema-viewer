@@ -1,10 +1,7 @@
 import 'jest-enzyme';
 
 import { mount, ReactWrapper } from 'enzyme';
-import * as fastGlob from 'fast-glob';
-import * as fs from 'fs';
 import { JSONSchema4 } from 'json-schema';
-import * as path from 'path';
 import * as React from 'react';
 
 import { JsonSchemaViewer } from '../components';
@@ -12,17 +9,6 @@ import { ViewMode } from '../types';
 import { dumpDom } from './utils/dumpDom';
 
 describe('HTML Output', () => {
-  it.each(
-    fastGlob.sync('**/*.json', {
-      cwd: path.join(__dirname, '../__fixtures__'),
-      ignore: ['stress-schema.json'],
-    }),
-  )('should match %s', filename => {
-    const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../__fixtures__/', filename), 'utf8'));
-
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
-  });
-
   describe.each(['anyOf', 'oneOf'])('given %s combiner placed next to allOf', combiner => {
     let schema: JSONSchema4;
 
