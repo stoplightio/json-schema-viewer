@@ -67,6 +67,7 @@ const validationFormatters: Record<string, (value: unknown) => ValidationFormat 
   multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
   pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
   default: createValidationsFormatter('Default', { exact: true, nowrap: true }),
+  style: createValidationsFormatter('Style', { exact: true, nowrap: true }),
 };
 
 const oasFormats = {
@@ -144,7 +145,7 @@ const NumberValidations = ({
 const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
     {keys(validations)
-      .filter(key => Object.keys(validationFormatters).includes(key))
+      .filter(key => Object.keys(validationFormatters).includes(key) && validations[key] !== void 0)
       .map(key => {
         const validation = validationFormatters[key](validations[key]);
         if (validation) {
