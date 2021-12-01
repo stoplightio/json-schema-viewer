@@ -8,6 +8,8 @@ export type JSVOptions = {
   onGoToRef?: GoToRefHandler;
   renderRowAddon?: RowAddonRenderer;
   hideExamples?: boolean;
+  renderRootTreeLines?: boolean;
+  disableCrumbs?: boolean;
 };
 
 const JSVOptionsContext = React.createContext<JSVOptions>({

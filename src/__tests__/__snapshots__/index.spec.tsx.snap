@@ -4,39 +4,27 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>bar</div>
+                <span>object</span>
               </div>
-              <div></div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -51,120 +39,85 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>bar</div>
+                <span>object</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
+                <div role=\\"button\\"></div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>barFoo</div>
-                          <span>object</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBaz</div>
-                          <span>boolean</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>barFoo</div>
+                  <span>object</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBar</div>
+                  <span>string</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBaz</div>
+                  <span>boolean</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooBar</div>
+                  <span>string</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooFoo</div>
-                          <span>number</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooFoo</div>
+                  <span>number</span>
                 </div>
               </div>
             </div>
@@ -181,137 +134,98 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>bar</div>
-                      <span>object</span>
-                    </div>
-                  </div>
-                </div>
+                <div>bar</div>
+                <span>object</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
+                <div role=\\"button\\"></div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div role=\\"button\\"></div>
-                        <div>
-                          <div>barFoo</div>
-                          <span>object</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>barFooBar</div>
-                              <span>object</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>barBaz</div>
-                          <span>boolean</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>barFoo</div>
+                  <span>object</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+          <div data-level=\\"2\\">
+            <div>
+              <div></div>
+              <div>
+                <div>
+                  <div>
+                    <div>barFooBar</div>
+                    <span>object</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBar</div>
+                  <span>string</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
+              <div>
+                <div>
+                  <div>barBaz</div>
+                  <span>boolean</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>array[object]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>array[object]</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooBar</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooBar</div>
+                  <span>string</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div>
+            <div></div>
+            <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>fooFoo</div>
-                          <span>number</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>fooFoo</div>
+                  <span>number</span>
                 </div>
               </div>
             </div>
@@ -328,102 +242,70 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
+          Admin
+          <div></div>
+        </div>
+        <div>(any of)</div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              Admin
-              <div></div>
-            </div>
-            <div>anyOf</div>
-          </div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>type</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed values:</span>
-                    <span>admin</span>
-                    <span>editor</span>
-                  </div>
-                </div>
-                <div></div>
+                <div>type</div>
+                <span>string</span>
+              </div>
+              <span>required</span>
+            </div>
+            <div>
+              <span>Allowed values:</span>
+              <div style=\\"gap: 4px\\">
+                <span>admin</span>
+                <span>editor</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>enabled</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                    <div>
-                      <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\"><p>Is this account enabled</p></div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>enabled</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+            <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>root</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>root</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>group</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>group</div>
+                <span>string</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>expirationDate</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>expirationDate</div>
+                <span>string</span>
               </div>
             </div>
           </div>
@@ -439,16 +321,13 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
-        <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              array[string]
-              <div></div>
-            </div>
-            <div>oneOf</div>
-          </div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
+          array[string]
+          <div></div>
         </div>
+        <div>(one of)</div>
       </div>
     </div>
   </div>
@@ -460,33 +339,25 @@ exports[`HTML Output given complex type that includes array and complex array su
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
+                <div>items</div>
                 <div>
-                  <div>
-                    <div>
-                      <div>items</div>
-                      <div>
-                        <span>null</span>
-                        <span>or</span>
-                        <span>array[string or number]</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\">
-                      <p>
-                        This description can be long and should truncate once it reaches the end of the row. If it's not
-                        truncating then theres and issue that needs to be fixed. Help!
-                      </p>
-                    </div>
-                  </div>
+                  <span>null</span>
+                  <span>or</span>
+                  <span>array[string or number]</span>
                 </div>
               </div>
-              <div></div>
+            </div>
+            <div style=\\"font-size: 12px\\">
+              <p>
+                This description can be long and should truncate once it reaches the end of the row. If it's not
+                truncating then theres and issue that needs to be fixed. Help!
+              </p>
             </div>
           </div>
         </div>
@@ -501,38 +372,29 @@ exports[`HTML Output given multiple object and string type, should process prope
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
               </div>
             </div>
           </div>
-          <div></div>
         </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>ids</div>
-                      <span>array[integer]</span>
-                    </div>
-                  </div>
-                </div>
+                <div>ids</div>
+                <span>array[integer]</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -547,102 +409,70 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
+        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
+          Admin
+          <div></div>
+        </div>
+        <div>(one of)</div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
-          <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
-            <div>
-              Admin
-              <div></div>
-            </div>
-            <div>oneOf</div>
-          </div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>type</div>
-                        <span>string</span>
-                      </div>
-                      <span>required</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Allowed values:</span>
-                    <span>admin</span>
-                    <span>editor</span>
-                  </div>
-                </div>
-                <div></div>
+                <div>type</div>
+                <span>string</span>
+              </div>
+              <span>required</span>
+            </div>
+            <div>
+              <span>Allowed values:</span>
+              <div style=\\"gap: 4px\\">
+                <span>admin</span>
+                <span>editor</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>enabled</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                    <div>
-                      <div style=\\"font-size: 12px\\" class=\\"MarkdownViewer\\"><p>Is this account enabled</p></div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>enabled</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+            <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>root</div>
-                        <span>boolean</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>root</div>
+                <span>boolean</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>group</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>group</div>
+                <span>string</span>
               </div>
             </div>
-            <div></div>
+          </div>
+        </div>
+        <div>
+          <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>expirationDate</div>
-                        <span>string</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div></div>
+                <div>expirationDate</div>
+                <span>string</span>
               </div>
             </div>
           </div>
@@ -658,38 +488,29 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
               </div>
             </div>
           </div>
-          <div></div>
         </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>id</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                </div>
+                <div>id</div>
+                <span>string</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -704,56 +525,41 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
+        <div>
+          <div>
+            <div role=\\"button\\"></div>
+            <div>
+              <div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <div>id</div>
+                <span>string</span>
               </div>
+              <span>read-only</span>
             </div>
           </div>
-          <div></div>
         </div>
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>id</div>
-                      <span>string</span>
-                    </div>
-                    <span>read-only</span>
-                  </div>
-                </div>
+                <div>description</div>
+                <span>string</span>
               </div>
-              <div></div>
-            </div>
-          </div>
-          <div></div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>description</div>
-                      <span>string</span>
-                    </div>
-                    <span>write-only</span>
-                  </div>
-                </div>
-              </div>
-              <div></div>
+              <span>write-only</span>
             </div>
           </div>
         </div>
@@ -768,56 +574,40 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
-      <div>
+      <div></div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>foo</div>
-                      <span>User</span>
-                    </div>
-                  </div>
-                </div>
+                <div>foo</div>
+                <span>User</span>
               </div>
-              <div></div>
             </div>
+          </div>
+        </div>
+        <div data-level=\\"1\\">
+          <div>
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>name</div>
-                          <span>string</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                  <div>name</div>
+                  <span>string</span>
                 </div>
               </div>
             </div>
           </div>
-          <div></div>
+        </div>
+        <div>
           <div>
             <div>
+              <div role=\\"button\\"></div>
               <div>
-                <div>
-                  <div>
-                    <div role=\\"button\\"></div>
-                    <div>
-                      <div>user</div>
-                      <span>User</span>
-                    </div>
-                  </div>
-                </div>
+                <div>user</div>
+                <span>User</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -832,38 +622,29 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
+      <div></div>
       <div>
         <div>
           <div>
+            <div role=\\"button\\"></div>
             <div>
               <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div>
-                    <span>string</span>
-                    <span>or</span>
-                    <span>object</span>
-                  </div>
-                </div>
+                <span>string</span>
+                <span>or</span>
+                <span>object</span>
               </div>
             </div>
           </div>
-          <div></div>
         </div>
+      </div>
+      <div data-level=\\"0\\">
         <div>
           <div>
             <div>
               <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>description</div>
-                      <span>string</span>
-                    </div>
-                  </div>
-                </div>
+                <div>description</div>
+                <span>string</span>
               </div>
-              <div></div>
             </div>
           </div>
         </div>

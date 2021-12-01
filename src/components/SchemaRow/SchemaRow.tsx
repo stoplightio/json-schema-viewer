@@ -7,12 +7,15 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { Box, Flex, Icon, Select } from '@stoplight/mosaic';
+import { Box, Flex, Icon, Select, VStack } from '@stoplight/mosaic';
+import { useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
+import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
+import { pathCrumbsAtom } from '../PathCrumbs';
 import { Caret, Description, Format, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Properties } from '../shared/Properties';
@@ -24,8 +27,9 @@ export interface SchemaRowProps {
 }
 
 export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
-  const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples } = useJSVOptionsContext();
+  const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines } = useJSVOptionsContext();
 
+  const setPathCrumbs = useUpdateAtom(pathCrumbsAtom);
   const [isExpanded, setExpanded] = React.useState<boolean>(
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
   );
@@ -52,89 +56,94 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
 
   const isBrokenRef = typeof refNode?.error === 'string';
 
+  const rootLevel = renderRootTreeLines ? 1 : 2;
   const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
   const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
+  const isCollapsible = childNodes.length > 0;
+  const isRootLevel = nestingLevel < rootLevel;
+
   return (
-    <Box pos="relative">
-      <Flex maxW="full">
-        <Box maxW="full" flexGrow>
-          <Box
-            onClick={childNodes.length > 0 ? () => setExpanded(!isExpanded) : undefined}
-            cursor={childNodes.length > 0 ? 'pointer' : undefined}
+    <>
+      <Flex
+        maxW="full"
+        onMouseEnter={(e: any) => {
+          e.stopPropagation();
+          setPathCrumbs(selectedChoice.type);
+        }}
+      >
+        {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}
+
+        <VStack spacing={1} maxW="full" flex={1} ml={isCollapsible && !isRootLevel ? 2 : undefined}>
+          <Flex
+            alignItems="center"
+            maxW="full"
+            onClick={isCollapsible ? () => setExpanded(!isExpanded) : undefined}
+            cursor={isCollapsible ? 'pointer' : undefined}
           >
-            <Flex alignItems="center" my={2} maxW="full">
-              {childNodes.length > 0 ? <Caret isExpanded={isExpanded} /> : null}
+            {isCollapsible ? <Caret isExpanded={isExpanded} /> : null}
 
-              <Flex alignItems="baseline" fontSize="base" flex={1}>
-                {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-                  <Box mr={2} fontFamily="mono" fontWeight="semibold">
-                    {last(schemaNode.subpath)}
-                  </Box>
-                )}
+            <Flex alignItems="baseline" fontSize="base" flex={1} pos="sticky" top={0}>
+              {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
+                <Box mr={2} fontFamily="mono" fontWeight="semibold">
+                  {last(schemaNode.subpath)}
+                </Box>
+              )}
 
-                {choices.length === 1 && (
-                  <>
-                    <Types schemaNode={typeToShow} />
-                    <Format schemaNode={typeToShow} />
-                  </>
-                )}
+              {choices.length === 1 && (
+                <>
+                  <Types schemaNode={typeToShow} />
+                  <Format schemaNode={typeToShow} />
+                </>
+              )}
 
-                {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
-                  <Box
-                    as="a"
-                    ml={2}
-                    cursor="pointer"
-                    color="primary-light"
-                    onClick={(e: React.MouseEvent) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      onGoToRef(schemaNode);
-                    }}
-                  >
-                    (go to ref)
-                  </Box>
-                ) : null}
+              {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
+                <Box
+                  as="a"
+                  ml={2}
+                  cursor="pointer"
+                  color="primary-light"
+                  onClick={(e: React.MouseEvent) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onGoToRef(schemaNode);
+                  }}
+                >
+                  (go to ref)
+                </Box>
+              ) : null}
 
-                {schemaNode.subpath.length > 1 && schemaNode.subpath[0] === 'patternProperties' ? (
-                  <Box ml={2} color="muted">
-                    (pattern property)
-                  </Box>
-                ) : null}
-                {choices.length > 1 && (
-                  <Select
-                    aria-label="Pick a type"
-                    size="sm"
-                    options={choices.map((choice, index) => ({
-                      value: String(index),
-                      label: choice.title,
-                    }))}
-                    value={
-                      String(choices.indexOf(selectedChoice))
-                      /* String to work around https://github.com/stoplightio/mosaic/issues/162 */
-                    }
-                    onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
-                  />
-                )}
+              {schemaNode.subpath.length > 1 && schemaNode.subpath[0] === 'patternProperties' ? (
+                <Box ml={2} color="muted">
+                  (pattern property)
+                </Box>
+              ) : null}
 
-                {combiner !== null ? (
-                  <Box ml={1} color="muted">
-                    {combiner}
-                  </Box>
-                ) : null}
-              </Flex>
-              <Properties
-                required={isPropertyRequired(schemaNode)}
-                deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
-                validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
-              />
+              {choices.length > 1 && (
+                <Select
+                  aria-label="Pick a type"
+                  size="sm"
+                  triggerTextPrefix={combiner ? `${COMBINER_NAME_MAP[combiner]}: ` : undefined}
+                  options={choices.map((choice, index) => ({
+                    value: String(index),
+                    label: choice.title,
+                  }))}
+                  value={
+                    String(choices.indexOf(selectedChoice))
+                    /* String to work around https://github.com/stoplightio/mosaic/issues/162 */
+                  }
+                  onChange={selectedIndex => setSelectedChoice(choices[selectedIndex as number])}
+                />
+              )}
             </Flex>
 
-            {typeof description === 'string' && description.length > 0 && (
-              <Flex flex={1} my={2} fontSize="base">
-                <Description value={description} />
-              </Flex>
-            )}
-          </Box>
+            <Properties
+              required={isPropertyRequired(schemaNode)}
+              deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
+              validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
+            />
+          </Flex>
+
+          {typeof description === 'string' && description.length > 0 && <Description value={description} />}
 
           <Validations
             validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}}
@@ -145,13 +154,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
             // TODO (JJ): Add mosaic tooltip showing ref error
             <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
           )}
-        </Box>
-        <Box>{renderRowAddon ? renderRowAddon({ schemaNode, nestingLevel }) : null}</Box>
+        </VStack>
+
+        {renderRowAddon ? <Box>{renderRowAddon({ schemaNode, nestingLevel })}</Box> : null}
       </Flex>
-      {childNodes.length > 0 && isExpanded ? (
-        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
-      ) : null}
-    </Box>
+
+      {isCollapsible && isExpanded ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
-import { Flex, Text } from '@stoplight/mosaic';
+import { Flex, HStack, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import capitalize from 'lodash/capitalize.js';
 import keys from 'lodash/keys.js';
@@ -54,7 +54,7 @@ const createValidationsFormatter = (name: string, options?: { exact?: boolean; n
   const values = Array.isArray(value) ? value : [value];
   if (values.length) {
     return {
-      name: options?.exact ? name : values.length > 1 ? `${name} values` : `${name} value`,
+      name: options?.exact ? name : values.length > 1 ? `${name}s` : `${name}`,
       values: values.map(createStringFormatter(options?.nowrap)),
     };
   }
@@ -62,11 +62,12 @@ const createValidationsFormatter = (name: string, options?: { exact?: boolean; n
 };
 
 const validationFormatters: Record<string, (value: unknown) => ValidationFormat | null> = {
-  enum: createValidationsFormatter('Allowed', { nowrap: true }),
+  enum: createValidationsFormatter('Allowed value', { nowrap: true }),
   examples: createValidationsFormatter('Example', { nowrap: true }),
   multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
   pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
-  default: createValidationsFormatter('Default', { nowrap: true }),
+  default: createValidationsFormatter('Default', { exact: true, nowrap: true }),
+  style: createValidationsFormatter('Style', { exact: true, nowrap: true }),
 };
 
 const oasFormats = {
@@ -131,20 +132,20 @@ const NumberValidations = ({
     return null;
   }
   return (
-    <Flex color="muted" maxW="full">
+    <HStack color="muted" maxW="full" spacing={1}>
       {entries
         .map(([key, value]) => numberValidationFormatters[key](value))
         .map((value, i) => (
           <Value key={i} name={value} />
         ))}
-    </Flex>
+    </HStack>
   );
 };
 
 const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown> }) => (
   <>
     {keys(validations)
-      .filter(key => Object.keys(validationFormatters).includes(key))
+      .filter(key => Object.keys(validationFormatters).includes(key) && validations[key] !== void 0)
       .map(key => {
         const validation = validationFormatters[key](validations[key]);
         if (validation) {
@@ -158,30 +159,20 @@ const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown>
 
 const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
-    <Flex flexWrap color="muted">
-      <Text color="light" mr={1} mb={2}>
-        {capitalize(name)}:
-      </Text>
-      {uniq(values).map(value => (
-        <Value key={value} name={value} />
-      ))}
-    </Flex>
+    <HStack color="muted" spacing={2} alignItems="baseline">
+      <Text>{capitalize(name)}:</Text>
+
+      <Flex flexWrap flex={1} style={{ gap: 4 }}>
+        {uniq(values).map(value => (
+          <Value key={value} name={value} />
+        ))}
+      </Flex>
+    </HStack>
   );
 };
 
-const Value = ({ name, className }: { name: string; className?: string }) => (
-  <Text
-    px={1}
-    fontFamily="mono"
-    bg="canvas-100"
-    border
-    rounded="lg"
-    wordBreak="words"
-    maxW="full"
-    mr={2}
-    mb={2}
-    className={className}
-  >
+const Value = ({ name }: { name: string }) => (
+  <Text px={1} bg="canvas-tint" color="muted" border rounded wordBreak="all" maxW="full">
     {name}
   </Text>
 );

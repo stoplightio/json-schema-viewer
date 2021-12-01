@@ -1,14 +1,9 @@
-@import "~@stoplight/mosaic/styles.css";
-@import "~@stoplight/mosaic/themes/default.css";
+@import '~@stoplight/mosaic/styles.css';
+@import '~@stoplight/mosaic/themes/default.css';
 
 .JsonSchemaViewer {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif,
-  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  border: 1px dotted #bbb; // to visualize component boundaries
-}
-
-.JsonSchemaViewer {
-  p {
-    font-size: 14px;
-  }
+  margin: auto;
+  width: 100%;
+  padding: 20px;
+  max-width: 800px;
 }

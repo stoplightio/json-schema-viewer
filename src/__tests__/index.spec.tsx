@@ -225,24 +225,16 @@ describe('Expanded depth', () => {
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
               <div class=\\"JsonSchemaViewer\\">
-                <div>
+                <div></div>
+                <div>array of:</div>
+                <div data-level=\\"0\\">
                   <div>
-                    <div>array of:</div>
                     <div>
                       <div>
+                        <div role=\\"button\\"></div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>foo</div>
-                                  <span>array[object]</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>foo</div>
+                          <span>array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -262,24 +254,16 @@ describe('Expanded depth', () => {
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
               <div class=\\"JsonSchemaViewer\\">
-                <div>
+                <div></div>
+                <div>array of:</div>
+                <div data-level=\\"0\\">
                   <div>
-                    <div>array of:</div>
                     <div>
                       <div>
+                        <div role=\\"button\\"></div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>foo</div>
-                                  <span>array[object]</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>foo</div>
+                          <span>array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -299,41 +283,29 @@ describe('Expanded depth', () => {
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
               <div class=\\"JsonSchemaViewer\\">
-                <div>
+                <div></div>
+                <div>array of:</div>
+                <div data-level=\\"0\\">
                   <div>
-                    <div>array of:</div>
                     <div>
                       <div>
+                        <div role=\\"button\\"></div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>foo</div>
-                                  <span>array[object]</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>foo</div>
+                          <span>array[object]</span>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-level=\\"1\\">
+                    <div>
+                      <div></div>
+                      <div>
                         <div>
+                          <div role=\\"button\\"></div>
                           <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div role=\\"button\\"></div>
-                                    <div>
-                                      <div>bar</div>
-                                      <span>object</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
+                            <div>bar</div>
+                            <span>object</span>
                           </div>
                         </div>
                       </div>
@@ -388,40 +360,26 @@ describe('Expanded depth', () => {
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
               <div class=\\"JsonSchemaViewer\\">
-                <div>
+                <div></div>
+                <div>array of:</div>
+                <div data-level=\\"0\\">
                   <div>
-                    <div>array of:</div>
                     <div>
                       <div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>bar</div>
-                                  <span>integer</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>bar</div>
+                          <span>integer</span>
                         </div>
                       </div>
-                      <div></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
                       <div>
+                        <div role=\\"button\\"></div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>foo</div>
-                                  <span>array[object]</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>foo</div>
+                          <span>array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -441,40 +399,26 @@ describe('Expanded depth', () => {
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
               <div class=\\"JsonSchemaViewer\\">
-                <div>
+                <div></div>
+                <div>array of:</div>
+                <div data-level=\\"0\\">
                   <div>
-                    <div>array of:</div>
                     <div>
                       <div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>bar</div>
-                                  <span>integer</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>bar</div>
+                          <span>integer</span>
                         </div>
                       </div>
-                      <div></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
                       <div>
+                        <div role=\\"button\\"></div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>foo</div>
-                                  <span>array[object]</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>foo</div>
+                          <span>array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -494,72 +438,49 @@ describe('Expanded depth', () => {
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
               <div class=\\"JsonSchemaViewer\\">
-                <div>
+                <div></div>
+                <div>array of:</div>
+                <div data-level=\\"0\\">
                   <div>
-                    <div>array of:</div>
                     <div>
                       <div>
                         <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>bar</div>
-                                  <span>integer</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div></div>
+                          <div>bar</div>
+                          <span>integer</span>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <div>
+                        <div role=\\"button\\"></div>
+                        <div>
+                          <div>foo</div>
+                          <span>array[object]</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-level=\\"1\\">
+                    <div>
                       <div></div>
                       <div>
                         <div>
                           <div>
-                            <div>
-                              <div>
-                                <div role=\\"button\\"></div>
-                                <div>
-                                  <div>foo</div>
-                                  <span>array[object]</span>
-                                </div>
-                              </div>
-                            </div>
+                            <div>bar</div>
+                            <span>string</span>
                           </div>
-                          <div></div>
                         </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div></div>
+                      <div>
                         <div>
                           <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>bar</div>
-                                      <span>string</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
-                          </div>
-                          <div></div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>foo</div>
-                                      <span>number</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div></div>
-                            </div>
+                            <div>foo</div>
+                            <span>number</span>
                           </div>
                         </div>
                       </div>
@@ -627,39 +548,27 @@ describe('Expanded depth', () => {
           "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
             <div data-overlay-container=\\"true\\">
               <div class=\\"JsonSchemaViewer\\">
-                <div>
+                <div></div>
+                <div data-level=\\"0\\">
                   <div>
                     <div>
                       <div>
+                        <div role=\\"button\\"></div>
                         <div>
-                          <div>
-                            <div>
-                              <div role=\\"button\\"></div>
-                              <div>
-                                <div>bar</div>
-                                <span>object</span>
-                              </div>
-                            </div>
-                          </div>
+                          <div>bar</div>
+                          <span>object</span>
                         </div>
-                        <div></div>
                       </div>
                     </div>
-                    <div></div>
+                  </div>
+                  <div>
                     <div>
                       <div>
+                        <div role=\\"button\\"></div>
                         <div>
-                          <div>
-                            <div>
-                              <div role=\\"button\\"></div>
-                              <div>
-                                <div>foo</div>
-                                <span>array[object]</span>
-                              </div>
-                            </div>
-                          </div>
+                          <div>foo</div>
+                          <span>array[object]</span>
                         </div>
-                        <div></div>
                       </div>
                     </div>
                   </div>
@@ -707,16 +616,12 @@ describe('$ref resolving', () => {
       "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
         <div data-overlay-container=\\"true\\">
           <div class=\\"JsonSchemaViewer\\">
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div><span>string</span></div>
-                    </div>
-                  </div>
+                  <div><span>string</span></div>
                 </div>
-                <div></div>
               </div>
             </div>
           </div>
@@ -738,29 +643,20 @@ describe('$ref resolving', () => {
       "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
         <div data-overlay-container=\\"true\\">
           <div class=\\"JsonSchemaViewer\\">
+            <div></div>
             <div>
               <div>
                 <div>
-                  <div>
-                    <div>
-                      <div role=\\"button\\"></div>
-                      <div><span>$ref(#/foo)[]</span></div>
-                    </div>
-                  </div>
+                  <div role=\\"button\\"></div>
+                  <div><span>$ref(#/foo)[]</span></div>
                 </div>
-                <div></div>
               </div>
+            </div>
+            <div data-level=\\"0\\">
               <div>
                 <div>
                   <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div><span>#/foo</span></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div></div>
+                    <div><span>#/foo</span></div>
                   </div>
                 </div>
               </div>
