@@ -140,7 +140,8 @@ storiesOf('JsonSchemaViewer', module)
         </Box>
       </InvertTheme>
     );
-  });
+  })
+  .add('maxHeight', () => <JsonSchemaViewer schema={schema as JSONSchema4} maxHeight={number('maxHeight', 500)} />);
 
 storiesOf('JsonSchemaViewer/combiners', module)
   .addDecorator(withKnobs)

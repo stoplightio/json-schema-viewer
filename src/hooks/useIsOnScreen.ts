@@ -34,7 +34,7 @@ function getScrollParent(node: HTMLElement | null): HTMLElement | typeof window 
     return null;
   }
 
-  if (node.scrollHeight > node.clientHeight) {
+  if (node.scrollHeight > node.clientHeight && node.clientHeight > 0) {
     return node.tagName === 'HTML' ? window : node;
   } else {
     return getScrollParent(node.parentElement);
