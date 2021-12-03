@@ -7,29 +7,32 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { Box, Flex, Icon, Select, VStack } from '@stoplight/mosaic';
-import { useUpdateAtom } from 'jotai/utils';
+import { Box, Flex, Icon, Select, SpaceVals, VStack } from '@stoplight/mosaic';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
-import { pathCrumbsAtom } from '../PathCrumbs';
 import { Caret, Description, Format, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
-import { Properties } from '../shared/Properties';
+import { Properties, useHasProperties } from '../shared/Properties';
+import { hoveredNodeAtom, isNodeHoveredAtom } from './state';
 import { useChoices } from './useChoices';
 
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
   nestingLevel: number;
+  pl?: SpaceVals;
 }
 
-export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
+export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ schemaNode, nestingLevel, pl }) => {
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines } = useJSVOptionsContext();
 
-  const setPathCrumbs = useUpdateAtom(pathCrumbsAtom);
+  const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
+  const isHovering = useAtomValue(isNodeHoveredAtom(schemaNode));
+
   const [isExpanded, setExpanded] = React.useState<boolean>(
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
   );
@@ -62,13 +65,20 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
   const isCollapsible = childNodes.length > 0;
   const isRootLevel = nestingLevel < rootLevel;
 
+  const required = isPropertyRequired(schemaNode);
+  const deprecated = isRegularNode(schemaNode) && schemaNode.deprecated;
+  const validations = isRegularNode(schemaNode) ? schemaNode.validations : {};
+  const hasProperties = useHasProperties({ required, deprecated, validations });
+
   return (
     <>
       <Flex
         maxW="full"
+        pl={pl}
+        py={2}
         onMouseEnter={(e: any) => {
           e.stopPropagation();
-          setPathCrumbs(selectedChoice.type);
+          setHoveredNode(selectedChoice.type);
         }}
       >
         {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}
@@ -82,7 +92,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
           >
             {isCollapsible ? <Caret isExpanded={isExpanded} /> : null}
 
-            <Flex alignItems="baseline" fontSize="base" flex={1} pos="sticky" top={0}>
+            <Flex alignItems="baseline" fontSize="base">
               {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                 <Box mr={2} fontFamily="mono" fontWeight="semibold">
                   {last(schemaNode.subpath)}
@@ -136,11 +146,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
               )}
             </Flex>
 
-            <Properties
-              required={isPropertyRequired(schemaNode)}
-              deprecated={isRegularNode(schemaNode) && schemaNode.deprecated}
-              validations={isRegularNode(schemaNode) ? schemaNode.validations : {}}
-            />
+            {hasProperties && <Box bg={isHovering ? 'canvas-200' : undefined} h="px" flex={1} mx={3} />}
+
+            <Properties required={required} deprecated={deprecated} validations={validations} />
           </Flex>
 
           {typeof description === 'string' && description.length > 0 && <Description value={description} />}
@@ -159,10 +167,12 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
         {renderRowAddon ? <Box>{renderRowAddon({ schemaNode, nestingLevel })}</Box> : null}
       </Flex>
 
-      {isCollapsible && isExpanded ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
+      {isCollapsible && isExpanded ? (
+        <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+      ) : null}
     </>
   );
-};
+});
 
 function shouldShowPropertyName(schemaNode: SchemaNode) {
   return (
