@@ -7,7 +7,7 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { Box, Flex, Icon, Select, VStack } from '@stoplight/mosaic';
+import { Box, Flex, Icon, Select, SpaceVals, VStack } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
 import * as React from 'react';
@@ -24,9 +24,18 @@ import { useChoices } from './useChoices';
 export interface SchemaRowProps {
   schemaNode: SchemaNode;
   nestingLevel: number;
+  pl?: SpaceVals;
+  isFirstChild?: boolean;
+  isLastChild?: boolean;
 }
 
-export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode, nestingLevel }) => {
+export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({
+  schemaNode,
+  nestingLevel,
+  pl,
+  isFirstChild,
+  isLastChild,
+}) => {
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines } = useJSVOptionsContext();
 
   const setPathCrumbs = useUpdateAtom(pathCrumbsAtom);
@@ -66,6 +75,11 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = ({ schemaNode,
     <>
       <Flex
         maxW="full"
+        borderT
+        borderB
+        borderColor={{ default: 'transparent', hover: 'light' }}
+        pl={pl}
+        py={2}
         onMouseEnter={(e: any) => {
           e.stopPropagation();
           setPathCrumbs(selectedChoice.type);
