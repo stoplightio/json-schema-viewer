@@ -7,7 +7,7 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
-import { showPathCrumbsAtom } from '../PathCrumbs';
+import { showPathCrumbsAtom } from '../PathCrumbs/state';
 import { ChildStack } from '../shared/ChildStack';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
 import { useChoices } from './useChoices';
@@ -22,7 +22,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
-        <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
       </>
     );
   }
@@ -63,7 +63,9 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
           ) : null}
         </HStack>
 
-        {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
+        {childNodes.length > 0 ? (
+          <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        ) : null}
       </>
     );
   }
@@ -77,7 +79,9 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
           array of:
         </Box>
 
-        {childNodes.length > 0 ? <ChildStack childNodes={childNodes} currentNestingLevel={nestingLevel} /> : null}
+        {childNodes.length > 0 ? (
+          <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        ) : null}
       </>
     );
   }

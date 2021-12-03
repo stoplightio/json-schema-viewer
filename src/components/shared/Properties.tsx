@@ -10,6 +10,14 @@ export interface IProperties {
   validations: Dictionary<unknown>;
 }
 
+export const useHasProperties = ({ required, deprecated, validations: { readOnly, writeOnly } }: IProperties) => {
+  const { viewMode } = useJSVOptionsContext();
+
+  const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
+
+  return deprecated || showVisibilityValidations || required;
+};
+
 export const Properties: React.FunctionComponent<IProperties> = ({
   required,
   deprecated,

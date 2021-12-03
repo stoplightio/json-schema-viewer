@@ -14,8 +14,9 @@ import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
 import type { JSONSchema } from '../types';
-import { PathCrumbs, pathCrumbsAtom } from './PathCrumbs';
+import { PathCrumbs } from './PathCrumbs';
 import { TopLevelSchemaRow } from './SchemaRow';
+import { hoveredNodeAtom } from './SchemaRow/state';
 
 export type JsonSchemaProps = Partial<JSVOptions> & {
   schema: JSONSchema;
@@ -74,10 +75,10 @@ const JsonSchemaViewerInner = ({
   JsonSchemaProps,
   'schema' | 'viewMode' | 'className' | 'resolveRef' | 'emptyText' | 'onTreePopulated' | 'maxHeight' | 'parentCrumbs'
 >) => {
-  const setPathCrumbs = useUpdateAtom(pathCrumbsAtom);
+  const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
   const onMouseLeave = React.useCallback(() => {
-    setPathCrumbs([]);
-  }, [setPathCrumbs]);
+    setHoveredNode(null);
+  }, [setHoveredNode]);
 
   const { jsonSchemaTreeRoot, nodeCount } = React.useMemo(() => {
     const jsonSchemaTree = new JsonSchemaTree(schema, {
