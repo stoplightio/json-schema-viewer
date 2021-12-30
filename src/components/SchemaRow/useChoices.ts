@@ -41,9 +41,9 @@ function makeChoice(node: SchemaNode): Choice {
   };
 }
 
-function makeArrayChoice(node: SchemaNode): Choice {
+function makeArrayChoice(node: SchemaNode, combiner?: string): Choice {
   const itemTitle = calculateChoiceTitle(node, true);
-  const title = itemTitle !== 'any' ? `array[${itemTitle}]` : 'array';
+  const title = itemTitle !== 'any' ? `array ${combiner ? `(${combiner})` : null} [${itemTitle}]` : 'array';
   return {
     type: node,
     title,
@@ -64,7 +64,9 @@ export const useChoices = (schemaNode: SchemaNode) => {
       isNonEmptyParentNode(schemaNode.children[0]) &&
       shouldShowChildSelector(schemaNode.children[0])
     ) {
-      return schemaNode.children[0].children.map(makeArrayChoice);
+      return schemaNode.children[0].children.map(child =>
+        makeArrayChoice(child, schemaNode.children[0].combiners?.[0]),
+      );
     }
 
     // if current node is a combiner, offer its children
