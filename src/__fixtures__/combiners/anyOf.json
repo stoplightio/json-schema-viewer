@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "myProp": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "foo": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "properties": {
+              "bar": {
+                "type": "number"
+              }
+            }
+          },
+          {
+            "properties": {
+              "baz": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "type": "object"
+      }
+    }
+  }
+}

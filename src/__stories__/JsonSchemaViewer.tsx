@@ -18,6 +18,7 @@ const nullRefSchema = require('../__fixtures__/references/nullish.json');
 const brokenRefArraySchema = require('../__fixtures__/arrays/of-refs.json');
 const oneOfWithArraySchema = require('../__fixtures__/combiners/oneof-with-array-type.json');
 const oneOfWithArraySchema2 = require('../__fixtures__/combiners/oneof-within-array-item.json');
+const anyOfObject = require('../__fixtures__/combiners/anyOf.json');
 const arrayOfComplexObjects = require('../__fixtures__/arrays/of-complex-objects.json');
 
 subscribeTheme({ mode: 'light' });
@@ -159,16 +160,23 @@ storiesOf('JsonSchemaViewer/combiners', module)
       onGoToRef={action('onGoToRef')}
     />
   ))
-  .add('anyOf-array-schema', () => (
+  .add('oneOf-array-schema', () => (
     <JsonSchemaViewer
       schema={oneOfWithArraySchema as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
   ))
-  .add('anyOf-array-schema2', () => (
+  .add('oneOf-array-schema2', () => (
     <JsonSchemaViewer
       schema={oneOfWithArraySchema2 as JSONSchema4}
+      defaultExpandedDepth={number('defaultExpandedDepth', 1)}
+      onGoToRef={action('onGoToRef')}
+    />
+  ))
+  .add('anyOf-object-schema', () => (
+    <JsonSchemaViewer
+      schema={anyOfObject as JSONSchema4}
       defaultExpandedDepth={number('defaultExpandedDepth', 1)}
       onGoToRef={action('onGoToRef')}
     />
