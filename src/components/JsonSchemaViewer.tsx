@@ -121,9 +121,10 @@ const JsonSchemaViewerInner = ({
     });
   }, [jsonSchemaTreeRoot, onTreePopulated, nodeCount]);
 
-  const isEmpty = React.useMemo(() => jsonSchemaTreeRoot.children.every(node => !isRegularNode(node) || node.unknown), [
-    jsonSchemaTreeRoot,
-  ]);
+  const isEmpty = React.useMemo(
+    () => jsonSchemaTreeRoot.children.every(node => !isRegularNode(node) || node.unknown),
+    [jsonSchemaTreeRoot],
+  );
   if (isEmpty) {
     return (
       <Box className={cn(className, 'JsonSchemaViewer')} fontSize="sm">
