@@ -48,18 +48,18 @@ const createStringFormatter = (nowrap: boolean | undefined) => (value: unknown) 
   return nowrap && typeof value === 'string' ? value : JSON.stringify(value);
 };
 
-const createValidationsFormatter = (name: string, options?: { exact?: boolean; nowrap?: boolean }) => (
-  value: unknown[] | unknown,
-): ValidationFormat | null => {
-  const values = Array.isArray(value) ? value : [value];
-  if (values.length) {
-    return {
-      name: options?.exact ? name : values.length > 1 ? `${name}s` : `${name}`,
-      values: values.map(createStringFormatter(options?.nowrap)),
-    };
-  }
-  return null;
-};
+const createValidationsFormatter =
+  (name: string, options?: { exact?: boolean; nowrap?: boolean }) =>
+  (value: unknown[] | unknown): ValidationFormat | null => {
+    const values = Array.isArray(value) ? value : [value];
+    if (values.length) {
+      return {
+        name: options?.exact ? name : values.length > 1 ? `${name}s` : `${name}`,
+        values: values.map(createStringFormatter(options?.nowrap)),
+      };
+    }
+    return null;
+  };
 
 const validationFormatters: Record<string, (value: unknown) => ValidationFormat | null> = {
   enum: createValidationsFormatter('Allowed value', { nowrap: true }),
