@@ -11,7 +11,7 @@ jobs:
 
   release:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16.13
     steps:
       - checkout
       - run: yarn
