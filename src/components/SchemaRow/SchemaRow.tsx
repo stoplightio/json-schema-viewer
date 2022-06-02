@@ -15,7 +15,15 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
-import { Caret, Description, Format, getValidationsFromSchema, Types, Validations } from '../shared';
+import {
+  Caret,
+  Description,
+  Format,
+  getInternalSchemaError,
+  getValidationsFromSchema,
+  Types,
+  Validations,
+} from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Properties, useHasProperties } from '../shared/Properties';
 import { hoveredNodeAtom, isNodeHoveredAtom } from './state';
@@ -69,6 +77,8 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
   const deprecated = isRegularNode(schemaNode) && schemaNode.deprecated;
   const validations = isRegularNode(schemaNode) ? schemaNode.validations : {};
   const hasProperties = useHasProperties({ required, deprecated, validations });
+
+  const internalSchemaError = getInternalSchemaError(schemaNode);
 
   return (
     <>
@@ -158,9 +168,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
             hideExamples={hideExamples}
           />
 
-          {isBrokenRef && (
-            // TODO (JJ): Add mosaic tooltip showing ref error
-            <Icon title={refNode!.error!} color="danger" icon={faExclamationTriangle} size="sm" />
+          {(isBrokenRef || internalSchemaError.hasError) && (
+            <Icon
+              title={refNode?.error! || internalSchemaError.error}
+              color="danger"
+              icon={faExclamationTriangle}
+              size="sm"
+            />
           )}
         </VStack>
 
