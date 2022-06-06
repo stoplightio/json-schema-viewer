@@ -49,6 +49,87 @@ describe('SchemaRow component', () => {
     });
   });
 
+  describe('resolving permission error', () => {
+    let tree: RootNode;
+    let schema: JSONSchema4;
+
+    it('given an object schema is marked as internal, a permission denied error messsage should be shown', () => {
+      schema = {
+        type: 'object',
+        'x-sl-internally-excluded': true,
+        'x-sl-error-message': 'You do not have permission to view this reference',
+      };
+      tree = buildTree(schema);
+      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      wrapper.unmount();
+    });
+
+    it('given a number schema is marked as internal, a permission denied error messsage should be shown', () => {
+      schema = {
+        type: 'number',
+        'x-sl-internally-excluded': true,
+        'x-sl-error-message': 'You do not have permission to view this reference',
+      };
+      tree = buildTree(schema);
+      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      wrapper.unmount();
+    });
+
+    it('given an integer schema is marked as internal, a permission denied error messsage should be shown', () => {
+      schema = {
+        type: 'integer',
+        'x-sl-internally-excluded': true,
+        'x-sl-error-message': 'You do not have permission to view this reference',
+      };
+      tree = buildTree(schema);
+      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      wrapper.unmount();
+    });
+
+    it('given a string schema is marked as internal, a permission denied error messsage should be shown', () => {
+      schema = {
+        type: 'string',
+        'x-sl-internally-excluded': true,
+        'x-sl-error-message': 'You do not have permission to view this reference',
+      };
+      tree = buildTree(schema);
+      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      wrapper.unmount();
+    });
+
+    it('given a boolean schema is marked as internal, a permission denied error messsage should be shown', () => {
+      schema = {
+        type: 'boolean',
+        'x-sl-internally-excluded': true,
+        'x-sl-error-message': 'You do not have permission to view this reference',
+      };
+      tree = buildTree(schema);
+      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      wrapper.unmount();
+    });
+
+    it('given an array schema is marked as internal, a permission denied error messsage should be shown', () => {
+      schema = {
+        title: 'test',
+        type: 'array',
+        items: {
+          type: 'array',
+          'x-sl-internally-excluded': true,
+          'x-sl-error-message': 'You do not have permission to view this reference',
+        },
+      };
+      tree = buildTree(schema);
+      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      wrapper.unmount();
+    });
+  });
+
   describe('required property', () => {
     let schema: JSONSchema4;
 

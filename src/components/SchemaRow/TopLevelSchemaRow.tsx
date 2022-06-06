@@ -1,4 +1,5 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown.js';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle.js';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
@@ -9,6 +10,7 @@ import { useIsOnScreen } from '../../hooks/useIsOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
 import { ChildStack } from '../shared/ChildStack';
+import { getInternalSchemaError } from '../shared/Validations';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
 import { useChoices } from './useChoices';
 
@@ -17,12 +19,17 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
   const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
 
+  const internalSchemaError = getInternalSchemaError(schemaNode);
+
   // regular objects are flattened at the top level
   if (isRegularNode(schemaNode) && isPureObjectNode(schemaNode)) {
     return (
       <>
         <ScrollCheck />
         <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        {internalSchemaError.hasError && (
+          <Icon title={internalSchemaError.error} color="danger" icon={faExclamationTriangle} size="sm" />
+        )}
       </>
     );
   }

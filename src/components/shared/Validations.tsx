@@ -1,4 +1,4 @@
-import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
+import { isRegularNode, RegularNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { Flex, HStack, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
 import capitalize from 'lodash/capitalize.js';
@@ -210,4 +210,27 @@ function getFilteredValidations(schemaNode: RegularNode) {
   }
 
   return schemaNode.validations;
+}
+
+export function getInternalSchemaError(schemaNode: SchemaNode, defaultErrorMessage?: string) {
+  let errorMessage: string | undefined;
+  const fragment: unknown = schemaNode.fragment;
+  if (typeof fragment === 'object' && fragment !== null) {
+    const fragmentErrorMessage = fragment['x-sl-error-message'];
+    if (typeof fragmentErrorMessage === 'string') {
+      errorMessage = fragmentErrorMessage ?? defaultErrorMessage;
+    } else {
+      const items: unknown = fragment['items'];
+      if (typeof items === 'object' && items !== null) {
+        const itemsErrorMessage = items['x-sl-error-message'];
+        if (typeof itemsErrorMessage === 'string') {
+          errorMessage = itemsErrorMessage ?? defaultErrorMessage;
+        }
+      }
+    }
+  }
+  return {
+    hasError: !!errorMessage,
+    error: errorMessage,
+  };
 }
