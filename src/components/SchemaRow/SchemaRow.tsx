@@ -8,6 +8,7 @@ import {
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon, Select, SpaceVals, VStack } from '@stoplight/mosaic';
+import { Atom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
 import * as React from 'react';
@@ -39,7 +40,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines } = useJSVOptionsContext();
 
   const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
-  const isHovering = useAtomValue(isNodeHoveredAtom(schemaNode));
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
@@ -156,7 +156,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
               )}
             </Flex>
 
-            {hasProperties && <Box bg={isHovering ? 'canvas-200' : undefined} h="px" flex={1} mx={3} />}
+            {hasProperties && <Divider atom={isNodeHoveredAtom(schemaNode)} />}
 
             <Properties required={required} deprecated={deprecated} validations={validations} />
           </Flex>
@@ -187,6 +187,12 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
     </>
   );
 });
+
+const Divider = ({ atom }: { atom: Atom<boolean> }) => {
+  const isHovering = useAtomValue(atom);
+
+  return <Box bg={isHovering ? 'canvas-200' : undefined} h="px" flex={1} mx={3} />;
+};
 
 function shouldShowPropertyName(schemaNode: SchemaNode) {
   return (
