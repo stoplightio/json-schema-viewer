@@ -8,6 +8,7 @@ import {
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
 import { Box, Flex, Icon, Select, SpaceVals, VStack } from '@stoplight/mosaic';
+import { Atom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
 import * as React from 'react';
@@ -187,10 +188,8 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
   );
 });
 
-const Hover = ({ atom }: { atom: any }) => {
+const Hover = ({ atom }: { atom: Atom<boolean> }) => {
   const isHovering = useAtomValue(atom);
-
-  if (!isHovering) return null;
 
   return <Box bg={isHovering ? 'canvas-200' : undefined} h="px" flex={1} mx={3} />;
 };
