@@ -39,7 +39,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
   const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines } = useJSVOptionsContext();
 
   const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
-  const isHovering = useAtomValue(isNodeHoveredAtom(schemaNode));
 
   const [isExpanded, setExpanded] = React.useState<boolean>(
     !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
@@ -156,7 +155,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
               )}
             </Flex>
 
-            {hasProperties && <Box bg={isHovering ? 'canvas-200' : undefined} h="px" flex={1} mx={3} />}
+            {hasProperties && <Hover atom={isNodeHoveredAtom(schemaNode)} />}
 
             <Properties required={required} deprecated={deprecated} validations={validations} />
           </Flex>
@@ -187,6 +186,14 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
     </>
   );
 });
+
+const Hover = ({ atom }: { atom: any }) => {
+  const isHovering = useAtomValue(atom);
+
+  if (!isHovering) return null;
+
+  return <Box bg={isHovering ? 'canvas-200' : undefined} h="px" flex={1} mx={3} />;
+};
 
 function shouldShowPropertyName(schemaNode: SchemaNode) {
   return (
