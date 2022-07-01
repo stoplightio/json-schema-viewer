@@ -1,5 +1,3 @@
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown.js';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle.js';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
@@ -28,7 +26,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
         <ScrollCheck />
         <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
         {internalSchemaError.hasError && (
-          <Icon title={internalSchemaError.error} color="danger" icon={faExclamationTriangle} size="sm" />
+          <Icon title={internalSchemaError.error} color="danger" icon={['fas', 'exclamation-triangle']} size="sm" />
         )}
       </>
     );
@@ -56,7 +54,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
                 <Flex fontFamily="mono" fontWeight="semibold" cursor="pointer" fontSize="base">
                   {selectedChoice.title}
                   <Box ml={1}>
-                    <Icon icon={faCaretDown} />
+                    <Icon icon={['fas', 'caret-down']} />
                   </Box>
                 </Flex>
               </Pressable>

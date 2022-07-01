@@ -1,4 +1,3 @@
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle.js';
 import {
   isMirroredNode,
   isReferenceNode,
@@ -172,7 +171,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
             <Icon
               title={refNode?.error! || internalSchemaError.error}
               color="danger"
-              icon={faExclamationTriangle}
+              icon={['fas', 'exclamation-triangle']}
               size="sm"
             />
           )}
