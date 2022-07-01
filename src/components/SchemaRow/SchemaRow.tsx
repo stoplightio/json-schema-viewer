@@ -156,7 +156,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
               )}
             </Flex>
 
-            {hasProperties && <Hover atom={isNodeHoveredAtom(schemaNode)} />}
+            {hasProperties && <Divider atom={isNodeHoveredAtom(schemaNode)} />}
 
             <Properties required={required} deprecated={deprecated} validations={validations} />
           </Flex>
@@ -188,7 +188,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
   );
 });
 
-const Hover = ({ atom }: { atom: Atom<boolean> }) => {
+const Divider = ({ atom }: { atom: Atom<boolean> }) => {
   const isHovering = useAtomValue(atom);
 
   return <Box bg={isHovering ? 'canvas-200' : undefined} h="px" flex={1} mx={3} />;
