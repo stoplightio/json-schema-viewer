@@ -5,7 +5,7 @@ import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
 
 import { SchemaRow } from '../../SchemaRow';
-import { Format } from '../Format';
+import { Types } from '../Types';
 import { buildTree, findNodeWithPath } from './utils';
 
 describe('Format component', () => {
@@ -14,15 +14,20 @@ describe('Format component', () => {
 
   it('should render next to a single type', () => {
     const wrapper = mount(<SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'id'])!} nestingLevel={0} />);
-    expect(wrapper.find(Format)).toHaveText('<float>');
+    expect(wrapper.find(Types)).toHaveText('number<float>');
     wrapper.unmount();
   });
 
-  it('should render next to an array of types', () => {
+  it.each`
+    property           | text
+    ${'count'}         | ${'integer<int32> or null'}
+    ${'date-of-birth'} | ${'number or string<date-time> or array'}
+    ${'size'}          | ${'number<byte> or string'}
+  `('given $property property, should render next to the appropriate type', ({ property, text }) => {
     const wrapper = mount(
-      <SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'date-of-birth'])!} nestingLevel={0} />,
+      <SchemaRow schemaNode={findNodeWithPath(tree, ['properties', property])!} nestingLevel={0} />,
     );
-    expect(wrapper.find(Format)).toHaveText('<date-time>');
+    expect(wrapper.find(Types)).toHaveText(text);
     wrapper.unmount();
   });
 
@@ -30,7 +35,7 @@ describe('Format component', () => {
     const wrapper = mount(
       <SchemaRow schemaNode={findNodeWithPath(tree, ['properties', 'notype'])!} nestingLevel={0} />,
     );
-    expect(wrapper.find(Format)).toHaveText('<date-time>');
+    expect(wrapper.find(Types)).toHaveText('<date-time>');
     wrapper.unmount();
   });
 });

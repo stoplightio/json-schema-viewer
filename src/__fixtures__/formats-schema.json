@@ -18,8 +18,19 @@
       "type": "number",
       "format": "float"
     },
+    "count": {
+      "type": ["integer", "null"],
+      "format": "int32"
+    },
+    "size": {
+      "type": [
+        "number",
+        "string"
+      ],
+      "format": "byte"
+    },
     "notype": {
-        "format": "date-time"
+      "format": "date-time"
     },
     "permissions": {
       "type": [
