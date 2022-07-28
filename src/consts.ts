@@ -8,6 +8,14 @@ export const COMBINER_PRETTY_NAMES: Readonly<Dictionary<string, SchemaCombinerNa
   [SchemaCombinerName.OneOf]: 'or',
 };
 
+export const COMMON_JSON_SCHEMA_AND_OAS_FORMATS = {
+  // strings are omitted because they are the default type to apply format to
+  number: ['byte', 'int32', 'int64', 'float', 'double'],
+  get integer() {
+    return this.number;
+  },
+};
+
 export const NESTING_OFFSET: SpaceVals = 3;
 
 export const CARET_ICON_SIZE = 'sm';

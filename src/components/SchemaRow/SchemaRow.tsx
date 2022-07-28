@@ -15,15 +15,7 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
-import {
-  Caret,
-  Description,
-  Format,
-  getInternalSchemaError,
-  getValidationsFromSchema,
-  Types,
-  Validations,
-} from '../shared';
+import { Caret, Description, getInternalSchemaError, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Properties, useHasProperties } from '../shared/Properties';
 import { hoveredNodeAtom, isNodeHoveredAtom } from './state';
@@ -108,12 +100,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
                 </Box>
               )}
 
-              {choices.length === 1 && (
-                <>
-                  <Types schemaNode={typeToShow} />
-                  <Format schemaNode={typeToShow} />
-                </>
-              )}
+              {choices.length === 1 && <Types schemaNode={typeToShow} />}
 
               {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
                 <Box
