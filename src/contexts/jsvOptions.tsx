@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { GoToRefHandler, RowAddonRenderer, ViewMode } from '../types';
+import { GoToRefHandler, NodeHasChangedFn, RowAddonRenderer, ViewMode } from '../types';
 
 export type JSVOptions = {
   defaultExpandedDepth: number;
@@ -10,6 +10,7 @@ export type JSVOptions = {
   hideExamples?: boolean;
   renderRootTreeLines?: boolean;
   disableCrumbs?: boolean;
+  nodeHasChanged?: NodeHasChangedFn;
 };
 
 const JSVOptionsContext = React.createContext<JSVOptions>({

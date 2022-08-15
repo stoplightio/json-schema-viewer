@@ -17,6 +17,8 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
   const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
 
+  const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
+
   const internalSchemaError = getInternalSchemaError(schemaNode);
 
   // regular objects are flattened at the top level
@@ -24,7 +26,12 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
-        <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        <ChildStack
+          schemaNode={schemaNode}
+          childNodes={childNodes}
+          currentNestingLevel={nestingLevel}
+          parentNodeId={nodeId}
+        />
         {internalSchemaError.hasError && (
           <Icon title={internalSchemaError.error} color="danger" icon={['fas', 'exclamation-triangle']} size="sm" />
         )}
@@ -69,7 +76,12 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
         </HStack>
 
         {childNodes.length > 0 ? (
-          <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+          <ChildStack
+            schemaNode={schemaNode}
+            childNodes={childNodes}
+            currentNestingLevel={nestingLevel}
+            parentNodeId={nodeId}
+          />
         ) : null}
       </>
     );
@@ -85,7 +97,12 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
         </Box>
 
         {childNodes.length > 0 ? (
-          <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+          <ChildStack
+            schemaNode={schemaNode}
+            childNodes={childNodes}
+            currentNestingLevel={nestingLevel}
+            parentNodeId={nodeId}
+          />
         ) : null}
       </>
     );

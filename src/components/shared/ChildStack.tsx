@@ -11,11 +11,12 @@ type ChildStackProps = {
   childNodes: readonly SchemaNode[];
   currentNestingLevel: number;
   className?: string;
+  parentNodeId?: string;
   RowComponent?: React.FC<SchemaRowProps>;
 };
 
 export const ChildStack = React.memo(
-  ({ childNodes, currentNestingLevel, className, RowComponent = SchemaRow }: ChildStackProps) => {
+  ({ childNodes, currentNestingLevel, className, RowComponent = SchemaRow, parentNodeId }: ChildStackProps) => {
     const { renderRootTreeLines } = useJSVOptionsContext();
     const rootLevel = renderRootTreeLines ? 0 : 1;
     const isRootLevel = currentNestingLevel < rootLevel;
@@ -39,6 +40,7 @@ export const ChildStack = React.memo(
             schemaNode={childNode}
             nestingLevel={currentNestingLevel + 1}
             pl={isRootLevel ? undefined : NESTING_OFFSET}
+            parentNodeId={parentNodeId}
           />
         ))}
       </Box>
