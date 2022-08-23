@@ -2,8 +2,10 @@ import { MarkdownViewer } from '@stoplight/markdown-viewer';
 import { Box, Link, Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
-export const Description: React.FunctionComponent<{ value: string }> = ({ value }) => {
+export const Description: React.FunctionComponent<{ value: unknown }> = ({ value }) => {
   const [showAll, setShowAll] = React.useState(false);
+
+  if (typeof value !== 'string' || value.trim().length === 0) return null;
 
   const paragraphs = value.split('\n\n');
 
