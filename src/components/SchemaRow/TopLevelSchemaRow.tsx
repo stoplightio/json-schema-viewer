@@ -7,6 +7,7 @@ import { COMBINER_NAME_MAP } from '../../consts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
+import { Description } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { getInternalSchemaError } from '../shared/Validations';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
@@ -26,6 +27,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
+        <Description value={schemaNode.annotations.description} />
         <ChildStack
           schemaNode={schemaNode}
           childNodes={childNodes}
@@ -45,6 +47,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
+        <Description value={schemaNode.annotations.description} />
 
         <HStack spacing={3} pb={4}>
           <Menu
@@ -91,6 +94,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
+        <Description value={schemaNode.annotations.description} />
 
         <Box fontFamily="mono" fontWeight="semibold" fontSize="base" pb={4}>
           array of:

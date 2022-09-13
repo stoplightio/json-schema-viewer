@@ -164,6 +164,32 @@ describe('HTML Output', () => {
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchSnapshot();
   });
+
+  it('should render top-level description on allOf', () => {
+    const schema: JSONSchema4 = {
+      description: 'This is a description that should be rendered',
+      allOf: [
+        {
+          type: 'object',
+          properties: {
+            foo: {
+              type: 'string',
+            },
+          },
+        },
+        {
+          type: 'object',
+          properties: {
+            baz: {
+              type: 'string',
+            },
+          },
+        },
+      ],
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
+  });
 });
 
 describe.each([{}, { unknown: '' }, { $ref: null }])('given empty schema, should render empty text', schema => {
