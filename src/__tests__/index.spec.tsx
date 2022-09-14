@@ -165,7 +165,7 @@ describe('HTML Output', () => {
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchSnapshot();
   });
 
-  it('should render top-level description on allOf', () => {
+  describe('top level descriptions', () => {
     const schema: JSONSchema4 = {
       description: 'This is a description that should be rendered',
       allOf: [
@@ -188,7 +188,15 @@ describe('HTML Output', () => {
       ],
     };
 
-    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
+    it('should render top-level description on allOf', () => {
+      expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchSnapshot();
+    });
+
+    it('should not render top-level description when skipTopLevelDescription=true', () => {
+      expect(
+        dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} skipTopLevelDescription />),
+      ).toMatchSnapshot();
+    });
   });
 });
 

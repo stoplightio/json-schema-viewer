@@ -659,7 +659,40 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
 "
 `;
 
-exports[`HTML Output should render top-level description on allOf 1`] = `
+exports[`HTML Output top level descriptions should not render top-level description when skipTopLevelDescription=true 1`] = `
+"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+  <div data-overlay-container=\\"true\\">
+    <div class=\\"JsonSchemaViewer\\">
+      <div></div>
+      <div data-level=\\"0\\">
+        <div data-id=\\"862ab7c3a6663\\">
+          <div>
+            <div>
+              <div>
+                <div>foo</div>
+                <span>string</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-id=\\"3d3ab69efb5e7\\">
+          <div>
+            <div>
+              <div>
+                <div>baz</div>
+                <span>string</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`HTML Output top level descriptions should render top-level description on allOf 1`] = `
 "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
