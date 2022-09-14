@@ -26,6 +26,7 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   onTreePopulated?: (props: { rootNode: RootNode; nodeCount: number }) => void;
   maxHeight?: number;
   parentCrumbs?: string[];
+  skipTopLevelDescription?: boolean;
 };
 
 const JsonSchemaViewerComponent = ({
@@ -37,6 +38,7 @@ const JsonSchemaViewerComponent = ({
   renderRootTreeLines,
   disableCrumbs,
   nodeHasChanged,
+  skipTopLevelDescription,
   ...rest
 }: JsonSchemaProps & ErrorBoundaryForwardedProps) => {
   const options = React.useMemo(
@@ -66,7 +68,7 @@ const JsonSchemaViewerComponent = ({
     <MosaicProvider>
       <JSVOptionsContextProvider value={options}>
         <Provider>
-          <JsonSchemaViewerInner viewMode={viewMode} {...rest} />
+          <JsonSchemaViewerInner viewMode={viewMode} skipTopLevelDescription={skipTopLevelDescription} {...rest} />
         </Provider>
       </JSVOptionsContextProvider>
     </MosaicProvider>
@@ -82,9 +84,18 @@ const JsonSchemaViewerInner = ({
   onTreePopulated,
   maxHeight,
   parentCrumbs,
+  skipTopLevelDescription,
 }: Pick<
   JsonSchemaProps,
-  'schema' | 'viewMode' | 'className' | 'resolveRef' | 'emptyText' | 'onTreePopulated' | 'maxHeight' | 'parentCrumbs'
+  | 'schema'
+  | 'viewMode'
+  | 'className'
+  | 'resolveRef'
+  | 'emptyText'
+  | 'onTreePopulated'
+  | 'maxHeight'
+  | 'parentCrumbs'
+  | 'skipTopLevelDescription'
 >) => {
   const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
   const onMouseLeave = React.useCallback(() => {
@@ -153,7 +164,7 @@ const JsonSchemaViewerInner = ({
       style={{ maxHeight }}
     >
       <PathCrumbs parentCrumbs={parentCrumbs} />
-      <TopLevelSchemaRow schemaNode={jsonSchemaTreeRoot.children[0]} />
+      <TopLevelSchemaRow schemaNode={jsonSchemaTreeRoot.children[0]} skipDescription={skipTopLevelDescription} />
     </Box>
   );
 };

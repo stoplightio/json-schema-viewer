@@ -13,7 +13,10 @@ import { getInternalSchemaError } from '../shared/Validations';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
 import { useChoices } from './useChoices';
 
-export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNode'>) => {
+export const TopLevelSchemaRow = ({
+  schemaNode,
+  skipDescription,
+}: Pick<SchemaRowProps, 'schemaNode'> & { skipDescription?: boolean }) => {
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
@@ -27,7 +30,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
-        <Description value={schemaNode.annotations.description} />
+        {!skipDescription ? <Description value={schemaNode.annotations.description} /> : null}
         <ChildStack
           schemaNode={schemaNode}
           childNodes={childNodes}
