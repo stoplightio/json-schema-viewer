@@ -22,6 +22,7 @@ const changed: Record<string, ReturnType<NodeHasChangedFn>> = {
   'list-of-objects-items-friend-name-id': { type: 'modified', selfAffected: true, isBreaking: true },
   'list-of-objects-items-friend-name-last-id': { type: 'added', isBreaking: true },
   'friend-id': { type: 'added', isBreaking: true },
+  'address-street-id': { type: 'added' },
 };
 const nodeHasChanged: NodeHasChangedFn = ({ nodeId }) => {
   const change = changed[nodeId!];
