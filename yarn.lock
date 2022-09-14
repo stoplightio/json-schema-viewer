@@ -2417,10 +2417,10 @@
     unist-util-select "^4.0.0"
     unist-util-visit "^3.1.0"
 
-"@stoplight/mosaic-code-viewer@^1.24.2":
-  version "1.24.2"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-viewer/-/mosaic-code-viewer-1.24.2.tgz#3e3a283ab4ad8a8161240de63ad3904a38e8f580"
-  integrity sha512-anPzzyCgcU+aFV+6qZB4YmWnbymgRgB70g5T2gvavZZ2r9tw8g3eG/U6d1+38i1it3IadJPpF6yzqwC5kUs04Q==
+"@stoplight/mosaic-code-viewer@^1.32.0":
+  version "1.32.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-viewer/-/mosaic-code-viewer-1.32.0.tgz#07f517c5179cdc59d968146cf03e910650adf3ca"
+  integrity sha512-QO7bTKNBIrkXN6fAbb75BvEjQHKfYv6xPFWHmh0DkkrmANveF/wUYXQdIxV2KdjAUT6BaDXr3yt0dEwb15IevQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.2.0"
@@ -2429,7 +2429,8 @@
     "@react-types/radio" "3.1.2"
     "@react-types/shared" "3.9.0"
     "@react-types/switch" "3.1.2"
-    "@stoplight/mosaic" "1.24.2"
+    "@stoplight/mosaic" "1.32.0"
+    "@stoplight/types" "^13.7.0"
     clsx "^1.1.1"
     copy-to-clipboard "^3.3.1"
     dom-helpers "^3.3.1"
@@ -2445,10 +2446,10 @@
     use-resize-observer "^9.0.2"
     zustand "^3.5.2"
 
-"@stoplight/mosaic@1.24.2", "@stoplight/mosaic@^1.24.2":
-  version "1.24.2"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.24.2.tgz#802596c2702264dc32f2b979a4bdacd36eeb0f24"
-  integrity sha512-0wYIjhDk0YMTPpOWyOwiy+Z0efT0W9bXhE3uhK4zEHKtTahhHaGtVauPq2y4EwwNTdRYE5ACr9use/tGKiMKig==
+"@stoplight/mosaic@1.32.0", "@stoplight/mosaic@^1.32.0":
+  version "1.32.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.32.0.tgz#ab1bce0a7360fe61730c3f4c762a25c739ea50a7"
+  integrity sha512-1ZHacNpmta3Hu3JQK1w+UuH5NawuWc4TdY6sPXJAAgZ9zNodkbYzdKsJVdfH2r/ni337ue5r3T15kwhKqFeL0A==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.2.0"
@@ -2459,6 +2460,7 @@
     "@react-types/shared" "3.9.0"
     "@react-types/switch" "3.1.2"
     "@react-types/textfield" "3.3.0"
+    "@stoplight/types" "^13.7.0"
     "@types/react" "^17.0.3"
     "@types/react-dom" "^17.0.3"
     clsx "^1.1.1"
@@ -2527,6 +2529,14 @@
     semantic-release "17.0.3"
     shelljs "0.8.x"
     tslib "^2.2.0"
+
+"@stoplight/types@13.7.0", "@stoplight/types@^13.7.0":
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/types/-/types-13.7.0.tgz#717d9e3ef068e8f143d045e9bc89b97da06933c4"
+  integrity sha512-7ePIccfTxjEhruv8VrkDv5whP5qd9ijRzAWEbjYpUYnDfaqPTfq8/wMMjMCAKIecboxsAVD9LZy/3puXddGsDQ==
+  dependencies:
+    "@types/json-schema" "^7.0.4"
+    utility-types "^3.10.0"
 
 "@stoplight/types@^12.0.0", "@stoplight/types@^12.3.0":
   version "12.3.0"
@@ -8385,6 +8395,11 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
+
+fnv-plus@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/fnv-plus/-/fnv-plus-1.3.1.tgz#c34cb4572565434acb08ba257e4044ce2b006d67"
+  integrity sha512-Gz1EvfOneuFfk4yG458dJ3TLJ7gV19q3OM/vVvvHf7eT02Hm1DleB4edsia6ahbKgAYxO9gvyQ1ioWZR+a00Yw==
 
 for-in@^1.0.2:
   version "1.0.2"

@@ -254,7 +254,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div>
+                  <div data-id=\\"862ab7c3a6663\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -283,7 +283,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div>
+                  <div data-id=\\"862ab7c3a6663\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -312,7 +312,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div>
+                  <div data-id=\\"862ab7c3a6663\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -324,7 +324,7 @@ describe('Expanded depth', () => {
                     </div>
                   </div>
                   <div data-level=\\"1\\">
-                    <div>
+                    <div data-id=\\"f1c21cde4de6f\\">
                       <div></div>
                       <div>
                         <div>
@@ -389,7 +389,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div>
+                  <div data-id=\\"3cbab69efa81f\\">
                     <div>
                       <div>
                         <div>
@@ -399,7 +399,7 @@ describe('Expanded depth', () => {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div data-id=\\"862ab7c3a6663\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -428,7 +428,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div>
+                  <div data-id=\\"3cbab69efa81f\\">
                     <div>
                       <div>
                         <div>
@@ -438,7 +438,7 @@ describe('Expanded depth', () => {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div data-id=\\"862ab7c3a6663\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -467,7 +467,7 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div>
+                  <div data-id=\\"3cbab69efa81f\\">
                     <div>
                       <div>
                         <div>
@@ -477,7 +477,7 @@ describe('Expanded depth', () => {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div data-id=\\"862ab7c3a6663\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -489,7 +489,7 @@ describe('Expanded depth', () => {
                     </div>
                   </div>
                   <div data-level=\\"1\\">
-                    <div>
+                    <div data-id=\\"f1c21cde4de6f\\">
                       <div></div>
                       <div>
                         <div>
@@ -500,7 +500,7 @@ describe('Expanded depth', () => {
                         </div>
                       </div>
                     </div>
-                    <div>
+                    <div data-id=\\"c6321b8d80105\\">
                       <div></div>
                       <div>
                         <div>
@@ -576,7 +576,7 @@ describe('Expanded depth', () => {
               <div class=\\"JsonSchemaViewer\\">
                 <div></div>
                 <div data-level=\\"0\\">
-                  <div>
+                  <div data-id=\\"3cbab69efa81f\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -587,7 +587,7 @@ describe('Expanded depth', () => {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div data-id=\\"862ab7c3a6663\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
@@ -643,7 +643,7 @@ describe('$ref resolving', () => {
         <div data-overlay-container=\\"true\\">
           <div class=\\"JsonSchemaViewer\\">
             <div></div>
-            <div>
+            <div data-id=\\"bf8b96e78f11d\\">
               <div>
                 <div>
                   <div><span>string</span></div>
@@ -670,7 +670,7 @@ describe('$ref resolving', () => {
         <div data-overlay-container=\\"true\\">
           <div class=\\"JsonSchemaViewer\\">
             <div></div>
-            <div>
+            <div data-id=\\"bf8b96e78f11d\\">
               <div>
                 <div>
                   <div role=\\"button\\"></div>
@@ -679,7 +679,7 @@ describe('$ref resolving', () => {
               </div>
             </div>
             <div data-level=\\"0\\">
-              <div>
+              <div data-id=\\"98538b996305d\\">
                 <div>
                   <div>
                     <div><span>#/foo</span></div>

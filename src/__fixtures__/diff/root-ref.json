@@ -1,0 +1,26 @@
+{
+  "title": "User",
+  "type": "object",
+  "x-stoplight": { "id": "root-id" },
+  "properties": {
+    "billing_address": {
+      "type": "string",
+      "title": "Billing Address",
+      "x-stoplight": { "id": "billing_address-id" },
+      "$ref": "#/$defs/Address"
+    }
+  },
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "title": "Address",
+      "x-stoplight": { "id": "address-id" },
+      "properties": {
+        "street": {
+          "type": "string",
+          "x-stoplight": { "id": "address-street-id" }
+        }
+      }
+    }
+  }
+}

@@ -36,6 +36,7 @@ const JsonSchemaViewerComponent = ({
   hideExamples,
   renderRootTreeLines,
   disableCrumbs,
+  nodeHasChanged,
   ...rest
 }: JsonSchemaProps & ErrorBoundaryForwardedProps) => {
   const options = React.useMemo(
@@ -47,8 +48,18 @@ const JsonSchemaViewerComponent = ({
       hideExamples,
       renderRootTreeLines,
       disableCrumbs,
+      nodeHasChanged,
     }),
-    [defaultExpandedDepth, viewMode, onGoToRef, renderRowAddon, hideExamples, renderRootTreeLines, disableCrumbs],
+    [
+      defaultExpandedDepth,
+      viewMode,
+      onGoToRef,
+      renderRowAddon,
+      hideExamples,
+      renderRootTreeLines,
+      disableCrumbs,
+      nodeHasChanged,
+    ],
   );
 
   return (

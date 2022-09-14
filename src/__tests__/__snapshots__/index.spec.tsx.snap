@@ -6,7 +6,7 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"3cbab69efa81f\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -17,7 +17,7 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"862ab7c3a6663\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -41,7 +41,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"3cbab69efa81f\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -53,7 +53,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div>
+          <div data-id=\\"12aba6f44026c\\">
             <div></div>
             <div>
               <div>
@@ -65,7 +65,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
               </div>
             </div>
           </div>
-          <div>
+          <div data-id=\\"073ba5acf896f\\">
             <div></div>
             <div>
               <div>
@@ -76,7 +76,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
               </div>
             </div>
           </div>
-          <div>
+          <div data-id=\\"07bba5acf9ef7\\">
             <div></div>
             <div>
               <div>
@@ -88,7 +88,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"862ab7c3a6663\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -100,7 +100,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div>
+          <div data-id=\\"ae9fe22da9a31\\">
             <div></div>
             <div>
               <div>
@@ -111,7 +111,7 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
               </div>
             </div>
           </div>
-          <div>
+          <div data-id=\\"240fe113d2860\\">
             <div></div>
             <div>
               <div>
@@ -136,7 +136,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"3cbab69efa81f\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -148,7 +148,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div>
+          <div data-id=\\"12aba6f44026c\\">
             <div></div>
             <div>
               <div>
@@ -161,7 +161,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
             </div>
           </div>
           <div data-level=\\"2\\">
-            <div>
+            <div data-id=\\"d768172596c01\\">
               <div></div>
               <div>
                 <div>
@@ -173,7 +173,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
               </div>
             </div>
           </div>
-          <div>
+          <div data-id=\\"073ba5acf896f\\">
             <div></div>
             <div>
               <div>
@@ -184,7 +184,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
               </div>
             </div>
           </div>
-          <div>
+          <div data-id=\\"07bba5acf9ef7\\">
             <div></div>
             <div>
               <div>
@@ -196,7 +196,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"862ab7c3a6663\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -208,7 +208,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div>
+          <div data-id=\\"ae9fe22da9a31\\">
             <div></div>
             <div>
               <div>
@@ -219,7 +219,7 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
               </div>
             </div>
           </div>
-          <div>
+          <div data-id=\\"240fe113d2860\\">
             <div></div>
             <div>
               <div>
@@ -251,7 +251,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
         <div>(any of)</div>
       </div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"4a8da9be0aedc\\">
           <div>
             <div>
               <div>
@@ -270,7 +270,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"e2533efaa39da\\">
           <div>
             <div>
               <div>
@@ -281,7 +281,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"bd5c934660dce\\">
           <div>
             <div>
               <div>
@@ -291,7 +291,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"b0aa37b59ceff\\">
           <div>
             <div>
               <div>
@@ -301,7 +301,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"b6d786a9b103c\\">
           <div>
             <div>
               <div>
@@ -342,7 +342,7 @@ exports[`HTML Output given complex type that includes array and complex array su
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"231c8499288a6\\">
           <div>
             <div>
               <div>
@@ -374,7 +374,7 @@ exports[`HTML Output given multiple object and string type, should process prope
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div>
+      <div data-id=\\"bf8b96e78f11d\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
@@ -389,7 +389,7 @@ exports[`HTML Output given multiple object and string type, should process prope
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"2a0059431a56c\\">
           <div>
             <div>
               <div>
@@ -419,7 +419,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
         <div>(one of)</div>
       </div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"4a8da9be0aedc\\">
           <div>
             <div>
               <div>
@@ -438,7 +438,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"e2533efaa39da\\">
           <div>
             <div>
               <div>
@@ -449,7 +449,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"bd5c934660dce\\">
           <div>
             <div>
               <div>
@@ -459,7 +459,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"b0aa37b59ceff\\">
           <div>
             <div>
               <div>
@@ -469,7 +469,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"b6d786a9b103c\\">
           <div>
             <div>
               <div>
@@ -491,7 +491,7 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div>
+      <div data-id=\\"bf8b96e78f11d\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
@@ -506,7 +506,7 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"f19a0161d8b16\\">
           <div>
             <div>
               <div>
@@ -528,7 +528,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div>
+      <div data-id=\\"bf8b96e78f11d\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
@@ -543,7 +543,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"f19a0161d8b16\\">
           <div>
             <div>
               <div>
@@ -555,7 +555,7 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"78328d924d5b6\\">
           <div>
             <div>
               <div>
@@ -580,7 +580,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"862ab7c3a6663\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -592,7 +592,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div>
+          <div data-id=\\"c098fbf9b1d2f\\">
             <div></div>
             <div>
               <div>
@@ -604,7 +604,7 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"621e12cb0db5c\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
@@ -627,7 +627,7 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div>
+      <div data-id=\\"bf8b96e78f11d\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
@@ -642,7 +642,7 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"78328d924d5b6\\">
           <div>
             <div>
               <div>
@@ -666,7 +666,7 @@ exports[`HTML Output should render top-level description on allOf 1`] = `
       <div></div>
       <div style=\\"font-size: 12px\\"><p>This is a description that should be rendered</p></div>
       <div data-level=\\"0\\">
-        <div>
+        <div data-id=\\"862ab7c3a6663\\">
           <div>
             <div>
               <div>
@@ -676,7 +676,7 @@ exports[`HTML Output should render top-level description on allOf 1`] = `
             </div>
           </div>
         </div>
-        <div>
+        <div data-id=\\"3d3ab69efb5e7\\">
           <div>
             <div>
               <div>
