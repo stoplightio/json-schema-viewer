@@ -1,6 +1,7 @@
+import type { NodeHasChangedFn } from '@stoplight/types';
 import * as React from 'react';
 
-import { GoToRefHandler, NodeHasChangedFn, RowAddonRenderer, ViewMode } from '../types';
+import { GoToRefHandler, RowAddonRenderer, ViewMode } from '../types';
 
 export type JSVOptions = {
   defaultExpandedDepth: number;
@@ -10,7 +11,7 @@ export type JSVOptions = {
   hideExamples?: boolean;
   renderRootTreeLines?: boolean;
   disableCrumbs?: boolean;
-  nodeHasChanged?: NodeHasChangedFn;
+  nodeHasChanged?: NodeHasChangedFn<React.ReactNode>;
 };
 
 const JSVOptionsContext = React.createContext<JSVOptions>({

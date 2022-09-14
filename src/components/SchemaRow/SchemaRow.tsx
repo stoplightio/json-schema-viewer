@@ -6,7 +6,8 @@ import {
   SchemaNode,
   SchemaNodeKind,
 } from '@stoplight/json-schema-tree';
-import { BackgroundColorVals, Box, BoxProps, Flex, Icon, Select, SpaceVals, VStack } from '@stoplight/mosaic';
+import { Box, Flex, Icon, NodeAnnotation, Select, SpaceVals, VStack } from '@stoplight/mosaic';
+import type { ChangeType } from '@stoplight/types';
 import { Atom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import last from 'lodash/last.js';
@@ -16,7 +17,6 @@ import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { getNodeId, getOriginalNodeId } from '../../hash';
 import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
-import { ChangeType, NodeHasChangedFn } from '../../types';
 import { Caret, Description, getInternalSchemaError, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Properties, useHasProperties } from '../shared/Properties';
@@ -28,21 +28,20 @@ export interface SchemaRowProps {
   nestingLevel: number;
   pl?: SpaceVals;
   parentNodeId?: string;
+  parentChangeType?: ChangeType;
 }
 
-const ChangeTypeToColor: Record<ChangeType, BackgroundColorVals> = {
-  // @ts-expect-error
-  added: '#05B870',
-  // @ts-expect-error
-  modified: '#E9B703',
-  // @ts-expect-error
-  removed: '#F05151',
-};
-
 export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
-  ({ schemaNode, nestingLevel, pl, parentNodeId }) => {
-    const { defaultExpandedDepth, renderRowAddon, onGoToRef, hideExamples, renderRootTreeLines, nodeHasChanged } =
-      useJSVOptionsContext();
+  ({ schemaNode, nestingLevel, pl, parentNodeId, parentChangeType }) => {
+    const {
+      defaultExpandedDepth,
+      renderRowAddon,
+      onGoToRef,
+      hideExamples,
+      renderRootTreeLines,
+      nodeHasChanged,
+      viewMode,
+    } = useJSVOptionsContext();
 
     const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
 
@@ -50,7 +49,8 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
 
     // @ts-expect-error originalFragment does exist...
     const originalNodeId = schemaNode.originalFragment?.$ref ? getOriginalNodeId(schemaNode, parentNodeId) : nodeId;
-    const hasChanged = nodeHasChanged?.({ nodeId: originalNodeId });
+    const mode = viewMode === 'standalone' ? undefined : viewMode;
+    const hasChanged = nodeHasChanged?.({ nodeId: originalNodeId, mode });
 
     const [isExpanded, setExpanded] = React.useState<boolean>(
       !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
@@ -103,6 +103,14 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
       }
     }
 
+    if (parentChangeType === 'added' && hasChanged && hasChanged.type === 'removed') {
+      return null;
+    }
+
+    if (parentChangeType === 'removed' && hasChanged && hasChanged.type === 'added') {
+      return null;
+    }
+
     return (
       <>
         <Flex
@@ -118,7 +126,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
         >
           {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}
 
-          <ChangeAnnotation change={hasChanged} style={{ left: annotationLeftOffset }} />
+          {parentChangeType !== 'added' && parentChangeType !== 'removed' ? (
+            <NodeAnnotation change={hasChanged} style={{ left: annotationLeftOffset }} />
+          ) : null}
 
           <VStack spacing={1} maxW="full" flex={1} ml={isCollapsible && !isRootLevel ? 2 : undefined}>
             <Flex
@@ -209,45 +219,13 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
             childNodes={childNodes}
             currentNestingLevel={nestingLevel}
             parentNodeId={nodeId}
+            parentChangeType={parentChangeType ? parentChangeType : hasChanged ? hasChanged?.type : undefined}
           />
         ) : null}
       </>
     );
   },
 );
-
-const ChangeAnnotation = ({ change, ...props }: { change?: ReturnType<NodeHasChangedFn> } & BoxProps<'div'>) => {
-  if (!change) return null;
-
-  const { style = {}, ...rest } = props;
-
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const selfAffected = change.selfAffected || change.type === 'added' || change.type === 'removed';
-
-  return (
-    <Box
-      w={1.5}
-      pos="absolute"
-      pinY="px"
-      bg={selfAffected ? ChangeTypeToColor[change.type] : undefined}
-      rounded
-      style={{
-        ...style,
-        borderWidth: 2,
-        borderColor: selfAffected ? 'transparent' : ChangeTypeToColor[change.type],
-      }}
-      {...rest}
-    >
-      <Box pos="absolute" right={3} pinY fontSize="lg" display="flex" alignItems="center">
-        {change.isBreaking ? (
-          <Box color="danger">
-            <Icon icon={[selfAffected ? 'fas' : 'far', 'exclamation-circle']} />
-          </Box>
-        ) : null}
-      </Box>
-    </Box>
-  );
-};
 
 const Divider = ({ atom }: { atom: Atom<boolean> }) => {
   const isHovering = useAtomValue(atom);

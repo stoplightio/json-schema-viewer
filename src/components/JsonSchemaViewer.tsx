@@ -13,7 +13,7 @@ import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
-import type { DiffRenderer, JSONSchema } from '../types';
+import type { JSONSchema } from '../types';
 import { PathCrumbs } from './PathCrumbs';
 import { TopLevelSchemaRow } from './SchemaRow';
 import { hoveredNodeAtom } from './SchemaRow/state';
@@ -26,7 +26,7 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   onTreePopulated?: (props: { rootNode: RootNode; nodeCount: number }) => void;
   maxHeight?: number;
   parentCrumbs?: string[];
-} & DiffRenderer;
+};
 
 const JsonSchemaViewerComponent = ({
   viewMode = 'standalone',

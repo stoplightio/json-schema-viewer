@@ -1,9 +1,9 @@
+import type { NodeHasChangedFn } from '@stoplight/types';
 import { Story } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
 import React from 'react';
 
 import { JsonSchemaProps, JsonSchemaViewer } from '../components/JsonSchemaViewer';
-import { NodeHasChangedFn } from '../types';
 
 const defaultSchema = require('../__fixtures__/default-schema.json');
 const simpleExample = require('../__fixtures__/diff/simple-example.json');

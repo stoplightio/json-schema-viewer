@@ -1,5 +1,6 @@
 import { SchemaNode } from '@stoplight/json-schema-tree';
 import { Box, SpaceVals } from '@stoplight/mosaic';
+import type { ChangeType } from '@stoplight/types';
 import * as React from 'react';
 
 import { NESTING_OFFSET } from '../../consts';
@@ -13,10 +14,18 @@ type ChildStackProps = {
   className?: string;
   parentNodeId?: string;
   RowComponent?: React.FC<SchemaRowProps>;
+  parentChangeType?: ChangeType;
 };
 
 export const ChildStack = React.memo(
-  ({ childNodes, currentNestingLevel, className, RowComponent = SchemaRow, parentNodeId }: ChildStackProps) => {
+  ({
+    childNodes,
+    currentNestingLevel,
+    className,
+    RowComponent = SchemaRow,
+    parentNodeId,
+    parentChangeType,
+  }: ChildStackProps) => {
     const { renderRootTreeLines } = useJSVOptionsContext();
     const rootLevel = renderRootTreeLines ? 0 : 1;
     const isRootLevel = currentNestingLevel < rootLevel;
@@ -41,6 +50,7 @@ export const ChildStack = React.memo(
             nestingLevel={currentNestingLevel + 1}
             pl={isRootLevel ? undefined : NESTING_OFFSET}
             parentNodeId={parentNodeId}
+            parentChangeType={parentChangeType}
           />
         ))}
       </Box>

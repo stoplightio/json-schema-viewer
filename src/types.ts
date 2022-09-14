@@ -14,13 +14,3 @@ export type RowAddonRenderer = (props: SchemaRowProps) => React.ReactNode;
 export type ViewMode = 'read' | 'write' | 'standalone';
 
 export type JSONSchema = JSONSchema4 | JSONSchema6 | JSONSchema7;
-
-export type ChangeType = 'added' | 'modified' | 'removed';
-export type NodeHasChangedFn = (props: {
-  path?: readonly string[];
-  nodeId?: string;
-}) => false | { type: ChangeType; selfAffected?: boolean; isBreaking?: boolean };
-
-export type DiffRenderer = {
-  nodeHasChanged?: NodeHasChangedFn;
-};
