@@ -88,7 +88,11 @@ export const TopLevelSchemaRow = ({
             currentNestingLevel={nestingLevel}
             parentNodeId={nodeId}
           />
-        ) : null}
+        ) : combiner ? <SchemaRow
+                         schemaNode={selectedChoice.type}
+                         nestingLevel={nestingLevel} /> : null
+
+        }
       </>
     );
   }
