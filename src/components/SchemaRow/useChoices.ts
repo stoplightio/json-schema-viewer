@@ -18,7 +18,7 @@ function calculateChoiceTitle(node: SchemaNode, isPlural: boolean): string {
     if (realName) {
       return realName;
     }
-    return node.primaryType !== null ? node.primaryType + primitiveSuffix : node.originalFragment.title as string || 'any';
+    return node.primaryType !== null ? node.primaryType + primitiveSuffix : String(node.originalFragment.title || 'any');
   }
   if (isReferenceNode(node)) {
     if (node.value) {
