@@ -36,5 +36,8 @@ OneOfMulti.args = { schema: oneOfWithMultiTypesSchema, renderRootTreeLines: true
 export const ArrayOneOf2 = Template.bind({});
 ArrayOneOf2.args = { schema: oneOfWithArraySchema2 as JSONSchema4, renderRootTreeLines: true };
 
+export const OneOfMulti = Template.bind({});
+OneOfMulti.args = { schema: oneOfWithMultiTypesSchema, renderRootTreeLines: true };
+
 export const ObjectAnyOf = Template.bind({});
 ObjectAnyOf.args = { schema: anyOfObject as JSONSchema4 };

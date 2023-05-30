@@ -330,6 +330,13 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
         </div>
         <div>(one of)</div>
       </div>
+      <div data-id=\\"b55b1e932485c\\">
+        <div>
+          <div>
+            <div><span>array[string]</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
