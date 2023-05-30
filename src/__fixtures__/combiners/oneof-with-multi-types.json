@@ -1,0 +1,54 @@
+{
+  "title": "a",
+  "oneOf": [
+    {
+      "title": "b",
+      "type": "object",
+      "properties": {
+        "c": {
+          "title": "d",
+          "type": "string"
+        },
+        "e": {
+          "title": "e",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "f",
+      "type": "boolean"
+    },
+    {
+      "title": "g",
+      "oneOf": [
+        {
+          "title": "h",
+          "type": "string"
+        },
+        {
+          "title": "l",
+          "type": "object",
+          "properties": {
+            "foo": {
+              "title": "k",
+              "oneOf": [
+                {
+                  "title": "m",
+                  "type": "string"
+                },
+                {
+                  "title": "o",
+                  "type": "object",
+                  "properties": {
+                    "foo": { "type": "string" }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
