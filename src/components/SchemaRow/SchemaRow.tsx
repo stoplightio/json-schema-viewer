@@ -1,12 +1,5 @@
-import {
-  isMirroredNode,
-  isReferenceNode,
-  isRegularNode,
-  ReferenceNode,
-  SchemaNode,
-  SchemaNodeKind,
-} from '@stoplight/json-schema-tree';
-import { Box, Flex, Icon, NodeAnnotation, Select, SpaceVals, VStack } from '@stoplight/mosaic';
+import { isMirroredNode, isReferenceNode, isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
+import { Box, Flex, NodeAnnotation, Select, SpaceVals, VStack } from '@stoplight/mosaic';
 import type { ChangeType } from '@stoplight/types';
 import { Atom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
@@ -16,9 +9,10 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { getNodeId, getOriginalNodeId } from '../../hash';
-import { calculateChildrenToShow, isFlattenableNode, isPropertyRequired } from '../../tree';
-import { Caret, Description, getInternalSchemaError, getValidationsFromSchema, Types, Validations } from '../shared';
+import { calculateChildrenToShow, isPropertyRequired } from '../../tree';
+import { Caret, Description, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
+import { Error } from '../shared/Error';
 import { Properties, useHasProperties } from '../shared/Properties';
 import { hoveredNodeAtom, isNodeHoveredAtom } from './state';
 import { useChoices } from './useChoices';
@@ -60,24 +54,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const typeToShow = selectedChoice.type;
     const description = isRegularNode(typeToShow) ? typeToShow.annotations.description : null;
 
-    const refNode = React.useMemo<ReferenceNode | null>(() => {
-      if (isReferenceNode(schemaNode)) {
-        return schemaNode;
-      }
-
-      if (
-        isRegularNode(schemaNode) &&
-        (isFlattenableNode(schemaNode) ||
-          (schemaNode.primaryType === SchemaNodeKind.Array && schemaNode.children?.length === 1))
-      ) {
-        return (schemaNode.children?.find(isReferenceNode) as ReferenceNode | undefined) ?? null;
-      }
-
-      return null;
-    }, [schemaNode]);
-
-    const isBrokenRef = typeof refNode?.error === 'string';
-
     const rootLevel = renderRootTreeLines ? 1 : 2;
     const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
     const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
@@ -88,8 +64,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const deprecated = isRegularNode(schemaNode) && schemaNode.deprecated;
     const validations = isRegularNode(schemaNode) ? schemaNode.validations : {};
     const hasProperties = useHasProperties({ required, deprecated, validations });
-
-    const internalSchemaError = getInternalSchemaError(schemaNode);
 
     const annotationRootOffset = renderRootTreeLines ? 0 : 8;
     let annotationLeftOffset = -20 - annotationRootOffset;
@@ -199,20 +173,12 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
               validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}}
               hideExamples={hideExamples}
             />
-
-            {(isBrokenRef || internalSchemaError.hasError) && (
-              <Icon
-                title={refNode?.error! || internalSchemaError.error}
-                color="danger"
-                icon={['fas', 'exclamation-triangle']}
-                size="sm"
-              />
-            )}
           </VStack>
+
+          <Error schemaNode={schemaNode} />
 
           {renderRowAddon ? <Box>{renderRowAddon({ schemaNode, nestingLevel })}</Box> : null}
         </Flex>
-
         {isCollapsible && isExpanded ? (
           <ChildStack
             schemaNode={schemaNode}

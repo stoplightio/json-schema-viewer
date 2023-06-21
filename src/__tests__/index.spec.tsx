@@ -685,6 +685,7 @@ describe('$ref resolving', () => {
                   <div><span>$ref(#/foo)[]</span></div>
                 </div>
               </div>
+              <span></span>
             </div>
             <div data-level=\\"0\\">
               <div data-id=\\"98538b996305d\\">
@@ -693,6 +694,7 @@ describe('$ref resolving', () => {
                     <div><span>#/foo</span></div>
                   </div>
                 </div>
+                <span></span>
               </div>
             </div>
           </div>
