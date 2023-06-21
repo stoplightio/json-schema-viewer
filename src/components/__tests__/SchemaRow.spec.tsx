@@ -30,7 +30,7 @@ describe('SchemaRow component', () => {
 
     it('given no custom resolver, should render a generic error message', () => {
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(1)).toHaveProp('title', `Could not resolve '#/properties/foo'`);
+      expect(wrapper.find(Icon).at(1)).toHaveProp('aria-label', `Could not resolve '#/properties/foo'`);
       wrapper.unmount();
     });
 
@@ -44,7 +44,7 @@ describe('SchemaRow component', () => {
       });
 
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(1)).toHaveProp('title', message);
+      expect(wrapper.find(Icon).at(1)).toHaveProp('aria-label', message);
       wrapper.unmount();
     });
   });
@@ -53,7 +53,7 @@ describe('SchemaRow component', () => {
     let tree: RootNode;
     let schema: JSONSchema4;
 
-    it('given an object schema is marked as internal, a permission denied error messsage should be shown', () => {
+    it('given an object schema is marked as internal, a permission denied error message should be shown', () => {
       schema = {
         type: 'object',
         'x-sl-internally-excluded': true,
@@ -61,7 +61,7 @@ describe('SchemaRow component', () => {
       };
       tree = buildTree(schema);
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
       wrapper.unmount();
     });
 
@@ -73,7 +73,7 @@ describe('SchemaRow component', () => {
       };
       tree = buildTree(schema);
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
       wrapper.unmount();
     });
 
@@ -85,7 +85,7 @@ describe('SchemaRow component', () => {
       };
       tree = buildTree(schema);
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
       wrapper.unmount();
     });
 
@@ -97,7 +97,7 @@ describe('SchemaRow component', () => {
       };
       tree = buildTree(schema);
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
       wrapper.unmount();
     });
 
@@ -109,7 +109,7 @@ describe('SchemaRow component', () => {
       };
       tree = buildTree(schema);
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
       wrapper.unmount();
     });
 
@@ -125,7 +125,7 @@ describe('SchemaRow component', () => {
       };
       tree = buildTree(schema);
       const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('title', `You do not have permission to view this reference`);
+      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
       wrapper.unmount();
     });
   });

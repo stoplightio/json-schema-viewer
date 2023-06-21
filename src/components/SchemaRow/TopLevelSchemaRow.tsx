@@ -9,7 +9,7 @@ import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
 import { Description } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
-import { getInternalSchemaError } from '../shared/Validations';
+import { Error } from '../shared/Error';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
 import { useChoices } from './useChoices';
 
@@ -23,8 +23,6 @@ export const TopLevelSchemaRow = ({
 
   const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
 
-  const internalSchemaError = getInternalSchemaError(schemaNode);
-
   // regular objects are flattened at the top level
   if (isRegularNode(schemaNode) && isPureObjectNode(schemaNode)) {
     return (
@@ -37,9 +35,7 @@ export const TopLevelSchemaRow = ({
           currentNestingLevel={nestingLevel}
           parentNodeId={nodeId}
         />
-        {internalSchemaError.hasError && (
-          <Icon title={internalSchemaError.error} color="danger" icon={['fas', 'exclamation-triangle']} size="sm" />
-        )}
+        <Error schemaNode={schemaNode} />
       </>
     );
   }
