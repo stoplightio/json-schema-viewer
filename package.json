@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@stoplight/json": "^3.20.1",
-    "@stoplight/json-schema-tree": "^2.2.2",
+    "@stoplight/json-schema-tree": "^2.2.4",
     "@stoplight/react-error-boundary": "^2.0.0",
     "@types/json-schema": "^7.0.7",
     "classnames": "^2.2.6",
