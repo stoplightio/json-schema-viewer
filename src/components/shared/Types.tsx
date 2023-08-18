@@ -61,7 +61,7 @@ function getFormats(schemaNode: RegularNode): Partial<Record<SchemaNodeKind, str
 export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
   if (isReferenceNode(schemaNode)) {
     return (
-      <Box as="span" textOverflow="truncate">
+      <Box as="span" textOverflow="truncate" data-test="property-type-ref">
         {schemaNode.value ?? '$ref'}
       </Box>
     );
@@ -80,7 +80,7 @@ export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ sch
 
   const rendered = types.map((type, i, { length }) => (
     <React.Fragment key={type}>
-      <Box as="span" textOverflow="truncate" color="muted">
+      <Box as="span" textOverflow="truncate" color="muted" data-test="property-type">
         {shouldRenderName(type) ? printName(schemaNode) ?? type : type}
       </Box>
 

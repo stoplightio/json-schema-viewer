@@ -29,11 +29,11 @@ export const Properties: React.FunctionComponent<IProperties> = ({
   const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
   const visibility = showVisibilityValidations ? (
     readOnly ? (
-      <Box as="span" ml={2} color="muted">
+      <Box as="span" ml={2} color="muted" data-test="property-read-only">
         read-only
       </Box>
     ) : (
-      <Box as="span" ml={2} color="muted">
+      <Box as="span" ml={2} color="muted" data-test="property-write-only">
         write-only
       </Box>
     )
@@ -42,13 +42,13 @@ export const Properties: React.FunctionComponent<IProperties> = ({
   return (
     <>
       {deprecated ? (
-        <Box as="span" ml={2} color="warning">
+        <Box as="span" ml={2} color="warning" data-test="property-deprecated">
           deprecated
         </Box>
       ) : null}
       {visibility}
       {required && (
-        <Box as="span" ml={2} color="warning">
+        <Box as="span" ml={2} color="warning" data-test="property-required">
           required
         </Box>
       )}

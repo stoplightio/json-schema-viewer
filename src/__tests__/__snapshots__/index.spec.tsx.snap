@@ -6,24 +6,24 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div data-id=\\"3cbab69efa81f\\">
+        <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>bar</div>
-                <span>object</span>
+                <div data-test=\\"property-name-bar\\">bar</div>
+                <span data-test=\\"property-type\\">object</span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"862ab7c3a6663\\">
+        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>foo</div>
-                <span>array[object]</span>
+                <div data-test=\\"property-name-foo\\">foo</div>
+                <span data-test=\\"property-type\\">array[object]</span>
               </div>
             </div>
           </div>
@@ -41,83 +41,83 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div data-id=\\"3cbab69efa81f\\">
+        <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>bar</div>
-                <span>object</span>
+                <div data-test=\\"property-name-bar\\">bar</div>
+                <span data-test=\\"property-type\\">object</span>
               </div>
             </div>
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div data-id=\\"12aba6f44026c\\">
+          <div data-id=\\"12aba6f44026c\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div role=\\"button\\"></div>
                 <div>
-                  <div>barFoo</div>
-                  <span>object</span>
+                  <div data-test=\\"property-name-barFoo\\">barFoo</div>
+                  <span data-test=\\"property-type\\">object</span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"073ba5acf896f\\">
+          <div data-id=\\"073ba5acf896f\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>barBar</div>
-                  <span>string</span>
+                  <div data-test=\\"property-name-barBar\\">barBar</div>
+                  <span data-test=\\"property-type\\">string</span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"07bba5acf9ef7\\">
+          <div data-id=\\"07bba5acf9ef7\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>barBaz</div>
-                  <span>boolean</span>
+                  <div data-test=\\"property-name-barBaz\\">barBaz</div>
+                  <span data-test=\\"property-type\\">boolean</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"862ab7c3a6663\\">
+        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>foo</div>
-                <span>array[object]</span>
+                <div data-test=\\"property-name-foo\\">foo</div>
+                <span data-test=\\"property-type\\">array[object]</span>
               </div>
             </div>
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div data-id=\\"ae9fe22da9a31\\">
+          <div data-id=\\"ae9fe22da9a31\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>fooBar</div>
-                  <span>string</span>
+                  <div data-test=\\"property-name-fooBar\\">fooBar</div>
+                  <span data-test=\\"property-type\\">string</span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"240fe113d2860\\">
+          <div data-id=\\"240fe113d2860\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>fooFoo</div>
-                  <span>number</span>
+                  <div data-test=\\"property-name-fooFoo\\">fooFoo</div>
+                  <span data-test=\\"property-type\\">number</span>
                 </div>
               </div>
             </div>
@@ -136,96 +136,96 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div data-id=\\"3cbab69efa81f\\">
+        <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>bar</div>
-                <span>object</span>
+                <div data-test=\\"property-name-bar\\">bar</div>
+                <span data-test=\\"property-type\\">object</span>
               </div>
             </div>
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div data-id=\\"12aba6f44026c\\">
+          <div data-id=\\"12aba6f44026c\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div role=\\"button\\"></div>
                 <div>
-                  <div>barFoo</div>
-                  <span>object</span>
+                  <div data-test=\\"property-name-barFoo\\">barFoo</div>
+                  <span data-test=\\"property-type\\">object</span>
                 </div>
               </div>
             </div>
           </div>
           <div data-level=\\"2\\">
-            <div data-id=\\"d768172596c01\\">
+            <div data-id=\\"d768172596c01\\" data-test=\\"schema-row\\">
               <div></div>
               <div>
                 <div>
                   <div>
-                    <div>barFooBar</div>
-                    <span>object</span>
+                    <div data-test=\\"property-name-barFooBar\\">barFooBar</div>
+                    <span data-test=\\"property-type\\">object</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"073ba5acf896f\\">
+          <div data-id=\\"073ba5acf896f\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>barBar</div>
-                  <span>string</span>
+                  <div data-test=\\"property-name-barBar\\">barBar</div>
+                  <span data-test=\\"property-type\\">string</span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"07bba5acf9ef7\\">
+          <div data-id=\\"07bba5acf9ef7\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>barBaz</div>
-                  <span>boolean</span>
+                  <div data-test=\\"property-name-barBaz\\">barBaz</div>
+                  <span data-test=\\"property-type\\">boolean</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"862ab7c3a6663\\">
+        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>foo</div>
-                <span>array[object]</span>
+                <div data-test=\\"property-name-foo\\">foo</div>
+                <span data-test=\\"property-type\\">array[object]</span>
               </div>
             </div>
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div data-id=\\"ae9fe22da9a31\\">
+          <div data-id=\\"ae9fe22da9a31\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>fooBar</div>
-                  <span>string</span>
+                  <div data-test=\\"property-name-fooBar\\">fooBar</div>
+                  <span data-test=\\"property-type\\">string</span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"240fe113d2860\\">
+          <div data-id=\\"240fe113d2860\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>fooFoo</div>
-                  <span>number</span>
+                  <div data-test=\\"property-name-fooFoo\\">fooFoo</div>
+                  <span data-test=\\"property-type\\">number</span>
                 </div>
               </div>
             </div>
@@ -251,17 +251,17 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
         <div>(any of)</div>
       </div>
       <div data-level=\\"0\\">
-        <div data-id=\\"4a8da9be0aedc\\">
+        <div data-id=\\"4a8da9be0aedc\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>type</div>
-                <span>string</span>
+                <div data-test=\\"property-name-type\\">type</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
               <div></div>
-              <span>required</span>
+              <span data-test=\\"property-required\\">required</span>
             </div>
-            <div>
+            <div data-test=\\"property-validation\\">
               <span>Allowed values:</span>
               <div style=\\"gap: 4px\\">
                 <span>admin</span>
@@ -270,43 +270,43 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div data-id=\\"e2533efaa39da\\">
+        <div data-id=\\"e2533efaa39da\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>enabled</div>
-                <span>boolean</span>
+                <div data-test=\\"property-name-enabled\\">enabled</div>
+                <span data-test=\\"property-type\\">boolean</span>
               </div>
             </div>
             <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
           </div>
         </div>
-        <div data-id=\\"bd5c934660dce\\">
+        <div data-id=\\"bd5c934660dce\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>root</div>
-                <span>boolean</span>
+                <div data-test=\\"property-name-root\\">root</div>
+                <span data-test=\\"property-type\\">boolean</span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b0aa37b59ceff\\">
+        <div data-id=\\"b0aa37b59ceff\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>group</div>
-                <span>string</span>
+                <div data-test=\\"property-name-group\\">group</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b6d786a9b103c\\">
+        <div data-id=\\"b6d786a9b103c\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>expirationDate</div>
-                <span>string</span>
+                <div data-test=\\"property-name-expirationDate\\">expirationDate</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
@@ -330,10 +330,10 @@ exports[`HTML Output given array with oneOf containing items, should merge it co
         </div>
         <div>(one of)</div>
       </div>
-      <div data-id=\\"b55b1e932485c\\">
+      <div data-id=\\"b55b1e932485c\\" data-test=\\"schema-row\\">
         <div>
           <div>
-            <div><span>array[string]</span></div>
+            <div><span data-test=\\"property-type\\">array[string]</span></div>
           </div>
         </div>
       </div>
@@ -349,15 +349,15 @@ exports[`HTML Output given complex type that includes array and complex array su
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div data-id=\\"231c8499288a6\\">
+        <div data-id=\\"231c8499288a6\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>items</div>
+                <div data-test=\\"property-name-items\\">items</div>
                 <div>
-                  <span>null</span>
+                  <span data-test=\\"property-type\\">null</span>
                   <span>or</span>
-                  <span>array[string or number]</span>
+                  <span data-test=\\"property-type\\">array[string or number]</span>
                 </div>
               </div>
             </div>
@@ -381,27 +381,27 @@ exports[`HTML Output given multiple object and string type, should process prope
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div data-id=\\"bf8b96e78f11d\\">
+      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
             <div>
               <div>
-                <span>string</span>
+                <span data-test=\\"property-type\\">string</span>
                 <span>or</span>
-                <span>object</span>
+                <span data-test=\\"property-type\\">object</span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div data-id=\\"2a0059431a56c\\">
+        <div data-id=\\"2a0059431a56c\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>ids</div>
-                <span>array[integer]</span>
+                <div data-test=\\"property-name-ids\\">ids</div>
+                <span data-test=\\"property-type\\">array[integer]</span>
               </div>
             </div>
           </div>
@@ -426,17 +426,17 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
         <div>(one of)</div>
       </div>
       <div data-level=\\"0\\">
-        <div data-id=\\"4a8da9be0aedc\\">
+        <div data-id=\\"4a8da9be0aedc\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>type</div>
-                <span>string</span>
+                <div data-test=\\"property-name-type\\">type</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
               <div></div>
-              <span>required</span>
+              <span data-test=\\"property-required\\">required</span>
             </div>
-            <div>
+            <div data-test=\\"property-validation\\">
               <span>Allowed values:</span>
               <div style=\\"gap: 4px\\">
                 <span>admin</span>
@@ -445,43 +445,43 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
             </div>
           </div>
         </div>
-        <div data-id=\\"e2533efaa39da\\">
+        <div data-id=\\"e2533efaa39da\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>enabled</div>
-                <span>boolean</span>
+                <div data-test=\\"property-name-enabled\\">enabled</div>
+                <span data-test=\\"property-type\\">boolean</span>
               </div>
             </div>
             <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
           </div>
         </div>
-        <div data-id=\\"bd5c934660dce\\">
+        <div data-id=\\"bd5c934660dce\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>root</div>
-                <span>boolean</span>
+                <div data-test=\\"property-name-root\\">root</div>
+                <span data-test=\\"property-type\\">boolean</span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b0aa37b59ceff\\">
+        <div data-id=\\"b0aa37b59ceff\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>group</div>
-                <span>string</span>
+                <div data-test=\\"property-name-group\\">group</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b6d786a9b103c\\">
+        <div data-id=\\"b6d786a9b103c\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>expirationDate</div>
-                <span>string</span>
+                <div data-test=\\"property-name-expirationDate\\">expirationDate</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
@@ -498,27 +498,27 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div data-id=\\"bf8b96e78f11d\\">
+      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
             <div>
               <div>
-                <span>string</span>
+                <span data-test=\\"property-type\\">string</span>
                 <span>or</span>
-                <span>object</span>
+                <span data-test=\\"property-type\\">object</span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div data-id=\\"f19a0161d8b16\\">
+        <div data-id=\\"f19a0161d8b16\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>id</div>
-                <span>string</span>
+                <div data-test=\\"property-name-id\\">id</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
@@ -535,42 +535,42 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div data-id=\\"bf8b96e78f11d\\">
+      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
             <div>
               <div>
-                <span>string</span>
+                <span data-test=\\"property-type\\">string</span>
                 <span>or</span>
-                <span>object</span>
+                <span data-test=\\"property-type\\">object</span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div data-id=\\"f19a0161d8b16\\">
+        <div data-id=\\"f19a0161d8b16\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>id</div>
-                <span>string</span>
+                <div data-test=\\"property-name-id\\">id</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
               <div></div>
-              <span>read-only</span>
+              <span data-test=\\"property-read-only\\">read-only</span>
             </div>
           </div>
         </div>
-        <div data-id=\\"78328d924d5b6\\">
+        <div data-id=\\"78328d924d5b6\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>description</div>
-                <span>string</span>
+                <div data-test=\\"property-name-description\\">description</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
               <div></div>
-              <span>write-only</span>
+              <span data-test=\\"property-write-only\\">write-only</span>
             </div>
           </div>
         </div>
@@ -587,37 +587,37 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div data-id=\\"862ab7c3a6663\\">
+        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>foo</div>
-                <span>User</span>
+                <div data-test=\\"property-name-foo\\">foo</div>
+                <span data-test=\\"property-type\\">User</span>
               </div>
             </div>
           </div>
         </div>
         <div data-level=\\"1\\">
-          <div data-id=\\"c098fbf9b1d2f\\">
+          <div data-id=\\"c098fbf9b1d2f\\" data-test=\\"schema-row\\">
             <div></div>
             <div>
               <div>
                 <div>
-                  <div>name</div>
-                  <span>string</span>
+                  <div data-test=\\"property-name-name\\">name</div>
+                  <span data-test=\\"property-type\\">string</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"621e12cb0db5c\\">
+        <div data-id=\\"621e12cb0db5c\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div role=\\"button\\"></div>
               <div>
-                <div>user</div>
-                <span>User</span>
+                <div data-test=\\"property-name-user\\">user</div>
+                <span data-test=\\"property-type\\">User</span>
               </div>
             </div>
           </div>
@@ -634,27 +634,27 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div data-id=\\"bf8b96e78f11d\\">
+      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
         <div>
           <div>
             <div role=\\"button\\"></div>
             <div>
               <div>
-                <span>string</span>
+                <span data-test=\\"property-type\\">string</span>
                 <span>or</span>
-                <span>object</span>
+                <span data-test=\\"property-type\\">object</span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div data-level=\\"0\\">
-        <div data-id=\\"78328d924d5b6\\">
+        <div data-id=\\"78328d924d5b6\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>description</div>
-                <span>string</span>
+                <div data-test=\\"property-name-description\\">description</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
@@ -672,22 +672,22 @@ exports[`HTML Output top level descriptions should not render top-level descript
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
       <div data-level=\\"0\\">
-        <div data-id=\\"862ab7c3a6663\\">
+        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>foo</div>
-                <span>string</span>
+                <div data-test=\\"property-name-foo\\">foo</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"3d3ab69efb5e7\\">
+        <div data-id=\\"3d3ab69efb5e7\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>baz</div>
-                <span>string</span>
+                <div data-test=\\"property-name-baz\\">baz</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
@@ -706,22 +706,22 @@ exports[`HTML Output top level descriptions should render top-level description 
       <div></div>
       <div style=\\"font-size: 12px\\"><p>This is a description that should be rendered</p></div>
       <div data-level=\\"0\\">
-        <div data-id=\\"862ab7c3a6663\\">
+        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>foo</div>
-                <span>string</span>
+                <div data-test=\\"property-name-foo\\">foo</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"3d3ab69efb5e7\\">
+        <div data-id=\\"3d3ab69efb5e7\\" data-test=\\"schema-row\\">
           <div>
             <div>
               <div>
-                <div>baz</div>
-                <span>string</span>
+                <div data-test=\\"property-name-baz\\">baz</div>
+                <span data-test=\\"property-type\\">string</span>
               </div>
             </div>
           </div>

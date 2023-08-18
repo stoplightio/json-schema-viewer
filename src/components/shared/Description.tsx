@@ -26,6 +26,7 @@ export const Description: React.FunctionComponent<{ value: unknown }> = ({ value
   return (
     <Box
       as={MarkdownViewer}
+      data-test="property-description"
       markdown={firstParagraph}
       parseOptions={{
         components: {
