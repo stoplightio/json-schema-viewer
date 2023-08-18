@@ -6,5 +6,5 @@ type FormatProps = {
 };
 
 export const Format: React.FunctionComponent<FormatProps> = ({ format }) => {
-  return <Box as="span" color="muted">{`<${format}>`}</Box>;
+  return <Box as="span" color="muted" data-test="property-type-format">{`<${format}>`}</Box>;
 };

@@ -132,7 +132,7 @@ const NumberValidations = ({
     return null;
   }
   return (
-    <HStack color="muted" maxW="full" spacing={1}>
+    <HStack color="muted" maxW="full" spacing={1} data-test="property-validation">
       {entries
         .map(([key, value]) => numberValidationFormatters[key](value))
         .map((value, i) => (
@@ -159,7 +159,7 @@ const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown>
 
 const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
-    <HStack color="muted" spacing={2} alignItems="baseline">
+    <HStack color="muted" spacing={2} alignItems="baseline" data-test="property-validation">
       <Text>{capitalize(name)}:</Text>
 
       <Flex flexWrap flex={1} style={{ gap: 4 }}>

@@ -262,13 +262,13 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div data-id=\\"862ab7c3a6663\\">
+                  <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>foo</div>
-                          <span>array[object]</span>
+                          <div data-test=\\"property-name-foo\\">foo</div>
+                          <span data-test=\\"property-type\\">array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -291,13 +291,13 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div data-id=\\"862ab7c3a6663\\">
+                  <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>foo</div>
-                          <span>array[object]</span>
+                          <div data-test=\\"property-name-foo\\">foo</div>
+                          <span data-test=\\"property-type\\">array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -320,26 +320,26 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div data-id=\\"862ab7c3a6663\\">
+                  <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>foo</div>
-                          <span>array[object]</span>
+                          <div data-test=\\"property-name-foo\\">foo</div>
+                          <span data-test=\\"property-type\\">array[object]</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div data-level=\\"1\\">
-                    <div data-id=\\"f1c21cde4de6f\\">
+                    <div data-id=\\"f1c21cde4de6f\\" data-test=\\"schema-row\\">
                       <div></div>
                       <div>
                         <div>
                           <div role=\\"button\\"></div>
                           <div>
-                            <div>bar</div>
-                            <span>object</span>
+                            <div data-test=\\"property-name-bar\\">bar</div>
+                            <span data-test=\\"property-type\\">object</span>
                           </div>
                         </div>
                       </div>
@@ -397,23 +397,23 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div data-id=\\"3cbab69efa81f\\">
+                  <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div>
-                          <div>bar</div>
-                          <span>integer</span>
+                          <div data-test=\\"property-name-bar\\">bar</div>
+                          <span data-test=\\"property-type\\">integer</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div data-id=\\"862ab7c3a6663\\">
+                  <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>foo</div>
-                          <span>array[object]</span>
+                          <div data-test=\\"property-name-foo\\">foo</div>
+                          <span data-test=\\"property-type\\">array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -436,23 +436,23 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div data-id=\\"3cbab69efa81f\\">
+                  <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div>
-                          <div>bar</div>
-                          <span>integer</span>
+                          <div data-test=\\"property-name-bar\\">bar</div>
+                          <span data-test=\\"property-type\\">integer</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div data-id=\\"862ab7c3a6663\\">
+                  <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>foo</div>
-                          <span>array[object]</span>
+                          <div data-test=\\"property-name-foo\\">foo</div>
+                          <span data-test=\\"property-type\\">array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -475,46 +475,46 @@ describe('Expanded depth', () => {
                 <div></div>
                 <div>array of:</div>
                 <div data-level=\\"0\\">
-                  <div data-id=\\"3cbab69efa81f\\">
+                  <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div>
-                          <div>bar</div>
-                          <span>integer</span>
+                          <div data-test=\\"property-name-bar\\">bar</div>
+                          <span data-test=\\"property-type\\">integer</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div data-id=\\"862ab7c3a6663\\">
+                  <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>foo</div>
-                          <span>array[object]</span>
+                          <div data-test=\\"property-name-foo\\">foo</div>
+                          <span data-test=\\"property-type\\">array[object]</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div data-level=\\"1\\">
-                    <div data-id=\\"f1c21cde4de6f\\">
+                    <div data-id=\\"f1c21cde4de6f\\" data-test=\\"schema-row\\">
                       <div></div>
                       <div>
                         <div>
                           <div>
-                            <div>bar</div>
-                            <span>string</span>
+                            <div data-test=\\"property-name-bar\\">bar</div>
+                            <span data-test=\\"property-type\\">string</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div data-id=\\"c6321b8d80105\\">
+                    <div data-id=\\"c6321b8d80105\\" data-test=\\"schema-row\\">
                       <div></div>
                       <div>
                         <div>
                           <div>
-                            <div>foo</div>
-                            <span>number</span>
+                            <div data-test=\\"property-name-foo\\">foo</div>
+                            <span data-test=\\"property-type\\">number</span>
                           </div>
                         </div>
                       </div>
@@ -584,24 +584,24 @@ describe('Expanded depth', () => {
               <div class=\\"JsonSchemaViewer\\">
                 <div></div>
                 <div data-level=\\"0\\">
-                  <div data-id=\\"3cbab69efa81f\\">
+                  <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>bar</div>
-                          <span>object</span>
+                          <div data-test=\\"property-name-bar\\">bar</div>
+                          <span data-test=\\"property-type\\">object</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div data-id=\\"862ab7c3a6663\\">
+                  <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
                     <div>
                       <div>
                         <div role=\\"button\\"></div>
                         <div>
-                          <div>foo</div>
-                          <span>array[object]</span>
+                          <div data-test=\\"property-name-foo\\">foo</div>
+                          <span data-test=\\"property-type\\">array[object]</span>
                         </div>
                       </div>
                     </div>
@@ -651,10 +651,10 @@ describe('$ref resolving', () => {
         <div data-overlay-container=\\"true\\">
           <div class=\\"JsonSchemaViewer\\">
             <div></div>
-            <div data-id=\\"bf8b96e78f11d\\">
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
               <div>
                 <div>
-                  <div><span>string</span></div>
+                  <div><span data-test=\\"property-type\\">string</span></div>
                 </div>
               </div>
             </div>
@@ -678,20 +678,20 @@ describe('$ref resolving', () => {
         <div data-overlay-container=\\"true\\">
           <div class=\\"JsonSchemaViewer\\">
             <div></div>
-            <div data-id=\\"bf8b96e78f11d\\">
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
               <div>
                 <div>
                   <div role=\\"button\\"></div>
-                  <div><span>$ref(#/foo)[]</span></div>
+                  <div><span data-test=\\"property-type\\">$ref(#/foo)[]</span></div>
                 </div>
               </div>
               <span></span>
             </div>
             <div data-level=\\"0\\">
-              <div data-id=\\"98538b996305d\\">
+              <div data-id=\\"98538b996305d\\" data-test=\\"schema-row\\">
                 <div>
                   <div>
-                    <div><span>#/foo</span></div>
+                    <div><span data-test=\\"property-type-ref\\">#/foo</span></div>
                   </div>
                 </div>
                 <span></span>

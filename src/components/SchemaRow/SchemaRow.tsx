@@ -92,6 +92,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
           pl={pl}
           py={2}
           data-id={originalNodeId}
+          data-test="schema-row"
           pos="relative"
           onMouseEnter={(e: any) => {
             e.stopPropagation();
@@ -115,7 +116,12 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
 
               <Flex alignItems="baseline" fontSize="base">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-                  <Box mr={2} fontFamily="mono" fontWeight="semibold">
+                  <Box
+                    mr={2}
+                    fontFamily="mono"
+                    fontWeight="semibold"
+                    data-test={`property-name-${last(schemaNode.subpath)}`}
+                  >
                     {last(schemaNode.subpath)}
                   </Box>
                 )}
