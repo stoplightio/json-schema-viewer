@@ -278,7 +278,7 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
                 <span data-test=\\"property-type\\">boolean</span>
               </div>
             </div>
-            <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+            <div data-test=\\"property-description\\" style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
           </div>
         </div>
         <div data-id=\\"bd5c934660dce\\" data-test=\\"schema-row\\">
@@ -361,7 +361,7 @@ exports[`HTML Output given complex type that includes array and complex array su
                 </div>
               </div>
             </div>
-            <div style=\\"font-size: 12px\\">
+            <div data-test=\\"property-description\\" style=\\"font-size: 12px\\">
               <p>
                 This description can be long and should truncate once it reaches the end of the row. If it's not
                 truncating then theres and issue that needs to be fixed. Help!
@@ -453,7 +453,7 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
                 <span data-test=\\"property-type\\">boolean</span>
               </div>
             </div>
-            <div style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+            <div data-test=\\"property-description\\" style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
           </div>
         </div>
         <div data-id=\\"bd5c934660dce\\" data-test=\\"schema-row\\">
@@ -704,7 +704,9 @@ exports[`HTML Output top level descriptions should render top-level description 
   <div data-overlay-container=\\"true\\">
     <div class=\\"JsonSchemaViewer\\">
       <div></div>
-      <div style=\\"font-size: 12px\\"><p>This is a description that should be rendered</p></div>
+      <div data-test=\\"property-description\\" style=\\"font-size: 12px\\">
+        <p>This is a description that should be rendered</p>
+      </div>
       <div data-level=\\"0\\">
         <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
           <div>
