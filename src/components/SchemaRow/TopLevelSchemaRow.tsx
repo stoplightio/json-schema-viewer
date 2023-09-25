@@ -1,13 +1,14 @@
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
+import { isEmpty } from 'lodash';
 import * as React from 'react';
 
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
-import { Description } from '../shared';
+import { Description, getValidationsFromSchema, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Error } from '../shared/Error';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
@@ -92,6 +93,7 @@ export const TopLevelSchemaRow = ({
   }
 
   if (isComplexArray(schemaNode) && isPureObjectNode(schemaNode.children[0])) {
+    const validations = getValidationsFromSchema(schemaNode);
     return (
       <>
         <ScrollCheck />
@@ -100,6 +102,12 @@ export const TopLevelSchemaRow = ({
         <Box fontFamily="mono" fontWeight="semibold" fontSize="base" pb={4}>
           array of:
         </Box>
+
+        {!isEmpty(validations) && (
+          <Box fontSize="sm" mb={1} mt={-2}>
+            <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
+          </Box>
+        )}
 
         {childNodes.length > 0 ? (
           <ChildStack
