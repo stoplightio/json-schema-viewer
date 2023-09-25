@@ -1,7 +1,6 @@
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
-import { isEmpty } from 'lodash';
 import * as React from 'react';
 
 import { COMBINER_NAME_MAP } from '../../consts';
@@ -93,7 +92,7 @@ export const TopLevelSchemaRow = ({
   }
 
   if (isComplexArray(schemaNode) && isPureObjectNode(schemaNode.children[0])) {
-    const validations = getValidationsFromSchema(schemaNode);
+    const validations = isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : null;
     return (
       <>
         <ScrollCheck />
@@ -103,9 +102,9 @@ export const TopLevelSchemaRow = ({
           array of:
         </Box>
 
-        {!isEmpty(validations) && (
+        {validations && (
           <Box fontSize="sm" mb={1} mt={-2}>
-            <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
+            <Validations validations={validations} />
           </Box>
         )}
 
