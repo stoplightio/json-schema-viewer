@@ -93,7 +93,7 @@ export const TopLevelSchemaRow = ({
   }
 
   if (isComplexArray(schemaNode) && isPureObjectNode(schemaNode.children[0])) {
-    const validations = getValidationsFromSchema(schemaNode);
+    const validations = isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {};
     return (
       <>
         <ScrollCheck />
@@ -105,7 +105,7 @@ export const TopLevelSchemaRow = ({
 
         {!isEmpty(validations) && (
           <Box fontSize="sm" mb={1} mt={-2}>
-            <Validations validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}} />
+            <Validations validations={validations} />
           </Box>
         )}
 
