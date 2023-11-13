@@ -9,7 +9,7 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { getNodeId, getOriginalNodeId } from '../../hash';
-import { visibleChildren, isPropertyRequired } from '../../tree';
+import { isPropertyRequired, visibleChildren } from '../../tree';
 import { Caret, Description, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Error } from '../shared/Error';
