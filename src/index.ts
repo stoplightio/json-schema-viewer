@@ -1,2 +1,3 @@
-export { JsonSchemaViewer, Validations } from './components';
+export { Choice, JsonSchemaViewer, useChoices, Validations } from './components';
+export { visibleChildren } from './tree';
 export * from './types';

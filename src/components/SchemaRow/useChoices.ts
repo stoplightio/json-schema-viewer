@@ -6,7 +6,8 @@ import * as React from 'react';
 import { isComplexArray, isNonEmptyParentNode } from '../../tree';
 import { printName } from '../../utils';
 
-type Choice = {
+/** one option among several mutually exclusive sub-schemas */
+export type Choice = {
   title: string;
   type: SchemaNode;
 };
@@ -53,10 +54,11 @@ function makeArrayChoice(node: SchemaNode, combiner?: string): Choice {
 }
 
 /**
- * Calculates type choices for a given node.
+ * Enumerates the sub-schema type for a given node.
  *
- * Usually a node has one choice - only one possible type -, itself.
- * If a node is an oneOf or anyOf combiner, the possible types are the sub-types of the combiner.
+ * Usually a node has one choice, only one possible type: itself. If a node is
+ * a oneOf or anyOf combiner, the possible types are the sub-types of the
+ * combiner.
  */
 export const useChoices = (schemaNode: SchemaNode) => {
   const choices: Choice[] = React.useMemo(() => {
