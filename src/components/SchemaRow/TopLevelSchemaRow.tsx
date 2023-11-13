@@ -20,8 +20,6 @@ export const TopLevelSchemaRow = ({
 }: Pick<SchemaRowProps, 'schemaNode'> & { skipDescription?: boolean }) => {
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const childNodes = React.useMemo(() => visibleChildren(selectedChoice.type), [selectedChoice.type]);
-  // eslint-disable-next-line no-console
-  console.log({ childNodes });
   const nestingLevel = 0;
 
   const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
