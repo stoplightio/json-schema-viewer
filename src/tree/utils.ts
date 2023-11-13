@@ -41,10 +41,11 @@ export function isComplexArray(node: SchemaNode): node is ComplexArrayNode {
 }
 
 /**
- * Returns the children of `node` that should be displayed in the tree.
- * Defaults to `node.children`, except for Arrays that get special handling (flattening).
+ * Returns the children of `node` that should be displayed in a viewer or
+ * editor. Defaults to `node.children`, except for Arrays that get special
+ * handling (flattening).
  */
-export function calculateChildrenToShow(node: SchemaNode): SchemaNode[] {
+export function visibleChildren(node: SchemaNode): SchemaNode[] {
   if (!isRegularNode(node) || isPrimitiveArray(node)) {
     return [];
   }

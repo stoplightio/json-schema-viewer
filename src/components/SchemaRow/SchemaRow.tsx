@@ -9,7 +9,7 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { getNodeId, getOriginalNodeId } from '../../hash';
-import { calculateChildrenToShow, isPropertyRequired } from '../../tree';
+import { isPropertyRequired, visibleChildren } from '../../tree';
 import { Caret, Description, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Error } from '../shared/Error';
@@ -55,7 +55,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const description = isRegularNode(typeToShow) ? typeToShow.annotations.description : null;
 
     const rootLevel = renderRootTreeLines ? 1 : 2;
-    const childNodes = React.useMemo(() => calculateChildrenToShow(typeToShow), [typeToShow]);
+    const childNodes = React.useMemo(() => visibleChildren(typeToShow), [typeToShow]);
     const combiner = isRegularNode(schemaNode) && schemaNode.combiners?.length ? schemaNode.combiners[0] : null;
     const isCollapsible = childNodes.length > 0;
     const isRootLevel = nestingLevel < rootLevel;

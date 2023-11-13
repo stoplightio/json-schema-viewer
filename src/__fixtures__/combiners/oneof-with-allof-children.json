@@ -1,0 +1,44 @@
+{
+  "oneOf": [
+    {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "foo": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "bar": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "baz": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "boggle": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

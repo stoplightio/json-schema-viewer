@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
-import { calculateChildrenToShow, isComplexArray } from '../../tree';
+import { isComplexArray, visibleChildren } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
 import { Description, getValidationsFromSchema, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
@@ -19,7 +19,7 @@ export const TopLevelSchemaRow = ({
   skipDescription,
 }: Pick<SchemaRowProps, 'schemaNode'> & { skipDescription?: boolean }) => {
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
-  const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice.type]);
+  const childNodes = React.useMemo(() => visibleChildren(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
 
   const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
