@@ -23,6 +23,8 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   emptyText?: string;
   className?: string;
   resolveRef?: SchemaTreeRefDereferenceFn;
+  /** Controls the level of recursion of refs. Prevents overly complex trees and running out of stack depth. */
+  maxRefDepth?: number;
   onTreePopulated?: (props: { rootNode: RootNode; nodeCount: number }) => void;
   maxHeight?: number;
   parentCrumbs?: string[];
@@ -80,6 +82,7 @@ const JsonSchemaViewerInner = ({
   viewMode,
   className,
   resolveRef,
+  maxRefDepth,
   emptyText = 'No schema defined',
   onTreePopulated,
   maxHeight,
@@ -91,6 +94,7 @@ const JsonSchemaViewerInner = ({
   | 'viewMode'
   | 'className'
   | 'resolveRef'
+  | 'maxRefDepth'
   | 'emptyText'
   | 'onTreePopulated'
   | 'maxHeight'
@@ -106,6 +110,7 @@ const JsonSchemaViewerInner = ({
     const jsonSchemaTree = new JsonSchemaTree(schema, {
       mergeAllOf: true,
       refResolver: resolveRef,
+      maxRefDepth,
     });
 
     let nodeCount = 0;
@@ -134,7 +139,7 @@ const JsonSchemaViewerInner = ({
       jsonSchemaTreeRoot: jsonSchemaTree.root,
       nodeCount,
     };
-  }, [schema, resolveRef, viewMode]);
+  }, [schema, resolveRef, maxRefDepth, viewMode]);
 
   React.useEffect(() => {
     onTreePopulated?.({
