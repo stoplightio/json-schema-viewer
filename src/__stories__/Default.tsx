@@ -35,7 +35,6 @@ Expansions.args = {
   schema: arrayOfComplexObjects as JSONSchema4,
   renderRootTreeLines: true,
   defaultExpandedDepth: 0,
-  forcedExpandAll: true,
 };
 
 export const ArrayOfObjects = Template.bind({});
