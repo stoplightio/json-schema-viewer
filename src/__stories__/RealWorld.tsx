@@ -1,3 +1,4 @@
+import { Flex } from '@stoplight/mosaic';
 import { Story } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
 import React from 'react';
@@ -7,6 +8,7 @@ import { JsonSchemaProps, JsonSchemaViewer } from '../components/JsonSchemaViewe
 const defaultSchema = require('../__fixtures__/default-schema.json');
 const boxFileSchema = require('../__fixtures__/real-world/box-file.json');
 const githubIssueSchema = require('../__fixtures__/real-world/github-issue.json');
+const extensionsSchema = require('../__fixtures__/real-world/vendor-extensions.json');
 
 export default {
   component: JsonSchemaViewer,
@@ -25,4 +27,18 @@ GithubIssueSchema.args = {
   schema: githubIssueSchema as JSONSchema4,
   parentCrumbs: ['Github', 'Issue'],
   renderRootTreeLines: true,
+};
+
+export const ExtensionRowSchema = Template.bind({});
+ExtensionRowSchema.args = {
+  schema: extensionsSchema as JSONSchema4,
+  defaultExpandedDepth: Infinity,
+  renderRootTreeLines: true,
+  renderExtensionAddon: () => {
+    return (
+      <Flex h="full" alignItems="center">
+        Vendor Extensions
+      </Flex>
+    );
+  },
 };

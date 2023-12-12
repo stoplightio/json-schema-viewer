@@ -125,7 +125,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({ validations
 const NumberValidations = ({
   validations,
 }: {
-  validations: Partial<Record<typeof numberValidationNames[number], unknown>>;
+  validations: Partial<Record<(typeof numberValidationNames)[number], unknown>>;
 }) => {
   const entries = Object.entries(validations);
   if (!entries.length) {
