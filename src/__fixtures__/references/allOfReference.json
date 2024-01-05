@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "AAAAA": { "allOf": [{ "description": "AAAAA", "type": "string" }, { "examples": ["AAAAA"] }] },
+        "BBBBB": {
+          "allOf": [
+            {
+              "$ref": "#/paths/~1operation/post/requestBody/content/application~1json/schema/allOf/0/properties/AAAAA/allOf/0",
+              "description": "BBBBB"
+            },
+            { "examples": ["BBBBB"] }
+          ]
+        }
+      }
+    }
+  ]
+}

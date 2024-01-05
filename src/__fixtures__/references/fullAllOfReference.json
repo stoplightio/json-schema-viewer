@@ -1,0 +1,40 @@
+{
+  "paths": {
+    "/operation": {
+      "post": {
+        "summary": "operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "AAAAA": { "allOf": [{ "description": "AAAAA", "type": "string" }, { "examples": ["AAAAA"] }] },
+                      "BBBBB": {
+                        "allOf": [
+                          {
+                            "$ref": "#/paths/~1operation/post/requestBody/content/application~1json/schema/allOf/0/properties/AAAAA/allOf/0",
+                            "description": "BBBBB"
+                          },
+                          { "examples": ["BBBBB"] }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "operationId",
+        "security": []
+      }
+    }
+  },
+  "servers": [{ "url": "http://example.com" }],
+  "openapi": "3.1.0",
+  "info": { "title": "Test", "version": "version" }
+}
