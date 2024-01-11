@@ -183,16 +183,24 @@ export function validationCount(schemaNode: RegularNode) {
   return uniq(validationKeys.map(key => ([...numberValidationNames].includes(key) ? 'number' : key))).length;
 }
 
+const getArrayValidations = (schemaNode: RegularNode) => {
+  if (schemaNode.children?.length === 1 && isRegularNode(schemaNode.children[0])) {
+    if (schemaNode.children[0].enum !== null) {
+      return { enum: schemaNode.children[0].enum };
+    } else if (schemaNode.children[0].fragment.pattern !== void 0) {
+      return { pattern: schemaNode.children[0].fragment.pattern };
+    }
+  }
+  return null;
+};
+
 export function getValidationsFromSchema(schemaNode: RegularNode) {
   return {
     ...(schemaNode.enum !== null
       ? { enum: schemaNode.enum }
-      : // in case schemaNode is type: "array", check if its child have defined enum
-      schemaNode.primaryType === 'array' &&
-        schemaNode.children?.length === 1 &&
-        isRegularNode(schemaNode.children[0]) &&
-        schemaNode.children[0].enum !== null
-      ? { enum: schemaNode.children[0].enum }
+      : schemaNode.primaryType === 'array'
+      ? // in case schemaNode is type: "array", check if its child has an additional validation
+        getArrayValidations(schemaNode)
       : null),
     ...('annotations' in schemaNode
       ? {

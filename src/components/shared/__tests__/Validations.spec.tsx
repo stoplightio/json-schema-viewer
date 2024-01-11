@@ -66,6 +66,24 @@ describe('Validations component', () => {
     expect(wrapper).toIncludeText('Allowed values:p1p2p3');
   });
 
+  it('should check for array child fragment.pattern', () => {
+    const tree = buildTree({
+      type: 'array',
+      items: {
+        type: 'string',
+        pattern: '^[a-z0-9]{13}$',
+      },
+    });
+
+    const node = tree.children[0] as RegularNode;
+
+    expect(isRegularNode(node)).toBe(true);
+    const validations = getValidationsFromSchema(node);
+    const wrapper = mount(<Validations validations={validations} />);
+
+    expect(wrapper).toIncludeText('Match pattern:^[a-z0-9]{13}$');
+  });
+
   it('should not render hidden example validations', () => {
     const node = new RegularNode({
       type: 'number',
