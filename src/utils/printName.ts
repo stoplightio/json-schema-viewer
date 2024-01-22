@@ -3,7 +3,15 @@ import { isReferenceNode, isRegularNode, RegularNode, SchemaNodeKind } from '@st
 import upperFirst from 'lodash/upperFirst.js';
 
 import { isNonNullable } from '../guards/isNonNullable';
-import { isComplexArray, isPrimitiveArray } from '../tree';
+import {
+  isComplexArray,
+  isComplexDictionary,
+  isDictionaryNode,
+  isFlattenableNode,
+  isPrimitiveArray,
+  isPrimitiveDictionary,
+} from '../tree';
+import { getApplicableFormats } from './getApplicableFormats';
 
 type PrintNameOptions = {
   shouldUseRefNameFallback?: boolean;
@@ -13,18 +21,14 @@ export function printName(
   schemaNode: RegularNode,
   { shouldUseRefNameFallback = false }: PrintNameOptions = {},
 ): string | undefined {
-  if (
-    schemaNode.primaryType !== SchemaNodeKind.Array ||
-    !isNonNullable(schemaNode.children) ||
-    schemaNode.children.length === 0
-  ) {
+  if (!isFlattenableNode(schemaNode)) {
     return schemaNode.title ?? (shouldUseRefNameFallback ? getNodeNameFromOriginalRef(schemaNode) : undefined);
   }
 
-  return printArrayName(schemaNode, { shouldUseRefNameFallback });
+  return printFlattenedName(schemaNode, { shouldUseRefNameFallback });
 }
 
-function printArrayName(
+function printFlattenedName(
   schemaNode: RegularNode,
   { shouldUseRefNameFallback = false }: PrintNameOptions,
 ): string | undefined {
@@ -33,41 +37,54 @@ function printArrayName(
   }
 
   if (schemaNode.children.length === 1 && isReferenceNode(schemaNode.children[0])) {
-    return `$ref(${schemaNode.children[0].value})[]`;
+    const value = `$ref(${schemaNode.children[0].value})`;
+    return isDictionaryNode(schemaNode) ? `dictionary[string, ${value}]` : `${value}[]`;
   }
 
-  if (isPrimitiveArray(schemaNode)) {
+  const format = isDictionaryNode(schemaNode) ? 'dictionary[string, %s]' : 'array[%s]';
+
+  if (isPrimitiveArray(schemaNode) || isPrimitiveDictionary(schemaNode)) {
     const val =
-      schemaNode.children?.reduce<SchemaNodeKind[] | null>((mergedTypes, child) => {
+      schemaNode.children?.reduce<(SchemaNodeKind | `${SchemaNodeKind}<${string}>`)[] | null>((mergedTypes, child) => {
         if (mergedTypes === null) return null;
 
         if (!isRegularNode(child)) return null;
 
         if (child.types !== null && child.types.length > 0) {
+          const formats = getApplicableFormats(child);
           for (const type of child.types) {
             if (mergedTypes.includes(type)) continue;
-            mergedTypes.push(type);
+
+            if (formats !== null && formats[0] === type) {
+              mergedTypes.push(`${type}<${formats[1]}>`);
+            } else {
+              mergedTypes.push(type);
+            }
           }
         }
 
         return mergedTypes;
       }, []) ?? null;
 
-    return val !== null && val.length > 0 ? `array[${val.join(' or ')}]` : 'array';
+    if (val !== null && val.length > 0) {
+      return format.replace('%s', val.join(' or '));
+    }
+
+    return isDictionaryNode(schemaNode) ? 'dictionary[string, any]' : 'array';
   }
 
-  if (isComplexArray(schemaNode)) {
+  if (isComplexArray(schemaNode) || isComplexDictionary(schemaNode)) {
     const firstChild = schemaNode.children[0];
     if (firstChild.title) {
-      return `array[${firstChild.title}]`;
+      return format.replace('%s', firstChild.title);
     } else if (shouldUseRefNameFallback && getNodeNameFromOriginalRef(schemaNode)) {
-      return `array[${getNodeNameFromOriginalRef(schemaNode)}]`;
+      return format.replace('%s', getNodeNameFromOriginalRef(schemaNode) ?? 'any');
     } else if (firstChild.primaryType) {
-      return `array[${firstChild.primaryType}]`;
+      return format.replace('%s', firstChild.primaryType);
     } else if (firstChild.combiners?.length) {
-      return `array[${firstChild.combiners.join('/')}]`;
+      return format.replace('%s', firstChild.combiners.join(' '));
     }
-    return 'array';
+    return isComplexArray(schemaNode) ? 'array' : format.replace('%s', 'any');
   }
 
   return undefined;
