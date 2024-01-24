@@ -208,6 +208,113 @@ describe('HTML Output', () => {
     `);
   });
 
+  it('should render top-level dictionary', () => {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      additionalProperties: {
+        type: 'string',
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div><span data-test=\\"property-type\\">dictionary[string, string]</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should not merge array of dictionaries', () => {
+    const schema: JSONSchema7 = {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: {
+          type: 'string',
+        },
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div><span data-test=\\"property-type\\">array</span></div>
+                </div>
+              </div>
+            </div>
+            <div data-level=\\"0\\">
+              <div data-id=\\"98538b996305d\\" data-test=\\"schema-row\\">
+                <div>
+                  <div>
+                    <div><span data-test=\\"property-type\\">dictionary[string, string]</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should merge dictionaries with array values', () => {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      additionalProperties: {
+        type: 'array',
+        items: {
+          type: 'string',
+        },
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div><span data-test=\\"property-type\\">dictionary[string, array]</span></div>
+                </div>
+              </div>
+            </div>
+            <div data-level=\\"0\\">
+              <div data-id=\\"98538b996305d\\" data-test=\\"schema-row\\">
+                <div>
+                  <div>
+                    <div><span data-test=\\"property-type\\">string</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
   it('should not render true/false additionalProperties', () => {
     const schema: JSONSchema7 = {
       type: 'object',
