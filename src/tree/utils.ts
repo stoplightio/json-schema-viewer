@@ -41,7 +41,8 @@ export function isFlattenableNode(node: SchemaNode): node is FlattenableNode {
 
   return (
     node.children.length === 1 &&
-    (isRegularNode(node.children[0]) || (isReferenceNode(node.children[0]) && node.children[0].error !== null))
+    ((isRegularNode(node.children[0]) && (!isArrayNode(node) || !isDictionaryNode(node.children[0]))) ||
+      (isReferenceNode(node.children[0]) && node.children[0].error !== null))
   );
 }
 
