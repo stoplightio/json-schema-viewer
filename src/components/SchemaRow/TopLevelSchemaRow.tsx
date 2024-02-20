@@ -7,7 +7,7 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
-import { isComplexArray, visibleChildren } from '../../tree';
+import { isComplexArray, isDictionaryNode, visibleChildren } from '../../tr
 import { extractVendorExtensions } from '../../utils/extractVendorExtensions';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
 import { Description, getValidationsFromSchema, Validations } from '../shared';
@@ -152,5 +152,5 @@ function ScrollCheck() {
 }
 
 function isPureObjectNode(schemaNode: RegularNode) {
-  return schemaNode.primaryType === 'object' && schemaNode.types?.length === 1;
+  return schemaNode.primaryType === 'object' && schemaNode.types?.length === 1 && !isDictionaryNode(schemaNode);
 }

@@ -1,7 +1,6 @@
 import {
   isRegularNode,
   RootNode,
-  SchemaNode,
   SchemaTree as JsonSchemaTree,
   SchemaTreeRefDereferenceFn,
 } from '@stoplight/json-schema-tree';
@@ -13,7 +12,8 @@ import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
-import type { JSONSchema } from '../types';
+import { shouldNodeBeIncluded } from '../tree/utils';
+import { JSONSchema } from '../types';
 import { PathCrumbs } from './PathCrumbs';
 import { TopLevelSchemaRow } from './SchemaRow';
 import { hoveredNodeAtom } from './SchemaRow/state';
@@ -117,20 +117,9 @@ const JsonSchemaViewerInner = ({
     });
 
     let nodeCount = 0;
-    const shouldNodeBeIncluded = (node: SchemaNode) => {
-      if (!isRegularNode(node)) return true;
-
-      const { validations } = node;
-
-      if (!!validations.writeOnly === !!validations.readOnly) {
-        return true;
-      }
-
-      return !((viewMode === 'read' && !!validations.writeOnly) || (viewMode === 'write' && !!validations.readOnly));
-    };
 
     jsonSchemaTree.walker.hookInto('filter', node => {
-      if (shouldNodeBeIncluded(node)) {
+      if (shouldNodeBeIncluded(node, viewMode)) {
         nodeCount++;
         return true;
       }

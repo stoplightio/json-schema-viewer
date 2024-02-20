@@ -1,4 +1,5 @@
 import {
+  isBooleanishNode,
   isReferenceNode,
   isRegularNode,
   RegularNode,
@@ -9,10 +10,8 @@ import {
 import { Box } from '@stoplight/mosaic';
 import * as React from 'react';
 
-import { COMMON_JSON_SCHEMA_AND_OAS_FORMATS } from '../../consts';
-import { isPrimitiveArray } from '../../tree';
 import { printName } from '../../utils';
-import { Format } from './Format';
+import { getApplicableFormats } from '../../utils/getApplicableFormats';
 
 function shouldRenderName(type: SchemaNodeKind | SchemaCombinerName | '$ref'): boolean {
   return type === SchemaNodeKind.Array || type === SchemaNodeKind.Object || type === '$ref';
@@ -32,32 +31,6 @@ function getTypes(schemaNode: RegularNode): Array<SchemaNodeKind | SchemaCombine
   );
 }
 
-function getFormats(schemaNode: RegularNode): Partial<Record<SchemaNodeKind, string>> {
-  const formats: Partial<Record<SchemaNodeKind, string>> = {};
-
-  if (isPrimitiveArray(schemaNode) && schemaNode.children[0].format !== null) {
-    formats.array = schemaNode.children[0].format;
-  }
-
-  if (schemaNode.format === null) {
-    return formats;
-  }
-
-  const types = getTypes(schemaNode);
-
-  for (const type of types) {
-    if (!(type in COMMON_JSON_SCHEMA_AND_OAS_FORMATS)) continue;
-
-    if (COMMON_JSON_SCHEMA_AND_OAS_FORMATS[type].includes(schemaNode.format)) {
-      formats[type] = schemaNode.format;
-      return formats;
-    }
-  }
-
-  formats.string = schemaNode.format;
-  return formats;
-}
-
 export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ schemaNode }) => {
   if (isReferenceNode(schemaNode)) {
     return (
@@ -67,32 +40,51 @@ export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ sch
     );
   }
 
+  if (isBooleanishNode(schemaNode)) {
+    return (
+      <Box as="span" textOverflow="truncate" color="muted" data-test="property-type">
+        {schemaNode.fragment ? 'any' : 'never'}
+      </Box>
+    );
+  }
+
   if (!isRegularNode(schemaNode)) {
     return null;
   }
 
+  const formats = getApplicableFormats(schemaNode);
   const types = getTypes(schemaNode);
-  const formats = getFormats(schemaNode);
 
   if (types.length === 0) {
-    return formats.string !== void 0 ? <Format format={formats.string} /> : null;
+    return (
+      <Box as="span" textOverflow="truncate" color="muted" data-test="property-type">
+        {formats === null ? 'any' : `<${formats[1]}>`}
+      </Box>
+    );
   }
 
-  const rendered = types.map((type, i, { length }) => (
-    <React.Fragment key={type}>
-      <Box as="span" textOverflow="truncate" color="muted" data-test="property-type">
-        {shouldRenderName(type) ? printName(schemaNode) ?? type : type}
-      </Box>
+  const rendered = types.map((type, i, { length }) => {
+    let printedName;
+    if (shouldRenderName(type)) {
+      printedName = printName(schemaNode);
+    }
 
-      {type in formats ? <Format format={formats[type]} /> : null}
+    printedName ??= type + (formats === null || formats[0] !== type ? '' : `<${formats[1]}>`);
 
-      {i < length - 1 && (
-        <Box as="span" key={`${i}-sep`} color="muted">
-          {' or '}
+    return (
+      <React.Fragment key={type}>
+        <Box as="span" textOverflow="truncate" color="muted" data-test="property-type">
+          {printedName}
         </Box>
-      )}
-    </React.Fragment>
-  ));
+
+        {i < length - 1 && (
+          <Box as="span" key={`${i}-sep`} color="muted">
+            {' or '}
+          </Box>
+        )}
+      </React.Fragment>
+    );
+  });
 
   return rendered.length > 1 ? <Box textOverflow="truncate">{rendered}</Box> : <>{rendered}</>;
 };

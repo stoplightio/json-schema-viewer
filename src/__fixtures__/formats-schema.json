@@ -3,11 +3,7 @@
   "type": "object",
   "properties": {
     "date-of-birth": {
-      "type": [
-        "number",
-        "string",
-        "array"
-      ],
+      "type": ["number", "string", "array"],
       "format": "date-time",
       "items": {}
     },
@@ -23,20 +19,28 @@
       "format": "int32"
     },
     "size": {
-      "type": [
-        "number",
-        "string"
-      ],
+      "type": ["number", "string"],
       "format": "byte"
     },
     "notype": {
       "format": "date-time"
     },
+    "array-of-integers": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "map-of-ids": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
     "permissions": {
-      "type": [
-        "string",
-        "object"
-      ],
+      "type": ["string", "object"],
       "format": "password",
       "properties": {
         "ids": {

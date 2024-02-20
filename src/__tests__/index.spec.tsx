@@ -1,7 +1,7 @@
 import 'jest-enzyme';
 
 import { mount, ReactWrapper } from 'enzyme';
-import { JSONSchema4 } from 'json-schema';
+import { JSONSchema4, JSONSchema7 } from 'json-schema';
 import * as React from 'react';
 
 import { JsonSchemaViewer } from '../components';
@@ -163,6 +163,228 @@ describe('HTML Output', () => {
     };
 
     expect(dumpDom(<JsonSchemaViewer schema={schema} />)).toMatchSnapshot();
+  });
+
+  it('given dictionary with defined properties, should not render them', () => {
+    const schema: JSONSchema7 = {
+      type: ['object', 'null'],
+      properties: {
+        id: {
+          type: 'string',
+          readOnly: true,
+        },
+        description: {
+          type: 'string',
+          writeOnly: true,
+        },
+      },
+      additionalProperties: {
+        type: 'string',
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <span data-test=\\"property-type\\">dictionary[string, string]</span>
+                      <span>or</span>
+                      <span data-test=\\"property-type\\">null</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should render top-level dictionary', () => {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      additionalProperties: {
+        type: 'string',
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div><span data-test=\\"property-type\\">dictionary[string, string]</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should not merge array of dictionaries', () => {
+    const schema: JSONSchema7 = {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: {
+          type: 'string',
+        },
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div><span data-test=\\"property-type\\">array</span></div>
+                </div>
+              </div>
+            </div>
+            <div data-level=\\"0\\">
+              <div data-id=\\"98538b996305d\\" data-test=\\"schema-row\\">
+                <div>
+                  <div>
+                    <div><span data-test=\\"property-type\\">dictionary[string, string]</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should merge dictionaries with array values', () => {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      additionalProperties: {
+        type: 'array',
+        items: {
+          type: 'string',
+        },
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div role=\\"button\\"></div>
+                  <div><span data-test=\\"property-type\\">dictionary[string, array]</span></div>
+                </div>
+              </div>
+            </div>
+            <div data-level=\\"0\\">
+              <div data-id=\\"98538b996305d\\" data-test=\\"schema-row\\">
+                <div>
+                  <div>
+                    <div><span data-test=\\"property-type\\">string</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should not render true/false additionalProperties', () => {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+        },
+      },
+      additionalProperties: true,
+    };
+
+    const additionalTrue = dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />);
+    const additionalFalse = dumpDom(
+      <JsonSchemaViewer schema={{ ...schema, additionalProperties: false }} defaultExpandedDepth={Infinity} />,
+    );
+    expect(additionalTrue).toEqual(additionalFalse);
+    expect(additionalTrue).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-level=\\"0\\">
+              <div data-id=\\"8074f410d9775\\" data-test=\\"schema-row\\">
+                <div>
+                  <div>
+                    <div>
+                      <div data-test=\\"property-name-id\\">id</div>
+                      <span data-test=\\"property-type\\">string</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
+  });
+
+  it('should not render additionalItems', () => {
+    const schema: JSONSchema7 = {
+      type: 'array',
+      additionalItems: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+        },
+      },
+    };
+
+    expect(dumpDom(<JsonSchemaViewer schema={schema} defaultExpandedDepth={Infinity} />)).toMatchInlineSnapshot(`
+      "<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
+        <div data-overlay-container=\\"true\\">
+          <div class=\\"JsonSchemaViewer\\">
+            <div></div>
+            <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
+              <div>
+                <div>
+                  <div><span data-test=\\"property-type\\">array</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      "
+    `);
   });
 
   describe('top level descriptions', () => {

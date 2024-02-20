@@ -2,7 +2,7 @@ import 'jest-enzyme';
 
 import { Provider as MosaicProvider } from '@stoplight/mosaic';
 import { mount, ReactWrapper } from 'enzyme';
-import { JSONSchema4 } from 'json-schema';
+import type { JSONSchema4, JSONSchema7 } from 'json-schema';
 import * as React from 'react';
 
 import { SchemaRow, Types } from '../..';
@@ -11,7 +11,7 @@ import { buildTree, findNodeWithPath } from './utils';
 describe('Property component', () => {
   const toUnmount: ReactWrapper[] = [];
 
-  function render(schema: JSONSchema4, nodePath?: readonly string[]) {
+  function render(schema: JSONSchema4 | JSONSchema7, nodePath?: readonly string[]) {
     const tree = buildTree(schema);
 
     const node = nodePath ? findNodeWithPath(tree, nodePath) : tree.children[0];
@@ -37,16 +37,28 @@ describe('Property component', () => {
   });
 
   it('should render Types with proper type and subtype', () => {
-    const schema: JSONSchema4 = {
+    let schema: JSONSchema4 = {
       type: 'array',
       items: {
         type: 'string',
       },
     };
 
-    const wrapper = render(schema);
+    let wrapper = render(schema);
     expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
       `"<span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">array[string]</span>"`,
+    );
+
+    schema = {
+      type: 'object',
+      additionalProperties: {
+        type: 'string',
+      },
+    };
+
+    wrapper = render(schema);
+    expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+      `"<span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">dictionary[string, string]</span>"`,
     );
   });
 
@@ -70,6 +82,34 @@ describe('Property component', () => {
     const wrapper = render(schema);
     expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
       `"<span data-test=\\"property-type-ref\\" class=\\"sl-truncate\\">$ref</span>"`,
+    );
+  });
+
+  it('should display true schemas', () => {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      properties: {
+        foo: true,
+      },
+    };
+
+    const wrapper = render(schema, ['properties', 'foo']);
+    expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+      `"<span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">any</span>"`,
+    );
+  });
+
+  it('should display false schemas', () => {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      properties: {
+        foo: false,
+      },
+    };
+
+    const wrapper = render(schema, ['properties', 'foo']);
+    expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
+      `"<span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">never</span>"`,
     );
   });
 
@@ -166,7 +206,7 @@ describe('Property component', () => {
 
       const wrapper = render(schema);
       expect(wrapper.html()).toMatchInlineSnapshot(
-        `"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\"><div data-overlay-container=\\"true\\" class=\\"\\"><div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full sl-cursor-pointer\\"><div class=\\"sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted\\" role=\\"button\\"><svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"chevron-down\\" class=\\"svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon\\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 448 512\\"><path fill=\\"currentColor\\" d=\\"M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z\\"></path></svg></div><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">array[object]</span></div></div></div></div><div data-level=\\"0\\" class=\\"sl-text-sm\\"><div data-id=\\"85705cc624c84\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full\\"><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><div data-test=\\"property-name-foo\\" class=\\"sl-font-mono sl-font-semibold sl-mr-2\\">foo</div></div></div></div></div><div data-id=\\"8ce05b74b485f\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full\\"><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><div data-test=\\"property-name-bar\\" class=\\"sl-font-mono sl-font-semibold sl-mr-2\\">bar</div></div></div></div></div><div data-id=\\"8c605b74b3bb7\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full\\"><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><div data-test=\\"property-name-baz\\" class=\\"sl-font-mono sl-font-semibold sl-mr-2\\">baz</div></div></div></div></div></div></div></div>"`,
+        `"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\"><div data-overlay-container=\\"true\\" class=\\"\\"><div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full sl-cursor-pointer\\"><div class=\\"sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted\\" role=\\"button\\"><svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"chevron-down\\" class=\\"svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon\\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 448 512\\"><path fill=\\"currentColor\\" d=\\"M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z\\"></path></svg></div><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">array[object]</span></div></div></div></div><div data-level=\\"0\\" class=\\"sl-text-sm\\"><div data-id=\\"85705cc624c84\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full\\"><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><div data-test=\\"property-name-foo\\" class=\\"sl-font-mono sl-font-semibold sl-mr-2\\">foo</div><span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">any</span></div></div></div></div><div data-id=\\"8ce05b74b485f\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full\\"><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><div data-test=\\"property-name-bar\\" class=\\"sl-font-mono sl-font-semibold sl-mr-2\\">bar</div><span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">any</span></div></div></div></div><div data-id=\\"8c605b74b3bb7\\" data-test=\\"schema-row\\" class=\\"sl-flex sl-relative sl-max-w-full sl-py-2\\"><div class=\\"sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full\\"><div class=\\"sl-flex sl-items-center sl-max-w-full\\"><div class=\\"sl-flex sl-items-baseline sl-text-base\\"><div data-test=\\"property-name-baz\\" class=\\"sl-font-mono sl-font-semibold sl-mr-2\\">baz</div><span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">any</span></div></div></div></div></div></div></div>"`,
       );
     });
 
@@ -301,6 +341,32 @@ describe('Property component', () => {
       expect(wrapper.find(Types).first().html()).toMatchInlineSnapshot(
         `"<span data-test=\\"property-type\\" class=\\"sl-truncate sl-text-muted\\">array</span>"`,
       );
+    });
+  });
+
+  describe('format', () => {
+    const schema: JSONSchema4 = require('../../../__fixtures__/formats-schema.json');
+
+    it('should render next to a single type', () => {
+      const wrapper = render(schema, ['properties', 'id']);
+      expect(wrapper.find(Types)).toHaveText('number<float>');
+    });
+
+    it.each`
+      property               | text
+      ${'count'}             | ${'integer<int32> or null'}
+      ${'date-of-birth'}     | ${'number or string<date-time> or array'}
+      ${'array-of-integers'} | ${'array[integer<int32>]'}
+      ${'map-of-ids'}        | ${'dictionary[string, integer<int32>]'}
+      ${'size'}              | ${'number<byte> or string'}
+    `('given $property property, should render next to the appropriate type', ({ property, text }) => {
+      const wrapper = render(schema, ['properties', property]);
+      expect(wrapper.find(Types)).toHaveText(text);
+    });
+
+    it('should render even when the type(s) is/are missing', () => {
+      const wrapper = render(schema, ['properties', 'notype']);
+      expect(wrapper.find(Types)).toHaveText('<date-time>');
     });
   });
 });
