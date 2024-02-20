@@ -12,7 +12,7 @@ export type VendorExtensionsResult = [number, VendorExtensionsList];
  * @returns VendorExtensionsResult
  */
 export function extractVendorExtensions(fragment: SchemaFragment = {}): VendorExtensionsResult {
-  const extensionKeys = Object.keys(fragment).filter(key => key.toLowerCase().startsWith('x-'));
+  const extensionKeys = Object.keys(fragment).filter(key => key.startsWith('x-'));
   let vendorExtensions = {};
   extensionKeys.forEach(key => {
     vendorExtensions[key] = fragment[key];

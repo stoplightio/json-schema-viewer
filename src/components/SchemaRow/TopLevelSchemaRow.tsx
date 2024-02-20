@@ -7,7 +7,7 @@ import * as React from 'react';
 import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
-import { isComplexArray, isDictionaryNode, visibleChildren } from '../../tr
+import { isComplexArray, isDictionaryNode, visibleChildren } from '../../tree';
 import { extractVendorExtensions } from '../../utils/extractVendorExtensions';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
 import { Description, getValidationsFromSchema, Validations } from '../shared';
@@ -29,7 +29,7 @@ export const TopLevelSchemaRow = ({
   const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
   const [totalVendorExtensions, vendorExtensions] = React.useMemo(
     () => extractVendorExtensions(schemaNode.fragment),
-    [schemaNode],
+    [schemaNode.fragment],
   );
   const hasVendorProperties = totalVendorExtensions > 0;
 

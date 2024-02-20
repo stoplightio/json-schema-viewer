@@ -69,7 +69,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
 
     const [totalVendorExtensions, vendorExtensions] = React.useMemo(
       () => extractVendorExtensions(schemaNode.fragment),
-      [schemaNode],
+      [schemaNode.fragment],
     );
     const hasVendorProperties = totalVendorExtensions > 0;
 
