@@ -5,8 +5,10 @@ import { isEmpty } from 'lodash';
 import * as React from 'react';
 
 import { COMBINER_NAME_MAP } from '../../consts';
+import { useJSVOptionsContext } from '../../contexts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
 import { isComplexArray, isDictionaryNode, visibleChildren } from '../../tree';
+import { extractVendorExtensions } from '../../utils/extractVendorExtensions';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
 import { Description, getValidationsFromSchema, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
@@ -18,11 +20,18 @@ export const TopLevelSchemaRow = ({
   schemaNode,
   skipDescription,
 }: Pick<SchemaRowProps, 'schemaNode'> & { skipDescription?: boolean }) => {
+  const { renderExtensionAddon } = useJSVOptionsContext();
+
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const childNodes = React.useMemo(() => visibleChildren(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
 
   const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
+  const [totalVendorExtensions, vendorExtensions] = React.useMemo(
+    () => extractVendorExtensions(schemaNode.fragment),
+    [schemaNode.fragment],
+  );
+  const hasVendorProperties = totalVendorExtensions > 0;
 
   // regular objects are flattened at the top level
   if (isRegularNode(schemaNode) && isPureObjectNode(schemaNode)) {
@@ -30,6 +39,9 @@ export const TopLevelSchemaRow = ({
       <>
         <ScrollCheck />
         {!skipDescription ? <Description value={schemaNode.annotations.description} /> : null}
+        {hasVendorProperties && renderExtensionAddon
+          ? renderExtensionAddon({ schemaNode, nestingLevel, vendorExtensions })
+          : null}
         <ChildStack
           schemaNode={schemaNode}
           childNodes={childNodes}
@@ -48,7 +60,6 @@ export const TopLevelSchemaRow = ({
       <>
         <ScrollCheck />
         <Description value={schemaNode.annotations.description} />
-
         <HStack spacing={3} pb={4}>
           <Menu
             aria-label="Pick a type"
@@ -77,7 +88,6 @@ export const TopLevelSchemaRow = ({
             </Flex>
           ) : null}
         </HStack>
-
         {childNodes.length > 0 ? (
           <ChildStack
             schemaNode={schemaNode}

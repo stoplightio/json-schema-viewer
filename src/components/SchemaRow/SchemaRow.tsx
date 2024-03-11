@@ -10,6 +10,7 @@ import { COMBINER_NAME_MAP } from '../../consts';
 import { useJSVOptionsContext } from '../../contexts';
 import { getNodeId, getOriginalNodeId } from '../../hash';
 import { isPropertyRequired, visibleChildren } from '../../tree';
+import { extractVendorExtensions } from '../../utils/extractVendorExtensions';
 import { Caret, Description, getValidationsFromSchema, Types, Validations } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
 import { Error } from '../shared/Error';
@@ -30,6 +31,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const {
       defaultExpandedDepth,
       renderRowAddon,
+      renderExtensionAddon,
       onGoToRef,
       hideExamples,
       renderRootTreeLines,
@@ -64,6 +66,12 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const deprecated = isRegularNode(schemaNode) && schemaNode.deprecated;
     const validations = isRegularNode(schemaNode) ? schemaNode.validations : {};
     const hasProperties = useHasProperties({ required, deprecated, validations });
+
+    const [totalVendorExtensions, vendorExtensions] = React.useMemo(
+      () => extractVendorExtensions(schemaNode.fragment),
+      [schemaNode.fragment],
+    );
+    const hasVendorProperties = totalVendorExtensions > 0;
 
     const annotationRootOffset = renderRootTreeLines ? 0 : 8;
     let annotationLeftOffset = -20 - annotationRootOffset;
@@ -100,11 +108,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
           }}
         >
           {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}
-
           {parentChangeType !== 'added' && parentChangeType !== 'removed' ? (
             <NodeAnnotation change={hasChanged} style={{ left: annotationLeftOffset }} />
           ) : null}
-
           <VStack spacing={1} maxW="full" flex={1} ml={isCollapsible && !isRootLevel ? 2 : undefined}>
             <Flex
               alignItems="center"
@@ -113,7 +119,6 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
               cursor={isCollapsible ? 'pointer' : undefined}
             >
               {isCollapsible ? <Caret isExpanded={isExpanded} /> : null}
-
               <Flex alignItems="baseline" fontSize="base">
                 {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
                   <Box
@@ -167,22 +172,19 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
                   />
                 )}
               </Flex>
-
               {hasProperties && <Divider atom={isNodeHoveredAtom(schemaNode)} />}
-
               <Properties required={required} deprecated={deprecated} validations={validations} />
             </Flex>
-
             {typeof description === 'string' && description.length > 0 && <Description value={description} />}
-
             <Validations
               validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}}
               hideExamples={hideExamples}
             />
+            {hasVendorProperties && renderExtensionAddon ? (
+              <Box>{renderExtensionAddon({ schemaNode, nestingLevel, vendorExtensions })}</Box>
+            ) : null}
           </VStack>
-
           <Error schemaNode={schemaNode} />
-
           {renderRowAddon ? <Box>{renderRowAddon({ schemaNode, nestingLevel })}</Box> : null}
         </Flex>
         {isCollapsible && isExpanded ? (

@@ -1,0 +1,97 @@
+{
+  "title": "User",
+  "type": "object",
+  "x-stoplight": { "id": "root-id" },
+  "properties": {
+    "name": {
+      "type": "string",
+      "const": "Constant name",
+      "examples": ["Example name", "Different name"],
+      "x-stoplight": { "id": "name-id" }
+    },
+    "age": {
+      "type": "number",
+      "minimum": 10,
+      "maximum": 40,
+      "x-stoplight": { "id": "age-id" }
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "x-stoplight": { "id": "completed_at-id" }
+    },
+    "list": {
+      "type": ["null", "array"],
+      "items": {
+        "type": ["string", "number"],
+        "x-stoplight": { "id": "list-items-id" }
+      },
+      "minItems": 1,
+      "maxItems": 4,
+      "x-stoplight": { "id": "list-id" }
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "examples": ["one@email.com", "two@email.com"],
+      "deprecated": true,
+      "default": "default@email.com",
+      "minLength": 2,
+      "x-stoplight": { "id": "email-id" }
+    },
+    "list-of-objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "x-stoplight": { "id": "list-of-objects-items-id" },
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": { "id": "list-of-objects-items-id-id" }
+          },
+          "friend": {
+            "type": "object",
+            "x-stoplight": { "id": "list-of-objects-items-friend-id" },
+            "properties": {
+              "id": {
+                "type": "string",
+                "x-stoplight": { "id": "list-of-objects-items-friend-id-id" }
+              },
+              "name": {
+                "type": "object",
+                "x-stoplight": { "id": "list-of-objects-items-friend-name-id" },
+                "properties": {
+                  "first": {
+                    "type": "string",
+                    "x-stoplight": { "id": "list-of-objects-items-friend-name-first-id" }
+                  },
+                  "last": {
+                    "type": "string",
+                    "x-stoplight": { "id": "list-of-objects-items-friend-name-last-id" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 4,
+      "x-stoplight": { "id": "list-of-objects-id" }
+    },
+    "friend": {
+      "type": "object",
+      "x-stoplight": { "id": "friend-id" },
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-stoplight": { "id": "friend-id-id" }
+        },
+        "name": {
+          "type": "string",
+          "x-stoplight": { "id": "friend-name-id" }
+        }
+      }
+    }
+  }
+}

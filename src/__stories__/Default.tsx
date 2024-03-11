@@ -30,6 +30,13 @@ CustomRowAddon.args = {
   ),
 };
 
+export const Expansions = Template.bind({});
+Expansions.args = {
+  schema: arrayOfComplexObjects as JSONSchema4,
+  renderRootTreeLines: true,
+  defaultExpandedDepth: 0,
+};
+
 export const ArrayOfObjects = Template.bind({});
 ArrayOfObjects.args = { schema: arrayOfComplexObjects as JSONSchema4, renderRootTreeLines: true };
 
