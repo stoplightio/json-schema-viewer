@@ -11,7 +11,11 @@ export type VendorExtensionsResult = [number, VendorExtensionsList];
  * @param fragment The fragment to extract the vendor extensions from
  * @returns VendorExtensionsResult
  */
-export function extractVendorExtensions(fragment: SchemaFragment = {}): VendorExtensionsResult {
+export function extractVendorExtensions(fragment: SchemaFragment | boolean): VendorExtensionsResult {
+  if (typeof fragment === 'boolean') {
+    return [0, {}];
+  }
+
   const extensionKeys = Object.keys(fragment).filter(key => key.startsWith('x-'));
   let vendorExtensions = {};
   extensionKeys.forEach(key => {
