@@ -1,4 +1,3 @@
-import { Flex } from '@stoplight/mosaic';
 import { Story } from '@storybook/react';
 import { JSONSchema4 } from 'json-schema';
 import React from 'react';
