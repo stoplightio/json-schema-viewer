@@ -4,10 +4,12 @@ import { COMMON_JSON_SCHEMA_AND_OAS_FORMATS } from '../consts';
 
 export function getApplicableFormats(schemaNode: RegularNode): [type: SchemaNodeKind, format: string] | null {
   // Format is handled for contentMediaType type i.e. binary format
-  if (schemaNode.types !== null && schemaNode.fragment['contentMediaType'] === 'application/octet-stream') {
-    for (const type of schemaNode.types) {
-      return [type, 'binary'];
-    }
+  if (
+    schemaNode.fragment['contentMediaType'] === 'application/octet-stream' &&
+    schemaNode.types &&
+    schemaNode.types.length > 0
+  ) {
+    return [schemaNode.types[0], 'binary'];
   }
   if (schemaNode.format === null) {
     return null;
