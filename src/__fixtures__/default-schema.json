@@ -2,6 +2,11 @@
   "title": "User",
   "type": "object",
   "properties": {
+    "profile_photo": {
+      "type": "string",
+      "contentMediaType": "application/octet-stream",
+      "description": "This is user's profile photo"
+    },
     "name": {
       "type": "string",
       "const": "Constant name",
