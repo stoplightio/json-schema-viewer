@@ -3,15 +3,18 @@ import { RegularNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 import { COMMON_JSON_SCHEMA_AND_OAS_FORMATS } from '../consts';
 
 export function getApplicableFormats(schemaNode: RegularNode): [type: SchemaNodeKind, format: string] | null {
-  // Format is handled for contentMediaType type i.e. binary format
-  if (
-    schemaNode.fragment['contentMediaType'] === 'application/octet-stream' &&
-    schemaNode.types &&
-    schemaNode.types.length > 0
-  ) {
-    return [schemaNode.types[0], 'binary'];
-  }
+  // JSON Schema itself doesn't directly support defining binary data types.
+  // To address this limitation within the http-spec repository, we use
+  // `contentMediaType: 'application/octet-stream'` to indicate binary content.
+
   if (schemaNode.format === null) {
+    if (
+      schemaNode.fragment['contentMediaType'] === 'application/octet-stream' &&
+      schemaNode.types &&
+      schemaNode.types.length > 0
+    ) {
+      return [schemaNode.types[0], 'binary'];
+    }
     return null;
   }
 
