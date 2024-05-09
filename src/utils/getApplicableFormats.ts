@@ -4,8 +4,9 @@ import { COMMON_JSON_SCHEMA_AND_OAS_FORMATS } from '../consts';
 
 export function getApplicableFormats(schemaNode: RegularNode): [type: SchemaNodeKind, format: string] | null {
   // JSON Schema itself doesn't directly support defining binary data types.
-  // To address this limitation within the http-spec repository, we use
-  // `contentMediaType: 'application/octet-stream'` to indicate binary content.
+  // Within the http-spec repository, we address this limitation using
+  // OpenAPI features i.e. `contentMediaType: 'application/octet-stream'`.
+  // which is specific to OpenAPI and not supported by JSON Schema itself.
 
   if (schemaNode.format === null) {
     if (
