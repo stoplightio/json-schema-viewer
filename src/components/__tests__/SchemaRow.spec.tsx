@@ -260,4 +260,33 @@ describe('SchemaRow component', () => {
       });
     });
   });
+  describe('schema node with contentMediaType', () => {
+    let schema: JSONSchema4;
+
+    beforeEach(() => {
+      schema = {
+        type: 'object',
+        properties: {
+          profile_photo: {
+            type: 'string',
+            contentMediaType: 'application/octet-stream',
+            description: "This is user's profile photo",
+          },
+        },
+      };
+    });
+
+    it('should render correct type name for binary type', () => {
+      const tree = buildTree(schema);
+
+      const schemaNode = findNodeWithPath(tree, ['properties', 'profile_photo']);
+      if (!schemaNode) {
+        throw Error('Node not found, invalid configuration');
+      }
+      const wrapper = mount(<SchemaRow schemaNode={schemaNode} nestingLevel={0} />);
+      const spanWrapper = wrapper.find({ 'data-test': 'property-type' });
+      expect(spanWrapper.at(0).text()).toContain('string<binary>');
+      wrapper.unmount();
+    });
+  });
 });
