@@ -8,14 +8,15 @@ export function getApplicableFormats(schemaNode: RegularNode): [type: SchemaNode
   // OpenAPI features i.e. `contentMediaType: 'application/octet-stream'`.
   // which is specific to OpenAPI and not supported by JSON Schema itself.
 
+  if (
+    schemaNode.fragment['contentMediaType'] === 'application/octet-stream' &&
+    schemaNode.types &&
+    schemaNode.types.length > 0
+  ) {
+    return [schemaNode.types[0], 'binary'];
+  }
+
   if (schemaNode.format === null) {
-    if (
-      schemaNode.fragment['contentMediaType'] === 'application/octet-stream' &&
-      schemaNode.types &&
-      schemaNode.types.length > 0
-    ) {
-      return [schemaNode.types[0], 'binary'];
-    }
     return null;
   }
 
