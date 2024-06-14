@@ -146,7 +146,7 @@ const JsonSchemaViewerInner = ({
   );
   if (isEmpty) {
     return (
-      <Box className={cn(className, 'JsonSchemaViewer')} fontSize="sm">
+      <Box className={cn(className, 'JsonSchemaViewer')} fontSize="sm" data-test="empty-text">
         {emptyText}
       </Box>
     );
