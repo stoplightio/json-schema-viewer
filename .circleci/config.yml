@@ -3,7 +3,7 @@ version: 2
 jobs:
   test_node:
     docker:
-      - image: cimg/node:16.13
+      - image: cimg/node:18.20
     steps:
       - checkout
       - run: yarn
@@ -11,7 +11,7 @@ jobs:
 
   release:
     docker:
-      - image: circleci/node:16.13
+      - image: cimg/node:18.20
     steps:
       - checkout
       - run: yarn

@@ -16,11 +16,12 @@ export function extractVendorExtensions(fragment: SchemaFragment | boolean): Ven
     return [0, {}];
   }
 
-  const extensionKeys = Object.keys(fragment).filter(key => key.startsWith('x-'));
-  let vendorExtensions = {};
-  extensionKeys.forEach(key => {
-    vendorExtensions[key] = fragment[key];
-  });
+  const extensionKeys = Object.entries(fragment).filter(([key]) => key.startsWith('x-'));
+  let vendorExtensions: VendorExtensionsList = {};
+
+  for (const [key, value] of extensionKeys) {
+    vendorExtensions[key] = value;
+  }
 
   return [extensionKeys.length, vendorExtensions];
 }

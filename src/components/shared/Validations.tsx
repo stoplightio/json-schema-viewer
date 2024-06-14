@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Flex, HStack, Text } from '@stoplight/mosaic';
 import { Dictionary } from '@stoplight/types';
@@ -28,6 +29,8 @@ export const numberValidationNames = [
   'exclusiveMinimum',
   'exclusiveMaximum',
 ];
+
+type NumberValidationNames = typeof numberValidationNames;
 
 const exampleValidationNames = ['examples'];
 
@@ -92,8 +95,14 @@ const oasFormats = {
   },
 };
 
+function isOasFormat(format: string): format is keyof typeof oasFormats {
+  return format in oasFormats;
+}
+
 function filterOutOasFormatValidations(format: string, values: Dictionary<unknown>) {
-  if (!(format in oasFormats)) return values;
+  if (!isOasFormat(format)) {
+    return values;
+  }
 
   const newValues = { ...values };
 
@@ -125,7 +134,7 @@ export const Validations: React.FunctionComponent<IValidations> = ({ validations
 const NumberValidations = ({
   validations,
 }: {
-  validations: Partial<Record<typeof numberValidationNames[number], unknown>>;
+  validations: Partial<Record<NumberValidationNames[number], unknown>>;
 }) => {
   const entries = Object.entries(validations);
   if (!entries.length) {

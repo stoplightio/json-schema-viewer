@@ -1,3 +1,4 @@
+import { isPlainObject } from '@stoplight/json';
 import { RegularNode, SchemaNodeKind } from '@stoplight/json-schema-tree';
 
 import { COMMON_JSON_SCHEMA_AND_OAS_FORMATS } from '../consts';
@@ -9,6 +10,7 @@ export function getApplicableFormats(schemaNode: RegularNode): [type: SchemaNode
   // which is specific to OpenAPI and not supported by JSON Schema itself.
 
   if (
+    isPlainObject(schemaNode.fragment) &&
     schemaNode.fragment['contentMediaType'] === 'application/octet-stream' &&
     schemaNode.types &&
     schemaNode.types.length > 0
