@@ -12,13 +12,5 @@
     "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/no-floating-promises": ["error", { "ignoreVoid": true }],
     "no-console": "warn"
-  },
-  "overrides": [
-    {
-      "files": ["*.spec.{ts,tsx}"],
-      "env": {
-        "jest": true
-      }
-    }
-  ]
+  }
 }

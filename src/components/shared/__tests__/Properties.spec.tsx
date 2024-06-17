@@ -1,9 +1,10 @@
-import 'jest-enzyme';
+import '@testing-library/jest-dom';
 
 import { RegularNode } from '@stoplight/json-schema-tree';
 import { Dictionary } from '@stoplight/types';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import * as React from 'react';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { Properties } from '../Properties';
 
@@ -22,11 +23,9 @@ describe('Properties component', () => {
     });
 
     it('should render deprecated box', () => {
-      const wrapper = shallow(
-        <Properties deprecated={deprecated} required={false} validations={validations} />,
-      ).childAt(0);
+      const wrapper = render(<Properties deprecated={deprecated} required={false} validations={validations} />);
 
-      expect(wrapper).toHaveText('deprecated');
+      expect(wrapper.queryByText('deprecated')).toBeInTheDocument();
     });
   });
 });

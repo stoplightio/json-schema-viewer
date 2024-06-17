@@ -1,29 +1,118 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Expanded depth nested object static given initial level set to 0, should render top 2 levels 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-bar\\">bar</div>
-                <span data-test=\\"property-type\\">object</span>
+exports[`Expanded depth > nested object > static > given initial level set to 0, should render top 2 levels 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="3cbab69efa81f"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon"
+                  data-icon="chevron-right"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 320 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-bar"
+                >
+                  bar
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  object
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-foo\\">foo</div>
-                <span data-test=\\"property-type\\">array[object]</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="862ab7c3a6663"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon"
+                  data-icon="chevron-right"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 320 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-foo"
+                >
+                  foo
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  array[object]
+                </span>
               </div>
             </div>
           </div>
@@ -32,92 +121,315 @@ exports[`Expanded depth nested object static given initial level set to 0, shoul
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`Expanded depth nested object static given initial level set to 1, should render top 3 levels 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-bar\\">bar</div>
-                <span data-test=\\"property-type\\">object</span>
+exports[`Expanded depth > nested object > static > given initial level set to 1, should render top 3 levels 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="3cbab69efa81f"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                  data-icon="chevron-down"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 448 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-bar"
+                >
+                  bar
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  object
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-level=\\"1\\">
-          <div data-id=\\"12aba6f44026c\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div data-test=\\"property-name-barFoo\\">barFoo</div>
-                  <span data-test=\\"property-type\\">object</span>
+        <div
+          class="sl-text-sm sl-ml-px sl-border-l"
+          data-level="1"
+        >
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="12aba6f44026c"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+              >
+                <div
+                  class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                  role="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon"
+                    data-icon="chevron-right"
+                    data-prefix="fas"
+                    focusable="false"
+                    role="img"
+                    viewBox="0 0 320 512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-barFoo"
+                  >
+                    barFoo
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    object
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"073ba5acf896f\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-barBar\\">barBar</div>
-                  <span data-test=\\"property-type\\">string</span>
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="073ba5acf896f"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-barBar"
+                  >
+                    barBar
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    string
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"07bba5acf9ef7\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-barBaz\\">barBaz</div>
-                  <span data-test=\\"property-type\\">boolean</span>
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="07bba5acf9ef7"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-barBaz"
+                  >
+                    barBaz
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    boolean
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-foo\\">foo</div>
-                <span data-test=\\"property-type\\">array[object]</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="862ab7c3a6663"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                  data-icon="chevron-down"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 448 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-foo"
+                >
+                  foo
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  array[object]
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-level=\\"1\\">
-          <div data-id=\\"ae9fe22da9a31\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-fooBar\\">fooBar</div>
-                  <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-text-sm sl-ml-px sl-border-l"
+          data-level="1"
+        >
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="ae9fe22da9a31"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-fooBar"
+                  >
+                    fooBar
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    string
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"240fe113d2860\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-fooFoo\\">fooFoo</div>
-                  <span data-test=\\"property-type\\">number</span>
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="240fe113d2860"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-fooFoo"
+                  >
+                    fooFoo
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    number
+                  </span>
                 </div>
               </div>
             </div>
@@ -127,105 +439,353 @@ exports[`Expanded depth nested object static given initial level set to 1, shoul
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`Expanded depth nested object static given initial level set to 2, should render top 4 levels 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"3cbab69efa81f\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-bar\\">bar</div>
-                <span data-test=\\"property-type\\">object</span>
+exports[`Expanded depth > nested object > static > given initial level set to 2, should render top 4 levels 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="3cbab69efa81f"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                  data-icon="chevron-down"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 448 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-bar"
+                >
+                  bar
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  object
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-level=\\"1\\">
-          <div data-id=\\"12aba6f44026c\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div role=\\"button\\"></div>
-                <div>
-                  <div data-test=\\"property-name-barFoo\\">barFoo</div>
-                  <span data-test=\\"property-type\\">object</span>
+        <div
+          class="sl-text-sm sl-ml-px sl-border-l"
+          data-level="1"
+        >
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="12aba6f44026c"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+              >
+                <div
+                  class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                  role="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                    data-icon="chevron-down"
+                    data-prefix="fas"
+                    focusable="false"
+                    role="img"
+                    viewBox="0 0 448 512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-barFoo"
+                  >
+                    barFoo
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    object
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-level=\\"2\\">
-            <div data-id=\\"d768172596c01\\" data-test=\\"schema-row\\">
-              <div></div>
-              <div>
-                <div>
-                  <div>
-                    <div data-test=\\"property-name-barFooBar\\">barFooBar</div>
-                    <span data-test=\\"property-type\\">object</span>
+          <div
+            class="sl-text-sm sl-ml-7 sl-border-l"
+            data-level="2"
+          >
+            <div
+              class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+              data-id="d768172596c01"
+              data-test="schema-row"
+            >
+              <div
+                class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+              />
+              <div
+                class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-center sl-max-w-full"
+                >
+                  <div
+                    class="sl-flex sl-items-baseline sl-text-base"
+                  >
+                    <div
+                      class="sl-font-mono sl-font-semibold sl-mr-2"
+                      data-test="property-name-barFooBar"
+                    >
+                      barFooBar
+                    </div>
+                    <span
+                      class="sl-truncate sl-text-muted"
+                      data-test="property-type"
+                    >
+                      object
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"073ba5acf896f\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-barBar\\">barBar</div>
-                  <span data-test=\\"property-type\\">string</span>
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="073ba5acf896f"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-barBar"
+                  >
+                    barBar
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    string
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"07bba5acf9ef7\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-barBaz\\">barBaz</div>
-                  <span data-test=\\"property-type\\">boolean</span>
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="07bba5acf9ef7"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-barBaz"
+                  >
+                    barBaz
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    boolean
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-foo\\">foo</div>
-                <span data-test=\\"property-type\\">array[object]</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="862ab7c3a6663"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                  data-icon="chevron-down"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 448 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-foo"
+                >
+                  foo
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  array[object]
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-level=\\"1\\">
-          <div data-id=\\"ae9fe22da9a31\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-fooBar\\">fooBar</div>
-                  <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-text-sm sl-ml-px sl-border-l"
+          data-level="1"
+        >
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="ae9fe22da9a31"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-fooBar"
+                  >
+                    fooBar
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    string
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div data-id=\\"240fe113d2860\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-fooFoo\\">fooFoo</div>
-                  <span data-test=\\"property-type\\">number</span>
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="240fe113d2860"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-fooFoo"
+                  >
+                    fooFoo
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    number
+                  </span>
                 </div>
               </div>
             </div>
@@ -235,78 +795,250 @@ exports[`Expanded depth nested object static given initial level set to 2, shoul
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given anyOf combiner placed next to allOf given allOf merging enabled, should merge contents of allOf combiners 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div>
-        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
+exports[`HTML Output > given anyOf combiner placed next to allOf > given allOf merging enabled, should merge contents of allOf combiners 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-stack sl-stack--horizontal sl-stack--3 sl-flex sl-flex-row sl-items-center sl-pb-4"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Pick a type"
+          class="sl-flex sl-text-base sl-font-mono sl-font-semibold sl-cursor-pointer"
+          id="react-aria-0-2"
+        >
           Admin
-          <div></div>
+          <div
+            class="sl-ml-1"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-caret-down sl-icon"
+              data-icon="caret-down"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
         </div>
-        <div>(any of)</div>
+        <div
+          class="sl-flex sl-items-center sl-text-base sl-text-muted"
+        >
+          (any of)
+        </div>
       </div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"4a8da9be0aedc\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-type\\">type</div>
-                <span data-test=\\"property-type\\">string</span>
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="4a8da9be0aedc"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-type"
+                >
+                  type
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
-              <div></div>
-              <span data-test=\\"property-required\\">required</span>
+              <div
+                class="sl-flex-1 sl-h-px sl-mx-3"
+              />
+              <span
+                class="sl-ml-2 sl-text-warning"
+                data-test="property-required"
+              >
+                required
+              </span>
             </div>
-            <div data-test=\\"property-validation\\">
-              <span>Allowed values:</span>
-              <div style=\\"gap: 4px\\">
-                <span>admin</span>
-                <span>editor</span>
+            <div
+              class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted"
+              data-test="property-validation"
+            >
+              <span>
+                Allowed values
+                :
+              </span>
+              <div
+                class="sl-flex sl-flex-1 sl-flex-wrap"
+                style="gap: 4px;"
+              >
+                <span
+                  class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border"
+                >
+                  admin
+                </span>
+                <span
+                  class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border"
+                >
+                  editor
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"e2533efaa39da\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-enabled\\">enabled</div>
-                <span data-test=\\"property-type\\">boolean</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="e2533efaa39da"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-enabled"
+                >
+                  enabled
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  boolean
+                </span>
               </div>
             </div>
-            <div data-test=\\"property-description\\" style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+            <div
+              class="sl-prose sl-markdown-viewer "
+              data-test="property-description"
+              style="font-size: 12px;"
+            >
+              <p>
+                Is this account enabled
+              </p>
+            </div>
           </div>
         </div>
-        <div data-id=\\"bd5c934660dce\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-root\\">root</div>
-                <span data-test=\\"property-type\\">boolean</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="bd5c934660dce"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-root"
+                >
+                  root
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  boolean
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b0aa37b59ceff\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-group\\">group</div>
-                <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="b0aa37b59ceff"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-group"
+                >
+                  group
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b6d786a9b103c\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-expirationDate\\">expirationDate</div>
-                <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="b6d786a9b103c"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-expirationDate"
+                >
+                  expirationDate
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
@@ -315,56 +1047,154 @@ exports[`HTML Output given anyOf combiner placed next to allOf given allOf mergi
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given array with oneOf containing items, should merge it correctly 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div>
-        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
+exports[`HTML Output > given array with oneOf containing items, should merge it correctly 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-stack sl-stack--horizontal sl-stack--3 sl-flex sl-flex-row sl-items-center sl-pb-4"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Pick a type"
+          class="sl-flex sl-text-base sl-font-mono sl-font-semibold sl-cursor-pointer"
+          id="react-aria-0-2"
+        >
           array[string]
-          <div></div>
+          <div
+            class="sl-ml-1"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-caret-down sl-icon"
+              data-icon="caret-down"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
         </div>
-        <div>(one of)</div>
+        <div
+          class="sl-flex sl-items-center sl-text-base sl-text-muted"
+        >
+          (one of)
+        </div>
       </div>
-      <div data-id=\\"b55b1e932485c\\" data-test=\\"schema-row\\">
-        <div>
-          <div>
-            <div><span data-test=\\"property-type\\">array[string]</span></div>
+      <div
+        class="sl-flex sl-relative sl-max-w-full sl-py-2"
+        data-id="b55b1e932485c"
+        data-test="schema-row"
+      >
+        <div
+          class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-center sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-baseline sl-text-base"
+            >
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                array[string]
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given complex type that includes array and complex array subtype, should not ignore subtype 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"231c8499288a6\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-items\\">items</div>
-                <div>
-                  <span data-test=\\"property-type\\">null</span>
-                  <span>or</span>
-                  <span data-test=\\"property-type\\">array[string or number]</span>
+exports[`HTML Output > given complex type that includes array and complex array subtype, should not ignore subtype 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="231c8499288a6"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-items"
+                >
+                  items
+                </div>
+                <div
+                  class="sl-truncate"
+                >
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    null
+                  </span>
+                  <span
+                    class="sl-text-muted"
+                  >
+                     or 
+                  </span>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    array[string or number]
+                  </span>
                 </div>
               </div>
             </div>
-            <div data-test=\\"property-description\\" style=\\"font-size: 12px\\">
+            <div
+              class="sl-prose sl-markdown-viewer "
+              data-test="property-description"
+              style="font-size: 12px;"
+            >
               <p>
-                This description can be long and should truncate once it reaches the end of the row. If it's not
-                truncating then theres and issue that needs to be fixed. Help!
+                This description can be long and should truncate once it reaches the end of the row. If it's not truncating then theres and issue that needs to be fixed. Help!
               </p>
             </div>
           </div>
@@ -373,35 +1203,110 @@ exports[`HTML Output given complex type that includes array and complex array su
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given multiple object and string type, should process properties 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
-        <div>
-          <div>
-            <div role=\\"button\\"></div>
-            <div>
-              <div>
-                <span data-test=\\"property-type\\">string</span>
-                <span>or</span>
-                <span data-test=\\"property-type\\">object</span>
+exports[`HTML Output > given multiple object and string type, should process properties 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-flex sl-relative sl-max-w-full sl-py-2"
+        data-id="bf8b96e78f11d"
+        data-test="schema-row"
+      >
+        <div
+          class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+          >
+            <div
+              class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+              role="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                data-icon="chevron-down"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 448 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              class="sl-flex sl-items-baseline sl-text-base"
+            >
+              <div
+                class="sl-truncate"
+              >
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
+                <span
+                  class="sl-text-muted"
+                >
+                   or 
+                </span>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  object
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"2a0059431a56c\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-ids\\">ids</div>
-                <span data-test=\\"property-type\\">array[integer]</span>
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="2a0059431a56c"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-ids"
+                >
+                  ids
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  array[integer]
+                </span>
               </div>
             </div>
           </div>
@@ -410,78 +1315,250 @@ exports[`HTML Output given multiple object and string type, should process prope
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given oneOf combiner placed next to allOf given allOf merging enabled, should merge contents of allOf combiners 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div>
-        <div aria-label=\\"Pick a type\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" id=\\"react-aria-0-2\\">
+exports[`HTML Output > given oneOf combiner placed next to allOf > given allOf merging enabled, should merge contents of allOf combiners 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-stack sl-stack--horizontal sl-stack--3 sl-flex sl-flex-row sl-items-center sl-pb-4"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Pick a type"
+          class="sl-flex sl-text-base sl-font-mono sl-font-semibold sl-cursor-pointer"
+          id="react-aria-0-2"
+        >
           Admin
-          <div></div>
+          <div
+            class="sl-ml-1"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-caret-down sl-icon"
+              data-icon="caret-down"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
         </div>
-        <div>(one of)</div>
+        <div
+          class="sl-flex sl-items-center sl-text-base sl-text-muted"
+        >
+          (one of)
+        </div>
       </div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"4a8da9be0aedc\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-type\\">type</div>
-                <span data-test=\\"property-type\\">string</span>
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="4a8da9be0aedc"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-type"
+                >
+                  type
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
-              <div></div>
-              <span data-test=\\"property-required\\">required</span>
+              <div
+                class="sl-flex-1 sl-h-px sl-mx-3"
+              />
+              <span
+                class="sl-ml-2 sl-text-warning"
+                data-test="property-required"
+              >
+                required
+              </span>
             </div>
-            <div data-test=\\"property-validation\\">
-              <span>Allowed values:</span>
-              <div style=\\"gap: 4px\\">
-                <span>admin</span>
-                <span>editor</span>
+            <div
+              class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted"
+              data-test="property-validation"
+            >
+              <span>
+                Allowed values
+                :
+              </span>
+              <div
+                class="sl-flex sl-flex-1 sl-flex-wrap"
+                style="gap: 4px;"
+              >
+                <span
+                  class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border"
+                >
+                  admin
+                </span>
+                <span
+                  class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border"
+                >
+                  editor
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"e2533efaa39da\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-enabled\\">enabled</div>
-                <span data-test=\\"property-type\\">boolean</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="e2533efaa39da"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-enabled"
+                >
+                  enabled
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  boolean
+                </span>
               </div>
             </div>
-            <div data-test=\\"property-description\\" style=\\"font-size: 12px\\"><p>Is this account enabled</p></div>
+            <div
+              class="sl-prose sl-markdown-viewer "
+              data-test="property-description"
+              style="font-size: 12px;"
+            >
+              <p>
+                Is this account enabled
+              </p>
+            </div>
           </div>
         </div>
-        <div data-id=\\"bd5c934660dce\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-root\\">root</div>
-                <span data-test=\\"property-type\\">boolean</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="bd5c934660dce"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-root"
+                >
+                  root
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  boolean
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b0aa37b59ceff\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-group\\">group</div>
-                <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="b0aa37b59ceff"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-group"
+                >
+                  group
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"b6d786a9b103c\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-expirationDate\\">expirationDate</div>
-                <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="b6d786a9b103c"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-expirationDate"
+                >
+                  expirationDate
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
@@ -490,35 +1567,110 @@ exports[`HTML Output given oneOf combiner placed next to allOf given allOf mergi
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given read mode, should populate proper nodes 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
-        <div>
-          <div>
-            <div role=\\"button\\"></div>
-            <div>
-              <div>
-                <span data-test=\\"property-type\\">string</span>
-                <span>or</span>
-                <span data-test=\\"property-type\\">object</span>
+exports[`HTML Output > given read mode, should populate proper nodes 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-flex sl-relative sl-max-w-full sl-py-2"
+        data-id="bf8b96e78f11d"
+        data-test="schema-row"
+      >
+        <div
+          class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+          >
+            <div
+              class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+              role="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                data-icon="chevron-down"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 448 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              class="sl-flex sl-items-baseline sl-text-base"
+            >
+              <div
+                class="sl-truncate"
+              >
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
+                <span
+                  class="sl-text-muted"
+                >
+                   or 
+                </span>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  object
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"f19a0161d8b16\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-id\\">id</div>
-                <span data-test=\\"property-type\\">string</span>
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="f19a0161d8b16"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-id"
+                >
+                  id
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
@@ -527,50 +1679,159 @@ exports[`HTML Output given read mode, should populate proper nodes 1`] = `
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
-        <div>
-          <div>
-            <div role=\\"button\\"></div>
-            <div>
-              <div>
-                <span data-test=\\"property-type\\">string</span>
-                <span>or</span>
-                <span data-test=\\"property-type\\">object</span>
+exports[`HTML Output > given standalone mode, should populate proper nodes 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-flex sl-relative sl-max-w-full sl-py-2"
+        data-id="bf8b96e78f11d"
+        data-test="schema-row"
+      >
+        <div
+          class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+          >
+            <div
+              class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+              role="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                data-icon="chevron-down"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 448 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              class="sl-flex sl-items-baseline sl-text-base"
+            >
+              <div
+                class="sl-truncate"
+              >
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
+                <span
+                  class="sl-text-muted"
+                >
+                   or 
+                </span>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  object
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"f19a0161d8b16\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-id\\">id</div>
-                <span data-test=\\"property-type\\">string</span>
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="f19a0161d8b16"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-id"
+                >
+                  id
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
-              <div></div>
-              <span data-test=\\"property-read-only\\">read-only</span>
+              <div
+                class="sl-flex-1 sl-h-px sl-mx-3"
+              />
+              <span
+                class="sl-ml-2 sl-text-muted"
+                data-test="property-read-only"
+              >
+                read-only
+              </span>
             </div>
           </div>
         </div>
-        <div data-id=\\"78328d924d5b6\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-description\\">description</div>
-                <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="78328d924d5b6"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-description"
+                >
+                  description
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
-              <div></div>
-              <span data-test=\\"property-write-only\\">write-only</span>
+              <div
+                class="sl-flex-1 sl-h-px sl-mx-3"
+              />
+              <span
+                class="sl-ml-2 sl-text-muted"
+                data-test="property-write-only"
+              >
+                write-only
+              </span>
             </div>
           </div>
         </div>
@@ -578,46 +1839,159 @@ exports[`HTML Output given standalone mode, should populate proper nodes 1`] = `
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given visible $ref node, should try to inject the title immediately 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-foo\\">foo</div>
-                <span data-test=\\"property-type\\">User</span>
+exports[`HTML Output > given visible $ref node, should try to inject the title immediately 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="862ab7c3a6663"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                  data-icon="chevron-down"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 448 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-foo"
+                >
+                  foo
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  User
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-level=\\"1\\">
-          <div data-id=\\"c098fbf9b1d2f\\" data-test=\\"schema-row\\">
-            <div></div>
-            <div>
-              <div>
-                <div>
-                  <div data-test=\\"property-name-name\\">name</div>
-                  <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-text-sm sl-ml-px sl-border-l"
+          data-level="1"
+        >
+          <div
+            class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3"
+            data-id="c098fbf9b1d2f"
+            data-test="schema-row"
+          >
+            <div
+              class="sl-w-3 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"
+            />
+            <div
+              class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-center sl-max-w-full"
+              >
+                <div
+                  class="sl-flex sl-items-baseline sl-text-base"
+                >
+                  <div
+                    class="sl-font-mono sl-font-semibold sl-mr-2"
+                    data-test="property-name-name"
+                  >
+                    name
+                  </div>
+                  <span
+                    class="sl-truncate sl-text-muted"
+                    data-test="property-type"
+                  >
+                    string
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"621e12cb0db5c\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div role=\\"button\\"></div>
-              <div>
-                <div data-test=\\"property-name-user\\">user</div>
-                <span data-test=\\"property-type\\">User</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="621e12cb0db5c"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+            >
+              <div
+                class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+                role="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon"
+                  data-icon="chevron-right"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 320 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-user"
+                >
+                  user
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  User
+                </span>
               </div>
             </div>
           </div>
@@ -626,35 +2000,110 @@ exports[`HTML Output given visible $ref node, should try to inject the title imm
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output given write mode, should populate proper nodes 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-id=\\"bf8b96e78f11d\\" data-test=\\"schema-row\\">
-        <div>
-          <div>
-            <div role=\\"button\\"></div>
-            <div>
-              <div>
-                <span data-test=\\"property-type\\">string</span>
-                <span>or</span>
-                <span data-test=\\"property-type\\">object</span>
+exports[`HTML Output > given write mode, should populate proper nodes 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-flex sl-relative sl-max-w-full sl-py-2"
+        data-id="bf8b96e78f11d"
+        data-test="schema-row"
+      >
+        <div
+          class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-center sl-max-w-full sl-cursor-pointer"
+          >
+            <div
+              class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted"
+              role="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-chevron-down fa-fw fa-sm sl-icon"
+                data-icon="chevron-down"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 448 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              class="sl-flex sl-items-baseline sl-text-base"
+            >
+              <div
+                class="sl-truncate"
+              >
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
+                <span
+                  class="sl-text-muted"
+                >
+                   or 
+                </span>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  object
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"78328d924d5b6\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-description\\">description</div>
-                <span data-test=\\"property-type\\">string</span>
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="78328d924d5b6"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-description"
+                >
+                  description
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
@@ -663,31 +2112,81 @@ exports[`HTML Output given write mode, should populate proper nodes 1`] = `
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output top level descriptions should not render top-level description when skipTopLevelDescription=true 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-foo\\">foo</div>
-                <span data-test=\\"property-type\\">string</span>
+exports[`HTML Output > top level descriptions > should not render top-level description when skipTopLevelDescription=true 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="862ab7c3a6663"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-foo"
+                >
+                  foo
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"3d3ab69efb5e7\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-baz\\">baz</div>
-                <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="3d3ab69efb5e7"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-baz"
+                >
+                  baz
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
@@ -696,34 +2195,90 @@ exports[`HTML Output top level descriptions should not render top-level descript
     </div>
   </div>
 </div>
-"
 `;
 
-exports[`HTML Output top level descriptions should render top-level description on allOf 1`] = `
-"<div class=\\"\\" id=\\"mosaic-provider-react-aria-0-1\\">
-  <div data-overlay-container=\\"true\\">
-    <div class=\\"JsonSchemaViewer\\">
-      <div></div>
-      <div data-test=\\"property-description\\" style=\\"font-size: 12px\\">
-        <p>This is a description that should be rendered</p>
+exports[`HTML Output > top level descriptions > should render top-level description on allOf 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="JsonSchemaViewer"
+    >
+      <div />
+      <div
+        class="sl-prose sl-markdown-viewer "
+        data-test="property-description"
+        style="font-size: 12px;"
+      >
+        <p>
+          This is a description that should be rendered
+        </p>
       </div>
-      <div data-level=\\"0\\">
-        <div data-id=\\"862ab7c3a6663\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-foo\\">foo</div>
-                <span data-test=\\"property-type\\">string</span>
+      <div
+        class="sl-text-sm"
+        data-level="0"
+      >
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="862ab7c3a6663"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-foo"
+                >
+                  foo
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div data-id=\\"3d3ab69efb5e7\\" data-test=\\"schema-row\\">
-          <div>
-            <div>
-              <div>
-                <div data-test=\\"property-name-baz\\">baz</div>
-                <span data-test=\\"property-type\\">string</span>
+        <div
+          class="sl-flex sl-relative sl-max-w-full sl-py-2"
+          data-id="3d3ab69efb5e7"
+          data-test="schema-row"
+        >
+          <div
+            class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+          >
+            <div
+              class="sl-flex sl-items-center sl-max-w-full"
+            >
+              <div
+                class="sl-flex sl-items-baseline sl-text-base"
+              >
+                <div
+                  class="sl-font-mono sl-font-semibold sl-mr-2"
+                  data-test="property-name-baz"
+                >
+                  baz
+                </div>
+                <span
+                  class="sl-truncate sl-text-muted"
+                  data-test="property-type"
+                >
+                  string
+                </span>
               </div>
             </div>
           </div>
@@ -732,5 +2287,4 @@ exports[`HTML Output top level descriptions should render top-level description 
     </div>
   </div>
 </div>
-"
 `;

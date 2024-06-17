@@ -1,14 +1,13 @@
-import 'jest-enzyme';
+import '@testing-library/jest-dom';
 
 import { RootNode } from '@stoplight/json-schema-tree';
-import { Icon } from '@stoplight/mosaic';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { SchemaRow } from '../SchemaRow';
 import { buildTree, findNodeWithPath } from '../shared/__tests__/utils';
-import { Properties } from '../shared/Properties';
 
 describe('SchemaRow component', () => {
   describe('resolving error', () => {
@@ -28,13 +27,12 @@ describe('SchemaRow component', () => {
       tree = buildTree(schema);
     });
 
-    it('given no custom resolver, should render a generic error message', () => {
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(1)).toHaveProp('aria-label', `Could not resolve '#/properties/foo'`);
-      wrapper.unmount();
+    it('given no custom resolver, should render a generic error message', async () => {
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(`Could not resolve '#/properties/foo'`)).toBeInTheDocument();
     });
 
-    it('given a custom resolver, should render a message thrown by it', () => {
+    it('given a custom resolver, should render a message thrown by it', async () => {
       const message = "I don't know how to resolve it. Sorry";
 
       tree = buildTree(schema, {
@@ -43,9 +41,8 @@ describe('SchemaRow component', () => {
         },
       });
 
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(1)).toHaveProp('aria-label', message);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(message)).toBeInTheDocument();
     });
   });
 
@@ -53,67 +50,62 @@ describe('SchemaRow component', () => {
     let tree: RootNode;
     let schema: JSONSchema4;
 
-    it('given an object schema is marked as internal, a permission denied error message should be shown', () => {
+    it('given an object schema is marked as internal, a permission denied error message should be shown', async () => {
       schema = {
         type: 'object',
         'x-sl-internally-excluded': true,
         'x-sl-error-message': 'You do not have permission to view this reference',
       };
       tree = buildTree(schema);
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(`You do not have permission to view this reference`)).toBeInTheDocument();
     });
 
-    it('given a number schema is marked as internal, a permission denied error messsage should be shown', () => {
+    it('given a number schema is marked as internal, a permission denied error messsage should be shown', async () => {
       schema = {
         type: 'number',
         'x-sl-internally-excluded': true,
         'x-sl-error-message': 'You do not have permission to view this reference',
       };
       tree = buildTree(schema);
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(`You do not have permission to view this reference`)).toBeInTheDocument();
     });
 
-    it('given an integer schema is marked as internal, a permission denied error messsage should be shown', () => {
+    it('given an integer schema is marked as internal, a permission denied error messsage should be shown', async () => {
       schema = {
         type: 'integer',
         'x-sl-internally-excluded': true,
         'x-sl-error-message': 'You do not have permission to view this reference',
       };
       tree = buildTree(schema);
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(`You do not have permission to view this reference`)).toBeInTheDocument();
     });
 
-    it('given a string schema is marked as internal, a permission denied error messsage should be shown', () => {
+    it('given a string schema is marked as internal, a permission denied error messsage should be shown', async () => {
       schema = {
         type: 'string',
         'x-sl-internally-excluded': true,
         'x-sl-error-message': 'You do not have permission to view this reference',
       };
       tree = buildTree(schema);
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(`You do not have permission to view this reference`)).toBeInTheDocument();
     });
 
-    it('given a boolean schema is marked as internal, a permission denied error messsage should be shown', () => {
+    it('given a boolean schema is marked as internal, a permission denied error messsage should be shown', async () => {
       schema = {
         type: 'boolean',
         'x-sl-internally-excluded': true,
         'x-sl-error-message': 'You do not have permission to view this reference',
       };
       tree = buildTree(schema);
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(`You do not have permission to view this reference`)).toBeInTheDocument();
     });
 
-    it('given an array schema is marked as internal, a permission denied error messsage should be shown', () => {
+    it('given an array schema is marked as internal, a permission denied error messsage should be shown', async () => {
       schema = {
         title: 'test',
         type: 'array',
@@ -124,9 +116,8 @@ describe('SchemaRow component', () => {
         },
       };
       tree = buildTree(schema);
-      const wrapper = mount(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
-      expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={tree.children[0]!} nestingLevel={0} />);
+      expect(await wrapper.findByLabelText(`You do not have permission to view this reference`)).toBeInTheDocument();
     });
   });
 
@@ -140,9 +131,13 @@ describe('SchemaRow component', () => {
       if (!schemaNode) {
         throw Error('Node not found, invalid configuration');
       }
-      const wrapper = mount(<SchemaRow schemaNode={schemaNode} nestingLevel={0} />);
-      expect(wrapper.find(Properties)).toHaveProp('required', value);
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={schemaNode} nestingLevel={0} />);
+      const requiredEl = wrapper.queryByTestId('property-required');
+      if (value) {
+        expect(requiredEl).toBeInTheDocument();
+      } else {
+        expect(requiredEl).not.toBeInTheDocument();
+      }
     }
 
     beforeEach(() => {
@@ -276,17 +271,16 @@ describe('SchemaRow component', () => {
       };
     });
 
-    it('should render correct type name for binary type', () => {
+    it('should render correct type name for binary type', async () => {
       const tree = buildTree(schema);
 
       const schemaNode = findNodeWithPath(tree, ['properties', 'profile_photo']);
       if (!schemaNode) {
         throw Error('Node not found, invalid configuration');
       }
-      const wrapper = mount(<SchemaRow schemaNode={schemaNode} nestingLevel={0} />);
-      const spanWrapper = wrapper.find({ 'data-test': 'property-type' });
-      expect(spanWrapper.at(0).text()).toContain('string<binary>');
-      wrapper.unmount();
+      const wrapper = render(<SchemaRow schemaNode={schemaNode} nestingLevel={0} />);
+      const spanWrapper = await wrapper.findByTestId('property-type');
+      expect(spanWrapper).toHaveTextContent('string<binary>');
     });
   });
 });

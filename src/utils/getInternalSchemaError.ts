@@ -16,7 +16,7 @@ export function getInternalSchemaError(schemaNode: SchemaNode): string | undefin
       errorMessage = fragmentErrorMessage;
     } else {
       const items: unknown = fragment['items'];
-      if (typeof items === 'object' && items !== null) {
+      if (isPlainObject(items)) {
         const itemsErrorMessage = items['x-sl-error-message'];
         if (typeof itemsErrorMessage === 'string') {
           errorMessage = itemsErrorMessage;

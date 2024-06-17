@@ -1,3 +1,4 @@
+import { isPlainObject } from '@stoplight/json';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
@@ -26,7 +27,13 @@ export const TopLevelSchemaRow = ({
   const childNodes = React.useMemo(() => visibleChildren(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
 
-  const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
+  const nodeId = (() => {
+    if (isPlainObject(schemaNode.fragment) && isPlainObject(schemaNode.fragment['x-stoplight'])) {
+      const id = schemaNode.fragment['x-stoplight'].id;
+      return typeof id === 'string' ? id : undefined;
+    }
+    return undefined;
+  })();
   const [totalVendorExtensions, vendorExtensions] = React.useMemo(
     () => extractVendorExtensions(schemaNode.fragment),
     [schemaNode.fragment],

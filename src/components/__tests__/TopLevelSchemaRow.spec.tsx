@@ -1,10 +1,10 @@
-import 'jest-enzyme';
+import '@testing-library/jest-dom';
 
 import { RootNode } from '@stoplight/json-schema-tree';
-import { Icon } from '@stoplight/mosaic';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { JSONSchema4 } from 'json-schema';
 import * as React from 'react';
+import { describe, expect, it } from 'vitest';
 
 import { TopLevelSchemaRow } from '../SchemaRow/TopLevelSchemaRow';
 import { buildTree } from '../shared/__tests__/utils';
@@ -40,11 +40,10 @@ describe('resolving permission error', () => {
     };
 
     tree = buildTree(schema);
-    const wrapper = mount(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
-    expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-    expect(wrapper.find(Icon).at(1)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-    expect(wrapper.find(Icon).at(2)).not.toHaveProp('aria-label', `You do not have permission to view this reference`);
-    expect(wrapper.find(Icon).at(3)).not.toHaveProp('aria-label', `You do not have permission to view this reference`);
+    const wrapper = render(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
+    const icons = wrapper.queryAllByLabelText('You do not have permission to view this reference');
+    expect(icons).toHaveLength(2);
+
     wrapper.unmount();
   });
 
@@ -73,10 +72,9 @@ describe('resolving permission error', () => {
     };
 
     tree = buildTree(schema);
-    const wrapper = mount(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
-    expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-    expect(wrapper.find(Icon).at(1)).toHaveProp('aria-label', `You do not have permission to view this reference`);
-    expect(wrapper.find(Icon).at(2)).toHaveProp('aria-label', `You do not have permission to view this reference`);
+    const wrapper = render(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
+    const icons = wrapper.queryAllByLabelText('You do not have permission to view this reference');
+    expect(icons).toHaveLength(3);
     wrapper.unmount();
   });
 
@@ -87,8 +85,10 @@ describe('resolving permission error', () => {
       'x-sl-internally-excluded': true,
     };
     tree = buildTree(schema);
-    const wrapper = mount(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
-    expect(wrapper.find(Icon).at(0)).toHaveProp('aria-label', `You do not have permission to view this reference`);
+    const wrapper = render(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
+    const icons = wrapper.queryAllByLabelText('You do not have permission to view this reference');
+    expect(icons).toHaveLength(1);
+    expect(icons[0]).toBeInTheDocument();
     wrapper.unmount();
   });
 
@@ -126,10 +126,9 @@ describe('resolving permission error', () => {
     };
 
     tree = buildTree(schema);
-    const wrapper = mount(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
-    expect(wrapper.find(Icon).at(1)).not.toHaveProp('title', `You do not have permission to view this reference`);
-    expect(wrapper.find(Icon).at(2)).not.toHaveProp('title', `You do not have permission to view this reference`);
-    expect(wrapper.find(Icon).at(3)).not.toHaveProp('title', `You do not have permission to view this reference`);
+    const wrapper = render(<TopLevelSchemaRow schemaNode={tree.children[0]!} />);
+    const icons = wrapper.queryAllByLabelText('You do not have permission to view this reference');
+    expect(icons).toHaveLength(0);
     wrapper.unmount();
   });
 });

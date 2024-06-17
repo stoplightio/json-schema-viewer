@@ -4,11 +4,11 @@ export const useIsOnScreen = (ref: RefObject<HTMLElement>) => {
   const [isOnScreen, setIsOnScreen] = useState(true);
 
   useEffect(() => {
-    let observer: IntersectionObserver | null = null;
+    let observer: IntersectionObserver | undefined;
 
     if (ref.current) {
       const scrollParent = getScrollParent(ref.current);
-      const observer = new IntersectionObserver(
+      observer = new IntersectionObserver(
         ([entry]) => {
           setIsOnScreen(entry.isIntersecting);
         },
