@@ -1,8 +1,9 @@
-import 'jest-enzyme';
+import '@testing-library/jest-dom';
 
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import * as React from 'react';
+import { describe, expect, it } from 'vitest';
 
 import { Validations } from '../../shared';
 import { getValidationsFromSchema } from '../Validations';
@@ -21,13 +22,13 @@ describe('Validations component', () => {
     });
 
     const validations = getValidationsFromSchema(node);
-    const wrapper = mount(<Validations validations={validations} />);
+    const wrapper = render(<Validations validations={validations} />).container;
 
-    expect(wrapper).toIncludeText('>= 10<= 40');
-    expect(wrapper).toIncludeText('Allowed values:10203040');
-    expect(wrapper).toIncludeText('Default:20');
-    expect(wrapper).toIncludeText('Multiple of:10');
-    expect(wrapper).toIncludeText('Example:20');
+    expect(wrapper).toHaveTextContent('>= 10<= 40');
+    expect(wrapper).toHaveTextContent('Allowed values:10203040');
+    expect(wrapper).toHaveTextContent('Default:20');
+    expect(wrapper).toHaveTextContent('Multiple of:10');
+    expect(wrapper).toHaveTextContent('Example:20');
   });
 
   it('should render string type validations', () => {
@@ -41,12 +42,12 @@ describe('Validations component', () => {
     });
 
     const validations = getValidationsFromSchema(node);
-    const wrapper = mount(<Validations validations={validations} />);
+    const wrapper = render(<Validations validations={validations} />).container;
 
-    expect(wrapper).toIncludeText('>= 2 characters<= 4 characters');
-    expect(wrapper).toIncludeText('Default:foo');
-    expect(wrapper).toIncludeText('Examples:Example 1Example 2');
-    expect(wrapper).toIncludeText('Allowed value:bar');
+    expect(wrapper).toHaveTextContent('>= 2 characters<= 4 characters');
+    expect(wrapper).toHaveTextContent('Default:foo');
+    expect(wrapper).toHaveTextContent('Examples:Example 1Example 2');
+    expect(wrapper).toHaveTextContent('Allowed value:bar');
   });
 
   it('should check for array child enum', () => {
@@ -61,9 +62,9 @@ describe('Validations component', () => {
 
     expect(isRegularNode(node)).toBe(true);
     const validations = getValidationsFromSchema(node);
-    const wrapper = mount(<Validations validations={validations} />);
+    const wrapper = render(<Validations validations={validations} />).container;
 
-    expect(wrapper).toIncludeText('Allowed values:p1p2p3');
+    expect(wrapper).toHaveTextContent('Allowed values:p1p2p3');
   });
 
   it('should check for array child fragment.pattern', () => {
@@ -79,9 +80,9 @@ describe('Validations component', () => {
 
     expect(isRegularNode(node)).toBe(true);
     const validations = getValidationsFromSchema(node);
-    const wrapper = mount(<Validations validations={validations} />);
+    const wrapper = render(<Validations validations={validations} />).container;
 
-    expect(wrapper).toIncludeText('Match pattern:^[a-z0-9]{13}$');
+    expect(wrapper).toHaveTextContent('Match pattern:^[a-z0-9]{13}$');
   });
 
   it('should not render hidden example validations', () => {
@@ -92,10 +93,10 @@ describe('Validations component', () => {
     });
 
     const validations = getValidationsFromSchema(node);
-    const wrapper = mount(<Validations validations={validations} hideExamples />);
+    const wrapper = render(<Validations validations={validations} hideExamples />).container;
 
-    expect(wrapper).not.toIncludeText('Example value:42');
-    expect(wrapper).not.toIncludeText('Example values:42');
+    expect(wrapper).not.toHaveTextContent('Example value:42');
+    expect(wrapper).not.toHaveTextContent('Example values:42');
   });
 
   describe('OAS formats', () => {
@@ -108,9 +109,9 @@ describe('Validations component', () => {
       });
 
       const validations = getValidationsFromSchema(node);
-      const wrapper = mount(<Validations validations={validations} />);
+      const wrapper = render(<Validations validations={validations} />);
 
-      expect(wrapper).toBeEmptyRender();
+      expect(wrapper.container.firstChild).toMatchInlineSnapshot(`null`);
     });
 
     it('should render non-standard values', () => {
@@ -122,9 +123,9 @@ describe('Validations component', () => {
       });
 
       const validations = getValidationsFromSchema(node);
-      const wrapper = mount(<Validations validations={validations} />);
+      const wrapper = render(<Validations validations={validations} />).container;
 
-      expect(wrapper).toIncludeText('>= 0');
+      expect(wrapper).toHaveTextContent('>= 0');
     });
   });
 });

@@ -1,0 +1,272 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Property component > format > given 'array-of-integers' property, should render next to the appropriate type 'array[integer<int32>]' 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="sl-flex sl-relative sl-max-w-full sl-py-2"
+      data-id="cba968a2420f0"
+      data-test="schema-row"
+    >
+      <div
+        class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+      >
+        <div
+          class="sl-flex sl-items-center sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-baseline sl-text-base"
+          >
+            <div
+              class="sl-font-mono sl-font-semibold sl-mr-2"
+              data-test="property-name-array-of-integers"
+            >
+              array-of-integers
+            </div>
+            <span
+              class="sl-truncate sl-text-muted"
+              data-test="property-type"
+            >
+              array[integer&lt;int32&gt;]
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Property component > format > given 'count' property, should render next to the appropriate type 'integer<int32> or null' 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="sl-flex sl-relative sl-max-w-full sl-py-2"
+      data-id="e093535696d4d"
+      data-test="schema-row"
+    >
+      <div
+        class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+      >
+        <div
+          class="sl-flex sl-items-center sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-baseline sl-text-base"
+          >
+            <div
+              class="sl-font-mono sl-font-semibold sl-mr-2"
+              data-test="property-name-count"
+            >
+              count
+            </div>
+            <div
+              class="sl-truncate"
+            >
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                integer&lt;int32&gt;
+              </span>
+              <span
+                class="sl-text-muted"
+              >
+                 or 
+              </span>
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                null
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Property component > format > given 'date-of-birth' property, should render next to the appropriate type 'number or string<date-time> or array' 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="sl-flex sl-relative sl-max-w-full sl-py-2"
+      data-id="0dd6bfbbfb0ed"
+      data-test="schema-row"
+    >
+      <div
+        class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+      >
+        <div
+          class="sl-flex sl-items-center sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-baseline sl-text-base"
+          >
+            <div
+              class="sl-font-mono sl-font-semibold sl-mr-2"
+              data-test="property-name-date-of-birth"
+            >
+              date-of-birth
+            </div>
+            <div
+              class="sl-truncate"
+            >
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                number
+              </span>
+              <span
+                class="sl-text-muted"
+              >
+                 or 
+              </span>
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                string&lt;date-time&gt;
+              </span>
+              <span
+                class="sl-text-muted"
+              >
+                 or 
+              </span>
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                array
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Property component > format > given 'map-of-ids' property, should render next to the appropriate type 'dictionary[string, integer<int32>]' 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="sl-flex sl-relative sl-max-w-full sl-py-2"
+      data-id="113c1d8192bed"
+      data-test="schema-row"
+    >
+      <div
+        class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+      >
+        <div
+          class="sl-flex sl-items-center sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-baseline sl-text-base"
+          >
+            <div
+              class="sl-font-mono sl-font-semibold sl-mr-2"
+              data-test="property-name-map-of-ids"
+            >
+              map-of-ids
+            </div>
+            <span
+              class="sl-truncate sl-text-muted"
+              data-test="property-type"
+            >
+              dictionary[string, integer&lt;int32&gt;]
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Property component > format > given 'size' property, should render next to the appropriate type 'number<byte> or string' 1`] = `
+<div
+  class=""
+  id="mosaic-provider-react-aria-0-1"
+>
+  <div
+    class=""
+    data-overlay-container="true"
+  >
+    <div
+      class="sl-flex sl-relative sl-max-w-full sl-py-2"
+      data-id="0b4cedcd441f1"
+      data-test="schema-row"
+    >
+      <div
+        class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full"
+      >
+        <div
+          class="sl-flex sl-items-center sl-max-w-full"
+        >
+          <div
+            class="sl-flex sl-items-baseline sl-text-base"
+          >
+            <div
+              class="sl-font-mono sl-font-semibold sl-mr-2"
+              data-test="property-name-size"
+            >
+              size
+            </div>
+            <div
+              class="sl-truncate"
+            >
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                number&lt;byte&gt;
+              </span>
+              <span
+                class="sl-text-muted"
+              >
+                 or 
+              </span>
+              <span
+                class="sl-truncate sl-text-muted"
+                data-test="property-type"
+              >
+                string
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
