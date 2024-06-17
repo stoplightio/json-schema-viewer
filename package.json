@@ -31,9 +31,9 @@
     "release.dryRun": "sl-scripts release --dry-run --debug",
     "storybook": "start-storybook -p 6006",
     "test": "vitest run",
-    "test.prod": "yarn lint && yarn vitest run --coverage",
-    "test.update": "yarn vitest run --updateSnapshot",
-    "test.watch": "yarn vitest",
+    "test.prod": "yarn lint && vitest run --coverage",
+    "test.update": "vitest run --update",
+    "test.watch": "vitest",
     "test.packaging": "node -e \"require('./dist/index.js')\" && node --input-type=module -e \"import './dist/index.mjs'\"",
     "size-limit": "size-limit"
   },
