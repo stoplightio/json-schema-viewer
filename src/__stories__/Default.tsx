@@ -9,6 +9,7 @@ const defaultSchema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
 const githubIssueSchema = require('../__fixtures__/real-world/github-issue.json');
 const arrayOfComplexObjects = require('../__fixtures__/arrays/of-complex-objects.json');
+const allOfComplexSchema = require('../__fixtures__/combiners/allOfs/complex.json');
 
 export default {
   component: JsonSchemaViewer,
@@ -100,3 +101,10 @@ ExpandCollapseAll.args = {
   schema: githubIssueSchema as JSONSchema4,
 };
 ExpandCollapseAll.storyName = 'Expand/Collapse All';
+
+export const CircularExpandCollapseAll = Template.bind({});
+CircularExpandCollapseAll.args = {
+  showExpandAll: true,
+  maxRefDepth: 10,
+  schema: allOfComplexSchema as JSONSchema4,
+};

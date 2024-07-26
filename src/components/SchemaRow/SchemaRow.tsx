@@ -29,6 +29,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
   ({ schemaNode, nestingLevel, pl, parentNodeId, parentChangeType }) => {
     const {
       defaultExpandedDepth,
+      maxRefDepth,
       renderRowAddon,
       renderExtensionAddon,
       onGoToRef,
@@ -50,7 +51,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const hasChanged = nodeHasChanged?.({ nodeId: originalNodeId, mode });
 
     const [isExpanded, setExpanded] = React.useState<boolean>(
-      expansionMode === 'expand_all' ? true : !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
+      expansionMode === 'expand_all'
+        ? !isMirroredNode(schemaNode)
+        : !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
     );
 
     const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
@@ -70,11 +73,14 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
 
     React.useEffect(() => {
       if (expansionMode === 'expand_all' && !isExpanded) {
-        setExpanded(true);
+        const canBeExpanded = maxRefDepth && maxRefDepth > 0 ? nestingLevel < maxRefDepth : true;
+        if (canBeExpanded) {
+          setExpanded(true);
+        }
       } else if (expansionMode === 'collapse_all' && isExpanded) {
         setExpanded(false);
       }
-    }, [isExpanded, expansionMode]);
+    }, [isExpanded, expansionMode, nestingLevel, maxRefDepth]);
 
     const [totalVendorExtensions, vendorExtensions] = React.useMemo(
       () => extractVendorExtensions(schemaNode.fragment),

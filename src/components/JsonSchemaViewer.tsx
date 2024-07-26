@@ -1,6 +1,7 @@
 import {
   isRegularNode,
   RootNode,
+  SchemaNodeKind,
   SchemaTree as JsonSchemaTree,
   SchemaTreeRefDereferenceFn,
 } from '@stoplight/json-schema-tree';
@@ -11,7 +12,7 @@ import { Provider, useAtom, useSetAtom } from 'jotai';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
-import { shouldNodeBeIncluded } from '../tree/utils';
+import { isNonEmptyParentNode, shouldNodeBeIncluded } from '../tree/utils';
 import { JSONSchema } from '../types';
 import { PathCrumbs } from './PathCrumbs';
 import { TopLevelSchemaRow } from './SchemaRow';
@@ -34,7 +35,8 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
 const JsonSchemaViewerComponent = ({
   viewMode = 'standalone',
   defaultExpandedDepth = 1,
-  showExpandAll = false,
+  maxRefDepth,
+  showExpandAll = true,
   onGoToRef,
   renderRowAddon,
   renderExtensionAddon,
@@ -48,6 +50,7 @@ const JsonSchemaViewerComponent = ({
   const options = React.useMemo(
     () => ({
       defaultExpandedDepth,
+      maxRefDepth,
       viewMode,
       showExpandAll,
       onGoToRef,
@@ -60,6 +63,7 @@ const JsonSchemaViewerComponent = ({
     }),
     [
       defaultExpandedDepth,
+      maxRefDepth,
       viewMode,
       showExpandAll,
       onGoToRef,
@@ -163,6 +167,20 @@ const JsonSchemaViewerInner = ({
     [jsonSchemaTreeRoot],
   );
 
+  // Naive check if there are collapsible rows
+  const hasCollapsibleRows = React.useMemo(() => {
+    if (jsonSchemaTreeRoot.children.length === 0) {
+      return false;
+    }
+
+    if (isNonEmptyParentNode(jsonSchemaTreeRoot.children[0])) {
+      return jsonSchemaTreeRoot.children[0].children.some(childNode => {
+        return isRegularNode(childNode) && childNode.primaryType === SchemaNodeKind.Object;
+      });
+    }
+    return false;
+  }, [jsonSchemaTreeRoot]);
+
   if (isEmpty) {
     return (
       <Box className={cn(className, 'JsonSchemaViewer')} fontSize="sm" data-test="empty-text">
@@ -179,7 +197,7 @@ const JsonSchemaViewerInner = ({
       onMouseLeave={onMouseLeave}
       style={{ maxHeight }}
     >
-      {showExpandAll ? (
+      {hasCollapsibleRows && showExpandAll ? (
         <HStack w="full" fontFamily="mono" fontSize="sm" lineHeight="none" bg="canvas-pure" px="px" color="light">
           <Box flex={1}>&nbsp;</Box>
           <Button pl={1} mr={1} size="sm" appearance="minimal" onClick={onCollapseExpandAll}>
