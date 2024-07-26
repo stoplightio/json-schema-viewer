@@ -4,11 +4,10 @@ import {
   SchemaTree as JsonSchemaTree,
   SchemaTreeRefDereferenceFn,
 } from '@stoplight/json-schema-tree';
-import { Box, Provider as MosaicProvider } from '@stoplight/mosaic';
+import { Box, Button, HStack, Provider as MosaicProvider } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
-import { Provider } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
+import { Provider, useAtom, useSetAtom } from 'jotai';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
@@ -16,7 +15,7 @@ import { shouldNodeBeIncluded } from '../tree/utils';
 import { JSONSchema } from '../types';
 import { PathCrumbs } from './PathCrumbs';
 import { TopLevelSchemaRow } from './SchemaRow';
-import { hoveredNodeAtom } from './SchemaRow/state';
+import { ExpansionMode, expansionModeAtom, hoveredNodeAtom } from './SchemaRow/state';
 
 export type JsonSchemaProps = Partial<JSVOptions> & {
   schema: JSONSchema;
@@ -29,11 +28,13 @@ export type JsonSchemaProps = Partial<JSVOptions> & {
   maxHeight?: number;
   parentCrumbs?: string[];
   skipTopLevelDescription?: boolean;
+  showExpandAll?: boolean;
 };
 
 const JsonSchemaViewerComponent = ({
   viewMode = 'standalone',
   defaultExpandedDepth = 1,
+  showExpandAll = false,
   onGoToRef,
   renderRowAddon,
   renderExtensionAddon,
@@ -48,6 +49,7 @@ const JsonSchemaViewerComponent = ({
     () => ({
       defaultExpandedDepth,
       viewMode,
+      showExpandAll,
       onGoToRef,
       renderRowAddon,
       renderExtensionAddon,
@@ -59,6 +61,7 @@ const JsonSchemaViewerComponent = ({
     [
       defaultExpandedDepth,
       viewMode,
+      showExpandAll,
       onGoToRef,
       renderRowAddon,
       renderExtensionAddon,
@@ -73,7 +76,12 @@ const JsonSchemaViewerComponent = ({
     <MosaicProvider>
       <JSVOptionsContextProvider value={options}>
         <Provider>
-          <JsonSchemaViewerInner viewMode={viewMode} skipTopLevelDescription={skipTopLevelDescription} {...rest} />
+          <JsonSchemaViewerInner
+            viewMode={viewMode}
+            showExpandAll={showExpandAll}
+            skipTopLevelDescription={skipTopLevelDescription}
+            {...rest}
+          />
         </Provider>
       </JSVOptionsContextProvider>
     </MosaicProvider>
@@ -83,6 +91,7 @@ const JsonSchemaViewerComponent = ({
 const JsonSchemaViewerInner = ({
   schema,
   viewMode,
+  showExpandAll,
   className,
   resolveRef,
   maxRefDepth,
@@ -95,6 +104,7 @@ const JsonSchemaViewerInner = ({
   JsonSchemaProps,
   | 'schema'
   | 'viewMode'
+  | 'showExpandAll'
   | 'className'
   | 'resolveRef'
   | 'maxRefDepth'
@@ -104,10 +114,17 @@ const JsonSchemaViewerInner = ({
   | 'parentCrumbs'
   | 'skipTopLevelDescription'
 >) => {
-  const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
+  const setHoveredNode = useSetAtom(hoveredNodeAtom);
+  const [expansionMode, setExpansionMode] = useAtom(expansionModeAtom);
+
   const onMouseLeave = React.useCallback(() => {
     setHoveredNode(null);
   }, [setHoveredNode]);
+
+  const onCollapseExpandAll = React.useCallback(() => {
+    const newExpansionMode: ExpansionMode = expansionMode === 'expand_all' ? 'collapse_all' : 'expand_all';
+    setExpansionMode(newExpansionMode);
+  }, [expansionMode, setExpansionMode]);
 
   const { jsonSchemaTreeRoot, nodeCount } = React.useMemo(() => {
     const jsonSchemaTree = new JsonSchemaTree(schema, {
@@ -123,6 +140,7 @@ const JsonSchemaViewerInner = ({
         nodeCount++;
         return true;
       }
+
       return false;
     });
     jsonSchemaTree.populate();
@@ -144,6 +162,7 @@ const JsonSchemaViewerInner = ({
     () => jsonSchemaTreeRoot.children.every(node => !isRegularNode(node) || node.unknown),
     [jsonSchemaTreeRoot],
   );
+
   if (isEmpty) {
     return (
       <Box className={cn(className, 'JsonSchemaViewer')} fontSize="sm" data-test="empty-text">
@@ -160,7 +179,15 @@ const JsonSchemaViewerInner = ({
       onMouseLeave={onMouseLeave}
       style={{ maxHeight }}
     >
-      <PathCrumbs parentCrumbs={parentCrumbs} />
+      {showExpandAll ? (
+        <HStack w="full" fontFamily="mono" fontSize="sm" lineHeight="none" bg="canvas-pure" px="px" color="light">
+          <Box flex={1}>&nbsp;</Box>
+          <Button pl={1} mr={1} size="sm" appearance="minimal" onClick={onCollapseExpandAll}>
+            {expansionMode === 'expand_all' ? 'Collapse All' : 'Expand All'}
+          </Button>
+        </HStack>
+      ) : null}
+      <PathCrumbs parentCrumbs={parentCrumbs} showExpandAll={showExpandAll} />
       <TopLevelSchemaRow schemaNode={jsonSchemaTreeRoot.children[0]} skipDescription={skipTopLevelDescription} />
     </Box>
   );

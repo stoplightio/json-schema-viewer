@@ -6,6 +6,7 @@ import { ExtensionAddonRenderer, GoToRefHandler, RowAddonRenderer, ViewMode } fr
 export type JSVOptions = {
   defaultExpandedDepth: number;
   viewMode: ViewMode;
+  showExpandAll?: boolean;
   onGoToRef?: GoToRefHandler;
   renderRowAddon?: RowAddonRenderer;
   renderExtensionAddon?: ExtensionAddonRenderer;
@@ -19,6 +20,7 @@ const JSVOptionsContext = React.createContext<JSVOptions>({
   defaultExpandedDepth: 0,
   viewMode: 'standalone',
   hideExamples: false,
+  showExpandAll: false,
 });
 
 export const useJSVOptionsContext = () => React.useContext(JSVOptionsContext);
