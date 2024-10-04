@@ -1,7 +1,7 @@
 import { isPlainObject } from '@stoplight/json';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
-import { useUpdateAtom } from 'jotai/utils';
+import { useSetAtom } from 'jotai';
 import { isEmpty } from 'lodash';
 import * as React from 'react';
 
@@ -22,7 +22,6 @@ export const TopLevelSchemaRow = ({
   skipDescription,
 }: Pick<SchemaRowProps, 'schemaNode'> & { skipDescription?: boolean }) => {
   const { renderExtensionAddon } = useJSVOptionsContext();
-
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const childNodes = React.useMemo(() => visibleChildren(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
@@ -150,7 +149,7 @@ function ScrollCheck() {
   const elementRef = React.useRef<HTMLDivElement>(null);
 
   const isOnScreen = useIsOnScreen(elementRef);
-  const setShowPathCrumbs = useUpdateAtom(showPathCrumbsAtom);
+  const setShowPathCrumbs = useSetAtom(showPathCrumbsAtom);
   React.useEffect(() => {
     setShowPathCrumbs(!isOnScreen);
   }, [isOnScreen, setShowPathCrumbs]);
