@@ -138,5 +138,8 @@
       "brotli": true,
       "running": false
     }
-  ]
+  ],
+  "resolutions": {
+    "express": "4.20.0"
+  }
 }
