@@ -138,5 +138,8 @@
       "brotli": true,
       "running": false
     }
-  ]
+  ],
+  "resolutions": {
+    "rollup": "4.22.4"
+  }
 }
