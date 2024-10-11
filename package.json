@@ -140,6 +140,7 @@
     }
   ],
   "resolutions": {
-    "rollup": "4.22.4"
+    "rollup": "4.22.4",
+    "express": "4.20.0"
   }
 }
