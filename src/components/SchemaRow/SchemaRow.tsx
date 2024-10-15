@@ -1,8 +1,7 @@
 import { isMirroredNode, isReferenceNode, isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, NodeAnnotation, Select, SpaceVals, VStack } from '@stoplight/mosaic';
 import type { ChangeType } from '@stoplight/types';
-import { Atom } from 'jotai';
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { Atom, useAtomValue, useSetAtom } from 'jotai';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
@@ -15,7 +14,7 @@ import { Caret, Description, getValidationsFromSchema, Types, Validations } from
 import { ChildStack } from '../shared/ChildStack';
 import { Error } from '../shared/Error';
 import { Properties, useHasProperties } from '../shared/Properties';
-import { hoveredNodeAtom, isNodeHoveredAtom } from './state';
+import { expansionModeAtom, hoveredNodeAtom, isNodeHoveredAtom } from './state';
 import { useChoices } from './useChoices';
 
 export interface SchemaRowProps {
@@ -30,6 +29,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
   ({ schemaNode, nestingLevel, pl, parentNodeId, parentChangeType }) => {
     const {
       defaultExpandedDepth,
+      maxRefDepth,
       renderRowAddon,
       renderExtensionAddon,
       onGoToRef,
@@ -39,7 +39,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
       viewMode,
     } = useJSVOptionsContext();
 
-    const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
+    const setHoveredNode = useSetAtom(hoveredNodeAtom);
+
+    const expansionMode = useAtomValue(expansionModeAtom);
 
     const nodeId = getNodeId(schemaNode, parentNodeId);
 
@@ -49,7 +51,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const hasChanged = nodeHasChanged?.({ nodeId: originalNodeId, mode });
 
     const [isExpanded, setExpanded] = React.useState<boolean>(
-      !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
+      expansionMode === 'expand_all'
+        ? !isMirroredNode(schemaNode)
+        : !isMirroredNode(schemaNode) && nestingLevel <= defaultExpandedDepth,
     );
 
     const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
@@ -66,6 +70,17 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
     const deprecated = isRegularNode(schemaNode) && schemaNode.deprecated;
     const validations = isRegularNode(schemaNode) ? schemaNode.validations : {};
     const hasProperties = useHasProperties({ required, deprecated, validations });
+
+    React.useEffect(() => {
+      if (expansionMode === 'expand_all' && !isExpanded) {
+        const canBeExpanded = maxRefDepth && maxRefDepth > 0 ? nestingLevel < maxRefDepth : true;
+        if (canBeExpanded) {
+          setExpanded(true);
+        }
+      } else if (expansionMode === 'collapse_all' && isExpanded) {
+        setExpanded(false);
+      }
+    }, [isExpanded, expansionMode, nestingLevel, maxRefDepth]);
 
     const [totalVendorExtensions, vendorExtensions] = React.useMemo(
       () => extractVendorExtensions(schemaNode.fragment),
