@@ -65,7 +65,7 @@
     "@stoplight/types": "^13.7.0",
     "@storybook/addon-essentials": "^6.5.0",
     "@storybook/builder-webpack5": "^6.5.0",
-    "@storybook/core": "^6.5.0",
+    "@storybook/core": "^8.3.6",
     "@storybook/manager-webpack5": "^6.5.0",
     "@storybook/react": "^6.5.0",
     "@testing-library/jest-dom": "^6.4.6",
@@ -142,6 +142,7 @@
   "resolutions": {
     "rollup": "4.22.4",
     "express": "4.20.0",
-    "trim-newlines": "3.0.1"
+    "trim-newlines": "3.0.1",
+    "webpack-dev-middleware": "7.1.0"
   }
 }
