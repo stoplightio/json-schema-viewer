@@ -142,6 +142,7 @@
   "resolutions": {
     "rollup": "4.22.4",
     "express": "4.20.0",
-    "webpack-dev-middleware": "7.1.0"
+    "webpack-dev-middleware": "7.1.0",
+    "braces": "3.0.3"
   }
 }
