@@ -145,6 +145,7 @@
     "trim-newlines": "3.0.1",
     "webpack-dev-middleware": "7.1.0",
     "trim": "0.0.3",
-    "braces": "3.0.3"
+    "braces": "3.0.3",
+    "ws": "8.17.1"
   }
 }
