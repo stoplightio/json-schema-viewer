@@ -127,5 +127,17 @@ describe('Validations component', () => {
 
       expect(wrapper).toHaveTextContent('>= 0');
     });
+
+    it('Not defined range, should not render any validation', () => {
+      const node = new RegularNode({
+        type: 'integer',
+        format: 'int64',
+      });
+
+      const validations = getValidationsFromSchema(node);
+      const wrapper = render(<Validations validations={validations} />).container;
+
+      expect(wrapper).toHaveTextContent('');
+    });
   });
 });

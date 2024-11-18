@@ -72,15 +72,18 @@ const validationFormatters: Record<string, (value: unknown) => ValidationFormat 
   default: createValidationsFormatter('Default', { exact: true, nowrap: true }),
   style: createValidationsFormatter('Style', { exact: true, nowrap: true }),
 };
+// eslint-disable-next-line no-console
+console.log('harshita')
 
 const oasFormats = {
+
   int32: {
     minimum: 0 - 2 ** 31,
     maximum: 2 ** 31 - 1,
   },
   int64: {
-    minimum: 0 - 2 ** 63,
-    maximum: 2 ** 63 - 1,
+    minimum: Number.MIN_SAFE_INTEGER,
+    maximum: Number.MAX_SAFE_INTEGER,
   },
   float: {
     minimum: 0 - 2 ** 128,
