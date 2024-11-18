@@ -72,8 +72,7 @@ const validationFormatters: Record<string, (value: unknown) => ValidationFormat 
   default: createValidationsFormatter('Default', { exact: true, nowrap: true }),
   style: createValidationsFormatter('Style', { exact: true, nowrap: true }),
 };
-// eslint-disable-next-line no-console
-console.log('harshita')
+
 
 const oasFormats = {
 
