@@ -128,7 +128,7 @@ describe('Validations component', () => {
       expect(wrapper).toHaveTextContent('>= 0');
     });
 
-    it('Not defined range, should not render any validation', () => {
+    it('should not render any range if not defined', () => {
       const node = new RegularNode({
         type: 'integer',
         format: 'int64',
