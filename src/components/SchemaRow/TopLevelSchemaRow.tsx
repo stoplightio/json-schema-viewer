@@ -66,7 +66,7 @@ export const TopLevelSchemaRow = ({
     return (
       <>
         <ScrollCheck />
-        <Description value={schemaNode.annotations.description} />
+        <Description value={schemaNode.annotations.description || schemaNode.originalFragment.description} />
         <HStack spacing={3} pb={4}>
           <Menu
             aria-label="Pick a type"
@@ -158,6 +158,6 @@ function ScrollCheck() {
   return <div ref={elementRef} />;
 }
 
-function isPureObjectNode(schemaNode: RegularNode) {
+export function isPureObjectNode(schemaNode: RegularNode) {
   return schemaNode.primaryType === 'object' && schemaNode.types?.length === 1 && !isDictionaryNode(schemaNode);
 }
