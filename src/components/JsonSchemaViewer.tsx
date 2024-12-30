@@ -4,7 +4,6 @@ import {
   SchemaTree as JsonSchemaTree,
   SchemaTreeRefDereferenceFn,
 } from '@stoplight/json-schema-tree';
-import { isPureObjectNode } from './SchemaRow';
 import { Box, Provider as MosaicProvider } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
@@ -152,13 +151,6 @@ const JsonSchemaViewerInner = ({
       </Box>
     );
   }
-
-  const isCombineSchema = schema.allOf || schema.oneOf || schema.anyOf;
-  const jsonSchema = jsonSchemaTreeRoot.children[0];
-
-  skipTopLevelDescription = skipTopLevelDescription
-    ? !(isRegularNode(jsonSchema) && isPureObjectNode(jsonSchema) && isCombineSchema)
-    : false;
 
   return (
     <Box
