@@ -160,6 +160,6 @@ function ScrollCheck() {
   return <div ref={elementRef} />;
 }
 
-export function isPureObjectNode(schemaNode: RegularNode) {
+function isPureObjectNode(schemaNode: RegularNode) {
   return schemaNode.primaryType === 'object' && schemaNode.types?.length === 1 && !isDictionaryNode(schemaNode);
 }
