@@ -175,7 +175,9 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
               {hasProperties && <Divider atom={isNodeHoveredAtom(schemaNode)} />}
               <Properties required={required} deprecated={deprecated} validations={validations} />
             </Flex>
-            {typeof description === 'string' && description.length > 0 && <Description value={description} />}
+            {typeof description === 'string' &&
+              (!combiner || schemaNode.parent?.fragment.description !== description) &&
+              description.length > 0 && <Description value={description} />}
             <Validations
               validations={isRegularNode(schemaNode) ? getValidationsFromSchema(schemaNode) : {}}
               hideExamples={hideExamples}

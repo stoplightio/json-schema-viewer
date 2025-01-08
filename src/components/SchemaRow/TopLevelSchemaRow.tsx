@@ -66,7 +66,9 @@ export const TopLevelSchemaRow = ({
     return (
       <>
         <ScrollCheck />
-        <Description value={schemaNode.annotations.description} />
+        {schemaNode.annotations.description !== schemaNode.parent?.fragment.description && (
+          <Description value={schemaNode.annotations.description} />
+        )}
         <HStack spacing={3} pb={4}>
           <Menu
             aria-label="Pick a type"
