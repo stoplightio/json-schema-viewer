@@ -1,7 +1,7 @@
 import { isPlainObject } from '@stoplight/json';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
-import { useUpdateAtom } from 'jotai/utils';
+import { useSetAtom } from 'jotai';
 import { isEmpty } from 'lodash';
 import * as React from 'react';
 
@@ -152,7 +152,7 @@ function ScrollCheck() {
   const elementRef = React.useRef<HTMLDivElement>(null);
 
   const isOnScreen = useIsOnScreen(elementRef);
-  const setShowPathCrumbs = useUpdateAtom(showPathCrumbsAtom);
+  const setShowPathCrumbs = useSetAtom(showPathCrumbsAtom);
   React.useEffect(() => {
     setShowPathCrumbs(!isOnScreen);
   }, [isOnScreen, setShowPathCrumbs]);
