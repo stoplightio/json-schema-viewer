@@ -148,6 +148,7 @@
     "braces": "3.0.3",
     "ws": "8.17.1",
     "fast-loops": "1.1.4",
-    "cross-spawn": "7.0.5"
+    "cross-spawn": "7.0.5",
+    "path-to-regexp": "0.1.12"
   }
 }
