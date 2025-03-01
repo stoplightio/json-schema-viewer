@@ -1,8 +1,7 @@
 import { isMirroredNode, isReferenceNode, isRegularNode, SchemaNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, NodeAnnotation, Select, SpaceVals, VStack } from '@stoplight/mosaic';
 import type { ChangeType } from '@stoplight/types';
-import { Atom } from 'jotai';
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { Atom, useAtomValue, useSetAtom } from 'jotai';
 import last from 'lodash/last.js';
 import * as React from 'react';
 
@@ -39,7 +38,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
       viewMode,
     } = useJSVOptionsContext();
 
-    const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
+    const setHoveredNode = useSetAtom(hoveredNodeAtom);
 
     const nodeId = getNodeId(schemaNode, parentNodeId);
 
