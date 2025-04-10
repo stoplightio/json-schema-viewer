@@ -7,7 +7,9 @@ import { JsonSchemaProps, JsonSchemaViewer } from '../components/JsonSchemaViewe
 
 const defaultSchema = require('../__fixtures__/default-schema.json');
 const stressSchema = require('../__fixtures__/stress-schema.json');
+const githubIssueSchema = require('../__fixtures__/real-world/github-issue.json');
 const arrayOfComplexObjects = require('../__fixtures__/arrays/of-complex-objects.json');
+const allOfComplexSchema = require('../__fixtures__/combiners/allOfs/complex.json');
 
 export default {
   component: JsonSchemaViewer,
@@ -22,12 +24,16 @@ export const Default = Template.bind({});
 
 export const CustomRowAddon = Template.bind({});
 CustomRowAddon.args = {
-  renderRowAddon: () => (
-    <Flex h="full" alignItems="center">
-      <Button pl={1} mr={1} size="sm" appearance="minimal" icon="bullseye" />
-      <input type="checkbox" />
-    </Flex>
-  ),
+  renderRowAddon: ({ nestingLevel }) => {
+    return nestingLevel == 1 ? (
+      <Flex h="full" alignItems="center">
+        <Button pl={1} mr={1} size="sm" appearance="minimal" icon="bullseye" />
+        <Button pl={1} mr={1} size="sm" appearance="minimal">
+          Expand All
+        </Button>
+      </Flex>
+    ) : null;
+  },
 };
 
 export const Expansions = Template.bind({});
@@ -88,3 +94,17 @@ export const DarkMode: Story<JsonSchemaProps> = ({ schema = defaultSchema as JSO
     </Box>
   </InvertTheme>
 );
+
+export const ExpandCollapseAll = Template.bind({});
+ExpandCollapseAll.args = {
+  showExpandAll: true,
+  schema: githubIssueSchema as JSONSchema4,
+};
+ExpandCollapseAll.storyName = 'Expand/Collapse All';
+
+export const CircularExpandCollapseAll = Template.bind({});
+CircularExpandCollapseAll.args = {
+  showExpandAll: true,
+  maxRefDepth: 10,
+  schema: allOfComplexSchema as JSONSchema4,
+};
