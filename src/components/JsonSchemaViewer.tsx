@@ -7,8 +7,7 @@ import {
 import { Box, Provider as MosaicProvider } from '@stoplight/mosaic';
 import { ErrorBoundaryForwardedProps, FallbackProps, withErrorBoundary } from '@stoplight/react-error-boundary';
 import cn from 'classnames';
-import { Provider } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
+import { Provider, useSetAtom } from 'jotai';
 import * as React from 'react';
 
 import { JSVOptions, JSVOptionsContextProvider } from '../contexts';
@@ -104,7 +103,7 @@ const JsonSchemaViewerInner = ({
   | 'parentCrumbs'
   | 'skipTopLevelDescription'
 >) => {
-  const setHoveredNode = useUpdateAtom(hoveredNodeAtom);
+  const setHoveredNode = useSetAtom(hoveredNodeAtom);
   const onMouseLeave = React.useCallback(() => {
     setHoveredNode(null);
   }, [setHoveredNode]);
