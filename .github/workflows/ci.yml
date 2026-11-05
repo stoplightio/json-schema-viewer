@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - beta
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn test.prod
+
+  release:
+    name: release
+    if: github.event_name == 'push'
+    needs: test
+    runs-on: ubuntu-latest
+    # Must match the Environment name on the npm trusted publisher; limited to master/beta in repo settings
+    environment: npm-publish
+    concurrency:
+      group: release-${{ github.ref }}
+      cancel-in-progress: false
+    permissions:
+      contents: write # tags, GitHub releases and the gh-pages docs push
+      issues: write # semantic-release success/failure comments
+      pull-requests: write # semantic-release success comments
+      id-token: write # npm trusted publishing (OIDC), so no NPM_TOKEN secret is needed
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      # No dependency cache in the publishing job, to avoid cache poisoning from PR runs
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn build.docs
+      - run: yarn release
+        env:
+          # semantic-release only adds the x-access-token: prefix Actions needs when the token is passed as GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn release.docs
+        env:
+          # sl-scripts pushes to https://${GH_TOKEN}@github.com/..., so the prefix has to be included here
+          GH_TOKEN: x-access-token:${{ secrets.GITHUB_TOKEN }}
